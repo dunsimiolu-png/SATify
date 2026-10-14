@@ -17,7 +17,9 @@ import {
   LogOut,
   Cookie,
   MoreHorizontal,
-  X
+  X,
+  Columns,
+  Rows
 } from 'lucide-react';
 import { Logo } from './Logo';
 import { MockQuestion } from '../types/quiz';
@@ -42,6 +44,8 @@ interface HeaderProps {
   user?: UserProfile | null;
   onOpenLogin?: () => void;
   onOpenAccount?: () => void;
+  onToggleLayout?: () => void;
+  isTwoPane?: boolean;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -61,6 +65,8 @@ export const Header: React.FC<HeaderProps> = ({
   user,
   onOpenLogin,
   onOpenAccount,
+  onToggleLayout,
+  isTwoPane = true,
 }) => {
   const [isTimerHidden, setIsTimerHidden] = useState<boolean>(false);
   const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
@@ -259,6 +265,22 @@ export const Header: React.FC<HeaderProps> = ({
               <Highlighter className="w-4 h-4" />
               <span className="hidden md:inline text-[10px] font-medium">Annotate</span>
             </button>
+
+            {/* View Layout Toggle (Split vs Stacked) */}
+            {onToggleLayout && (
+              <button
+                onClick={onToggleLayout}
+                className="flex flex-col items-center justify-center rounded-lg p-1.5 sm:px-2 sm:py-1 min-w-[34px] min-h-[34px] sm:min-w-0 sm:min-h-0 text-gray-700 dark:text-slate-300 hover:bg-blue-50 dark:hover:bg-blue-950/40 hover:text-blue-600 dark:hover:text-blue-400 transition group cursor-pointer"
+                title={isTwoPane ? "Switch to Stacked View (Passage above question)" : "Switch to Side-by-Side Split View"}
+              >
+                {isTwoPane ? (
+                  <Rows className="w-4 h-4 text-blue-600 dark:text-blue-400 group-hover:scale-110 transition-transform" />
+                ) : (
+                  <Columns className="w-4 h-4 text-blue-600 dark:text-blue-400 group-hover:scale-110 transition-transform" />
+                )}
+                <span className="hidden md:inline text-[10px] font-medium">{isTwoPane ? "Stacked" : "Split"}</span>
+              </button>
+            )}
 
             {/* Calculator & Math Reference: Hidden when practicing Reading & Writing */}
             {section !== 'Reading and Writing' && (

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import React, { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import { Header } from './components/Header';
 import { LeftPane } from './components/LeftPane';
 import { RightPane } from './components/RightPane';
@@ -96,19 +96,46 @@ export const App: React.FC = () => {
     return () => window.removeEventListener('satify_toast', handleToast);
   }, []);
 
-  // Mobile navigation drawer and responsive layout states (< 1280px / xl)
+  // Mobile navigation drawer and responsive layout states
   const [isMobileNavOpen, setIsMobileNavOpen] = useState<boolean>(false);
-  const [isDesktop, setIsDesktop] = useState<boolean>(() => 
-    typeof window !== 'undefined' ? window.innerWidth >= 1280 : true
+  const [windowWidth, setWindowWidth] = useState<number>(() => 
+    typeof window !== 'undefined' ? window.innerWidth : 1280
   );
+  const [isLandscape, setIsLandscape] = useState<boolean>(() => 
+    typeof window !== 'undefined' ? window.innerWidth >= window.innerHeight : true
+  );
+
+  // Manual layout override: null ('auto' based on device orientation), 'split', or 'stacked'
+  const [layoutOverride, setLayoutOverride] = useState<'split' | 'stacked' | null>(null);
 
   useEffect(() => {
     const handleResize = () => {
-      setIsDesktop(window.innerWidth >= 1280);
+      setWindowWidth(window.innerWidth);
+      setIsLandscape(window.innerWidth >= window.innerHeight);
     };
     window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener('orientationchange', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('orientationchange', handleResize);
+    };
   }, []);
+
+  // Compute active two-pane state:
+  // - If user manually toggled, obey their preference
+  // - Otherwise: Split view when screen is in landscape AND width >= 900px (standard iPad landscape & desktop)
+  // - In portrait orientation on tablets/phones, defaults to stacked so options are always immediately visible!
+  const isTwoPane = useMemo(() => {
+    if (layoutOverride) return layoutOverride === 'split';
+    return isLandscape && windowWidth >= 900;
+  }, [layoutOverride, isLandscape, windowWidth]);
+
+  const handleToggleLayout = useCallback(() => {
+    setLayoutOverride(prev => {
+      const current = prev !== null ? prev === 'split' : isTwoPane;
+      return current ? 'stacked' : 'split';
+    });
+  }, [isTwoPane]);
 
   useEffect(() => {
     const root = document.documentElement;
@@ -301,35 +328,66 @@ export const App: React.FC = () => {
     }
   }, [safeIndex, activeQuestions.length]);
 
-  // Resizable Split Pane Logic
-  const handleMouseDown = useCallback((e: React.MouseEvent) => {
+  // Unified Pointer & Touch Resizable Split Pane Logic
+  const isDraggingRef = useRef<boolean>(false);
+
+  const handlePointerDown = useCallback((e: React.PointerEvent) => {
     e.preventDefault();
+    e.stopPropagation();
     setIsDragging(true);
+    isDraggingRef.current = true;
+    try {
+      e.currentTarget.setPointerCapture(e.pointerId);
+    } catch {}
+  }, []);
+
+  const handlePointerMove = useCallback((clientX: number) => {
+    if (!isDraggingRef.current) return;
+    const containerWidth = window.innerWidth;
+    if (containerWidth <= 0) return;
+    const newSplit = (clientX / containerWidth) * 100;
+    if (newSplit >= 20 && newSplit <= 80) {
+      setSplitRatio(newSplit);
+    }
+  }, []);
+
+  const handlePointerUp = useCallback(() => {
+    if (isDraggingRef.current) {
+      isDraggingRef.current = false;
+      setIsDragging(false);
+    }
   }, []);
 
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!isDragging) return;
-      const containerWidth = window.innerWidth;
-      const newSplit = (e.clientX / containerWidth) * 100;
-      if (newSplit >= 25 && newSplit <= 75) {
-        setSplitRatio(newSplit);
-      }
+    if (!isDragging) return;
+
+    const onPointerMove = (e: PointerEvent) => {
+      handlePointerMove(e.clientX);
+    };
+    const onPointerUp = () => {
+      handlePointerUp();
     };
 
-    const handleMouseUp = () => {
-      if (isDragging) setIsDragging(false);
-    };
+    window.addEventListener('pointermove', onPointerMove, { passive: false });
+    window.addEventListener('pointerup', onPointerUp);
+    window.addEventListener('pointercancel', onPointerUp);
 
-    if (isDragging) {
-      window.addEventListener('mousemove', handleMouseMove);
-      window.addEventListener('mouseup', handleMouseUp);
-    }
+    // Touch events fallback for Mobile Safari / iPadOS
+    const onTouchMove = (e: TouchEvent) => {
+      if (!isDraggingRef.current || e.touches.length === 0) return;
+      handlePointerMove(e.touches[0].clientX);
+    };
+    window.addEventListener('touchmove', onTouchMove, { passive: false });
+    window.addEventListener('touchend', onPointerUp);
+
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('mouseup', handleMouseUp);
+      window.removeEventListener('pointermove', onPointerMove);
+      window.removeEventListener('pointerup', onPointerUp);
+      window.removeEventListener('pointercancel', onPointerUp);
+      window.removeEventListener('touchmove', onTouchMove);
+      window.removeEventListener('touchend', onPointerUp);
     };
-  }, [isDragging]);
+  }, [isDragging, handlePointerMove, handlePointerUp]);
 
   // Keyboard Shortcuts (A-D, Enter, Arrow keys)
   useEffect(() => {
@@ -739,16 +797,26 @@ export const App: React.FC = () => {
               user={currentUser}
               onOpenLogin={() => setIsLoginModalOpen(true)}
               onOpenAccount={() => setIsAccountModalOpen(true)}
+              onToggleLayout={handleToggleLayout}
+              isTwoPane={isTwoPane}
             />
 
             {/* Split Pane / Stacked Mobile Workspace */}
-            <main className="flex-1 min-h-0 w-full flex flex-col lg:flex-row overflow-y-auto lg:overflow-hidden overscroll-contain relative bg-white dark:bg-[#070a10]">
+            <main className={`flex-1 min-h-0 w-full relative bg-white dark:bg-[#070a10] ${
+              isTwoPane && !isLeftCollapsed
+                ? 'flex flex-row overflow-hidden'
+                : 'flex flex-col overflow-y-auto overscroll-contain'
+            }`}>
               {!isLeftCollapsed ? (
                 <>
                   {/* Left Pane: Reading Passage, Visual Graphs, Paired Texts, Poems */}
                   <section
-                    style={isDesktop ? { width: `${splitRatio}%` } : undefined}
-                    className="w-full lg:h-full bg-white dark:bg-[#070a10] lg:overflow-hidden flex flex-col border-b lg:border-b-0 border-slate-200 dark:border-slate-800 shrink-0"
+                    style={isTwoPane ? { width: `${splitRatio}%` } : { width: '100%' }}
+                    className={`${
+                      isTwoPane 
+                        ? 'h-full overflow-hidden flex flex-col border-r border-slate-200 dark:border-slate-800 shrink-0' 
+                        : 'w-full flex flex-col border-b border-dashed border-slate-300 dark:border-slate-700 shrink-0'
+                    } bg-white dark:bg-[#070a10]`}
                   >
                     <LeftPane
                       question={currentQuestion}
@@ -756,6 +824,7 @@ export const App: React.FC = () => {
                       highlights={currentHighlights}
                       onHighlightClick={handleHighlightClick}
                       onTextSelected={handleTextSelected}
+                      isSplitView={isTwoPane}
                       onClearSelection={() => {
                         setToolbarState(prev => ({
                           ...prev,
@@ -771,22 +840,41 @@ export const App: React.FC = () => {
                     />
                   </section>
 
-                  {/* Interactive Drag Divider (Hidden on < 1280px / xl:hidden) */}
-                  <div
-                    onMouseDown={handleMouseDown}
-                    onDoubleClick={() => setIsLeftCollapsed(true)}
-                    className="hidden xl:flex relative w-1 bg-slate-200 dark:bg-slate-800 hover:bg-blue-600 dark:hover:bg-blue-500 items-center justify-center cursor-col-resize transition-colors z-20 group shrink-0"
-                    title="Drag to resize panes • Double-click to collapse left pane"
-                  >
-                    <div className="absolute h-10 w-4 rounded-full bg-slate-900 dark:bg-slate-700 group-hover:bg-blue-600 text-white flex items-center justify-center shadow-md transition-colors pointer-events-none">
-                      <GripVertical className="w-3 h-3 text-slate-300" />
-                    </div>
-                  </div>
+                  {/* Interactive Drag Divider (Active in Two-Pane Mode with Touch Support) */}
+                  {isTwoPane && (
+                    <div
+                      onPointerDown={handlePointerDown}
+                      onDoubleClick={() => setIsLeftCollapsed(true)}
+                      style={{ touchAction: 'none' }}
+                      className="relative w-4 -mx-1 hover:w-4 flex items-center justify-center cursor-col-resize z-20 group shrink-0 select-none touch-none"
+                      title="Drag with mouse or finger to resize panes • Double-tap to collapse passage"
+                    >
+                      {/* Vertical line indicator */}
+                      <div className={`w-1 h-full transition-colors ${
+                        isDragging 
+                          ? 'bg-blue-600 dark:bg-blue-500' 
+                          : 'bg-slate-200 dark:bg-slate-800 group-hover:bg-blue-500'
+                      }`} />
 
-                  {/* Right Pane: Question Stem, Options, Controls & Rationale (pb-24 on mobile/tablet so questions never overlap fixed footer) */}
+                      {/* Pill Handle - 44px min touch target */}
+                      <div className={`absolute h-12 w-6 rounded-full flex items-center justify-center shadow-md transition-all pointer-events-none ${
+                        isDragging
+                          ? 'bg-blue-600 scale-110 shadow-blue-500/30'
+                          : 'bg-slate-900 dark:bg-slate-700 group-hover:bg-blue-600 text-white'
+                      }`}>
+                        <GripVertical className="w-3.5 h-3.5 text-slate-200" />
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Right Pane: Question Stem, Options, Controls & Rationale */}
                   <section
-                    style={isDesktop ? { width: `${100 - splitRatio}%` } : undefined}
-                    className="w-full xl:h-full bg-white dark:bg-[#070a10] xl:overflow-hidden flex flex-col shrink-0 pb-24 xl:pb-0"
+                    style={isTwoPane ? { width: `${100 - splitRatio}%` } : { width: '100%' }}
+                    className={`${
+                      isTwoPane 
+                        ? 'h-full overflow-hidden flex flex-col shrink-0 pb-20 xl:pb-0' 
+                        : 'w-full flex flex-col shrink-0 pb-32'
+                    } bg-white dark:bg-[#070a10]`}
                   >
                     <RightPane
                       question={currentQuestion}
@@ -799,6 +887,7 @@ export const App: React.FC = () => {
                       highlights={currentHighlights}
                       onHighlightClick={handleHighlightClick}
                       onOpenGrammarGuide={() => setIsGrammarGuideOpen(true)}
+                      isSplitView={isTwoPane}
                     />
                   </section>
                 </>
@@ -826,6 +915,7 @@ export const App: React.FC = () => {
                       highlights={currentHighlights}
                       onHighlightClick={handleHighlightClick}
                       onOpenGrammarGuide={() => setIsGrammarGuideOpen(true)}
+                      isSplitView={false}
                     />
                   </div>
                 </div>

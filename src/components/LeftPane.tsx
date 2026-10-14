@@ -18,6 +18,7 @@ interface LeftPaneProps {
     rect: DOMRect;
   }) => void;
   onClearSelection?: () => void;
+  isSplitView?: boolean;
 }
 
 export const LeftPane: React.FC<LeftPaneProps> = ({
@@ -28,6 +29,7 @@ export const LeftPane: React.FC<LeftPaneProps> = ({
   onOpenNote,
   onTextSelected,
   onClearSelection,
+  isSplitView = true,
 }) => {
   const passageText = question.passage || question.passageText || '';
   const lastValidSelectionRef = useRef<{
@@ -196,7 +198,11 @@ export const LeftPane: React.FC<LeftPaneProps> = ({
     <div 
       onMouseUp={handleSelectionEnd}
       onTouchEnd={handleSelectionEnd}
-      className="h-auto lg:h-full px-4 sm:px-6 lg:px-10 py-5 sm:py-8 overflow-y-visible lg:overflow-y-auto overflow-x-hidden bg-white dark:bg-[#070a10] text-slate-900 dark:text-white select-text passage-text"
+      className={`px-4 sm:px-6 lg:px-10 py-5 sm:py-8 overflow-x-hidden bg-white dark:bg-[#070a10] text-slate-900 dark:text-white select-text passage-text ${
+        isSplitView 
+          ? 'h-full overflow-y-auto' 
+          : 'h-auto overflow-visible'
+      }`}
     >
       {/* Annotate active mode indicator & Sticky Mobile Highlighter Bar */}
       {isAnnotateActive && (

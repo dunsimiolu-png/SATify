@@ -31,6 +31,7 @@ interface RightPaneProps {
   onHighlightClick: (highlight: TextHighlight, rect: DOMRect) => void;
   onOpenNote?: (highlight: TextHighlight, rect: DOMRect) => void;
   onOpenGrammarGuide?: () => void;
+  isSplitView?: boolean;
 }
 
 export const RightPane: React.FC<RightPaneProps> = ({
@@ -45,6 +46,7 @@ export const RightPane: React.FC<RightPaneProps> = ({
   onHighlightClick: _onHighlightClick,
   onOpenNote: _onOpenNote,
   onOpenGrammarGuide,
+  isSplitView = true,
 }) => {
   const [isCopied, setIsCopied] = useState<boolean>(false);
   const [isAbcModeActive, setIsAbcModeActive] = useState<boolean>(false);
@@ -112,7 +114,11 @@ export const RightPane: React.FC<RightPaneProps> = ({
     : question.rationale?.summary || '';
 
   return (
-    <div className="h-auto lg:h-full px-4 sm:px-6 lg:px-10 py-5 sm:py-6 overflow-y-visible lg:overflow-y-auto overflow-x-hidden bg-white dark:bg-[#070a10] text-slate-900 dark:text-white select-text question-stem pb-24 lg:pb-6">
+    <div className={`px-4 sm:px-6 lg:px-10 py-5 sm:py-6 overflow-x-hidden bg-white dark:bg-[#070a10] text-slate-900 dark:text-white select-text question-stem ${
+      isSplitView
+        ? 'h-full overflow-y-auto pb-24'
+        : 'h-auto overflow-visible pb-36'
+    }`}>
       {/* 1. Metadata Ribbon (Above Question Strip) */}
       <div className="mb-4 flex items-center justify-between gap-3 text-xs flex-wrap select-none">
         {/* Left Side Metadata */}
