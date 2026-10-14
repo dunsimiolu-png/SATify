@@ -731,7 +731,7 @@ function assembleQuestionPassageAndPrompt(lines, domain, skill) {
       const prev = i > 0 ? noteLines[i - 1] : null;
       const prevEndsWithPunct = prev ? /[.?!;’”"]$/.test(prev.text.trim()) : false;
       const dy = prev ? prev.y - cur.y : 0;
-      const startsWithBulletChar = /^[•\-\*]/.test(trimmed);
+      const startsWithBulletChar = /^[•●\u2022\-\*]/.test(trimmed);
 
       // A new note can ONLY start if:
       // (1) curNote is empty, OR
@@ -750,7 +750,7 @@ function assembleQuestionPassageAndPrompt(lines, domain, skill) {
     }
     if (curNote) discreteNotes.push(cleanText(curNote));
 
-    const formattedNotes = discreteNotes.map(n => '• ' + n.replace(/^[•\-\*]\s*/, '')).join('\n');
+    const formattedNotes = discreteNotes.map(n => '• ' + n.replace(/^[•●\u2022\-\*]\s*/, '')).join('\n');
     passage = intro ? (intro + '\n\n' + formattedNotes) : formattedNotes;
   } else if (isCrossText) {
     // Cross-Text Connections: Text 1 & Text 2 formatting

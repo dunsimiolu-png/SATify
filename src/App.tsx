@@ -10,14 +10,20 @@ import { QuestionNavModal } from './components/QuestionNavModal';
 import { HighlightToolbar } from './components/HighlightToolbar';
 import { SetupDashboard } from './components/SetupDashboard';
 import { GrammarComparisonModal } from './components/GrammarComparisonModal';
+import { CookieConsentBanner } from './components/CookieConsentBanner';
+import { LoginModal } from './components/LoginModal';
+import { UserProfile, getCurrentUser } from './utils/auth';
 import { Sidebar, AppRoute } from './components/Sidebar';
 import { PasscodeLock } from './components/PasscodeLock';
-import { HomeDashboard } from './views/HomeDashboard';
-import { AnalyticsView } from './views/AnalyticsView';
-import { SavedMistakesView } from './views/SavedMistakesView';
-import { VocabPracticeView } from './views/VocabPracticeView';
-import { ScoreCalculatorView } from './views/ScoreCalculatorView';
-import { QuestionRush } from './components/QuestionRush';
+
+// Dynamically lazy-loaded view chunks with Suspense for instant page loads (Requirement 1)
+const HomeDashboard = React.lazy(() => import('./views/HomeDashboard').then(m => ({ default: m.HomeDashboard })));
+const AnalyticsView = React.lazy(() => import('./views/AnalyticsView').then(m => ({ default: m.AnalyticsView })));
+const SavedMistakesView = React.lazy(() => import('./views/SavedMistakesView').then(m => ({ default: m.SavedMistakesView })));
+const VocabPracticeView = React.lazy(() => import('./views/VocabPracticeView').then(m => ({ default: m.VocabPracticeView })));
+const ScoreCalculatorView = React.lazy(() => import('./views/ScoreCalculatorView').then(m => ({ default: m.ScoreCalculatorView })));
+const QuestionRush = React.lazy(() => import('./components/QuestionRush').then(m => ({ default: m.QuestionRush })));
+
 import { allEnglishQuestions } from './data/mockQuestions';
 import { 
   MockQuestion, 
@@ -53,15 +59,27 @@ export const App: React.FC = () => {
     setIsUnlocked(false);
   }, []);
 
-  // Mobile navigation drawer and responsive layout states
+  // User profile and Google Sign-in state (Requirement 8)
+  const [currentUser, setCurrentUser] = useState<UserProfile | null>(() => getCurrentUser());
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState<boolean>(false);
+
+  useEffect(() => {
+    const handleAuthChange = (e: any) => {
+      setCurrentUser(e.detail || null);
+    };
+    window.addEventListener('satify_auth_changed', handleAuthChange);
+    return () => window.removeEventListener('satify_auth_changed', handleAuthChange);
+  }, []);
+
+  // Mobile navigation drawer and responsive layout states (< 1280px / xl)
   const [isMobileNavOpen, setIsMobileNavOpen] = useState<boolean>(false);
   const [isDesktop, setIsDesktop] = useState<boolean>(() => 
-    typeof window !== 'undefined' ? window.innerWidth >= 1024 : true
+    typeof window !== 'undefined' ? window.innerWidth >= 1280 : true
   );
 
   useEffect(() => {
     const handleResize = () => {
-      setIsDesktop(window.innerWidth >= 1024);
+      setIsDesktop(window.innerWidth >= 1280);
     };
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
@@ -536,7 +554,7 @@ export const App: React.FC = () => {
   }
 
   return (
-    <div className="w-screen h-screen flex flex-col md:flex-row overflow-hidden font-sans bg-slate-50 dark:bg-[#070a10] text-slate-900 dark:text-white">
+    <div className="w-full max-w-full overflow-x-hidden h-[100dvh] max-h-[100dvh] flex flex-col md:flex-row overflow-hidden font-sans bg-slate-50 dark:bg-[#070a10] text-slate-900 dark:text-white">
       {/* 1. Mobile Top Bar (< 768px) when NOT in full practice mode */}
       {currentRoute !== 'practice' && (
         <div className="md:hidden flex items-center justify-between px-4 py-2 pt-[max(env(safe-area-inset-top,0px),8px)] bg-white dark:bg-[#070a10] border-b border-slate-200 dark:border-slate-800 z-40 shrink-0">
@@ -550,25 +568,48 @@ export const App: React.FC = () => {
             </button>
             <Logo size="sm" variant="header" inverted={isDark} />
           </div>
-          <button
-            onClick={toggleTheme}
-            className="min-h-[44px] min-w-[44px] flex items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition cursor-pointer"
-            title={isDark ? "Switch to Light Theme" : "Switch to Dark Theme"}
-            aria-label="Toggle theme"
-          >
-            {isDark ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-slate-700" />}
-          </button>
+          <div className="flex items-center gap-2">
+            {currentUser ? (
+              <button
+                onClick={() => setIsLoginModalOpen(true)}
+                className="w-8 h-8 rounded-full overflow-hidden border-2 border-blue-600 flex items-center justify-center bg-blue-600 text-white font-bold text-xs cursor-pointer"
+                title={currentUser.name}
+              >
+                {currentUser.picture ? (
+                  <img src={currentUser.picture} alt={currentUser.name} className="w-full h-full object-cover" />
+                ) : (
+                  <span>{currentUser.name.charAt(0).toUpperCase()}</span>
+                )}
+              </button>
+            ) : (
+              <button
+                onClick={() => setIsLoginModalOpen(true)}
+                className="px-2.5 py-1.5 rounded-xl bg-blue-600 text-white font-bold text-xs hover:bg-blue-700 transition shadow-xs cursor-pointer active:scale-95"
+              >
+                Sign In
+              </button>
+            )}
+
+            <button
+              onClick={toggleTheme}
+              className="min-h-[44px] min-w-[44px] flex items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition cursor-pointer"
+              title={isDark ? "Switch to Light Theme" : "Switch to Dark Theme"}
+              aria-label="Toggle theme"
+            >
+              {isDark ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-slate-700" />}
+            </button>
+          </div>
         </div>
       )}
 
-      {/* 2. Slide-over Mobile Navigation Drawer (< 768px) */}
-      {currentRoute !== 'practice' && isMobileNavOpen && (
+      {/* 2. Slide-over Mobile Navigation Drawer (< 1280px / xl:hidden) */}
+      {isMobileNavOpen && (
         <>
           <div
-            className="fixed inset-0 bg-black/60 backdrop-blur-xs z-40 md:hidden animate-in fade-in duration-200"
+            className="fixed inset-0 bg-black/60 backdrop-blur-xs z-50 animate-in fade-in duration-200"
             onClick={() => setIsMobileNavOpen(false)}
           />
-          <div className="w-72 fixed inset-y-0 left-0 z-50 md:hidden animate-in slide-in-from-left duration-200 flex flex-col shadow-2xl">
+          <div className="w-72 fixed inset-y-0 left-0 z-50 animate-in slide-in-from-left duration-200 flex flex-col shadow-2xl">
             <Sidebar
               className="w-full h-full"
               currentRoute={currentRoute as AppRoute}
@@ -608,42 +649,48 @@ export const App: React.FC = () => {
 
       {/* 4. Main Content Area */}
       <div className="flex-1 h-full overflow-hidden flex flex-col">
-        {currentRoute === 'home' && (
-          <HomeDashboard
-            questions={allQuestions}
-            onStartSkillPractice={handleStartSkillPractice}
-            onOpenQuestionBank={() => setIsSetupOpen(true)}
-          />
-        )}
+        <React.Suspense fallback={
+          <div className="flex-1 flex items-center justify-center min-h-[300px] w-full bg-white dark:bg-[#070a10]">
+            <div className="w-8 h-8 border-3 border-blue-600 border-t-transparent rounded-full animate-spin" />
+          </div>
+        }>
+          {currentRoute === 'home' && (
+            <HomeDashboard
+              questions={allQuestions}
+              onStartSkillPractice={handleStartSkillPractice}
+              onOpenQuestionBank={() => setIsSetupOpen(true)}
+            />
+          )}
 
-        {currentRoute === 'analytics' && (
-          <AnalyticsView
-            questions={allQuestions}
-            onStartSkillPractice={handleStartSkillPractice}
-          />
-        )}
+          {currentRoute === 'analytics' && (
+            <AnalyticsView
+              questions={allQuestions}
+              onStartSkillPractice={handleStartSkillPractice}
+            />
+          )}
 
-        {currentRoute === 'saved' && (
-          <SavedMistakesView
-            questions={allQuestions}
-            onStartCustomPractice={handleStartCustomPractice}
-          />
-        )}
+          {currentRoute === 'saved' && (
+            <SavedMistakesView
+              questions={allQuestions}
+              onStartCustomPractice={handleStartCustomPractice}
+            />
+          )}
 
-        {currentRoute === 'vocab' && (
-          <VocabPracticeView />
-        )}
+          {currentRoute === 'vocab' && (
+            <VocabPracticeView />
+          )}
 
-        {currentRoute === 'rush' && (
-          <QuestionRush
-            questions={allQuestions}
-            onOpenQuestionBank={() => setIsSetupOpen(true)}
-          />
-        )}
+          {currentRoute === 'rush' && (
+            <QuestionRush
+              questions={allQuestions}
+              onOpenQuestionBank={() => setIsSetupOpen(true)}
+            />
+          )}
 
-        {currentRoute === 'calculator' && (
-          <ScoreCalculatorView />
-        )}
+          {currentRoute === 'calculator' && (
+            <ScoreCalculatorView />
+          )}
+        </React.Suspense>
 
         {/* ----------------------------------------------------------------- */}
         {/* FULL BLUEBOOK TEST RUNNER VIEW (When in Practice Mode)            */}
@@ -662,18 +709,21 @@ export const App: React.FC = () => {
               isAnnotateActive={isAnnotateActive}
               onToggleAnnotate={() => setIsAnnotateActive(!isAnnotateActive)}
               onExitToDashboard={handleExitToDashboard}
+              onOpenNav={() => setIsMobileNavOpen(true)}
               currentQuestion={currentQuestion}
               isAnswerChecked={currentState.isAnswerChecked}
+              user={currentUser}
+              onOpenLogin={() => setIsLoginModalOpen(true)}
             />
 
             {/* Split Pane / Stacked Mobile Workspace */}
-            <main className="flex-1 min-h-0 w-full flex flex-col lg:flex-row overflow-y-auto lg:overflow-hidden overscroll-contain relative bg-white dark:bg-[#070a10]">
+            <main className="flex-1 min-h-0 w-full flex flex-col xl:flex-row overflow-y-auto xl:overflow-hidden overscroll-contain relative bg-white dark:bg-[#070a10]">
               {!isLeftCollapsed ? (
                 <>
                   {/* Left Pane: Reading Passage, Visual Graphs, Paired Texts, Poems */}
                   <section
                     style={isDesktop ? { width: `${splitRatio}%` } : undefined}
-                    className="w-full lg:h-full bg-white dark:bg-[#070a10] lg:overflow-hidden flex flex-col border-b lg:border-b-0 border-slate-200 dark:border-slate-800 shrink-0"
+                    className="w-full xl:h-full bg-white dark:bg-[#070a10] xl:overflow-hidden flex flex-col border-b xl:border-b-0 border-slate-200 dark:border-slate-800 shrink-0"
                   >
                     <LeftPane
                       question={currentQuestion}
@@ -684,11 +734,11 @@ export const App: React.FC = () => {
                     />
                   </section>
 
-                  {/* Interactive Drag Divider (Hidden on < 1024px) */}
+                  {/* Interactive Drag Divider (Hidden on < 1280px / xl:hidden) */}
                   <div
                     onMouseDown={handleMouseDown}
                     onDoubleClick={() => setIsLeftCollapsed(true)}
-                    className="hidden lg:flex relative w-1 bg-slate-200 dark:bg-slate-800 hover:bg-blue-600 dark:hover:bg-blue-500 items-center justify-center cursor-col-resize transition-colors z-20 group shrink-0"
+                    className="hidden xl:flex relative w-1 bg-slate-200 dark:bg-slate-800 hover:bg-blue-600 dark:hover:bg-blue-500 items-center justify-center cursor-col-resize transition-colors z-20 group shrink-0"
                     title="Drag to resize panes • Double-click to collapse left pane"
                   >
                     <div className="absolute h-10 w-4 rounded-full bg-slate-900 dark:bg-slate-700 group-hover:bg-blue-600 text-white flex items-center justify-center shadow-md transition-colors pointer-events-none">
@@ -696,10 +746,10 @@ export const App: React.FC = () => {
                     </div>
                   </div>
 
-                  {/* Right Pane: Question Stem, Options, Controls & Rationale */}
+                  {/* Right Pane: Question Stem, Options, Controls & Rationale (pb-24 on mobile/tablet so questions never overlap fixed footer) */}
                   <section
                     style={isDesktop ? { width: `${100 - splitRatio}%` } : undefined}
-                    className="w-full lg:h-full bg-white dark:bg-[#070a10] lg:overflow-hidden flex flex-col shrink-0"
+                    className="w-full xl:h-full bg-white dark:bg-[#070a10] xl:overflow-hidden flex flex-col shrink-0 pb-24 xl:pb-0"
                   >
                     <RightPane
                       question={currentQuestion}
@@ -806,6 +856,16 @@ export const App: React.FC = () => {
         onClose={() => setIsSetupOpen(false)}
         onStartPractice={handleStartPractice}
         currentConfig={filterConfig}
+      />
+
+      {/* Floating Theme-Aware Cookie Consent Banner & Preferences Modal */}
+      <CookieConsentBanner />
+
+      {/* Google Sign-In & Founder Welcome Email Modal */}
+      <LoginModal
+        isOpen={isLoginModalOpen}
+        onClose={() => setIsLoginModalOpen(false)}
+        onSuccess={(u) => setCurrentUser(u)}
       />
 
       {/* Floating Highlighter Pill Toolbar (Active only in Practice mode) */}

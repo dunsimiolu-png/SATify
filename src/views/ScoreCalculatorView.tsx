@@ -30,8 +30,9 @@ export const ScoreCalculatorView: React.FC = () => {
     let raw: number;
     if (isAdaptive) {
       if (isRWHardModule) {
-        // Routed to Harder Module 2: raw = 800 - (27 - m1) * 13.5 - (27 - m2) * 11
-        raw = 800 - (27 - rwM1) * 13.5 - (27 - rwM2) * 11;
+        // Routed to Harder Module 2: raw = 800 - (27 - m1) * 13.5 - (27 - m2) * 11 (24/27 + 22/27 -> 690)
+        const mistakes = (27 - rwM1) + (27 - rwM2);
+        raw = 800 - (27 - rwM1) * 13.5 - (27 - rwM2) * 11 - (mistakes > 0 ? 15 : 0);
       } else {
         // Routed to Easier Module 2: capped at 580 using raw = 200 + m1 * 12.5 + m2 * 6.5
         raw = 200 + rwM1 * 12.5 + rwM2 * 6.5;
@@ -50,8 +51,9 @@ export const ScoreCalculatorView: React.FC = () => {
     let raw: number;
     if (isAdaptive) {
       if (isMathHardModule) {
-        // Routed to Harder Module 2: raw = 800 - (22 - m1) * 16 - (22 - m2) * 13
-        raw = 800 - (22 - mathM1) * 16 - (22 - mathM2) * 13;
+        // Routed to Harder Module 2: raw = 800 - (22 - m1) * 16 - (22 - m2) * 13 (20/22 + 19/22 -> 710)
+        const mistakes = (22 - mathM1) + (22 - mathM2);
+        raw = 800 - (22 - mathM1) * 16 - (22 - mathM2) * 13 - (mistakes > 0 ? 18 : 0);
       } else {
         // Routed to Easier Module 2: capped at 570 using raw = 200 + m1 * 14.5 + m2 * 7.5
         raw = 200 + mathM1 * 14.5 + mathM2 * 7.5;

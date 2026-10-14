@@ -69,6 +69,7 @@ export const HighlightToolbar: React.FC<HighlightToolbarProps> = ({
       {/* Floating White Pill Toolbar */}
       <div
         onMouseDown={(e) => { e.preventDefault(); e.stopPropagation(); }} // CRITICAL: Never clears window.getSelection()
+        onTouchStart={(e) => { e.preventDefault(); e.stopPropagation(); }}
         style={{
           position: 'fixed',
           top: `${position.top}px`,
@@ -78,13 +79,18 @@ export const HighlightToolbar: React.FC<HighlightToolbarProps> = ({
         className="bg-white rounded-full shadow-[0_4px_16px_rgba(0,0,0,0.15)] border border-gray-200 px-2.5 py-1.5 flex items-center gap-2 z-50 animate-in fade-in zoom-in-95 duration-150 select-none"
       >
         {/* 1. Three Circular Color Swatches */}
-        <div className="flex items-center gap-1.5" onMouseDown={(e) => { e.preventDefault(); e.stopPropagation(); }}>
+        <div className="flex items-center gap-1.5" onMouseDown={(e) => { e.preventDefault(); e.stopPropagation(); }} onTouchStart={(e) => { e.preventDefault(); e.stopPropagation(); }}>
           {swatches.map((swatch) => {
             const isActive = activeHighlight ? currentColor === swatch.id : swatch.id === 'yellow';
             return (
               <button
                 key={swatch.id}
                 onMouseDown={(e) => { e.preventDefault(); e.stopPropagation(); }}
+                onTouchStart={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  onSelectColor(swatch.id);
+                }}
                 onClick={() => onSelectColor(swatch.id)}
                 style={{ backgroundColor: swatch.bg }}
                 className={`w-8 h-8 rounded-full flex items-center justify-center transition-all cursor-pointer shadow-2xs hover:scale-105 active:scale-95 ${
@@ -103,7 +109,7 @@ export const HighlightToolbar: React.FC<HighlightToolbarProps> = ({
         </div>
 
         {/* 2. Underline Style Button with chevron */}
-        <div className="relative flex items-center" onMouseDown={(e) => { e.preventDefault(); e.stopPropagation(); }}>
+        <div className="relative flex items-center" onMouseDown={(e) => { e.preventDefault(); e.stopPropagation(); }} onTouchStart={(e) => { e.preventDefault(); e.stopPropagation(); }}>
           <div
             className={`flex items-center rounded-full border border-gray-400 transition-colors ${
               isUnderlined ? 'bg-gray-100 text-black border-gray-600 font-bold' : 'bg-white text-gray-700 hover:bg-gray-50'
@@ -111,6 +117,11 @@ export const HighlightToolbar: React.FC<HighlightToolbarProps> = ({
           >
             <button
               onMouseDown={(e) => { e.preventDefault(); e.stopPropagation(); }}
+              onTouchStart={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                onToggleUnderline();
+              }}
               onClick={() => onToggleUnderline()}
               className="pl-2.5 pr-1 py-1 flex items-center justify-center text-xs font-bold cursor-pointer"
               title="Toggle Underline"
@@ -121,6 +132,11 @@ export const HighlightToolbar: React.FC<HighlightToolbarProps> = ({
             </button>
             <button
               onMouseDown={(e) => { e.preventDefault(); e.stopPropagation(); }}
+              onTouchStart={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                setIsUnderlineMenuOpen(!isUnderlineMenuOpen);
+              }}
               onClick={(e) => {
                 e.stopPropagation();
                 setIsUnderlineMenuOpen(!isUnderlineMenuOpen);
@@ -137,12 +153,19 @@ export const HighlightToolbar: React.FC<HighlightToolbarProps> = ({
             <div
               className="absolute left-0 bottom-full mb-2 bg-white rounded-lg shadow-xl border border-gray-200 py-1 w-32 z-50 text-xs text-gray-800 select-none animate-in fade-in zoom-in-95"
               onMouseDown={(e) => { e.preventDefault(); e.stopPropagation(); }}
+              onTouchStart={(e) => { e.preventDefault(); e.stopPropagation(); }}
               onClick={(e) => e.stopPropagation()}
             >
               {(['solid', 'dashed', 'dotted'] as UnderlineStyle[]).map((style) => (
                 <button
                   key={style}
                   onMouseDown={(e) => { e.preventDefault(); e.stopPropagation(); }}
+                  onTouchStart={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    onToggleUnderline(style);
+                    setIsUnderlineMenuOpen(false);
+                  }}
                   onClick={() => {
                     onToggleUnderline(style);
                     setIsUnderlineMenuOpen(false);
@@ -168,6 +191,11 @@ export const HighlightToolbar: React.FC<HighlightToolbarProps> = ({
         {/* 3. Delete Highlight Button (Trash Icon inside Circle) */}
         <button
           onMouseDown={(e) => { e.preventDefault(); e.stopPropagation(); }}
+          onTouchStart={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            onDeleteHighlight();
+          }}
           onClick={onDeleteHighlight}
           className="w-8 h-8 rounded-full border border-gray-400 hover:bg-gray-100 flex items-center justify-center text-gray-700 hover:text-rose-600 transition-colors shadow-2xs cursor-pointer"
           title="Remove highlight"

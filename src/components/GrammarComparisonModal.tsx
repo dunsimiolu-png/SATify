@@ -91,7 +91,7 @@ export const GrammarComparisonModal: React.FC<GrammarComparisonModalProps> = ({
                 : 'border-transparent text-gray-500 dark:text-slate-400 hover:text-gray-900 dark:hover:text-white'
             }`}
           >
-            <Layers className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" />
+            <Layers className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
             <span>Boundaries (Punctuation)</span>
           </button>
 
@@ -138,7 +138,7 @@ export const GrammarComparisonModal: React.FC<GrammarComparisonModalProps> = ({
                   {/* Boundaries Card */}
                   <div className="p-4 rounded-xl bg-white dark:bg-[#141a24] border border-blue-200 dark:border-blue-900 shadow-xs space-y-2">
                     <div className="flex items-center justify-between">
-                      <span className="text-xs font-extrabold uppercase tracking-wider text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded border border-indigo-200">
+                      <span className="text-xs font-extrabold uppercase tracking-wider text-blue-700 bg-blue-50 px-2 py-0.5 rounded border border-blue-200">
                         Topic: Boundaries
                       </span>
                       <span className="text-xs font-bold text-gray-400">Punctuation Focus</span>
@@ -195,7 +195,7 @@ export const GrammarComparisonModal: React.FC<GrammarComparisonModalProps> = ({
                     <span className="w-6 h-6 rounded-full bg-blue-100 text-blue-700 font-bold flex items-center justify-center shrink-0">2</span>
                     <span className="text-gray-800">Are the remaining words identical across all 4 options?</span>
                     <ArrowRight className="w-4 h-4 text-gray-400 shrink-0 ml-auto" />
-                    <span className="font-extrabold text-indigo-700 shrink-0">YES &rarr; Boundaries</span>
+                    <span className="font-extrabold text-blue-700 shrink-0">YES &rarr; Boundaries</span>
                   </div>
                   <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg border border-gray-200">
                     <span className="w-6 h-6 rounded-full bg-blue-100 text-blue-700 font-bold flex items-center justify-center shrink-0">3</span>
@@ -224,7 +224,7 @@ export const GrammarComparisonModal: React.FC<GrammarComparisonModalProps> = ({
                 {/* Rule 1 */}
                 <div className="p-4 rounded-xl border border-gray-200 bg-white space-y-1.5">
                   <div className="font-bold text-gray-900 flex items-center gap-1.5">
-                    <CheckCircle2 className="w-4 h-4 text-indigo-600" />
+                    <CheckCircle2 className="w-4 h-4 text-blue-600" />
                     <span>Independent Clauses (IC; IC)</span>
                   </div>
                   <p className="text-gray-600">
@@ -238,7 +238,7 @@ export const GrammarComparisonModal: React.FC<GrammarComparisonModalProps> = ({
                 {/* Rule 2 */}
                 <div className="p-4 rounded-xl border border-gray-200 bg-white space-y-1.5">
                   <div className="font-bold text-gray-900 flex items-center gap-1.5">
-                    <CheckCircle2 className="w-4 h-4 text-indigo-600" />
+                    <CheckCircle2 className="w-4 h-4 text-blue-600" />
                     <span>Colon Rules (IC: Explanation)</span>
                   </div>
                   <p className="text-gray-600">
@@ -252,7 +252,7 @@ export const GrammarComparisonModal: React.FC<GrammarComparisonModalProps> = ({
                 {/* Rule 3 */}
                 <div className="p-4 rounded-xl border border-gray-200 bg-white space-y-1.5">
                   <div className="font-bold text-gray-900 flex items-center gap-1.5">
-                    <CheckCircle2 className="w-4 h-4 text-indigo-600" />
+                    <CheckCircle2 className="w-4 h-4 text-blue-600" />
                     <span>Dashes (Single or Paired)</span>
                   </div>
                   <p className="text-gray-600">
@@ -266,7 +266,7 @@ export const GrammarComparisonModal: React.FC<GrammarComparisonModalProps> = ({
                 {/* Rule 4 */}
                 <div className="p-4 rounded-xl border border-gray-200 bg-white space-y-1.5">
                   <div className="font-bold text-gray-900 flex items-center gap-1.5">
-                    <CheckCircle2 className="w-4 h-4 text-indigo-600" />
+                    <CheckCircle2 className="w-4 h-4 text-blue-600" />
                     <span>Comma + FANBOYS (IC, and IC)</span>
                   </div>
                   <p className="text-gray-600">
@@ -390,7 +390,7 @@ export const GrammarComparisonModal: React.FC<GrammarComparisonModalProps> = ({
                   <thead className="bg-gray-50 text-gray-700 border-b border-gray-200 font-bold">
                     <tr>
                       <th className="p-3">Attribute</th>
-                      <th className="p-3 text-indigo-700 bg-indigo-50/50">Boundaries</th>
+                      <th className="p-3 text-blue-700 bg-blue-50/50">Boundaries</th>
                       <th className="p-3 text-emerald-700 bg-emerald-50/50">Form, Structure, and Sense</th>
                     </tr>
                   </thead>

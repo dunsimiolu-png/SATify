@@ -11,12 +11,17 @@ import {
   Home,
   Split,
   Sun,
-  Moon
+  Moon,
+  Menu,
+  User,
+  LogOut,
+  Cookie
 } from 'lucide-react';
 import { Logo } from './Logo';
 import { MockQuestion } from '../types/quiz';
 import { getQuestionTargetSeconds, getPacePillColor, formatSecondsToPace } from '../utils/pacingTargets';
 import { useTheme } from '../utils/theme';
+import { UserProfile, logoutUser } from '../utils/auth';
 
 interface HeaderProps {
   section?: string;
@@ -29,8 +34,11 @@ interface HeaderProps {
   isAnnotateActive: boolean;
   onToggleAnnotate: () => void;
   onExitToDashboard?: () => void;
+  onOpenNav?: () => void;
   currentQuestion?: MockQuestion;
   isAnswerChecked?: boolean;
+  user?: UserProfile | null;
+  onOpenLogin?: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -44,11 +52,15 @@ export const Header: React.FC<HeaderProps> = ({
   isAnnotateActive,
   onToggleAnnotate,
   onExitToDashboard,
+  onOpenNav,
   currentQuestion,
   isAnswerChecked = false,
+  user,
+  onOpenLogin,
 }) => {
   const [isTimerHidden, setIsTimerHidden] = useState<boolean>(false);
   const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState<boolean>(false);
   const { isDark, toggleTheme } = useTheme();
 
   // CookSAT Count-Up Per-Question Stopwatch starting at 00:00
@@ -102,6 +114,17 @@ export const Header: React.FC<HeaderProps> = ({
       <div className="px-3 py-2 sm:px-5 sm:py-2.5 flex items-center justify-between gap-2 min-h-[50px] sm:min-h-[56px]">
         {/* Left Section: SATify Logo Container & Title & Directions */}
         <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+          {onOpenNav && (
+            <button
+              onClick={onOpenNav}
+              className="xl:hidden p-1.5 rounded-lg bg-gray-100 dark:bg-slate-800 hover:bg-gray-200 dark:hover:bg-slate-700 text-gray-700 dark:text-slate-300 transition shrink-0 min-h-[36px] min-w-[36px] flex items-center justify-center cursor-pointer"
+              title="Open Navigation Menu"
+              aria-label="Open Navigation Menu"
+            >
+              <Menu className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+            </button>
+          )}
+
           {onExitToDashboard && (
             <button
               onClick={onExitToDashboard}
@@ -265,6 +288,61 @@ export const Header: React.FC<HeaderProps> = ({
               {isDark ? "Light" : "Dark"}
             </span>
           </button>
+
+          {/* User Profile Avatar / Sign In */}
+          {user ? (
+            <div className="relative shrink-0 ml-1">
+              <button
+                onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
+                className="w-8 h-8 rounded-full overflow-hidden border-2 border-blue-600 focus:outline-none flex items-center justify-center bg-blue-600 text-white font-bold text-xs cursor-pointer shadow-xs transition hover:scale-105"
+                title={user.name}
+              >
+                {user.picture ? (
+                  <img src={user.picture} alt={user.name} className="w-full h-full object-cover" />
+                ) : (
+                  <span>{user.name.charAt(0).toUpperCase()}</span>
+                )}
+              </button>
+
+              {isUserMenuOpen && (
+                <div className="absolute right-0 top-full mt-2 w-56 rounded-2xl bg-white dark:bg-[#0f1522] border border-slate-200 dark:border-slate-800 shadow-2xl p-2 text-xs text-slate-800 dark:text-slate-100 z-50 animate-in fade-in zoom-in-95">
+                  <div className="p-2.5 border-b border-slate-100 dark:border-slate-800">
+                    <p className="font-extrabold text-slate-900 dark:text-white truncate">{user.name}</p>
+                    <p className="text-[11px] text-slate-500 dark:text-slate-400 truncate">{user.email}</p>
+                  </div>
+                  <button
+                    onClick={() => {
+                      setIsUserMenuOpen(false);
+                      window.dispatchEvent(new CustomEvent('satify_open_cookie_preferences'));
+                    }}
+                    className="w-full p-2 text-left rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800/60 flex items-center gap-2 cursor-pointer transition text-slate-700 dark:text-slate-300"
+                  >
+                    <Cookie className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
+                    <span>Cookie Preferences</span>
+                  </button>
+                  <button
+                    onClick={() => {
+                      setIsUserMenuOpen(false);
+                      logoutUser();
+                    }}
+                    className="w-full p-2 text-left rounded-xl hover:bg-rose-50 dark:hover:bg-rose-950/40 text-rose-600 dark:text-rose-400 flex items-center gap-2 cursor-pointer transition"
+                  >
+                    <LogOut className="w-3.5 h-3.5" />
+                    <span>Sign Out</span>
+                  </button>
+                </div>
+              )}
+            </div>
+          ) : (
+            <button
+              onClick={onOpenLogin}
+              className="px-2.5 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs flex items-center gap-1.5 transition shadow-xs cursor-pointer active:scale-95 shrink-0 ml-1"
+              title="Sign in with Google"
+            >
+              <User className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">Sign In</span>
+            </button>
+          )}
         </div>
       </div>
 

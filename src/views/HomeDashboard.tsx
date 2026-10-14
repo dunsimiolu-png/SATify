@@ -9,7 +9,6 @@ import {
   Target, 
   Play, 
   Layers, 
-  TrendingUp,
   RotateCcw,
   AlertTriangle,
   X
@@ -22,6 +21,8 @@ import {
   clearAllProgress
 } from '../utils/storage';
 import { Logo } from '../components/Logo';
+import { ActivityTrendChart } from '../components/charts/ActivityTrendChart';
+import { CircularGauge } from '../components/charts/CircularGauge';
 
 interface HomeDashboardProps {
   questions: MockQuestion[];
@@ -88,54 +89,7 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({
   // Max count for activity trend chart height calculation
   const maxTrendDay = Math.max(1, ...activityTrend.map(d => d.total));
 
-  // Circular Donut Gauge SVG Component
-  const CircularDonutGauge = ({ percent, size = 68, strokeWidth = 7 }: { percent: number; size?: number; strokeWidth?: number }) => {
-    const radius = (size - strokeWidth) / 2;
-    const circumference = 2 * Math.PI * radius;
-    const strokeDashoffset = circumference - (percent / 100) * circumference;
 
-    const strokeColor = percent >= 80 
-      ? '#10b981' // emerald
-      : percent >= 50 
-        ? '#3b82f6' // blue
-        : percent > 0 
-          ? '#f59e0b' // amber
-          : '#e5e7eb'; // gray
-
-    return (
-      <div className="relative flex items-center justify-center shrink-0" style={{ width: size, height: size }}>
-        <svg className="w-full h-full -rotate-90" viewBox={`0 0 ${size} ${size}`}>
-          {/* Background circle */}
-          <circle
-            cx={size / 2}
-            cy={size / 2}
-            r={radius}
-            fill="none"
-            stroke="#f3f4f6"
-            strokeWidth={strokeWidth}
-          />
-          {/* Foreground progress circle */}
-          <circle
-            cx={size / 2}
-            cy={size / 2}
-            r={radius}
-            fill="none"
-            stroke={strokeColor}
-            strokeWidth={strokeWidth}
-            strokeDasharray={circumference}
-            strokeDashoffset={strokeDashoffset}
-            strokeLinecap="round"
-            className="transition-all duration-700 ease-out"
-          />
-        </svg>
-        <div className="absolute inset-0 flex flex-col items-center justify-center select-none">
-          <span className="text-xs font-extrabold text-gray-800 leading-none">
-            {percent}%
-          </span>
-        </div>
-      </div>
-    );
-  };
 
   const formatTimeSpent = (totalSeconds: number) => {
     if (totalSeconds <= 0) return '0m';
@@ -317,79 +271,8 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({
           </div>
         </div>
 
-        {/* 3. The 10-day Activity Trend Green/Red Bar Chart */}
-        <div className="p-6 rounded-2xl bg-white border border-gray-200/80 shadow-xs space-y-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <TrendingUp className="w-5 h-5 text-[#0050d8]" />
-              <h3 className="font-extrabold text-base text-gray-900">
-                10-Day Activity Trend
-              </h3>
-            </div>
-            <div className="flex items-center gap-4 text-xs font-semibold text-gray-600">
-              <div className="flex items-center gap-1.5">
-                <span className="w-3 h-3 rounded-xs bg-emerald-500" />
-                <span>Correct</span>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <span className="w-3 h-3 rounded-xs bg-rose-500" />
-                <span>Incorrect</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Bar Chart Container */}
-          <div className="h-44 w-full flex items-end justify-between gap-2 pt-6 pb-2 px-2 border-b border-gray-100">
-            {activityTrend.map((day, idx) => {
-              const heightPercent = day.total > 0 ? Math.max(15, (day.total / maxTrendDay) * 100) : 4;
-              const correctPercent = day.total > 0 ? (day.correct / day.total) * 100 : 0;
-              const wrongPercent = 100 - correctPercent;
-
-              return (
-                <div key={idx} className="flex-1 flex flex-col items-center gap-2 h-full justify-end group">
-                  {/* Count tooltip on hover */}
-                  <div className="opacity-0 group-hover:opacity-100 transition-opacity text-[10px] font-bold text-gray-600 bg-gray-100 px-1.5 py-0.5 rounded shadow-2xs">
-                    {day.total} Qs
-                  </div>
-
-                  {/* Stacked Bar */}
-                  <div 
-                    className="w-full max-w-[36px] bg-gray-100 rounded-t-md overflow-hidden flex flex-col justify-end transition-all"
-                    style={{ height: `${heightPercent}%` }}
-                  >
-                    {day.total > 0 ? (
-                      <>
-                        {/* Red Wrong Portion */}
-                        {day.wrong > 0 && (
-                          <div 
-                            className="w-full bg-rose-500 transition-all"
-                            style={{ height: `${wrongPercent}%` }}
-                            title={`${day.wrong} incorrect`}
-                          />
-                        )}
-                        {/* Green Correct Portion */}
-                        {day.correct > 0 && (
-                          <div 
-                            className="w-full bg-emerald-500 transition-all"
-                            style={{ height: `${correctPercent}%` }}
-                            title={`${day.correct} correct`}
-                          />
-                        )}
-                      </>
-                    ) : (
-                      <div className="w-full h-1 bg-gray-200" />
-                    )}
-                  </div>
-
-                  {/* Day Label */}
-                  <span className="text-[10px] font-medium text-gray-400">
-                    {day.label}
-                  </span>
-                </div>
-              );
-            })}
-          </div>
-        </div>
+        {/* 3. The 10-day Activity Trend Green/Red Bar Chart (Memoized) */}
+        <ActivityTrendChart activityTrend={activityTrend} maxTrendDay={maxTrendDay} />
 
         {/* 4. Domain & Skill Breakdown Containers with Donut Gauges */}
         <div className="space-y-6">
@@ -436,7 +319,7 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({
                       >
                         {/* Top: Donut Gauge + Skill Info */}
                         <div className="flex items-start gap-3.5">
-                          <CircularDonutGauge percent={accuracy} />
+                          <CircularGauge percent={accuracy} />
 
                           <div className="flex-1 min-w-0">
                             <h4 className="font-bold text-sm text-gray-900 leading-snug truncate group-hover:text-[#0050d8] transition-colors" title={skillName}>

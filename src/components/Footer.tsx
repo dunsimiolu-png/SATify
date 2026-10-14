@@ -22,7 +22,7 @@ export const Footer: React.FC<FooterProps> = ({
   const isLast = currentIndex === totalQuestions - 1;
 
   return (
-    <footer className="relative shrink-0 w-full bg-white dark:bg-[#070a10] border-t border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white select-none z-30 pb-[max(env(safe-area-inset-bottom,0px),8px)]">
+    <footer className="relative shrink-0 w-full bg-white dark:bg-[#070a10] border-t border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white select-none z-30 pb-[max(env(safe-area-inset-bottom,14px),12px)]">
       {/* Signature Bluebook horizontal dashed divider strip */}
       <div className="bluebook-dashed-border" />
 

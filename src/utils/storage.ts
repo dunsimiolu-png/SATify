@@ -284,27 +284,36 @@ export function updateStudyStreak(): number {
 // -----------------------------------------------------------------------------
 export function get10DayActivityTrend(): DayActivity[] {
   const attempts = getAttempts();
-  const days: DayActivity[] = [];
+  
+  // High-performance single O(N) reduction pass
+  const countsByDate = new Map<string, { correct: number; wrong: number; total: number }>();
+  for (let i = 0; i < attempts.length; i++) {
+    const a = attempts[i];
+    const dateStr = new Date(a.timestamp).toISOString().slice(0, 10);
+    let entry = countsByDate.get(dateStr);
+    if (!entry) {
+      entry = { correct: 0, wrong: 0, total: 0 };
+      countsByDate.set(dateStr, entry);
+    }
+    entry.total++;
+    if (a.isCorrect) entry.correct++;
+    else entry.wrong++;
+  }
 
+  const days: DayActivity[] = [];
+  const now = Date.now();
   for (let i = 9; i >= 0; i--) {
-    const d = new Date(Date.now() - i * 86400000);
+    const d = new Date(now - i * 86400000);
     const dateStr = d.toISOString().slice(0, 10);
     const label = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-
-    const dayAttempts = attempts.filter(a => {
-      const aDate = new Date(a.timestamp).toISOString().slice(0, 10);
-      return aDate === dateStr;
-    });
-
-    const correct = dayAttempts.filter(a => a.isCorrect).length;
-    const wrong = dayAttempts.length - correct;
+    const stats = countsByDate.get(dateStr) || { correct: 0, wrong: 0, total: 0 };
 
     days.push({
       date: dateStr,
       label,
-      correct,
-      wrong,
-      total: dayAttempts.length,
+      correct: stats.correct,
+      wrong: stats.wrong,
+      total: stats.total,
     });
   }
 

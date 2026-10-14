@@ -23,6 +23,7 @@ import {
   formatSecondsToPace
 } from '../utils/pacingTargets';
 import { RichText } from './RichText';
+import { BulletPassage, isBulletPassage } from './BulletPassage';
 
 interface QuestionRushProps {
   questions: MockQuestion[];
@@ -265,7 +266,11 @@ export const QuestionRush: React.FC<QuestionRushProps> = ({
 
               {/* Passage Text */}
               <div className="text-sm sm:text-base leading-relaxed text-slate-800 dark:text-slate-200 space-y-3 font-serif">
-                <RichText text={currentQuestion.passage} />
+                {isBulletPassage(currentQuestion.passage) ? (
+                  <BulletPassage text={currentQuestion.passage} />
+                ) : (
+                  <RichText text={currentQuestion.passage} />
+                )}
               </div>
             </div>
           </div>
