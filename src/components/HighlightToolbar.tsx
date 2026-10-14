@@ -32,6 +32,8 @@ export const HighlightToolbar: React.FC<HighlightToolbarProps> = ({
   const [isNoteBoxOpen, setIsNoteBoxOpen] = useState<boolean>(false);
   const [noteContent, setNoteContent] = useState<string>(activeHighlight?.note || '');
   const noteTextareaRef = useRef<HTMLTextAreaElement>(null);
+  const toolbarRef = useRef<HTMLDivElement>(null);
+  const noteBoxRef = useRef<HTMLDivElement>(null);
 
   // Sync note content if activeHighlight changes
   useEffect(() => {
@@ -44,14 +46,34 @@ export const HighlightToolbar: React.FC<HighlightToolbarProps> = ({
     }
   }, [isNoteBoxOpen]);
 
+  // Close toolbar on Escape key or when clicking/tapping outside (whitespace)
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         onClose();
       }
     };
+
+    const handleOutsideClick = (e: MouseEvent | TouchEvent) => {
+      const target = e.target as Node;
+      if (toolbarRef.current && toolbarRef.current.contains(target)) return;
+      if (noteBoxRef.current && noteBoxRef.current.contains(target)) return;
+      onClose();
+    };
+
     window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    // Slight delay so the mouseup/touchend event that created the selection doesn't instantly dismiss it
+    const timer = setTimeout(() => {
+      document.addEventListener('mousedown', handleOutsideClick);
+      document.addEventListener('touchstart', handleOutsideClick);
+    }, 60);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      clearTimeout(timer);
+      document.removeEventListener('mousedown', handleOutsideClick);
+      document.removeEventListener('touchstart', handleOutsideClick);
+    };
   }, [onClose]);
 
   const currentColor = activeHighlight?.color || 'yellow';
@@ -68,6 +90,7 @@ export const HighlightToolbar: React.FC<HighlightToolbarProps> = ({
     <>
       {/* Floating White Pill Toolbar */}
       <div
+        ref={toolbarRef}
         onMouseDown={(e) => { e.preventDefault(); e.stopPropagation(); }} // CRITICAL: Never clears window.getSelection()
         onTouchStart={(e) => { e.preventDefault(); e.stopPropagation(); }}
         style={{
@@ -224,6 +247,7 @@ export const HighlightToolbar: React.FC<HighlightToolbarProps> = ({
       {/* Floating Note Box Drawer right below the highlight */}
       {isNoteBoxOpen && (
         <div
+          ref={noteBoxRef}
           onMouseDown={(e) => e.stopPropagation()}
           style={{
             position: 'fixed',

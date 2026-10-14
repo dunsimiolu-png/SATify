@@ -133,26 +133,8 @@ export const App: React.FC = () => {
   // Per-question state map (user answers, review flags)
   const [userStates, setUserStates] = useState<Record<number, UserQuestionState>>({});
 
-  // Annotations & Highlights state by question ID (persisted in localStorage)
-  const [highlightsByQuestion, setHighlightsByQuestion] = useState<Record<string, TextHighlight[]>>(() => {
-    if (typeof window === 'undefined') return {};
-    try {
-      const saved = localStorage.getItem('satify_highlights');
-      return saved ? JSON.parse(saved) : {};
-    } catch {
-      return {};
-    }
-  });
-
-  // Persist highlights to localStorage whenever updated
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-    try {
-      localStorage.setItem('satify_highlights', JSON.stringify(highlightsByQuestion));
-    } catch (err) {
-      console.error('Failed to persist highlights to localStorage:', err);
-    }
-  }, [highlightsByQuestion]);
+  // Annotations & Highlights state by question ID (Session-only; resets when leaving practice or returning to dashboard)
+  const [highlightsByQuestion, setHighlightsByQuestion] = useState<Record<string, TextHighlight[]>>({});
 
   // Floating Highlight Pill Toolbar State
   const [toolbarState, setToolbarState] = useState<{
@@ -517,6 +499,7 @@ export const App: React.FC = () => {
   // Exit Practice Mode and return to Dashboard with full cleanup
   const handleExitToDashboard = useCallback(() => {
     setIsAnnotateActive(false);
+    setHighlightsByQuestion({});
     setToolbarState({
       isOpen: false,
       position: { top: 0, left: 0 },
@@ -524,6 +507,9 @@ export const App: React.FC = () => {
       pendingSelection: undefined,
     });
     if (typeof window !== 'undefined') {
+      try {
+        localStorage.removeItem('satify_highlights');
+      } catch {}
       const sel = window.getSelection();
       if (sel) sel.removeAllRanges();
     }
@@ -534,6 +520,7 @@ export const App: React.FC = () => {
   useEffect(() => {
     if (currentRoute !== 'practice') {
       setIsAnnotateActive(false);
+      setHighlightsByQuestion({});
       setToolbarState({
         isOpen: false,
         position: { top: 0, left: 0 },
@@ -541,6 +528,9 @@ export const App: React.FC = () => {
         pendingSelection: undefined,
       });
       if (typeof window !== 'undefined') {
+        try {
+          localStorage.removeItem('satify_highlights');
+        } catch {}
         const sel = window.getSelection();
         if (sel) sel.removeAllRanges();
       }
@@ -731,6 +721,18 @@ export const App: React.FC = () => {
                       highlights={currentHighlights}
                       onHighlightClick={handleHighlightClick}
                       onTextSelected={handleTextSelected}
+                      onClearSelection={() => {
+                        setToolbarState(prev => ({
+                          ...prev,
+                          isOpen: false,
+                          activeHighlight: null,
+                          pendingSelection: undefined,
+                        }));
+                        if (typeof window !== 'undefined') {
+                          const sel = window.getSelection();
+                          if (sel) sel.removeAllRanges();
+                        }
+                      }}
                     />
                   </section>
 

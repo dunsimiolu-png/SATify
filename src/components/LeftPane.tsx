@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useRef } from 'react';
 import { MockQuestion, TextHighlight } from '../types/quiz';
 import { RichText } from './RichText';
 import { BulletPassage, isBulletPassage } from './BulletPassage';
+import { PairedPassage, isPairedPassage } from './PairedPassage';
 
 interface LeftPaneProps {
   question: MockQuestion;
@@ -16,6 +17,7 @@ interface LeftPaneProps {
     text: string;
     rect: DOMRect;
   }) => void;
+  onClearSelection?: () => void;
 }
 
 export const LeftPane: React.FC<LeftPaneProps> = ({
@@ -25,6 +27,7 @@ export const LeftPane: React.FC<LeftPaneProps> = ({
   onHighlightClick,
   onOpenNote,
   onTextSelected,
+  onClearSelection,
 }) => {
   const passageText = question.passage || question.passageText || '';
   const lastValidSelectionRef = useRef<{
@@ -52,14 +55,6 @@ export const LeftPane: React.FC<LeftPaneProps> = ({
       lastValidSelectionRef.current = null;
     }
   }, [isAnnotateActive]);
-
-  // Detect Paired texts (Text 1 / Text 2)
-  const STANDALONE_T1_REGEX = /(?:^|\n)\s*Text\s*1(?!\s+(?:is\s+adapted|discusses|was\s+written|describes|presents|explores|argues|considers))\s*(?:\n|$)/i;
-  const STANDALONE_T2_REGEX = /(?:^|\n)\s*Text\s*2(?!\s+(?:is\s+adapted|discusses|was\s+written|describes|presents|explores|argues|considers))\s*(?:\n|$)/i;
-
-  const isPairedText = question.skill === 'Cross-Text Connections' || (
-    STANDALONE_T1_REGEX.test(passageText) && STANDALONE_T2_REGEX.test(passageText)
-  );
 
   // Helper to extract and calibrate exact selection start, end, text and rect
   const extractSelection = useCallback(() => {
@@ -140,14 +135,21 @@ export const LeftPane: React.FC<LeftPaneProps> = ({
 
   // Handle selection end (mouseup / touchend) to trigger floating highlighter toolbar
   const handleSelectionEnd = useCallback(() => {
-    const sel = extractSelection() || lastValidSelectionRef.current;
+    const sel = extractSelection();
     if (sel && onTextSelected) {
+      lastValidSelectionRef.current = sel;
       onTextSelected({
         target: 'passage',
         ...sel,
       });
+    } else if (!sel) {
+      // User clicked or tapped whitespace without selecting text
+      lastValidSelectionRef.current = null;
+      if (onClearSelection) {
+        onClearSelection();
+      }
     }
-  }, [extractSelection, onTextSelected]);
+  }, [extractSelection, onTextSelected, onClearSelection]);
 
   const renderContent = () => {
     // 1. Rhetorical Synthesis: Structured Bullet Notes List (Requirement 4)
@@ -163,67 +165,17 @@ export const LeftPane: React.FC<LeftPaneProps> = ({
       );
     }
 
-    // 2. Paired Passages: Text 1 and Text 2 (Vertically Stacked Full-Width Cards)
-    if (isPairedText) {
-      const m1 = passageText.match(STANDALONE_T1_REGEX);
-      const m2 = passageText.match(STANDALONE_T2_REGEX);
-
-      if (m1 && m2 && m1.index !== undefined && m2.index !== undefined && m1.index < m2.index) {
-        const intro = passageText.slice(0, m1.index).trim();
-        const t1 = passageText.slice(m1.index + m1[0].length, m2.index).trim();
-        const t2 = passageText.slice(m2.index + m2[0].length).trim();
-
-        return (
-          <div className="flex flex-col gap-5 w-full font-serif text-[17px] leading-[1.7] text-[#111827] dark:text-slate-100">
-            {intro && (
-              <div className="p-4 bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/60 rounded-xl text-gray-700 dark:text-slate-300 italic text-[15px] leading-relaxed">
-                <RichText
-                  text={intro}
-                  target="passage"
-                  highlights={highlights}
-                  onHighlightClick={onHighlightClick}
-                  onOpenNote={onOpenNote}
-                />
-              </div>
-            )}
-            {/* Text 1 Full-Width Card */}
-            <div className="w-full bg-slate-50/70 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-700/60 rounded-xl p-5 shadow-2xs">
-              <div className="mb-3">
-                <span className="inline-block px-3 py-1 rounded-md bg-[#0050d8] text-white font-sans font-bold text-xs uppercase tracking-wider">
-                  Text 1
-                </span>
-              </div>
-              <div className="whitespace-pre-line leading-[1.7]">
-                <RichText
-                  text={t1}
-                  target="passage"
-                  highlights={highlights}
-                  onHighlightClick={onHighlightClick}
-                  onOpenNote={onOpenNote}
-                />
-              </div>
-            </div>
-
-            {/* Text 2 Full-Width Card */}
-            <div className="w-full bg-slate-50/70 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-700/60 rounded-xl p-5 shadow-2xs">
-              <div className="mb-3">
-                <span className="inline-block px-3 py-1 rounded-md bg-[#0050d8] text-white font-sans font-bold text-xs uppercase tracking-wider">
-                  Text 2
-                </span>
-              </div>
-              <div className="whitespace-pre-line leading-[1.7]">
-                <RichText
-                  text={t2}
-                  target="passage"
-                  highlights={highlights}
-                  onHighlightClick={onHighlightClick}
-                  onOpenNote={onOpenNote}
-                />
-              </div>
-            </div>
-          </div>
-        );
-      }
+    // 2. Paired Passages: Text 1 and Text 2 (Cross-Text Connections)
+    if (isPairedPassage(passageText, question.skill)) {
+      return (
+        <PairedPassage
+          text={passageText}
+          target="passage"
+          highlights={highlights}
+          onHighlightClick={onHighlightClick}
+          onOpenNote={onOpenNote}
+        />
+      );
     }
 
     // 3. Standard Reading Passage: Preserve poem lines and paragraph splits

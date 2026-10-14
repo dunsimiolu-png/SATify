@@ -24,6 +24,7 @@ import {
 } from '../utils/pacingTargets';
 import { RichText } from './RichText';
 import { BulletPassage, isBulletPassage } from './BulletPassage';
+import { PairedPassage, isPairedPassage } from './PairedPassage';
 
 interface QuestionRushProps {
   questions: MockQuestion[];
@@ -57,6 +58,7 @@ export const QuestionRush: React.FC<QuestionRushProps> = ({
   const [isAnswerRevealed, setIsAnswerRevealed] = useState<boolean>(false);
   const [results, setResults] = useState<QuestionResult[]>([]);
   const [showRationale, setShowRationale] = useState<boolean>(false);
+  const [mobileRushTab, setMobileRushTab] = useState<'both' | 'passage' | 'question'>('both');
 
   // Timer state
   const [targetSeconds, setTargetSeconds] = useState<number>(45);
@@ -94,6 +96,7 @@ export const QuestionRush: React.FC<QuestionRushProps> = ({
     setSelectedChoice(null);
     setIsAnswerRevealed(false);
     setShowRationale(false);
+    setMobileRushTab('both');
 
     if (timerRef.current) clearInterval(timerRef.current);
 
@@ -174,43 +177,57 @@ export const QuestionRush: React.FC<QuestionRushProps> = ({
     return (
       <div className="w-full h-full flex flex-col bg-slate-50 text-slate-900 dark:bg-[#070a10] dark:text-white select-none overflow-hidden">
         {/* Top Rush Game Bar */}
-        <div className="px-6 py-3.5 bg-white dark:bg-[#0f1522] border-b border-slate-200 dark:border-slate-800 flex items-center justify-between gap-4">
-          <div className="flex items-center gap-4">
+        <div className="px-3.5 sm:px-6 py-2.5 sm:py-3.5 bg-white dark:bg-[#0f1522] border-b border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 sm:gap-4 shrink-0">
+          <div className="flex items-center justify-between sm:justify-start gap-2 sm:gap-4">
             <button
               onClick={handleExitRush}
-              className="px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-xs font-bold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition cursor-pointer flex items-center gap-1.5 shadow-2xs"
+              className="px-2.5 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-xs font-bold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition cursor-pointer flex items-center gap-1 shadow-2xs"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
-              <span>Exit Rush</span>
+              <span>Exit</span>
             </button>
 
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1.5 sm:gap-2">
               <span className="text-xs font-extrabold text-slate-900 dark:text-white">
-                Question {currentIndex + 1}
+                Q {currentIndex + 1}
               </span>
               <span className="text-xs text-slate-400 dark:text-slate-500">
-                of {rushQueue.length}
+                / {rushQueue.length}
               </span>
             </div>
 
             <span className="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800">
-              ⚡ {selectedMode.toUpperCase()} ({selectedMode === 'blitz' ? '0.8x' : selectedMode === 'relaxed' ? '1.25x' : '1.0x'})
+              ⚡ {selectedMode.toUpperCase()}
             </span>
+
+            {/* Mobile-only Stars & Streak in top row */}
+            <div className="sm:hidden flex items-center gap-1.5 ml-auto">
+              <div className="flex items-center gap-1 bg-slate-100 dark:bg-slate-800/80 px-2 py-0.5 rounded-lg border border-slate-200 dark:border-slate-700 text-xs font-bold text-amber-500">
+                <span>⭐</span>
+                <span>{totalStarsEarned}</span>
+              </div>
+              {currentStreak > 1 && (
+                <div className="flex items-center gap-0.5 bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300 px-1.5 py-0.5 rounded-lg border border-amber-200 dark:border-amber-800 text-xs font-bold">
+                  <Flame className="w-3 h-3 text-amber-500" />
+                  <span>{currentStreak}x</span>
+                </div>
+              )}
+            </div>
           </div>
 
           {/* Central Countdown Clock */}
-          <div className="flex items-center gap-3">
-            <div className="flex flex-col items-center">
-              <div className={`flex items-center gap-1.5 text-base sm:text-lg font-black font-mono tracking-tight ${
+          <div className="flex items-center justify-between sm:justify-center gap-3">
+            <div className="flex items-center sm:flex-col sm:items-center justify-between w-full sm:w-auto gap-2">
+              <div className={`flex items-center gap-1.5 text-sm sm:text-base md:text-lg font-black font-mono tracking-tight ${
                 isTimeExpired ? 'text-rose-500' : isTimeLow ? 'text-rose-400 animate-pulse' : timerRatio < 0.3 ? 'text-amber-500' : 'text-emerald-500'
               }`}>
                 <Clock className="w-4 h-4" />
                 <span>{formatSecondsToPace(timeRemaining)}</span>
-                <span className="text-xs text-slate-400 dark:text-slate-500 font-sans font-medium">
+                <span className="text-[11px] sm:text-xs text-slate-400 dark:text-slate-500 font-sans font-medium">
                   / {formatSecondsToPace(targetSeconds)}
                 </span>
               </div>
-              <div className="w-32 sm:w-44 h-1.5 bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden mt-1">
+              <div className="flex-1 sm:w-44 h-1.5 bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
                 <div 
                   className={`h-full transition-all duration-300 rounded-full ${
                     isTimeExpired ? 'bg-rose-500' : isTimeLow ? 'bg-rose-400' : timerRatio < 0.3 ? 'bg-amber-500' : 'bg-emerald-500'
@@ -221,8 +238,8 @@ export const QuestionRush: React.FC<QuestionRushProps> = ({
             </div>
           </div>
 
-          {/* Star & Streak Tally */}
-          <div className="flex items-center gap-3">
+          {/* Desktop Star & Streak Tally */}
+          <div className="hidden sm:flex items-center gap-3">
             <div className="flex items-center gap-1.5 bg-slate-100 dark:bg-slate-800/80 px-3 py-1 rounded-xl border border-slate-200 dark:border-slate-700">
               <span className="text-sm">⭐</span>
               <span className="text-xs font-bold text-amber-500 dark:text-amber-400">
@@ -239,44 +256,82 @@ export const QuestionRush: React.FC<QuestionRushProps> = ({
           </div>
         </div>
 
+        {/* Mobile View Switcher (< lg) */}
+        <div className="lg:hidden px-3.5 pt-2.5 pb-1 flex items-center justify-center shrink-0 bg-slate-50 dark:bg-[#070a10]">
+          <div className="inline-flex p-1 bg-slate-200/80 dark:bg-slate-800 rounded-xl border border-slate-300 dark:border-slate-700 text-xs font-bold w-full max-w-sm">
+            <button
+              type="button"
+              onClick={() => setMobileRushTab('both')}
+              className={`flex-1 py-1.5 rounded-lg transition-all ${
+                mobileRushTab === 'both' ? 'bg-white dark:bg-[#0f1522] text-blue-600 dark:text-blue-400 shadow-2xs font-extrabold' : 'text-slate-600 dark:text-slate-400'
+              }`}
+            >
+              All
+            </button>
+            <button
+              type="button"
+              onClick={() => setMobileRushTab('passage')}
+              className={`flex-1 py-1.5 rounded-lg transition-all ${
+                mobileRushTab === 'passage' ? 'bg-white dark:bg-[#0f1522] text-blue-600 dark:text-blue-400 shadow-2xs font-extrabold' : 'text-slate-600 dark:text-slate-400'
+              }`}
+            >
+              Passage
+            </button>
+            <button
+              type="button"
+              onClick={() => setMobileRushTab('question')}
+              className={`flex-1 py-1.5 rounded-lg transition-all ${
+                mobileRushTab === 'question' ? 'bg-white dark:bg-[#0f1522] text-blue-600 dark:text-blue-400 shadow-2xs font-extrabold' : 'text-slate-600 dark:text-slate-400'
+              }`}
+            >
+              Choices
+            </button>
+          </div>
+        </div>
+
         {/* Question Content Body */}
-        <div className="flex-1 overflow-y-auto overflow-x-hidden p-4 sm:p-6 grid grid-cols-1 lg:grid-cols-2 gap-6 max-w-7xl mx-auto w-full">
+        <div className="flex-1 overflow-y-auto overflow-x-hidden p-3.5 sm:p-6 grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 max-w-7xl mx-auto w-full pb-36 lg:pb-8">
           {/* Left Pane: Passage or Media */}
-          <div className="bg-white dark:bg-[#0f1522] border border-slate-200 dark:border-slate-800 rounded-2xl p-4 sm:p-6 flex flex-col justify-between overflow-y-visible lg:overflow-y-auto max-h-none lg:max-h-[75vh] shadow-sm">
-            <div className="space-y-4">
-              <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
-                <span className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
-                  Reading Passage
-                </span>
-                <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
-                  {currentQuestion.domain}
-                </span>
-              </div>
-
-              {/* Optional Graph/Table Image */}
-              {currentQuestion.imageUrl && (
-                <div className="my-3 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700 bg-white p-2">
-                  <img
-                    src={currentQuestion.imageUrl}
-                    alt="Question Graphic"
-                    className="max-h-56 mx-auto object-contain"
-                  />
+          {(!mobileRushTab || mobileRushTab === 'both' || mobileRushTab === 'passage') && (
+            <div className="bg-white dark:bg-[#0f1522] border border-slate-200 dark:border-slate-800 rounded-2xl p-4 sm:p-6 flex flex-col justify-between overflow-y-visible lg:overflow-y-auto max-h-none lg:max-h-[75vh] shadow-sm">
+              <div className="space-y-4">
+                <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
+                  <span className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                    Reading Passage
+                  </span>
+                  <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
+                    {currentQuestion.domain}
+                  </span>
                 </div>
-              )}
 
-              {/* Passage Text */}
-              <div className="text-sm sm:text-base leading-relaxed text-slate-800 dark:text-slate-200 space-y-3 font-serif">
-                {isBulletPassage(currentQuestion.passage) ? (
-                  <BulletPassage text={currentQuestion.passage} />
-                ) : (
-                  <RichText text={currentQuestion.passage} />
+                {/* Optional Graph/Table Image */}
+                {currentQuestion.imageUrl && (
+                  <div className="my-3 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700 bg-white p-2">
+                    <img
+                      src={currentQuestion.imageUrl}
+                      alt="Question Graphic"
+                      className="max-h-56 mx-auto object-contain"
+                    />
+                  </div>
                 )}
+
+                {/* Passage Text: Formats Standard, Bullet (Rhetorical Synthesis), and Paired Passages */}
+                <div className="text-sm sm:text-base leading-relaxed text-slate-800 dark:text-slate-200 space-y-3 font-serif">
+                  {isBulletPassage(currentQuestion.passage) ? (
+                    <BulletPassage text={currentQuestion.passage} />
+                  ) : isPairedPassage(currentQuestion.passage, currentQuestion.skill) ? (
+                    <PairedPassage text={currentQuestion.passage} showTabsOnMobile={true} />
+                  ) : (
+                    <RichText text={currentQuestion.passage} />
+                  )}
+                </div>
               </div>
             </div>
-          </div>
+          )}
 
           {/* Right Pane: Prompt, Choices & Immediate Feedback */}
-          <div className="bg-white dark:bg-[#0f1522] border border-slate-200 dark:border-slate-800 rounded-2xl p-4 sm:p-6 flex flex-col justify-between overflow-y-visible lg:overflow-y-auto max-h-none lg:max-h-[75vh] space-y-5 shadow-sm">
+          {(!mobileRushTab || mobileRushTab === 'both' || mobileRushTab === 'question') && (
+            <div className="bg-white dark:bg-[#0f1522] border border-slate-200 dark:border-slate-800 rounded-2xl p-4 sm:p-6 flex flex-col justify-between overflow-y-visible lg:overflow-y-auto max-h-none lg:max-h-[75vh] space-y-5 shadow-sm">
             <div className="space-y-4">
               {/* Skill & Difficulty Pills */}
               <div className="flex items-center justify-between flex-wrap gap-2">
@@ -420,6 +475,7 @@ export const QuestionRush: React.FC<QuestionRushProps> = ({
               </div>
             )}
           </div>
+          )}
         </div>
       </div>
     );
