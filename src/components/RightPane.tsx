@@ -112,7 +112,7 @@ export const RightPane: React.FC<RightPaneProps> = ({
     : question.rationale?.summary || '';
 
   return (
-    <div className="h-full px-4 sm:px-6 lg:px-10 py-6 overflow-y-auto overflow-x-hidden bg-white dark:bg-[#070a10] text-slate-900 dark:text-white select-text question-stem">
+    <div className="h-auto lg:h-full px-4 sm:px-6 lg:px-10 py-5 sm:py-6 overflow-y-visible lg:overflow-y-auto overflow-x-hidden bg-white dark:bg-[#070a10] text-slate-900 dark:text-white select-text question-stem pb-24 lg:pb-6">
       {/* 1. Metadata Ribbon (Above Question Strip) */}
       <div className="mb-4 flex items-center justify-between gap-3 text-xs flex-wrap select-none">
         {/* Left Side Metadata */}
@@ -273,7 +273,7 @@ export const RightPane: React.FC<RightPaneProps> = ({
               <button
                 disabled={isEliminated}
                 onClick={() => onSelectChoice(choiceId as 'A' | 'B' | 'C' | 'D')}
-                className={`w-full relative text-left rounded-lg px-4 py-3.5 flex items-start gap-3.5 transition-all select-none ${cardBorderClass} ${
+                className={`w-full min-h-[48px] relative text-left rounded-lg px-4 py-3.5 flex items-start gap-3.5 transition-all select-none ${cardBorderClass} ${
                   isEliminated ? 'opacity-45 pointer-events-none' : 'cursor-pointer'
                 }`}
               >
@@ -305,7 +305,7 @@ export const RightPane: React.FC<RightPaneProps> = ({
               {(isAbcModeActive || isEliminated) && (
                 <button
                   onClick={() => onToggleEliminate(choiceId as 'A' | 'B' | 'C' | 'D')}
-                  className={`flex-shrink-0 p-2 rounded-full border transition ${
+                  className={`flex-shrink-0 min-h-[44px] min-w-[44px] flex items-center justify-center p-2 rounded-full border transition cursor-pointer ${
                     isEliminated
                       ? 'border-slate-300 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200'
                       : 'border-slate-200 dark:border-slate-700 bg-white dark:bg-[#0f1522] text-slate-400 hover:text-rose-600 hover:border-rose-300 hover:bg-rose-50'
@@ -330,7 +330,7 @@ export const RightPane: React.FC<RightPaneProps> = ({
           <button
             onClick={() => onCheckAnswer(questionElapsed)}
             disabled={!userState.selectedChoice}
-            className={`px-6 py-2 rounded-full text-sm font-semibold transition shadow-xs flex items-center gap-2 ${
+            className={`min-h-[44px] px-6 py-2 rounded-full text-sm font-semibold transition shadow-xs flex items-center gap-2 ${
               userState.selectedChoice
                 ? 'bg-blue-600 hover:bg-blue-700 text-white active:scale-95 cursor-pointer'
                 : 'bg-slate-200 dark:bg-slate-800 text-slate-400 dark:text-slate-600 cursor-not-allowed'

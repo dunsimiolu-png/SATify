@@ -147,8 +147,8 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({
   };
 
   return (
-    <div className="w-full h-full overflow-y-auto bg-[#f8fafc] text-gray-900 select-text">
-      <div className="max-w-6xl mx-auto px-8 py-8 space-y-8">
+    <div className="w-full h-full overflow-y-auto overflow-x-hidden bg-[#f8fafc] text-gray-900 select-text">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-8 py-6 sm:py-8 space-y-6 sm:space-y-8">
         {/* Top Header */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-gray-200">
           <div className="flex items-center gap-4">

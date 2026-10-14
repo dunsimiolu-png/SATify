@@ -138,7 +138,7 @@ export const AnalyticsView: React.FC<AnalyticsViewProps> = ({
   }, [skillStats]);
 
   return (
-    <div className="w-full h-full overflow-y-auto bg-[#f8fafc] text-gray-900 px-6 py-8 md:px-10 space-y-8 select-text">
+    <div className="w-full h-full overflow-y-auto overflow-x-hidden bg-[#f8fafc] text-gray-900 px-4 sm:px-6 md:px-10 py-6 sm:py-8 space-y-6 sm:space-y-8 select-text">
       {/* Header & Timeframe Filters */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-2 border-b border-gray-200">
         <div>

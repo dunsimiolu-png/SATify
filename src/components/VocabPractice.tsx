@@ -746,9 +746,9 @@ export const VocabPractice: React.FC = () => {
   const alphabet = ['ALL', ...'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')];
 
   return (
-    <div className="w-full h-full overflow-y-auto bg-slate-50 dark:bg-[#070a10] text-slate-900 dark:text-white select-text">
+    <div className="w-full h-full overflow-y-auto overflow-x-hidden bg-slate-50 dark:bg-[#070a10] text-slate-900 dark:text-white select-text">
       {isCreatingCollection ? (
-        <div className="max-w-4xl mx-auto px-6 py-8 space-y-6 animate-in fade-in duration-200">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-8 space-y-6 animate-in fade-in duration-200">
           {/* Top Back Link */}
           <button
             onClick={handleCancelBuilder}

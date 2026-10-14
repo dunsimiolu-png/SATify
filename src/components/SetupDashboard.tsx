@@ -6,7 +6,6 @@ import {
   X,
   Shuffle,
   EyeOff,
-  ShieldCheck,
   Sun,
   Moon,
   RotateCcw,
@@ -242,20 +241,14 @@ export const SetupDashboard: React.FC<SetupDashboardProps> = ({
         onClick={e => e.stopPropagation()}
       >
         {/* Top Header Bar */}
-        <div className="px-6 py-4 border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#070a10] flex items-center justify-between">
+        <div className="px-4 sm:px-6 py-3.5 sm:py-4 border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#070a10] flex items-center justify-between gap-3">
           <div className="flex items-center gap-4">
             <Logo size="sm" variant="full" inverted={isDark} />
             <div className="h-6 w-px bg-slate-200 dark:bg-slate-800 hidden sm:block" />
             <div>
-              <div className="flex items-center gap-3 flex-wrap">
-                <h2 className="text-base font-bold text-slate-900 dark:text-white tracking-tight">
-                  Get started
-                </h2>
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200 dark:bg-emerald-950/60 dark:text-emerald-400 dark:border-emerald-500/40 shadow-xs">
-                  <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0" />
-                  <span>✓ Non-Active Question Bank (All PDF questions are Non-Active — 100% Safe for Official Bluebook Practice Tests)</span>
-                </div>
-              </div>
+              <h2 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white tracking-tight">
+                Get started
+              </h2>
               <p className="text-xs text-slate-500 dark:text-[#a1a1aa] mt-0.5">
                 Digital SAT Reading & Writing Practice • Question Bank
               </p>
@@ -290,7 +283,7 @@ export const SetupDashboard: React.FC<SetupDashboardProps> = ({
         </div>
 
         {/* Main Configuration Scroll Body */}
-        <div className="p-6 overflow-y-auto space-y-6 text-sm">
+        <div className="p-4 sm:p-6 overflow-y-auto space-y-6 text-sm">
           {/* SECTION 1: Choose Your Test */}
           <div className="space-y-2.5">
             <h3 className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-[#a1a1aa] flex items-center gap-1.5">
@@ -480,12 +473,6 @@ export const SetupDashboard: React.FC<SetupDashboardProps> = ({
               4. More options
             </h3>
 
-            {/* Permanent Emerald-Green Verification Badge */}
-            <div className="p-3 bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-500/40 rounded-xl flex items-center gap-2.5 text-xs text-emerald-800 dark:text-emerald-300 font-medium">
-              <ShieldCheck className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
-              <span>✓ Non-Active Question Bank (All PDF questions are Non-Active — 100% Safe for Official Bluebook Practice Tests)</span>
-            </div>
-
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {/* Shuffle Questions */}
               <label className="flex items-center gap-3 p-3.5 bg-slate-50 dark:bg-[#141a24] border border-slate-200 dark:border-slate-800 rounded-xl cursor-pointer hover:border-slate-300 dark:hover:border-slate-700 transition">
@@ -550,7 +537,7 @@ export const SetupDashboard: React.FC<SetupDashboardProps> = ({
         )}
 
         {/* Bottom Action Footer Bar */}
-        <div className="px-6 py-4 bg-slate-50 dark:bg-[#070a10] border-t border-slate-200 dark:border-slate-800 flex items-center justify-between flex-wrap gap-4">
+        <div className="px-4 sm:px-6 py-3.5 sm:py-4 bg-slate-50 dark:bg-[#070a10] border-t border-slate-200 dark:border-slate-800 flex items-center justify-between flex-wrap gap-4">
           <div className="flex flex-col sm:flex-row sm:items-center gap-2">
             <div className="flex items-center gap-2">
               <div className="w-2.5 h-2.5 rounded-full bg-blue-600 animate-pulse" />
@@ -571,7 +558,7 @@ export const SetupDashboard: React.FC<SetupDashboardProps> = ({
               <button
                 type="button"
                 onClick={onClose}
-                className="px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-[#a1a1aa] hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition font-semibold text-xs cursor-pointer"
+                className="min-h-[44px] px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-[#a1a1aa] hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition font-semibold text-xs cursor-pointer flex items-center justify-center"
               >
                 Cancel
               </button>
@@ -581,7 +568,7 @@ export const SetupDashboard: React.FC<SetupDashboardProps> = ({
               type="button"
               onClick={handleLaunch}
               disabled={matchedQuestions.length === 0}
-              className={`px-8 py-3 rounded-xl font-bold text-sm text-white flex items-center gap-2.5 shadow-lg transition active:scale-95 ${
+              className={`min-h-[44px] px-6 sm:px-8 py-3 rounded-xl font-bold text-sm text-white flex items-center gap-2.5 shadow-lg transition active:scale-95 ${
                 matchedQuestions.length > 0
                   ? 'bg-blue-600 hover:bg-blue-700 shadow-blue-600/25 cursor-pointer'
                   : 'bg-slate-200 dark:bg-slate-800 text-slate-400 dark:text-slate-600 cursor-not-allowed'

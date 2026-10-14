@@ -239,7 +239,7 @@ export const LeftPane: React.FC<LeftPaneProps> = ({
   return (
     <div 
       onMouseUp={handleMouseUp}
-      className="h-full px-4 sm:px-6 lg:px-10 py-6 sm:py-8 overflow-y-auto overflow-x-hidden bg-white dark:bg-[#070a10] text-slate-900 dark:text-white select-text passage-text"
+      className="h-auto lg:h-full px-4 sm:px-6 lg:px-10 py-5 sm:py-8 overflow-y-visible lg:overflow-y-auto overflow-x-hidden bg-white dark:bg-[#070a10] text-slate-900 dark:text-white select-text passage-text"
     >
       {/* Annotate active mode indicator */}
       {isAnnotateActive && (

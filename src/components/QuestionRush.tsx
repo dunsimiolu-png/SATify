@@ -239,9 +239,9 @@ export const QuestionRush: React.FC<QuestionRushProps> = ({
         </div>
 
         {/* Question Content Body */}
-        <div className="flex-1 overflow-y-auto p-4 sm:p-6 grid grid-cols-1 lg:grid-cols-2 gap-6 max-w-7xl mx-auto w-full">
+        <div className="flex-1 overflow-y-auto overflow-x-hidden p-4 sm:p-6 grid grid-cols-1 lg:grid-cols-2 gap-6 max-w-7xl mx-auto w-full">
           {/* Left Pane: Passage or Media */}
-          <div className="bg-white dark:bg-[#0f1522] border border-slate-200 dark:border-slate-800 rounded-2xl p-6 flex flex-col justify-between overflow-y-auto max-h-[75vh] shadow-sm">
+          <div className="bg-white dark:bg-[#0f1522] border border-slate-200 dark:border-slate-800 rounded-2xl p-4 sm:p-6 flex flex-col justify-between overflow-y-visible lg:overflow-y-auto max-h-none lg:max-h-[75vh] shadow-sm">
             <div className="space-y-4">
               <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
                 <span className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
@@ -271,7 +271,7 @@ export const QuestionRush: React.FC<QuestionRushProps> = ({
           </div>
 
           {/* Right Pane: Prompt, Choices & Immediate Feedback */}
-          <div className="bg-white dark:bg-[#0f1522] border border-slate-200 dark:border-slate-800 rounded-2xl p-6 flex flex-col justify-between overflow-y-auto max-h-[75vh] space-y-5 shadow-sm">
+          <div className="bg-white dark:bg-[#0f1522] border border-slate-200 dark:border-slate-800 rounded-2xl p-4 sm:p-6 flex flex-col justify-between overflow-y-visible lg:overflow-y-auto max-h-none lg:max-h-[75vh] space-y-5 shadow-sm">
             <div className="space-y-4">
               {/* Skill & Difficulty Pills */}
               <div className="flex items-center justify-between flex-wrap gap-2">
@@ -325,7 +325,7 @@ export const QuestionRush: React.FC<QuestionRushProps> = ({
                       key={opt.id}
                       disabled={isAnswerRevealed}
                       onClick={() => handleSelectChoice(opt.id)}
-                      className={`w-full text-left p-3.5 rounded-xl border transition-all duration-150 flex items-start gap-3 cursor-pointer disabled:cursor-default ${buttonStyles}`}
+                      className={`w-full min-h-[48px] text-left p-3.5 rounded-xl border transition-all duration-150 flex items-start gap-3 cursor-pointer disabled:cursor-default ${buttonStyles}`}
                     >
                       <span className={`w-6 h-6 rounded-full font-bold text-xs flex items-center justify-center shrink-0 border ${
                         isAnswerRevealed && isCorrectAnswer
@@ -562,8 +562,8 @@ export const QuestionRush: React.FC<QuestionRushProps> = ({
   // RENDER: Question Rush Hub Screen
   // ---------------------------------------------------------------------------
   return (
-    <div className="w-full h-full overflow-y-auto bg-slate-50 dark:bg-[#070a10] text-slate-900 dark:text-white select-text">
-      <div className="max-w-6xl mx-auto px-4 sm:px-8 py-8 space-y-8 animate-in fade-in duration-200">
+    <div className="w-full h-full overflow-y-auto overflow-x-hidden bg-slate-50 dark:bg-[#070a10] text-slate-900 dark:text-white select-text">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-8 py-6 sm:py-8 space-y-6 sm:space-y-8 animate-in fade-in duration-200">
         {/* Top Header */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-200 dark:border-slate-800">
           <div className="space-y-1">

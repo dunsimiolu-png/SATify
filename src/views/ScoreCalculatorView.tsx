@@ -90,7 +90,7 @@ export const ScoreCalculatorView: React.FC = () => {
   };
 
   return (
-    <div className="w-full h-full overflow-y-auto bg-slate-50 text-slate-900 dark:bg-[#0b0e14] dark:text-white px-6 py-8 md:px-10 space-y-8 select-text">
+    <div className="w-full h-full overflow-y-auto overflow-x-hidden bg-slate-50 text-slate-900 dark:bg-[#0b0e14] dark:text-white px-4 sm:px-6 md:px-10 py-6 sm:py-8 space-y-6 sm:space-y-8 select-text">
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-2 border-b border-slate-200 dark:border-slate-800">
         <div>

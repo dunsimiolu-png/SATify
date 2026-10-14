@@ -539,11 +539,11 @@ export const App: React.FC = () => {
     <div className="w-screen h-screen flex flex-col md:flex-row overflow-hidden font-sans bg-slate-50 dark:bg-[#070a10] text-slate-900 dark:text-white">
       {/* 1. Mobile Top Bar (< 768px) when NOT in full practice mode */}
       {currentRoute !== 'practice' && (
-        <div className="md:hidden flex items-center justify-between px-4 py-3 bg-white dark:bg-[#070a10] border-b border-slate-200 dark:border-slate-800 z-40 shrink-0">
+        <div className="md:hidden flex items-center justify-between px-4 py-2 pt-[max(env(safe-area-inset-top,0px),8px)] bg-white dark:bg-[#070a10] border-b border-slate-200 dark:border-slate-800 z-40 shrink-0">
           <div className="flex items-center gap-3">
             <button
               onClick={() => setIsMobileNavOpen(true)}
-              className="p-1.5 -ml-1 rounded-lg text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition cursor-pointer"
+              className="min-h-[44px] min-w-[44px] flex items-center justify-center -ml-1 rounded-lg text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition cursor-pointer"
               aria-label="Open navigation menu"
             >
               <Menu className="w-5 h-5" />
@@ -552,7 +552,7 @@ export const App: React.FC = () => {
           </div>
           <button
             onClick={toggleTheme}
-            className="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition cursor-pointer"
+            className="min-h-[44px] min-w-[44px] flex items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition cursor-pointer"
             title={isDark ? "Switch to Light Theme" : "Switch to Dark Theme"}
             aria-label="Toggle theme"
           >
@@ -649,7 +649,7 @@ export const App: React.FC = () => {
         {/* FULL BLUEBOOK TEST RUNNER VIEW (When in Practice Mode)            */}
         {/* ----------------------------------------------------------------- */}
         {currentRoute === 'practice' && (
-          <div className="w-full h-full flex flex-col justify-between overflow-hidden bg-white dark:bg-[#070a10]">
+          <div className="fixed inset-0 h-[100dvh] max-h-[100dvh] w-full flex flex-col overflow-hidden bg-white dark:bg-[#070a10] z-30">
             {/* Top Bluebook Header */}
             <Header
               section={currentQuestion.section}
@@ -667,13 +667,13 @@ export const App: React.FC = () => {
             />
 
             {/* Split Pane / Stacked Mobile Workspace */}
-            <main className="flex-1 w-full flex flex-col lg:flex-row h-auto lg:h-[calc(100vh-112px)] overflow-y-auto lg:overflow-hidden overflow-x-hidden relative bg-white dark:bg-[#070a10]">
+            <main className="flex-1 min-h-0 w-full flex flex-col lg:flex-row overflow-y-auto lg:overflow-hidden overscroll-contain relative bg-white dark:bg-[#070a10]">
               {!isLeftCollapsed ? (
                 <>
                   {/* Left Pane: Reading Passage, Visual Graphs, Paired Texts, Poems */}
                   <section
                     style={isDesktop ? { width: `${splitRatio}%` } : undefined}
-                    className="w-full lg:h-full bg-white dark:bg-[#070a10] overflow-y-visible lg:overflow-y-auto flex flex-col border-b lg:border-b-0 border-slate-200 dark:border-slate-800 shrink-0"
+                    className="w-full lg:h-full bg-white dark:bg-[#070a10] lg:overflow-hidden flex flex-col border-b lg:border-b-0 border-slate-200 dark:border-slate-800 shrink-0"
                   >
                     <LeftPane
                       question={currentQuestion}
@@ -699,7 +699,7 @@ export const App: React.FC = () => {
                   {/* Right Pane: Question Stem, Options, Controls & Rationale */}
                   <section
                     style={isDesktop ? { width: `${100 - splitRatio}%` } : undefined}
-                    className="w-full lg:h-full bg-white dark:bg-[#070a10] overflow-y-visible lg:overflow-y-auto flex flex-col shrink-0"
+                    className="w-full lg:h-full bg-white dark:bg-[#070a10] lg:overflow-hidden flex flex-col shrink-0"
                   >
                     <RightPane
                       question={currentQuestion}
