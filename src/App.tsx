@@ -614,6 +614,8 @@ export const App: React.FC = () => {
               savedCount={savedCount}
               onCloseMobile={() => setIsMobileNavOpen(false)}
               onLock={handleLockApp}
+              user={currentUser}
+              onOpenLogin={() => setIsLoginModalOpen(true)}
             />
           </div>
         </>
@@ -633,6 +635,8 @@ export const App: React.FC = () => {
             }}
             savedCount={savedCount}
             onLock={handleLockApp}
+            user={currentUser}
+            onOpenLogin={() => setIsLoginModalOpen(true)}
           />
         </div>
       )}

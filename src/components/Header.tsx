@@ -123,6 +123,17 @@ export const Header: React.FC<HeaderProps> = ({
     };
   }, [isMobileToolsOpen]);
 
+  // Close user profile dropdown when clicking outside
+  useEffect(() => {
+    if (!isUserMenuOpen) return;
+    const handleClick = () => setIsUserMenuOpen(false);
+    const timer = setTimeout(() => document.addEventListener('click', handleClick), 10);
+    return () => {
+      clearTimeout(timer);
+      document.removeEventListener('click', handleClick);
+    };
+  }, [isUserMenuOpen]);
+
   return (
     <header className="shrink-0 w-full bg-white dark:bg-[#070a10] border-b border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white select-none z-30 pt-[max(env(safe-area-inset-top,0px),8px)]">
       <div className="px-3 py-2 sm:px-5 sm:py-2.5 flex items-center justify-between gap-1 sm:gap-2 min-h-[50px] sm:min-h-[56px]">

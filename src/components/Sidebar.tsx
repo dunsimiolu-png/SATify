@@ -12,10 +12,13 @@ import {
   Zap,
   Sun,
   Moon,
-  X
+  X,
+  User,
+  LogOut
 } from 'lucide-react';
 import { Logo } from './Logo';
 import { useTheme } from '../utils/theme';
+import { UserProfile, logoutUser } from '../utils/auth';
 
 export type AppRoute = 
   | 'home' 
@@ -33,6 +36,8 @@ interface SidebarProps {
   className?: string;
   onCloseMobile?: () => void;
   onLock?: () => void;
+  user?: UserProfile | null;
+  onOpenLogin?: () => void;
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({
@@ -42,6 +47,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
   className = '',
   onCloseMobile,
   onLock,
+  user,
+  onOpenLogin,
 }) => {
   const { isDark, toggleTheme } = useTheme();
   const navItems: { id: AppRoute; label: string; icon: React.ReactNode; badge?: string | number }[] = [
@@ -131,6 +138,48 @@ export const Sidebar: React.FC<SidebarProps> = ({
           );
         })}
       </nav>
+
+      {/* User Profile / Sign In Card */}
+      <div className="p-3 border-t border-slate-100 dark:border-[#1a1f2c] bg-slate-50/60 dark:bg-[#0b0e14]">
+        {user ? (
+          <div className="flex items-center justify-between gap-2 p-1.5 rounded-xl bg-white dark:bg-[#151a24] border border-slate-200/80 dark:border-[#222b3d] shadow-2xs">
+            <div className="flex items-center gap-2.5 min-w-0">
+              <div className="w-8 h-8 rounded-full overflow-hidden border-2 border-blue-600 shrink-0 bg-blue-600 text-white font-bold text-xs flex items-center justify-center">
+                {user.picture ? (
+                  <img src={user.picture} alt={user.name} className="w-full h-full object-cover" />
+                ) : (
+                  <span>{user.name.charAt(0).toUpperCase()}</span>
+                )}
+              </div>
+              <div className="min-w-0 flex-1">
+                <p className="text-xs font-bold text-slate-900 dark:text-white truncate leading-tight">
+                  {user.name}
+                </p>
+                <p className="text-[10px] text-slate-400 dark:text-slate-500 truncate leading-tight mt-0.5">
+                  {user.email}
+                </p>
+              </div>
+            </div>
+
+            <button
+              onClick={() => logoutUser()}
+              className="p-1.5 rounded-lg text-slate-400 hover:text-rose-600 dark:hover:text-rose-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition shrink-0 cursor-pointer"
+              title="Sign Out"
+              aria-label="Sign Out"
+            >
+              <LogOut className="w-4 h-4" />
+            </button>
+          </div>
+        ) : (
+          <button
+            onClick={onOpenLogin}
+            className="w-full py-2.5 px-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs shadow-xs transition flex items-center justify-center gap-2 cursor-pointer active:scale-98"
+          >
+            <User className="w-3.5 h-3.5" />
+            <span>Sign In / Create Account</span>
+          </button>
+        )}
+      </div>
 
       {/* Footer Copyright & Theme Toggle */}
       <div className="p-4 border-t border-slate-100 dark:border-[#1a1f2c] bg-slate-50 dark:bg-[#080a0f] flex items-center justify-between gap-2">
