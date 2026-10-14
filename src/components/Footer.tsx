@@ -26,88 +26,69 @@ export const Footer: React.FC<FooterProps> = ({
       {/* Signature Bluebook horizontal dashed divider strip */}
       <div className="bluebook-dashed-border" />
 
-      <div className="min-h-[50px] sm:min-h-[56px] px-3 sm:px-6 py-1.5 flex items-center justify-between gap-2">
-        {/* Left: Branded Label, Copyright & Keyboard Shortcuts (Hidden on < lg to prevent any overlap on iPad & mobile) */}
-        <div className="hidden lg:flex items-center gap-3 shrink-0">
-          <span className="font-bold text-gray-900 dark:text-white text-sm tracking-tight hidden xl:inline">
+      {/* 3-Column Balanced Layout: mathematically impossible for center widget to collide with left or right */}
+      <div className="min-h-[52px] sm:min-h-[58px] px-3 sm:px-6 py-2 grid grid-cols-3 items-center gap-2 w-full">
+        {/* Column 1 (Left): Clean Minimal Branding & Copyright */}
+        <div className="flex items-center justify-start min-w-0">
+          <span className="font-extrabold text-slate-900 dark:text-white text-xs sm:text-sm tracking-tight truncate">
             SATify Practice
           </span>
-          <span className="text-gray-300 dark:text-slate-700 hidden xl:inline">|</span>
-          <span className="text-[11px] text-gray-500 dark:text-slate-400 font-medium truncate max-w-[200px] xl:max-w-none">
-            © Oluwole Inuoluwadunsimi 2026
+          <span className="text-slate-400 dark:text-slate-500 text-xs hidden md:inline ml-2 truncate font-medium">
+            • © 2026
           </span>
-          <span className="text-gray-300 dark:text-slate-700 hidden xl:inline">|</span>
-          <div className="text-[11px] text-gray-500 dark:text-slate-400 font-mono hidden xl:flex items-center gap-1.5">
-            <span className="bg-gray-100 dark:bg-slate-800 text-gray-700 dark:text-slate-300 px-1.5 py-0.5 rounded border border-gray-200 dark:border-slate-700">
-              Keys: A-D
-            </span>
-            <span className="bg-gray-100 dark:bg-slate-800 text-gray-700 dark:text-slate-300 px-1.5 py-0.5 rounded border border-gray-200 dark:border-slate-700">
-              Enter to Check
-            </span>
-            <span className="bg-gray-100 dark:bg-slate-800 text-gray-700 dark:text-slate-300 px-1.5 py-0.5 rounded border border-gray-200 dark:border-slate-700">
-              ← / →
-            </span>
-          </div>
         </div>
 
-        {/* Mobile Left: Question Navigator Button (< sm) */}
-        <div className="sm:hidden flex items-center">
+        {/* Column 2 (Center): Bluebook Black Pill Question Navigator */}
+        <div className="flex items-center justify-center shrink-0">
           <button
+            type="button"
             onClick={onToggleGrid}
-            className="min-h-[40px] bg-[#1e1e1e] hover:bg-black dark:bg-[#151a24] dark:hover:bg-[#1a2130] text-white font-semibold text-xs px-3 py-1.5 rounded-md flex items-center gap-1 shadow-xs border border-slate-700 cursor-pointer"
+            className="min-h-[40px] sm:min-h-[44px] bg-[#1e1e1e] hover:bg-black dark:bg-[#151a24] dark:hover:bg-[#1a2130] text-white font-semibold text-xs sm:text-sm px-3 sm:px-5 py-2 rounded-md flex items-center gap-1.5 sm:gap-2 shadow-xs transition active:scale-95 border border-slate-700 cursor-pointer whitespace-nowrap"
             title="Open Bluebook Question Overview Grid"
           >
-            <span>Q {currentIndex + 1} of {totalQuestions}</span>
+            {/* Compact text on small phones, full text on tablets/desktop */}
+            <span className="sm:hidden font-mono font-bold">
+              Q {currentIndex + 1} of {totalQuestions}
+            </span>
+            <span className="hidden sm:inline font-sans">
+              Question {currentIndex + 1} of {totalQuestions}
+            </span>
             {isGridOpen ? (
-              <ChevronDown className="w-3.5 h-3.5 text-gray-300" />
+              <ChevronDown className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gray-300 shrink-0" />
             ) : (
-              <ChevronUp className="w-3.5 h-3.5 text-gray-300" />
+              <ChevronUp className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gray-300 shrink-0" />
             )}
           </button>
         </div>
 
-        {/* Center: Black Pill Question Navigator Button (sm+) */}
-        <div className="hidden sm:block sm:absolute sm:left-1/2 sm:-translate-x-1/2">
+        {/* Column 3 (Right): Navigation Buttons (< Back / Next >) */}
+        <div className="flex items-center justify-end gap-1.5 sm:gap-3 shrink-0">
           <button
-            onClick={onToggleGrid}
-            className="min-h-[42px] bg-[#1e1e1e] hover:bg-black dark:bg-[#151a24] dark:hover:bg-[#1a2130] text-white font-semibold text-xs sm:text-sm px-3.5 sm:px-4 py-2 rounded-md flex items-center gap-1.5 sm:gap-2 shadow-xs transition active:scale-95 border border-slate-700 cursor-pointer"
-            title="Open Bluebook Question Overview Grid"
-          >
-            <span>Question {currentIndex + 1} of {totalQuestions}</span>
-            {isGridOpen ? (
-              <ChevronDown className="w-4 h-4 text-gray-300" />
-            ) : (
-              <ChevronUp className="w-4 h-4 text-gray-300" />
-            )}
-          </button>
-        </div>
-
-        {/* Right: Blue Pill Navigation Buttons */}
-        <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0 ml-auto">
-          <button
+            type="button"
             onClick={onPrev}
             disabled={isFirst}
-            className={`min-h-[40px] sm:min-h-[44px] font-semibold px-3 sm:px-5 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm transition flex items-center gap-1 shadow-xs ${
+            className={`min-h-[38px] sm:min-h-[44px] font-semibold px-3 sm:px-5 py-2 rounded-full text-xs sm:text-sm transition flex items-center gap-1 shadow-xs shrink-0 ${
               isFirst
-                ? 'bg-gray-100 dark:bg-slate-800/80 text-gray-400 dark:text-slate-600 cursor-not-allowed'
+                ? 'bg-slate-100 dark:bg-slate-800/80 text-slate-400 dark:text-slate-600 cursor-not-allowed'
                 : 'bg-blue-600 hover:bg-blue-700 text-white active:scale-95 cursor-pointer'
             }`}
           >
-            <ChevronLeft className="w-4 h-4" />
+            <ChevronLeft className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
             <span>Back</span>
           </button>
 
           <button
+            type="button"
             onClick={onNext}
             disabled={isLast}
-            className={`min-h-[40px] sm:min-h-[44px] font-semibold px-3.5 sm:px-6 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm transition flex items-center gap-1 shadow-xs ${
+            className={`min-h-[38px] sm:min-h-[44px] font-semibold px-3.5 sm:px-6 py-2 rounded-full text-xs sm:text-sm transition flex items-center gap-1 shadow-xs shrink-0 ${
               isLast
-                ? 'bg-gray-100 dark:bg-slate-800/80 text-gray-400 dark:text-slate-600 cursor-not-allowed'
+                ? 'bg-slate-100 dark:bg-slate-800/80 text-slate-400 dark:text-slate-600 cursor-not-allowed'
                 : 'bg-blue-600 hover:bg-blue-700 text-white active:scale-95 cursor-pointer'
             }`}
           >
             <span>Next</span>
-            <ChevronRight className="w-4 h-4" />
+            <ChevronRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
           </button>
         </div>
       </div>
