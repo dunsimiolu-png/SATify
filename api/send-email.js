@@ -27,7 +27,7 @@ export default async function handler(req, res) {
   }
 
   const userName = name || email.split('@')[0];
-  const founderEmail = 'dunsimiolu@gmail.com';
+  const founderEmail = 'satifysatceo@gmail.com';
   const founderName = 'Oluwole Inuoluwadunsimi (Founder & CEO, SATify)';
   const loginTime = new Date().toLocaleString('en-US', {
     timeZone: 'UTC',

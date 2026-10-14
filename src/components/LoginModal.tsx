@@ -13,7 +13,8 @@ import {
   Sparkles, 
   Loader2,
   KeyRound,
-  LogOut
+  LogOut,
+  Settings
 } from 'lucide-react';
 import { Logo } from './Logo';
 import { 
@@ -29,11 +30,11 @@ interface LoginModalProps {
   isOpen: boolean;
   onClose: () => void;
   onSuccess?: (user: UserProfile) => void;
-  initialMode?: 'signin' | 'register' | 'google';
+  initialMode?: 'signin' | 'register';
   currentUser?: UserProfile | null;
 }
 
-type AuthMode = 'signin' | 'register' | 'forgot' | 'google';
+type AuthMode = 'signin' | 'register' | 'forgot';
 
 export const LoginModal: React.FC<LoginModalProps> = ({
   isOpen,
@@ -45,8 +46,6 @@ export const LoginModal: React.FC<LoginModalProps> = ({
   const [mode, setMode] = useState<AuthMode>(initialMode);
   const [name, setName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
-  const [googleEmail, setGoogleEmail] = useState<string>('');
-  const [googleName, setGoogleName] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [confirmPassword, setConfirmPassword] = useState<string>('');
   const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -57,6 +56,19 @@ export const LoginModal: React.FC<LoginModalProps> = ({
   const [successMsg, setSuccessMsg] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
+  // Google Client ID State (loaded from Vite env or local storage)
+  const [googleClientId, setGoogleClientId] = useState<string>(() => {
+    const envId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
+    if (envId && !envId.includes('YOUR_GOOGLE_CLIENT_ID')) return envId;
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('satify_google_client_id') || '';
+    }
+    return '';
+  });
+  const [showClientIdInput, setShowClientIdInput] = useState<boolean>(false);
+  const [inputClientId, setInputClientId] = useState<string>('');
+
+  // Official Google Button container ref
   const googleBtnRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -64,12 +76,8 @@ export const LoginModal: React.FC<LoginModalProps> = ({
       setMode(initialMode);
       setError(null);
       setSuccessMsg(null);
-      if (currentUser?.email) {
-        setGoogleEmail(currentUser.email);
-        setGoogleName(currentUser.name);
-      }
     }
-  }, [isOpen, initialMode, currentUser]);
+  }, [isOpen, initialMode]);
 
   const handleSwitchMode = (newMode: AuthMode) => {
     setMode(newMode);
@@ -77,16 +85,17 @@ export const LoginModal: React.FC<LoginModalProps> = ({
     setSuccessMsg(null);
   };
 
-  // Google Identity Services initialization
+  // Initialize Google Identity Services (GIS)
   useEffect(() => {
-    if (!isOpen) return;
+    if (!isOpen || !googleClientId) return;
 
-    const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
-    const isGoogleAvailable = typeof window !== 'undefined' && (window as any).google?.accounts?.id;
+    const initGIS = () => {
+      const google = (window as any).google;
+      if (!google?.accounts?.id) return false;
 
-    if (isGoogleAvailable && googleClientId && !googleClientId.includes('YOUR_GOOGLE_CLIENT_ID')) {
       try {
-        (window as any).google.accounts.id.initialize({
+        // Initialize Google One-Tap & standard button callback
+        google.accounts.id.initialize({
           client_id: googleClientId,
           callback: async (response: any) => {
             if (response.credential) {
@@ -96,7 +105,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({
                 if (onSuccess) onSuccess(user);
                 onClose();
               } catch (err: any) {
-                setError(err.message || 'Google sign-in failed');
+                setError(err?.message || 'Google authentication failed.');
               } finally {
                 setIsSubmitting(false);
               }
@@ -104,77 +113,112 @@ export const LoginModal: React.FC<LoginModalProps> = ({
           },
         });
 
+        // Render official Google button into container
         if (googleBtnRef.current) {
           googleBtnRef.current.innerHTML = '';
-          (window as any).google.accounts.id.renderButton(googleBtnRef.current, {
+          google.accounts.id.renderButton(googleBtnRef.current, {
+            type: 'standard',
             theme: 'outline',
             size: 'large',
-            width: 320,
             text: 'continue_with',
             shape: 'pill',
+            width: 320,
+            logo_alignment: 'left',
           });
         }
+        return true;
       } catch (err) {
         console.warn('Google Identity initialization notice:', err);
+        return false;
       }
+    };
+
+    if (!initGIS()) {
+      const interval = setInterval(() => {
+        if (initGIS()) clearInterval(interval);
+      }, 300);
+      return () => clearInterval(interval);
     }
-  }, [isOpen, onClose, onSuccess]);
+  }, [isOpen, googleClientId, onSuccess, onClose]);
 
   if (!isOpen) return null;
 
-  // Click on "Continue with Google"
-  const handleGoogleClick = () => {
-    const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
-    const isGoogleAvailable = typeof window !== 'undefined' && (window as any).google?.accounts?.id;
-
-    // If client ID is configured and GIS is available, prompt
-    if (isGoogleAvailable && googleClientId && !googleClientId.includes('YOUR_GOOGLE_CLIENT_ID')) {
-      try {
-        (window as any).google.accounts.id.prompt();
-        return;
-      } catch (e) {
-        // Fallback to explicit google email prompt
-      }
-    }
-
-    // Switch to dedicated Google prompt view
-    setMode('google');
-    if (!googleEmail && email) {
-      setGoogleEmail(email);
-    }
-  };
-
-  // Submit Google Sign In
-  const handleGoogleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  // Real Google Sign-In Popup trigger via OAuth2 Token Client
+  const handleRealGoogleSignIn = () => {
     setError(null);
 
-    const cleanGoogleEmail = googleEmail.trim();
-    if (!cleanGoogleEmail || !cleanGoogleEmail.includes('@') || !cleanGoogleEmail.includes('.')) {
-      setError('Please enter a valid Google email address (e.g. name@gmail.com).');
+    if (!googleClientId) {
+      setShowClientIdInput(true);
       return;
     }
 
-    setIsSubmitting(true);
-    try {
-      const derivedName = googleName.trim() || cleanGoogleEmail.split('@')[0].replace(/[._]/g, ' ');
-      const formattedName = derivedName.charAt(0).toUpperCase() + derivedName.slice(1);
+    const google = (window as any).google;
+    if (!google?.accounts?.oauth2) {
+      setError('Google Identity SDK is still initializing. Please click again in a moment.');
+      return;
+    }
 
-      const user = await authenticateWithGoogle({
-        name: formattedName,
-        email: cleanGoogleEmail.toLowerCase(),
+    try {
+      const tokenClient = google.accounts.oauth2.initTokenClient({
+        client_id: googleClientId,
+        scope: 'email profile openid',
+        callback: async (tokenResp: any) => {
+          if (tokenResp.error) {
+            setError(tokenResp.error_description || tokenResp.error || 'Google Sign-In canceled.');
+            return;
+          }
+
+          if (tokenResp.access_token) {
+            setIsSubmitting(true);
+            try {
+              // Fetch verified Google Profile directly from Google APIs
+              const res = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
+                headers: { Authorization: `Bearer ${tokenResp.access_token}` },
+              });
+              const googleProfile = await res.json();
+
+              if (!googleProfile.email) {
+                throw new Error('Google did not return an email address.');
+              }
+
+              const user = await authenticateWithGoogle({
+                name: googleProfile.name || googleProfile.email.split('@')[0],
+                email: googleProfile.email,
+                picture: googleProfile.picture,
+              });
+
+              if (onSuccess) onSuccess(user);
+              onClose();
+            } catch (err: any) {
+              setError(err?.message || 'Failed to authenticate Google user profile.');
+            } finally {
+              setIsSubmitting(false);
+            }
+          }
+        },
       });
 
-      if (onSuccess) onSuccess(user);
-      onClose();
+      tokenClient.requestAccessToken({ prompt: 'select_account' });
     } catch (err: any) {
-      setError(err?.message || 'Google sign-in encountered an issue. Please try again.');
-    } finally {
-      setIsSubmitting(false);
+      setError(err?.message || 'Could not launch Google Sign-In popup. Please verify your Client ID.');
     }
   };
 
-  // Handle Email + Password Sign In
+  // Save manual Google Client ID input
+  const handleSaveClientId = (e: React.FormEvent) => {
+    e.preventDefault();
+    const cleanId = inputClientId.trim();
+    if (!cleanId) return;
+    setGoogleClientId(cleanId);
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('satify_google_client_id', cleanId);
+    }
+    setShowClientIdInput(false);
+    setSuccessMsg('Google Client ID connected! Initializing Google Sign-In...');
+    setTimeout(() => setSuccessMsg(null), 3000);
+  };
+
+  // Normal Email + Password Sign In
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
@@ -205,7 +249,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({
     }
   };
 
-  // Handle Email + Password Registration
+  // Normal Email + Password Sign Up (Registration)
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
@@ -244,7 +288,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({
     }
   };
 
-  // Handle Password Reset
+  // Password Reset
   const handleResetPassword = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
@@ -347,13 +391,11 @@ export const LoginModal: React.FC<LoginModalProps> = ({
             {mode === 'signin' && 'Welcome Back to SATify'}
             {mode === 'register' && 'Create Your SATify Account'}
             {mode === 'forgot' && 'Reset Your Password'}
-            {mode === 'google' && 'Sign in with Google'}
           </h2>
           <p className="text-xs text-slate-500 dark:text-slate-400 max-w-xs mx-auto">
             {mode === 'signin' && 'Sign in to sync your practice analytics, saved mistakes, and pacing data.'}
             {mode === 'register' && 'Join thousands of students practicing on official Bluebook test software specs.'}
             {mode === 'forgot' && 'Enter your registered email and a new password to recover access.'}
-            {mode === 'google' && 'Enter your Google email address to sync your account instantly.'}
           </p>
         </div>
 
@@ -372,109 +414,57 @@ export const LoginModal: React.FC<LoginModalProps> = ({
           </div>
         )}
 
-        {/* GOOGLE SIGN IN DEDICATED PROMPT */}
-        {mode === 'google' && (
-          <form onSubmit={handleGoogleSubmit} className="space-y-3.5">
-            <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 flex items-center gap-3">
-              <svg className="w-6 h-6 shrink-0" viewBox="0 0 24 24">
-                <path
-                  fill="#4285F4"
-                  d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"
-                />
-                <path
-                  fill="#34A853"
-                  d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.33 24 12 24z"
-                />
-                <path
-                  fill="#FBBC05"
-                  d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.16 0 9.98 0 12s.45 3.84 1.25 5.42l4.03-3.15z"
-                />
-                <path
-                  fill="#EA4335"
-                  d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"
-                />
-              </svg>
-              <div className="text-xs">
-                <p className="font-bold text-slate-800 dark:text-white">Google Identity Authentication</p>
-                <p className="text-[11px] text-slate-500">Sign in with your Google email or Gmail address</p>
-              </div>
+        {/* CLIENT ID CONFIGURATION PROMPT (only if requested or missing) */}
+        {showClientIdInput && (
+          <form onSubmit={handleSaveClientId} className="p-3.5 rounded-2xl bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800 space-y-2 text-xs">
+            <div className="flex items-center gap-1.5 font-bold text-amber-900 dark:text-amber-200">
+              <Settings className="w-4 h-4 text-amber-600" />
+              <span>Connect Google OAuth Client ID</span>
             </div>
-
-            <div>
-              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
-                Google Email Address
-              </label>
-              <div className="relative">
-                <Mail className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
-                <input
-                  type="email"
-                  required
-                  autoFocus
-                  value={googleEmail}
-                  onChange={(e) => setGoogleEmail(e.target.value)}
-                  placeholder="yourname@gmail.com"
-                  className="w-full pl-9 pr-3 py-2.5 bg-slate-50 dark:bg-slate-900/60 border border-slate-300 dark:border-slate-700 rounded-xl text-xs sm:text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-600 transition"
-                />
-              </div>
-            </div>
-
-            <div>
-              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
-                Your Name <span className="text-slate-400 font-normal">(optional)</span>
-              </label>
-              <div className="relative">
-                <User className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
-                <input
-                  type="text"
-                  value={googleName}
-                  onChange={(e) => setGoogleName(e.target.value)}
-                  placeholder="e.g. Oluwole Dunsimi"
-                  className="w-full pl-9 pr-3 py-2 bg-slate-50 dark:bg-slate-900/60 border border-slate-300 dark:border-slate-700 rounded-xl text-xs sm:text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-600 transition"
-                />
-              </div>
-            </div>
-
-            <div className="flex items-center gap-2.5 pt-1">
+            <p className="text-[11px] text-amber-800 dark:text-amber-300">
+              Paste your Google OAuth Client ID (from Google Cloud Console) to activate real Google Sign-In:
+            </p>
+            <input
+              type="text"
+              required
+              autoFocus
+              value={inputClientId}
+              onChange={(e) => setInputClientId(e.target.value)}
+              placeholder="e.g. 123456789-xxxxxx.apps.googleusercontent.com"
+              className="w-full px-3 py-2 bg-white dark:bg-slate-900 border border-amber-300 dark:border-amber-700 rounded-xl text-xs font-mono text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-600"
+            />
+            <div className="flex items-center gap-2 pt-1">
               <button
                 type="button"
-                onClick={() => handleSwitchMode('signin')}
-                className="py-2.5 px-3.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-semibold text-xs transition cursor-pointer flex items-center gap-1.5"
+                onClick={() => setShowClientIdInput(false)}
+                className="py-1.5 px-3 rounded-lg bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-semibold"
               >
-                <ArrowLeft className="w-3.5 h-3.5" />
-                <span>Back</span>
+                Cancel
               </button>
-
               <button
                 type="submit"
-                disabled={isSubmitting}
-                className="flex-1 py-2.5 px-4 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs sm:text-sm transition shadow-md shadow-blue-500/20 cursor-pointer active:scale-98 disabled:opacity-50 flex items-center justify-center gap-2"
+                className="flex-1 py-1.5 px-3 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-bold"
               >
-                {isSubmitting ? (
-                  <>
-                    <Loader2 className="w-4 h-4 animate-spin" />
-                    <span>Signing in with Google...</span>
-                  </>
-                ) : (
-                  <span>Continue with Google</span>
-                )}
+                Connect Client ID
               </button>
             </div>
           </form>
         )}
 
-        {/* STANDARD GOOGLE 1-CLICK BUTTON (in signin & register modes) */}
-        {mode !== 'forgot' && mode !== 'google' && (
+        {/* REAL GOOGLE SIGN-IN SECTION */}
+        {mode !== 'forgot' && (
           <div className="space-y-3">
-            {/* GIS container if initialized */}
+            {/* Rendered official Google button (if GIS initialized) */}
             <div ref={googleBtnRef} className="flex justify-center empty:hidden" />
 
-            {/* Universal Google Button */}
+            {/* Universal Google Trigger Button (triggers real Google account chooser popup) */}
             <button
               type="button"
-              onClick={handleGoogleClick}
+              onClick={handleRealGoogleSignIn}
               disabled={isSubmitting}
               className="w-full min-h-[46px] px-4 py-2.5 rounded-2xl bg-white hover:bg-slate-50 dark:bg-[#151b28] dark:hover:bg-[#1a2233] border border-slate-300 dark:border-slate-700 text-slate-800 dark:text-white font-bold text-xs sm:text-sm shadow-xs flex items-center justify-center gap-3 transition active:scale-98 cursor-pointer disabled:opacity-50"
             >
+              {/* Google G Logo SVG */}
               <svg className="w-5 h-5 shrink-0" viewBox="0 0 24 24">
                 <path
                   fill="#4285F4"
@@ -493,7 +483,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({
                   d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"
                 />
               </svg>
-              <span>Continue with Google</span>
+              <span>{isSubmitting ? 'Connecting with Google...' : 'Continue with Google'}</span>
             </button>
 
             {/* Divider */}
@@ -507,7 +497,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({
         )}
 
         {/* TABS: SIGN IN VS CREATE ACCOUNT */}
-        {mode !== 'forgot' && mode !== 'google' && (
+        {mode !== 'forgot' && (
           <div className="flex rounded-xl bg-slate-100 dark:bg-slate-900/80 p-1 border border-slate-200/80 dark:border-slate-800">
             <button
               type="button"
@@ -529,12 +519,12 @@ export const LoginModal: React.FC<LoginModalProps> = ({
                   : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
               }`}
             >
-              Create Account
+              Sign Up
             </button>
           </div>
         )}
 
-        {/* SIGN IN FORM */}
+        {/* NORMAL SIGN IN FORM */}
         {mode === 'signin' && (
           <form onSubmit={handleSignIn} className="space-y-3.5">
             <div>
@@ -618,7 +608,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({
           </form>
         )}
 
-        {/* CREATE ACCOUNT FORM */}
+        {/* NORMAL SIGN UP FORM */}
         {mode === 'register' && (
           <form onSubmit={handleRegister} className="space-y-3">
             <div>
@@ -680,7 +670,6 @@ export const LoginModal: React.FC<LoginModalProps> = ({
                 </button>
               </div>
 
-              {/* Password strength progress bar */}
               {password && (
                 <div className="mt-1.5 space-y-1">
                   <div className="h-1 w-full bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
@@ -842,15 +831,15 @@ export const LoginModal: React.FC<LoginModalProps> = ({
           </form>
         )}
 
-        {/* Founder & Security Note */}
+        {/* Founder CEO Note */}
         <div className="p-3 rounded-2xl bg-blue-50/70 dark:bg-blue-950/40 border border-blue-200/80 dark:border-blue-800 text-xs text-blue-900 dark:text-blue-200 flex items-start gap-2.5">
           <Sparkles className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
           <div className="space-y-0.5">
             <p className="font-bold text-[11px] sm:text-xs text-blue-950 dark:text-blue-100">
-              Automated Founder Welcome & Login Email
+              Personalized Founder Welcome Email
             </p>
             <p className="text-[11px] text-blue-800 dark:text-blue-300 leading-relaxed">
-              Every time you sign in, you'll receive a confirmation email directly from <strong>Oluwole Inuoluwadunsimi</strong> (Founder & CEO) with top test pacing tactics.
+              When you sign in, you'll receive a confirmation email from <strong>Oluwole Inuoluwadunsimi</strong> (Founder & CEO, SATify) via <strong>satifysatceo@gmail.com</strong>.
             </p>
           </div>
         </div>

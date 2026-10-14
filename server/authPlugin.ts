@@ -32,7 +32,7 @@ const sendJson = (res: ServerResponse, statusCode: number, data: any) => {
 
 export const sendCeoWelcomeEmail = async (user: UserPayload) => {
   const recipient = user.email;
-  const founderEmail = 'dunsimiolu@gmail.com';
+  const founderEmail = 'satifysatceo@gmail.com';
   const founderName = 'Oluwole Inuoluwadunsimi (Founder & CEO, SATify)';
 
   const emailHtml = `
