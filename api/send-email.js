@@ -100,38 +100,47 @@ export default async function handler(req, res) {
   `;
 
   try {
+    const smtpUser = process.env.SMTP_USER || 'satifysatceo@gmail.com';
+    const smtpPass = process.env.SMTP_PASS || process.env.GMAIL_APP_PASSWORD;
     const smtpHost = process.env.SMTP_HOST;
-    const smtpUser = process.env.SMTP_USER;
-    const smtpPass = process.env.SMTP_PASS;
 
-    if (smtpHost && smtpUser && smtpPass) {
-      const transporter = nodemailer.createTransport({
-        host: smtpHost,
-        port: parseInt(process.env.SMTP_PORT || '587'),
-        secure: process.env.SMTP_SECURE === 'true' || process.env.SMTP_PORT === '465',
-        auth: {
-          user: smtpUser,
-          pass: smtpPass,
-        },
-      });
+    if (smtpPass) {
+      const transporter = smtpHost
+        ? nodemailer.createTransport({
+            host: smtpHost,
+            port: parseInt(process.env.SMTP_PORT || '465'),
+            secure: process.env.SMTP_SECURE === 'true' || process.env.SMTP_PORT === '465',
+            auth: {
+              user: smtpUser,
+              pass: smtpPass,
+            },
+          })
+        : nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+              user: smtpUser,
+              pass: smtpPass,
+            },
+          });
 
       await transporter.sendMail({
-        from: `"${founderName}" <${process.env.SMTP_FROM || founderEmail}>`,
+        from: `"${founderName}" <${process.env.SMTP_FROM || smtpUser}>`,
         to: email,
-        bcc: founderEmail,
+        bcc: smtpUser,
         subject: `⚡ Welcome back to SATify, ${userName}! (Login Notification)`,
         html: emailHtml,
       });
 
-      console.log(`[SATify Email] Sent live login notification to ${email}`);
-      return res.status(200).json({ success: true, mode: 'smtp', recipient: email });
+      console.log(`[SATify Email] Live email sent from ${smtpUser} to ${email}`);
+      return res.status(200).json({ success: true, mode: 'live_gmail', recipient: email });
     } else {
-      console.log(`[SATify Email] Simulated email generated for ${email} (No SMTP configured)`);
+      console.log(`[SATify Email Simulated] Live delivery requires SMTP_PASS for ${smtpUser}`);
       return res.status(200).json({ 
         success: true, 
         mode: 'simulated', 
         recipient: email,
-        note: 'Email logged. Configure SMTP_HOST, SMTP_USER, and SMTP_PASS in Vercel environment variables to send live emails.' 
+        sender: smtpUser,
+        note: `Live emails require a 16-character Gmail App Password for ${smtpUser} configured as SMTP_PASS in Vercel.` 
       });
     }
   } catch (err) {
