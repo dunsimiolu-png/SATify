@@ -93,3 +93,6 @@ Thumbs.db
 
 # Raw source PDFs (already extracted into src/data/questions.json)
 raw-pdfs/
+
+# Local helpers
+push.bat
