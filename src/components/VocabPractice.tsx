@@ -1065,14 +1065,15 @@ export const VocabPractice: React.FC = () => {
             </div>
 
             {/* Review Mode Tabs */}
-            <div className="inline-flex p-1 bg-gray-100 dark:bg-slate-800/80 rounded-xl border border-gray-200 dark:border-slate-700">
-              {[
-                { id: 'flashcards', label: 'Split-Pane Practice', icon: <Layers className="w-3.5 h-3.5" /> },
-                { id: 'learn', label: 'Learn Mode', icon: <Award className="w-3.5 h-3.5" /> },
-                { id: 'match', label: 'Match Game', icon: <Clock className="w-3.5 h-3.5" /> },
-                { id: 'library', label: 'Explore Deck', icon: <BookOpen className="w-3.5 h-3.5" /> },
-                { id: 'decks', label: `My Decks (${customDecks.length})`, icon: <FolderPlus className="w-3.5 h-3.5" /> },
-              ].map(tab => (
+            <div className="w-full overflow-x-auto pb-1.5 scrollbar-none -mx-1 px-1">
+              <div className="inline-flex p-1 bg-gray-100 dark:bg-slate-800/80 rounded-xl border border-gray-200 dark:border-slate-700 min-w-max">
+                {[
+                  { id: 'flashcards', label: 'Split-Pane Practice', icon: <Layers className="w-3.5 h-3.5" /> },
+                  { id: 'learn', label: 'Learn Mode', icon: <Award className="w-3.5 h-3.5" /> },
+                  { id: 'match', label: 'Match Game', icon: <Clock className="w-3.5 h-3.5" /> },
+                  { id: 'library', label: 'Explore Deck', icon: <BookOpen className="w-3.5 h-3.5" /> },
+                  { id: 'decks', label: `My Decks (${customDecks.length})`, icon: <FolderPlus className="w-3.5 h-3.5" /> },
+                ].map(tab => (
                 <button
                   key={tab.id}
                   onClick={() => {
@@ -1089,6 +1090,7 @@ export const VocabPractice: React.FC = () => {
                   <span>{tab.label}</span>
                 </button>
               ))}
+              </div>
             </div>
           </div>
 
@@ -1155,9 +1157,9 @@ export const VocabPractice: React.FC = () => {
                   </div>
 
                   {/* Split Layout: Left Queue & Centered Flashcard Stage */}
-                  <div className="flex flex-col md:flex-row min-h-[580px]">
-                    {/* Left Scrollable Queue (w-72) */}
-                    <div className="w-full md:w-72 lg:w-80 border-b md:border-b-0 md:border-r border-gray-200 dark:border-slate-800 flex flex-col bg-gray-50/40 dark:bg-[#0e131d]/70 shrink-0">
+                  <div className="flex flex-col lg:flex-row min-h-[500px]">
+                    {/* Word Queue: Below flashcard on mobile/tablet (order-2), Left on desktop (order-1) */}
+                    <div className="w-full lg:w-72 xl:w-80 border-t lg:border-t-0 lg:border-r border-gray-200 dark:border-slate-800 flex flex-col bg-gray-50/40 dark:bg-[#0e131d]/70 shrink-0 order-2 lg:order-1">
                       {/* Search Filter in Queue */}
                       <div className="p-3 border-b border-gray-200 dark:border-slate-800">
                         <div className="relative">
@@ -1173,7 +1175,7 @@ export const VocabPractice: React.FC = () => {
                       </div>
 
                       {/* Queue List */}
-                      <div className="flex-1 overflow-y-auto max-h-[220px] md:max-h-[520px] p-2 space-y-1">
+                      <div className="flex-1 overflow-y-auto max-h-[260px] lg:max-h-[520px] p-2 space-y-1">
                         {queuedWords.map((word) => {
                           const isActive = currentFlashcard?.id === word.id;
                           const r = wordRatings[word.id];
@@ -1233,10 +1235,10 @@ export const VocabPractice: React.FC = () => {
                       </div>
                     </div>
 
-                    {/* Centered Flashcard Stage */}
-                    <div className="flex-1 flex flex-col items-center justify-center p-6 md:p-10 overflow-y-auto relative bg-slate-50 dark:bg-[#070a10]">
+                    {/* Centered Flashcard Stage: On mobile/tablet shown first (order-1) */}
+                    <div className="flex-1 flex flex-col items-center justify-center p-3 sm:p-6 md:p-10 overflow-y-auto relative bg-slate-50 dark:bg-[#070a10] order-1 lg:order-2">
                       {/* Top Status Pill Above Flashcard */}
-                      <div className="mb-4">
+                      <div className="mb-3 sm:mb-4">
                         {currentRating === 'know_it' && (
                           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800">
                             <CheckCircle2 className="w-3.5 h-3.5" />
@@ -1262,8 +1264,8 @@ export const VocabPractice: React.FC = () => {
                         )}
                       </div>
 
-                      {/* Large Flashcard (max-w-[560px] min-h-[420px] rounded-3xl p-10) */}
-                      <div className="w-full max-w-[560px] min-h-[420px] rounded-3xl p-8 md:p-10 bg-white dark:bg-[#151a24] border border-slate-200 dark:border-slate-800 shadow-xl flex flex-col justify-between items-center text-center relative transition-all">
+                      {/* Large Flashcard (Responsive padding and min-height) */}
+                      <div className="w-full max-w-[560px] min-h-[350px] sm:min-h-[420px] rounded-3xl p-5 sm:p-8 md:p-10 bg-white dark:bg-[#151a24] border border-slate-200 dark:border-slate-800 shadow-xl flex flex-col justify-between items-center text-center relative transition-all">
                         {/* Flashcard Top Row: Part of Speech & Pronunciation Button */}
                         <div className="w-full flex items-center justify-between">
                           <span className="px-3 py-1 rounded-lg bg-blue-50 dark:bg-blue-950/60 text-[#0050d8] dark:text-blue-400 font-bold text-xs uppercase tracking-wider border border-blue-100 dark:border-blue-900">
@@ -1282,11 +1284,11 @@ export const VocabPractice: React.FC = () => {
 
                         {/* Flashcard Middle: Word, IPA phonetics, Definition link / box */}
                         <div className="w-full my-auto py-4 flex flex-col items-center">
-                          <h2 className="text-5xl md:text-6xl font-black text-gray-900 dark:text-white tracking-tight">
+                          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 dark:text-white tracking-tight break-words max-w-full px-2">
                             {currentFlashcard.word}
                           </h2>
 
-                          <div className="text-sm md:text-base text-gray-500 dark:text-slate-400 italic mt-2">
+                          <div className="text-xs sm:text-sm md:text-base text-gray-500 dark:text-slate-400 italic mt-2">
                             {currentFlashcard.partOfSpeech} • {getWordPhonetics(currentFlashcard.word)}
                           </div>
 
@@ -1301,17 +1303,17 @@ export const VocabPractice: React.FC = () => {
                             </button>
                           ) : (
                             <div className="w-full mt-6 space-y-4 animate-in fade-in duration-200">
-                              <div className="p-4 rounded-2xl bg-cyan-50/50 dark:bg-cyan-950/20 border border-cyan-100 dark:border-cyan-900/50 text-left">
+                              <div className="p-3.5 sm:p-4 rounded-2xl bg-cyan-50/50 dark:bg-cyan-950/20 border border-cyan-100 dark:border-cyan-900/50 text-left">
                                 <span className="text-[10px] font-extrabold uppercase tracking-wider text-cyan-700 dark:text-cyan-300 block mb-1">
                                   Definition
                                 </span>
-                                <p className="text-base md:text-lg font-semibold text-gray-800 dark:text-slate-100 leading-relaxed">
+                                <p className="text-sm sm:text-base md:text-lg font-semibold text-gray-800 dark:text-slate-100 leading-relaxed">
                                   {currentFlashcard.definition}
                                 </p>
                               </div>
 
                               {currentFlashcard.example && (
-                                <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-[#0e131d] border border-slate-200 dark:border-slate-800 text-left">
+                                <div className="p-3 sm:p-3.5 rounded-xl bg-slate-50 dark:bg-[#0e131d] border border-slate-200 dark:border-slate-800 text-left">
                                   <span className="text-[10px] font-extrabold uppercase tracking-wider text-gray-400 dark:text-slate-500 block mb-1">
                                     Context Example
                                   </span>
@@ -1336,32 +1338,32 @@ export const VocabPractice: React.FC = () => {
 
                         {/* Flashcard Bottom: 3 Rating Buttons with Shortcuts */}
                         <div className="w-full pt-4 border-t border-gray-100 dark:border-slate-800/80">
-                          <div className="grid grid-cols-3 gap-2.5">
+                          <div className="grid grid-cols-3 gap-1.5 sm:gap-2.5">
                             <button
                               type="button"
                               onClick={() => handleRateWord('needs_review')}
-                              className="py-2.5 px-3 rounded-xl border border-rose-200 dark:border-rose-900/60 bg-rose-50/80 dark:bg-rose-950/30 hover:bg-rose-100 dark:hover:bg-rose-950/60 text-rose-700 dark:text-rose-400 font-bold text-xs uppercase tracking-wider transition active:scale-95 cursor-pointer flex flex-col items-center justify-center gap-0.5 shadow-2xs"
+                              className="py-2 sm:py-2.5 px-1.5 sm:px-3 rounded-xl border border-rose-200 dark:border-rose-900/60 bg-rose-50/80 dark:bg-rose-950/30 hover:bg-rose-100 dark:hover:bg-rose-950/60 text-rose-700 dark:text-rose-400 font-bold text-[11px] sm:text-xs uppercase tracking-wider transition active:scale-95 cursor-pointer flex flex-col items-center justify-center gap-0.5 shadow-2xs"
                             >
-                              <span className="text-[10px] opacity-70">Key [1]</span>
-                              <span>Needs review</span>
+                              <span className="text-[9px] sm:text-[10px] opacity-70">Key [1]</span>
+                              <span className="truncate">Needs review</span>
                             </button>
 
                             <button
                               type="button"
                               onClick={() => handleRateWord('almost')}
-                              className="py-2.5 px-3 rounded-xl border border-amber-200 dark:border-amber-900/60 bg-amber-50/80 dark:bg-amber-950/30 hover:bg-amber-100 dark:hover:bg-amber-950/60 text-amber-700 dark:text-amber-400 font-bold text-xs uppercase tracking-wider transition active:scale-95 cursor-pointer flex flex-col items-center justify-center gap-0.5 shadow-2xs"
+                              className="py-2 sm:py-2.5 px-1.5 sm:px-3 rounded-xl border border-amber-200 dark:border-amber-900/60 bg-amber-50/80 dark:bg-amber-950/30 hover:bg-amber-100 dark:hover:bg-amber-950/60 text-amber-700 dark:text-amber-400 font-bold text-[11px] sm:text-xs uppercase tracking-wider transition active:scale-95 cursor-pointer flex flex-col items-center justify-center gap-0.5 shadow-2xs"
                             >
-                              <span className="text-[10px] opacity-70">Key [2]</span>
-                              <span>Almost</span>
+                              <span className="text-[9px] sm:text-[10px] opacity-70">Key [2]</span>
+                              <span className="truncate">Almost</span>
                             </button>
 
                             <button
                               type="button"
                               onClick={() => handleRateWord('know_it')}
-                              className="py-2.5 px-3 rounded-xl border border-emerald-200 dark:border-emerald-900/60 bg-emerald-50/80 dark:bg-emerald-950/30 hover:bg-emerald-100 dark:hover:bg-emerald-950/60 text-emerald-700 dark:text-emerald-400 font-bold text-xs uppercase tracking-wider transition active:scale-95 cursor-pointer flex flex-col items-center justify-center gap-0.5 shadow-2xs"
+                              className="py-2 sm:py-2.5 px-1.5 sm:px-3 rounded-xl border border-emerald-200 dark:border-emerald-900/60 bg-emerald-50/80 dark:bg-emerald-950/30 hover:bg-emerald-100 dark:hover:bg-emerald-950/60 text-emerald-700 dark:text-emerald-400 font-bold text-[11px] sm:text-xs uppercase tracking-wider transition active:scale-95 cursor-pointer flex flex-col items-center justify-center gap-0.5 shadow-2xs"
                             >
-                              <span className="text-[10px] opacity-70">Key [3]</span>
-                              <span>Know it</span>
+                              <span className="text-[9px] sm:text-[10px] opacity-70">Key [3]</span>
+                              <span className="truncate">Know it</span>
                             </button>
                           </div>
 

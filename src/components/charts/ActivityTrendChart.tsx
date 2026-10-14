@@ -33,14 +33,14 @@ export const ActivityTrendChart: React.FC<ActivityTrendChartProps> = React.memo(
       </div>
 
       {/* Bar Chart Container */}
-      <div className="h-44 w-full flex items-end justify-between gap-2 pt-6 pb-2 px-2 border-b border-slate-100 dark:border-slate-800">
+      <div className="h-44 w-full flex items-end justify-between gap-1 sm:gap-2 pt-6 pb-2 px-1 sm:px-2 border-b border-slate-100 dark:border-slate-800">
         {activityTrend.map((day, idx) => {
           const heightPercent = day.total > 0 ? Math.max(15, (day.total / maxTrendDay) * 100) : 4;
           const correctPercent = day.total > 0 ? (day.correct / day.total) * 100 : 0;
           const wrongPercent = 100 - correctPercent;
 
           return (
-            <div key={idx} className="flex-1 flex flex-col items-center gap-2 h-full justify-end group">
+            <div key={idx} className="flex-1 flex flex-col items-center gap-1.5 sm:gap-2 h-full justify-end group min-w-0">
               {/* Count tooltip on hover */}
               <div className="opacity-0 group-hover:opacity-100 transition-opacity bg-slate-900 dark:bg-slate-800 text-white text-[10px] py-0.5 px-1.5 rounded-sm pointer-events-none whitespace-nowrap shadow-xs font-mono">
                 {day.total} {day.total === 1 ? 'Q' : 'Qs'} ({day.correct} ✓)
@@ -48,7 +48,7 @@ export const ActivityTrendChart: React.FC<ActivityTrendChartProps> = React.memo(
 
               {/* Stacked Colored Bar */}
               <div 
-                className="w-full max-w-[28px] rounded-t-md overflow-hidden flex flex-col justify-end transition-all duration-300"
+                className="w-full max-w-[20px] sm:max-w-[28px] rounded-t-md overflow-hidden flex flex-col justify-end transition-all duration-300"
                 style={{ height: `${heightPercent}%` }}
               >
                 {day.total > 0 ? (
@@ -70,7 +70,7 @@ export const ActivityTrendChart: React.FC<ActivityTrendChartProps> = React.memo(
               </div>
 
               {/* Date Label */}
-              <span className="text-[10px] font-bold text-slate-500 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
+              <span className="text-[8px] sm:text-[10px] font-bold text-slate-500 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-white transition-colors truncate max-w-full text-center">
                 {day.label}
               </span>
             </div>

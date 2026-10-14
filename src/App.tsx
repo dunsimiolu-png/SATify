@@ -555,9 +555,9 @@ export const App: React.FC = () => {
 
   return (
     <div className="w-full max-w-full overflow-x-hidden h-[100dvh] max-h-[100dvh] flex flex-col md:flex-row overflow-hidden font-sans bg-slate-50 dark:bg-[#070a10] text-slate-900 dark:text-white">
-      {/* 1. Mobile Top Bar (< 768px) when NOT in full practice mode */}
+      {/* 1. Mobile Top Bar (< 1024px / lg:hidden) when NOT in full practice mode */}
       {currentRoute !== 'practice' && (
-        <div className="md:hidden flex items-center justify-between px-4 py-2 pt-[max(env(safe-area-inset-top,0px),8px)] bg-white dark:bg-[#070a10] border-b border-slate-200 dark:border-slate-800 z-40 shrink-0">
+        <div className="lg:hidden flex items-center justify-between px-4 py-2 pt-[max(env(safe-area-inset-top,0px),8px)] bg-white dark:bg-[#070a10] border-b border-slate-200 dark:border-slate-800 z-40 shrink-0">
           <div className="flex items-center gap-3">
             <button
               onClick={() => setIsMobileNavOpen(true)}
@@ -602,7 +602,7 @@ export const App: React.FC = () => {
         </div>
       )}
 
-      {/* 2. Slide-over Mobile Navigation Drawer (< 1280px / xl:hidden) */}
+      {/* 2. Slide-over Mobile Navigation Drawer (< 1024px / lg:hidden) */}
       {isMobileNavOpen && (
         <>
           <div
@@ -629,9 +629,9 @@ export const App: React.FC = () => {
         </>
       )}
 
-      {/* 3. Desktop Left Sidebar (>= 768px) when NOT in full practice mode */}
+      {/* 3. Desktop Left Sidebar (>= 1024px / hidden lg:flex) when NOT in full practice mode */}
       {currentRoute !== 'practice' && (
-        <div className="hidden md:flex h-full shrink-0">
+        <div className="hidden lg:flex h-full shrink-0">
           <Sidebar
             currentRoute={currentRoute as AppRoute}
             onRouteChange={(route) => {
@@ -717,13 +717,13 @@ export const App: React.FC = () => {
             />
 
             {/* Split Pane / Stacked Mobile Workspace */}
-            <main className="flex-1 min-h-0 w-full flex flex-col xl:flex-row overflow-y-auto xl:overflow-hidden overscroll-contain relative bg-white dark:bg-[#070a10]">
+            <main className="flex-1 min-h-0 w-full flex flex-col lg:flex-row overflow-y-auto lg:overflow-hidden overscroll-contain relative bg-white dark:bg-[#070a10]">
               {!isLeftCollapsed ? (
                 <>
                   {/* Left Pane: Reading Passage, Visual Graphs, Paired Texts, Poems */}
                   <section
                     style={isDesktop ? { width: `${splitRatio}%` } : undefined}
-                    className="w-full xl:h-full bg-white dark:bg-[#070a10] xl:overflow-hidden flex flex-col border-b xl:border-b-0 border-slate-200 dark:border-slate-800 shrink-0"
+                    className="w-full lg:h-full bg-white dark:bg-[#070a10] lg:overflow-hidden flex flex-col border-b lg:border-b-0 border-slate-200 dark:border-slate-800 shrink-0"
                   >
                     <LeftPane
                       question={currentQuestion}

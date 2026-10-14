@@ -241,16 +241,18 @@ export const SetupDashboard: React.FC<SetupDashboardProps> = ({
         onClick={e => e.stopPropagation()}
       >
         {/* Top Header Bar */}
-        <div className="px-4 sm:px-6 py-3.5 sm:py-4 border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#070a10] flex items-center justify-between gap-3">
-          <div className="flex items-center gap-4">
-            <Logo size="sm" variant="full" inverted={isDark} />
+        <div className="px-3.5 sm:px-6 py-3 sm:py-4 border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#070a10] flex items-center justify-between gap-2 sm:gap-3">
+          <div className="flex items-center gap-2 sm:gap-4 min-w-0">
+            <div className="shrink-0">
+              <Logo size="sm" variant="header" inverted={isDark} />
+            </div>
             <div className="h-6 w-px bg-slate-200 dark:bg-slate-800 hidden sm:block" />
-            <div>
-              <h2 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white tracking-tight">
+            <div className="min-w-0">
+              <h2 className="text-sm sm:text-base md:text-lg font-bold text-slate-900 dark:text-white tracking-tight truncate">
                 Get started
               </h2>
-              <p className="text-xs text-slate-500 dark:text-[#a1a1aa] mt-0.5">
-                Digital SAT Reading & Writing Practice • Question Bank
+              <p className="text-[11px] sm:text-xs text-slate-500 dark:text-[#a1a1aa] truncate">
+                Digital SAT Reading & Writing Practice
               </p>
             </div>
           </div>
@@ -427,7 +429,7 @@ export const SetupDashboard: React.FC<SetupDashboardProps> = ({
             <h3 className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-[#a1a1aa]">
               3. Difficulty
             </h3>
-            <div className="grid grid-cols-3 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3">
               {(['Easy', 'Medium', 'Hard'] as DifficultyLevel[]).map(diff => {
                 const isSelected = selectedDifficulties.includes(diff);
                 const count = counts.diffMap[diff] || 0;
@@ -441,7 +443,7 @@ export const SetupDashboard: React.FC<SetupDashboardProps> = ({
                 return (
                   <label
                     key={diff}
-                    className={`flex items-center justify-between p-3.5 rounded-xl border cursor-pointer transition ${
+                    className={`flex items-center justify-between p-3 sm:p-3.5 rounded-xl border cursor-pointer transition ${
                       isSelected
                         ? `bg-blue-50/60 dark:bg-[#1a2233] border-blue-600 dark:border-blue-500 shadow-xs ring-1 ring-blue-600 dark:ring-blue-500`
                         : 'bg-slate-50 dark:bg-[#141a24] border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:border-slate-300 dark:hover:border-slate-700'
