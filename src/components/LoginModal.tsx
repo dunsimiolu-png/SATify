@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   X, 
   ShieldCheck, 
@@ -70,9 +70,6 @@ export const LoginModal: React.FC<LoginModalProps> = ({
   const [showClientIdInput, setShowClientIdInput] = useState<boolean>(false);
   const [inputClientId, setInputClientId] = useState<string>('');
 
-  // Official Google Button container ref
-  const googleBtnRef = useRef<HTMLDivElement>(null);
-
   useEffect(() => {
     if (isOpen) {
       setMode(initialMode);
@@ -115,19 +112,6 @@ export const LoginModal: React.FC<LoginModalProps> = ({
           },
         });
 
-        // Render official Google button into container
-        if (googleBtnRef.current) {
-          googleBtnRef.current.innerHTML = '';
-          google.accounts.id.renderButton(googleBtnRef.current, {
-            type: 'standard',
-            theme: 'outline',
-            size: 'large',
-            text: 'continue_with',
-            shape: 'pill',
-            width: 320,
-            logo_alignment: 'left',
-          });
-        }
         return true;
       } catch (err) {
         console.warn('Google Identity initialization notice:', err);
@@ -456,9 +440,6 @@ export const LoginModal: React.FC<LoginModalProps> = ({
         {/* REAL GOOGLE SIGN-IN SECTION */}
         {mode !== 'forgot' && (
           <div className="space-y-3">
-            {/* Rendered official Google button (if GIS initialized) */}
-            <div ref={googleBtnRef} className="flex justify-center empty:hidden" />
-
             {/* Universal Google Trigger Button (triggers real Google account chooser popup) */}
             <button
               type="button"
