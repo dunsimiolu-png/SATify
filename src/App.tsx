@@ -11,6 +11,7 @@ import { HighlightToolbar } from './components/HighlightToolbar';
 import { SetupDashboard } from './components/SetupDashboard';
 import { GrammarComparisonModal } from './components/GrammarComparisonModal';
 import { Sidebar, AppRoute } from './components/Sidebar';
+import { PasscodeLock } from './components/PasscodeLock';
 import { HomeDashboard } from './views/HomeDashboard';
 import { AnalyticsView } from './views/AnalyticsView';
 import { SavedMistakesView } from './views/SavedMistakesView';
@@ -38,6 +39,19 @@ import { useTheme } from './utils/theme';
 export const App: React.FC = () => {
   // Global Theme state ('dark' | 'light')
   const { theme, isDark, toggleTheme } = useTheme();
+
+  // Private Passcode Authentication State
+  const [isUnlocked, setIsUnlocked] = useState<boolean>(() => {
+    if (typeof window === 'undefined') return false;
+    return localStorage.getItem('satify_auth_status') === 'unlocked' || 
+           sessionStorage.getItem('satify_auth_status') === 'unlocked';
+  });
+
+  const handleLockApp = useCallback(() => {
+    localStorage.removeItem('satify_auth_status');
+    sessionStorage.removeItem('satify_auth_status');
+    setIsUnlocked(false);
+  }, []);
 
   // Mobile navigation drawer and responsive layout states
   const [isMobileNavOpen, setIsMobileNavOpen] = useState<boolean>(false);
@@ -517,9 +531,10 @@ export const App: React.FC = () => {
 
   const savedCount = useMemo(() => getSavedQuestionIds().length, [currentState]);
 
-  // ---------------------------------------------------------------------------
-  // MAIN RENDER: Sidebar + Dashboard Routes OR Full Bluebook Practice Runner
-  // ---------------------------------------------------------------------------
+  if (!isUnlocked) {
+    return <PasscodeLock onUnlock={() => setIsUnlocked(true)} />;
+  }
+
   return (
     <div className="w-screen h-screen flex flex-col md:flex-row overflow-hidden font-sans bg-slate-50 dark:bg-[#070a10] text-slate-900 dark:text-white">
       {/* 1. Mobile Top Bar (< 768px) when NOT in full practice mode */}
@@ -567,6 +582,7 @@ export const App: React.FC = () => {
               }}
               savedCount={savedCount}
               onCloseMobile={() => setIsMobileNavOpen(false)}
+              onLock={handleLockApp}
             />
           </div>
         </>
@@ -585,6 +601,7 @@ export const App: React.FC = () => {
               }
             }}
             savedCount={savedCount}
+            onLock={handleLockApp}
           />
         </div>
       )}

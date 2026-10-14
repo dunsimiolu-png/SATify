@@ -32,6 +32,7 @@ interface SidebarProps {
   savedCount?: number;
   className?: string;
   onCloseMobile?: () => void;
+  onLock?: () => void;
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({
@@ -40,6 +41,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   savedCount = 0,
   className = '',
   onCloseMobile,
+  onLock,
 }) => {
   const { isDark, toggleTheme } = useTheme();
   const navItems: { id: AppRoute; label: string; icon: React.ReactNode; badge?: string | number }[] = [
@@ -142,19 +144,33 @@ export const Sidebar: React.FC<SidebarProps> = ({
           </div>
         </div>
 
-        {/* Theme toggle button */}
-        <button
-          onClick={toggleTheme}
-          className="p-2 rounded-lg bg-white dark:bg-[#151a24] hover:bg-slate-100 dark:hover:bg-[#202738] text-slate-700 dark:text-gray-300 transition group border border-slate-200 dark:border-[#222b3d] cursor-pointer"
-          title={isDark ? "Switch to Light Theme" : "Switch to Dark Theme"}
-          aria-label="Toggle dark/light theme"
-        >
-          {isDark ? (
-            <Sun className="w-4 h-4 text-amber-400 group-hover:rotate-45 transition-transform" />
-          ) : (
-            <Moon className="w-4 h-4 text-slate-700 group-hover:-rotate-12 transition-transform" />
+        <div className="flex items-center gap-1.5">
+          {/* Lock App button */}
+          {onLock && (
+            <button
+              onClick={onLock}
+              className="p-2 rounded-lg bg-white dark:bg-[#151a24] hover:bg-rose-50 dark:hover:bg-rose-950/40 text-slate-600 hover:text-rose-600 dark:text-gray-300 dark:hover:text-rose-400 transition group border border-slate-200 dark:border-[#222b3d] cursor-pointer"
+              title="Lock App (Private Mode)"
+              aria-label="Lock App"
+            >
+              <Lock className="w-4 h-4 group-hover:scale-110 transition-transform" />
+            </button>
           )}
-        </button>
+
+          {/* Theme toggle button */}
+          <button
+            onClick={toggleTheme}
+            className="p-2 rounded-lg bg-white dark:bg-[#151a24] hover:bg-slate-100 dark:hover:bg-[#202738] text-slate-700 dark:text-gray-300 transition group border border-slate-200 dark:border-[#222b3d] cursor-pointer"
+            title={isDark ? "Switch to Light Theme" : "Switch to Dark Theme"}
+            aria-label="Toggle dark/light theme"
+          >
+            {isDark ? (
+              <Sun className="w-4 h-4 text-amber-400 group-hover:rotate-45 transition-transform" />
+            ) : (
+              <Moon className="w-4 h-4 text-slate-700 group-hover:-rotate-12 transition-transform" />
+            )}
+          </button>
+        </div>
       </div>
     </aside>
   );
