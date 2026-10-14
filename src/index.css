@@ -1,0 +1,143 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html, body, #root {
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    user-select: none;
+    -webkit-user-select: none;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  html.dark,
+  html.dark body,
+  body.dark {
+    background-color: #0b0e14;
+    color: #f8fafc;
+  }
+}
+
+/* Global dark mode surface overrides for seamless theme switching across all views */
+html.dark .bg-white {
+  background-color: #111726;
+}
+html.dark .bg-slate-50,
+html.dark .bg-\[\#f8fafc\] {
+  background-color: #0b0e14;
+}
+html.dark .bg-slate-100,
+html.dark .bg-gray-50,
+html.dark .bg-gray-100 {
+  background-color: #161e31;
+}
+html.dark .text-slate-900,
+html.dark .text-gray-900,
+html.dark .text-gray-800,
+html.dark .text-\[\#111827\] {
+  color: #f1f5f9;
+}
+html.dark .text-gray-700,
+html.dark .text-slate-700 {
+  color: #cbd5e1;
+}
+html.dark .text-gray-600,
+html.dark .text-slate-600 {
+  color: #94a3b8;
+}
+html.dark .border-slate-200,
+html.dark .border-gray-200,
+html.dark .border-gray-300 {
+  border-color: #1e293b;
+}
+
+/* Allow text selection in passages, stems, and explanations */
+.passage-text,
+.question-stem,
+.explanation-text,
+.selectable-text {
+  user-select: text;
+  -webkit-user-select: text;
+}
+
+/* Inline typography tags for authentic College Board styling */
+.passage-text u,
+.question-stem u,
+.explanation-text u,
+.rich-text u,
+u {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
+}
+
+.passage-text em,
+.question-stem em,
+.explanation-text em,
+.rich-text em,
+em,
+.passage-text i,
+.question-stem i,
+.explanation-text i,
+.rich-text i,
+i {
+  font-style: italic;
+}
+
+.passage-text sub,
+.question-stem sub,
+.explanation-text sub,
+.rich-text sub,
+sub {
+  vertical-align: sub;
+  font-size: 0.75em;
+  line-height: 0;
+}
+
+.passage-text sup,
+.question-stem sup,
+.explanation-text sup,
+.rich-text sup,
+sup {
+  vertical-align: super;
+  font-size: 0.75em;
+  line-height: 0;
+}
+
+/* Authentic College Board Bluebook Dashed Border */
+.bluebook-dashed-border {
+  background-image: repeating-linear-gradient(to right, #262626 0, #262626 16px, transparent 16px, transparent 22px);
+  height: 2px;
+  width: 100%;
+}
+
+/* Custom crisp scrollbars for authentic desktop app experience */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}
+
+html.dark ::-webkit-scrollbar-thumb {
+  background: #334155;
+}
+
+html.dark ::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}
