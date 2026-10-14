@@ -56,14 +56,16 @@ export const LoginModal: React.FC<LoginModalProps> = ({
   const [successMsg, setSuccessMsg] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
-  // Google Client ID State (loaded from Vite env or local storage)
+  // Google Client ID State (loaded from Vite env, local storage, or default)
+  const DEFAULT_GOOGLE_CLIENT_ID = '230405444938-0ksaq5k8mlpqhsokplr8p7gvnjhnc4hh.apps.googleusercontent.com';
   const [googleClientId, setGoogleClientId] = useState<string>(() => {
     const envId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
     if (envId && !envId.includes('YOUR_GOOGLE_CLIENT_ID')) return envId;
     if (typeof window !== 'undefined') {
-      return localStorage.getItem('satify_google_client_id') || '';
+      const stored = localStorage.getItem('satify_google_client_id');
+      if (stored) return stored;
     }
-    return '';
+    return DEFAULT_GOOGLE_CLIENT_ID;
   });
   const [showClientIdInput, setShowClientIdInput] = useState<boolean>(false);
   const [inputClientId, setInputClientId] = useState<string>('');
