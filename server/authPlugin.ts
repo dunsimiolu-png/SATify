@@ -169,8 +169,8 @@ export function authApiPlugin(): Plugin {
           return sendJson(res, 200, { success: true });
         }
 
-        // 4. POST /api/auth/send-welcome
-        if (req.method === 'POST' && url === '/api/auth/send-welcome') {
+        // 4. POST /api/send-email or /api/auth/send-welcome
+        if (req.method === 'POST' && (url === '/api/send-email' || url === '/api/auth/send-welcome')) {
           try {
             const body = await parseBody(req);
             const result = await sendCeoWelcomeEmail({

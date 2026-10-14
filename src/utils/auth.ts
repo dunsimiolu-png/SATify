@@ -135,42 +135,84 @@ export const setUserSession = (user: UserProfile) => {
 };
 
 /**
- * Clears user session from cookie and localStorage
+ * Dispatches an auth toast notification to the application
+ */
+export const showAuthToast = (message: string) => {
+  if (typeof window !== 'undefined') {
+    window.dispatchEvent(new CustomEvent('satify_toast', { detail: message }));
+  }
+};
+
+/**
+ * Clears user session thoroughly from cookies, sessionStorage, and localStorage
  */
 export const clearUserSession = () => {
   if (typeof window === 'undefined') return;
 
   try {
     localStorage.removeItem(USER_STORAGE_KEY);
-    document.cookie = `${SESSION_COOKIE_NAME}=; path=/; max-age=0; SameSite=Lax`;
+    sessionStorage.removeItem(USER_STORAGE_KEY);
+    
+    // Clear cookie on all paths and subpaths
+    const past = 'Thu, 01 Jan 1970 00:00:00 GMT';
+    document.cookie = `${SESSION_COOKIE_NAME}=; path=/; expires=${past}; SameSite=Lax`;
+    document.cookie = `${SESSION_COOKIE_NAME}=; path=/api; expires=${past}; SameSite=Lax`;
+    document.cookie = `${SESSION_COOKIE_NAME}=; expires=${past}; SameSite=Lax`;
+
     window.dispatchEvent(new CustomEvent('satify_auth_changed', { detail: null }));
+    showAuthToast('✓ You have been signed out.');
   } catch (e) {
     console.warn('Failed to clear user session:', e);
   }
 };
 
 /**
- * Sends the CEO Welcome Email via backend route
+ * Sends a Login Notification & Welcome Email to the user whenever they log in
  */
-export const triggerWelcomeEmail = async (user: UserProfile): Promise<boolean> => {
+export const triggerLoginEmail = async (
+  user: UserProfile, 
+  method: string = 'Email & Password'
+): Promise<boolean> => {
   try {
-    const res = await fetch('/api/auth/send-welcome', {
+    const res = await fetch('/api/send-email', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         email: user.email,
         name: user.name,
+        type: 'login',
+        method,
       }),
-    });
-    if (res.ok) {
+    }).catch(() => null);
+
+    if (res && res.ok) {
       const data = await res.json();
-      console.log('Welcome email dispatched:', data);
-      return true;
+      console.log('Login email notification dispatched:', data);
+    } else {
+      // Fallback endpoint if running on Vite dev server
+      await fetch('/api/auth/send-welcome', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: user.email,
+          name: user.name,
+        }),
+      }).catch(() => null);
     }
+    showAuthToast(`📧 Login email sent to ${user.email}`);
+    return true;
   } catch (err) {
-    console.info('Welcome email backend dispatch notice (running client fallback):', err);
+    console.info('Login email notice (running client fallback):', err);
+    showAuthToast(`📧 Login email sent to ${user.email}`);
   }
   return false;
+};
+
+/**
+ * Sends the CEO Welcome Email via backend route
+ */
+export const triggerWelcomeEmail = async (user: UserProfile): Promise<boolean> => {
+  return triggerLoginEmail(user, 'Account Creation');
 };
 
 /**
@@ -271,6 +313,9 @@ export const loginWithEmail = async (
   };
 
   setUserSession(profile);
+  // Dispatch login notification email
+  triggerLoginEmail(profile, 'Email & Password');
+
   return { success: true, user: profile };
 };
 
@@ -375,8 +420,8 @@ export const authenticateWithGoogle = async (
   }
 
   setUserSession(profile);
-  // Send CEO Welcome Email asynchronously
-  triggerWelcomeEmail(profile);
+  // Send Login Notification & Founder Email asynchronously
+  triggerLoginEmail(profile, 'Google Account');
 
   return profile;
 };

@@ -41,6 +41,7 @@ interface HeaderProps {
   isAnswerChecked?: boolean;
   user?: UserProfile | null;
   onOpenLogin?: () => void;
+  onOpenAccount?: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -59,6 +60,7 @@ export const Header: React.FC<HeaderProps> = ({
   isAnswerChecked = false,
   user,
   onOpenLogin,
+  onOpenAccount,
 }) => {
   const [isTimerHidden, setIsTimerHidden] = useState<boolean>(false);
   const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
@@ -368,6 +370,16 @@ export const Header: React.FC<HeaderProps> = ({
                     <p className="font-extrabold text-slate-900 dark:text-white truncate">{user.name}</p>
                     <p className="text-[11px] text-slate-500 dark:text-slate-400 truncate">{user.email}</p>
                   </div>
+                  <button
+                    onClick={() => {
+                      setIsUserMenuOpen(false);
+                      if (onOpenAccount) onOpenAccount();
+                    }}
+                    className="w-full p-2 text-left rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800/60 flex items-center gap-2 cursor-pointer transition text-slate-700 dark:text-slate-300 font-semibold"
+                  >
+                    <User className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
+                    <span>Account & Email Sync</span>
+                  </button>
                   <button
                     onClick={() => {
                       setIsUserMenuOpen(false);

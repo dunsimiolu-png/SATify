@@ -12,7 +12,8 @@ import { SetupDashboard } from './components/SetupDashboard';
 import { GrammarComparisonModal } from './components/GrammarComparisonModal';
 import { CookieConsentBanner } from './components/CookieConsentBanner';
 import { LoginModal } from './components/LoginModal';
-import { UserProfile, getCurrentUser } from './utils/auth';
+import { UserAccountModal } from './components/UserAccountModal';
+import { UserProfile, getCurrentUser, logoutUser } from './utils/auth';
 import { Sidebar, AppRoute } from './components/Sidebar';
 import { PasscodeLock } from './components/PasscodeLock';
 
@@ -62,6 +63,8 @@ export const App: React.FC = () => {
   // User profile and Google Sign-in state (Requirement 8)
   const [currentUser, setCurrentUser] = useState<UserProfile | null>(() => getCurrentUser());
   const [isLoginModalOpen, setIsLoginModalOpen] = useState<boolean>(false);
+  const [isAccountModalOpen, setIsAccountModalOpen] = useState<boolean>(false);
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
 
   useEffect(() => {
     const handleAuthChange = (e: any) => {
@@ -69,6 +72,16 @@ export const App: React.FC = () => {
     };
     window.addEventListener('satify_auth_changed', handleAuthChange);
     return () => window.removeEventListener('satify_auth_changed', handleAuthChange);
+  }, []);
+
+  useEffect(() => {
+    const handleToast = (e: any) => {
+      setToastMessage(e.detail || null);
+      const timer = setTimeout(() => setToastMessage(null), 4000);
+      return () => clearTimeout(timer);
+    };
+    window.addEventListener('satify_toast', handleToast);
+    return () => window.removeEventListener('satify_toast', handleToast);
   }, []);
 
   // Mobile navigation drawer and responsive layout states (< 1280px / xl)
@@ -561,8 +574,8 @@ export const App: React.FC = () => {
           <div className="flex items-center gap-2">
             {currentUser ? (
               <button
-                onClick={() => setIsLoginModalOpen(true)}
-                className="w-8 h-8 rounded-full overflow-hidden border-2 border-blue-600 flex items-center justify-center bg-blue-600 text-white font-bold text-xs cursor-pointer"
+                onClick={() => setIsAccountModalOpen(true)}
+                className="w-8 h-8 rounded-full overflow-hidden border-2 border-blue-600 flex items-center justify-center bg-blue-600 text-white font-bold text-xs cursor-pointer shadow-xs transition hover:scale-105"
                 title={currentUser.name}
               >
                 {currentUser.picture ? (
@@ -616,6 +629,10 @@ export const App: React.FC = () => {
               onLock={handleLockApp}
               user={currentUser}
               onOpenLogin={() => setIsLoginModalOpen(true)}
+              onOpenAccount={() => {
+                setIsMobileNavOpen(false);
+                setIsAccountModalOpen(true);
+              }}
             />
           </div>
         </>
@@ -637,6 +654,7 @@ export const App: React.FC = () => {
             onLock={handleLockApp}
             user={currentUser}
             onOpenLogin={() => setIsLoginModalOpen(true)}
+            onOpenAccount={() => setIsAccountModalOpen(true)}
           />
         </div>
       )}
@@ -708,6 +726,7 @@ export const App: React.FC = () => {
               isAnswerChecked={currentState.isAnswerChecked}
               user={currentUser}
               onOpenLogin={() => setIsLoginModalOpen(true)}
+              onOpenAccount={() => setIsAccountModalOpen(true)}
             />
 
             {/* Split Pane / Stacked Mobile Workspace */}
@@ -872,7 +891,32 @@ export const App: React.FC = () => {
         isOpen={isLoginModalOpen}
         onClose={() => setIsLoginModalOpen(false)}
         onSuccess={(u) => setCurrentUser(u)}
+        currentUser={currentUser}
       />
+
+      {/* User Account Details & Sign Out Modal */}
+      <UserAccountModal
+        isOpen={isAccountModalOpen}
+        onClose={() => setIsAccountModalOpen(false)}
+        user={currentUser}
+        onSignOut={() => {
+          logoutUser();
+          setIsAccountModalOpen(false);
+        }}
+        onSwitchAccount={() => {
+          setIsAccountModalOpen(false);
+          setIsLoginModalOpen(true);
+        }}
+      />
+
+      {/* Floating Global Auth & Notification Toast */}
+      {toastMessage && (
+        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 animate-in fade-in slide-in-from-bottom-3 duration-200 pointer-events-none">
+          <div className="px-4 py-2.5 rounded-full bg-slate-900/95 dark:bg-white/95 text-white dark:text-slate-900 font-bold text-xs sm:text-sm shadow-2xl flex items-center gap-2 border border-slate-700/50 dark:border-slate-300">
+            <span>{toastMessage}</span>
+          </div>
+        </div>
+      )}
 
       {/* Floating Highlighter Pill Toolbar (Active only in Practice mode) */}
       {currentRoute === 'practice' && toolbarState.isOpen && (

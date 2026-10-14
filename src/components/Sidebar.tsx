@@ -38,6 +38,7 @@ interface SidebarProps {
   onLock?: () => void;
   user?: UserProfile | null;
   onOpenLogin?: () => void;
+  onOpenAccount?: () => void;
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({
@@ -49,6 +50,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   onLock,
   user,
   onOpenLogin,
+  onOpenAccount,
 }) => {
   const { isDark, toggleTheme } = useTheme();
   const navItems: { id: AppRoute; label: string; icon: React.ReactNode; badge?: string | number }[] = [
@@ -143,7 +145,12 @@ export const Sidebar: React.FC<SidebarProps> = ({
       <div className="p-3 border-t border-slate-100 dark:border-[#1a1f2c] bg-slate-50/60 dark:bg-[#0b0e14]">
         {user ? (
           <div className="flex items-center justify-between gap-2 p-1.5 rounded-xl bg-white dark:bg-[#151a24] border border-slate-200/80 dark:border-[#222b3d] shadow-2xs">
-            <div className="flex items-center gap-2.5 min-w-0">
+            <button
+              type="button"
+              onClick={onOpenAccount}
+              className="flex items-center gap-2.5 min-w-0 flex-1 text-left cursor-pointer hover:opacity-85 transition rounded-lg p-0.5"
+              title="Open Account Settings"
+            >
               <div className="w-8 h-8 rounded-full overflow-hidden border-2 border-blue-600 shrink-0 bg-blue-600 text-white font-bold text-xs flex items-center justify-center">
                 {user.picture ? (
                   <img src={user.picture} alt={user.name} className="w-full h-full object-cover" />
@@ -159,10 +166,13 @@ export const Sidebar: React.FC<SidebarProps> = ({
                   {user.email}
                 </p>
               </div>
-            </div>
+            </button>
 
             <button
-              onClick={() => logoutUser()}
+              onClick={() => {
+                logoutUser();
+                if (onCloseMobile) onCloseMobile();
+              }}
               className="p-1.5 rounded-lg text-slate-400 hover:text-rose-600 dark:hover:text-rose-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition shrink-0 cursor-pointer"
               title="Sign Out"
               aria-label="Sign Out"

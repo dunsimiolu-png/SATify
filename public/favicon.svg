@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1d4ed8"/>
+      <stop offset="100%" stop-color="#1e3a8a"/>
+    </linearGradient>
+    <linearGradient id="boltGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fde047"/>
+      <stop offset="100%" stop-color="#eab308"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Vibrant Blue Rounded Container -->
+  <rect width="64" height="64" rx="14" fill="url(#bgGrad)"/>
+  
+  <!-- Crisp Open Book Pages (White) -->
+  <path d="M14 44C20 41 26 41 31 43V23C26 21 20 21 14 23V44Z" fill="#ffffff" fill-opacity="0.95"/>
+  <path d="M50 44C44 41 38 41 33 43V23C38 21 44 21 50 23V44Z" fill="#ffffff" fill-opacity="0.95"/>
+  
+  <!-- Center Book Spine Groove -->
+  <line x1="32" y1="23" x2="32" y2="44" stroke="#93c5fd" stroke-width="2" stroke-linecap="round"/>
+  
+  <!-- Signature High-Energy Lightning Bolt / Rising Arrow -->
+  <path d="M35 12L22 32H32L29 50L44 28H33L35 12Z" fill="url(#boltGrad)" stroke="#1e3a8a" stroke-width="1.5" stroke-linejoin="round"/>
+</svg>
