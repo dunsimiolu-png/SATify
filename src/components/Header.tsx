@@ -266,11 +266,11 @@ export const Header: React.FC<HeaderProps> = ({
               <span className="hidden md:inline text-[10px] font-medium">Annotate</span>
             </button>
 
-            {/* View Layout Toggle (Split vs Stacked) */}
+            {/* View Layout Toggle (Split vs Stacked) - Tablet & Desktop only */}
             {onToggleLayout && (
               <button
                 onClick={onToggleLayout}
-                className="flex flex-col items-center justify-center rounded-lg p-1.5 sm:px-2 sm:py-1 min-w-[34px] min-h-[34px] sm:min-w-0 sm:min-h-0 text-gray-700 dark:text-slate-300 hover:bg-blue-50 dark:hover:bg-blue-950/40 hover:text-blue-600 dark:hover:text-blue-400 transition group cursor-pointer"
+                className="hidden md:flex flex-col items-center justify-center rounded-lg p-1.5 sm:px-2 sm:py-1 min-w-[34px] min-h-[34px] sm:min-w-0 sm:min-h-0 text-gray-700 dark:text-slate-300 hover:bg-blue-50 dark:hover:bg-blue-950/40 hover:text-blue-600 dark:hover:text-blue-400 transition group cursor-pointer"
                 title={isTwoPane ? "Switch to Stacked View (Passage above question)" : "Switch to Side-by-Side Split View"}
               >
                 {isTwoPane ? (
@@ -278,7 +278,7 @@ export const Header: React.FC<HeaderProps> = ({
                 ) : (
                   <Columns className="w-4 h-4 text-blue-600 dark:text-blue-400 group-hover:scale-110 transition-transform" />
                 )}
-                <span className="hidden md:inline text-[10px] font-medium">{isTwoPane ? "Stacked" : "Split"}</span>
+                <span className="text-[10px] font-medium">{isTwoPane ? "Stacked" : "Split"}</span>
               </button>
             )}
 

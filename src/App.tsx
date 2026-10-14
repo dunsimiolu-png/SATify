@@ -121,21 +121,28 @@ export const App: React.FC = () => {
     };
   }, []);
 
+  // Mobile devices (< 768px): STRICTLY STACKED ONLY, NO OTHER OPTION!
+  const isMobile = windowWidth < 768;
+
   // Compute active two-pane state:
-  // - If user manually toggled, obey their preference
-  // - Otherwise: Split view when screen is in landscape AND width >= 900px (standard iPad landscape & desktop)
-  // - In portrait orientation on tablets/phones, defaults to stacked so options are always immediately visible!
+  // - On mobile (< 768px): Strictly stacked only - no other option!
+  // - Tablet & Desktop (>= 768px):
+  //     - If user manually toggled, obey their preference
+  //     - Default: Split view when screen is in landscape (standard iPad landscape & desktop)
+  //     - In portrait orientation on tablets, defaults to stacked
   const isTwoPane = useMemo(() => {
+    if (isMobile) return false;
     if (layoutOverride) return layoutOverride === 'split';
-    return isLandscape && windowWidth >= 900;
-  }, [layoutOverride, isLandscape, windowWidth]);
+    return isLandscape && windowWidth >= 768;
+  }, [isMobile, layoutOverride, isLandscape, windowWidth]);
 
   const handleToggleLayout = useCallback(() => {
+    if (windowWidth < 768) return; // Disallowed on mobile view
     setLayoutOverride(prev => {
       const current = prev !== null ? prev === 'split' : isTwoPane;
       return current ? 'stacked' : 'split';
     });
-  }, [isTwoPane]);
+  }, [isTwoPane, windowWidth]);
 
   useEffect(() => {
     const root = document.documentElement;
@@ -873,7 +880,7 @@ export const App: React.FC = () => {
                     className={`${
                       isTwoPane 
                         ? 'h-full overflow-hidden flex flex-col shrink-0 pb-20 xl:pb-0' 
-                        : 'w-full flex flex-col shrink-0 pb-32'
+                        : 'w-full flex flex-col shrink-0 pb-12'
                     } bg-white dark:bg-[#070a10]`}
                   >
                     <RightPane

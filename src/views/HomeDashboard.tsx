@@ -367,7 +367,7 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({
         </div>
 
         {/* Footer */}
-        <footer className="pt-8 pb-4 border-t border-gray-200 text-center text-xs text-gray-500 font-medium">
+        <footer className="pt-8 pb-4 border-t border-gray-200 dark:border-slate-800 text-center text-xs text-gray-500 dark:text-slate-400 font-medium">
           © Oluwole Inuoluwadunsimi 2026
         </footer>
       </div>
