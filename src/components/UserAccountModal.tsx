@@ -8,9 +8,16 @@ import {
   UserCheck, 
   Send, 
   Loader2, 
-  ExternalLink
+  ExternalLink,
+  Smartphone,
+  Laptop,
+  Copy,
+  Check,
+  RefreshCw,
+  ArrowRightLeft
 } from 'lucide-react';
 import { UserProfile, triggerLoginEmail, showAuthToast } from '../utils/auth';
+import { exportUserData, importUserData, syncCloudProgress } from '../utils/storage';
 
 interface UserAccountModalProps {
   isOpen: boolean;
@@ -29,8 +36,52 @@ export const UserAccountModal: React.FC<UserAccountModalProps> = ({
 }) => {
   const [isSendingEmail, setIsSendingEmail] = useState<boolean>(false);
   const [emailSuccess, setEmailSuccess] = useState<boolean>(false);
+  const [isCopied, setIsCopied] = useState<boolean>(false);
+  const [showImportBox, setShowImportBox] = useState<boolean>(false);
+  const [importCode, setImportCode] = useState<string>('');
+  const [importFeedback, setImportFeedback] = useState<{ success: boolean; message: string } | null>(null);
+  const [isSyncingCloud, setIsSyncingCloud] = useState<boolean>(false);
 
   if (!isOpen || !user) return null;
+
+  const handleCopySyncCode = () => {
+    try {
+      const code = exportUserData();
+      navigator.clipboard.writeText(code);
+      setIsCopied(true);
+      showAuthToast('✓ Device Sync Code copied! Paste on your iPad/phone.');
+      setTimeout(() => setIsCopied(false), 3000);
+    } catch (e) {
+      showAuthToast('Failed to copy to clipboard.');
+    }
+  };
+
+  const handleImportSyncCode = () => {
+    const res = importUserData(importCode);
+    setImportFeedback(res);
+    if (res.success) {
+      showAuthToast(`✓ ${res.message}`);
+      setImportCode('');
+      setTimeout(() => {
+        setShowImportBox(false);
+        setImportFeedback(null);
+      }, 3000);
+    }
+  };
+
+  const handleCloudSync = async () => {
+    setIsSyncingCloud(true);
+    try {
+      const ok = await syncCloudProgress();
+      if (ok) {
+        showAuthToast('✓ Cloud sync complete!');
+      } else {
+        showAuthToast('Use "Copy Sync Code" below to instantly sync to your other device.');
+      }
+    } finally {
+      setIsSyncingCloud(false);
+    }
+  };
 
   const handleSendTestEmail = async () => {
     setIsSendingEmail(true);
@@ -61,7 +112,7 @@ export const UserAccountModal: React.FC<UserAccountModalProps> = ({
         if (e.target === e.currentTarget) onClose();
       }}
     >
-      <div className="bg-white dark:bg-[#0f1522] border border-slate-200 dark:border-slate-800 rounded-3xl max-w-md w-full p-6 sm:p-7 shadow-2xl space-y-5 text-slate-900 dark:text-white animate-in zoom-in-95 duration-150 relative">
+      <div className="bg-white dark:bg-[#0f1522] border border-slate-200 dark:border-slate-800 rounded-3xl max-w-md w-full p-6 sm:p-7 shadow-2xl space-y-4 text-slate-900 dark:text-white animate-in zoom-in-95 duration-150 relative max-h-[90vh] overflow-y-auto">
         {/* Close Button */}
         <button
           onClick={onClose}
@@ -151,6 +202,93 @@ export const UserAccountModal: React.FC<UserAccountModalProps> = ({
               </>
             )}
           </button>
+        </div>
+
+        {/* Sync Across Devices Card */}
+        <div className="p-3.5 rounded-2xl bg-blue-50/50 dark:bg-blue-950/30 border border-blue-200/70 dark:border-blue-900/50 space-y-2.5">
+          <div className="flex items-center justify-between text-xs">
+            <span className="font-bold text-slate-800 dark:text-slate-200 flex items-center gap-1.5">
+              <ArrowRightLeft className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
+              Sync Across Devices
+            </span>
+            <span className="flex items-center gap-1 text-[10px] text-blue-600 dark:text-blue-400 font-semibold">
+              <Laptop className="w-3 h-3" />
+              <span>↔</span>
+              <Smartphone className="w-3 h-3" />
+            </span>
+          </div>
+
+          <p className="text-[11px] text-slate-600 dark:text-slate-400 leading-relaxed">
+            Want your questions, bookmarks, and streak on your iPad or phone? Generate a sync code from this device:
+          </p>
+
+          <div className="grid grid-cols-2 gap-2">
+            <button
+              onClick={handleCopySyncCode}
+              className="py-2 px-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs transition flex items-center justify-center gap-1.5 shadow-xs cursor-pointer active:scale-95"
+            >
+              {isCopied ? (
+                <>
+                  <Check className="w-3.5 h-3.5" />
+                  <span>Code Copied!</span>
+                </>
+              ) : (
+                <>
+                  <Copy className="w-3.5 h-3.5" />
+                  <span>Copy Sync Code</span>
+                </>
+              )}
+            </button>
+
+            <button
+              onClick={() => {
+                setShowImportBox(!showImportBox);
+                setImportFeedback(null);
+              }}
+              className="py-2 px-3 rounded-xl bg-white hover:bg-slate-100 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-700 font-bold text-xs transition flex items-center justify-center gap-1.5 shadow-xs cursor-pointer active:scale-95"
+            >
+              <RefreshCw className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
+              <span>{showImportBox ? 'Hide Input' : 'Paste on Device'}</span>
+            </button>
+          </div>
+
+          {showImportBox && (
+            <div className="pt-2 space-y-2 border-t border-blue-200/50 dark:border-blue-900/40 animate-in fade-in duration-150">
+              <textarea
+                value={importCode}
+                onChange={(e) => setImportCode(e.target.value)}
+                placeholder="Paste the sync code from your other device here..."
+                rows={2}
+                className="w-full text-xs p-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 font-mono text-slate-800 dark:text-slate-200 focus:outline-hidden focus:ring-2 focus:ring-blue-500"
+              />
+              <button
+                onClick={handleImportSyncCode}
+                disabled={!importCode.trim()}
+                className="w-full py-2 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 disabled:opacity-50 text-white font-bold text-xs transition flex items-center justify-center gap-1.5 shadow-xs cursor-pointer active:scale-95"
+              >
+                <Check className="w-3.5 h-3.5" />
+                <span>Import & Merge Progress</span>
+              </button>
+
+              {importFeedback && (
+                <p className={`text-[11px] font-semibold ${importFeedback.success ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400'}`}>
+                  {importFeedback.message}
+                </p>
+              )}
+            </div>
+          )}
+
+          <div className="flex items-center justify-between pt-1 text-[11px] text-slate-500 dark:text-slate-400 border-t border-blue-200/40 dark:border-blue-900/30">
+            <span>Cloud Sync:</span>
+            <button
+              onClick={handleCloudSync}
+              disabled={isSyncingCloud}
+              className="text-blue-600 dark:text-blue-400 font-semibold hover:underline flex items-center gap-1 cursor-pointer disabled:opacity-50"
+            >
+              <RefreshCw className={`w-3 h-3 ${isSyncingCloud ? 'animate-spin' : ''}`} />
+              <span>{isSyncingCloud ? 'Syncing...' : 'Sync Cloud Now'}</span>
+            </button>
+          </div>
         </div>
 
         {/* Action Buttons */}

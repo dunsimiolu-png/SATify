@@ -432,11 +432,169 @@ export function getSkillStatsMap() {
 }
 
 // -----------------------------------------------------------------------------
+// Cross-Device Sync & Data Transfer
+// -----------------------------------------------------------------------------
+export interface UserDataBackup {
+  version: 1;
+  email: string;
+  timestamp: number;
+  attempts: AttemptRecord[];
+  savedIds: string[];
+  streak: { streak: number; lastDate: string } | null;
+  vocabRatings?: Record<string, any>;
+  customDecks?: any[];
+}
+
+export function exportUserData(): string {
+  const attempts = getAttempts();
+  const savedIds = getSavedQuestionIds();
+  const streakRaw = typeof window !== 'undefined' ? localStorage.getItem(getScopedKey(STORAGE_KEYS.STREAK)) : null;
+  const streak = streakRaw ? JSON.parse(streakRaw) : null;
+  const user = getCurrentUser();
+
+  const data: UserDataBackup = {
+    version: 1,
+    email: user?.email || 'guest',
+    timestamp: Date.now(),
+    attempts,
+    savedIds,
+    streak,
+  };
+
+  try {
+    if (typeof window !== 'undefined') {
+      const ratingsRaw = localStorage.getItem(getScopedKey(STORAGE_KEYS.VOCAB_RATINGS));
+      if (ratingsRaw) data.vocabRatings = JSON.parse(ratingsRaw);
+      const decksRaw = localStorage.getItem(getScopedKey(STORAGE_KEYS.VOCAB_DECKS));
+      if (decksRaw) data.customDecks = JSON.parse(decksRaw);
+    }
+  } catch {}
+
+  return btoa(unescape(encodeURIComponent(JSON.stringify(data))));
+}
+
+export function importUserData(code: string): { success: boolean; message: string; count?: number } {
+  try {
+    const clean = code.trim();
+    if (!clean) return { success: false, message: 'Please enter a sync code.' };
+    
+    const jsonStr = decodeURIComponent(escape(atob(clean)));
+    const data: UserDataBackup = JSON.parse(jsonStr);
+
+    if (!data || !Array.isArray(data.attempts)) {
+      return { success: false, message: 'Invalid or incomplete sync code.' };
+    }
+
+    if (typeof window === 'undefined') return { success: false, message: 'Window unavailable' };
+
+    // Merge attempts (keep newer if duplicate question)
+    const existing = getAttempts();
+    const map = new Map<string, AttemptRecord>();
+    for (const a of existing) {
+      map.set(a.questionId, a);
+    }
+    for (const a of data.attempts) {
+      const cur = map.get(a.questionId);
+      if (!cur || a.timestamp >= cur.timestamp) {
+        map.set(a.questionId, a);
+      }
+    }
+    const mergedAttempts = Array.from(map.values());
+    localStorage.setItem(getScopedKey(STORAGE_KEYS.ATTEMPTS), JSON.stringify(mergedAttempts));
+
+    // Merge saved questions
+    const existingSaved = getSavedQuestionIds();
+    const mergedSaved = Array.from(new Set([...existingSaved, ...(data.savedIds || [])]));
+    localStorage.setItem(getScopedKey(STORAGE_KEYS.SAVED), JSON.stringify(mergedSaved));
+
+    // Merge streak if higher
+    if (data.streak) {
+      const curStreak = getStudyStreak();
+      if ((data.streak.streak || 0) > curStreak) {
+        localStorage.setItem(getScopedKey(STORAGE_KEYS.STREAK), JSON.stringify(data.streak));
+      }
+    }
+
+    // Vocab ratings & decks
+    if (data.vocabRatings) {
+      const ratingsKey = getScopedKey(STORAGE_KEYS.VOCAB_RATINGS);
+      const curRatings = localStorage.getItem(ratingsKey);
+      const parsedCur = curRatings ? JSON.parse(curRatings) : {};
+      localStorage.setItem(ratingsKey, JSON.stringify({ ...parsedCur, ...data.vocabRatings }));
+    }
+    if (data.customDecks && data.customDecks.length > 0) {
+      const decksKey = getScopedKey(STORAGE_KEYS.VOCAB_DECKS);
+      const curDecks = localStorage.getItem(decksKey);
+      const parsedCur: any[] = curDecks ? JSON.parse(curDecks) : [];
+      const deckMap = new Map();
+      for (const d of parsedCur) deckMap.set(d.id, d);
+      for (const d of data.customDecks) deckMap.set(d.id, d);
+      localStorage.setItem(decksKey, JSON.stringify(Array.from(deckMap.values())));
+    }
+
+    window.dispatchEvent(new CustomEvent('satify_storage_update'));
+    return { 
+      success: true, 
+      message: `Successfully synced ${mergedAttempts.length} questions and ${mergedSaved.length} bookmarks!`,
+      count: mergedAttempts.length 
+    };
+  } catch (e: any) {
+    return { success: false, message: 'Could not parse sync code. Make sure you copied the entire string.' };
+  }
+}
+
+/**
+ * Attempts automated background cloud sync if backend cloud endpoint is available
+ */
+export async function syncCloudProgress(): Promise<boolean> {
+  if (typeof window === 'undefined') return false;
+  const user = getCurrentUser();
+  if (!user?.email) return false;
+
+  try {
+    const attempts = getAttempts();
+    const savedIds = getSavedQuestionIds();
+    const streak = getStudyStreak();
+
+    const res = await fetch('/api/sync', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email: user.email,
+        attempts,
+        savedIds,
+        streak,
+        timestamp: Date.now(),
+      }),
+    });
+
+    if (res.ok) {
+      const cloudData = await res.json();
+      if (cloudData.attempts && Array.isArray(cloudData.attempts) && cloudData.attempts.length > attempts.length) {
+        // Cloud has more recent data (e.g. from another device)
+        localStorage.setItem(getScopedKey(STORAGE_KEYS.ATTEMPTS), JSON.stringify(cloudData.attempts));
+        if (cloudData.savedIds) {
+          localStorage.setItem(getScopedKey(STORAGE_KEYS.SAVED), JSON.stringify(cloudData.savedIds));
+        }
+        window.dispatchEvent(new CustomEvent('satify_storage_update'));
+      }
+      return true;
+    }
+  } catch (err) {
+    // Silent fail if offline or cloud endpoint not configured
+  }
+  return false;
+}
+
+// -----------------------------------------------------------------------------
 // Global Auth Sync Listener
 // -----------------------------------------------------------------------------
 if (typeof window !== 'undefined') {
   window.addEventListener('satify_auth_changed', () => {
     // Notify all active views that storage scope has switched
     window.dispatchEvent(new CustomEvent('satify_storage_update'));
+    // Trigger background cloud sync on login
+    syncCloudProgress().catch(() => {});
   });
 }
+
