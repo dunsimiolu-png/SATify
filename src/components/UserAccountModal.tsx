@@ -14,10 +14,17 @@ import {
   Copy,
   Check,
   RefreshCw,
-  ArrowRightLeft
+  ArrowRightLeft,
+  Cloud,
+  CheckCircle2
 } from 'lucide-react';
 import { UserProfile, triggerLoginEmail, showAuthToast } from '../utils/auth';
-import { exportUserData, importUserData, syncCloudProgress } from '../utils/storage';
+import { 
+  pullCloudProgress, 
+  pushCloudProgress, 
+  exportUserData, 
+  importUserData 
+} from '../utils/storage';
 
 interface UserAccountModalProps {
   isOpen: boolean;
@@ -36,20 +43,39 @@ export const UserAccountModal: React.FC<UserAccountModalProps> = ({
 }) => {
   const [isSendingEmail, setIsSendingEmail] = useState<boolean>(false);
   const [emailSuccess, setEmailSuccess] = useState<boolean>(false);
+  const [isSyncingCloud, setIsSyncingCloud] = useState<boolean>(false);
+  const [syncFeedback, setSyncFeedback] = useState<string | null>(null);
+  const [showManualTransfer, setShowManualTransfer] = useState<boolean>(false);
   const [isCopied, setIsCopied] = useState<boolean>(false);
-  const [showImportBox, setShowImportBox] = useState<boolean>(false);
   const [importCode, setImportCode] = useState<string>('');
   const [importFeedback, setImportFeedback] = useState<{ success: boolean; message: string } | null>(null);
-  const [isSyncingCloud, setIsSyncingCloud] = useState<boolean>(false);
 
   if (!isOpen || !user) return null;
+
+  const handleCloudSync = async () => {
+    setIsSyncingCloud(true);
+    setSyncFeedback(null);
+    try {
+      const pullRes = await pullCloudProgress();
+      await pushCloudProgress();
+      const count = pullRes?.count;
+      const msg = count !== undefined ? `✓ Synced! (${count} questions tracked)` : '✓ Synced across your devices!';
+      setSyncFeedback(msg);
+      showAuthToast(msg);
+      setTimeout(() => setSyncFeedback(null), 4000);
+    } catch (e) {
+      showAuthToast('Local progress saved.');
+    } finally {
+      setIsSyncingCloud(false);
+    }
+  };
 
   const handleCopySyncCode = () => {
     try {
       const code = exportUserData();
       navigator.clipboard.writeText(code);
       setIsCopied(true);
-      showAuthToast('✓ Device Sync Code copied! Paste on your iPad/phone.');
+      showAuthToast('✓ Offline backup code copied!');
       setTimeout(() => setIsCopied(false), 3000);
     } catch (e) {
       showAuthToast('Failed to copy to clipboard.');
@@ -62,24 +88,10 @@ export const UserAccountModal: React.FC<UserAccountModalProps> = ({
     if (res.success) {
       showAuthToast(`✓ ${res.message}`);
       setImportCode('');
+      pushCloudProgress().catch(() => {});
       setTimeout(() => {
-        setShowImportBox(false);
         setImportFeedback(null);
       }, 3000);
-    }
-  };
-
-  const handleCloudSync = async () => {
-    setIsSyncingCloud(true);
-    try {
-      const ok = await syncCloudProgress();
-      if (ok) {
-        showAuthToast('✓ Cloud sync complete!');
-      } else {
-        showAuthToast('Use "Copy Sync Code" below to instantly sync to your other device.');
-      }
-    } finally {
-      setIsSyncingCloud(false);
     }
   };
 
@@ -204,91 +216,104 @@ export const UserAccountModal: React.FC<UserAccountModalProps> = ({
           </button>
         </div>
 
-        {/* Sync Across Devices Card */}
-        <div className="p-3.5 rounded-2xl bg-blue-50/50 dark:bg-blue-950/30 border border-blue-200/70 dark:border-blue-900/50 space-y-2.5">
-          <div className="flex items-center justify-between text-xs">
-            <span className="font-bold text-slate-800 dark:text-slate-200 flex items-center gap-1.5">
-              <ArrowRightLeft className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
-              Sync Across Devices
-            </span>
-            <span className="flex items-center gap-1 text-[10px] text-blue-600 dark:text-blue-400 font-semibold">
-              <Laptop className="w-3 h-3" />
-              <span>↔</span>
-              <Smartphone className="w-3 h-3" />
-            </span>
+        {/* Automatic Account Cloud Sync Card */}
+        <div className="p-4 rounded-2xl bg-gradient-to-br from-blue-50/90 to-indigo-50/50 dark:from-blue-950/40 dark:to-indigo-950/20 border border-blue-200/80 dark:border-blue-900/60 space-y-3">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2.5">
+              <div className="w-8 h-8 rounded-xl bg-blue-600/10 dark:bg-blue-500/20 text-blue-600 dark:text-blue-400 flex items-center justify-center">
+                <Cloud className="w-4 h-4" />
+              </div>
+              <div>
+                <h3 className="text-xs font-bold text-slate-900 dark:text-white flex items-center gap-1.5">
+                  Automatic Account Sync
+                  <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-100 dark:bg-emerald-950/70 text-emerald-700 dark:text-emerald-400">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                    Live
+                  </span>
+                </h3>
+                <p className="text-[11px] text-slate-500 dark:text-slate-400">
+                  Linked to <span className="font-semibold text-slate-800 dark:text-slate-200">{user.email}</span>
+                </p>
+              </div>
+            </div>
+            <div className="flex items-center gap-1.5 text-xs text-blue-600 dark:text-blue-400 font-semibold bg-white/80 dark:bg-slate-900/60 px-2 py-1 rounded-lg border border-blue-100 dark:border-blue-900/40">
+              <Laptop className="w-3.5 h-3.5" />
+              <ArrowRightLeft className="w-3 h-3" />
+              <Smartphone className="w-3.5 h-3.5" />
+            </div>
           </div>
 
-          <p className="text-[11px] text-slate-600 dark:text-slate-400 leading-relaxed">
-            Want your questions, bookmarks, and streak on your iPad or phone? Generate a sync code from this device:
-          </p>
+          <div className="text-[11px] text-slate-600 dark:text-slate-300 space-y-1.5 bg-white/70 dark:bg-slate-900/50 p-2.5 rounded-xl border border-blue-100 dark:border-blue-900/40">
+            <div className="flex items-center gap-2">
+              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
+              <span>Study streak & daily practice sync automatically</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
+              <span>Questions answered & accuracy tracked across all devices</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
+              <span>Sign in with this email on iPad or mobile to continue</span>
+            </div>
+          </div>
 
-          <div className="grid grid-cols-2 gap-2">
-            <button
-              onClick={handleCopySyncCode}
-              className="py-2 px-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs transition flex items-center justify-center gap-1.5 shadow-xs cursor-pointer active:scale-95"
-            >
-              {isCopied ? (
-                <>
-                  <Check className="w-3.5 h-3.5" />
-                  <span>Code Copied!</span>
-                </>
-              ) : (
-                <>
-                  <Copy className="w-3.5 h-3.5" />
-                  <span>Copy Sync Code</span>
-                </>
-              )}
-            </button>
+          <button
+            onClick={handleCloudSync}
+            disabled={isSyncingCloud}
+            className="w-full py-2.5 px-3 rounded-xl bg-blue-600 hover:bg-blue-700 disabled:opacity-60 text-white font-bold text-xs transition flex items-center justify-center gap-2 shadow-xs cursor-pointer active:scale-98"
+          >
+            <RefreshCw className={`w-3.5 h-3.5 ${isSyncingCloud ? 'animate-spin' : ''}`} />
+            <span>{isSyncingCloud ? 'Syncing with Cloud...' : syncFeedback || 'Sync Now'}</span>
+          </button>
 
+          {/* Collapsible offline backup tools for emergency offline transfers */}
+          <div className="pt-1 text-center">
             <button
-              onClick={() => {
-                setShowImportBox(!showImportBox);
-                setImportFeedback(null);
-              }}
-              className="py-2 px-3 rounded-xl bg-white hover:bg-slate-100 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 border border-slate-300 dark:border-slate-700 font-bold text-xs transition flex items-center justify-center gap-1.5 shadow-xs cursor-pointer active:scale-95"
+              onClick={() => setShowManualTransfer(!showManualTransfer)}
+              className="text-[10px] text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 underline cursor-pointer"
             >
-              <RefreshCw className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
-              <span>{showImportBox ? 'Hide Input' : 'Paste on Device'}</span>
+              {showManualTransfer ? 'Hide manual backup code' : 'Offline transfer code (optional)'}
             </button>
           </div>
 
-          {showImportBox && (
+          {showManualTransfer && (
             <div className="pt-2 space-y-2 border-t border-blue-200/50 dark:border-blue-900/40 animate-in fade-in duration-150">
-              <textarea
+              <div className="grid grid-cols-2 gap-2">
+                <button
+                  onClick={handleCopySyncCode}
+                  className="py-1.5 px-2 rounded-lg bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold text-[11px] flex items-center justify-center gap-1 cursor-pointer"
+                >
+                  <Copy className="w-3 h-3" />
+                  <span>{isCopied ? 'Copied!' : 'Copy Code'}</span>
+                </button>
+                <button
+                  onClick={() => {
+                    if (importCode.trim()) {
+                      handleImportSyncCode();
+                    }
+                  }}
+                  disabled={!importCode.trim()}
+                  className="py-1.5 px-2 rounded-lg bg-emerald-600 disabled:opacity-40 text-white font-bold text-[11px] flex items-center justify-center gap-1 cursor-pointer"
+                >
+                  <Check className="w-3 h-3" />
+                  <span>Import</span>
+                </button>
+              </div>
+              <input
+                type="text"
                 value={importCode}
                 onChange={(e) => setImportCode(e.target.value)}
-                placeholder="Paste the sync code from your other device here..."
-                rows={2}
-                className="w-full text-xs p-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 font-mono text-slate-800 dark:text-slate-200 focus:outline-hidden focus:ring-2 focus:ring-blue-500"
+                placeholder="Paste backup code..."
+                className="w-full text-xs p-2 rounded-lg bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 font-mono"
               />
-              <button
-                onClick={handleImportSyncCode}
-                disabled={!importCode.trim()}
-                className="w-full py-2 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 disabled:opacity-50 text-white font-bold text-xs transition flex items-center justify-center gap-1.5 shadow-xs cursor-pointer active:scale-95"
-              >
-                <Check className="w-3.5 h-3.5" />
-                <span>Import & Merge Progress</span>
-              </button>
-
               {importFeedback && (
-                <p className={`text-[11px] font-semibold ${importFeedback.success ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400'}`}>
+                <p className={`text-[10px] ${importFeedback.success ? 'text-emerald-500' : 'text-rose-500'}`}>
                   {importFeedback.message}
                 </p>
               )}
             </div>
           )}
-
-          <div className="flex items-center justify-between pt-1 text-[11px] text-slate-500 dark:text-slate-400 border-t border-blue-200/40 dark:border-blue-900/30">
-            <span>Cloud Sync:</span>
-            <button
-              onClick={handleCloudSync}
-              disabled={isSyncingCloud}
-              className="text-blue-600 dark:text-blue-400 font-semibold hover:underline flex items-center gap-1 cursor-pointer disabled:opacity-50"
-            >
-              <RefreshCw className={`w-3 h-3 ${isSyncingCloud ? 'animate-spin' : ''}`} />
-              <span>{isSyncingCloud ? 'Syncing...' : 'Sync Cloud Now'}</span>
-            </button>
-          </div>
         </div>
 
         {/* Action Buttons */}

@@ -161,6 +161,7 @@ export function recordAttempt(attempt: AttemptRecord): void {
 
     // Trigger reactive update across open components
     window.dispatchEvent(new CustomEvent('satify_storage_update'));
+    queueCloudSync();
   } catch (e) {
     console.error('Failed to record attempt to localStorage', e);
   }
@@ -285,6 +286,7 @@ export function toggleSaveQuestion(id: string): boolean {
     const key = getScopedKey(STORAGE_KEYS.SAVED);
     localStorage.setItem(key, JSON.stringify(updated));
     window.dispatchEvent(new CustomEvent('satify_storage_update'));
+    queueCloudSync();
     return isNowSaved;
   } catch (e) {
     return false;
@@ -543,58 +545,252 @@ export function importUserData(code: string): { success: boolean; message: strin
   }
 }
 
+// -----------------------------------------------------------------------------
+// Automated Account-Based Cloud Sync
+// -----------------------------------------------------------------------------
+
+let syncDebounceTimer: any = null;
+
 /**
- * Attempts automated background cloud sync if backend cloud endpoint is available
+ * Pushes the user's latest local state to the cloud under their email
  */
-export async function syncCloudProgress(): Promise<boolean> {
+export async function pushCloudProgress(customEmail?: string): Promise<boolean> {
   if (typeof window === 'undefined') return false;
   const user = getCurrentUser();
-  if (!user?.email) return false;
+  const email = (customEmail || user?.email || '').trim().toLowerCase();
+  if (!email) return false;
 
   try {
     const attempts = getAttempts();
     const savedIds = getSavedQuestionIds();
-    const streak = getStudyStreak();
+    const streakRaw = localStorage.getItem(getScopedKey(STORAGE_KEYS.STREAK));
+    const streak = streakRaw 
+      ? JSON.parse(streakRaw) 
+      : { streak: getStudyStreak(), lastDate: new Date().toISOString().slice(0, 10) };
+
+    let vocabRatings = {};
+    let customDecks: any[] = [];
+    try {
+      const ratingsRaw = localStorage.getItem(getScopedKey(STORAGE_KEYS.VOCAB_RATINGS));
+      if (ratingsRaw) vocabRatings = JSON.parse(ratingsRaw);
+      const decksRaw = localStorage.getItem(getScopedKey(STORAGE_KEYS.VOCAB_DECKS));
+      if (decksRaw) customDecks = JSON.parse(decksRaw);
+    } catch {}
 
     const res = await fetch('/api/sync', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        email: user.email,
+        action: 'push',
+        email,
         attempts,
         savedIds,
         streak,
+        vocabRatings,
+        customDecks,
         timestamp: Date.now(),
       }),
     });
 
     if (res.ok) {
-      const cloudData = await res.json();
-      if (cloudData.attempts && Array.isArray(cloudData.attempts) && cloudData.attempts.length > attempts.length) {
-        // Cloud has more recent data (e.g. from another device)
-        localStorage.setItem(getScopedKey(STORAGE_KEYS.ATTEMPTS), JSON.stringify(cloudData.attempts));
-        if (cloudData.savedIds) {
-          localStorage.setItem(getScopedKey(STORAGE_KEYS.SAVED), JSON.stringify(cloudData.savedIds));
+      const data = await res.json();
+      if (data.attempts && data.attempts.length > attempts.length) {
+        // Cloud had newer records from another device, update local
+        localStorage.setItem(getScopedKey(STORAGE_KEYS.ATTEMPTS), JSON.stringify(data.attempts));
+        if (data.savedIds) {
+          localStorage.setItem(getScopedKey(STORAGE_KEYS.SAVED), JSON.stringify(data.savedIds));
         }
         window.dispatchEvent(new CustomEvent('satify_storage_update'));
       }
       return true;
     }
   } catch (err) {
-    // Silent fail if offline or cloud endpoint not configured
+    // Fail silently when offline
   }
   return false;
 }
 
+/**
+ * Pulls cloud data for the active account and updates local storage
+ */
+export async function pullCloudProgress(customEmail?: string): Promise<{ success: boolean; count?: number }> {
+  if (typeof window === 'undefined') return { success: false };
+  const user = getCurrentUser();
+  const email = (customEmail || user?.email || '').trim().toLowerCase();
+  if (!email) return { success: false };
+
+  try {
+    const res = await fetch(`/api/sync?email=${encodeURIComponent(email)}&action=pull`);
+    if (!res.ok) return { success: false };
+
+    const cloud = await res.json();
+    if (!cloud || !Array.isArray(cloud.attempts)) return { success: false };
+
+    let hasUpdates = false;
+
+    // 1. Merge Attempts
+    const localAttempts = getAttempts();
+    const map = new Map<string, AttemptRecord>();
+    for (const a of localAttempts) map.set(a.questionId, a);
+    for (const a of cloud.attempts) {
+      const cur = map.get(a.questionId);
+      if (!cur || a.timestamp >= cur.timestamp) {
+        map.set(a.questionId, a);
+        hasUpdates = true;
+      }
+    }
+    const mergedAttempts = Array.from(map.values());
+    if (mergedAttempts.length !== localAttempts.length || hasUpdates) {
+      localStorage.setItem(getScopedKey(STORAGE_KEYS.ATTEMPTS), JSON.stringify(mergedAttempts));
+    }
+
+    // 2. Merge Saved Bookmarks
+    const localSaved = getSavedQuestionIds();
+    const mergedSaved = Array.from(new Set([...localSaved, ...(cloud.savedIds || [])]));
+    if (mergedSaved.length !== localSaved.length) {
+      localStorage.setItem(getScopedKey(STORAGE_KEYS.SAVED), JSON.stringify(mergedSaved));
+      hasUpdates = true;
+    }
+
+    // 3. Merge Streak
+    if (cloud.streak) {
+      const localStreak = getStudyStreak();
+      if ((cloud.streak.streak || 0) > localStreak) {
+        localStorage.setItem(getScopedKey(STORAGE_KEYS.STREAK), JSON.stringify(cloud.streak));
+        hasUpdates = true;
+      }
+    }
+
+    // 4. Merge Vocab
+    if (cloud.vocabRatings && Object.keys(cloud.vocabRatings).length > 0) {
+      const ratingsKey = getScopedKey(STORAGE_KEYS.VOCAB_RATINGS);
+      const raw = localStorage.getItem(ratingsKey);
+      const curRatings = raw ? JSON.parse(raw) : {};
+      localStorage.setItem(ratingsKey, JSON.stringify({ ...curRatings, ...cloud.vocabRatings }));
+      hasUpdates = true;
+    }
+
+    if (hasUpdates) {
+      window.dispatchEvent(new CustomEvent('satify_storage_update'));
+    }
+
+    return { success: true, count: mergedAttempts.length };
+  } catch (err) {
+    return { success: false };
+  }
+}
+
+/**
+ * Debounced background sync trigger
+ */
+export function queueCloudSync(): void {
+  if (typeof window === 'undefined') return;
+  if (syncDebounceTimer) clearTimeout(syncDebounceTimer);
+  syncDebounceTimer = setTimeout(() => {
+    pushCloudProgress().catch(() => {});
+  }, 1200);
+}
+
+// Alias for backwards compatibility
+export const syncCloudProgress = pushCloudProgress;
+
+/**
+ * If the user practiced in guest mode before signing in, merge their guest records
+ * into their newly authenticated account so no progress is ever lost.
+ */
+export function migrateGuestDataToUser(): void {
+  if (typeof window === 'undefined') return;
+  const scope = getUserScope();
+  if (scope === 'guest') return;
+
+  try {
+    const guestAttemptsRaw = localStorage.getItem(`${STORAGE_KEYS.ATTEMPTS}_guest`) || localStorage.getItem(STORAGE_KEYS.ATTEMPTS);
+    const guestSavedRaw = localStorage.getItem(`${STORAGE_KEYS.SAVED}_guest`) || localStorage.getItem(STORAGE_KEYS.SAVED);
+    const guestStreakRaw = localStorage.getItem(`${STORAGE_KEYS.STREAK}_guest`) || localStorage.getItem(STORAGE_KEYS.STREAK);
+
+    let hasGuestData = false;
+
+    if (guestAttemptsRaw) {
+      const guestAttempts: AttemptRecord[] = JSON.parse(guestAttemptsRaw);
+      if (Array.isArray(guestAttempts) && guestAttempts.length > 0) {
+        const userAttempts = getAttempts();
+        const map = new Map<string, AttemptRecord>();
+        for (const a of userAttempts) map.set(a.questionId, a);
+        for (const a of guestAttempts) {
+          const cur = map.get(a.questionId);
+          if (!cur || a.timestamp >= cur.timestamp) {
+            map.set(a.questionId, a);
+          }
+        }
+        localStorage.setItem(getScopedKey(STORAGE_KEYS.ATTEMPTS), JSON.stringify(Array.from(map.values())));
+        hasGuestData = true;
+      }
+    }
+
+    if (guestSavedRaw) {
+      const guestSaved: string[] = JSON.parse(guestSavedRaw);
+      if (Array.isArray(guestSaved) && guestSaved.length > 0) {
+        const userSaved = getSavedQuestionIds();
+        const mergedSaved = Array.from(new Set([...userSaved, ...guestSaved]));
+        localStorage.setItem(getScopedKey(STORAGE_KEYS.SAVED), JSON.stringify(mergedSaved));
+        hasGuestData = true;
+      }
+    }
+
+    if (guestStreakRaw) {
+      try {
+        const guestStreak = JSON.parse(guestStreakRaw);
+        const curStreak = getStudyStreak();
+        if ((guestStreak.streak || 0) > curStreak) {
+          localStorage.setItem(getScopedKey(STORAGE_KEYS.STREAK), guestStreakRaw);
+          hasGuestData = true;
+        }
+      } catch {}
+    }
+
+    if (hasGuestData) {
+      localStorage.removeItem(`${STORAGE_KEYS.ATTEMPTS}_guest`);
+      localStorage.removeItem(STORAGE_KEYS.ATTEMPTS);
+      localStorage.removeItem(`${STORAGE_KEYS.SAVED}_guest`);
+      localStorage.removeItem(STORAGE_KEYS.SAVED);
+    }
+  } catch (e) {
+    console.warn('Guest migration error:', e);
+  }
+}
+
 // -----------------------------------------------------------------------------
-// Global Auth Sync Listener
+// Global Auth & Device Sync Listeners
 // -----------------------------------------------------------------------------
 if (typeof window !== 'undefined') {
-  window.addEventListener('satify_auth_changed', () => {
-    // Notify all active views that storage scope has switched
+  // When user logs in or switches accounts: merge guest data, pull cloud data, and push updates
+  window.addEventListener('satify_auth_changed', async () => {
+    migrateGuestDataToUser();
     window.dispatchEvent(new CustomEvent('satify_storage_update'));
-    // Trigger background cloud sync on login
-    syncCloudProgress().catch(() => {});
+    await pullCloudProgress();
+    await pushCloudProgress();
+    window.dispatchEvent(new CustomEvent('satify_storage_update'));
   });
+
+  // When user focuses the window (e.g. returns from another tab or device): check for cloud updates
+  window.addEventListener('focus', () => {
+    pullCloudProgress().catch(() => {});
+  });
+
+  // Initial pull on app launch if user is logged in
+  if (typeof document !== 'undefined') {
+    const initSync = async () => {
+      await pullCloudProgress();
+      window.dispatchEvent(new CustomEvent('satify_storage_update'));
+    };
+    if (document.readyState === 'complete') {
+      initSync().catch(() => {});
+    } else {
+      window.addEventListener('load', () => {
+        initSync().catch(() => {});
+      });
+    }
+  }
 }
+
 
