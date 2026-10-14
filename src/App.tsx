@@ -65,13 +65,25 @@ export const App: React.FC = () => {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState<boolean>(false);
   const [isAccountModalOpen, setIsAccountModalOpen] = useState<boolean>(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
+  const [storageVersion, setStorageVersion] = useState<number>(0);
 
   useEffect(() => {
     const handleAuthChange = (e: any) => {
       setCurrentUser(e.detail || null);
+      // Reset active practice question states so in-flight questions don't bleed between accounts
+      setUserStates({});
+      setStorageVersion(v => v + 1);
     };
     window.addEventListener('satify_auth_changed', handleAuthChange);
     return () => window.removeEventListener('satify_auth_changed', handleAuthChange);
+  }, []);
+
+  useEffect(() => {
+    const handleStorageUpdate = () => {
+      setStorageVersion(v => v + 1);
+    };
+    window.addEventListener('satify_storage_update', handleStorageUpdate);
+    return () => window.removeEventListener('satify_storage_update', handleStorageUpdate);
   }, []);
 
   useEffect(() => {
@@ -550,7 +562,7 @@ export const App: React.FC = () => {
     }
   }, [currentRoute]);
 
-  const savedCount = useMemo(() => getSavedQuestionIds().length, [currentState]);
+  const savedCount = useMemo(() => getSavedQuestionIds().length, [currentState, storageVersion]);
 
   if (!isUnlocked) {
     return <PasscodeLock onUnlock={() => setIsUnlocked(true)} />;

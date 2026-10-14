@@ -31,6 +31,7 @@ import {
   isSoundEnabled, 
   toggleSound 
 } from '../utils/soundEffects';
+import { getScopedKey, getUserScope } from '../utils/storage';
 
 export interface CustomDeck {
   id: string;
@@ -208,35 +209,43 @@ export const speakWord = (text: string) => {
 
 export const VocabPractice: React.FC = () => {
   // ---------------------------------------------------------------------------
-  // Custom Decks State from localStorage
+  // Custom Decks State from localStorage (Scoped per account)
   // ---------------------------------------------------------------------------
   const [customDecks, setCustomDecks] = useState<CustomDeck[]>(() => {
     if (typeof window === 'undefined') return [];
     try {
-      const saved = localStorage.getItem(LOCAL_STORAGE_DECKS_KEY) || localStorage.getItem(LOCAL_STORAGE_CUSTOM_DECKS_KEY);
+      const key = getScopedKey(LOCAL_STORAGE_DECKS_KEY);
+      let saved = localStorage.getItem(key);
+      if (!saved && getUserScope() === 'guest') {
+        saved = localStorage.getItem(LOCAL_STORAGE_DECKS_KEY) || localStorage.getItem(LOCAL_STORAGE_CUSTOM_DECKS_KEY);
+      }
       return saved ? JSON.parse(saved) : [];
     } catch {
       return [];
     }
   });
 
-  // Persist custom decks to localStorage
+  // Persist custom decks to localStorage (Scoped per account)
   useEffect(() => {
     if (typeof window === 'undefined') return;
     try {
       const serialized = JSON.stringify(customDecks);
-      localStorage.setItem(LOCAL_STORAGE_DECKS_KEY, serialized);
-      localStorage.setItem(LOCAL_STORAGE_CUSTOM_DECKS_KEY, serialized);
+      const key = getScopedKey(LOCAL_STORAGE_DECKS_KEY);
+      localStorage.setItem(key, serialized);
     } catch (err) {
       console.error('Failed to save custom decks:', err);
     }
   }, [customDecks]);
 
-  // Persistent Word Ratings from localStorage
+  // Persistent Word Ratings from localStorage (Scoped per account)
   const [wordRatings, setWordRatings] = useState<Record<string, WordRating>>(() => {
     if (typeof window === 'undefined') return {};
     try {
-      const saved = localStorage.getItem(LOCAL_STORAGE_RATINGS_KEY);
+      const key = getScopedKey(LOCAL_STORAGE_RATINGS_KEY);
+      let saved = localStorage.getItem(key);
+      if (!saved && getUserScope() === 'guest') {
+        saved = localStorage.getItem(LOCAL_STORAGE_RATINGS_KEY);
+      }
       return saved ? JSON.parse(saved) : {};
     } catch {
       return {};
@@ -246,11 +255,37 @@ export const VocabPractice: React.FC = () => {
   useEffect(() => {
     if (typeof window === 'undefined') return;
     try {
-      localStorage.setItem(LOCAL_STORAGE_RATINGS_KEY, JSON.stringify(wordRatings));
+      const key = getScopedKey(LOCAL_STORAGE_RATINGS_KEY);
+      localStorage.setItem(key, JSON.stringify(wordRatings));
     } catch (err) {
       console.error('Failed to save word ratings:', err);
     }
   }, [wordRatings]);
+
+  // Sync vocab data when active account changes
+  useEffect(() => {
+    const handleAuthChange = () => {
+      try {
+        const deckKey = getScopedKey(LOCAL_STORAGE_DECKS_KEY);
+        let savedDecks = localStorage.getItem(deckKey);
+        if (!savedDecks && getUserScope() === 'guest') {
+          savedDecks = localStorage.getItem(LOCAL_STORAGE_DECKS_KEY);
+        }
+        setCustomDecks(savedDecks ? JSON.parse(savedDecks) : []);
+
+        const ratingsKey = getScopedKey(LOCAL_STORAGE_RATINGS_KEY);
+        let savedRatings = localStorage.getItem(ratingsKey);
+        if (!savedRatings && getUserScope() === 'guest') {
+          savedRatings = localStorage.getItem(LOCAL_STORAGE_RATINGS_KEY);
+        }
+        setWordRatings(savedRatings ? JSON.parse(savedRatings) : {});
+      } catch (err) {
+        console.error('Failed to sync vocab on account change:', err);
+      }
+    };
+    window.addEventListener('satify_auth_changed', handleAuthChange);
+    return () => window.removeEventListener('satify_auth_changed', handleAuthChange);
+  }, []);
 
   // Selected Deck: 'all' | 'official' | deck.id
   const [selectedDeckId, setSelectedDeckId] = useState<string>('official');

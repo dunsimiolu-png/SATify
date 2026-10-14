@@ -1,3 +1,5 @@
+import { getCurrentUser } from './auth';
+
 export interface AttemptRecord {
   questionId: string;
   selectedOption: string; // 'A' | 'B' | 'C' | 'D'
@@ -36,23 +38,64 @@ export const STORAGE_KEYS = {
   STREAK: 'satify_study_streak',
   CUSTOM_VOCAB: 'satify_custom_vocab',
   VOCAB_PROGRESS: 'satify_vocab_progress',
+  VOCAB_DECKS: 'satify_vocab_decks',
+  VOCAB_RATINGS: 'satify_vocab_word_ratings',
   SOUND_ENABLED: 'satify_sound_enabled',
 };
 
+/**
+ * Returns a normalized identifier for the active account (or 'guest')
+ */
+export function getUserScope(): string {
+  if (typeof window === 'undefined') return 'guest';
+  try {
+    const user = getCurrentUser();
+    if (user?.email) {
+      return `usr_${user.email.trim().toLowerCase().replace(/[^a-z0-9]/g, '_')}`;
+    }
+    if (user?.id) {
+      return `usr_${user.id.trim().toLowerCase().replace(/[^a-z0-9]/g, '_')}`;
+    }
+  } catch (e) {
+    console.warn('Failed to resolve user scope:', e);
+  }
+  return 'guest';
+}
+
+/**
+ * Generates an account-scoped localStorage key
+ */
+export function getScopedKey(baseKey: string): string {
+  const scope = getUserScope();
+  return `${baseKey}_${scope}`;
+}
+
 // -----------------------------------------------------------------------------
-// Unified satify_attempts Store
+// Unified satify_attempts Store (Scoped to active user account)
 // -----------------------------------------------------------------------------
 export function getAttempts(): AttemptRecord[] {
   if (typeof window === 'undefined') return [];
   try {
-    const raw = localStorage.getItem(STORAGE_KEYS.ATTEMPTS);
+    const key = getScopedKey(STORAGE_KEYS.ATTEMPTS);
+    let raw = localStorage.getItem(key);
+
+    // Fallback: If guest and scoped key has nothing yet, check legacy un-scoped key
+    if (!raw && getUserScope() === 'guest') {
+      raw = localStorage.getItem(STORAGE_KEYS.ATTEMPTS);
+    }
+
     if (raw) {
       const parsed = JSON.parse(raw);
       if (Array.isArray(parsed)) return parsed;
     }
 
     // Fallback migration from legacy answers
-    const legacy = localStorage.getItem(STORAGE_KEYS.ANSWERS);
+    const answersKey = getScopedKey(STORAGE_KEYS.ANSWERS);
+    let legacy = localStorage.getItem(answersKey);
+    if (!legacy && getUserScope() === 'guest') {
+      legacy = localStorage.getItem(STORAGE_KEYS.ANSWERS);
+    }
+
     if (legacy) {
       const parsedLegacy = JSON.parse(legacy);
       const migrated: AttemptRecord[] = Object.values(parsedLegacy).map((a: any) => ({
@@ -65,7 +108,7 @@ export function getAttempts(): AttemptRecord[] {
         domain: a.domain || '',
         difficulty: a.difficulty || 'Medium',
       }));
-      localStorage.setItem(STORAGE_KEYS.ATTEMPTS, JSON.stringify(migrated));
+      localStorage.setItem(key, JSON.stringify(migrated));
       return migrated;
     }
 
@@ -96,7 +139,8 @@ export function recordAttempt(attempt: AttemptRecord): void {
     // We update the record for the question and place latest at end
     const filtered = attempts.filter(a => a.questionId !== attempt.questionId);
     filtered.push(attempt);
-    localStorage.setItem(STORAGE_KEYS.ATTEMPTS, JSON.stringify(filtered));
+    const attemptsKey = getScopedKey(STORAGE_KEYS.ATTEMPTS);
+    localStorage.setItem(attemptsKey, JSON.stringify(filtered));
 
     // Also mirror to legacy answers map for any third-party compatibility
     const legacyAnswers = getSavedAnswers();
@@ -110,7 +154,8 @@ export function recordAttempt(attempt: AttemptRecord): void {
       timestamp: attempt.timestamp,
       timeSpentSeconds: attempt.timeSpentSeconds,
     };
-    localStorage.setItem(STORAGE_KEYS.ANSWERS, JSON.stringify(legacyAnswers));
+    const answersKey = getScopedKey(STORAGE_KEYS.ANSWERS);
+    localStorage.setItem(answersKey, JSON.stringify(legacyAnswers));
 
     updateStudyStreak();
 
@@ -174,15 +219,28 @@ export function getIncorrectQuestionIds(): string[] {
 }
 
 // -----------------------------------------------------------------------------
-// Guarded Reset Progress Function
+// Guarded Reset Progress Function (Scoped to active user account)
 // -----------------------------------------------------------------------------
 export function clearAllProgress(): void {
   if (typeof window === 'undefined') return;
   try {
-    localStorage.removeItem(STORAGE_KEYS.ATTEMPTS);
-    localStorage.removeItem(STORAGE_KEYS.ANSWERS);
-    localStorage.removeItem(STORAGE_KEYS.USER_STATES);
-    localStorage.removeItem(STORAGE_KEYS.STREAK);
+    const attemptsKey = getScopedKey(STORAGE_KEYS.ATTEMPTS);
+    const answersKey = getScopedKey(STORAGE_KEYS.ANSWERS);
+    const userStatesKey = getScopedKey(STORAGE_KEYS.USER_STATES);
+    const streakKey = getScopedKey(STORAGE_KEYS.STREAK);
+
+    localStorage.removeItem(attemptsKey);
+    localStorage.removeItem(answersKey);
+    localStorage.removeItem(userStatesKey);
+    localStorage.removeItem(streakKey);
+
+    if (getUserScope() === 'guest') {
+      localStorage.removeItem(STORAGE_KEYS.ATTEMPTS);
+      localStorage.removeItem(STORAGE_KEYS.ANSWERS);
+      localStorage.removeItem(STORAGE_KEYS.USER_STATES);
+      localStorage.removeItem(STORAGE_KEYS.STREAK);
+    }
+
     window.dispatchEvent(new CustomEvent('satify_storage_update'));
   } catch (e) {
     console.error('Failed to clear progress', e);
@@ -190,12 +248,16 @@ export function clearAllProgress(): void {
 }
 
 // -----------------------------------------------------------------------------
-// Saved & Bookmarked Questions
+// Saved & Bookmarked Questions (Scoped to active user account)
 // -----------------------------------------------------------------------------
 export function getSavedQuestionIds(): string[] {
   if (typeof window === 'undefined') return [];
   try {
-    const raw = localStorage.getItem(STORAGE_KEYS.SAVED);
+    const key = getScopedKey(STORAGE_KEYS.SAVED);
+    let raw = localStorage.getItem(key);
+    if (!raw && getUserScope() === 'guest') {
+      raw = localStorage.getItem(STORAGE_KEYS.SAVED);
+    }
     return raw ? JSON.parse(raw) : [];
   } catch (e) {
     return [];
@@ -220,7 +282,8 @@ export function toggleSaveQuestion(id: string): boolean {
       updated = [...list, id];
       isNowSaved = true;
     }
-    localStorage.setItem(STORAGE_KEYS.SAVED, JSON.stringify(updated));
+    const key = getScopedKey(STORAGE_KEYS.SAVED);
+    localStorage.setItem(key, JSON.stringify(updated));
     window.dispatchEvent(new CustomEvent('satify_storage_update'));
     return isNowSaved;
   } catch (e) {
@@ -229,12 +292,16 @@ export function toggleSaveQuestion(id: string): boolean {
 }
 
 // -----------------------------------------------------------------------------
-// Daily Study Streak
+// Daily Study Streak (Scoped to active user account)
 // -----------------------------------------------------------------------------
 export function getStudyStreak(): number {
   if (typeof window === 'undefined') return 0;
   try {
-    const raw = localStorage.getItem(STORAGE_KEYS.STREAK);
+    const key = getScopedKey(STORAGE_KEYS.STREAK);
+    let raw = localStorage.getItem(key);
+    if (!raw && getUserScope() === 'guest') {
+      raw = localStorage.getItem(STORAGE_KEYS.STREAK);
+    }
     if (!raw) return 0;
     const data = JSON.parse(raw);
     const today = new Date().toISOString().slice(0, 10);
@@ -256,9 +323,13 @@ export function getStudyStreak(): number {
 export function updateStudyStreak(): number {
   if (typeof window === 'undefined') return 1;
   try {
+    const key = getScopedKey(STORAGE_KEYS.STREAK);
     const today = new Date().toISOString().slice(0, 10);
     const yesterday = new Date(Date.now() - 86400000).toISOString().slice(0, 10);
-    const raw = localStorage.getItem(STORAGE_KEYS.STREAK);
+    let raw = localStorage.getItem(key);
+    if (!raw && getUserScope() === 'guest') {
+      raw = localStorage.getItem(STORAGE_KEYS.STREAK);
+    }
 
     let streak = 1;
     if (raw) {
@@ -272,7 +343,7 @@ export function updateStudyStreak(): number {
       }
     }
 
-    localStorage.setItem(STORAGE_KEYS.STREAK, JSON.stringify({ streak, lastDate: today }));
+    localStorage.setItem(key, JSON.stringify({ streak, lastDate: today }));
     return streak;
   } catch (e) {
     return 1;
@@ -358,4 +429,14 @@ export function getSkillStatsMap() {
   }
 
   return stats;
+}
+
+// -----------------------------------------------------------------------------
+// Global Auth Sync Listener
+// -----------------------------------------------------------------------------
+if (typeof window !== 'undefined') {
+  window.addEventListener('satify_auth_changed', () => {
+    // Notify all active views that storage scope has switched
+    window.dispatchEvent(new CustomEvent('satify_storage_update'));
+  });
 }
