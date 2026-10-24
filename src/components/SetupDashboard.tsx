@@ -235,13 +235,13 @@ export const SetupDashboard: React.FC<SetupDashboardProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md p-3 sm:p-6 overflow-y-auto select-none animate-in fade-in duration-200">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-3 sm:p-6 overflow-y-auto select-none animate-in fade-in duration-150">
       <div 
-        className="w-full max-w-4xl bg-white text-slate-900 dark:bg-[#0f1522] dark:text-[#e4e4e7] rounded-2xl border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden flex flex-col max-h-[92vh]"
+        className="w-full max-w-4xl bg-white text-zinc-950 dark:bg-[#11131A] dark:text-[#F4F4F6] rounded-xl border border-zinc-200 dark:border-[#222634] shadow-lg overflow-hidden flex flex-col max-h-[92vh]"
         onClick={e => e.stopPropagation()}
       >
         {/* Top Header Bar */}
-        <div className="px-3.5 sm:px-6 py-3 sm:py-4 border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#070a10] flex items-center justify-between gap-2 sm:gap-3">
+        <div className="px-3.5 sm:px-6 py-3 sm:py-4 border-b border-zinc-200 dark:border-[#222634] bg-neutral-50 dark:bg-[#181B24] flex items-center justify-between gap-2 sm:gap-3">
           <div className="flex items-center gap-2 sm:gap-4 min-w-0">
             <div className="shrink-0">
               <Logo size="sm" variant="header" inverted={isDark} />
@@ -570,13 +570,13 @@ export const SetupDashboard: React.FC<SetupDashboardProps> = ({
               type="button"
               onClick={handleLaunch}
               disabled={matchedQuestions.length === 0}
-              className={`min-h-[44px] px-6 sm:px-8 py-3 rounded-xl font-bold text-sm text-white flex items-center gap-2.5 shadow-lg transition active:scale-95 ${
+              className={`h-10 px-5 rounded-lg font-semibold text-xs text-white flex items-center gap-2 transition-colors duration-150 ${
                 matchedQuestions.length > 0
-                  ? 'bg-blue-600 hover:bg-blue-700 shadow-blue-600/25 cursor-pointer'
-                  : 'bg-slate-200 dark:bg-slate-800 text-slate-400 dark:text-slate-600 cursor-not-allowed'
+                  ? 'bg-blue-700 hover:bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-500 cursor-pointer'
+                  : 'bg-zinc-200 dark:bg-[#222634] text-zinc-400 dark:text-zinc-600 cursor-not-allowed opacity-50'
               }`}
             >
-              <Play className="w-4 h-4 fill-white" />
+              <Play className="w-3.5 h-3.5 fill-current" strokeWidth={1.75} />
               <span>Find Questions</span>
             </button>
           </div>

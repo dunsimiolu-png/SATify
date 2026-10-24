@@ -1,5 +1,5 @@
 import React from 'react';
-import { ChevronUp, ChevronDown, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronUp, ChevronDown, ChevronLeft, ChevronRight, Check } from 'lucide-react';
 
 interface FooterProps {
   currentIndex: number;
@@ -25,61 +25,62 @@ export const Footer: React.FC<FooterProps> = ({
 
   return (
     <footer 
-      style={{ paddingBottom: 'max(env(safe-area-inset-bottom, 0px), 8px)' }}
-      className="relative shrink-0 w-full bg-white dark:bg-[#070a10] border-t border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white select-none z-30"
+      style={{ paddingBottom: 'max(env(safe-area-inset-bottom, 0px), 6px)' }}
+      className="relative shrink-0 w-full bg-white dark:bg-[#11131A] border-t border-zinc-200 dark:border-[#222634] text-zinc-950 dark:text-[#F4F4F6] select-none z-30"
     >
       {/* Signature Bluebook horizontal dashed divider strip */}
       <div className="bluebook-dashed-border" />
 
-      <div className="h-[54px] sm:h-[60px] px-3 sm:px-6 flex items-center justify-between relative w-full">
-        {/* Left: Branding & Copyright (Hidden on mobile phones so question nav has full room) */}
+      <div className="h-14 px-3 sm:px-6 flex items-center justify-between relative w-full">
+        {/* Left: Branding & Academic Identifier */}
         <div className="hidden sm:flex items-center gap-2 min-w-0">
-          <span className="font-extrabold text-slate-900 dark:text-white text-xs sm:text-sm tracking-tight truncate">
-            SATify Practice
+          <span className="font-semibold text-zinc-950 dark:text-[#F4F4F6] text-xs sm:text-sm tracking-tight truncate">
+            SATify Workspace
           </span>
-          <span className="text-slate-300 dark:text-slate-700 hidden lg:inline">|</span>
-          <span className="text-slate-500 dark:text-slate-400 text-xs font-medium hidden md:inline truncate">
+          <span className="text-zinc-300 dark:text-[#222634] hidden lg:inline">|</span>
+          <span className="text-zinc-500 dark:text-[#8E95A5] text-xs font-mono hidden md:inline truncate">
             © Oluwole Inuoluwadunsimi 2026
           </span>
         </div>
 
-        {/* Center on tablet/desktop, Left on mobile: Bluebook Black Pill Question Navigator */}
+        {/* Center on tablet/desktop, Left on mobile: Bluebook Question Navigator Pill */}
         <div className="sm:absolute sm:left-1/2 sm:-translate-x-1/2 flex items-center">
           <button
             type="button"
             onClick={onToggleGrid}
-            className="min-h-[38px] sm:min-h-[42px] bg-[#1e1e1e] hover:bg-black dark:bg-[#151a24] dark:hover:bg-[#1a2130] text-white font-semibold text-xs sm:text-sm px-3 sm:px-5 py-2 rounded-md flex items-center gap-2 shadow-xs transition active:scale-95 border border-slate-700 cursor-pointer whitespace-nowrap"
-            title="Open Bluebook Question Overview Grid"
+            className="h-9 bg-zinc-950 hover:bg-zinc-900 dark:bg-[#181B24] dark:hover:bg-[#202534] text-white font-mono text-xs sm:text-sm px-3.5 sm:px-4 py-1.5 rounded-lg flex items-center gap-2 border border-zinc-800 dark:border-[#222634] transition-colors duration-150 cursor-pointer whitespace-nowrap"
+            title="Open Question Navigator Popover"
           >
-            <span className="font-sans font-medium">
+            <span className="tabular-nums font-sans font-medium">
               Question {currentIndex + 1} of {totalQuestions}
             </span>
             {isAnswered && (
-              <span className="hidden sm:inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[10px] font-bold bg-emerald-600 text-white leading-none">
-                ✓ Answered
+              <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[10px] font-mono font-bold bg-emerald-600 text-white leading-none">
+                <Check className="w-2.5 h-2.5 stroke-[3]" />
+                <span>Answered</span>
               </span>
             )}
             {isGridOpen ? (
-              <ChevronDown className="w-4 h-4 text-gray-300 shrink-0" />
+              <ChevronDown className="w-3.5 h-3.5 text-zinc-400 shrink-0" strokeWidth={1.75} />
             ) : (
-              <ChevronUp className="w-4 h-4 text-gray-300 shrink-0" />
+              <ChevronUp className="w-3.5 h-3.5 text-zinc-400 shrink-0" strokeWidth={1.75} />
             )}
           </button>
         </div>
 
-        {/* Right: Blue Pill Navigation Buttons (< Back / Next >) */}
-        <div className="flex items-center gap-1.5 sm:gap-3 shrink-0 ml-auto">
+        {/* Right: Navigation Buttons (Back / Next) */}
+        <div className="flex items-center gap-2 shrink-0 ml-auto">
           <button
             type="button"
             onClick={onPrev}
             disabled={isFirst}
-            className={`min-h-[36px] sm:min-h-[42px] font-semibold px-3 sm:px-5 py-2 rounded-full text-xs sm:text-sm transition flex items-center gap-1 shadow-xs shrink-0 ${
+            className={`h-9 px-3.5 sm:px-4 rounded-lg text-xs font-semibold transition-colors duration-150 flex items-center gap-1 shrink-0 ${
               isFirst
-                ? 'bg-slate-100 dark:bg-slate-800/80 text-slate-400 dark:text-slate-600 cursor-not-allowed'
-                : 'bg-blue-600 hover:bg-blue-700 text-white active:scale-95 cursor-pointer'
+                ? 'border border-zinc-200 dark:border-[#222634] bg-zinc-50 dark:bg-[#181B24] text-zinc-400 dark:text-zinc-600 cursor-not-allowed opacity-40'
+                : 'border border-zinc-200 dark:border-[#222634] bg-white hover:bg-zinc-100 dark:bg-[#181B24] dark:hover:bg-[#202534] text-zinc-900 dark:text-[#F4F4F6] cursor-pointer'
             }`}
           >
-            <ChevronLeft className="w-4 h-4 shrink-0" />
+            <ChevronLeft className="w-4 h-4 shrink-0" strokeWidth={1.75} />
             <span>Back</span>
           </button>
 
@@ -87,14 +88,14 @@ export const Footer: React.FC<FooterProps> = ({
             type="button"
             onClick={onNext}
             disabled={isLast}
-            className={`min-h-[36px] sm:min-h-[42px] font-semibold px-3.5 sm:px-6 py-2 rounded-full text-xs sm:text-sm transition flex items-center gap-1 shadow-xs shrink-0 ${
+            className={`h-9 px-4 sm:px-5 rounded-lg text-xs font-semibold transition-colors duration-150 flex items-center gap-1 shrink-0 ${
               isLast
-                ? 'bg-slate-100 dark:bg-slate-800/80 text-slate-400 dark:text-slate-600 cursor-not-allowed'
-                : 'bg-blue-600 hover:bg-blue-700 text-white active:scale-95 cursor-pointer'
+                ? 'bg-zinc-200 dark:bg-[#222634] text-zinc-400 dark:text-zinc-600 cursor-not-allowed opacity-40'
+                : 'bg-blue-700 hover:bg-blue-800 text-white dark:bg-blue-600 dark:hover:bg-blue-500 cursor-pointer'
             }`}
           >
             <span>Next</span>
-            <ChevronRight className="w-4 h-4 shrink-0" />
+            <ChevronRight className="w-4 h-4 shrink-0" strokeWidth={1.75} />
           </button>
         </div>
       </div>

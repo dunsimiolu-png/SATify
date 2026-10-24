@@ -18,6 +18,7 @@ import {
 import { MockQuestion, UserQuestionState, AnswerChoice, TextHighlight } from '../types/quiz';
 import { RichText } from './RichText';
 import { getQuestionTargetSeconds, getPacePillColor, formatSecondsToPace } from '../utils/pacingTargets';
+import { isQuestionAnswered } from '../utils/storage';
 
 interface RightPaneProps {
   question: MockQuestion;
@@ -108,7 +109,7 @@ export const RightPane: React.FC<RightPaneProps> = ({
     );
   };
 
-  const isAnswered = userState.selectedChoice !== null || userState.isAnswerChecked;
+  const isAnswered = userState.selectedChoice !== null || userState.isAnswerChecked || isQuestionAnswered(question.id);
   const isSelectedCorrect = userState.selectedChoice === question.correctAnswer;
   const rationaleText = typeof question.rationale === 'string' 
     ? question.rationale 
@@ -214,17 +215,17 @@ export const RightPane: React.FC<RightPaneProps> = ({
       </div>
 
       {/* 2. Bluebook Question Header Bar */}
-      <div className="w-full bg-slate-100 border-b border-dashed border-slate-300 text-slate-800 dark:bg-[#111827] dark:border-slate-700 dark:text-slate-100 flex items-center justify-between pr-3 select-none">
+      <div className="w-full bg-zinc-100 dark:bg-[#181B24] border-b border-zinc-200 dark:border-[#222634] text-zinc-900 dark:text-[#F4F4F6] flex items-center justify-between pr-3 select-none rounded-t-lg">
         <div className="flex items-center gap-2 sm:gap-3">
-          {/* Question Number Square */}
-          <div className="w-8 h-8 bg-slate-900 text-white dark:bg-blue-600 dark:text-white font-bold text-sm flex items-center justify-center shrink-0">
+          {/* Question Number Badge */}
+          <div className="w-8 h-8 rounded-tl-lg bg-zinc-950 text-white dark:bg-blue-600 dark:text-white font-mono font-semibold text-sm flex items-center justify-center shrink-0 tabular-nums">
             {question.questionNumber}
           </div>
 
           {/* Answered Indicator Badge */}
           {isAnswered && (
-            <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded text-xs font-bold bg-emerald-600 text-white shadow-xs animate-in fade-in">
-              <Check className="w-3.5 h-3.5 stroke-[3]" />
+            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-mono font-semibold bg-emerald-600 text-white">
+              <Check className="w-3 h-3 stroke-[2.5]" />
               <span>Answered</span>
             </span>
           )}
@@ -232,16 +233,17 @@ export const RightPane: React.FC<RightPaneProps> = ({
           {/* Mark for Review Toggle */}
           <button
             onClick={onToggleMarkForReview}
-            className={`flex items-center gap-1.5 text-xs transition-colors cursor-pointer ${
+            className={`flex items-center gap-1.5 text-xs transition-colors duration-150 cursor-pointer ${
               userState.isMarkedForReview
-                ? 'text-[#dc2626] dark:text-rose-400 font-bold'
-                : 'text-slate-700 hover:text-blue-600 dark:text-slate-200 dark:hover:text-blue-400 font-medium'
+                ? 'text-rose-600 dark:text-rose-400 font-semibold'
+                : 'text-zinc-600 hover:text-zinc-950 dark:text-[#8E95A5] dark:hover:text-[#F4F4F6] font-medium'
             }`}
           >
             <Bookmark
-              className={`w-4 h-4 transition-transform ${
-                userState.isMarkedForReview ? 'fill-[#dc2626] dark:fill-rose-400 stroke-[#dc2626] dark:stroke-rose-400 scale-110' : 'text-slate-600 dark:text-slate-400'
+              className={`w-3.5 h-3.5 transition-colors duration-150 ${
+                userState.isMarkedForReview ? 'fill-rose-600 dark:fill-rose-400 stroke-rose-600 dark:stroke-rose-400' : 'text-zinc-500 dark:text-[#8E95A5]'
               }`}
+              strokeWidth={1.75}
             />
             <span>Mark for Review</span>
           </button>
@@ -250,24 +252,24 @@ export const RightPane: React.FC<RightPaneProps> = ({
         {/* Right: ABC Option Eliminator Button */}
         <button
           onClick={() => setIsAbcModeActive(!isAbcModeActive)}
-          className={`text-xs px-2.5 py-1 rounded font-bold transition flex items-center gap-1 cursor-pointer ${
+          className={`text-xs px-2.5 py-1 rounded font-mono font-medium transition-colors duration-150 flex items-center gap-1 cursor-pointer ${
             isAbcModeActive
-              ? 'bg-slate-900 text-white border border-slate-900 dark:bg-blue-600 dark:border-blue-600'
-              : 'bg-white border border-slate-300 text-slate-800 dark:bg-slate-800 dark:border-slate-600 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-700'
+              ? 'bg-zinc-950 text-white dark:bg-blue-600 dark:text-white'
+              : 'bg-white border border-zinc-200 text-zinc-800 dark:bg-[#11131A] dark:border-[#222634] dark:text-[#F4F4F6] hover:bg-zinc-50 dark:hover:bg-[#181B24]'
           }`}
-          title="Toggle ABC answer elimination cross-out tool"
+          title="Toggle ABC answer elimination tool"
         >
-          <span className="line-through decoration-2">ABC</span>
+          <span className="line-through decoration-1">ABC</span>
         </button>
       </div>
 
-      {/* 3. Question Prompt / Stem */}
-      <div data-annotate-target="prompt" className="mt-5 mb-5 font-serif text-[17px] leading-[1.65] text-[#111827] dark:text-slate-100">
+      {/* 3. Question Prompt / Stem (Constrained measure, high-legibility serif) */}
+      <div data-annotate-target="prompt" className="mt-5 mb-5 font-serif text-[17px] leading-relaxed max-w-[65ch] text-zinc-950 dark:text-[#F4F4F6]">
         <RichText text={promptText} />
       </div>
 
       {/* 4. Multiple Choice Options (A, B, C, D) */}
-      <div className="space-y-3">
+      <div className="space-y-2.5 max-w-[65ch]">
         {optionsList.map((choice: AnswerChoice) => {
           const choiceId = choice.id || choice.label || 'A';
           const isSelected = userState.selectedChoice === choiceId;
@@ -275,23 +277,23 @@ export const RightPane: React.FC<RightPaneProps> = ({
           const isChecked = userState.isAnswerChecked;
           const isCorrect = choiceId === question.correctAnswer;
 
-          // Compute card styling
-          let cardBorderClass = 'border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0f1522] hover:bg-slate-50 dark:hover:bg-slate-800/60 text-slate-900 dark:text-slate-100';
-          let circleBgClass = 'border border-slate-400 dark:border-slate-600 bg-white dark:bg-[#161f30] text-slate-700 dark:text-slate-200';
+          // Compute card styling with clean hairline borders & active rings
+          let cardStyleClass = 'border border-zinc-200 dark:border-[#222634] bg-white dark:bg-[#11131A] hover:bg-zinc-50 dark:hover:bg-[#181B24] text-zinc-950 dark:text-[#F4F4F6]';
+          let badgeStyleClass = 'border border-zinc-300 dark:border-[#222634] bg-zinc-50 dark:bg-[#181B24] text-zinc-700 dark:text-[#8E95A5]';
 
           if (isChecked) {
             if (isCorrect) {
-              cardBorderClass = 'border-2 border-emerald-600 bg-emerald-50/70 dark:bg-emerald-950/40 text-emerald-950 dark:text-emerald-100';
-              circleBgClass = 'bg-emerald-600 text-white border-emerald-600 font-bold';
+              cardStyleClass = 'ring-2 ring-emerald-600 border-transparent bg-emerald-50/60 dark:bg-emerald-950/20 text-emerald-950 dark:text-emerald-100';
+              badgeStyleClass = 'bg-emerald-600 text-white border-emerald-600 font-bold';
             } else if (isSelected && !isCorrect) {
-              cardBorderClass = 'border-2 border-rose-600 bg-rose-50/70 dark:bg-rose-950/40 text-rose-950 dark:text-rose-100';
-              circleBgClass = 'bg-rose-600 text-white border-rose-600 font-bold';
+              cardStyleClass = 'ring-2 ring-rose-600 border-transparent bg-rose-50/60 dark:bg-rose-950/20 text-rose-950 dark:text-rose-100';
+              badgeStyleClass = 'bg-rose-600 text-white border-rose-600 font-bold';
             } else {
-              cardBorderClass = 'border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-[#0b0e14]/50 text-slate-400 dark:text-slate-500 opacity-60';
+              cardStyleClass = 'border border-zinc-200 dark:border-[#222634] bg-zinc-50/40 dark:bg-[#11131A]/40 text-zinc-400 dark:text-zinc-600 opacity-50';
             }
           } else if (isSelected) {
-            cardBorderClass = 'border-2 border-blue-600 bg-blue-50/70 dark:bg-blue-950/40 text-blue-950 dark:text-white shadow-xs';
-            circleBgClass = 'bg-blue-600 text-white border-blue-600 font-bold';
+            cardStyleClass = 'ring-2 ring-blue-600 dark:ring-blue-500 border-transparent bg-blue-50/50 dark:bg-[#181B24] text-zinc-950 dark:text-white shadow-xs';
+            badgeStyleClass = 'bg-blue-600 dark:bg-blue-500 text-white border-blue-600 dark:border-blue-500 font-bold';
           }
 
           return (
@@ -299,30 +301,30 @@ export const RightPane: React.FC<RightPaneProps> = ({
               <button
                 disabled={isEliminated}
                 onClick={() => onSelectChoice(choiceId as 'A' | 'B' | 'C' | 'D')}
-                className={`w-full min-h-[48px] relative text-left rounded-lg px-4 py-3.5 flex items-start gap-3.5 transition-all select-none ${cardBorderClass} ${
-                  isEliminated ? 'opacity-45 pointer-events-none' : 'cursor-pointer'
+                className={`w-full min-h-[46px] relative text-left rounded-lg px-4 py-3 flex items-start gap-3 transition-colors duration-150 select-none ${cardStyleClass} ${
+                  isEliminated ? 'opacity-40 pointer-events-none' : 'cursor-pointer'
                 }`}
               >
                 {/* Horizontal Strike-through line when eliminated */}
                 {isEliminated && (
-                  <div className="absolute inset-x-4 top-1/2 -translate-y-1/2 h-[2px] bg-slate-700 dark:bg-slate-400 pointer-events-none z-10" />
+                  <div className="absolute inset-x-4 top-1/2 -translate-y-1/2 h-[1px] bg-zinc-500 dark:bg-zinc-400 pointer-events-none z-10" />
                 )}
 
-                {/* Letter Circle (A, B, C, D) */}
+                {/* Bordered Letter Badge (A, B, C, D) */}
                 <div
-                  className={`w-7 h-7 rounded-full flex-shrink-0 flex items-center justify-center font-sans text-xs font-semibold transition ${circleBgClass}`}
+                  className={`w-6 h-6 rounded-md flex-shrink-0 flex items-center justify-center font-mono text-xs font-semibold tabular-nums transition-colors duration-150 ${badgeStyleClass}`}
                 >
                   {isChecked && isCorrect ? (
-                    <Check className="w-4 h-4 stroke-[2.5]" />
+                    <Check className="w-3.5 h-3.5 stroke-[2.5]" />
                   ) : isChecked && isSelected && !isCorrect ? (
-                    <X className="w-4 h-4 stroke-[2.5]" />
+                    <X className="w-3.5 h-3.5 stroke-[2.5]" />
                   ) : (
                     choiceId
                   )}
                 </div>
 
                 {/* Choice Text */}
-                <div className="flex-1 pt-0.5 font-serif text-[16px] leading-relaxed text-[#111827] dark:text-slate-100">
+                <div className="flex-1 pt-0.5 font-serif text-[15px] sm:text-[16px] leading-relaxed text-zinc-950 dark:text-[#F4F4F6]">
                   <RichText text={choice.text} />
                 </div>
               </button>
@@ -331,17 +333,17 @@ export const RightPane: React.FC<RightPaneProps> = ({
               {(isAbcModeActive || isEliminated) && (
                 <button
                   onClick={() => onToggleEliminate(choiceId as 'A' | 'B' | 'C' | 'D')}
-                  className={`flex-shrink-0 min-h-[44px] min-w-[44px] flex items-center justify-center p-2 rounded-full border transition cursor-pointer ${
+                  className={`flex-shrink-0 h-9 w-9 flex items-center justify-center rounded-lg border transition-colors duration-150 cursor-pointer ${
                     isEliminated
-                      ? 'border-slate-300 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200'
-                      : 'border-slate-200 dark:border-slate-700 bg-white dark:bg-[#0f1522] text-slate-400 hover:text-rose-600 hover:border-rose-300 hover:bg-rose-50'
+                      ? 'border-zinc-300 bg-zinc-100 dark:bg-[#181B24] text-zinc-700 dark:text-[#8E95A5] hover:bg-zinc-200'
+                      : 'border-zinc-200 dark:border-[#222634] bg-white dark:bg-[#11131A] text-zinc-400 hover:text-rose-600 hover:border-rose-300'
                   }`}
                   title={isEliminated ? `Restore Option ${choiceId}` : `Eliminate Option ${choiceId}`}
                 >
                   {isEliminated ? (
-                    <Undo2 className="w-4 h-4" />
+                    <Undo2 className="w-3.5 h-3.5" strokeWidth={1.75} />
                   ) : (
-                    <X className="w-4 h-4" />
+                    <X className="w-3.5 h-3.5" strokeWidth={1.75} />
                   )}
                 </button>
               )}
@@ -351,7 +353,7 @@ export const RightPane: React.FC<RightPaneProps> = ({
       </div>
 
       {/* 5. Inline "Check Answer" & Explanation Controls */}
-      <div className="mt-6 pt-5 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between gap-4 select-none flex-wrap">
+      <div className="mt-6 pt-4 border-t border-zinc-200 dark:border-[#222634] max-w-[65ch] flex items-center justify-between gap-4 select-none flex-wrap">
         <div className="flex items-center gap-3 flex-wrap">
           <button
             onClick={() => onCheckAnswer(questionElapsed)}

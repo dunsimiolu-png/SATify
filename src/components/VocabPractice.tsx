@@ -413,8 +413,11 @@ export const VocabPractice: React.FC = () => {
         handleRateWord('needs_review');
       } else if (e.key === '2') {
         e.preventDefault();
-        handleRateWord('almost');
+        handleRateWord('needs_review');
       } else if (e.key === '3') {
+        e.preventDefault();
+        handleRateWord('almost');
+      } else if (e.key === '4') {
         e.preventDefault();
         handleRateWord('know_it');
       } else if (e.key === 'ArrowRight') {
@@ -1299,69 +1302,73 @@ export const VocabPractice: React.FC = () => {
                         )}
                       </div>
 
-                      {/* Large Flashcard (Responsive padding and min-height) */}
-                      <div className="w-full max-w-[560px] min-h-[350px] sm:min-h-[420px] rounded-3xl p-5 sm:p-8 md:p-10 bg-white dark:bg-[#151a24] border border-slate-200 dark:border-slate-800 shadow-xl flex flex-col justify-between items-center text-center relative transition-all">
-                        {/* Flashcard Top Row: Part of Speech & Pronunciation Button */}
-                        <div className="w-full flex items-center justify-between">
-                          <span className="px-3 py-1 rounded-lg bg-blue-50 dark:bg-blue-950/60 text-[#0050d8] dark:text-blue-400 font-bold text-xs uppercase tracking-wider border border-blue-100 dark:border-blue-900">
-                            {currentFlashcard.partOfSpeech}
-                          </span>
+                      {/* Tactile Index Card (aspect-[16/10] max-w-2xl mx-auto) */}
+                      <div className="w-full max-w-2xl aspect-[16/10] min-h-[380px] rounded-xl p-6 sm:p-8 bg-white dark:bg-[#11131A] border border-zinc-200 dark:border-[#222634] shadow-xs flex flex-col justify-between items-center text-center relative transition-colors duration-150">
+                        {/* Flashcard Top Row: Front/Back state & Part of speech & Audio */}
+                        <div className="w-full flex items-center justify-between border-b border-zinc-100 dark:border-[#181B24] pb-3">
+                          <div className="flex items-center gap-2">
+                            <span className="px-2 py-0.5 rounded border border-zinc-200 dark:border-[#222634] bg-zinc-50 dark:bg-[#181B24] text-zinc-600 dark:text-[#8E95A5] font-mono text-[10px] uppercase font-semibold">
+                              {currentFlashcard.partOfSpeech}
+                            </span>
+                            <span className="text-[10px] font-mono uppercase tracking-wider text-zinc-400 dark:text-[#8E95A5]">
+                              {!isDefinitionRevealed ? 'Front • Stimulus' : 'Back • Definition'}
+                            </span>
+                          </div>
 
                           <button
                             type="button"
                             onClick={() => speakWord(currentFlashcard.word)}
-                            className="w-10 h-10 rounded-full bg-gray-100 dark:bg-slate-800 hover:bg-blue-50 dark:hover:bg-blue-950/60 text-gray-700 dark:text-slate-200 hover:text-[#0050d8] dark:hover:text-blue-400 flex items-center justify-center transition shadow-xs cursor-pointer"
-                            title="Listen to pronunciation (🔊)"
+                            className="h-8 w-8 rounded-md border border-zinc-200 dark:border-[#222634] bg-zinc-50 dark:bg-[#181B24] hover:bg-zinc-100 dark:hover:bg-[#202534] text-zinc-700 dark:text-[#8E95A5] hover:text-zinc-950 dark:hover:text-[#F4F4F6] flex items-center justify-center transition-colors duration-150 cursor-pointer"
+                            title="Listen to pronunciation"
                           >
-                            <Volume2 className="w-5 h-5" />
+                            <Volume2 className="w-4 h-4" strokeWidth={1.75} />
                           </button>
                         </div>
 
                         {/* Flashcard Middle: Word, IPA phonetics, Definition link / box */}
                         <div className="w-full my-auto py-4 flex flex-col items-center">
-                          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 dark:text-white tracking-tight break-words max-w-full px-2">
+                          <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-zinc-950 dark:text-[#F4F4F6] break-words max-w-full px-2">
                             {currentFlashcard.word}
                           </h2>
 
-                          <div className="text-xs sm:text-sm md:text-base text-gray-500 dark:text-slate-400 italic mt-2">
-                            {currentFlashcard.partOfSpeech} • {getWordPhonetics(currentFlashcard.word)}
+                          <div className="text-xs sm:text-sm font-mono text-zinc-500 dark:text-[#8E95A5] mt-1.5">
+                            {getWordPhonetics(currentFlashcard.word)}
                           </div>
 
                           {!isDefinitionRevealed ? (
                             <button
                               type="button"
                               onClick={() => setIsDefinitionRevealed(true)}
-                              className="mt-6 inline-flex items-center gap-2 text-cyan-600 dark:text-cyan-400 hover:text-cyan-700 dark:hover:text-cyan-300 font-bold text-sm tracking-wide transition cursor-pointer hover:underline"
+                              className="mt-6 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-zinc-200 dark:border-[#222634] bg-zinc-50 hover:bg-zinc-100 dark:bg-[#181B24] dark:hover:bg-[#202534] text-zinc-700 dark:text-[#8E95A5] hover:text-zinc-950 dark:hover:text-[#F4F4F6] text-xs font-mono transition-colors duration-150 cursor-pointer"
                             >
-                              <Sparkles className="w-4 h-4" />
-                              <span>Click to see definition (Space)</span>
+                              <span>Press Space or click to reveal</span>
                             </button>
                           ) : (
-                            <div className="w-full mt-6 space-y-4 animate-in fade-in duration-200">
-                              <div className="p-3.5 sm:p-4 rounded-2xl bg-cyan-50/50 dark:bg-cyan-950/20 border border-cyan-100 dark:border-cyan-900/50 text-left">
-                                <span className="text-[10px] font-extrabold uppercase tracking-wider text-cyan-700 dark:text-cyan-300 block mb-1">
+                            <div className="w-full mt-4 space-y-3 animate-in fade-in duration-150">
+                              <div className="p-3.5 rounded-lg border border-zinc-200 dark:border-[#222634] bg-zinc-50/70 dark:bg-[#181B24]/70 text-left">
+                                <span className="text-[10px] font-mono uppercase tracking-wider text-zinc-500 dark:text-[#8E95A5] block mb-1">
                                   Definition
                                 </span>
-                                <p className="text-sm sm:text-base md:text-lg font-semibold text-gray-800 dark:text-slate-100 leading-relaxed">
+                                <p className="text-sm sm:text-base font-medium text-zinc-900 dark:text-[#F4F4F6] leading-relaxed">
                                   {currentFlashcard.definition}
                                 </p>
                               </div>
 
                               {currentFlashcard.example && (
-                                <div className="p-3 sm:p-3.5 rounded-xl bg-slate-50 dark:bg-[#0e131d] border border-slate-200 dark:border-slate-800 text-left">
-                                  <span className="text-[10px] font-extrabold uppercase tracking-wider text-gray-400 dark:text-slate-500 block mb-1">
-                                    Context Example
+                                <div className="p-3 rounded-lg border border-zinc-200 dark:border-[#222634] bg-white dark:bg-[#11131A] text-left">
+                                  <span className="text-[10px] font-mono uppercase tracking-wider text-zinc-400 dark:text-[#8E95A5] block mb-0.5">
+                                    Context
                                   </span>
-                                  <p className="text-xs md:text-sm italic text-gray-600 dark:text-slate-300 font-serif leading-relaxed">
+                                  <p className="text-xs sm:text-sm font-serif italic text-zinc-700 dark:text-[#C5CAD6] leading-relaxed">
                                     "{currentFlashcard.example}"
                                   </p>
                                 </div>
                               )}
 
                               {currentFlashcard.synonyms && currentFlashcard.synonyms.length > 0 && (
-                                <div className="flex flex-wrap gap-1.5 justify-center pt-1">
+                                <div className="flex flex-wrap gap-1 justify-center pt-1">
                                   {currentFlashcard.synonyms.map((s, idx) => (
-                                    <span key={idx} className="px-2.5 py-0.5 rounded-full bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-slate-300 text-xs font-semibold">
+                                    <span key={idx} className="px-2 py-0.5 rounded border border-zinc-200 dark:border-[#222634] bg-zinc-100 dark:bg-[#181B24] text-zinc-600 dark:text-[#8E95A5] text-[11px] font-mono">
                                       {s}
                                     </span>
                                   ))}
@@ -1371,55 +1378,64 @@ export const VocabPractice: React.FC = () => {
                           )}
                         </div>
 
-                        {/* Flashcard Bottom: 3 Rating Buttons with Shortcuts */}
-                        <div className="w-full pt-4 border-t border-gray-100 dark:border-slate-800/80">
-                          <div className="grid grid-cols-3 gap-1.5 sm:gap-2.5">
+                        {/* Flashcard Bottom: 4 Keyboard-Accessible Rating Buttons */}
+                        <div className="w-full pt-3 border-t border-zinc-100 dark:border-[#181B24]">
+                          <div className="grid grid-cols-4 gap-2">
                             <button
                               type="button"
                               onClick={() => handleRateWord('needs_review')}
-                              className="py-2 sm:py-2.5 px-1.5 sm:px-3 rounded-xl border border-rose-200 dark:border-rose-900/60 bg-rose-50/80 dark:bg-rose-950/30 hover:bg-rose-100 dark:hover:bg-rose-950/60 text-rose-700 dark:text-rose-400 font-bold text-[11px] sm:text-xs uppercase tracking-wider transition active:scale-95 cursor-pointer flex flex-col items-center justify-center gap-0.5 shadow-2xs"
+                              className="py-2 px-1.5 rounded-lg border border-zinc-200 dark:border-[#222634] hover:border-rose-400 dark:hover:border-rose-800 bg-white dark:bg-[#11131A] text-rose-700 dark:text-rose-400 text-xs font-semibold transition-colors duration-150 cursor-pointer flex flex-col items-center justify-center gap-0.5"
                             >
-                              <span className="text-[9px] sm:text-[10px] opacity-70">Key [1]</span>
-                              <span className="truncate">Needs review</span>
+                              <span className="text-[10px] font-mono text-zinc-400 dark:text-[#8E95A5]">1</span>
+                              <span className="truncate">Again</span>
+                            </button>
+
+                            <button
+                              type="button"
+                              onClick={() => handleRateWord('needs_review')}
+                              className="py-2 px-1.5 rounded-lg border border-zinc-200 dark:border-[#222634] hover:border-amber-400 dark:hover:border-amber-800 bg-white dark:bg-[#11131A] text-amber-700 dark:text-amber-400 text-xs font-semibold transition-colors duration-150 cursor-pointer flex flex-col items-center justify-center gap-0.5"
+                            >
+                              <span className="text-[10px] font-mono text-zinc-400 dark:text-[#8E95A5]">2</span>
+                              <span className="truncate">Hard</span>
                             </button>
 
                             <button
                               type="button"
                               onClick={() => handleRateWord('almost')}
-                              className="py-2 sm:py-2.5 px-1.5 sm:px-3 rounded-xl border border-amber-200 dark:border-amber-900/60 bg-amber-50/80 dark:bg-amber-950/30 hover:bg-amber-100 dark:hover:bg-amber-950/60 text-amber-700 dark:text-amber-400 font-bold text-[11px] sm:text-xs uppercase tracking-wider transition active:scale-95 cursor-pointer flex flex-col items-center justify-center gap-0.5 shadow-2xs"
+                              className="py-2 px-1.5 rounded-lg border border-zinc-200 dark:border-[#222634] hover:border-blue-400 dark:hover:border-blue-800 bg-white dark:bg-[#11131A] text-blue-700 dark:text-blue-400 text-xs font-semibold transition-colors duration-150 cursor-pointer flex flex-col items-center justify-center gap-0.5"
                             >
-                              <span className="text-[9px] sm:text-[10px] opacity-70">Key [2]</span>
-                              <span className="truncate">Almost</span>
+                              <span className="text-[10px] font-mono text-zinc-400 dark:text-[#8E95A5]">3</span>
+                              <span className="truncate">Good</span>
                             </button>
 
                             <button
                               type="button"
                               onClick={() => handleRateWord('know_it')}
-                              className="py-2 sm:py-2.5 px-1.5 sm:px-3 rounded-xl border border-emerald-200 dark:border-emerald-900/60 bg-emerald-50/80 dark:bg-emerald-950/30 hover:bg-emerald-100 dark:hover:bg-emerald-950/60 text-emerald-700 dark:text-emerald-400 font-bold text-[11px] sm:text-xs uppercase tracking-wider transition active:scale-95 cursor-pointer flex flex-col items-center justify-center gap-0.5 shadow-2xs"
+                              className="py-2 px-1.5 rounded-lg border border-zinc-200 dark:border-[#222634] hover:border-emerald-400 dark:hover:border-emerald-800 bg-white dark:bg-[#11131A] text-emerald-700 dark:text-emerald-400 text-xs font-semibold transition-colors duration-150 cursor-pointer flex flex-col items-center justify-center gap-0.5"
                             >
-                              <span className="text-[9px] sm:text-[10px] opacity-70">Key [3]</span>
-                              <span className="truncate">Know it</span>
+                              <span className="text-[10px] font-mono text-zinc-400 dark:text-[#8E95A5]">4</span>
+                              <span className="truncate">Easy</span>
                             </button>
                           </div>
 
                           {/* Prev / Next controls */}
-                          <div className="flex items-center justify-between mt-3 text-xs text-gray-400 dark:text-slate-500">
+                          <div className="flex items-center justify-between mt-3 text-xs font-mono text-zinc-500 dark:text-[#8E95A5]">
                             <button
                               type="button"
                               onClick={handlePrevCard}
-                              className="inline-flex items-center gap-1 hover:text-gray-700 dark:hover:text-slate-300 transition cursor-pointer"
+                              className="inline-flex items-center gap-1 hover:text-zinc-950 dark:hover:text-[#F4F4F6] transition-colors cursor-pointer"
                             >
-                              <ChevronLeft className="w-3.5 h-3.5" />
-                              <span>Previous (←)</span>
+                              <ChevronLeft className="w-3.5 h-3.5" strokeWidth={1.75} />
+                              <span>Previous</span>
                             </button>
-                            <span>Card {cardIndex + 1} of {activeWords.length}</span>
+                            <span className="tabular-nums">Card {cardIndex + 1} of {activeWords.length}</span>
                             <button
                               type="button"
                               onClick={handleNextCard}
-                              className="inline-flex items-center gap-1 hover:text-gray-700 dark:hover:text-slate-300 transition cursor-pointer"
+                              className="inline-flex items-center gap-1 hover:text-zinc-950 dark:hover:text-[#F4F4F6] transition-colors cursor-pointer"
                             >
-                              <span>Next (→)</span>
-                              <ChevronRight className="w-3.5 h-3.5" />
+                              <span>Next</span>
+                              <ChevronRight className="w-3.5 h-3.5" strokeWidth={1.75} />
                             </button>
                           </div>
                         </div>

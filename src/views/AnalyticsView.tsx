@@ -158,43 +158,48 @@ export const AnalyticsView: React.FC<AnalyticsViewProps> = ({
   }, [filteredAnswers]);
 
   return (
-    <div className="w-full h-full overflow-y-auto overflow-x-hidden bg-[#f8fafc] text-gray-900 px-4 sm:px-6 md:px-10 py-6 sm:py-8 space-y-6 sm:space-y-8 select-text">
+    <div className="w-full h-full overflow-y-auto overflow-x-hidden bg-neutral-50 dark:bg-[#090A0F] text-zinc-950 dark:text-[#F4F4F6] px-4 sm:px-6 md:px-10 py-6 sm:py-8 space-y-6 sm:space-y-8 select-text">
       {/* Header & Timeframe Filters */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-2 border-b border-gray-200">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-zinc-200 dark:border-[#222634]">
         <div>
-          <h1 className="text-2xl md:text-3xl font-extrabold text-gray-900 tracking-tight">
-            Performance & Analytics
+          <div className="flex items-center gap-2">
+            <span className="text-[11px] font-mono font-semibold tracking-wider text-blue-700 dark:text-blue-400 uppercase">
+              Performance Analytics
+            </span>
+          </div>
+          <h1 className="text-2xl sm:text-3xl font-semibold tracking-tight text-zinc-950 dark:text-[#F4F4F6] mt-1">
+            Historical Accuracy & Pacing
           </h1>
-          <p className="text-sm text-gray-500 mt-1">
-            Track historical accuracy, uncover weaknesses, and drill into your 5 lowest-accuracy skills.
+          <p className="text-xs sm:text-sm text-zinc-600 dark:text-[#8E95A5] mt-1">
+            Evaluate skill distribution, review pacing benchmarks, and target your lowest-accuracy skills.
           </p>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2.5">
           <button
             onClick={() => setIsResetModalOpen(true)}
-            className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl border border-gray-200 hover:border-rose-300 hover:bg-rose-50 text-gray-600 hover:text-rose-600 font-bold text-xs shadow-2xs transition active:scale-95 cursor-pointer"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-zinc-200 dark:border-[#222634] bg-white dark:bg-[#11131A] hover:bg-zinc-100 dark:hover:bg-[#181B24] text-zinc-600 dark:text-[#8E95A5] hover:text-rose-600 dark:hover:text-rose-400 font-medium text-xs transition-colors duration-150 cursor-pointer"
             title="Reset All Progress"
           >
-            <RotateCcw className="w-3.5 h-3.5" />
-            <span>Reset Progress</span>
+            <RotateCcw className="w-3.5 h-3.5" strokeWidth={1.75} />
+            <span>Reset</span>
           </button>
 
           {/* Timeframe Filter Buttons */}
-          <div className="inline-flex items-center p-1 bg-white border border-gray-200 rounded-xl shadow-xs">
+          <div className="inline-flex items-center p-0.5 bg-white dark:bg-[#11131A] border border-zinc-200 dark:border-[#222634] rounded-lg shadow-2xs">
             {[
               { id: 'all', label: 'All Time' },
-              { id: '30d', label: 'Last 30 Days' },
-              { id: '7d', label: 'Last 7 Days' },
+              { id: '30d', label: '30D' },
+              { id: '7d', label: '7D' },
               { id: 'today', label: 'Today' },
             ].map(btn => (
               <button
                 key={btn.id}
                 onClick={() => setTimeframe(btn.id as TimeframeFilter)}
-                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
+                className={`px-3 py-1 rounded text-xs font-mono font-medium transition-colors duration-150 ${
                   timeframe === btn.id
-                    ? 'bg-[#0050d8] text-white shadow-xs'
-                    : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+                    ? 'bg-blue-700 text-white dark:bg-blue-600 font-semibold'
+                    : 'text-zinc-600 dark:text-[#8E95A5] hover:text-zinc-950 dark:hover:text-white'
                 }`}
               >
                 {btn.label}
@@ -204,32 +209,32 @@ export const AnalyticsView: React.FC<AnalyticsViewProps> = ({
         </div>
       </div>
 
-      {/* Overview Stat Cards */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="p-5 rounded-2xl bg-white border border-gray-200/80 shadow-xs space-y-1">
-          <div className="text-xs font-semibold text-gray-500">Attempted Questions</div>
-          <div className="text-2xl font-black text-gray-900">{totalAttempted}</div>
-          <div className="text-[11px] text-gray-400">Total answered in period</div>
+      {/* Overview Stat Cards (Bento grid with 1px hairline borders & tabular-nums) */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+        <div className="p-5 rounded-xl bg-white dark:bg-[#11131A] border border-zinc-200 dark:border-[#222634] shadow-xs space-y-1">
+          <div className="text-xs font-medium text-zinc-500 dark:text-[#8E95A5]">Attempted Questions</div>
+          <div className="text-2xl sm:text-3xl font-mono font-semibold tabular-nums text-zinc-950 dark:text-[#F4F4F6]">{totalAttempted}</div>
+          <div className="text-[11px] font-mono text-zinc-400 dark:text-[#8E95A5]">Total in timeframe</div>
         </div>
 
-        <div className="p-5 rounded-2xl bg-white border border-gray-200/80 shadow-xs space-y-1">
-          <div className="text-xs font-semibold text-gray-500">Period Accuracy</div>
-          <div className="text-2xl font-black text-emerald-600">{overallAccuracy}%</div>
-          <div className="text-[11px] text-emerald-700 font-medium">{totalCorrect} correct • {totalWrong} wrong</div>
+        <div className="p-5 rounded-xl bg-white dark:bg-[#11131A] border border-zinc-200 dark:border-[#222634] shadow-xs space-y-1">
+          <div className="text-xs font-medium text-zinc-500 dark:text-[#8E95A5]">Period Accuracy</div>
+          <div className="text-2xl sm:text-3xl font-mono font-semibold tabular-nums text-emerald-600 dark:text-emerald-400">{overallAccuracy}%</div>
+          <div className="text-[11px] font-mono text-zinc-500 dark:text-[#8E95A5]">{totalCorrect} correct • {totalWrong} wrong</div>
         </div>
 
-        <div className="p-5 rounded-2xl bg-white border border-gray-200/80 shadow-xs space-y-1">
-          <div className="text-xs font-semibold text-gray-500">Avg Pace / Question</div>
-          <div className="text-2xl font-black text-[#0050d8]">{avgTimeSeconds}s</div>
-          <div className="text-[11px] text-blue-600 font-medium">College Board benchmark: 71s</div>
+        <div className="p-5 rounded-xl bg-white dark:bg-[#11131A] border border-zinc-200 dark:border-[#222634] shadow-xs space-y-1">
+          <div className="text-xs font-medium text-zinc-500 dark:text-[#8E95A5]">Average Question Pace</div>
+          <div className="text-2xl sm:text-3xl font-mono font-semibold tabular-nums text-blue-700 dark:text-blue-400">{avgTimeSeconds}s</div>
+          <div className="text-[11px] font-mono text-zinc-500 dark:text-[#8E95A5]">Benchmark: 71s / question</div>
         </div>
 
-        <div className="p-5 rounded-2xl bg-white border border-gray-200/80 shadow-xs space-y-1">
-          <div className="text-xs font-semibold text-gray-500">Mastery Level</div>
-          <div className="text-2xl font-black text-blue-600 dark:text-blue-400">
+        <div className="p-5 rounded-xl bg-white dark:bg-[#11131A] border border-zinc-200 dark:border-[#222634] shadow-xs space-y-1">
+          <div className="text-xs font-medium text-zinc-500 dark:text-[#8E95A5]">Mastery Level</div>
+          <div className="text-2xl sm:text-3xl font-semibold tracking-tight text-zinc-950 dark:text-[#F4F4F6]">
             {overallAccuracy >= 85 ? 'Advanced' : overallAccuracy >= 65 ? 'Proficient' : 'Developing'}
           </div>
-          <div className="text-[11px] text-blue-700 dark:text-blue-300 font-medium">Digital SAT calibrated</div>
+          <div className="text-[11px] font-mono text-blue-700 dark:text-blue-400">Digital SAT calibrated</div>
         </div>
       </div>
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Lock, Unlock, ShieldAlert, CheckCircle2, Moon, Sun } from 'lucide-react';
+import { Lock, Moon, Sun, ShieldAlert } from 'lucide-react';
 import { useTheme } from '../utils/theme';
+import { Logo } from './Logo';
 
 interface PasscodeLockProps {
   onUnlock: () => void;
@@ -19,7 +20,7 @@ export const PasscodeLock: React.FC<PasscodeLockProps> = ({ onUnlock }) => {
   const envPasscode = (import.meta as unknown as { env?: Record<string, string> }).env?.VITE_APP_PASSCODE;
   const correctPasscode = (envPasscode || '2016').trim();
 
-  // Keep input focused automatically
+  // Focus automatically on mount
   useEffect(() => {
     inputRef.current?.focus();
   }, []);
@@ -35,14 +36,14 @@ export const PasscodeLock: React.FC<PasscodeLockProps> = ({ onUnlock }) => {
       }
       setTimeout(() => {
         onUnlock();
-      }, 400);
+      }, 350);
     } else {
       setError('Incorrect passcode. Please try again.');
       setIsShaking(true);
       setPin('');
       setTimeout(() => {
         setIsShaking(false);
-      }, 500);
+      }, 400);
       inputRef.current?.focus();
     }
   };
@@ -78,51 +79,49 @@ export const PasscodeLock: React.FC<PasscodeLockProps> = ({ onUnlock }) => {
   };
 
   return (
-    <div className="fixed inset-0 z-[9999] flex flex-col items-center justify-center p-4 bg-slate-900/95 dark:bg-[#07090e]/98 backdrop-blur-xl transition-colors">
-      {/* Top right theme toggle */}
-      <div className="absolute top-4 right-4">
+    <div className={`fixed inset-0 z-[9999] flex flex-col items-center justify-center p-4 bg-neutral-50 dark:bg-[#090A0F] text-zinc-950 dark:text-[#F4F4F6] transition-opacity duration-300 ${
+      isSuccess ? 'opacity-0 scale-98 pointer-events-none' : 'opacity-100 scale-100'
+    }`}>
+      {/* Top utility cluster */}
+      <div className="absolute top-4 right-4 flex items-center gap-2">
         <button
           onClick={toggleTheme}
-          className="p-2.5 rounded-full bg-slate-800/80 dark:bg-[#151a24] hover:bg-slate-700 dark:hover:bg-[#202738] text-slate-300 dark:text-gray-300 transition border border-slate-700/60 dark:border-[#222b3d]"
+          className="h-9 w-9 rounded-lg border border-zinc-200 dark:border-[#222634] bg-white dark:bg-[#11131A] text-zinc-600 dark:text-[#8E95A5] hover:text-zinc-950 dark:hover:text-[#F4F4F6] flex items-center justify-center transition-colors duration-150 cursor-pointer"
+          title={isDark ? "Switch to Light Mode" : "Switch to Dark Mode"}
           aria-label="Toggle theme"
         >
-          {isDark ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-slate-300" />}
+          {isDark ? <Sun className="w-4 h-4 text-amber-400" strokeWidth={1.75} /> : <Moon className="w-4 h-4 text-zinc-700" strokeWidth={1.75} />}
         </button>
       </div>
 
-      <div className={`w-full max-w-sm rounded-2xl bg-white dark:bg-[#0f141d] border border-slate-200 dark:border-[#1e2638] shadow-2xl p-6 sm:p-8 flex flex-col items-center text-center transition-all ${
-        isShaking ? 'animate-[shake_0.4s_ease-in-out]' : ''
+      {/* Access Vault Card */}
+      <div className={`w-full max-w-[380px] rounded-2xl bg-white dark:bg-[#11131A] border border-zinc-200 dark:border-[#222634] shadow-xs p-7 sm:p-8 flex flex-col items-center text-center transition-all duration-150 ${
+        isShaking ? 'animate-[shake_0.35s_ease-in-out]' : ''
       }`}>
-        {/* Brand Icon & Status */}
-        <div className="mb-4 relative">
-          <div className="w-16 h-16 rounded-2xl bg-blue-600/10 dark:bg-blue-500/10 border border-blue-500/20 flex items-center justify-center shadow-inner">
-            {isSuccess ? (
-              <Unlock className="w-8 h-8 text-emerald-500 animate-bounce" />
-            ) : (
-              <Lock className="w-8 h-8 text-blue-600 dark:text-blue-400" />
-            )}
+        {/* Crisp Header: Wordmark & Workspace Badge */}
+        <div className="flex flex-col items-center mb-6">
+          <Logo size="md" variant="full" inverted={isDark} />
+          
+          <div className="mt-4 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md border border-zinc-200 dark:border-[#222634] bg-zinc-100 dark:bg-[#181B24] text-[11px] font-mono font-semibold tracking-wider text-zinc-600 dark:text-[#8E95A5] uppercase">
+            <span className="w-1.5 h-1.5 rounded-full bg-blue-600 dark:bg-blue-500" />
+            <span>Digital SAT Workspace</span>
           </div>
-          {isSuccess && (
-            <span className="absolute -bottom-1 -right-1 bg-emerald-500 text-white rounded-full p-1 shadow-md">
-              <CheckCircle2 className="w-3.5 h-3.5" />
-            </span>
-          )}
         </div>
 
-        <h1 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mb-1 tracking-tight">
-          SATify Private Access
+        <h1 className="text-lg font-semibold tracking-tight text-zinc-950 dark:text-[#F4F4F6] mb-1">
+          Private Access Vault
         </h1>
-        <p className="text-xs sm:text-sm text-slate-500 dark:text-gray-400 mb-6">
-          Enter your personal passcode to unlock your practice sessions and question bank.
+        <p className="text-xs text-zinc-600 dark:text-[#8E95A5] mb-6 leading-relaxed">
+          Enter 4-digit passcode to resume your practice sessions and analytical metrics.
         </p>
 
-        {/* Hidden actual input for standard desktop keyboards */}
+        {/* Hidden native input for physical desktop keyboards */}
         <input
           ref={inputRef}
           type="password"
           inputMode="numeric"
           autoFocus
-          maxLength={8}
+          maxLength={correctPasscode.length}
           value={pin}
           onChange={(e) => {
             const val = e.target.value.replace(/\D/g, '');
@@ -137,48 +136,51 @@ export const PasscodeLock: React.FC<PasscodeLockProps> = ({ onUnlock }) => {
           aria-label="Passcode input"
         />
 
-        {/* Visual PIN dots / boxes */}
+        {/* Segmented PIN input boxes */}
         <div 
           onClick={() => inputRef.current?.focus()}
-          className="flex items-center justify-center gap-3 mb-6 cursor-pointer"
+          className="flex items-center justify-center gap-2.5 mb-5 cursor-pointer select-none"
         >
           {Array.from({ length: correctPasscode.length }).map((_, idx) => {
             const isFilled = idx < pin.length;
+            const isFocused = idx === pin.length;
             return (
               <div
                 key={idx}
-                className={`w-11 h-13 sm:w-12 sm:h-14 rounded-xl border-2 flex items-center justify-center font-mono text-xl sm:text-2xl font-bold transition-all select-none ${
+                className={`w-12 h-14 rounded-lg border flex items-center justify-center font-mono text-xl font-semibold tabular-nums transition-colors duration-150 ${
                   isSuccess
-                    ? 'border-emerald-500 bg-emerald-50 dark:bg-emerald-950/30 text-emerald-600'
+                    ? 'border-emerald-600 bg-emerald-50 dark:bg-emerald-950/20 text-emerald-600 dark:text-emerald-400'
                     : error
-                    ? 'border-rose-500 bg-rose-50 dark:bg-rose-950/30 text-rose-500'
+                    ? 'border-rose-500 bg-rose-50 dark:bg-rose-950/20 text-rose-600'
                     : isFilled
-                    ? 'border-blue-500 dark:border-blue-400 bg-blue-50/50 dark:bg-blue-950/30 text-blue-600 dark:text-blue-400 shadow-sm scale-105'
-                    : 'border-slate-200 dark:border-[#222b3d] bg-slate-50 dark:bg-[#151a24] text-slate-400'
+                    ? 'border-blue-600 dark:border-blue-500 bg-zinc-50 dark:bg-[#181B24] text-zinc-950 dark:text-[#F4F4F6]'
+                    : isFocused
+                    ? 'border-zinc-400 dark:border-zinc-500 bg-zinc-50 dark:bg-[#181B24]'
+                    : 'border-zinc-200 dark:border-[#222634] bg-white dark:bg-[#11131A] text-zinc-400'
                 }`}
               >
-                {isFilled ? '●' : ''}
+                {isFilled ? '•' : ''}
               </div>
             );
           })}
         </div>
 
-        {/* Error message */}
+        {/* Error Notification */}
         {error && (
-          <div className="flex items-center gap-1.5 text-xs font-medium text-rose-500 mb-4 animate-fade-in">
-            <ShieldAlert className="w-3.5 h-3.5 flex-shrink-0" />
+          <div className="flex items-center gap-1.5 text-xs font-medium text-rose-600 dark:text-rose-400 mb-4 animate-in fade-in duration-150">
+            <ShieldAlert className="w-3.5 h-3.5 shrink-0" strokeWidth={1.75} />
             <span>{error}</span>
           </div>
         )}
 
-        {/* Numeric keypad for touch / mobile convenience */}
-        <div className="grid grid-cols-3 gap-2 w-full max-w-[260px] mb-6">
+        {/* Tactile Keypad */}
+        <div className="grid grid-cols-3 gap-1.5 w-full max-w-[270px] mb-5">
           {['1', '2', '3', '4', '5', '6', '7', '8', '9'].map((digit) => (
             <button
               key={digit}
               type="button"
               onClick={() => handleDigitClick(digit)}
-              className="h-11 sm:h-12 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-[#171f2e] dark:hover:bg-[#202b3f] text-slate-800 dark:text-gray-200 font-semibold text-lg transition active:scale-95 shadow-sm"
+              className="h-11 rounded-lg border border-zinc-200 dark:border-[#222634] bg-zinc-50 hover:bg-zinc-100 dark:bg-[#181B24] dark:hover:bg-[#202534] text-zinc-950 dark:text-[#F4F4F6] font-mono text-base font-semibold tabular-nums transition-colors duration-150 cursor-pointer"
             >
               {digit}
             </button>
@@ -186,21 +188,21 @@ export const PasscodeLock: React.FC<PasscodeLockProps> = ({ onUnlock }) => {
           <button
             type="button"
             onClick={handleClear}
-            className="h-11 sm:h-12 rounded-xl bg-slate-100 hover:bg-rose-100 dark:bg-[#171f2e] dark:hover:bg-rose-950/40 text-slate-500 hover:text-rose-600 dark:text-gray-400 text-xs font-semibold transition active:scale-95"
+            className="h-11 rounded-lg border border-zinc-200 dark:border-[#222634] bg-zinc-50 hover:bg-zinc-100 dark:bg-[#181B24] dark:hover:bg-[#202534] text-zinc-500 dark:text-[#8E95A5] text-xs font-medium transition-colors duration-150 cursor-pointer"
           >
             Clear
           </button>
           <button
             type="button"
             onClick={() => handleDigitClick('0')}
-            className="h-11 sm:h-12 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-[#171f2e] dark:hover:bg-[#202b3f] text-slate-800 dark:text-gray-200 font-semibold text-lg transition active:scale-95 shadow-sm"
+            className="h-11 rounded-lg border border-zinc-200 dark:border-[#222634] bg-zinc-50 hover:bg-zinc-100 dark:bg-[#181B24] dark:hover:bg-[#202534] text-zinc-950 dark:text-[#F4F4F6] font-mono text-base font-semibold tabular-nums transition-colors duration-150 cursor-pointer"
           >
             0
           </button>
           <button
             type="button"
             onClick={handleBackspace}
-            className="h-11 sm:h-12 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-[#171f2e] dark:hover:bg-[#202b3f] text-slate-600 dark:text-gray-300 text-sm font-semibold transition active:scale-95"
+            className="h-11 rounded-lg border border-zinc-200 dark:border-[#222634] bg-zinc-50 hover:bg-zinc-100 dark:bg-[#181B24] dark:hover:bg-[#202534] text-zinc-600 dark:text-[#8E95A5] text-xs font-medium transition-colors duration-150 cursor-pointer flex items-center justify-center"
             aria-label="Backspace"
           >
             ⌫
@@ -208,20 +210,22 @@ export const PasscodeLock: React.FC<PasscodeLockProps> = ({ onUnlock }) => {
         </div>
 
         {/* Remember device checkbox */}
-        <label className="flex items-center gap-2 text-xs text-slate-600 dark:text-gray-400 cursor-pointer select-none">
+        <label className="flex items-center gap-2 text-xs text-zinc-600 dark:text-[#8E95A5] cursor-pointer select-none">
           <input
             type="checkbox"
             checked={rememberMe}
             onChange={(e) => setRememberMe(e.target.checked)}
-            className="w-4 h-4 rounded border-slate-300 dark:border-gray-600 text-blue-600 focus:ring-blue-500 dark:bg-gray-800"
+            className="w-3.5 h-3.5 rounded border-zinc-300 dark:border-[#222634] text-blue-600 focus:ring-0 dark:bg-[#181B24] cursor-pointer"
           />
-          <span>Remember on this browser</span>
+          <span>Remember on this device</span>
         </label>
       </div>
 
-      <p className="mt-6 text-[11px] text-slate-400 dark:text-gray-500 font-medium">
-        SATify Digital SAT Practice • Private Personal Edition
-      </p>
+      {/* Minimal Footer Stamp */}
+      <div className="mt-6 flex items-center gap-1.5 text-[11px] font-mono text-zinc-500 dark:text-[#8E95A5]">
+        <Lock className="w-3 h-3" strokeWidth={1.75} />
+        <span>Satify • Official 2026 Academic Specification</span>
+      </div>
     </div>
   );
 };

@@ -97,14 +97,19 @@ export const SavedMistakesView: React.FC<SavedMistakesViewProps> = ({
   };
 
   return (
-    <div className="w-full h-full overflow-y-auto overflow-x-hidden bg-[#f8fafc] text-gray-900 px-4 sm:px-6 md:px-10 py-6 sm:py-8 space-y-6 select-text">
+    <div className="w-full h-full overflow-y-auto overflow-x-hidden bg-neutral-50 dark:bg-[#090A0F] text-zinc-950 dark:text-[#F4F4F6] px-4 sm:px-6 md:px-10 py-6 sm:py-8 space-y-6 select-text">
       {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-2 border-b border-gray-200">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-zinc-200 dark:border-[#222634]">
         <div>
-          <h1 className="text-2xl md:text-3xl font-extrabold text-gray-900 tracking-tight">
-            Saved & Mistakes
+          <div className="flex items-center gap-2">
+            <span className="text-[11px] font-mono font-semibold tracking-wider text-blue-700 dark:text-blue-400 uppercase">
+              Question Archive
+            </span>
+          </div>
+          <h1 className="text-2xl sm:text-3xl font-semibold tracking-tight text-zinc-950 dark:text-[#F4F4F6] mt-1">
+            Saved & Mistake Bank
           </h1>
-          <p className="text-sm text-gray-500 mt-1">
+          <p className="text-xs sm:text-sm text-zinc-600 dark:text-[#8E95A5] mt-1">
             Review detailed question rationales, see your exact incorrect choices, and retry questions to lock in mastery.
           </p>
         </div>
@@ -112,15 +117,15 @@ export const SavedMistakesView: React.FC<SavedMistakesViewProps> = ({
         {displayedQuestions.length > 0 && (
           <button
             onClick={handlePracticeAll}
-            className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#0050d8] hover:bg-[#003da6] text-white font-bold text-sm shadow-md transition active:scale-95 cursor-pointer w-fit"
+            className="flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-700 hover:bg-blue-800 text-white dark:bg-blue-600 dark:hover:bg-blue-500 font-semibold text-xs transition-colors duration-150 cursor-pointer w-fit"
           >
-            <Play className="w-4 h-4 fill-current" />
+            <Play className="w-3.5 h-3.5 fill-current" />
             <span>
               {tab === 'answered'
                 ? `Practice All Answered (${displayedQuestions.length})`
                 : tab === 'mistakes' 
                 ? `Practice All Mistakes (${displayedQuestions.length})`
-                : `Practice Saved Bookmarks (${displayedQuestions.length})`}
+                : `Practice Saved (${displayedQuestions.length})`}
             </span>
           </button>
         )}
@@ -129,41 +134,41 @@ export const SavedMistakesView: React.FC<SavedMistakesViewProps> = ({
       {/* Tabs & Search Filter Strip */}
       <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
         {/* Toggle Pill */}
-        <div className="inline-flex p-1 bg-white border border-gray-200 rounded-xl shadow-xs flex-wrap gap-1">
+        <div className="inline-flex p-0.5 bg-white dark:bg-[#11131A] border border-zinc-200 dark:border-[#222634] rounded-lg shadow-2xs flex-wrap gap-1">
           <button
             onClick={() => setTab('answered')}
-            className={`flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs font-bold transition-all ${
+            className={`flex items-center gap-2 px-3 py-1.5 rounded-md text-xs font-mono font-medium transition-colors duration-150 ${
               tab === 'answered'
-                ? 'bg-[#0050d8] text-white shadow-xs'
-                : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+                ? 'bg-blue-700 text-white dark:bg-blue-600 font-semibold shadow-2xs'
+                : 'text-zinc-600 dark:text-[#8E95A5] hover:text-zinc-950 dark:hover:text-white'
             }`}
           >
-            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-            <span>Answered Questions ({answeredQuestions.length})</span>
+            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" strokeWidth={1.75} />
+            <span>Answered ({answeredQuestions.length})</span>
           </button>
 
           <button
             onClick={() => setTab('mistakes')}
-            className={`flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs font-bold transition-all ${
+            className={`flex items-center gap-2 px-3 py-1.5 rounded-md text-xs font-mono font-medium transition-colors duration-150 ${
               tab === 'mistakes'
-                ? 'bg-[#0050d8] text-white shadow-xs'
-                : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+                ? 'bg-blue-700 text-white dark:bg-blue-600 font-semibold shadow-2xs'
+                : 'text-zinc-600 dark:text-[#8E95A5] hover:text-zinc-950 dark:hover:text-white'
             }`}
           >
-            <XCircle className="w-3.5 h-3.5 text-rose-400" />
-            <span>Incorrect Questions ({mistakeQuestions.length})</span>
+            <XCircle className="w-3.5 h-3.5 text-rose-400" strokeWidth={1.75} />
+            <span>Mistakes ({mistakeQuestions.length})</span>
           </button>
 
           <button
             onClick={() => setTab('saved')}
-            className={`flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs font-bold transition-all ${
+            className={`flex items-center gap-2 px-3 py-1.5 rounded-md text-xs font-mono font-medium transition-colors duration-150 ${
               tab === 'saved'
-                ? 'bg-[#0050d8] text-white shadow-xs'
-                : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+                ? 'bg-blue-700 text-white dark:bg-blue-600 font-semibold shadow-2xs'
+                : 'text-zinc-600 dark:text-[#8E95A5] hover:text-zinc-950 dark:hover:text-white'
             }`}
           >
-            <Bookmark className="w-3.5 h-3.5" />
-            <span>Saved Bookmarks ({savedQuestions.length})</span>
+            <Bookmark className="w-3.5 h-3.5" strokeWidth={1.75} />
+            <span>Saved ({savedQuestions.length})</span>
           </button>
         </div>
 

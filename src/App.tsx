@@ -728,17 +728,17 @@ export const App: React.FC = () => {
   }
 
   return (
-    <div className="w-full max-w-full overflow-x-hidden h-[100dvh] max-h-[100dvh] flex flex-col md:flex-row overflow-hidden font-sans bg-slate-50 dark:bg-[#070a10] text-slate-900 dark:text-white">
+    <div className="w-full max-w-full overflow-x-hidden h-[100dvh] max-h-[100dvh] flex flex-col md:flex-row overflow-hidden font-sans bg-neutral-50 dark:bg-[#090A0F] text-zinc-950 dark:text-[#F4F4F6]">
       {/* 1. Mobile Top Bar (< 1024px / lg:hidden) when NOT in full practice mode */}
       {currentRoute !== 'practice' && (
-        <div className="lg:hidden flex items-center justify-between px-4 py-2 pt-[max(env(safe-area-inset-top,0px),8px)] bg-white dark:bg-[#070a10] border-b border-slate-200 dark:border-slate-800 z-40 shrink-0">
-          <div className="flex items-center gap-3">
+        <div className="lg:hidden flex items-center justify-between px-4 h-14 pt-[max(env(safe-area-inset-top,0px),4px)] bg-white dark:bg-[#11131A] border-b border-zinc-200 dark:border-[#222634] z-40 shrink-0">
+          <div className="flex items-center gap-2.5">
             <button
               onClick={() => setIsMobileNavOpen(true)}
-              className="min-h-[44px] min-w-[44px] flex items-center justify-center -ml-1 rounded-lg text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition cursor-pointer"
+              className="h-9 w-9 flex items-center justify-center -ml-1 rounded-lg text-zinc-700 dark:text-[#8E95A5] hover:bg-zinc-100 dark:hover:bg-[#181B24] transition-colors duration-150 cursor-pointer"
               aria-label="Open navigation menu"
             >
-              <Menu className="w-5 h-5" />
+              <Menu className="w-4 h-4" strokeWidth={1.75} />
             </button>
             <Logo size="sm" variant="header" inverted={isDark} />
           </div>
@@ -746,7 +746,7 @@ export const App: React.FC = () => {
             {currentUser ? (
               <button
                 onClick={() => setIsAccountModalOpen(true)}
-                className="w-8 h-8 rounded-full overflow-hidden border-2 border-blue-600 flex items-center justify-center bg-blue-600 text-white font-bold text-xs cursor-pointer shadow-xs transition hover:scale-105"
+                className="w-7 h-7 rounded-md overflow-hidden border border-zinc-300 dark:border-[#222634] flex items-center justify-center bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 font-bold text-xs cursor-pointer"
                 title={currentUser.name}
               >
                 {currentUser.picture ? (
@@ -758,7 +758,7 @@ export const App: React.FC = () => {
             ) : (
               <button
                 onClick={() => setIsLoginModalOpen(true)}
-                className="px-2.5 py-1.5 rounded-xl bg-blue-600 text-white font-bold text-xs hover:bg-blue-700 transition shadow-xs cursor-pointer active:scale-95"
+                className="px-3 py-1.5 rounded-lg bg-blue-700 hover:bg-blue-800 text-white dark:bg-blue-600 dark:hover:bg-blue-500 font-semibold text-xs transition-colors duration-150 cursor-pointer"
               >
                 Sign In
               </button>
@@ -766,11 +766,11 @@ export const App: React.FC = () => {
 
             <button
               onClick={toggleTheme}
-              className="min-h-[44px] min-w-[44px] flex items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition cursor-pointer"
-              title={isDark ? "Switch to Light Theme" : "Switch to Dark Theme"}
+              className="h-9 w-9 flex items-center justify-center rounded-lg border border-transparent hover:border-zinc-200 dark:hover:border-[#222634] bg-zinc-50 dark:bg-[#181B24] text-zinc-700 dark:text-[#8E95A5] hover:text-zinc-950 dark:hover:text-[#F4F4F6] transition-colors duration-150 cursor-pointer"
+              title={isDark ? "Switch to Light Mode" : "Switch to Dark Mode"}
               aria-label="Toggle theme"
             >
-              {isDark ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-slate-700" />}
+              {isDark ? <Sun className="w-4 h-4 text-amber-400" strokeWidth={1.75} /> : <Moon className="w-4 h-4 text-zinc-700" strokeWidth={1.75} />}
             </button>
           </div>
         </div>
@@ -879,7 +879,7 @@ export const App: React.FC = () => {
         {/* FULL BLUEBOOK TEST RUNNER VIEW (When in Practice Mode)            */}
         {/* ----------------------------------------------------------------- */}
         {currentRoute === 'practice' && (
-          <div className="fixed inset-0 h-[100dvh] max-h-[100dvh] w-full flex flex-col overflow-hidden bg-white dark:bg-[#070a10] z-30">
+          <div className="fixed inset-0 h-[100dvh] max-h-[100dvh] w-full flex flex-col overflow-hidden bg-white dark:bg-[#090A0F] z-30">
             {/* Top Bluebook Header */}
             <Header
               section={currentQuestion.section}
@@ -904,7 +904,7 @@ export const App: React.FC = () => {
             />
 
             {/* Split Pane / Stacked Mobile Workspace */}
-            <main className={`flex-1 min-h-0 w-full relative bg-white dark:bg-[#070a10] ${
+            <main className={`flex-1 min-h-0 w-full relative bg-white dark:bg-[#090A0F] ${
               isTwoPane && !isLeftCollapsed
                 ? 'flex flex-row overflow-hidden'
                 : 'flex flex-col overflow-y-auto overscroll-contain'
@@ -916,9 +916,9 @@ export const App: React.FC = () => {
                     style={isTwoPane ? { width: `${splitRatio}%` } : { width: '100%' }}
                     className={`${
                       isTwoPane 
-                        ? 'h-full overflow-hidden flex flex-col border-r border-slate-200 dark:border-slate-800 shrink-0' 
-                        : 'w-full flex flex-col border-b border-dashed border-slate-300 dark:border-slate-700 shrink-0'
-                    } bg-white dark:bg-[#070a10]`}
+                        ? 'h-full overflow-hidden flex flex-col border-r border-zinc-200 dark:border-[#222634] shrink-0' 
+                        : 'w-full flex flex-col border-b border-dashed border-zinc-300 dark:border-[#222634] shrink-0'
+                    } bg-white dark:bg-[#090A0F]`}
                   >
                     <LeftPane
                       question={currentQuestion}
@@ -942,29 +942,22 @@ export const App: React.FC = () => {
                     />
                   </section>
 
-                  {/* Interactive Drag Divider (Active in Two-Pane Mode with Touch Support) */}
+                  {/* Interactive Drag Divider (Tactile grab handle with w-1.5 hit-area) */}
                   {isTwoPane && (
                     <div
                       onPointerDown={handlePointerDown}
                       onDoubleClick={() => setIsLeftCollapsed(true)}
                       style={{ touchAction: 'none' }}
-                      className="relative w-4 -mx-1 hover:w-4 flex items-center justify-center cursor-col-resize z-20 group shrink-0 select-none touch-none"
-                      title="Drag with mouse or finger to resize panes • Double-tap to collapse passage"
+                      className="relative w-1.5 hover:w-2 flex items-center justify-center cursor-col-resize z-20 group shrink-0 select-none touch-none bg-zinc-200 dark:bg-[#222634] transition-colors duration-150 hover:bg-blue-600 dark:hover:bg-blue-500"
+                      title="Drag to resize panes • Double-click to collapse passage"
                     >
-                      {/* Vertical line indicator */}
-                      <div className={`w-1 h-full transition-colors ${
-                        isDragging 
-                          ? 'bg-blue-600 dark:bg-blue-500' 
-                          : 'bg-slate-200 dark:bg-slate-800 group-hover:bg-blue-500'
-                      }`} />
-
-                      {/* Pill Handle - 44px min touch target */}
-                      <div className={`absolute h-12 w-6 rounded-full flex items-center justify-center shadow-md transition-all pointer-events-none ${
+                      {/* Centered Pill Handle */}
+                      <div className={`absolute h-9 w-4 rounded-full flex items-center justify-center border border-zinc-200 dark:border-[#222634] shadow-xs transition-colors duration-150 pointer-events-none ${
                         isDragging
-                          ? 'bg-blue-600 scale-110 shadow-blue-500/30'
-                          : 'bg-slate-900 dark:bg-slate-700 group-hover:bg-blue-600 text-white'
+                          ? 'bg-blue-700 dark:bg-blue-600 text-white border-blue-600'
+                          : 'bg-white dark:bg-[#181B24] text-zinc-400 dark:text-[#8E95A5] group-hover:text-blue-600 dark:group-hover:text-blue-400'
                       }`}>
-                        <GripVertical className="w-3.5 h-3.5 text-slate-200" />
+                        <GripVertical className="w-3 h-3" strokeWidth={1.75} />
                       </div>
                     </div>
                   )}
@@ -976,7 +969,7 @@ export const App: React.FC = () => {
                       isTwoPane 
                         ? 'h-full overflow-hidden flex flex-col shrink-0 pb-20 xl:pb-0' 
                         : 'w-full flex flex-col shrink-0 pb-12'
-                    } bg-white dark:bg-[#070a10]`}
+                    } bg-white dark:bg-[#090A0F]`}
                   >
                     <RightPane
                       question={currentQuestion}
@@ -995,13 +988,13 @@ export const App: React.FC = () => {
                 </>
               ) : (
                 /* Collapsed Full Width View */
-                <div className="relative w-full h-full bg-white dark:bg-[#070a10] overflow-y-auto flex flex-col">
+                <div className="relative w-full h-full bg-white dark:bg-[#090A0F] overflow-y-auto flex flex-col">
                   <button
                     onClick={() => setIsLeftCollapsed(false)}
-                    className="absolute left-6 top-3 z-30 flex items-center gap-1.5 px-3 py-1.5 bg-white dark:bg-slate-800 hover:bg-gray-100 dark:hover:bg-slate-700 border border-gray-300 dark:border-slate-600 rounded-lg text-xs font-semibold text-gray-700 dark:text-slate-200 shadow-xs transition cursor-pointer"
+                    className="absolute left-6 top-3 z-30 flex items-center gap-1.5 px-3 py-1.5 bg-white dark:bg-[#11131A] hover:bg-zinc-100 dark:hover:bg-[#181B24] border border-zinc-200 dark:border-[#222634] rounded-lg text-xs font-semibold text-zinc-900 dark:text-[#F4F4F6] shadow-xs transition-colors duration-150 cursor-pointer"
                     title="Restore Two-Pane Split View"
                   >
-                    <Columns className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
+                    <Columns className="w-3.5 h-3.5 text-blue-700 dark:text-blue-400" strokeWidth={1.75} />
                     <span>Split View</span>
                   </button>
 

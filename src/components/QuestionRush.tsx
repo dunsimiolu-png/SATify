@@ -261,7 +261,7 @@ export const QuestionRush: React.FC<QuestionRushProps> = ({
             </div>
 
             {currentStreak > 1 && (
-              <div className="flex items-center gap-1 bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300 px-2.5 py-1 rounded-xl border border-amber-200 dark:border-amber-800 text-xs font-bold animate-bounce">
+              <div className="flex items-center gap-1 bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300 px-2.5 py-1 rounded-xl border border-amber-200 dark:border-amber-800 text-xs font-bold">
                 <Flame className="w-3.5 h-3.5 text-amber-500" />
                 <span>{currentStreak}x</span>
               </div>
@@ -481,7 +481,7 @@ export const QuestionRush: React.FC<QuestionRushProps> = ({
                 {/* Next Question Button */}
                 <button
                   onClick={handleNextQuestion}
-                  className="w-full py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs uppercase tracking-wider shadow-md transition active:scale-95 flex items-center justify-center gap-2 cursor-pointer"
+                  className="w-full py-3 rounded-lg bg-blue-700 hover:bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-500 text-white font-semibold text-xs transition-colors duration-150 flex items-center justify-center gap-2 cursor-pointer"
                 >
                   <span>{currentIndex + 1 < rushQueue.length ? 'Next Question →' : 'View Session Results →'}</span>
                 </button>
@@ -639,20 +639,20 @@ export const QuestionRush: React.FC<QuestionRushProps> = ({
     <div className="w-full h-full overflow-y-auto overflow-x-hidden bg-slate-50 dark:bg-[#070a10] text-slate-900 dark:text-white select-text">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 md:px-8 py-6 sm:py-8 space-y-6 sm:space-y-8 animate-in fade-in duration-200">
         {/* Top Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-200 dark:border-slate-800">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-zinc-200 dark:border-[#222634]">
           <div className="space-y-1">
             <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-amber-400 to-blue-600 flex items-center justify-center shadow-md">
-                <Zap className="w-5 h-5 text-white" />
+              <div className="w-8 h-8 rounded-lg bg-zinc-950 dark:bg-blue-600 flex items-center justify-center text-white shrink-0">
+                <Zap className="w-4 h-4" strokeWidth={1.75} />
               </div>
-              <h1 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white tracking-tight">
+              <h1 className="text-xl sm:text-2xl font-bold text-zinc-950 dark:text-[#F4F4F6] tracking-tight">
                 Question Rush
               </h1>
-              <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-50 text-amber-700 border border-amber-200 dark:bg-amber-950/40 dark:text-amber-400 dark:border-amber-800">
+              <span className="px-2 py-0.5 rounded text-[10px] font-mono font-semibold uppercase tracking-wider bg-zinc-100 text-zinc-700 border border-zinc-200 dark:bg-[#181B24] dark:text-[#8E95A5] dark:border-[#222634]">
                 Timed Mode
               </span>
             </div>
-            <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+            <p className="text-xs text-zinc-600 dark:text-[#8E95A5]">
               High-intensity SAT pacing trainer. Race against dynamic question timers calibrated by skill and difficulty.
             </p>
           </div>
@@ -661,97 +661,97 @@ export const QuestionRush: React.FC<QuestionRushProps> = ({
             <button
               type="button"
               onClick={onOpenQuestionBank}
-              className="px-4 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#0f1522] hover:bg-slate-50 dark:hover:bg-slate-800 text-xs font-bold text-slate-700 dark:text-slate-200 hover:text-slate-900 dark:hover:text-white transition flex items-center gap-2 cursor-pointer self-start sm:self-center shadow-2xs"
+              className="px-3.5 py-1.5 rounded-lg border border-zinc-200 dark:border-[#222634] bg-white dark:bg-[#11131A] hover:bg-zinc-100 dark:hover:bg-[#181B24] text-xs font-semibold text-zinc-900 dark:text-[#F4F4F6] transition-colors duration-150 flex items-center gap-2 cursor-pointer self-start sm:self-center"
             >
-              <Layers className="w-4 h-4 text-blue-600" />
+              <Layers className="w-4 h-4 text-blue-600 dark:text-blue-400" strokeWidth={1.75} />
               <span>Filter Question Bank</span>
             </button>
           )}
         </div>
 
         {/* 1. "What is Question Rush?" Banner Card */}
-        <div className="relative overflow-hidden rounded-2xl bg-blue-50/80 border border-blue-200 text-slate-900 dark:bg-[#0f1522] dark:border-blue-900/40 dark:text-white p-6 sm:p-7 shadow-sm space-y-4">
+        <div className="rounded-xl bg-white dark:bg-[#11131A] border border-zinc-200 dark:border-[#222634] text-zinc-950 dark:text-[#F4F4F6] p-5 sm:p-6 space-y-4">
           <div className="flex items-center gap-2.5">
-            <span className="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-blue-100 text-blue-700 dark:bg-blue-500/20 dark:text-blue-300 border border-blue-200 dark:border-blue-500/40">
-              ⚡ Live Target Pacing
+            <span className="px-2 py-0.5 rounded text-[10px] font-mono font-semibold uppercase tracking-wider bg-blue-50 text-blue-700 dark:bg-blue-950/40 dark:text-blue-400 border border-blue-200 dark:border-blue-900/60">
+              ⚡ Target Pacing
             </span>
-            <span className="text-xs text-slate-500 dark:text-slate-400">
+            <span className="text-xs font-mono text-zinc-500 dark:text-[#8E95A5]">
               Official Digital SAT Timed Practice
             </span>
           </div>
 
           <div className="max-w-3xl space-y-2">
-            <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white tracking-tight flex items-center gap-2">
+            <h2 className="text-lg sm:text-xl font-bold text-zinc-950 dark:text-[#F4F4F6] tracking-tight flex items-center gap-2">
               <span>What is Question Rush?</span>
-              <Sparkles className="w-5 h-5 text-amber-500" />
+              <Sparkles className="w-4 h-4 text-blue-600 dark:text-blue-400" strokeWidth={1.75} />
             </h2>
-            <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
-              Question Rush trains speed, precision, and intuition under pressure. Every question is dynamically calibrated to its official College Board <span className="text-blue-600 dark:text-blue-400 font-bold">Skill × Difficulty</span> target time (25 seconds for grammar up to 120 seconds for cross-text inferences). Beat the target countdown to rack up 3-Star Mastery and lock in your test-day pacing rhythm.
+            <p className="text-xs sm:text-sm text-zinc-600 dark:text-[#8E95A5] leading-relaxed">
+              Question Rush trains speed, precision, and intuition under pressure. Every question is dynamically calibrated to its official College Board <span className="text-blue-700 dark:text-blue-400 font-semibold">Skill × Difficulty</span> target time (25 seconds for grammar up to 120 seconds for cross-text inferences). Beat the target countdown to rack up 3-Star Mastery and lock in your test-day pacing rhythm.
             </p>
           </div>
 
-          <div className="flex flex-wrap items-center gap-3 pt-2 text-xs font-semibold text-slate-600 dark:text-slate-300">
-            <div className="flex items-center gap-1.5 bg-white dark:bg-[#141a24] px-3 py-1.5 rounded-xl border border-blue-200 dark:border-blue-900/30 shadow-2xs">
-              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
+          <div className="flex flex-wrap items-center gap-2.5 pt-1 text-xs font-medium text-zinc-700 dark:text-[#8E95A5]">
+            <div className="flex items-center gap-1.5 bg-zinc-50 dark:bg-[#181B24] px-2.5 py-1 rounded-md border border-zinc-200 dark:border-[#222634]">
+              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" strokeWidth={1.75} />
               <span>100% Non-Active Questions</span>
             </div>
-            <div className="flex items-center gap-1.5 bg-white dark:bg-[#141a24] px-3 py-1.5 rounded-xl border border-blue-200 dark:border-blue-900/30 shadow-2xs">
-              <Clock className="w-3.5 h-3.5 text-sky-500" />
+            <div className="flex items-center gap-1.5 bg-zinc-50 dark:bg-[#181B24] px-2.5 py-1 rounded-md border border-zinc-200 dark:border-[#222634]">
+              <Clock className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" strokeWidth={1.75} />
               <span>Dynamic Skill Clocks</span>
             </div>
-            <div className="flex items-center gap-1.5 bg-white dark:bg-[#141a24] px-3 py-1.5 rounded-xl border border-blue-200 dark:border-blue-900/30 shadow-2xs">
-              <Award className="w-3.5 h-3.5 text-amber-500" />
+            <div className="flex items-center gap-1.5 bg-zinc-50 dark:bg-[#181B24] px-2.5 py-1 rounded-md border border-zinc-200 dark:border-[#222634]">
+              <Award className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" strokeWidth={1.75} />
               <span>3-Star Speed Ratings</span>
             </div>
           </div>
         </div>
 
-        {/* 2. Two Gradient Hero Cards: Reading & Writing and Math */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Hero Card 1: Reading & Writing (Sleek Royal Blue Gradient) */}
-          <div className="relative rounded-2xl bg-gradient-to-br from-blue-600 to-blue-800 text-white p-6 sm:p-7 shadow-md shadow-blue-500/20 flex flex-col justify-between space-y-6">
+        {/* 2. Two Workspace Cards: Reading & Writing and Math */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          {/* Hero Card 1: Reading & Writing */}
+          <div className="rounded-xl bg-white dark:bg-[#11131A] text-zinc-950 dark:text-[#F4F4F6] border border-zinc-200 dark:border-[#222634] p-5 sm:p-6 flex flex-col justify-between space-y-5">
             <div className="space-y-4">
               <div className="flex items-center justify-between">
-                <span className="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-white/20 text-white border border-white/30 backdrop-blur-xs">
-                  ✓ Ready to Play
+                <span className="px-2 py-0.5 rounded text-[10px] font-mono font-semibold uppercase tracking-wider bg-emerald-50 text-emerald-700 border border-emerald-200 dark:bg-emerald-950/40 dark:text-emerald-400 dark:border-emerald-800">
+                  Ready to Practice
                 </span>
-                <span className="text-xs font-bold text-blue-100">
+                <span className="text-xs font-mono text-zinc-500 dark:text-[#8E95A5] tabular-nums">
                   {questions.length} questions
                 </span>
               </div>
 
               <div>
-                <h3 className="text-xl sm:text-2xl font-black text-white tracking-tight">
+                <h3 className="text-lg font-bold text-zinc-950 dark:text-[#F4F4F6] tracking-tight">
                   Reading &amp; Writing Rush
                 </h3>
-                <p className="text-xs sm:text-sm text-blue-100 mt-1.5 leading-relaxed">
+                <p className="text-xs text-zinc-600 dark:text-[#8E95A5] mt-1 leading-relaxed">
                   Fast-paced drills across Craft &amp; Structure, Information &amp; Ideas, Expression of Ideas, and Standard English Conventions.
                 </p>
               </div>
 
               {/* Speed Mode Selector */}
-              <div className="space-y-2 pt-2">
-                <label className="block text-[11px] font-bold text-blue-100 uppercase tracking-wider">
-                  Select Pacing Mode:
+              <div className="space-y-1.5 pt-1">
+                <label className="block text-[11px] font-mono font-semibold text-zinc-500 dark:text-[#8E95A5] uppercase tracking-wider">
+                  Pacing Multiplier
                 </label>
                 <div className="grid grid-cols-3 gap-2">
                   {[
-                    { id: 'blitz', label: '⚡ Blitz', sub: '0.8x Target' },
-                    { id: 'normal', label: '⏱️ Normal', sub: '1.0x Target' },
-                    { id: 'relaxed', label: '🌱 Relaxed', sub: '1.25x Target' },
+                    { id: 'blitz', label: 'Blitz', sub: '0.8x Target' },
+                    { id: 'normal', label: 'Normal', sub: '1.0x Target' },
+                    { id: 'relaxed', label: 'Relaxed', sub: '1.25x Target' },
                   ].map(mode => (
                     <button
                       key={mode.id}
                       type="button"
                       onClick={() => setSelectedMode(mode.id as RushMode)}
-                      className={`p-2.5 rounded-xl border text-center transition cursor-pointer ${
+                      className={`p-2 rounded-lg border text-center transition-colors duration-150 cursor-pointer ${
                         selectedMode === mode.id
-                          ? 'border-white bg-white/25 text-white ring-2 ring-white shadow-xs'
-                          : 'border-blue-400/40 bg-blue-700/40 text-blue-100 hover:bg-blue-700/70'
+                          ? 'border-blue-600 dark:border-blue-500 bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300 ring-1 ring-blue-600'
+                          : 'border-zinc-200 dark:border-[#222634] bg-zinc-50 dark:bg-[#181B24] text-zinc-700 dark:text-[#8E95A5] hover:border-zinc-300 dark:hover:border-zinc-700'
                       }`}
                     >
-                      <div className="text-xs font-bold">{mode.label}</div>
-                      <div className="text-[10px] text-blue-200 mt-0.5">{mode.sub}</div>
+                      <div className="text-xs font-semibold">{mode.label}</div>
+                      <div className="text-[10px] font-mono text-zinc-500 dark:text-[#8E95A5] mt-0.5">{mode.sub}</div>
                     </button>
                   ))}
                 </div>
@@ -759,17 +759,17 @@ export const QuestionRush: React.FC<QuestionRushProps> = ({
 
               {/* Sprint Length Selector */}
               <div className="flex items-center justify-between text-xs pt-1">
-                <span className="text-blue-100 font-semibold">Sprint Length:</span>
+                <span className="text-zinc-600 dark:text-[#8E95A5] font-mono text-[11px]">Sprint Length:</span>
                 <div className="flex items-center gap-1.5">
                   {[5, 10, 15, 20].map(sz => (
                     <button
                       key={sz}
                       type="button"
                       onClick={() => setSessionSize(sz)}
-                      className={`px-2.5 py-1 rounded-lg text-xs font-bold transition cursor-pointer ${
+                      className={`px-2.5 py-1 rounded-md text-xs font-mono font-semibold transition-colors duration-150 cursor-pointer tabular-nums ${
                         sessionSize === sz
-                          ? 'bg-white text-blue-900 font-extrabold shadow-xs'
-                          : 'bg-blue-700/40 text-blue-100 border border-blue-400/30 hover:bg-blue-700/70'
+                          ? 'bg-zinc-950 dark:bg-blue-600 text-white'
+                          : 'bg-zinc-100 dark:bg-[#181B24] text-zinc-700 dark:text-[#8E95A5] border border-zinc-200 dark:border-[#222634] hover:bg-zinc-200 dark:hover:bg-[#202534]'
                       }`}
                     >
                       {sz} Qs
@@ -782,10 +782,10 @@ export const QuestionRush: React.FC<QuestionRushProps> = ({
             {/* Launch Button */}
             <button
               onClick={handleStartRush}
-              className="w-full py-3.5 px-5 rounded-xl bg-white hover:bg-blue-50 text-blue-900 font-extrabold text-xs uppercase tracking-wider shadow-md transition active:scale-95 flex items-center justify-between cursor-pointer"
+              className="w-full py-2.5 px-4 rounded-lg bg-blue-700 hover:bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-500 text-white font-semibold text-xs transition-colors duration-150 flex items-center justify-between cursor-pointer"
             >
-              <span>Continue &gt;</span>
-              <ChevronRight className="w-4 h-4" />
+              <span>Start Timed Rush</span>
+              <ChevronRight className="w-4 h-4" strokeWidth={1.75} />
             </button>
           </div>
 

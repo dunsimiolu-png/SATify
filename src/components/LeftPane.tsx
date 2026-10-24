@@ -182,7 +182,7 @@ export const LeftPane: React.FC<LeftPaneProps> = ({
 
     // 3. Standard Reading Passage: Preserve poem lines and paragraph splits
     return (
-      <div className="font-serif text-[17px] leading-[1.7] text-[#111827] whitespace-pre-line">
+      <div className="font-serif text-[17px] leading-relaxed max-w-[65ch] text-zinc-950 dark:text-[#F4F4F6] whitespace-pre-line">
         <RichText
           text={passageText}
           target="passage"
@@ -198,7 +198,7 @@ export const LeftPane: React.FC<LeftPaneProps> = ({
     <div 
       onMouseUp={handleSelectionEnd}
       onTouchEnd={handleSelectionEnd}
-      className={`px-4 sm:px-6 lg:px-10 py-5 sm:py-8 overflow-x-hidden bg-white dark:bg-[#070a10] text-slate-900 dark:text-white select-text passage-text ${
+      className={`px-4 sm:px-6 lg:px-8 py-5 sm:py-6 overflow-x-hidden bg-white dark:bg-[#090A0F] text-zinc-950 dark:text-[#F4F4F6] select-text passage-text ${
         isSplitView 
           ? 'h-full overflow-y-auto' 
           : 'h-auto overflow-visible'
@@ -206,11 +206,11 @@ export const LeftPane: React.FC<LeftPaneProps> = ({
     >
       {/* Annotate active mode indicator & Sticky Mobile Highlighter Bar */}
       {isAnnotateActive && (
-        <div className="sticky top-0 z-20 mb-4 pb-1 bg-white dark:bg-[#070a10]">
-          <div className="flex items-center justify-between p-2 rounded-xl bg-blue-50/80 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-800 shadow-xs">
+        <div className="sticky top-0 z-20 mb-4 pb-1 bg-white dark:bg-[#090A0F]">
+          <div className="flex items-center justify-between p-2 rounded-lg bg-zinc-100 dark:bg-[#181B24] border border-zinc-200 dark:border-[#222634]">
             <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-blue-600 animate-ping" />
-              <span className="text-xs font-semibold text-blue-700 dark:text-blue-300">
+              <span className="w-2 h-2 rounded-full bg-blue-600 dark:bg-blue-400" />
+              <span className="text-xs font-semibold text-zinc-800 dark:text-[#F4F4F6]">
                 Highlighter Active
               </span>
             </div>
@@ -246,7 +246,7 @@ export const LeftPane: React.FC<LeftPaneProps> = ({
                       onTextSelected({ target: 'passage', ...sel });
                     }
                   }}
-                  className={`w-6 h-6 rounded-full border border-gray-400 ${bg} shadow-2xs hover:scale-110 active:scale-95 transition-transform cursor-pointer`}
+                  className={`w-5 h-5 rounded-full border border-zinc-300 dark:border-zinc-600 ${bg} transition-opacity duration-150 cursor-pointer`}
                 />
               ))}
             </div>
@@ -256,14 +256,14 @@ export const LeftPane: React.FC<LeftPaneProps> = ({
 
       {/* Optional passage title */}
       {question.passageTitle && (
-        <h3 className="font-serif font-bold text-lg text-[#111827] dark:text-white mb-4">
+        <h3 className="font-serif font-semibold text-lg text-zinc-950 dark:text-[#F4F4F6] mb-4 max-w-[65ch]">
           {question.passageTitle}
         </h3>
       )}
 
       {/* Visual Graph / Table / Chart Figure Card */}
       {question.imageUrl && (
-        <div className="mb-6 p-4 bg-white dark:bg-[#0f1522] border border-slate-200 dark:border-slate-800 rounded-xl shadow-xs overflow-hidden flex flex-col items-center">
+        <div className="mb-6 p-4 bg-white dark:bg-[#11131A] border border-zinc-200 dark:border-[#222634] rounded-xl overflow-hidden flex flex-col items-center max-w-[65ch]">
           <img
             src={question.imageUrl}
             alt="Question Graph or Table"
@@ -274,7 +274,7 @@ export const LeftPane: React.FC<LeftPaneProps> = ({
       )}
 
       {/* Main passage stimulus content */}
-      <div data-annotate-target="passage" className="text-[#111827] dark:text-slate-100">
+      <div data-annotate-target="passage" className="text-zinc-950 dark:text-[#F4F4F6] max-w-[65ch]">
         {renderContent()}
       </div>
     </div>

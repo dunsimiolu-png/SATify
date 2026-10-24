@@ -106,73 +106,73 @@ export const QuestionNavModal: React.FC<QuestionNavModalProps> = ({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-end justify-center pb-20 bg-slate-950/40 backdrop-blur-2xs animate-in fade-in duration-150"
+      className="fixed inset-0 z-50 flex items-end justify-center pb-20 bg-black/40 backdrop-blur-2xs animate-in fade-in duration-150"
       onClick={onClose}
     >
       <div
         ref={containerRef}
-        className="fixed bottom-16 left-1/2 -translate-x-1/2 z-50 w-[480px] max-w-[92vw] max-h-[68vh] flex flex-col bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-800 overflow-hidden animate-in slide-in-from-bottom-4 duration-200"
+        className="fixed bottom-16 left-1/2 -translate-x-1/2 z-50 w-[480px] max-w-[92vw] max-h-[68vh] flex flex-col bg-white dark:bg-[#11131A] rounded-xl shadow-xl border border-zinc-200 dark:border-[#222634] overflow-hidden animate-in slide-in-from-bottom-3 duration-150"
         onClick={e => e.stopPropagation()}
       >
         {/* Sticky Top Header */}
-        <div className="shrink-0 px-5 py-3.5 border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/80 flex flex-col gap-2.5">
+        <div className="shrink-0 px-5 py-3 border-b border-zinc-200 dark:border-[#222634] bg-neutral-50 dark:bg-[#181B24] flex flex-col gap-2.5">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <span className="font-bold text-slate-900 dark:text-slate-100 text-sm tracking-tight">
+              <span className="font-semibold text-zinc-950 dark:text-[#F4F4F6] text-xs sm:text-sm tracking-tight">
                 {sectionTitle}
               </span>
-              <span className="text-xs px-2 py-0.5 rounded-full bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300 font-semibold">
+              <span className="text-[10px] font-mono font-semibold px-2 py-0.5 rounded border border-zinc-200 dark:border-[#222634] bg-white dark:bg-[#11131A] text-zinc-600 dark:text-[#8E95A5]">
                 {questions.length} Questions
               </span>
             </div>
             <button
               onClick={onClose}
-              className="p-1 rounded-full text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700 transition"
+              className="p-1 rounded text-zinc-400 hover:text-zinc-950 dark:hover:text-[#F4F4F6] hover:bg-zinc-100 dark:hover:bg-[#181B24] transition-colors duration-150"
               aria-label="Close question navigator"
             >
-              <X className="w-4 h-4" />
+              <X className="w-4 h-4" strokeWidth={1.75} />
             </button>
           </div>
 
           {/* Jump to # & Filter Tabs */}
-          <div className="flex items-center justify-between gap-2 pt-1">
-            <div className="flex items-center gap-1 bg-slate-200/70 dark:bg-slate-900/70 p-0.5 rounded-lg text-xs font-medium flex-wrap">
+          <div className="flex items-center justify-between gap-2 pt-0.5">
+            <div className="flex items-center gap-1 bg-zinc-100 dark:bg-[#090A0F] p-0.5 rounded-lg text-xs font-medium flex-wrap border border-zinc-200 dark:border-[#222634]">
               <button
                 onClick={() => setActiveFilter('all')}
-                className={`px-2 py-1 rounded-md transition-all ${
+                className={`px-2 py-1 rounded-md text-[11px] font-mono transition-colors duration-150 ${
                   activeFilter === 'all'
-                    ? 'bg-white dark:bg-slate-800 text-slate-900 dark:text-white shadow-2xs font-semibold'
-                    : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                    ? 'bg-white dark:bg-[#181B24] text-zinc-950 dark:text-[#F4F4F6] shadow-2xs font-semibold'
+                    : 'text-zinc-600 dark:text-[#8E95A5] hover:text-zinc-950 dark:hover:text-white'
                 }`}
               >
                 All
               </button>
               <button
                 onClick={() => setActiveFilter('answered')}
-                className={`px-2 py-1 rounded-md transition-all ${
+                className={`px-2 py-1 rounded-md text-[11px] font-mono transition-colors duration-150 ${
                   activeFilter === 'answered'
-                    ? 'bg-emerald-600 text-white shadow-2xs font-semibold'
-                    : 'text-emerald-700 dark:text-emerald-400 hover:text-emerald-800 dark:hover:text-emerald-300'
+                    ? 'bg-emerald-600 text-white font-semibold'
+                    : 'text-emerald-700 dark:text-emerald-400 hover:text-emerald-800'
                 }`}
               >
                 Answered ({answeredCount})
               </button>
               <button
                 onClick={() => setActiveFilter('unanswered')}
-                className={`px-2 py-1 rounded-md transition-all ${
+                className={`px-2 py-1 rounded-md text-[11px] font-mono transition-colors duration-150 ${
                   activeFilter === 'unanswered'
-                    ? 'bg-white dark:bg-slate-800 text-slate-900 dark:text-white shadow-2xs font-semibold'
-                    : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                    ? 'bg-white dark:bg-[#181B24] text-zinc-950 dark:text-[#F4F4F6] shadow-2xs font-semibold'
+                    : 'text-zinc-600 dark:text-[#8E95A5] hover:text-zinc-950 dark:hover:text-white'
                 }`}
               >
                 Unanswered ({unansweredCount})
               </button>
               <button
                 onClick={() => setActiveFilter('for_review')}
-                className={`px-2 py-1 rounded-md transition-all ${
+                className={`px-2 py-1 rounded-md text-[11px] font-mono transition-colors duration-150 ${
                   activeFilter === 'for_review'
-                    ? 'bg-white dark:bg-slate-800 text-slate-900 dark:text-white shadow-2xs font-semibold'
-                    : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                    ? 'bg-white dark:bg-[#181B24] text-zinc-950 dark:text-[#F4F4F6] shadow-2xs font-semibold'
+                    : 'text-zinc-600 dark:text-[#8E95A5] hover:text-zinc-950 dark:hover:text-white'
                 }`}
               >
                 Review ({forReviewCount})
@@ -180,10 +180,10 @@ export const QuestionNavModal: React.FC<QuestionNavModalProps> = ({
               {incorrectCount > 0 && (
                 <button
                   onClick={() => setActiveFilter('incorrect')}
-                  className={`px-2 py-1 rounded-md transition-all ${
+                  className={`px-2 py-1 rounded-md text-[11px] font-mono transition-colors duration-150 ${
                     activeFilter === 'incorrect'
-                      ? 'bg-rose-100 dark:bg-rose-950/80 text-rose-700 dark:text-rose-300 shadow-2xs font-semibold'
-                      : 'text-rose-600 dark:text-rose-400 hover:text-rose-700'
+                      ? 'bg-rose-100 dark:bg-rose-950/60 text-rose-700 dark:text-rose-300 font-semibold'
+                      : 'text-rose-600 dark:text-rose-400'
                   }`}
                 >
                   Mistakes ({incorrectCount})
@@ -193,21 +193,19 @@ export const QuestionNavModal: React.FC<QuestionNavModalProps> = ({
 
             {/* Jump To # Input */}
             <form onSubmit={handleJumpSubmit} className="flex items-center gap-1">
-              <div className="relative flex items-center">
-                <input
-                  type="number"
-                  min="1"
-                  max={questions.length}
-                  placeholder="Jump #"
-                  value={jumpValue}
-                  onChange={e => setJumpValue(e.target.value)}
-                  className="w-16 h-7 px-2 text-xs font-semibold text-center rounded-md border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 focus:outline-hidden focus:ring-1 focus:ring-sky-500"
-                />
-              </div>
+              <input
+                type="number"
+                min="1"
+                max={questions.length}
+                placeholder="Jump #"
+                value={jumpValue}
+                onChange={e => setJumpValue(e.target.value)}
+                className="w-16 h-7 px-2 text-xs font-mono font-semibold text-center rounded border border-zinc-200 dark:border-[#222634] bg-white dark:bg-[#11131A] text-zinc-950 dark:text-[#F4F4F6] focus:outline-hidden focus:border-blue-600 tabular-nums"
+              />
               <button
                 type="submit"
                 disabled={!jumpValue}
-                className="h-7 px-2 text-xs font-semibold rounded-md bg-slate-900 hover:bg-slate-800 dark:bg-sky-600 dark:hover:bg-sky-500 text-white disabled:opacity-40 transition"
+                className="h-7 px-2 text-xs font-mono font-semibold rounded bg-zinc-950 hover:bg-zinc-800 dark:bg-blue-600 dark:hover:bg-blue-500 text-white disabled:opacity-35 transition-colors duration-150"
               >
                 Go
               </button>
@@ -215,28 +213,28 @@ export const QuestionNavModal: React.FC<QuestionNavModalProps> = ({
           </div>
 
           {/* Authentic Legend */}
-          <div className="flex items-center justify-between text-[11px] text-slate-600 dark:text-slate-400 pt-1 select-none border-t border-slate-200/60 dark:border-slate-700/60">
+          <div className="flex items-center justify-between text-[11px] font-mono text-zinc-500 dark:text-[#8E95A5] pt-1 select-none border-t border-zinc-200/60 dark:border-[#222634]">
             <div className="flex items-center gap-1.5">
-              <MapPin className="w-3.5 h-3.5 text-sky-600 dark:text-sky-400 fill-sky-600 dark:fill-sky-400" />
+              <MapPin className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400 fill-blue-600 dark:fill-blue-400" />
               <span>Current</span>
             </div>
             <div className="flex items-center gap-1.5">
-              <div className="w-3.5 h-3.5 bg-slate-900 dark:bg-sky-600 text-white rounded-xs flex items-center justify-center text-[9px] font-bold">✓</div>
+              <div className="w-3.5 h-3.5 bg-zinc-950 dark:bg-blue-600 text-white rounded-xs flex items-center justify-center text-[9px] font-bold">✓</div>
               <span>Answered</span>
             </div>
             <div className="flex items-center gap-1.5">
-              <div className="w-3.5 h-3.5 border-2 border-dashed border-slate-400 dark:border-slate-500 rounded-xs bg-white dark:bg-slate-900" />
+              <div className="w-3.5 h-3.5 border-2 border-dashed border-zinc-400 dark:border-zinc-600 rounded-xs bg-white dark:bg-[#11131A]" />
               <span>Unanswered</span>
             </div>
             <div className="flex items-center gap-1.5">
               <Bookmark className="w-3.5 h-3.5 fill-rose-500 stroke-rose-500" />
-              <span>For Review</span>
+              <span>Review</span>
             </div>
           </div>
         </div>
 
         {/* Dedicated Scrollable Middle Container */}
-        <div className="flex-1 min-h-0 overflow-y-auto p-5 grid grid-cols-6 gap-2.5 overscroll-contain">
+        <div className="flex-1 min-h-0 overflow-y-auto p-4 grid grid-cols-6 gap-2.5 overscroll-contain">
           {filteredQuestions.map(({ q, idx }) => {
             const state = userStates[idx] || {
               selectedChoice: null,
@@ -254,10 +252,10 @@ export const QuestionNavModal: React.FC<QuestionNavModalProps> = ({
 
             return (
               <div key={q.id} className="flex flex-col items-center">
-                {/* Location Pin Indicator Above Current Question */}
-                <div className="h-3.5 flex items-center justify-center">
+                {/* Location Pin Indicator */}
+                <div className="h-3 flex items-center justify-center">
                   {isCurrent && (
-                    <MapPin className="w-3.5 h-3.5 text-sky-600 dark:text-sky-400 fill-sky-600 dark:fill-sky-400 animate-bounce" />
+                    <MapPin className="w-3 h-3 text-blue-600 dark:text-blue-400 fill-blue-600 dark:fill-blue-400" />
                   )}
                 </div>
 
@@ -269,30 +267,30 @@ export const QuestionNavModal: React.FC<QuestionNavModalProps> = ({
                     onClose();
                   }}
                   title={`Question ${q.questionNumber || idx + 1}: ${isAnswered ? 'Answered' : 'Unanswered'}${state.selectedChoice ? ` (Choice ${state.selectedChoice})` : ''}`}
-                  className={`relative w-11 h-11 rounded-lg flex items-center justify-center font-bold text-xs transition-all shadow-2xs select-none ${
+                  className={`relative w-10 h-10 rounded-lg flex items-center justify-center font-mono font-semibold text-xs transition-colors duration-150 tabular-nums select-none ${
                     isCurrent
-                      ? 'ring-2 ring-sky-500 dark:ring-sky-400 ring-offset-2 dark:ring-offset-slate-900 scale-105'
-                      : 'hover:scale-105'
+                      ? 'ring-2 ring-blue-600 dark:ring-blue-500 ring-offset-2 dark:ring-offset-[#11131A]'
+                      : ''
                   } ${
                     isIncorrect
-                      ? 'bg-rose-100 dark:bg-rose-950/80 border-2 border-rose-500 text-rose-800 dark:text-rose-200'
+                      ? 'bg-rose-50 dark:bg-rose-950/40 border border-rose-500 text-rose-700 dark:text-rose-300'
                       : isCorrect
-                      ? 'bg-emerald-100 dark:bg-emerald-950/80 border-2 border-emerald-500 text-emerald-800 dark:text-emerald-200'
+                      ? 'bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-500 text-emerald-700 dark:text-emerald-300'
                       : isAnswered
-                      ? 'bg-slate-900 dark:bg-sky-600 text-white'
-                      : 'bg-white dark:bg-slate-800 border-2 border-dashed border-slate-400 dark:border-slate-600 text-slate-700 dark:text-slate-200 hover:border-slate-600 dark:hover:border-slate-400'
+                      ? 'bg-zinc-950 dark:bg-blue-600 text-white border-transparent'
+                      : 'bg-white dark:bg-[#11131A] border-2 border-dashed border-zinc-300 dark:border-[#222634] text-zinc-700 dark:text-[#8E95A5] hover:border-zinc-400'
                   }`}
                 >
                   {/* Marked for Review Bookmark Badge */}
                   {isMarked && (
-                    <div className="absolute -top-1.5 -right-1.5 z-10">
-                      <Bookmark className="w-3.5 h-3.5 fill-rose-600 stroke-rose-600" />
+                    <div className="absolute -top-1 -right-1 z-10">
+                      <Bookmark className="w-3 h-3 fill-rose-600 stroke-rose-600" />
                     </div>
                   )}
                   {/* Answered Indicator Checkmark */}
                   {isAnswered && !isCorrect && !isIncorrect && (
-                    <div className="absolute -bottom-1 -right-1 z-10 w-3.5 h-3.5 bg-emerald-500 text-white rounded-full flex items-center justify-center shadow-xs">
-                      <Check className="w-2.5 h-2.5 stroke-[3]" />
+                    <div className="absolute -bottom-0.5 -right-0.5 z-10 w-3 h-3 bg-emerald-600 text-white rounded-full flex items-center justify-center">
+                      <Check className="w-2 h-2 stroke-[3]" />
                     </div>
                   )}
                   <span>{q.questionNumber || idx + 1}</span>
@@ -302,20 +300,20 @@ export const QuestionNavModal: React.FC<QuestionNavModalProps> = ({
           })}
 
           {filteredQuestions.length === 0 && (
-            <div className="col-span-6 py-8 text-center text-xs text-slate-500 dark:text-slate-400">
+            <div className="col-span-6 py-8 text-center text-xs font-mono text-zinc-500 dark:text-[#8E95A5]">
               No questions found in this filter.
             </div>
           )}
         </div>
 
         {/* Sticky Footer */}
-        <div className="shrink-0 px-5 py-3 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/80 flex justify-between items-center text-xs text-slate-500 dark:text-slate-400">
-          <span>Click any question to jump directly</span>
+        <div className="shrink-0 px-5 py-2.5 border-t border-zinc-200 dark:border-[#222634] bg-neutral-50 dark:bg-[#181B24] flex justify-between items-center text-xs font-mono text-zinc-500 dark:text-[#8E95A5]">
+          <span>Click any question to jump</span>
           <button
             onClick={onClose}
-            className="px-4 py-1.5 bg-slate-200 hover:bg-slate-300 dark:bg-slate-700 dark:hover:bg-slate-600 text-slate-800 dark:text-slate-100 font-semibold rounded-lg transition"
+            className="px-3 py-1 bg-white hover:bg-zinc-100 dark:bg-[#11131A] dark:hover:bg-[#202534] border border-zinc-200 dark:border-[#222634] text-zinc-800 dark:text-[#F4F4F6] font-semibold rounded-md transition-colors duration-150 cursor-pointer"
           >
-            Close Grid
+            Close
           </button>
         </div>
       </div>
