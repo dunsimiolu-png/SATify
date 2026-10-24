@@ -25,6 +25,7 @@ import {
 import { RichText } from './RichText';
 import { BulletPassage, isBulletPassage } from './BulletPassage';
 import { PairedPassage, isPairedPassage } from './PairedPassage';
+import { recordAnswer, saveQuestion } from '../utils/storage';
 
 interface QuestionRushProps {
   questions: MockQuestion[];
@@ -132,6 +133,18 @@ export const QuestionRush: React.FC<QuestionRushProps> = ({
     };
 
     setResults(prev => [...prev, resultEntry]);
+
+    // Save answered question and record stats
+    recordAnswer(
+      currentQuestion.id,
+      choiceId,
+      isCorrect,
+      currentQuestion.domain,
+      currentQuestion.skill,
+      currentQuestion.difficulty,
+      elapsedTime || 15
+    );
+    saveQuestion(currentQuestion.id);
   };
 
   // Advance to next question or show summary

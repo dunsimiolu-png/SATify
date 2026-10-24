@@ -19,7 +19,8 @@ import {
   MoreHorizontal,
   X,
   Columns,
-  Rows
+  Rows,
+  Check
 } from 'lucide-react';
 import { Logo } from './Logo';
 import { MockQuestion } from '../types/quiz';
@@ -46,6 +47,7 @@ interface HeaderProps {
   onOpenAccount?: () => void;
   onToggleLayout?: () => void;
   isTwoPane?: boolean;
+  isAnswered?: boolean;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -67,6 +69,7 @@ export const Header: React.FC<HeaderProps> = ({
   onOpenAccount,
   onToggleLayout,
   isTwoPane = true,
+  isAnswered = false,
 }) => {
   const [isTimerHidden, setIsTimerHidden] = useState<boolean>(false);
   const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
@@ -176,9 +179,17 @@ export const Header: React.FC<HeaderProps> = ({
 
           {/* Title & Directions - hidden on very small screens */}
           <div className="flex flex-col justify-center min-w-0 hidden sm:flex">
-            <span className="text-gray-900 dark:text-white font-bold text-[12px] sm:text-[14px] lg:text-[15px] tracking-tight truncate">
-              <span className="hidden lg:inline">Section 1, Module {moduleNumber}: </span>Reading & Writing
-            </span>
+            <div className="flex items-center gap-2">
+              <span className="text-gray-900 dark:text-white font-bold text-[12px] sm:text-[14px] lg:text-[15px] tracking-tight truncate">
+                <span className="hidden lg:inline">Section 1, Module {moduleNumber}: </span>Reading & Writing
+              </span>
+              {isAnswered && (
+                <span className="hidden md:inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800 animate-in fade-in">
+                  <Check className="w-3 h-3 stroke-[2.5]" />
+                  <span>Answered</span>
+                </span>
+              )}
+            </div>
             <button
               onClick={onOpenDirections}
               className="mt-0.5 text-left text-[11px] sm:text-[12px] text-gray-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 font-medium flex items-center gap-0.5 w-fit group transition-colors cursor-pointer"

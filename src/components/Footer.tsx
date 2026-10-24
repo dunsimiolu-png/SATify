@@ -8,6 +8,7 @@ interface FooterProps {
   onToggleGrid: () => void;
   onPrev: () => void;
   onNext: () => void;
+  isAnswered?: boolean;
 }
 
 export const Footer: React.FC<FooterProps> = ({
@@ -17,6 +18,7 @@ export const Footer: React.FC<FooterProps> = ({
   onToggleGrid,
   onPrev,
   onNext,
+  isAnswered = false,
 }) => {
   const isFirst = currentIndex === 0;
   const isLast = currentIndex === totalQuestions - 1;
@@ -52,6 +54,11 @@ export const Footer: React.FC<FooterProps> = ({
             <span className="font-sans font-medium">
               Question {currentIndex + 1} of {totalQuestions}
             </span>
+            {isAnswered && (
+              <span className="hidden sm:inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[10px] font-bold bg-emerald-600 text-white leading-none">
+                ✓ Answered
+              </span>
+            )}
             {isGridOpen ? (
               <ChevronDown className="w-4 h-4 text-gray-300 shrink-0" />
             ) : (

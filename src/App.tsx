@@ -37,7 +37,12 @@ import {
 import { 
   recordAnswer, 
   toggleSaveQuestion, 
-  getSavedQuestionIds 
+  saveQuestion,
+  getSavedQuestionIds,
+  getSavedUserStates,
+  saveUserState,
+  getLatestAttemptsMap,
+  isQuestionAnswered
 } from './utils/storage';
 import { GripVertical, Columns, Menu, Sun, Moon } from 'lucide-react';
 import { Logo } from './components/Logo';
@@ -189,8 +194,58 @@ export const App: React.FC = () => {
   const [isGrammarGuideOpen, setIsGrammarGuideOpen] = useState<boolean>(false);
   const [isAnnotateActive, setIsAnnotateActive] = useState<boolean>(false);
 
+  // Helper to load initial question states from persistent storage
+  const loadInitialUserStates = useCallback((questions: MockQuestion[]): Record<number, UserQuestionState> => {
+    const savedStates = getSavedUserStates();
+    const attemptsMap = getLatestAttemptsMap();
+    const savedIds = getSavedQuestionIds();
+    const map: Record<number, UserQuestionState> = {};
+
+    questions.forEach((q, idx) => {
+      const saved = savedStates[q.id];
+      const attempt = attemptsMap[q.id];
+      const isSaved = savedIds.includes(q.id);
+
+      if (saved) {
+        map[idx] = {
+          selectedChoice: saved.selectedChoice,
+          eliminatedChoices: saved.eliminatedChoices || [],
+          isMarkedForReview: saved.isMarkedForReview || isSaved,
+          isAnswerChecked: saved.isAnswerChecked || false,
+          isExplanationOpen: saved.isExplanationOpen || false,
+        };
+      } else if (attempt) {
+        map[idx] = {
+          selectedChoice: (attempt.selectedOption as 'A' | 'B' | 'C' | 'D') || null,
+          eliminatedChoices: [],
+          isMarkedForReview: isSaved,
+          isAnswerChecked: true,
+          isExplanationOpen: false,
+        };
+      } else if (isSaved) {
+        map[idx] = {
+          selectedChoice: null,
+          eliminatedChoices: [],
+          isMarkedForReview: true,
+          isAnswerChecked: false,
+          isExplanationOpen: false,
+        };
+      }
+    });
+
+    return map;
+  }, []);
+
   // Per-question state map (user answers, review flags)
-  const [userStates, setUserStates] = useState<Record<number, UserQuestionState>>({});
+  const [userStates, setUserStates] = useState<Record<number, UserQuestionState>>(() => loadInitialUserStates(allEnglishQuestions));
+
+  // Sync initial user states when session questions change or storage updates
+  useEffect(() => {
+    setUserStates(prev => {
+      const loaded = loadInitialUserStates(sessionQuestions);
+      return { ...loaded, ...prev };
+    });
+  }, [sessionQuestions, storageVersion, loadInitialUserStates]);
 
   // Annotations & Highlights state by question ID (Session-only; resets when leaving practice or returning to dashboard)
   const [highlightsByQuestion, setHighlightsByQuestion] = useState<Record<string, TextHighlight[]>>({});
@@ -222,6 +277,7 @@ export const App: React.FC = () => {
     isAnswerChecked: false,
     isExplanationOpen: false,
   };
+  const isCurrentAnswered = currentState.selectedChoice !== null || currentState.isAnswerChecked || isQuestionAnswered(currentQuestion.id);
   const currentHighlights = highlightsByQuestion[currentQuestion?.id || ''] || [];
 
   // State update helper
@@ -240,36 +296,65 @@ export const App: React.FC = () => {
 
   // Choice Selection (Multiple Choice)
   const handleSelectChoice = useCallback((choice: 'A' | 'B' | 'C' | 'D') => {
-    updateCurrentState(prev => ({
-      ...prev,
-      selectedChoice: prev.selectedChoice === choice ? null : choice,
-      eliminatedChoices: prev.eliminatedChoices.filter(c => c !== choice),
-    }));
-  }, [updateCurrentState]);
+    updateCurrentState(prev => {
+      const isDeselecting = prev.selectedChoice === choice;
+      const nextChoice = isDeselecting ? null : choice;
+      const nextState: UserQuestionState = {
+        ...prev,
+        selectedChoice: nextChoice,
+        eliminatedChoices: prev.eliminatedChoices.filter(c => c !== choice),
+      };
+
+      // Persist to storage
+      saveUserState(currentQuestion.id, nextState);
+
+      // Auto-save question and record answer when answered
+      if (nextChoice !== null) {
+        saveQuestion(currentQuestion.id);
+        recordAnswer(
+          currentQuestion.id,
+          nextChoice,
+          nextChoice === currentQuestion.correctAnswer,
+          currentQuestion.domain,
+          currentQuestion.skill,
+          currentQuestion.difficulty,
+          30
+        );
+      }
+
+      return nextState;
+    });
+  }, [updateCurrentState, currentQuestion]);
 
   // Choice Elimination (ABC mode)
   const handleToggleEliminate = useCallback((choice: 'A' | 'B' | 'C' | 'D') => {
     updateCurrentState(prev => {
       const isEliminated = prev.eliminatedChoices.includes(choice);
-      return {
+      const nextEliminated = isEliminated
+        ? prev.eliminatedChoices.filter(c => c !== choice)
+        : [...prev.eliminatedChoices, choice];
+      const nextChoice = prev.selectedChoice === choice ? null : prev.selectedChoice;
+      const nextState: UserQuestionState = {
         ...prev,
-        eliminatedChoices: isEliminated
-          ? prev.eliminatedChoices.filter(c => c !== choice)
-          : [...prev.eliminatedChoices, choice],
-        selectedChoice: prev.selectedChoice === choice ? null : prev.selectedChoice,
+        eliminatedChoices: nextEliminated,
+        selectedChoice: nextChoice,
       };
+      saveUserState(currentQuestion.id, nextState);
+      return nextState;
     });
-  }, [updateCurrentState]);
+  }, [updateCurrentState, currentQuestion.id]);
 
   // Mark for Review & Bookmark in LocalStorage
   const handleToggleMarkForReview = useCallback(() => {
     updateCurrentState(prev => {
       const nextReview = !prev.isMarkedForReview;
       toggleSaveQuestion(currentQuestion.id);
-      return {
+      const nextState: UserQuestionState = {
         ...prev,
         isMarkedForReview: nextReview,
       };
+      saveUserState(currentQuestion.id, nextState);
+      return nextState;
     });
   }, [updateCurrentState, currentQuestion.id]);
 
@@ -289,12 +374,19 @@ export const App: React.FC = () => {
       timeSpentSeconds || 30
     );
 
-    updateCurrentState(prev => ({
-      ...prev,
+    // Save answered question to bookmarks
+    saveQuestion(currentQuestion.id);
+
+    const nextState: UserQuestionState = {
+      ...currentState,
       isAnswerChecked: true,
       isExplanationOpen: true,
-    }));
-  }, [currentState.selectedChoice, currentQuestion, updateCurrentState]);
+    };
+
+    saveUserState(currentQuestion.id, nextState);
+
+    updateCurrentState(() => nextState);
+  }, [currentState, currentQuestion, updateCurrentState]);
 
   // Toggle Explanation Drawer
   const handleToggleExplanation = useCallback(() => {
@@ -423,9 +515,10 @@ export const App: React.FC = () => {
   const handleStartSkillPractice = useCallback((skillName: string, domainName: string) => {
     // Strictly filter by exact skill and canonical domain
     const filtered = allQuestions.filter(q => q.skill === skillName && (!domainName || q.domain === domainName));
-    setSessionQuestions(filtered.length > 0 ? filtered : allQuestions.filter(q => q.skill === skillName));
+    const targetPool = filtered.length > 0 ? filtered : allQuestions.filter(q => q.skill === skillName);
+    setSessionQuestions(targetPool);
     setCurrentQuestionIndex(0);
-    setUserStates({});
+    setUserStates(loadInitialUserStates(targetPool));
     setFilterConfig({
       test: 'SAT',
       masterCategory: true,
@@ -437,17 +530,17 @@ export const App: React.FC = () => {
       hideAnswered: false,
     });
     setCurrentRoute('practice');
-  }, [allQuestions]);
+  }, [allQuestions, loadInitialUserStates]);
 
   // Launch custom practice from saved/mistakes
   const handleStartCustomPractice = useCallback((selectedQs: MockQuestion[]) => {
     if (selectedQs.length > 0) {
       setSessionQuestions(selectedQs);
       setCurrentQuestionIndex(0);
-      setUserStates({});
+      setUserStates(loadInitialUserStates(selectedQs));
       setCurrentRoute('practice');
     }
-  }, []);
+  }, [loadInitialUserStates]);
 
   // Practice session configuration started from SetupDashboard
   const handleStartPractice = useCallback((filtered: MockQuestion[], config: EnglishFilterConfig) => {
@@ -457,12 +550,13 @@ export const App: React.FC = () => {
     if (config.selectedSkills && config.selectedSkills.length > 0) {
       pool = pool.filter(q => config.selectedSkills.includes(q.skill) && (!config.selectedDomains || config.selectedDomains.includes(q.domain)));
     }
-    setSessionQuestions(pool.length > 0 ? pool : filtered);
+    const targetPool = pool.length > 0 ? pool : filtered;
+    setSessionQuestions(targetPool);
     setCurrentQuestionIndex(0);
-    setUserStates({});
+    setUserStates(loadInitialUserStates(targetPool));
     setIsSetupOpen(false);
     setCurrentRoute('practice');
-  }, []);
+  }, [loadInitialUserStates]);
 
   // Passage text selection listener from LeftPane
   const handleTextSelected = useCallback((data: {
@@ -801,6 +895,7 @@ export const App: React.FC = () => {
               onOpenNav={() => setIsMobileNavOpen(true)}
               currentQuestion={currentQuestion}
               isAnswerChecked={currentState.isAnswerChecked}
+              isAnswered={isCurrentAnswered}
               user={currentUser}
               onOpenLogin={() => setIsLoginModalOpen(true)}
               onOpenAccount={() => setIsAccountModalOpen(true)}
@@ -937,6 +1032,7 @@ export const App: React.FC = () => {
               onToggleGrid={() => setIsGridOpen(!isGridOpen)}
               onPrev={handlePrev}
               onNext={handleNext}
+              isAnswered={isCurrentAnswered}
             />
           </div>
         )}

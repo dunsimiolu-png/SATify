@@ -1,4 +1,5 @@
 import { getCurrentUser } from './auth';
+import { UserQuestionState } from '../types/quiz';
 
 export interface AttemptRecord {
   questionId: string;
@@ -159,6 +160,9 @@ export function recordAttempt(attempt: AttemptRecord): void {
 
     updateStudyStreak();
 
+    // Auto-save question so answered questions are saved in bookmarks
+    saveQuestion(attempt.questionId);
+
     // Trigger reactive update across open components
     window.dispatchEvent(new CustomEvent('satify_storage_update'));
     queueCloudSync();
@@ -291,6 +295,71 @@ export function toggleSaveQuestion(id: string): boolean {
   } catch (e) {
     return false;
   }
+}
+
+export function saveQuestion(id: string): boolean {
+  if (typeof window === 'undefined') return false;
+  try {
+    const list = getSavedQuestionIds();
+    if (!list.includes(id)) {
+      const updated = [...list, id];
+      const key = getScopedKey(STORAGE_KEYS.SAVED);
+      localStorage.setItem(key, JSON.stringify(updated));
+      window.dispatchEvent(new CustomEvent('satify_storage_update'));
+      queueCloudSync();
+      return true;
+    }
+    return false;
+  } catch (e) {
+    return false;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Per-Question User State Store (Scoped to active user account)
+// -----------------------------------------------------------------------------
+export function getSavedUserStates(): Record<string, UserQuestionState> {
+  if (typeof window === 'undefined') return {};
+  try {
+    const key = getScopedKey(STORAGE_KEYS.USER_STATES);
+    let raw = localStorage.getItem(key);
+    if (!raw && getUserScope() === 'guest') {
+      raw = localStorage.getItem(STORAGE_KEYS.USER_STATES);
+    }
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (typeof parsed === 'object' && parsed !== null) return parsed;
+    }
+    return {};
+  } catch (e) {
+    return {};
+  }
+}
+
+export function saveUserState(questionId: string, state: UserQuestionState): void {
+  if (typeof window === 'undefined') return;
+  try {
+    const map = getSavedUserStates();
+    map[questionId] = state;
+    const key = getScopedKey(STORAGE_KEYS.USER_STATES);
+    localStorage.setItem(key, JSON.stringify(map));
+    window.dispatchEvent(new CustomEvent('satify_storage_update'));
+  } catch (e) {
+    console.error('Failed to save user state:', e);
+  }
+}
+
+export function getSavedUserState(questionId: string): UserQuestionState | undefined {
+  const map = getSavedUserStates();
+  return map[questionId];
+}
+
+export function isQuestionAnswered(questionId: string): boolean {
+  const attempts = getLatestAttemptsMap();
+  if (attempts[questionId] && attempts[questionId].selectedOption) return true;
+  const states = getSavedUserStates();
+  if (states[questionId] && states[questionId].selectedChoice !== null) return true;
+  return false;
 }
 
 // -----------------------------------------------------------------------------
@@ -748,11 +817,23 @@ export function migrateGuestDataToUser(): void {
       } catch {}
     }
 
+    const guestStatesRaw = localStorage.getItem(`${STORAGE_KEYS.USER_STATES}_guest`) || localStorage.getItem(STORAGE_KEYS.USER_STATES);
+    if (guestStatesRaw) {
+      try {
+        const guestStates = JSON.parse(guestStatesRaw);
+        const userStates = getSavedUserStates();
+        localStorage.setItem(getScopedKey(STORAGE_KEYS.USER_STATES), JSON.stringify({ ...guestStates, ...userStates }));
+        hasGuestData = true;
+      } catch {}
+    }
+
     if (hasGuestData) {
       localStorage.removeItem(`${STORAGE_KEYS.ATTEMPTS}_guest`);
       localStorage.removeItem(STORAGE_KEYS.ATTEMPTS);
       localStorage.removeItem(`${STORAGE_KEYS.SAVED}_guest`);
       localStorage.removeItem(STORAGE_KEYS.SAVED);
+      localStorage.removeItem(`${STORAGE_KEYS.USER_STATES}_guest`);
+      localStorage.removeItem(STORAGE_KEYS.USER_STATES);
     }
   } catch (e) {
     console.warn('Guest migration error:', e);

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Bookmark, MapPin, X } from 'lucide-react';
+import { Bookmark, MapPin, X, Check } from 'lucide-react';
 import { MockQuestion, UserQuestionState } from '../types/quiz';
+import { isQuestionAnswered } from '../utils/storage';
 
 interface QuestionNavModalProps {
   isOpen: boolean;
@@ -12,7 +13,7 @@ interface QuestionNavModalProps {
   sectionTitle?: string;
 }
 
-type FilterTab = 'all' | 'unanswered' | 'for_review' | 'incorrect';
+type FilterTab = 'all' | 'answered' | 'unanswered' | 'for_review' | 'incorrect';
 
 export const QuestionNavModal: React.FC<QuestionNavModalProps> = ({
   isOpen,
@@ -64,10 +65,11 @@ export const QuestionNavModal: React.FC<QuestionNavModalProps> = ({
       isAnswerChecked: false,
       isExplanationOpen: false,
     };
-    const isAnswered = state.selectedChoice !== null;
+    const isAnswered = state.selectedChoice !== null || isQuestionAnswered(q.id);
     const isMarked = state.isMarkedForReview;
     const isIncorrect = state.isAnswerChecked && state.selectedChoice !== null && state.selectedChoice !== q.correctAnswer;
 
+    if (activeFilter === 'answered') return isAnswered;
     if (activeFilter === 'unanswered') return !isAnswered;
     if (activeFilter === 'for_review') return isMarked;
     if (activeFilter === 'incorrect') return isIncorrect;
@@ -84,12 +86,18 @@ export const QuestionNavModal: React.FC<QuestionNavModalProps> = ({
   };
 
   // Counts for tabs
+  let answeredCount = 0;
   let unansweredCount = 0;
   let forReviewCount = 0;
   let incorrectCount = 0;
   questions.forEach((q, idx) => {
     const state = userStates[idx];
-    if (!state || state.selectedChoice === null) unansweredCount++;
+    const isAns = (state && state.selectedChoice !== null) || isQuestionAnswered(q.id);
+    if (isAns) {
+      answeredCount++;
+    } else {
+      unansweredCount++;
+    }
     if (state?.isMarkedForReview) forReviewCount++;
     if (state?.isAnswerChecked && state.selectedChoice !== null && state.selectedChoice !== q.correctAnswer) {
       incorrectCount++;
@@ -128,7 +136,7 @@ export const QuestionNavModal: React.FC<QuestionNavModalProps> = ({
 
           {/* Jump to # & Filter Tabs */}
           <div className="flex items-center justify-between gap-2 pt-1">
-            <div className="flex items-center gap-1 bg-slate-200/70 dark:bg-slate-900/70 p-0.5 rounded-lg text-xs font-medium">
+            <div className="flex items-center gap-1 bg-slate-200/70 dark:bg-slate-900/70 p-0.5 rounded-lg text-xs font-medium flex-wrap">
               <button
                 onClick={() => setActiveFilter('all')}
                 className={`px-2 py-1 rounded-md transition-all ${
@@ -138,6 +146,16 @@ export const QuestionNavModal: React.FC<QuestionNavModalProps> = ({
                 }`}
               >
                 All
+              </button>
+              <button
+                onClick={() => setActiveFilter('answered')}
+                className={`px-2 py-1 rounded-md transition-all ${
+                  activeFilter === 'answered'
+                    ? 'bg-emerald-600 text-white shadow-2xs font-semibold'
+                    : 'text-emerald-700 dark:text-emerald-400 hover:text-emerald-800 dark:hover:text-emerald-300'
+                }`}
+              >
+                Answered ({answeredCount})
               </button>
               <button
                 onClick={() => setActiveFilter('unanswered')}
@@ -228,7 +246,7 @@ export const QuestionNavModal: React.FC<QuestionNavModalProps> = ({
               isExplanationOpen: false,
             };
             const isCurrent = idx === currentIndex;
-            const isAnswered = state.selectedChoice !== null;
+            const isAnswered = state.selectedChoice !== null || isQuestionAnswered(q.id);
             const isMarked = state.isMarkedForReview;
             const isChecked = state.isAnswerChecked;
             const isCorrect = isChecked && state.selectedChoice === q.correctAnswer;
@@ -250,6 +268,7 @@ export const QuestionNavModal: React.FC<QuestionNavModalProps> = ({
                     onSelectQuestion(idx);
                     onClose();
                   }}
+                  title={`Question ${q.questionNumber || idx + 1}: ${isAnswered ? 'Answered' : 'Unanswered'}${state.selectedChoice ? ` (Choice ${state.selectedChoice})` : ''}`}
                   className={`relative w-11 h-11 rounded-lg flex items-center justify-center font-bold text-xs transition-all shadow-2xs select-none ${
                     isCurrent
                       ? 'ring-2 ring-sky-500 dark:ring-sky-400 ring-offset-2 dark:ring-offset-slate-900 scale-105'
@@ -268,6 +287,12 @@ export const QuestionNavModal: React.FC<QuestionNavModalProps> = ({
                   {isMarked && (
                     <div className="absolute -top-1.5 -right-1.5 z-10">
                       <Bookmark className="w-3.5 h-3.5 fill-rose-600 stroke-rose-600" />
+                    </div>
+                  )}
+                  {/* Answered Indicator Checkmark */}
+                  {isAnswered && !isCorrect && !isIncorrect && (
+                    <div className="absolute -bottom-1 -right-1 z-10 w-3.5 h-3.5 bg-emerald-500 text-white rounded-full flex items-center justify-center shadow-xs">
+                      <Check className="w-2.5 h-2.5 stroke-[3]" />
                     </div>
                   )}
                   <span>{q.questionNumber || idx + 1}</span>

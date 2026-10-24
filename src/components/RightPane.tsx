@@ -108,6 +108,7 @@ export const RightPane: React.FC<RightPaneProps> = ({
     );
   };
 
+  const isAnswered = userState.selectedChoice !== null || userState.isAnswerChecked;
   const isSelectedCorrect = userState.selectedChoice === question.correctAnswer;
   const rationaleText = typeof question.rationale === 'string' 
     ? question.rationale 
@@ -172,6 +173,17 @@ export const RightPane: React.FC<RightPaneProps> = ({
             )}
           </button>
 
+          {/* Answered Status Pill in Metadata Strip */}
+          {isAnswered && (
+            <div
+              className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-50 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800 shadow-2xs animate-in fade-in"
+              title={`Question is answered${userState.selectedChoice ? ` with Choice ${userState.selectedChoice}` : ''}`}
+            >
+              <Check className="w-3 h-3 stroke-[2.5]" />
+              <span>Answered{userState.selectedChoice ? ` (${userState.selectedChoice})` : ''}</span>
+            </div>
+          )}
+
           {/* Live Per-Question Pace Pill */}
           <div
             className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-mono font-bold border transition-colors ${paceColor.badgeClass}`}
@@ -203,11 +215,19 @@ export const RightPane: React.FC<RightPaneProps> = ({
 
       {/* 2. Bluebook Question Header Bar */}
       <div className="w-full bg-slate-100 border-b border-dashed border-slate-300 text-slate-800 dark:bg-[#111827] dark:border-slate-700 dark:text-slate-100 flex items-center justify-between pr-3 select-none">
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3">
           {/* Question Number Square */}
           <div className="w-8 h-8 bg-slate-900 text-white dark:bg-blue-600 dark:text-white font-bold text-sm flex items-center justify-center shrink-0">
             {question.questionNumber}
           </div>
+
+          {/* Answered Indicator Badge */}
+          {isAnswered && (
+            <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded text-xs font-bold bg-emerald-600 text-white shadow-xs animate-in fade-in">
+              <Check className="w-3.5 h-3.5 stroke-[3]" />
+              <span>Answered</span>
+            </span>
+          )}
 
           {/* Mark for Review Toggle */}
           <button
@@ -345,6 +365,13 @@ export const RightPane: React.FC<RightPaneProps> = ({
             <span>{userState.isAnswerChecked ? 'Recheck Answer' : 'Check Answer'}</span>
           </button>
 
+          {isAnswered && !userState.isAnswerChecked && (
+            <span className="text-xs font-semibold px-3 py-1 rounded-full bg-blue-50 text-blue-800 dark:bg-blue-950/40 dark:text-blue-300 flex items-center gap-1.5 border border-blue-200 dark:border-blue-800 animate-in fade-in">
+              <Check className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400 stroke-[2.5]" />
+              <span>Answered (Option {userState.selectedChoice})</span>
+            </span>
+          )}
+
           {userState.isAnswerChecked && (
             <>
               <span
@@ -356,11 +383,11 @@ export const RightPane: React.FC<RightPaneProps> = ({
               >
                 {isSelectedCorrect ? (
                   <>
-                    <CheckCircle className="w-4 h-4 text-emerald-600 dark:text-emerald-400" /> Correct
+                    <CheckCircle className="w-4 h-4 text-emerald-600 dark:text-emerald-400" /> Answered • Correct
                   </>
                 ) : (
                   <>
-                    <XCircle className="w-4 h-4 text-rose-600 dark:text-rose-400" /> Incorrect (Answer: Option {question.correctAnswer})
+                    <XCircle className="w-4 h-4 text-rose-600 dark:text-rose-400" /> Answered • Incorrect (Answer: Option {question.correctAnswer})
                   </>
                 )}
               </span>
