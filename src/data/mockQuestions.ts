@@ -1,5 +1,6 @@
 import rawQuestions from './questions.json';
 import { MockQuestion } from '../types/quiz';
+import { normalizeExplanationText } from '../utils/formatExplanation';
 
 export const allEnglishQuestions: MockQuestion[] = (rawQuestions as any[]).map((q, idx) => ({
   id: q.id,
@@ -26,7 +27,7 @@ export const allEnglishQuestions: MockQuestion[] = (rawQuestions as any[]).map((
     text: opt.text,
   })),
   correctAnswer: q.correctAnswer,
-  rationale: q.rationale,
+  rationale: typeof q.rationale === 'string' ? normalizeExplanationText(q.rationale) : q.rationale,
 }));
 
 export const mockQuestions: MockQuestion[] = allEnglishQuestions.slice(0, 25);

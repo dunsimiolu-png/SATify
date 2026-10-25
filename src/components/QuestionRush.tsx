@@ -25,6 +25,7 @@ import {
 import { RichText } from './RichText';
 import { BulletPassage, isBulletPassage } from './BulletPassage';
 import { PairedPassage, isPairedPassage } from './PairedPassage';
+import { ExplanationRenderer } from './ExplanationRenderer';
 import { recordAnswer, saveQuestion } from '../utils/storage';
 
 interface QuestionRushProps {
@@ -471,8 +472,8 @@ export const QuestionRush: React.FC<QuestionRushProps> = ({
                     </button>
 
                     {showRationale && (
-                      <div className="mt-2.5 p-4 rounded-xl bg-slate-50 dark:bg-[#070a10] border border-slate-200 dark:border-slate-800 text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-serif animate-in fade-in">
-                        <RichText text={typeof currentQuestion.rationale === 'string' ? currentQuestion.rationale : currentQuestion.rationale?.summary || ''} />
+                      <div className="mt-2.5 p-4 rounded-xl bg-slate-50 dark:bg-[#070a10] border border-slate-200 dark:border-slate-800 animate-in fade-in">
+                        <ExplanationRenderer rationale={currentQuestion.rationale} />
                       </div>
                     )}
                   </div>

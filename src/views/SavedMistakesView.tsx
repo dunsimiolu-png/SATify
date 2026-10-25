@@ -13,6 +13,7 @@ import {
 } from 'lucide-react';
 import { MockQuestion, AnswerChoice } from '../types/quiz';
 import { RichText } from '../components/RichText';
+import { ExplanationRenderer } from '../components/ExplanationRenderer';
 import { 
   getSavedQuestionIds, 
   getLatestAttemptsMap,
@@ -391,14 +392,12 @@ export const SavedMistakesView: React.FC<SavedMistakesViewProps> = ({
 
                     {/* Official Rationale / Explanation */}
                     {q.rationale && (
-                      <div className="p-4 bg-blue-50/80 border border-blue-200 rounded-xl space-y-2">
-                        <div className="flex items-center gap-2 text-[#0050d8] font-bold text-xs uppercase tracking-wider">
+                      <div className="p-4 bg-blue-50/80 dark:bg-[#0f1522] border border-blue-200 dark:border-slate-800 rounded-xl space-y-2">
+                        <div className="flex items-center gap-2 text-[#0050d8] dark:text-blue-400 font-bold text-xs uppercase tracking-wider mb-2">
                           <HelpCircle className="w-4 h-4" />
                           <span>Official Explanation & Rationale</span>
                         </div>
-                        <div className="font-serif text-sm text-gray-800 leading-relaxed whitespace-pre-line">
-                          <RichText text={typeof q.rationale === 'string' ? q.rationale : q.rationale.summary} />
-                        </div>
+                        <ExplanationRenderer rationale={q.rationale} />
                       </div>
                     )}
                   </div>

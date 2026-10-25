@@ -226,7 +226,9 @@ function cleanText(text) {
   });
 
   // Single capital letters separated from lowercase word body (e.g. "T est", "V erne", "T rek", "T opaz")
-  res = res.replace(/\b([B-HJ-NP-Z])\s+([a-z]{2,})\b/g, '$1$2');
+  // Exclude Choice [A-D] so "Choice B is" never becomes "Choice Bis"
+  res = res.replace(/(?<!\bChoice\s+)\b([B-HJ-NP-Z])\s+([a-z]{2,})\b/g, '$1$2');
+  res = res.replace(/\b(Choice\s+[A-D])(?=[a-zA-Z])/g, '$1 ');
 
   // Specific poem & contraction repairs
   res = res

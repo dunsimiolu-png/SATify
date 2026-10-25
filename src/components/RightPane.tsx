@@ -17,6 +17,7 @@ import {
 } from 'lucide-react';
 import { MockQuestion, UserQuestionState, AnswerChoice, TextHighlight } from '../types/quiz';
 import { RichText } from './RichText';
+import { ExplanationRenderer } from './ExplanationRenderer';
 import { getQuestionTargetSeconds, getPacePillColor, formatSecondsToPace } from '../utils/pacingTargets';
 import { isQuestionAnswered } from '../utils/storage';
 
@@ -119,7 +120,7 @@ export const RightPane: React.FC<RightPaneProps> = ({
     <div className={`px-4 sm:px-6 lg:px-10 py-5 sm:py-6 overflow-x-hidden bg-white dark:bg-[#070a10] text-slate-900 dark:text-white select-text question-stem ${
       isSplitView
         ? 'h-full overflow-y-auto pb-24'
-        : 'h-auto overflow-visible pb-36'
+        : 'h-auto overflow-visible pb-20'
     }`}>
       {/* 1. Metadata Ribbon (Above Question Strip) */}
       <div className="mb-4 flex items-center justify-between gap-3 text-xs flex-wrap select-none">
@@ -447,12 +448,10 @@ export const RightPane: React.FC<RightPaneProps> = ({
           </div>
 
           <div className="mb-2">
-            <div className="font-sans font-semibold text-xs text-slate-600 dark:text-slate-400 uppercase tracking-wider mb-1.5">
+            <div className="font-sans font-semibold text-xs text-slate-600 dark:text-slate-400 uppercase tracking-wider mb-2">
               Correct Answer: Option {question.correctAnswer}
             </div>
-            <div className="font-serif text-[15px] leading-relaxed text-slate-800 dark:text-slate-200">
-              <RichText text={rationaleText} />
-            </div>
+            <ExplanationRenderer rationale={rationaleText} />
           </div>
         </div>
       )}
