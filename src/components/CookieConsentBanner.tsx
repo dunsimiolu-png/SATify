@@ -123,21 +123,21 @@ export const CookieConsentBanner: React.FC = () => {
       {isOpen && !isCustomizeModalOpen && (
         <aside 
           aria-label="Cookie consent banner"
-          className="fixed bottom-4 left-4 right-4 md:left-auto md:right-6 md:max-w-xl z-50 bg-white dark:bg-[#0f1522] border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-2xl animate-in slide-in-from-bottom duration-300 text-slate-900 dark:text-white"
+          className="fixed bottom-4 left-4 right-4 md:left-auto md:right-6 md:max-w-xl z-50 bg-white/95 dark:bg-[#11131A]/95 backdrop-blur-md border border-zinc-200/90 dark:border-[#222634] rounded-2xl p-5 shadow-2xl animate-in slide-in-from-bottom duration-300 text-zinc-950 dark:text-[#F4F4F6]"
         >
           <div className="flex items-start gap-3.5">
-            <div className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-800 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0">
+            <div className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-800 text-blue-700 dark:text-blue-400 flex items-center justify-center shrink-0">
               <Cookie className="w-5 h-5" />
             </div>
 
             <div className="flex-1 space-y-1.5">
               <div className="flex items-center justify-between">
-                <h4 className="font-extrabold text-sm sm:text-base text-slate-900 dark:text-white flex items-center gap-1.5">
+                <h4 className="font-bold text-sm sm:text-base text-zinc-950 dark:text-[#F4F4F6] flex items-center gap-1.5">
                   <span>Cookie & Privacy Preferences</span>
                 </h4>
                 <button
                   onClick={() => setIsOpen(false)}
-                  className="p-1 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition cursor-pointer"
+                  className="p-1.5 rounded-lg text-zinc-400 hover:text-zinc-950 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-[#181B24] transition-all duration-150 active:scale-90 cursor-pointer"
                   title="Dismiss banner"
                   aria-label="Dismiss banner"
                 >
@@ -145,21 +145,21 @@ export const CookieConsentBanner: React.FC = () => {
                 </button>
               </div>
 
-              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+              <p className="text-xs sm:text-sm text-zinc-600 dark:text-[#8E95A5] leading-relaxed">
                 We use cookies and local sessions to keep you signed in, preserve your practice progress and question notes, and calibrate your Digital SAT analytics.
               </p>
 
               <div className="pt-3 flex flex-wrap items-center gap-2">
                 <button
                   onClick={handleAcceptAll}
-                  className="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs transition shadow-xs cursor-pointer active:scale-95"
+                  className="px-4 py-2 rounded-xl bg-blue-700 hover:bg-blue-800 text-white dark:bg-blue-600 dark:hover:bg-blue-500 font-semibold text-xs transition-all duration-150 shadow-xs hover:shadow cursor-pointer active:scale-95"
                 >
                   Accept All
                 </button>
 
                 <button
                   onClick={handleEssentialOnly}
-                  className="px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-semibold text-xs transition cursor-pointer active:scale-95"
+                  className="px-3.5 py-2 rounded-xl bg-zinc-100 hover:bg-zinc-200 dark:bg-[#181B24] dark:hover:bg-[#202534] text-zinc-700 dark:text-[#8E95A5] hover:text-zinc-950 dark:hover:text-white font-semibold text-xs transition-all duration-150 cursor-pointer active:scale-95 border border-zinc-200 dark:border-[#222634]"
                 >
                   Essential Only
                 </button>

@@ -813,8 +813,8 @@ export const App: React.FC = () => {
       {/* 4. Main Content Area */}
       <div className="flex-1 h-full overflow-hidden flex flex-col">
         <React.Suspense fallback={
-          <div className="flex-1 flex items-center justify-center min-h-[300px] w-full bg-white dark:bg-[#070a10]">
-            <div className="w-8 h-8 border-3 border-blue-600 border-t-transparent rounded-full animate-spin" />
+          <div className="flex-1 flex items-center justify-center min-h-[300px] w-full bg-neutral-50 dark:bg-[#090A0F] animate-in fade-in duration-150">
+            <div className="w-7 h-7 border-2 border-blue-600 dark:border-blue-500 border-t-transparent rounded-full animate-spin" />
           </div>
         }>
           {currentRoute === 'home' && (
@@ -1090,7 +1090,7 @@ export const App: React.FC = () => {
       {/* Floating Global Auth & Notification Toast */}
       {toastMessage && (
         <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 animate-in fade-in slide-in-from-bottom-3 duration-200 pointer-events-none">
-          <div className="px-4 py-2.5 rounded-full bg-slate-900/95 dark:bg-white/95 text-white dark:text-slate-900 font-bold text-xs sm:text-sm shadow-2xl flex items-center gap-2 border border-slate-700/50 dark:border-slate-300">
+          <div className="px-4 py-2 rounded-full bg-zinc-950/95 dark:bg-white/95 text-white dark:text-zinc-950 font-semibold text-xs sm:text-sm shadow-2xl backdrop-blur-md flex items-center gap-2 border border-zinc-800/80 dark:border-zinc-200/80">
             <span>{toastMessage}</span>
           </div>
         </div>

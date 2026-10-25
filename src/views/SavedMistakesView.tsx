@@ -118,7 +118,7 @@ export const SavedMistakesView: React.FC<SavedMistakesViewProps> = ({
         {displayedQuestions.length > 0 && (
           <button
             onClick={handlePracticeAll}
-            className="flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-700 hover:bg-blue-800 text-white dark:bg-blue-600 dark:hover:bg-blue-500 font-semibold text-xs transition-colors duration-150 cursor-pointer w-fit"
+            className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-blue-700 hover:bg-blue-800 text-white dark:bg-blue-600 dark:hover:bg-blue-500 font-semibold text-xs shadow-xs hover:shadow transition-all duration-150 active:scale-95 cursor-pointer w-fit"
           >
             <Play className="w-3.5 h-3.5 fill-current" />
             <span>
@@ -135,12 +135,12 @@ export const SavedMistakesView: React.FC<SavedMistakesViewProps> = ({
       {/* Tabs & Search Filter Strip */}
       <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
         {/* Toggle Pill */}
-        <div className="inline-flex p-0.5 bg-white dark:bg-[#11131A] border border-zinc-200 dark:border-[#222634] rounded-lg shadow-2xs flex-wrap gap-1">
+        <div className="inline-flex p-1 bg-white dark:bg-[#11131A] border border-zinc-200 dark:border-[#222634] rounded-xl shadow-2xs flex-wrap gap-1">
           <button
             onClick={() => setTab('answered')}
-            className={`flex items-center gap-2 px-3 py-1.5 rounded-md text-xs font-mono font-medium transition-colors duration-150 ${
+            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono font-medium transition-all duration-150 active:scale-95 cursor-pointer ${
               tab === 'answered'
-                ? 'bg-blue-700 text-white dark:bg-blue-600 font-semibold shadow-2xs'
+                ? 'bg-blue-700 text-white dark:bg-blue-600 font-semibold shadow-xs'
                 : 'text-zinc-600 dark:text-[#8E95A5] hover:text-zinc-950 dark:hover:text-white'
             }`}
           >
@@ -150,9 +150,9 @@ export const SavedMistakesView: React.FC<SavedMistakesViewProps> = ({
 
           <button
             onClick={() => setTab('mistakes')}
-            className={`flex items-center gap-2 px-3 py-1.5 rounded-md text-xs font-mono font-medium transition-colors duration-150 ${
+            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono font-medium transition-all duration-150 active:scale-95 cursor-pointer ${
               tab === 'mistakes'
-                ? 'bg-blue-700 text-white dark:bg-blue-600 font-semibold shadow-2xs'
+                ? 'bg-blue-700 text-white dark:bg-blue-600 font-semibold shadow-xs'
                 : 'text-zinc-600 dark:text-[#8E95A5] hover:text-zinc-950 dark:hover:text-white'
             }`}
           >
@@ -162,9 +162,9 @@ export const SavedMistakesView: React.FC<SavedMistakesViewProps> = ({
 
           <button
             onClick={() => setTab('saved')}
-            className={`flex items-center gap-2 px-3 py-1.5 rounded-md text-xs font-mono font-medium transition-colors duration-150 ${
+            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono font-medium transition-all duration-150 active:scale-95 cursor-pointer ${
               tab === 'saved'
-                ? 'bg-blue-700 text-white dark:bg-blue-600 font-semibold shadow-2xs'
+                ? 'bg-blue-700 text-white dark:bg-blue-600 font-semibold shadow-xs'
                 : 'text-zinc-600 dark:text-[#8E95A5] hover:text-zinc-950 dark:hover:text-white'
             }`}
           >
@@ -176,20 +176,20 @@ export const SavedMistakesView: React.FC<SavedMistakesViewProps> = ({
         {/* Search & Difficulty Filter */}
         <div className="flex items-center gap-2">
           <div className="relative">
-            <Search className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
+            <Search className="w-4 h-4 text-zinc-400 absolute left-3 top-1/2 -translate-y-1/2" />
             <input
               type="text"
               placeholder="Search passage, prompt, or skill..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-9 pr-3 py-2 bg-white border border-gray-200 rounded-xl text-xs font-medium text-gray-800 placeholder-gray-400 focus:outline-none focus:border-[#0050d8] w-48 sm:w-64"
+              className="pl-9 pr-3 py-2 bg-white dark:bg-[#11131A] border border-zinc-200 dark:border-[#222634] rounded-xl text-xs font-medium text-zinc-950 dark:text-[#F4F4F6] placeholder-zinc-400 dark:placeholder-zinc-600 focus:outline-hidden focus:border-blue-600 focus:ring-1 focus:ring-blue-600 w-48 sm:w-64 transition-colors shadow-2xs"
             />
           </div>
 
           <select
             value={selectedDifficulty}
             onChange={(e) => setSelectedDifficulty(e.target.value)}
-            className="px-3 py-2 bg-white border border-gray-200 rounded-xl text-xs font-semibold text-gray-700 focus:outline-none focus:border-[#0050d8]"
+            className="px-3 py-2 bg-white dark:bg-[#11131A] border border-zinc-200 dark:border-[#222634] rounded-xl text-xs font-semibold text-zinc-800 dark:text-[#F4F4F6] focus:outline-hidden focus:border-blue-600 transition-colors shadow-2xs cursor-pointer"
           >
             <option value="all">All Difficulties</option>
             <option value="Easy">Easy</option>
@@ -201,14 +201,14 @@ export const SavedMistakesView: React.FC<SavedMistakesViewProps> = ({
 
       {/* Questions List */}
       {displayedQuestions.length === 0 ? (
-        <div className="p-12 text-center bg-white border border-gray-200 rounded-2xl space-y-3">
-          <div className="w-12 h-12 rounded-full bg-gray-100 text-gray-400 mx-auto flex items-center justify-center">
+        <div className="p-12 text-center bg-white dark:bg-[#11131A] border border-zinc-200 dark:border-[#222634] rounded-2xl space-y-3 shadow-2xs">
+          <div className="w-12 h-12 rounded-full bg-zinc-100 dark:bg-[#181B24] text-zinc-400 mx-auto flex items-center justify-center">
             {tab === 'saved' ? <Bookmark className="w-6 h-6" /> : tab === 'answered' ? <CheckCircle2 className="w-6 h-6 text-emerald-500" /> : <XCircle className="w-6 h-6 text-rose-500" />}
           </div>
-          <h3 className="font-bold text-base text-gray-800">
+          <h3 className="font-bold text-base text-zinc-950 dark:text-[#F4F4F6]">
             {tab === 'saved' ? 'No Saved Bookmarks Yet' : tab === 'answered' ? 'No Answered Questions Recorded Yet' : 'No Incorrect Questions Recorded'}
           </h3>
-          <p className="text-xs text-gray-500 max-w-sm mx-auto">
+          <p className="text-xs text-zinc-500 dark:text-[#8E95A5] max-w-sm mx-auto">
             {tab === 'saved'
               ? 'Click the bookmark ribbon on any question during practice to save it here for later review.'
               : tab === 'answered'
@@ -226,50 +226,50 @@ export const SavedMistakesView: React.FC<SavedMistakesViewProps> = ({
             return (
               <div
                 key={q.id}
-                className="bg-white border border-gray-200 rounded-xl shadow-xs hover:border-gray-300 transition overflow-hidden"
+                className="bg-white dark:bg-[#11131A] border border-zinc-200 dark:border-[#222634] hover:border-zinc-300 dark:hover:border-zinc-700 rounded-2xl shadow-2xs hover:shadow-xs transition-all duration-200 overflow-hidden"
               >
                 {/* Summary Header Bar */}
                 <div className="p-5 flex flex-col md:flex-row md:items-start justify-between gap-4">
                   <div className="flex-1 space-y-2">
                     <div className="flex items-center gap-2 flex-wrap">
-                      <span className="font-mono text-xs font-bold text-gray-400">
+                      <span className="font-mono text-xs font-bold text-zinc-400 dark:text-[#8E95A5]">
                         ID: {q.id}
                       </span>
-                      <span className="px-2 py-0.5 rounded text-[11px] font-bold bg-blue-50 text-[#0050d8] border border-blue-100">
+                      <span className="px-2 py-0.5 rounded text-[11px] font-bold bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-900/60">
                         {q.skill}
                       </span>
                       <span className={`px-2 py-0.5 rounded text-[11px] font-bold ${
-                        q.difficulty === 'Easy' ? 'bg-emerald-50 text-emerald-700' :
-                        q.difficulty === 'Medium' ? 'bg-amber-50 text-amber-700' :
-                        'bg-rose-50 text-rose-700'
+                        q.difficulty === 'Easy' ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800' :
+                        q.difficulty === 'Medium' ? 'bg-amber-50 text-amber-700 dark:bg-amber-950/40 dark:text-amber-300 border border-amber-200 dark:border-amber-800' :
+                        'bg-rose-50 text-rose-700 dark:bg-rose-950/40 dark:text-rose-300 border border-rose-200 dark:border-rose-800'
                       }`}>
                         {q.difficulty}
                       </span>
                       {attempt ? (
                         attempt.isCorrect ? (
-                          <span className="px-2 py-0.5 rounded text-[11px] font-bold bg-emerald-100 text-emerald-700 border border-emerald-200 flex items-center gap-1">
-                            <CheckCircle2 className="w-3 h-3 text-emerald-600" />
+                          <span className="px-2 py-0.5 rounded text-[11px] font-bold bg-emerald-100 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 flex items-center gap-1">
+                            <CheckCircle2 className="w-3 h-3 text-emerald-600 dark:text-emerald-400" />
                             <span>Answered • Choice ({attempt.selectedOption}) Correct</span>
                           </span>
                         ) : (
-                          <span className="px-2 py-0.5 rounded text-[11px] font-bold bg-rose-100 text-rose-700 border border-rose-200 flex items-center gap-1">
-                            <XCircle className="w-3 h-3 text-rose-600" />
+                          <span className="px-2 py-0.5 rounded text-[11px] font-bold bg-rose-100 text-rose-700 dark:bg-rose-950/40 dark:text-rose-300 border border-rose-200 dark:border-rose-800 flex items-center gap-1">
+                            <XCircle className="w-3 h-3 text-rose-600 dark:text-rose-400" />
                             <span>Answered • Chose ({attempt.selectedOption}) • Correct: ({q.correctAnswer})</span>
                           </span>
                         )
                       ) : answeredIds.has(q.id) ? (
-                        <span className="px-2 py-0.5 rounded text-[11px] font-bold bg-emerald-100 text-emerald-700 border border-emerald-200 flex items-center gap-1">
-                          <CheckCircle2 className="w-3 h-3 text-emerald-600" />
+                        <span className="px-2 py-0.5 rounded text-[11px] font-bold bg-emerald-100 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 flex items-center gap-1">
+                          <CheckCircle2 className="w-3 h-3 text-emerald-600 dark:text-emerald-400" />
                           <span>Answered</span>
                         </span>
                       ) : null}
                     </div>
 
-                    <div className="font-serif text-sm text-gray-800 line-clamp-2">
+                    <div className="font-serif text-sm text-zinc-800 dark:text-[#C5CAD6] line-clamp-2">
                       <RichText text={q.passage} />
                     </div>
 
-                    <div className="text-xs font-semibold text-gray-600 line-clamp-1">
+                    <div className="text-xs font-semibold text-zinc-600 dark:text-[#8E95A5] line-clamp-1">
                       <RichText text={q.prompt} />
                     </div>
                   </div>
@@ -278,7 +278,7 @@ export const SavedMistakesView: React.FC<SavedMistakesViewProps> = ({
                   <div className="flex items-center gap-2 shrink-0 self-end md:self-center">
                     <button
                       onClick={() => toggleExpand(q.id)}
-                      className="flex items-center gap-1 px-3 py-2 rounded-lg border border-gray-200 text-gray-700 hover:bg-gray-50 text-xs font-bold transition cursor-pointer"
+                      className="flex items-center gap-1 px-3 py-2 rounded-xl border border-zinc-200 dark:border-[#222634] text-zinc-700 dark:text-[#8E95A5] hover:text-zinc-950 dark:hover:text-[#F4F4F6] hover:bg-zinc-100 dark:hover:bg-[#181B24] text-xs font-semibold transition-all duration-150 cursor-pointer active:scale-95 shadow-2xs"
                       title={isExpanded ? 'Hide Review Details' : 'Show Full Review'}
                     >
                       <span>{isExpanded ? 'Hide Details' : 'Review'}</span>
@@ -287,10 +287,10 @@ export const SavedMistakesView: React.FC<SavedMistakesViewProps> = ({
 
                     <button
                       onClick={() => handleToggleBookmark(q.id)}
-                      className={`p-2 rounded-lg border transition cursor-pointer ${
+                      className={`p-2 rounded-xl border transition-all duration-150 cursor-pointer active:scale-90 ${
                         savedIds.includes(q.id)
-                          ? 'bg-amber-50 border-amber-300 text-amber-600 hover:bg-amber-100'
-                          : 'border-gray-200 text-gray-400 hover:text-gray-700 hover:bg-gray-50'
+                          ? 'bg-amber-50 dark:bg-amber-950/40 border-amber-300 dark:border-amber-700 text-amber-600 dark:text-amber-400 hover:bg-amber-100 shadow-2xs'
+                          : 'border-zinc-200 dark:border-[#222634] text-zinc-400 dark:text-[#8E95A5] hover:text-zinc-950 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-[#181B24]'
                       }`}
                       title={savedIds.includes(q.id) ? 'Remove Bookmark' : 'Bookmark Question'}
                     >
@@ -299,46 +299,46 @@ export const SavedMistakesView: React.FC<SavedMistakesViewProps> = ({
 
                     <button
                       onClick={() => onStartCustomPractice([q])}
-                      className="flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-gray-900 hover:bg-[#0050d8] text-white font-bold text-xs uppercase tracking-wider transition active:scale-95 cursor-pointer"
+                      className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-blue-700 hover:bg-blue-800 text-white dark:bg-blue-600 dark:hover:bg-blue-500 font-semibold text-xs transition-all duration-150 active:scale-95 cursor-pointer shadow-xs hover:shadow"
                       title="Practice this question"
                     >
                       <Play className="w-3.5 h-3.5 fill-current" />
-                      <span>Retry Question</span>
+                      <span>Retry</span>
                     </button>
                   </div>
                 </div>
 
                 {/* Full Review Inspection Drawer */}
                 {isExpanded && (
-                  <div className="px-5 pb-6 pt-2 border-t border-gray-100 bg-slate-50/50 space-y-5 animate-in fade-in duration-150">
+                  <div className="px-5 pb-6 pt-2 border-t border-zinc-100 dark:border-[#181B24] bg-neutral-50/50 dark:bg-[#090A0F]/50 space-y-5 animate-in fade-in duration-150">
                     {/* Full Passage */}
-                    <div className="p-4 bg-white rounded-xl border border-gray-200 space-y-2">
-                      <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">
+                    <div className="p-4 bg-white dark:bg-[#11131A] rounded-xl border border-zinc-200 dark:border-[#222634] space-y-2 shadow-2xs">
+                      <span className="text-[11px] font-bold text-zinc-400 dark:text-[#8E95A5] uppercase tracking-wider">
                         Passage Stimulus
                       </span>
                       {q.imageUrl && (
-                        <div className="my-2 p-3 bg-gray-50 border border-gray-200 rounded-lg flex items-center justify-center">
+                        <div className="my-2 p-3 bg-zinc-50 dark:bg-[#181B24] border border-zinc-200 dark:border-[#222634] rounded-lg flex items-center justify-center">
                           <img src={q.imageUrl} alt="Question figure" className="max-w-full h-auto object-contain rounded" />
                         </div>
                       )}
-                      <div className="font-serif text-[15px] leading-relaxed text-gray-900 whitespace-pre-line">
+                      <div className="font-serif text-[15px] leading-relaxed text-zinc-950 dark:text-[#F4F4F6] whitespace-pre-line">
                         <RichText text={q.passage} />
                       </div>
                     </div>
 
                     {/* Question Prompt */}
-                    <div className="p-4 bg-white rounded-xl border border-gray-200 space-y-2">
-                      <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">
+                    <div className="p-4 bg-white dark:bg-[#11131A] rounded-xl border border-zinc-200 dark:border-[#222634] space-y-2 shadow-2xs">
+                      <span className="text-[11px] font-bold text-zinc-400 dark:text-[#8E95A5] uppercase tracking-wider">
                         Question Prompt
                       </span>
-                      <div className="font-serif font-semibold text-[15px] text-gray-900">
+                      <div className="font-serif font-semibold text-[15px] text-zinc-950 dark:text-[#F4F4F6]">
                         <RichText text={q.prompt} />
                       </div>
                     </div>
 
                     {/* Options Breakdown */}
                     <div className="space-y-2.5">
-                      <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider block">
+                      <span className="text-[11px] font-bold text-zinc-400 dark:text-[#8E95A5] uppercase tracking-wider block">
                         Answer Choices
                       </span>
                       <div className="grid grid-cols-1 gap-2.5">
@@ -347,20 +347,20 @@ export const SavedMistakesView: React.FC<SavedMistakesViewProps> = ({
                           const isCorrect = optLabel === q.correctAnswer;
                           const wasChosenWrong = attempt && attempt.selectedOption === optLabel && !isCorrect;
 
-                          let cardStyle = 'border-gray-200 bg-white text-gray-800';
+                          let cardStyle = 'border-zinc-200 dark:border-[#222634] bg-white dark:bg-[#11131A] text-zinc-950 dark:text-[#F4F4F6] shadow-2xs';
                           let badge = null;
 
                           if (isCorrect) {
-                            cardStyle = 'border-2 border-emerald-500 bg-emerald-50/70 text-emerald-950 font-medium';
+                            cardStyle = 'border-2 border-emerald-500 bg-emerald-50/70 dark:bg-emerald-950/30 text-emerald-950 dark:text-emerald-100 font-medium shadow-xs';
                             badge = (
-                              <span className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-full shrink-0">
+                              <span className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-700 dark:text-emerald-300 bg-emerald-100 dark:bg-emerald-900/60 px-2 py-0.5 rounded-full shrink-0">
                                 <Check className="w-3 h-3 stroke-[3]" /> Correct Answer
                               </span>
                             );
                           } else if (wasChosenWrong) {
-                            cardStyle = 'border-2 border-rose-500 bg-rose-50/70 text-rose-950';
+                            cardStyle = 'border-2 border-rose-500 bg-rose-50/70 dark:bg-rose-950/30 text-rose-950 dark:text-rose-100 shadow-xs';
                             badge = (
-                              <span className="inline-flex items-center gap-1 text-[11px] font-bold text-rose-700 bg-rose-100 px-2 py-0.5 rounded-full shrink-0">
+                              <span className="inline-flex items-center gap-1 text-[11px] font-bold text-rose-700 dark:text-rose-300 bg-rose-100 dark:bg-rose-900/60 px-2 py-0.5 rounded-full shrink-0">
                                 <X className="w-3 h-3 stroke-[3]" /> Your Selection
                               </span>
                             );
@@ -372,10 +372,10 @@ export const SavedMistakesView: React.FC<SavedMistakesViewProps> = ({
                               className={`p-3.5 rounded-xl border flex items-start justify-between gap-3 ${cardStyle}`}
                             >
                               <div className="flex items-start gap-3">
-                                <span className={`w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs shrink-0 ${
+                                <span className={`w-6 h-6 rounded-lg flex items-center justify-center font-bold text-xs shrink-0 ${
                                   isCorrect ? 'bg-emerald-600 text-white' :
                                   wasChosenWrong ? 'bg-rose-600 text-white' :
-                                  'bg-gray-100 text-gray-700 border border-gray-300'
+                                  'bg-zinc-100 dark:bg-[#181B24] text-zinc-700 dark:text-[#8E95A5] border border-zinc-200 dark:border-[#222634]'
                                 }`}>
                                   {optLabel}
                                 </span>
@@ -392,8 +392,8 @@ export const SavedMistakesView: React.FC<SavedMistakesViewProps> = ({
 
                     {/* Official Rationale / Explanation */}
                     {q.rationale && (
-                      <div className="p-4 bg-blue-50/80 dark:bg-[#0f1522] border border-blue-200 dark:border-slate-800 rounded-xl space-y-2">
-                        <div className="flex items-center gap-2 text-[#0050d8] dark:text-blue-400 font-bold text-xs uppercase tracking-wider mb-2">
+                      <div className="p-4 bg-blue-50/80 dark:bg-[#141622] border border-blue-200/80 dark:border-blue-900/50 rounded-xl space-y-2 shadow-2xs">
+                        <div className="flex items-center gap-2 text-blue-700 dark:text-blue-400 font-bold text-xs uppercase tracking-wider mb-2">
                           <HelpCircle className="w-4 h-4" />
                           <span>Official Explanation & Rationale</span>
                         </div>
@@ -410,3 +410,5 @@ export const SavedMistakesView: React.FC<SavedMistakesViewProps> = ({
     </div>
   );
 };
+
+export default SavedMistakesView;

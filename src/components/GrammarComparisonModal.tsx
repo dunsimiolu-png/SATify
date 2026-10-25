@@ -36,25 +36,25 @@ export const GrammarComparisonModal: React.FC<GrammarComparisonModalProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 backdrop-blur-xs p-4 overflow-y-auto animate-in fade-in duration-150 select-text">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4 overflow-y-auto animate-in fade-in duration-200 select-text">
       <div 
-        className="w-full max-w-4xl bg-white dark:bg-[#0f1522] text-slate-900 dark:text-white rounded-2xl shadow-2xl border border-gray-200 dark:border-slate-800 overflow-hidden flex flex-col max-h-[90vh]"
+        className="w-full max-w-4xl bg-white dark:bg-[#11131A] text-zinc-950 dark:text-[#F4F4F6] rounded-2xl shadow-2xl border border-zinc-200/90 dark:border-[#222634] overflow-hidden flex flex-col max-h-[90vh] animate-in zoom-in-95 duration-200"
         onClick={e => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="px-6 py-4 border-b border-gray-200 dark:border-slate-800 bg-gray-50 dark:bg-[#070a10] flex items-center justify-between">
+        <div className="px-6 py-4 border-b border-zinc-200 dark:border-[#222634] bg-neutral-50/80 dark:bg-[#181B24]/80 backdrop-blur-xs flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-blue-100 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-800 flex items-center justify-center text-blue-700 dark:text-blue-400">
+            <div className="w-9 h-9 rounded-xl bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-800 flex items-center justify-center text-blue-700 dark:text-blue-400">
               <Split className="w-5 h-5" />
             </div>
             <div>
-              <h2 className="text-lg font-bold text-gray-900 dark:text-white tracking-tight flex items-center gap-2">
+              <h2 className="text-lg font-bold text-zinc-950 dark:text-[#F4F4F6] tracking-tight flex items-center gap-2">
                 Standard English Conventions
                 <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-400 border border-blue-200 dark:border-blue-800">
                   Cheat Sheet
                 </span>
               </h2>
-              <p className="text-xs text-gray-500 dark:text-slate-400">
+              <p className="text-xs text-zinc-500 dark:text-[#8E95A5] mt-0.5">
                 Quick Comparison Guide: Boundaries vs. Form, Structure, and Sense
               </p>
             </div>
@@ -62,7 +62,7 @@ export const GrammarComparisonModal: React.FC<GrammarComparisonModalProps> = ({
 
           <button
             onClick={onClose}
-            className="p-2 rounded-lg text-gray-400 dark:text-slate-500 hover:text-gray-700 dark:hover:text-white hover:bg-gray-200 dark:hover:bg-slate-800 transition"
+            className="p-1.5 rounded-lg text-zinc-400 dark:text-[#8E95A5] hover:text-zinc-950 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-[#181B24] transition-all duration-150 active:scale-90 cursor-pointer"
             title="Close (Esc)"
           >
             <X className="w-5 h-5" />
@@ -70,13 +70,13 @@ export const GrammarComparisonModal: React.FC<GrammarComparisonModalProps> = ({
         </div>
 
         {/* Tab Navigation */}
-        <div className="flex border-b border-gray-200 dark:border-slate-800 bg-white dark:bg-[#0f1522] px-6 gap-2 text-xs font-bold">
+        <div className="flex border-b border-zinc-200 dark:border-[#222634] bg-white dark:bg-[#11131A] px-6 gap-2 text-xs font-bold overflow-x-auto">
           <button
             onClick={() => setActiveTab('decision')}
-            className={`py-3 px-3.5 border-b-2 transition flex items-center gap-1.5 ${
+            className={`py-3 px-3.5 border-b-2 transition-all duration-150 flex items-center gap-1.5 cursor-pointer active:scale-95 whitespace-nowrap ${
               activeTab === 'decision'
-                ? 'border-blue-600 text-blue-600 dark:text-blue-400'
-                : 'border-transparent text-gray-500 dark:text-slate-400 hover:text-gray-900 dark:hover:text-white'
+                ? 'border-blue-600 text-blue-700 dark:text-blue-400 font-bold'
+                : 'border-transparent text-zinc-500 dark:text-[#8E95A5] hover:text-zinc-950 dark:hover:text-white'
             }`}
           >
             <Sparkles className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
@@ -85,10 +85,10 @@ export const GrammarComparisonModal: React.FC<GrammarComparisonModalProps> = ({
 
           <button
             onClick={() => setActiveTab('boundaries')}
-            className={`py-3 px-3.5 border-b-2 transition flex items-center gap-1.5 ${
+            className={`py-3 px-3.5 border-b-2 transition-all duration-150 flex items-center gap-1.5 cursor-pointer active:scale-95 whitespace-nowrap ${
               activeTab === 'boundaries'
-                ? 'border-blue-600 text-blue-600 dark:text-blue-400'
-                : 'border-transparent text-gray-500 dark:text-slate-400 hover:text-gray-900 dark:hover:text-white'
+                ? 'border-blue-600 text-blue-700 dark:text-blue-400 font-bold'
+                : 'border-transparent text-zinc-500 dark:text-[#8E95A5] hover:text-zinc-950 dark:hover:text-white'
             }`}
           >
             <Layers className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
@@ -97,10 +97,10 @@ export const GrammarComparisonModal: React.FC<GrammarComparisonModalProps> = ({
 
           <button
             onClick={() => setActiveTab('fss')}
-            className={`py-3 px-3.5 border-b-2 transition flex items-center gap-1.5 ${
+            className={`py-3 px-3.5 border-b-2 transition-all duration-150 flex items-center gap-1.5 cursor-pointer active:scale-95 whitespace-nowrap ${
               activeTab === 'fss'
-                ? 'border-blue-600 text-blue-600 dark:text-blue-400'
-                : 'border-transparent text-gray-500 dark:text-slate-400 hover:text-gray-900 dark:hover:text-white'
+                ? 'border-blue-600 text-blue-700 dark:text-blue-400 font-bold'
+                : 'border-transparent text-zinc-500 dark:text-[#8E95A5] hover:text-zinc-950 dark:hover:text-white'
             }`}
           >
             <FileText className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
@@ -109,10 +109,10 @@ export const GrammarComparisonModal: React.FC<GrammarComparisonModalProps> = ({
 
           <button
             onClick={() => setActiveTab('comparison')}
-            className={`py-3 px-3.5 border-b-2 transition flex items-center gap-1.5 ${
+            className={`py-3 px-3.5 border-b-2 transition-all duration-150 flex items-center gap-1.5 cursor-pointer active:scale-95 whitespace-nowrap ${
               activeTab === 'comparison'
-                ? 'border-blue-600 text-blue-600 dark:text-blue-400'
-                : 'border-transparent text-gray-500 dark:text-slate-400 hover:text-gray-900 dark:hover:text-white'
+                ? 'border-blue-600 text-blue-700 dark:text-blue-400 font-bold'
+                : 'border-transparent text-zinc-500 dark:text-[#8E95A5] hover:text-zinc-950 dark:hover:text-white'
             }`}
           >
             <HelpCircle className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />

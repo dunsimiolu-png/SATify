@@ -119,16 +119,16 @@ export const UserAccountModal: React.FC<UserAccountModalProps> = ({
 
   return (
     <div 
-      className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in duration-200"
+      className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in duration-200"
       onClick={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}
     >
-      <div className="bg-white dark:bg-[#0f1522] border border-slate-200 dark:border-slate-800 rounded-3xl max-w-md w-full p-6 sm:p-7 shadow-2xl space-y-4 text-slate-900 dark:text-white animate-in zoom-in-95 duration-150 relative max-h-[90vh] overflow-y-auto">
+      <div className="bg-white dark:bg-[#11131A] border border-zinc-200/90 dark:border-[#222634] rounded-2xl max-w-md w-full p-6 sm:p-7 shadow-2xl space-y-4 text-zinc-950 dark:text-[#F4F4F6] animate-in zoom-in-95 duration-200 relative max-h-[90vh] overflow-y-auto">
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-5 right-5 p-1.5 rounded-xl text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition cursor-pointer"
+          className="absolute top-5 right-5 p-1.5 rounded-lg text-zinc-400 hover:text-zinc-950 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-[#181B24] transition-all duration-150 active:scale-90 cursor-pointer"
           aria-label="Close modal"
         >
           <X className="w-5 h-5" />

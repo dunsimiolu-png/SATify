@@ -114,7 +114,7 @@ export const ScoreCalculatorView: React.FC = () => {
 
         <div className="flex items-center gap-2.5">
           {/* Adaptive Weighting Toggle */}
-          <label className="flex items-center gap-2 cursor-pointer select-none px-3 py-1.5 rounded-lg border border-zinc-200 dark:border-[#222634] bg-white dark:bg-[#11131A] text-xs font-semibold text-zinc-800 dark:text-[#F4F4F6] transition-colors duration-150">
+          <label className="flex items-center gap-2 cursor-pointer select-none px-3.5 py-1.5 rounded-xl border border-zinc-200 dark:border-[#222634] bg-white dark:bg-[#11131A] text-xs font-semibold text-zinc-800 dark:text-[#F4F4F6] transition-all duration-150 active:scale-95 shadow-2xs">
             <input
               type="checkbox"
               checked={isAdaptive}
@@ -127,7 +127,7 @@ export const ScoreCalculatorView: React.FC = () => {
 
           <button
             onClick={handleReset}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-zinc-200 dark:border-[#222634] bg-white dark:bg-[#11131A] hover:bg-zinc-100 dark:hover:bg-[#181B24] text-zinc-700 dark:text-[#8E95A5] hover:text-zinc-950 dark:hover:text-[#F4F4F6] text-xs font-medium transition-colors duration-150 cursor-pointer"
+            className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl border border-zinc-200 dark:border-[#222634] bg-white dark:bg-[#11131A] hover:bg-zinc-100 dark:hover:bg-[#181B24] text-zinc-700 dark:text-[#8E95A5] hover:text-zinc-950 dark:hover:text-[#F4F4F6] text-xs font-semibold transition-all duration-150 active:scale-95 shadow-2xs cursor-pointer"
           >
             <RotateCcw className="w-3.5 h-3.5" strokeWidth={1.75} />
             <span>Reset</span>
@@ -136,15 +136,15 @@ export const ScoreCalculatorView: React.FC = () => {
       </div>
 
       {/* Pinned Summary Scorecard (High contrast, solid surfaces, zero rainbow gradient) */}
-      <div className="p-6 sm:p-7 rounded-xl bg-white dark:bg-[#11131A] border border-zinc-200 dark:border-[#222634] shadow-xs flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+      <div className="p-6 sm:p-7 rounded-2xl bg-white dark:bg-[#11131A] border border-zinc-200 dark:border-[#222634] shadow-xs flex flex-col md:flex-row items-start md:items-center justify-between gap-6 transition-all duration-200 hover:border-zinc-300 dark:hover:border-zinc-700">
         <div className="space-y-2">
-          <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded border border-blue-200 dark:border-blue-900 bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300 text-[10px] font-mono font-semibold uppercase">
+          <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full border border-blue-200 dark:border-blue-900 bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300 text-[10px] font-mono font-semibold uppercase shadow-2xs">
             <Sparkles className="w-3 h-3 text-amber-500" />
             <span>Predicted Composite SAT Score</span>
           </div>
 
           <div className="flex items-baseline gap-3">
-            <span className="text-5xl sm:text-6xl font-semibold tracking-tight font-mono tabular-nums text-zinc-950 dark:text-[#F4F4F6]">
+            <span className="text-5xl sm:text-6xl font-bold tracking-tight font-mono tabular-nums text-zinc-950 dark:text-[#F4F4F6]">
               {totalScore}
             </span>
             <span className="text-lg font-mono text-zinc-400 dark:text-[#8E95A5]">/ 1600</span>
@@ -160,11 +160,11 @@ export const ScoreCalculatorView: React.FC = () => {
         {/* Section Score Breakdown Boxes */}
         <div className="grid grid-cols-2 gap-3 w-full md:w-auto">
           {/* Reading & Writing Section Box */}
-          <div className="p-4 rounded-lg border border-zinc-200 dark:border-[#222634] bg-neutral-50 dark:bg-[#181B24] text-center min-w-[140px] space-y-1">
+          <div className="p-4 rounded-xl border border-zinc-200 dark:border-[#222634] bg-neutral-50 dark:bg-[#181B24] text-center min-w-[140px] space-y-1 shadow-2xs transition-all duration-200 hover:border-zinc-300 dark:hover:border-zinc-700">
             <span className="text-[10px] font-mono font-semibold text-zinc-500 dark:text-[#8E95A5] uppercase tracking-wider block">
               Reading &amp; Writing
             </span>
-            <div className="text-2xl sm:text-3xl font-mono font-semibold tabular-nums text-blue-700 dark:text-blue-400">
+            <div className="text-2xl sm:text-3xl font-mono font-bold tabular-nums text-blue-700 dark:text-blue-400">
               {rwScore}
             </div>
             <span className="text-[10px] font-mono text-zinc-400 dark:text-[#8E95A5]">
@@ -173,11 +173,11 @@ export const ScoreCalculatorView: React.FC = () => {
           </div>
 
           {/* Math Section Box */}
-          <div className="p-4 rounded-lg border border-zinc-200 dark:border-[#222634] bg-neutral-50 dark:bg-[#181B24] text-center min-w-[140px] space-y-1">
+          <div className="p-4 rounded-xl border border-zinc-200 dark:border-[#222634] bg-neutral-50 dark:bg-[#181B24] text-center min-w-[140px] space-y-1 shadow-2xs transition-all duration-200 hover:border-zinc-300 dark:hover:border-zinc-700">
             <span className="text-[10px] font-mono font-semibold text-zinc-500 dark:text-[#8E95A5] uppercase tracking-wider block">
               Math
             </span>
-            <div className="text-2xl sm:text-3xl font-mono font-semibold tabular-nums text-zinc-950 dark:text-[#F4F4F6]">
+            <div className="text-2xl sm:text-3xl font-mono font-bold tabular-nums text-zinc-950 dark:text-[#F4F4F6]">
               {mathScore}
             </div>
             <span className="text-[10px] font-mono text-zinc-400 dark:text-[#8E95A5]">
@@ -190,7 +190,7 @@ export const ScoreCalculatorView: React.FC = () => {
       {/* Dual Column Module Controls (Synchronized range sliders and direct tabular-nums inputs) */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
         {/* SECTION 1: Reading & Writing Modules */}
-        <div className="p-5 sm:p-6 rounded-xl bg-white dark:bg-[#11131A] border border-zinc-200 dark:border-[#222634] shadow-xs space-y-5">
+        <div className="p-5 sm:p-6 rounded-2xl bg-white dark:bg-[#11131A] border border-zinc-200 dark:border-[#222634] shadow-xs space-y-5 transition-all duration-200 hover:border-zinc-300 dark:hover:border-zinc-700">
           <div className="flex items-center justify-between pb-3 border-b border-zinc-100 dark:border-[#181B24]">
             <div className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-blue-700 dark:bg-blue-500" />
@@ -198,7 +198,7 @@ export const ScoreCalculatorView: React.FC = () => {
                 Reading &amp; Writing (54 Questions)
               </h3>
             </div>
-            <span className="text-xs font-mono font-semibold text-blue-700 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/40 px-2.5 py-0.5 rounded border border-blue-200 dark:border-blue-900 tabular-nums">
+            <span className="text-xs font-mono font-semibold text-blue-700 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/40 px-2.5 py-0.5 rounded-lg border border-blue-200 dark:border-blue-900 tabular-nums shadow-2xs">
               Score: {rwScore}
             </span>
           </div>
@@ -214,7 +214,7 @@ export const ScoreCalculatorView: React.FC = () => {
                   max={27}
                   value={rwM1}
                   onChange={(e) => setRwM1(Math.min(27, Math.max(0, Number(e.target.value) || 0)))}
-                  className="w-12 h-7 px-1 text-center font-mono font-semibold text-xs tabular-nums bg-zinc-50 dark:bg-[#181B24] border border-zinc-200 dark:border-[#222634] rounded text-blue-700 dark:text-blue-400 focus:outline-hidden focus:border-blue-600"
+                  className="w-12 h-7 px-1 text-center font-mono font-semibold text-xs tabular-nums bg-zinc-50 dark:bg-[#181B24] border border-zinc-200 dark:border-[#222634] rounded-lg text-blue-700 dark:text-blue-400 focus:outline-hidden focus:border-blue-600 shadow-2xs"
                 />
                 <span className="text-zinc-400 font-mono text-xs">/ 27</span>
               </div>
@@ -235,7 +235,7 @@ export const ScoreCalculatorView: React.FC = () => {
           </div>
 
           {/* Adaptive Routing Status Pill */}
-          <div className={`p-2.5 rounded-lg border text-xs font-mono font-medium flex items-center justify-between ${
+          <div className={`p-3 rounded-xl border text-xs font-mono font-medium flex items-center justify-between shadow-2xs ${
             !isAdaptive
               ? 'bg-zinc-50 dark:bg-[#181B24] border-zinc-200 dark:border-[#222634] text-zinc-600 dark:text-[#8E95A5]'
               : isRWHardModule
@@ -263,7 +263,7 @@ export const ScoreCalculatorView: React.FC = () => {
                   max={27}
                   value={rwM2}
                   onChange={(e) => setRwM2(Math.min(27, Math.max(0, Number(e.target.value) || 0)))}
-                  className="w-12 h-7 px-1 text-center font-mono font-semibold text-xs tabular-nums bg-zinc-50 dark:bg-[#181B24] border border-zinc-200 dark:border-[#222634] rounded text-blue-700 dark:text-blue-400 focus:outline-hidden focus:border-blue-600"
+                  className="w-12 h-7 px-1 text-center font-mono font-semibold text-xs tabular-nums bg-zinc-50 dark:bg-[#181B24] border border-zinc-200 dark:border-[#222634] rounded-lg text-blue-700 dark:text-blue-400 focus:outline-hidden focus:border-blue-600 shadow-2xs"
                 />
                 <span className="text-zinc-400 font-mono text-xs">/ 27</span>
               </div>
@@ -284,7 +284,7 @@ export const ScoreCalculatorView: React.FC = () => {
         </div>
 
         {/* SECTION 2: Math Modules */}
-        <div className="p-5 sm:p-6 rounded-xl bg-white dark:bg-[#11131A] border border-zinc-200 dark:border-[#222634] shadow-xs space-y-5">
+        <div className="p-5 sm:p-6 rounded-2xl bg-white dark:bg-[#11131A] border border-zinc-200 dark:border-[#222634] shadow-xs space-y-5 transition-all duration-200 hover:border-zinc-300 dark:hover:border-zinc-700">
           <div className="flex items-center justify-between pb-3 border-b border-zinc-100 dark:border-[#181B24]">
             <div className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-zinc-600 dark:bg-zinc-400" />
@@ -292,7 +292,7 @@ export const ScoreCalculatorView: React.FC = () => {
                 Mathematics (44 Questions)
               </h3>
             </div>
-            <span className="text-xs font-mono font-semibold text-zinc-800 dark:text-[#F4F4F6] bg-zinc-100 dark:bg-[#181B24] px-2.5 py-0.5 rounded border border-zinc-200 dark:border-[#222634] tabular-nums">
+            <span className="text-xs font-mono font-semibold text-zinc-800 dark:text-[#F4F4F6] bg-zinc-100 dark:bg-[#181B24] px-2.5 py-0.5 rounded-lg border border-zinc-200 dark:border-[#222634] tabular-nums shadow-2xs">
               Score: {mathScore}
             </span>
           </div>
@@ -308,7 +308,7 @@ export const ScoreCalculatorView: React.FC = () => {
                   max={22}
                   value={mathM1}
                   onChange={(e) => setMathM1(Math.min(22, Math.max(0, Number(e.target.value) || 0)))}
-                  className="w-12 h-7 px-1 text-center font-mono font-semibold text-xs tabular-nums bg-zinc-50 dark:bg-[#181B24] border border-zinc-200 dark:border-[#222634] rounded text-zinc-950 dark:text-[#F4F4F6] focus:outline-hidden focus:border-blue-600"
+                  className="w-12 h-7 px-1 text-center font-mono font-semibold text-xs tabular-nums bg-zinc-50 dark:bg-[#181B24] border border-zinc-200 dark:border-[#222634] rounded-lg text-zinc-950 dark:text-[#F4F4F6] focus:outline-hidden focus:border-blue-600 shadow-2xs"
                 />
                 <span className="text-zinc-400 font-mono text-xs">/ 22</span>
               </div>
@@ -329,7 +329,7 @@ export const ScoreCalculatorView: React.FC = () => {
           </div>
 
           {/* Adaptive Routing Status Pill */}
-          <div className={`p-2.5 rounded-lg border text-xs font-mono font-medium flex items-center justify-between ${
+          <div className={`p-3 rounded-xl border text-xs font-mono font-medium flex items-center justify-between shadow-2xs ${
             !isAdaptive
               ? 'bg-zinc-50 dark:bg-[#181B24] border-zinc-200 dark:border-[#222634] text-zinc-600 dark:text-[#8E95A5]'
               : isMathHardModule
@@ -357,7 +357,7 @@ export const ScoreCalculatorView: React.FC = () => {
                   max={22}
                   value={mathM2}
                   onChange={(e) => setMathM2(Math.min(22, Math.max(0, Number(e.target.value) || 0)))}
-                  className="w-12 h-7 px-1 text-center font-mono font-semibold text-xs tabular-nums bg-zinc-50 dark:bg-[#181B24] border border-zinc-200 dark:border-[#222634] rounded text-zinc-950 dark:text-[#F4F4F6] focus:outline-hidden focus:border-blue-600"
+                  className="w-12 h-7 px-1 text-center font-mono font-semibold text-xs tabular-nums bg-zinc-50 dark:bg-[#181B24] border border-zinc-200 dark:border-[#222634] rounded-lg text-zinc-950 dark:text-[#F4F4F6] focus:outline-hidden focus:border-blue-600 shadow-2xs"
                 />
                 <span className="text-zinc-400 font-mono text-xs">/ 22</span>
               </div>
@@ -379,7 +379,7 @@ export const ScoreCalculatorView: React.FC = () => {
       </div>
 
       {/* Target University Benchmarks */}
-      <div className="p-5 sm:p-6 rounded-xl bg-white dark:bg-[#11131A] border border-zinc-200 dark:border-[#222634] shadow-xs space-y-4">
+      <div className="p-5 sm:p-6 rounded-2xl bg-white dark:bg-[#11131A] border border-zinc-200 dark:border-[#222634] shadow-xs space-y-4">
         <div className="flex items-center gap-2">
           <School className="w-4 h-4 text-zinc-600 dark:text-[#8E95A5]" strokeWidth={1.75} />
           <h3 className="font-semibold text-sm text-zinc-950 dark:text-[#F4F4F6]">
@@ -394,7 +394,7 @@ export const ScoreCalculatorView: React.FC = () => {
             { tier: 'Top 50 National Flagships', range: '1300–1410', desc: 'Top 15% Percentile' },
             { tier: 'National Composite Average', range: '1050', desc: '50th Percentile' },
           ].map((item, idx) => (
-            <div key={idx} className="p-3.5 rounded-lg border border-zinc-200 dark:border-[#222634] bg-neutral-50/60 dark:bg-[#181B24]/50 space-y-1">
+            <div key={idx} className="p-3.5 rounded-xl border border-zinc-200 dark:border-[#222634] bg-neutral-50/60 dark:bg-[#181B24]/50 space-y-1 transition-all duration-150 hover:border-zinc-300 dark:hover:border-zinc-700 hover:-translate-y-0.5 shadow-2xs">
               <span className="text-[10px] font-mono font-medium text-zinc-500 dark:text-[#8E95A5] uppercase tracking-wider block truncate">
                 {item.tier}
               </span>

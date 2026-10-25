@@ -395,25 +395,25 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({
 
       {/* Guarded Reset Progress Confirmation Modal */}
       {isResetModalOpen && (
-        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-2xs flex items-center justify-center p-4 animate-in fade-in duration-150">
-          <div className="bg-white dark:bg-[#11131A] rounded-xl max-w-md w-full p-6 shadow-xl border border-zinc-200 dark:border-[#222634] space-y-4 animate-in zoom-in-95 duration-150">
+        <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in duration-200">
+          <div className="bg-white dark:bg-[#11131A] rounded-2xl max-w-md w-full p-6 shadow-2xl border border-zinc-200/90 dark:border-[#222634] space-y-4 animate-in zoom-in-95 duration-200">
             <div className="flex items-start justify-between">
               <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-lg border border-rose-200 dark:border-rose-900 bg-rose-50 dark:bg-rose-950/40 text-rose-600 dark:text-rose-400 flex items-center justify-center shrink-0">
-                  <AlertTriangle className="w-4 h-4" strokeWidth={1.75} />
+                <div className="w-10 h-10 rounded-xl border border-rose-200 dark:border-rose-900 bg-rose-50 dark:bg-rose-950/40 text-rose-600 dark:text-rose-400 flex items-center justify-center shrink-0">
+                  <AlertTriangle className="w-5 h-5" strokeWidth={1.75} />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-base text-zinc-950 dark:text-[#F4F4F6]">
+                  <h3 className="font-bold text-base text-zinc-950 dark:text-[#F4F4F6]">
                     Reset Practice Progress
                   </h3>
-                  <p className="text-xs text-zinc-500 dark:text-[#8E95A5]">
+                  <p className="text-xs text-zinc-500 dark:text-[#8E95A5] mt-0.5">
                     This will reset your recorded answers and domain mastery.
                   </p>
                 </div>
               </div>
               <button
                 onClick={() => setIsResetModalOpen(false)}
-                className="p-1 rounded text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-[#181B24] transition-colors duration-150"
+                className="p-1.5 rounded-lg text-zinc-400 hover:text-zinc-950 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-[#181B24] transition-all duration-150 active:scale-90 cursor-pointer"
               >
                 <X className="w-4 h-4" strokeWidth={1.75} />
               </button>
@@ -423,10 +423,10 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({
               Are you sure you want to reset your practice progress? This will permanently clear all recorded attempts, accuracy calculations, domain mastery gauges, and daily study streak. This cannot be undone.
             </p>
 
-            <div className="flex items-center justify-end gap-2.5 pt-2 border-t border-zinc-100 dark:border-[#181B24]">
+            <div className="flex items-center justify-end gap-2.5 pt-3 border-t border-zinc-100 dark:border-[#181B24]">
               <button
                 onClick={() => setIsResetModalOpen(false)}
-                className="px-3 py-1.5 rounded-lg border border-zinc-200 dark:border-[#222634] text-zinc-700 dark:text-[#8E95A5] hover:bg-zinc-100 dark:hover:bg-[#181B24] font-medium text-xs transition-colors duration-150 cursor-pointer"
+                className="px-3.5 py-2 rounded-xl border border-zinc-200 dark:border-[#222634] text-zinc-700 dark:text-[#8E95A5] hover:bg-zinc-100 dark:hover:bg-[#181B24] font-medium text-xs transition-all duration-150 cursor-pointer active:scale-95"
               >
                 Cancel
               </button>
@@ -435,7 +435,7 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({
                   clearAllProgress();
                   setIsResetModalOpen(false);
                 }}
-                className="px-3 py-1.5 rounded-lg bg-rose-600 hover:bg-rose-700 text-white font-semibold text-xs transition-colors duration-150 cursor-pointer flex items-center gap-1.5"
+                className="px-4 py-2 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-semibold text-xs shadow-xs hover:shadow transition-all duration-150 cursor-pointer active:scale-95 flex items-center gap-1.5"
               >
                 <RotateCcw className="w-3.5 h-3.5" strokeWidth={1.75} />
                 <span>Confirm Reset</span>

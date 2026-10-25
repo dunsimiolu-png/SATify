@@ -329,16 +329,16 @@ export const LoginModal: React.FC<LoginModalProps> = ({
 
   return (
     <div 
-      className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto animate-in fade-in duration-200"
+      className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto animate-in fade-in duration-200"
       onClick={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}
     >
-      <div className="bg-white dark:bg-[#0f1522] border border-slate-200 dark:border-slate-800 rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl space-y-5 text-slate-900 dark:text-white animate-in zoom-in-95 duration-150 relative my-auto">
+      <div className="bg-white dark:bg-[#11131A] border border-zinc-200/90 dark:border-[#222634] rounded-2xl max-w-md w-full p-6 sm:p-8 shadow-2xl space-y-5 text-zinc-950 dark:text-[#F4F4F6] animate-in zoom-in-95 duration-200 relative my-auto">
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-5 right-5 p-1.5 rounded-xl text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition cursor-pointer"
+          className="absolute top-5 right-5 p-1.5 rounded-lg text-zinc-400 hover:text-zinc-950 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-[#181B24] transition-all duration-150 active:scale-90 cursor-pointer"
           aria-label="Close modal"
         >
           <X className="w-5 h-5" />
@@ -346,7 +346,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({
 
         {/* Currently Signed In Alert */}
         {currentUser && (
-          <div className="p-3.5 rounded-2xl bg-blue-50/80 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-900/60 flex items-center justify-between gap-3 text-xs">
+          <div className="p-3.5 rounded-xl bg-blue-50/80 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-900/60 flex items-center justify-between gap-3 text-xs">
             <div className="min-w-0">
               <p className="font-bold text-slate-900 dark:text-white truncate">
                 Signed in as {currentUser.name}
