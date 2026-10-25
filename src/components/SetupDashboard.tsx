@@ -235,23 +235,24 @@ export const SetupDashboard: React.FC<SetupDashboardProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-3 sm:p-6 overflow-y-auto select-none animate-in fade-in duration-150">
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-3 sm:p-6 overflow-y-auto select-none animate-in fade-in duration-200">
       <div 
-        className="w-full max-w-4xl bg-white text-zinc-950 dark:bg-[#11131A] dark:text-[#F4F4F6] rounded-xl border border-zinc-200 dark:border-[#222634] shadow-lg overflow-hidden flex flex-col max-h-[92vh]"
+        className="w-full max-w-4xl bg-white text-zinc-950 dark:bg-[#11131A] dark:text-[#F4F4F6] rounded-2xl border border-zinc-200/90 dark:border-[#222634] shadow-2xl overflow-hidden flex flex-col max-h-[92vh] animate-in zoom-in-95 duration-200"
         onClick={e => e.stopPropagation()}
       >
         {/* Top Header Bar */}
-        <div className="px-3.5 sm:px-6 py-3 sm:py-4 border-b border-zinc-200 dark:border-[#222634] bg-neutral-50 dark:bg-[#181B24] flex items-center justify-between gap-2 sm:gap-3">
+        <div className="px-4 sm:px-6 py-3.5 sm:py-4 border-b border-zinc-200 dark:border-[#222634] bg-neutral-50/80 dark:bg-[#181B24]/80 backdrop-blur-xs flex items-center justify-between gap-2 sm:gap-3">
           <div className="flex items-center gap-2 sm:gap-4 min-w-0">
             <div className="shrink-0">
               <Logo size="sm" variant="header" inverted={isDark} />
             </div>
-            <div className="h-6 w-px bg-slate-200 dark:bg-slate-800 hidden sm:block" />
+            <div className="h-6 w-px bg-zinc-200 dark:bg-[#222634] hidden sm:block" />
             <div className="min-w-0">
-              <h2 className="text-sm sm:text-base md:text-lg font-bold text-slate-900 dark:text-white tracking-tight truncate">
-                Get started
+              <h2 className="text-sm sm:text-base md:text-lg font-bold text-zinc-950 dark:text-[#F4F4F6] tracking-tight truncate">
+                Question Bank Filter
               </h2>
-              <p className="text-[11px] sm:text-xs text-slate-500 dark:text-[#a1a1aa] truncate">
+              <p className="text-[11px] sm:text-xs text-zinc-500 dark:text-[#8E95A5] truncate">
                 Digital SAT Reading & Writing Practice
               </p>
             </div>
@@ -260,22 +261,22 @@ export const SetupDashboard: React.FC<SetupDashboardProps> = ({
           <div className="flex items-center gap-2">
             <button
               onClick={toggleTheme}
-              className="p-1.5 px-2.5 rounded-lg text-slate-600 dark:text-[#a1a1aa] hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition flex items-center gap-1.5 text-xs font-semibold border border-transparent hover:border-slate-300 dark:hover:border-slate-700 cursor-pointer"
+              className="p-1.5 px-2.5 rounded-lg text-zinc-600 dark:text-[#8E95A5] hover:text-zinc-950 dark:hover:text-[#F4F4F6] hover:bg-zinc-100 dark:hover:bg-[#181B24] transition-all duration-150 flex items-center gap-1.5 text-xs font-semibold border border-transparent hover:border-zinc-200 dark:hover:border-[#222634] cursor-pointer active:scale-95"
               title={isDark ? "Switch to Light Mode" : "Switch to Dark Mode"}
               aria-label="Toggle dark/light theme"
             >
               {isDark ? (
                 <Sun className="w-4 h-4 text-amber-400" />
               ) : (
-                <Moon className="w-4 h-4 text-slate-600" />
+                <Moon className="w-4 h-4 text-zinc-700" />
               )}
-              <span className="hidden sm:inline">{isDark ? "Light Mode" : "Dark Mode"}</span>
+              <span className="hidden sm:inline">{isDark ? "Light" : "Dark"}</span>
             </button>
 
             {onClose && (
               <button
                 onClick={onClose}
-                className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition cursor-pointer"
+                className="p-1.5 rounded-lg text-zinc-400 hover:text-zinc-950 dark:hover:text-[#F4F4F6] hover:bg-zinc-100 dark:hover:bg-[#181B24] transition-all duration-150 cursor-pointer active:scale-90"
                 title="Close and return to active quiz"
               >
                 <X className="w-5 h-5" />

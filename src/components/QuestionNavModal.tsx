@@ -106,28 +106,28 @@ export const QuestionNavModal: React.FC<QuestionNavModalProps> = ({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-end justify-center pb-20 bg-black/40 backdrop-blur-2xs animate-in fade-in duration-150"
+      className="fixed inset-0 z-50 flex items-end justify-center pb-20 bg-black/50 backdrop-blur-sm animate-in fade-in duration-200"
       onClick={onClose}
     >
       <div
         ref={containerRef}
-        className="fixed bottom-16 left-1/2 -translate-x-1/2 z-50 w-[480px] max-w-[92vw] max-h-[68vh] flex flex-col bg-white dark:bg-[#11131A] rounded-xl shadow-xl border border-zinc-200 dark:border-[#222634] overflow-hidden animate-in slide-in-from-bottom-3 duration-150"
+        className="fixed bottom-16 left-1/2 -translate-x-1/2 z-50 w-[490px] max-w-[94vw] max-h-[70vh] flex flex-col bg-white dark:bg-[#11131A] rounded-2xl shadow-2xl border border-zinc-200/90 dark:border-[#222634] overflow-hidden animate-in slide-in-from-bottom-3 duration-200"
         onClick={e => e.stopPropagation()}
       >
         {/* Sticky Top Header */}
-        <div className="shrink-0 px-5 py-3 border-b border-zinc-200 dark:border-[#222634] bg-neutral-50 dark:bg-[#181B24] flex flex-col gap-2.5">
+        <div className="shrink-0 px-5 py-3 border-b border-zinc-200 dark:border-[#222634] bg-neutral-50/80 dark:bg-[#181B24]/80 backdrop-blur-xs flex flex-col gap-2.5">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <span className="font-semibold text-zinc-950 dark:text-[#F4F4F6] text-xs sm:text-sm tracking-tight">
                 {sectionTitle}
               </span>
-              <span className="text-[10px] font-mono font-semibold px-2 py-0.5 rounded border border-zinc-200 dark:border-[#222634] bg-white dark:bg-[#11131A] text-zinc-600 dark:text-[#8E95A5]">
+              <span className="text-[10px] font-mono font-semibold px-2 py-0.5 rounded-full border border-zinc-200 dark:border-[#222634] bg-white dark:bg-[#11131A] text-zinc-600 dark:text-[#8E95A5]">
                 {questions.length} Questions
               </span>
             </div>
             <button
               onClick={onClose}
-              className="p-1 rounded text-zinc-400 hover:text-zinc-950 dark:hover:text-[#F4F4F6] hover:bg-zinc-100 dark:hover:bg-[#181B24] transition-colors duration-150"
+              className="p-1.5 rounded-lg text-zinc-400 hover:text-zinc-950 dark:hover:text-[#F4F4F6] hover:bg-zinc-100 dark:hover:bg-[#181B24] transition-all duration-150 active:scale-90 cursor-pointer"
               aria-label="Close question navigator"
             >
               <X className="w-4 h-4" strokeWidth={1.75} />
@@ -136,10 +136,10 @@ export const QuestionNavModal: React.FC<QuestionNavModalProps> = ({
 
           {/* Jump to # & Filter Tabs */}
           <div className="flex items-center justify-between gap-2 pt-0.5">
-            <div className="flex items-center gap-1 bg-zinc-100 dark:bg-[#090A0F] p-0.5 rounded-lg text-xs font-medium flex-wrap border border-zinc-200 dark:border-[#222634]">
+            <div className="flex items-center gap-1 bg-zinc-100 dark:bg-[#090A0F] p-0.5 rounded-xl text-xs font-medium flex-wrap border border-zinc-200 dark:border-[#222634]">
               <button
                 onClick={() => setActiveFilter('all')}
-                className={`px-2 py-1 rounded-md text-[11px] font-mono transition-colors duration-150 ${
+                className={`px-2.5 py-1 rounded-lg text-[11px] font-mono transition-all duration-150 cursor-pointer active:scale-95 ${
                   activeFilter === 'all'
                     ? 'bg-white dark:bg-[#181B24] text-zinc-950 dark:text-[#F4F4F6] shadow-2xs font-semibold'
                     : 'text-zinc-600 dark:text-[#8E95A5] hover:text-zinc-950 dark:hover:text-white'
@@ -149,9 +149,9 @@ export const QuestionNavModal: React.FC<QuestionNavModalProps> = ({
               </button>
               <button
                 onClick={() => setActiveFilter('answered')}
-                className={`px-2 py-1 rounded-md text-[11px] font-mono transition-colors duration-150 ${
+                className={`px-2.5 py-1 rounded-lg text-[11px] font-mono transition-all duration-150 cursor-pointer active:scale-95 ${
                   activeFilter === 'answered'
-                    ? 'bg-emerald-600 text-white font-semibold'
+                    ? 'bg-emerald-600 text-white font-semibold shadow-xs'
                     : 'text-emerald-700 dark:text-emerald-400 hover:text-emerald-800'
                 }`}
               >
@@ -159,7 +159,7 @@ export const QuestionNavModal: React.FC<QuestionNavModalProps> = ({
               </button>
               <button
                 onClick={() => setActiveFilter('unanswered')}
-                className={`px-2 py-1 rounded-md text-[11px] font-mono transition-colors duration-150 ${
+                className={`px-2.5 py-1 rounded-lg text-[11px] font-mono transition-all duration-150 cursor-pointer active:scale-95 ${
                   activeFilter === 'unanswered'
                     ? 'bg-white dark:bg-[#181B24] text-zinc-950 dark:text-[#F4F4F6] shadow-2xs font-semibold'
                     : 'text-zinc-600 dark:text-[#8E95A5] hover:text-zinc-950 dark:hover:text-white'
@@ -169,7 +169,7 @@ export const QuestionNavModal: React.FC<QuestionNavModalProps> = ({
               </button>
               <button
                 onClick={() => setActiveFilter('for_review')}
-                className={`px-2 py-1 rounded-md text-[11px] font-mono transition-colors duration-150 ${
+                className={`px-2.5 py-1 rounded-lg text-[11px] font-mono transition-all duration-150 cursor-pointer active:scale-95 ${
                   activeFilter === 'for_review'
                     ? 'bg-white dark:bg-[#181B24] text-zinc-950 dark:text-[#F4F4F6] shadow-2xs font-semibold'
                     : 'text-zinc-600 dark:text-[#8E95A5] hover:text-zinc-950 dark:hover:text-white'
@@ -180,9 +180,9 @@ export const QuestionNavModal: React.FC<QuestionNavModalProps> = ({
               {incorrectCount > 0 && (
                 <button
                   onClick={() => setActiveFilter('incorrect')}
-                  className={`px-2 py-1 rounded-md text-[11px] font-mono transition-colors duration-150 ${
+                  className={`px-2.5 py-1 rounded-lg text-[11px] font-mono transition-all duration-150 cursor-pointer active:scale-95 ${
                     activeFilter === 'incorrect'
-                      ? 'bg-rose-100 dark:bg-rose-950/60 text-rose-700 dark:text-rose-300 font-semibold'
+                      ? 'bg-rose-100 dark:bg-rose-950/60 text-rose-700 dark:text-rose-300 font-semibold shadow-2xs'
                       : 'text-rose-600 dark:text-rose-400'
                   }`}
                 >
@@ -267,9 +267,9 @@ export const QuestionNavModal: React.FC<QuestionNavModalProps> = ({
                     onClose();
                   }}
                   title={`Question ${q.questionNumber || idx + 1}: ${isAnswered ? 'Answered' : 'Unanswered'}${state.selectedChoice ? ` (Choice ${state.selectedChoice})` : ''}`}
-                  className={`relative w-10 h-10 rounded-lg flex items-center justify-center font-mono font-semibold text-xs transition-colors duration-150 tabular-nums select-none ${
+                  className={`relative w-10 h-10 rounded-xl flex items-center justify-center font-mono font-semibold text-xs transition-all duration-150 hover:scale-105 active:scale-90 tabular-nums select-none cursor-pointer shadow-2xs ${
                     isCurrent
-                      ? 'ring-2 ring-blue-600 dark:ring-blue-500 ring-offset-2 dark:ring-offset-[#11131A]'
+                      ? 'ring-2 ring-blue-600 dark:ring-blue-500 ring-offset-2 dark:ring-offset-[#11131A] scale-105'
                       : ''
                   } ${
                     isIncorrect
@@ -307,11 +307,11 @@ export const QuestionNavModal: React.FC<QuestionNavModalProps> = ({
         </div>
 
         {/* Sticky Footer */}
-        <div className="shrink-0 px-5 py-2.5 border-t border-zinc-200 dark:border-[#222634] bg-neutral-50 dark:bg-[#181B24] flex justify-between items-center text-xs font-mono text-zinc-500 dark:text-[#8E95A5]">
+        <div className="shrink-0 px-5 py-3 border-t border-zinc-200 dark:border-[#222634] bg-neutral-50/90 dark:bg-[#181B24]/90 backdrop-blur-xs flex justify-between items-center text-xs font-mono text-zinc-500 dark:text-[#8E95A5]">
           <span>Click any question to jump</span>
           <button
             onClick={onClose}
-            className="px-3 py-1 bg-white hover:bg-zinc-100 dark:bg-[#11131A] dark:hover:bg-[#202534] border border-zinc-200 dark:border-[#222634] text-zinc-800 dark:text-[#F4F4F6] font-semibold rounded-md transition-colors duration-150 cursor-pointer"
+            className="px-3.5 py-1.5 bg-white hover:bg-zinc-100 dark:bg-[#11131A] dark:hover:bg-[#202534] border border-zinc-200 dark:border-[#222634] text-zinc-800 dark:text-[#F4F4F6] font-semibold rounded-lg transition-all duration-150 cursor-pointer active:scale-95 shadow-2xs"
           >
             Close
           </button>

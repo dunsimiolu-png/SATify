@@ -15,7 +15,6 @@ import { LoginModal } from './components/LoginModal';
 import { UserAccountModal } from './components/UserAccountModal';
 import { UserProfile, getCurrentUser, logoutUser } from './utils/auth';
 import { Sidebar, AppRoute } from './components/Sidebar';
-import { PasscodeLock } from './components/PasscodeLock';
 
 // Dynamically lazy-loaded view chunks with Suspense for instant page loads (Requirement 1)
 const HomeDashboard = React.lazy(() => import('./views/HomeDashboard').then(m => ({ default: m.HomeDashboard })));
@@ -51,19 +50,6 @@ import { useTheme } from './utils/theme';
 export const App: React.FC = () => {
   // Global Theme state ('dark' | 'light')
   const { theme, isDark, toggleTheme } = useTheme();
-
-  // Private Passcode Authentication State
-  const [isUnlocked, setIsUnlocked] = useState<boolean>(() => {
-    if (typeof window === 'undefined') return false;
-    return localStorage.getItem('satify_auth_status') === 'unlocked' || 
-           sessionStorage.getItem('satify_auth_status') === 'unlocked';
-  });
-
-  const handleLockApp = useCallback(() => {
-    localStorage.removeItem('satify_auth_status');
-    sessionStorage.removeItem('satify_auth_status');
-    setIsUnlocked(false);
-  }, []);
 
   // User profile and Google Sign-in state (Requirement 8)
   const [currentUser, setCurrentUser] = useState<UserProfile | null>(() => getCurrentUser());
@@ -723,10 +709,6 @@ export const App: React.FC = () => {
 
   const savedCount = useMemo(() => getSavedQuestionIds().length, [currentState, storageVersion]);
 
-  if (!isUnlocked) {
-    return <PasscodeLock onUnlock={() => setIsUnlocked(true)} />;
-  }
-
   return (
     <div className="w-full max-w-full overflow-x-hidden h-[100dvh] max-h-[100dvh] flex flex-col md:flex-row overflow-hidden font-sans bg-neutral-50 dark:bg-[#090A0F] text-zinc-950 dark:text-[#F4F4F6]">
       {/* 1. Mobile Top Bar (< 1024px / lg:hidden) when NOT in full practice mode */}
@@ -797,7 +779,6 @@ export const App: React.FC = () => {
               }}
               savedCount={savedCount}
               onCloseMobile={() => setIsMobileNavOpen(false)}
-              onLock={handleLockApp}
               user={currentUser}
               onOpenLogin={() => setIsLoginModalOpen(true)}
               onOpenAccount={() => {
@@ -822,7 +803,6 @@ export const App: React.FC = () => {
               }
             }}
             savedCount={savedCount}
-            onLock={handleLockApp}
             user={currentUser}
             onOpenLogin={() => setIsLoginModalOpen(true)}
             onOpenAccount={() => setIsAccountModalOpen(true)}

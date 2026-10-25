@@ -48,7 +48,7 @@ export const Footer: React.FC<FooterProps> = ({
           <button
             type="button"
             onClick={onToggleGrid}
-            className="h-9 bg-zinc-950 hover:bg-zinc-900 dark:bg-[#181B24] dark:hover:bg-[#202534] text-white font-mono text-xs sm:text-sm px-3.5 sm:px-4 py-1.5 rounded-lg flex items-center gap-2 border border-zinc-800 dark:border-[#222634] transition-colors duration-150 cursor-pointer whitespace-nowrap"
+            className="h-9 bg-zinc-950 hover:bg-zinc-900 dark:bg-[#181B24] dark:hover:bg-[#202534] text-white font-mono text-xs sm:text-sm px-3.5 sm:px-4 py-1.5 rounded-xl flex items-center gap-2 border border-zinc-800 dark:border-[#222634] shadow-xs hover:shadow transition-all duration-150 cursor-pointer active:scale-95 whitespace-nowrap"
             title="Open Question Navigator Popover"
           >
             <span className="tabular-nums font-sans font-medium">
@@ -61,9 +61,9 @@ export const Footer: React.FC<FooterProps> = ({
               </span>
             )}
             {isGridOpen ? (
-              <ChevronDown className="w-3.5 h-3.5 text-zinc-400 shrink-0" strokeWidth={1.75} />
+              <ChevronDown className="w-3.5 h-3.5 text-zinc-400 shrink-0 transition-transform duration-150" strokeWidth={1.75} />
             ) : (
-              <ChevronUp className="w-3.5 h-3.5 text-zinc-400 shrink-0" strokeWidth={1.75} />
+              <ChevronUp className="w-3.5 h-3.5 text-zinc-400 shrink-0 transition-transform duration-150" strokeWidth={1.75} />
             )}
           </button>
         </div>
@@ -74,10 +74,10 @@ export const Footer: React.FC<FooterProps> = ({
             type="button"
             onClick={onPrev}
             disabled={isFirst}
-            className={`h-9 px-3.5 sm:px-4 rounded-lg text-xs font-semibold transition-colors duration-150 flex items-center gap-1 shrink-0 ${
+            className={`h-9 px-3.5 sm:px-4 rounded-xl text-xs font-semibold transition-all duration-150 flex items-center gap-1 shrink-0 ${
               isFirst
                 ? 'border border-zinc-200 dark:border-[#222634] bg-zinc-50 dark:bg-[#181B24] text-zinc-400 dark:text-zinc-600 cursor-not-allowed opacity-40'
-                : 'border border-zinc-200 dark:border-[#222634] bg-white hover:bg-zinc-100 dark:bg-[#181B24] dark:hover:bg-[#202534] text-zinc-900 dark:text-[#F4F4F6] cursor-pointer'
+                : 'border border-zinc-200 dark:border-[#222634] bg-white hover:bg-zinc-100 dark:bg-[#181B24] dark:hover:bg-[#202534] text-zinc-900 dark:text-[#F4F4F6] cursor-pointer active:scale-95 shadow-2xs'
             }`}
           >
             <ChevronLeft className="w-4 h-4 shrink-0" strokeWidth={1.75} />
@@ -88,10 +88,10 @@ export const Footer: React.FC<FooterProps> = ({
             type="button"
             onClick={onNext}
             disabled={isLast}
-            className={`h-9 px-4 sm:px-5 rounded-lg text-xs font-semibold transition-colors duration-150 flex items-center gap-1 shrink-0 ${
+            className={`h-9 px-4 sm:px-5 rounded-xl text-xs font-semibold transition-all duration-150 flex items-center gap-1 shrink-0 shadow-xs hover:shadow ${
               isLast
                 ? 'bg-zinc-200 dark:bg-[#222634] text-zinc-400 dark:text-zinc-600 cursor-not-allowed opacity-40'
-                : 'bg-blue-700 hover:bg-blue-800 text-white dark:bg-blue-600 dark:hover:bg-blue-500 cursor-pointer'
+                : 'bg-blue-700 hover:bg-blue-800 text-white dark:bg-blue-600 dark:hover:bg-blue-500 cursor-pointer active:scale-95'
             }`}
           >
             <span>Next</span>

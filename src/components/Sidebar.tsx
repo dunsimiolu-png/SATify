@@ -6,7 +6,6 @@ import {
   BookOpen, 
   Calculator, 
   Layers, 
-  Lock,
   Zap,
   Sun,
   Moon,
@@ -33,7 +32,6 @@ interface SidebarProps {
   savedCount?: number;
   className?: string;
   onCloseMobile?: () => void;
-  onLock?: () => void;
   user?: UserProfile | null;
   onOpenLogin?: () => void;
   onOpenAccount?: () => void;
@@ -45,7 +43,6 @@ export const Sidebar: React.FC<SidebarProps> = ({
   savedCount = 0,
   className = '',
   onCloseMobile,
-  onLock,
   user,
   onOpenLogin,
   onOpenAccount,
@@ -86,14 +83,14 @@ export const Sidebar: React.FC<SidebarProps> = ({
         </div>
 
         {/* Workspace Status Tag */}
-        <div className="flex items-center justify-between px-2.5 py-1.5 rounded-lg border border-zinc-200 dark:border-[#222634] bg-neutral-50 dark:bg-[#090A0F]">
+        <div className="flex items-center justify-between px-2.5 py-1.5 rounded-lg border border-zinc-200 dark:border-[#222634] bg-neutral-50 dark:bg-[#090A0F] shadow-2xs">
           <div className="flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-blue-600 dark:bg-blue-500" />
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
             <span className="text-[11px] font-mono font-medium tracking-tight text-zinc-600 dark:text-[#8E95A5]">
               Digital SAT 2026
             </span>
           </div>
-          <span className="text-[10px] font-mono text-zinc-400 dark:text-[#8E95A5] uppercase">
+          <span className="text-[10px] font-mono font-semibold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/50 px-1.5 py-0.2 rounded border border-blue-100 dark:border-blue-900/40 uppercase">
             v1.0
           </span>
         </div>
@@ -114,14 +111,16 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 onRouteChange(item.id);
                 if (onCloseMobile) onCloseMobile();
               }}
-              className={`w-full flex items-center justify-between px-2.5 py-2 rounded-lg text-xs font-medium transition-colors duration-150 group cursor-pointer ${
+              className={`w-full flex items-center justify-between px-2.5 py-2 rounded-xl text-xs font-medium transition-all duration-150 ease-spring group cursor-pointer active:scale-[0.98] ${
                 isActive
-                  ? 'bg-zinc-100 dark:bg-[#181B24] text-zinc-950 dark:text-[#F4F4F6] font-semibold border border-zinc-200 dark:border-[#222634]'
-                  : 'text-zinc-600 dark:text-[#8E95A5] hover:text-zinc-950 dark:hover:text-[#F4F4F6] hover:bg-zinc-50 dark:hover:bg-[#141620] border border-transparent'
+                  ? 'bg-blue-50/90 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300 font-semibold border border-blue-200/80 dark:border-blue-900/60 shadow-2xs'
+                  : 'text-zinc-600 dark:text-[#8E95A5] hover:text-zinc-950 dark:hover:text-[#F4F4F6] hover:bg-zinc-100/70 dark:hover:bg-[#181B24]/80 hover:translate-x-0.5 border border-transparent'
               }`}
             >
               <div className="flex items-center gap-2.5 min-w-0">
-                <span className={`shrink-0 ${isActive ? 'text-blue-700 dark:text-blue-400' : 'text-zinc-500 dark:text-[#8E95A5] group-hover:text-zinc-950 dark:group-hover:text-[#F4F4F6]'}`}>
+                <span className={`shrink-0 transition-transform duration-150 group-hover:scale-110 ${
+                  isActive ? 'text-blue-700 dark:text-blue-400' : 'text-zinc-500 dark:text-[#8E95A5] group-hover:text-zinc-950 dark:group-hover:text-[#F4F4F6]'
+                }`}>
                   {item.icon}
                 </span>
                 <span className="truncate">{item.label}</span>
@@ -129,15 +128,15 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
               <div className="flex items-center gap-1.5 shrink-0 ml-2">
                 {item.badge !== undefined && (
-                  <span className={`px-1.5 py-0.2 rounded text-[10px] font-mono font-bold tabular-nums ${
+                  <span className={`px-1.5 py-0.2 rounded-full text-[10px] font-mono font-bold tabular-nums transition-colors ${
                     isActive 
-                      ? 'bg-blue-700 text-white dark:bg-blue-600' 
-                      : 'bg-zinc-200 dark:bg-[#222634] text-zinc-700 dark:text-[#8E95A5]'
+                      ? 'bg-blue-700 text-white dark:bg-blue-600 shadow-xs' 
+                      : 'bg-zinc-200/80 dark:bg-[#222634] text-zinc-700 dark:text-[#8E95A5]'
                   }`}>
                     {item.badge}
                   </span>
                 )}
-                <span className="hidden sm:inline font-mono text-[10px] text-zinc-400 dark:text-[#8E95A5]/60 group-hover:text-zinc-500">
+                <span className="hidden sm:inline font-mono text-[10px] text-zinc-400 dark:text-[#8E95A5]/60 group-hover:text-zinc-600 dark:group-hover:text-zinc-300">
                   {item.shortcut}
                 </span>
               </div>
@@ -149,14 +148,14 @@ export const Sidebar: React.FC<SidebarProps> = ({
       {/* User Profile / Sign In */}
       <div className="p-3 border-t border-zinc-200 dark:border-[#222634] bg-neutral-50/50 dark:bg-[#090A0F]/50">
         {user ? (
-          <div className="flex items-center justify-between gap-2 p-1.5 rounded-lg bg-white dark:bg-[#11131A] border border-zinc-200 dark:border-[#222634]">
+          <div className="flex items-center justify-between gap-2 p-1.5 rounded-xl bg-white dark:bg-[#11131A] border border-zinc-200 dark:border-[#222634] shadow-2xs hover:border-zinc-300 dark:hover:border-zinc-700 transition-colors">
             <button
               type="button"
               onClick={onOpenAccount}
-              className="flex items-center gap-2 min-w-0 flex-1 text-left cursor-pointer hover:opacity-85 transition-opacity"
+              className="flex items-center gap-2 min-w-0 flex-1 text-left cursor-pointer hover:opacity-90 transition-opacity active:scale-[0.98]"
               title="Account settings"
             >
-              <div className="w-7 h-7 rounded-md overflow-hidden border border-zinc-300 dark:border-[#222634] shrink-0 bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 font-bold text-xs flex items-center justify-center">
+              <div className="w-7 h-7 rounded-lg overflow-hidden border border-zinc-300 dark:border-[#222634] shrink-0 bg-blue-600 text-white font-bold text-xs flex items-center justify-center shadow-xs">
                 {user.picture ? (
                   <img src={user.picture} alt={user.name} className="w-full h-full object-cover" />
                 ) : (
@@ -178,7 +177,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 logoutUser();
                 if (onCloseMobile) onCloseMobile();
               }}
-              className="p-1 rounded text-zinc-400 hover:text-rose-600 dark:hover:text-rose-400 hover:bg-zinc-100 dark:hover:bg-[#181B24] transition-colors duration-150 shrink-0 cursor-pointer"
+              className="p-1.5 rounded-lg text-zinc-400 hover:text-rose-600 dark:hover:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/40 transition-colors duration-150 shrink-0 cursor-pointer active:scale-95"
               title="Sign Out"
               aria-label="Sign Out"
             >
@@ -188,7 +187,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         ) : (
           <button
             onClick={onOpenLogin}
-            className="w-full py-2 px-3 rounded-lg bg-blue-700 hover:bg-blue-800 text-white dark:bg-blue-600 dark:hover:bg-blue-500 font-semibold text-xs transition-colors duration-150 flex items-center justify-center gap-1.5 cursor-pointer"
+            className="w-full py-2 px-3 rounded-xl bg-blue-700 hover:bg-blue-800 text-white dark:bg-blue-600 dark:hover:bg-blue-500 font-semibold text-xs shadow-xs hover:shadow transition-all duration-150 flex items-center justify-center gap-1.5 cursor-pointer active:scale-[0.98]"
           >
             <User className="w-3.5 h-3.5" strokeWidth={1.75} />
             <span>Sign In</span>
@@ -198,29 +197,22 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
       {/* Footer Utility Cluster */}
       <div className="p-3 border-t border-zinc-200 dark:border-[#222634] bg-white dark:bg-[#11131A] flex items-center justify-between text-zinc-500 dark:text-[#8E95A5]">
-        <div className="text-[10px] font-mono">
+        <div className="text-[10px] font-mono tracking-tight">
           © SATify 2026
         </div>
 
         <div className="flex items-center gap-1">
-          {onLock && (
-            <button
-              onClick={onLock}
-              className="p-1.5 rounded-md hover:bg-zinc-100 dark:hover:bg-[#181B24] hover:text-zinc-950 dark:hover:text-[#F4F4F6] border border-transparent hover:border-zinc-200 dark:hover:border-[#222634] transition-colors duration-150 cursor-pointer"
-              title="Lock Workspace (Private Gate)"
-              aria-label="Lock Workspace"
-            >
-              <Lock className="w-3.5 h-3.5" strokeWidth={1.75} />
-            </button>
-          )}
-
           <button
             onClick={toggleTheme}
-            className="p-1.5 rounded-md hover:bg-zinc-100 dark:hover:bg-[#181B24] hover:text-zinc-950 dark:hover:text-[#F4F4F6] border border-transparent hover:border-zinc-200 dark:hover:border-[#222634] transition-colors duration-150 cursor-pointer"
+            className="p-1.5 rounded-lg hover:bg-zinc-100 dark:hover:bg-[#181B24] hover:text-zinc-950 dark:hover:text-[#F4F4F6] border border-transparent hover:border-zinc-200 dark:hover:border-[#222634] transition-all duration-150 cursor-pointer active:scale-90"
             title={isDark ? "Switch to Light Mode" : "Switch to Dark Mode"}
             aria-label="Toggle theme"
           >
-            {isDark ? <Sun className="w-3.5 h-3.5 text-amber-400" strokeWidth={1.75} /> : <Moon className="w-3.5 h-3.5 text-zinc-700" strokeWidth={1.75} />}
+            {isDark ? (
+              <Sun className="w-3.5 h-3.5 text-amber-400 hover:rotate-12 transition-transform duration-200" strokeWidth={1.75} />
+            ) : (
+              <Moon className="w-3.5 h-3.5 text-zinc-700 hover:-rotate-12 transition-transform duration-200" strokeWidth={1.75} />
+            )}
           </button>
         </div>
       </div>

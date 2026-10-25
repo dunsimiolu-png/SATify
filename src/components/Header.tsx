@@ -343,7 +343,7 @@ export const Header: React.FC<HeaderProps> = ({
           <div className="sm:hidden relative">
             <button
               onClick={(e) => { e.stopPropagation(); setIsMobileToolsOpen(!isMobileToolsOpen); }}
-              className="p-2 rounded-lg bg-gray-100 dark:bg-slate-800 hover:bg-gray-200 dark:hover:bg-slate-700 text-gray-700 dark:text-slate-300 transition min-h-[36px] min-w-[36px] flex items-center justify-center cursor-pointer"
+              className="p-2 rounded-xl bg-zinc-100 dark:bg-[#181B24] hover:bg-zinc-200 dark:hover:bg-[#202534] text-zinc-700 dark:text-[#8E95A5] transition-all duration-150 min-h-[36px] min-w-[36px] flex items-center justify-center cursor-pointer active:scale-95 border border-zinc-200 dark:border-[#222634]"
               title="More Tools"
               aria-label="More Tools"
             >
@@ -352,28 +352,28 @@ export const Header: React.FC<HeaderProps> = ({
 
             {/* Dropdown popover for mobile tools */}
             {isMobileToolsOpen && (
-              <div className="absolute right-0 top-full mt-2 w-48 rounded-2xl bg-white dark:bg-[#0f1522] border border-slate-200 dark:border-slate-700 shadow-2xl p-1.5 z-50 animate-in fade-in zoom-in-95">
-                <button onClick={() => { onOpenFilter(); setIsMobileToolsOpen(false); }} className="w-full p-2.5 text-left rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800/60 flex items-center gap-2.5 cursor-pointer transition text-sm font-medium text-slate-700 dark:text-slate-200">
-                  <SlidersHorizontal className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+              <div className="absolute right-0 top-full mt-2 w-52 rounded-2xl bg-white/95 dark:bg-[#11131A]/95 backdrop-blur-md border border-zinc-200/90 dark:border-[#222634] shadow-2xl p-1.5 z-50 animate-in fade-in zoom-in-95 duration-150">
+                <button onClick={() => { onOpenFilter(); setIsMobileToolsOpen(false); }} className="w-full p-2.5 text-left rounded-xl hover:bg-zinc-100 dark:hover:bg-[#181B24] flex items-center gap-2.5 cursor-pointer transition-colors duration-150 text-xs font-semibold text-zinc-800 dark:text-[#F4F4F6] active:scale-[0.98]">
+                  <SlidersHorizontal className="w-4 h-4 text-blue-700 dark:text-blue-400" />
                   <span>Filter Topics</span>
                 </button>
                 {onOpenGrammarGuide && (
-                  <button onClick={() => { onOpenGrammarGuide(); setIsMobileToolsOpen(false); }} className="w-full p-2.5 text-left rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800/60 flex items-center gap-2.5 cursor-pointer transition text-sm font-medium text-slate-700 dark:text-slate-200">
-                    <Split className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                  <button onClick={() => { onOpenGrammarGuide(); setIsMobileToolsOpen(false); }} className="w-full p-2.5 text-left rounded-xl hover:bg-zinc-100 dark:hover:bg-[#181B24] flex items-center gap-2.5 cursor-pointer transition-colors duration-150 text-xs font-semibold text-zinc-800 dark:text-[#F4F4F6] active:scale-[0.98]">
+                    <Split className="w-4 h-4 text-blue-700 dark:text-blue-400" />
                     <span>Grammar Guide</span>
                   </button>
                 )}
-                <button onClick={() => { onToggleAnnotate(); setIsMobileToolsOpen(false); }} className={`w-full p-2.5 text-left rounded-xl flex items-center gap-2.5 cursor-pointer transition text-sm font-medium ${isAnnotateActive ? 'bg-amber-50 dark:bg-amber-950/30 text-amber-800 dark:text-amber-300' : 'hover:bg-slate-100 dark:hover:bg-slate-800/60 text-slate-700 dark:text-slate-200'}`}>
+                <button onClick={() => { onToggleAnnotate(); setIsMobileToolsOpen(false); }} className={`w-full p-2.5 text-left rounded-xl flex items-center gap-2.5 cursor-pointer transition-colors duration-150 text-xs font-semibold active:scale-[0.98] ${isAnnotateActive ? 'bg-amber-50 dark:bg-amber-950/40 text-amber-900 dark:text-amber-200 border border-amber-300 dark:border-amber-800' : 'hover:bg-zinc-100 dark:hover:bg-[#181B24] text-zinc-800 dark:text-[#F4F4F6]'}`}>
                   <Highlighter className="w-4 h-4" />
                   <span>{isAnnotateActive ? 'Annotate ✓' : 'Annotate'}</span>
                 </button>
-                <button onClick={() => { onOpenDirections(); setIsMobileToolsOpen(false); }} className="w-full p-2.5 text-left rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800/60 flex items-center gap-2.5 cursor-pointer transition text-sm font-medium text-slate-700 dark:text-slate-200">
-                  <BookOpen className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                <button onClick={() => { onOpenDirections(); setIsMobileToolsOpen(false); }} className="w-full p-2.5 text-left rounded-xl hover:bg-zinc-100 dark:hover:bg-[#181B24] flex items-center gap-2.5 cursor-pointer transition-colors duration-150 text-xs font-semibold text-zinc-800 dark:text-[#F4F4F6] active:scale-[0.98]">
+                  <BookOpen className="w-4 h-4 text-blue-700 dark:text-blue-400" />
                   <span>Directions</span>
                 </button>
-                <div className="h-px bg-slate-100 dark:bg-slate-800 my-1" />
-                <button onClick={() => { toggleTheme(); setIsMobileToolsOpen(false); }} className="w-full p-2.5 text-left rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800/60 flex items-center gap-2.5 cursor-pointer transition text-sm font-medium text-slate-700 dark:text-slate-200">
-                  {isDark ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-slate-700" />}
+                <div className="h-px bg-zinc-200 dark:bg-[#222634] my-1" />
+                <button onClick={() => { toggleTheme(); setIsMobileToolsOpen(false); }} className="w-full p-2.5 text-left rounded-xl hover:bg-zinc-100 dark:hover:bg-[#181B24] flex items-center gap-2.5 cursor-pointer transition-colors duration-150 text-xs font-semibold text-zinc-800 dark:text-[#F4F4F6] active:scale-[0.98]">
+                  {isDark ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-zinc-700" />}
                   <span>{isDark ? 'Light Mode' : 'Dark Mode'}</span>
                 </button>
               </div>
@@ -385,7 +385,7 @@ export const Header: React.FC<HeaderProps> = ({
             <div className="relative shrink-0 ml-1">
               <button
                 onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
-                className="w-8 h-8 rounded-full overflow-hidden border-2 border-blue-600 focus:outline-none flex items-center justify-center bg-blue-600 text-white font-bold text-xs cursor-pointer shadow-xs transition hover:scale-105"
+                className="w-8 h-8 rounded-full overflow-hidden border-2 border-blue-600 focus:outline-hidden flex items-center justify-center bg-blue-600 text-white font-bold text-xs cursor-pointer shadow-xs transition-transform duration-150 hover:scale-105 active:scale-95"
                 title={user.name}
               >
                 {user.picture ? (
@@ -396,19 +396,19 @@ export const Header: React.FC<HeaderProps> = ({
               </button>
 
               {isUserMenuOpen && (
-                <div className="absolute right-0 top-full mt-2 w-56 rounded-2xl bg-white dark:bg-[#0f1522] border border-slate-200 dark:border-slate-800 shadow-2xl p-2 text-xs text-slate-800 dark:text-slate-100 z-50 animate-in fade-in zoom-in-95">
-                  <div className="p-2.5 border-b border-slate-100 dark:border-slate-800">
-                    <p className="font-extrabold text-slate-900 dark:text-white truncate">{user.name}</p>
-                    <p className="text-[11px] text-slate-500 dark:text-slate-400 truncate">{user.email}</p>
+                <div className="absolute right-0 top-full mt-2 w-60 rounded-2xl bg-white/95 dark:bg-[#11131A]/95 backdrop-blur-md border border-zinc-200/90 dark:border-[#222634] shadow-2xl p-2 text-xs text-zinc-950 dark:text-[#F4F4F6] z-50 animate-in fade-in zoom-in-95 duration-150">
+                  <div className="p-2.5 border-b border-zinc-100 dark:border-[#181B24]">
+                    <p className="font-bold text-zinc-950 dark:text-[#F4F4F6] truncate">{user.name}</p>
+                    <p className="text-[11px] text-zinc-500 dark:text-[#8E95A5] truncate mt-0.5">{user.email}</p>
                   </div>
                   <button
                     onClick={() => {
                       setIsUserMenuOpen(false);
                       if (onOpenAccount) onOpenAccount();
                     }}
-                    className="w-full p-2 text-left rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800/60 flex items-center gap-2 cursor-pointer transition text-slate-700 dark:text-slate-300 font-semibold"
+                    className="w-full p-2 text-left rounded-xl hover:bg-zinc-100 dark:hover:bg-[#181B24] flex items-center gap-2 cursor-pointer transition-colors text-zinc-800 dark:text-[#F4F4F6] font-medium active:scale-[0.98] mt-1"
                   >
-                    <User className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
+                    <User className="w-3.5 h-3.5 text-blue-700 dark:text-blue-400" />
                     <span>Account & Email Sync</span>
                   </button>
                   <button
@@ -416,9 +416,9 @@ export const Header: React.FC<HeaderProps> = ({
                       setIsUserMenuOpen(false);
                       window.dispatchEvent(new CustomEvent('satify_open_cookie_preferences'));
                     }}
-                    className="w-full p-2 text-left rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800/60 flex items-center gap-2 cursor-pointer transition text-slate-700 dark:text-slate-300"
+                    className="w-full p-2 text-left rounded-xl hover:bg-zinc-100 dark:hover:bg-[#181B24] flex items-center gap-2 cursor-pointer transition-colors text-zinc-800 dark:text-[#F4F4F6] active:scale-[0.98]"
                   >
-                    <Cookie className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
+                    <Cookie className="w-3.5 h-3.5 text-blue-700 dark:text-blue-400" />
                     <span>Cookie Preferences</span>
                   </button>
                   <button
@@ -426,7 +426,7 @@ export const Header: React.FC<HeaderProps> = ({
                       setIsUserMenuOpen(false);
                       logoutUser();
                     }}
-                    className="w-full p-2 text-left rounded-xl hover:bg-rose-50 dark:hover:bg-rose-950/40 text-rose-600 dark:text-rose-400 flex items-center gap-2 cursor-pointer transition"
+                    className="w-full p-2 text-left rounded-xl hover:bg-rose-50 dark:hover:bg-rose-950/40 text-rose-600 dark:text-rose-400 flex items-center gap-2 cursor-pointer transition-colors active:scale-[0.98]"
                   >
                     <LogOut className="w-3.5 h-3.5" />
                     <span>Sign Out</span>
@@ -437,7 +437,7 @@ export const Header: React.FC<HeaderProps> = ({
           ) : (
             <button
               onClick={onOpenLogin}
-              className="px-2.5 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs flex items-center gap-1.5 transition shadow-xs cursor-pointer active:scale-95 shrink-0 ml-1"
+              className="px-3 py-1.5 rounded-xl bg-blue-700 hover:bg-blue-800 text-white dark:bg-blue-600 dark:hover:bg-blue-500 font-semibold text-xs flex items-center gap-1.5 transition-all duration-150 shadow-xs hover:shadow cursor-pointer active:scale-95 shrink-0 ml-1"
               title="Sign in with Google"
             >
               <User className="w-3.5 h-3.5" />

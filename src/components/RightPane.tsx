@@ -279,21 +279,21 @@ export const RightPane: React.FC<RightPaneProps> = ({
           const isCorrect = choiceId === question.correctAnswer;
 
           // Compute card styling with clean hairline borders & active rings
-          let cardStyleClass = 'border border-zinc-200 dark:border-[#222634] bg-white dark:bg-[#11131A] hover:bg-zinc-50 dark:hover:bg-[#181B24] text-zinc-950 dark:text-[#F4F4F6]';
+          let cardStyleClass = 'border border-zinc-200 dark:border-[#222634] bg-white dark:bg-[#11131A] hover:bg-zinc-50 hover:border-zinc-300 dark:hover:bg-[#181B24] dark:hover:border-zinc-700 text-zinc-950 dark:text-[#F4F4F6] shadow-2xs';
           let badgeStyleClass = 'border border-zinc-300 dark:border-[#222634] bg-zinc-50 dark:bg-[#181B24] text-zinc-700 dark:text-[#8E95A5]';
 
           if (isChecked) {
             if (isCorrect) {
-              cardStyleClass = 'ring-2 ring-emerald-600 border-transparent bg-emerald-50/60 dark:bg-emerald-950/20 text-emerald-950 dark:text-emerald-100';
+              cardStyleClass = 'ring-2 ring-emerald-600 border-transparent bg-emerald-50/70 dark:bg-emerald-950/30 text-emerald-950 dark:text-emerald-100 shadow-xs';
               badgeStyleClass = 'bg-emerald-600 text-white border-emerald-600 font-bold';
             } else if (isSelected && !isCorrect) {
-              cardStyleClass = 'ring-2 ring-rose-600 border-transparent bg-rose-50/60 dark:bg-rose-950/20 text-rose-950 dark:text-rose-100';
+              cardStyleClass = 'ring-2 ring-rose-600 border-transparent bg-rose-50/70 dark:bg-rose-950/30 text-rose-950 dark:text-rose-100 shadow-xs';
               badgeStyleClass = 'bg-rose-600 text-white border-rose-600 font-bold';
             } else {
-              cardStyleClass = 'border border-zinc-200 dark:border-[#222634] bg-zinc-50/40 dark:bg-[#11131A]/40 text-zinc-400 dark:text-zinc-600 opacity-50';
+              cardStyleClass = 'border border-zinc-200/60 dark:border-[#222634]/60 bg-zinc-50/30 dark:bg-[#11131A]/30 text-zinc-400 dark:text-zinc-600 opacity-50';
             }
           } else if (isSelected) {
-            cardStyleClass = 'ring-2 ring-blue-600 dark:ring-blue-500 border-transparent bg-blue-50/50 dark:bg-[#181B24] text-zinc-950 dark:text-white shadow-xs';
+            cardStyleClass = 'ring-2 ring-blue-600 dark:ring-blue-500 border-transparent bg-blue-50/60 dark:bg-blue-950/20 text-zinc-950 dark:text-white shadow-xs';
             badgeStyleClass = 'bg-blue-600 dark:bg-blue-500 text-white border-blue-600 dark:border-blue-500 font-bold';
           }
 
@@ -302,8 +302,8 @@ export const RightPane: React.FC<RightPaneProps> = ({
               <button
                 disabled={isEliminated}
                 onClick={() => onSelectChoice(choiceId as 'A' | 'B' | 'C' | 'D')}
-                className={`w-full min-h-[46px] relative text-left rounded-lg px-4 py-3 flex items-start gap-3 transition-colors duration-150 select-none ${cardStyleClass} ${
-                  isEliminated ? 'opacity-40 pointer-events-none' : 'cursor-pointer'
+                className={`w-full min-h-[48px] relative text-left rounded-xl px-4 py-3 flex items-start gap-3 transition-all duration-150 ease-spring select-none ${cardStyleClass} ${
+                  isEliminated ? 'opacity-40 pointer-events-none' : 'cursor-pointer active:scale-[0.99]'
                 }`}
               >
                 {/* Horizontal Strike-through line when eliminated */}
@@ -313,7 +313,7 @@ export const RightPane: React.FC<RightPaneProps> = ({
 
                 {/* Bordered Letter Badge (A, B, C, D) */}
                 <div
-                  className={`w-6 h-6 rounded-md flex-shrink-0 flex items-center justify-center font-mono text-xs font-semibold tabular-nums transition-colors duration-150 ${badgeStyleClass}`}
+                  className={`w-6 h-6 rounded-lg flex-shrink-0 flex items-center justify-center font-mono text-xs font-semibold tabular-nums transition-all duration-150 group-hover:scale-105 ${badgeStyleClass}`}
                 >
                   {isChecked && isCorrect ? (
                     <Check className="w-3.5 h-3.5 stroke-[2.5]" />
@@ -334,10 +334,10 @@ export const RightPane: React.FC<RightPaneProps> = ({
               {(isAbcModeActive || isEliminated) && (
                 <button
                   onClick={() => onToggleEliminate(choiceId as 'A' | 'B' | 'C' | 'D')}
-                  className={`flex-shrink-0 h-9 w-9 flex items-center justify-center rounded-lg border transition-colors duration-150 cursor-pointer ${
+                  className={`flex-shrink-0 h-9 w-9 flex items-center justify-center rounded-xl border transition-all duration-150 cursor-pointer active:scale-90 ${
                     isEliminated
                       ? 'border-zinc-300 bg-zinc-100 dark:bg-[#181B24] text-zinc-700 dark:text-[#8E95A5] hover:bg-zinc-200'
-                      : 'border-zinc-200 dark:border-[#222634] bg-white dark:bg-[#11131A] text-zinc-400 hover:text-rose-600 hover:border-rose-300'
+                      : 'border-zinc-200 dark:border-[#222634] bg-white dark:bg-[#11131A] text-zinc-400 hover:text-rose-600 hover:border-rose-300 shadow-2xs'
                   }`}
                   title={isEliminated ? `Restore Option ${choiceId}` : `Eliminate Option ${choiceId}`}
                 >
@@ -359,17 +359,17 @@ export const RightPane: React.FC<RightPaneProps> = ({
           <button
             onClick={() => onCheckAnswer(questionElapsed)}
             disabled={!userState.selectedChoice}
-            className={`min-h-[44px] px-6 py-2 rounded-full text-sm font-semibold transition shadow-xs flex items-center gap-2 ${
+            className={`min-h-[44px] px-6 py-2.5 rounded-xl text-sm font-semibold transition-all duration-150 shadow-xs flex items-center gap-2 ${
               userState.selectedChoice
-                ? 'bg-blue-600 hover:bg-blue-700 text-white active:scale-95 cursor-pointer'
-                : 'bg-slate-200 dark:bg-slate-800 text-slate-400 dark:text-slate-600 cursor-not-allowed'
+                ? 'bg-blue-700 hover:bg-blue-800 text-white dark:bg-blue-600 dark:hover:bg-blue-500 hover:shadow active:scale-95 cursor-pointer'
+                : 'bg-zinc-200 dark:bg-[#181B24] text-zinc-400 dark:text-zinc-600 cursor-not-allowed border border-transparent'
             }`}
           >
             <span>{userState.isAnswerChecked ? 'Recheck Answer' : 'Check Answer'}</span>
           </button>
 
           {isAnswered && !userState.isAnswerChecked && (
-            <span className="text-xs font-semibold px-3 py-1 rounded-full bg-blue-50 text-blue-800 dark:bg-blue-950/40 dark:text-blue-300 flex items-center gap-1.5 border border-blue-200 dark:border-blue-800 animate-in fade-in">
+            <span className="text-xs font-semibold px-3 py-1.5 rounded-full bg-blue-50 text-blue-800 dark:bg-blue-950/40 dark:text-blue-300 flex items-center gap-1.5 border border-blue-200 dark:border-blue-800 animate-in fade-in duration-150">
               <Check className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400 stroke-[2.5]" />
               <span>Answered (Option {userState.selectedChoice})</span>
             </span>
@@ -378,10 +378,10 @@ export const RightPane: React.FC<RightPaneProps> = ({
           {userState.isAnswerChecked && (
             <>
               <span
-                className={`text-xs font-semibold px-3 py-1 rounded-full flex items-center gap-1.5 ${
+                className={`text-xs font-semibold px-3 py-1.5 rounded-full flex items-center gap-1.5 animate-in fade-in duration-150 ${
                   isSelectedCorrect
-                    ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-950/40 dark:text-emerald-300'
-                    : 'bg-rose-100 text-rose-800 dark:bg-rose-950/40 dark:text-rose-300'
+                    ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-950/40 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800/60'
+                    : 'bg-rose-100 text-rose-800 dark:bg-rose-950/40 dark:text-rose-300 border border-rose-200 dark:border-rose-800/60'
                 }`}
               >
                 {isSelectedCorrect ? (
@@ -397,7 +397,7 @@ export const RightPane: React.FC<RightPaneProps> = ({
 
               {/* Recorded Pace Badge */}
               <span
-                className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-mono font-bold border transition-colors ${paceColor.badgeClass}`}
+                className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-full text-xs font-mono font-bold border transition-colors ${paceColor.badgeClass}`}
                 title={`Target: ${targetSeconds}s`}
               >
                 <Clock className="w-3.5 h-3.5" />
@@ -411,10 +411,10 @@ export const RightPane: React.FC<RightPaneProps> = ({
         <button
           disabled={!userState.isAnswerChecked}
           onClick={onToggleExplanation}
-          className={`flex items-center gap-1.5 text-xs sm:text-sm font-semibold transition px-3 py-1.5 rounded-md ${
+          className={`flex items-center gap-1.5 text-xs sm:text-sm font-semibold transition-all duration-150 px-4 py-2 rounded-xl active:scale-95 ${
             !userState.isAnswerChecked
-              ? 'text-slate-400 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 cursor-not-allowed select-none opacity-80'
-              : 'text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-950/30 cursor-pointer border border-transparent'
+              ? 'text-zinc-400 bg-zinc-100 dark:bg-[#181B24] border border-zinc-200 dark:border-[#222634] cursor-not-allowed select-none opacity-80'
+              : 'text-blue-700 dark:text-blue-300 bg-blue-50/80 hover:bg-blue-100 dark:bg-blue-950/40 dark:hover:bg-blue-900/60 border border-blue-200/80 dark:border-blue-900/50 cursor-pointer shadow-2xs'
           }`}
           title={
             !userState.isAnswerChecked
@@ -439,16 +439,16 @@ export const RightPane: React.FC<RightPaneProps> = ({
 
       {/* 6. Official College Board Rationale Drawer */}
       {userState.isAnswerChecked && userState.isExplanationOpen && (
-        <div className="mt-5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0f1522] p-5 shadow-xs animate-in fade-in slide-in-from-top-2 duration-200 explanation-text select-text">
-          <div className="flex items-center gap-2 mb-3 pb-2 border-b border-slate-200 dark:border-slate-800">
-            <HelpCircle className="w-4 h-4 text-blue-600 dark:text-blue-400" />
-            <h4 className="font-bold text-slate-900 dark:text-white text-sm tracking-tight">
+        <div className="mt-5 rounded-2xl border border-zinc-200 dark:border-[#222634] bg-zinc-50/90 dark:bg-[#141620] p-5 sm:p-6 shadow-sm animate-in fade-in slide-in-from-top-2 duration-200 explanation-text select-text">
+          <div className="flex items-center gap-2 mb-3 pb-2.5 border-b border-zinc-200 dark:border-[#222634]">
+            <HelpCircle className="w-4 h-4 text-blue-700 dark:text-blue-400" />
+            <h4 className="font-bold text-zinc-950 dark:text-[#F4F4F6] text-sm tracking-tight">
               Official College Board Rationale
             </h4>
           </div>
 
           <div className="mb-2">
-            <div className="font-sans font-semibold text-xs text-slate-600 dark:text-slate-400 uppercase tracking-wider mb-2">
+            <div className="font-sans font-semibold text-xs text-zinc-600 dark:text-[#8E95A5] uppercase tracking-wider mb-2">
               Correct Answer: Option {question.correctAnswer}
             </div>
             <ExplanationRenderer rationale={rationaleText} />
