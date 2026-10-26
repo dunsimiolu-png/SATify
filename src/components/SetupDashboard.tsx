@@ -11,8 +11,8 @@ import {
   RotateCcw,
   AlertTriangle
 } from 'lucide-react';
-import { MockQuestion, EnglishFilterConfig, DifficultyLevel, SectionType } from '../types/quiz';
-import { allQuestions } from '../data/mockQuestions';
+import { MockQuestion, EnglishFilterConfig, DifficultyLevel } from '../types/quiz';
+import { allEnglishQuestions } from '../data/mockQuestions';
 import { Logo } from './Logo';
 import { useTheme } from '../utils/theme';
 import { getAnsweredQuestionIds } from '../utils/storage';
@@ -24,27 +24,14 @@ interface SetupDashboardProps {
   currentConfig?: EnglishFilterConfig;
 }
 
-export const READING_WRITING_DOMAINS = [
+const ALL_DOMAINS = [
   'Craft and Structure',
   'Information and Ideas',
   'Expression of Ideas',
   'Standard English Conventions',
 ] as const;
 
-export const MATH_DOMAINS = [
-  'Algebra',
-  'Advanced Math',
-  'Problem-Solving and Data Analysis',
-  'Geometry and Trigonometry',
-] as const;
-
-export const ALL_DOMAINS = [
-  ...READING_WRITING_DOMAINS,
-  ...MATH_DOMAINS,
-] as const;
-
-export const SKILLS_BY_DOMAIN: Record<string, string[]> = {
-  // Reading & Writing (10 Skills)
+const SKILLS_BY_DOMAIN: Record<string, string[]> = {
   'Craft and Structure': [
     'Words in Context',
     'Text Structure and Purpose',
@@ -63,34 +50,6 @@ export const SKILLS_BY_DOMAIN: Record<string, string[]> = {
     'Boundaries',
     'Form, Structure, and Sense',
   ],
-  // Math (19 Skills across 4 Official College Board Domains)
-  'Algebra': [
-    'Linear equations in one variable',
-    'Linear equations in two variables',
-    'Linear functions',
-    'Systems of two linear equations in two variables',
-    'Linear inequalities in one or two variables',
-  ],
-  'Advanced Math': [
-    'Equivalent expressions',
-    'Nonlinear equations in one variable and systems of equations in two variables',
-    'Nonlinear functions',
-  ],
-  'Problem-Solving and Data Analysis': [
-    'Ratios, rates, proportional relationships, and units',
-    'Percentages',
-    'One-variable data: Distributions and measures of center and spread',
-    'Two-variable data: Models and scatterplots',
-    'Probability and conditional probability',
-    'Inference from sample statistics and margin of error',
-    'Evaluating statistical claims: Observational studies and experiments',
-  ],
-  'Geometry and Trigonometry': [
-    'Area and volume',
-    'Lines, angles, and triangles',
-    'Right triangles and trigonometry',
-    'Circles',
-  ],
 };
 
 const ALL_SKILLS = Object.values(SKILLS_BY_DOMAIN).flat();
@@ -104,8 +63,8 @@ export const SetupDashboard: React.FC<SetupDashboardProps> = ({
   const { isDark, toggleTheme } = useTheme();
   // Config state
   const [test, setTest] = useState<'SAT'>('SAT');
-  const [selectedSections, setSelectedSections] = useState<SectionType[]>(
-    currentConfig?.selectedSections ?? ['Reading and Writing', 'Math']
+  const [masterCategory, setMasterCategory] = useState<boolean>(
+    currentConfig?.masterCategory ?? true
   );
   const [selectedDomains, setSelectedDomains] = useState<string[]>(
     currentConfig?.selectedDomains ?? [...ALL_DOMAINS]
@@ -127,10 +86,6 @@ export const SetupDashboard: React.FC<SetupDashboardProps> = ({
     'Information and Ideas': false,
     'Expression of Ideas': false,
     'Standard English Conventions': false,
-    'Algebra': false,
-    'Advanced Math': false,
-    'Problem-Solving and Data Analysis': false,
-    'Geometry and Trigonometry': false,
   });
 
   const toggleDomainExpanded = (domain: string) => {
@@ -140,28 +95,16 @@ export const SetupDashboard: React.FC<SetupDashboardProps> = ({
     }));
   };
 
-  // Toggle whole section (Reading & Writing or Math)
-  const handleToggleSection = (sec: SectionType) => {
-    const isSelected = selectedSections.includes(sec);
-    const secDomains = sec === 'Reading and Writing' ? [...READING_WRITING_DOMAINS] : [...MATH_DOMAINS];
-    const secSkills = secDomains.flatMap(d => SKILLS_BY_DOMAIN[d] || []);
-
-    if (isSelected) {
-      // Deselect section, its domains and skills
-      const newSections = selectedSections.filter(s => s !== sec);
-      const newDomains = selectedDomains.filter(d => !(secDomains as readonly string[]).includes(d));
-      const newSkills = selectedSkills.filter(s => !secSkills.includes(s));
-      setSelectedSections(newSections);
-      setSelectedDomains(newDomains);
-      setSelectedSkills(newSkills);
+  // Toggle master category checkbox
+  const handleToggleMaster = () => {
+    if (masterCategory) {
+      setMasterCategory(false);
+      setSelectedDomains([]);
+      setSelectedSkills([]);
     } else {
-      // Select section, its domains and skills
-      const newSections = [...selectedSections, sec];
-      const newDomains = Array.from(new Set([...selectedDomains, ...secDomains]));
-      const newSkills = Array.from(new Set([...selectedSkills, ...secSkills]));
-      setSelectedSections(newSections);
-      setSelectedDomains(newDomains);
-      setSelectedSkills(newSkills);
+      setMasterCategory(true);
+      setSelectedDomains([...ALL_DOMAINS]);
+      setSelectedSkills([...ALL_SKILLS]);
     }
   };
 
@@ -169,30 +112,19 @@ export const SetupDashboard: React.FC<SetupDashboardProps> = ({
   const handleToggleDomain = (domain: string) => {
     const isSelected = selectedDomains.includes(domain);
     const domainSkills = SKILLS_BY_DOMAIN[domain] || [];
-    const sec: SectionType = (READING_WRITING_DOMAINS as readonly string[]).includes(domain)
-      ? 'Reading and Writing'
-      : 'Math';
 
     if (isSelected) {
       const newDomains = selectedDomains.filter(d => d !== domain);
       const newSkills = selectedSkills.filter(s => !domainSkills.includes(s));
       setSelectedDomains(newDomains);
       setSelectedSkills(newSkills);
-
-      // Check if section still has any selected domains
-      const secDomains = sec === 'Reading and Writing' ? READING_WRITING_DOMAINS : MATH_DOMAINS;
-      const anySecDomainSelected = secDomains.some(d => newDomains.includes(d));
-      if (!anySecDomainSelected) {
-        setSelectedSections(prev => prev.filter(s => s !== sec));
-      }
+      if (newDomains.length === 0) setMasterCategory(false);
     } else {
       const newDomains = [...selectedDomains, domain];
       const newSkills = Array.from(new Set([...selectedSkills, ...domainSkills]));
       setSelectedDomains(newDomains);
       setSelectedSkills(newSkills);
-      if (!selectedSections.includes(sec)) {
-        setSelectedSections(prev => [...prev, sec]);
-      }
+      setMasterCategory(true);
     }
   };
 
@@ -200,9 +132,6 @@ export const SetupDashboard: React.FC<SetupDashboardProps> = ({
   const handleToggleSkill = (domain: string, skill: string) => {
     const isSelected = selectedSkills.includes(skill);
     const domainSkills = SKILLS_BY_DOMAIN[domain] || [];
-    const sec: SectionType = (READING_WRITING_DOMAINS as readonly string[]).includes(domain)
-      ? 'Reading and Writing'
-      : 'Math';
 
     let newSkills: string[];
     if (isSelected) {
@@ -214,22 +143,13 @@ export const SetupDashboard: React.FC<SetupDashboardProps> = ({
 
     // Update parent domain selection
     const anyDomainSkillSelected = domainSkills.some(s => newSkills.includes(s));
-    let newDomains = [...selectedDomains];
     if (anyDomainSkillSelected && !selectedDomains.includes(domain)) {
-      newDomains.push(domain);
-      setSelectedDomains(newDomains);
+      setSelectedDomains(prev => [...prev, domain]);
+      setMasterCategory(true);
     } else if (!anyDomainSkillSelected && selectedDomains.includes(domain)) {
-      newDomains = selectedDomains.filter(d => d !== domain);
+      const newDomains = selectedDomains.filter(d => d !== domain);
       setSelectedDomains(newDomains);
-    }
-
-    // Update section selection
-    const secDomains = sec === 'Reading and Writing' ? READING_WRITING_DOMAINS : MATH_DOMAINS;
-    const anySecDomainSelected = secDomains.some(d => newDomains.includes(d));
-    if (anySecDomainSelected && !selectedSections.includes(sec)) {
-      setSelectedSections(prev => [...prev, sec]);
-    } else if (!anySecDomainSelected && selectedSections.includes(sec)) {
-      setSelectedSections(prev => prev.filter(s => s !== sec));
+      if (newDomains.length === 0) setMasterCategory(false);
     }
   };
 
@@ -248,18 +168,14 @@ export const SetupDashboard: React.FC<SetupDashboardProps> = ({
     const domainMap: Record<string, number> = {};
     const skillMap: Record<string, number> = {};
     const diffMap: Record<string, number> = { Easy: 0, Medium: 0, Hard: 0 };
-    const sectionMap: Record<string, number> = { 'Reading and Writing': 0, 'Math': 0 };
 
-    for (const q of allQuestions) {
+    for (const q of allEnglishQuestions) {
       domainMap[q.domain] = (domainMap[q.domain] || 0) + 1;
       skillMap[q.skill] = (skillMap[q.skill] || 0) + 1;
       diffMap[q.difficulty] = (diffMap[q.difficulty] || 0) + 1;
-      if (q.section) {
-        sectionMap[q.section] = (sectionMap[q.section] || 0) + 1;
-      }
     }
 
-    return { domainMap, skillMap, diffMap, sectionMap };
+    return { domainMap, skillMap, diffMap };
   }, []);
 
   // Compute matched questions from satify_attempts
@@ -268,9 +184,7 @@ export const SetupDashboard: React.FC<SetupDashboardProps> = ({
   }, [hideAnswered]);
 
   const matchedQuestions = useMemo(() => {
-    return allQuestions.filter(q => {
-      // Must match selected section
-      if (selectedSections.length > 0 && !selectedSections.includes(q.section)) return false;
+    return allEnglishQuestions.filter(q => {
       // Must match selected skill strictly
       if (!selectedSkills.includes(q.skill)) return false;
       // Must match canonical domain-to-skill pairing
@@ -281,10 +195,10 @@ export const SetupDashboard: React.FC<SetupDashboardProps> = ({
       if (hideAnswered && answeredIds.has(q.id)) return false;
       return true;
     });
-  }, [selectedSections, selectedSkills, selectedDomains, selectedDifficulties, hideAnswered, answeredIds]);
+  }, [selectedSkills, selectedDomains, selectedDifficulties, hideAnswered, answeredIds]);
 
   const handleResetFilters = () => {
-    setSelectedSections(['Reading and Writing', 'Math']);
+    setMasterCategory(true);
     setSelectedDomains([...ALL_DOMAINS]);
     setSelectedSkills([...ALL_SKILLS]);
     setSelectedDifficulties(['Easy', 'Medium', 'Hard']);
@@ -305,8 +219,7 @@ export const SetupDashboard: React.FC<SetupDashboardProps> = ({
 
     const config: EnglishFilterConfig = {
       test,
-      masterCategory: selectedSections.includes('Reading and Writing'),
-      selectedSections,
+      masterCategory,
       selectedDomains,
       selectedSkills,
       selectedDifficulties,
@@ -339,7 +252,7 @@ export const SetupDashboard: React.FC<SetupDashboardProps> = ({
                 Question Bank Filter
               </h2>
               <p className="text-[11px] sm:text-xs text-zinc-500 dark:text-[#8E95A5] truncate">
-                Digital SAT Practice (Reading & Writing + Math)
+                Digital SAT Reading & Writing Practice
               </p>
             </div>
           </div>
@@ -390,13 +303,13 @@ export const SetupDashboard: React.FC<SetupDashboardProps> = ({
                 <span className="font-bold text-slate-900 dark:text-white text-sm">SAT</span>
               </label>
               <span className="text-xs text-slate-500 dark:text-[#71717a] border-l border-slate-200 dark:border-slate-800 pl-4">
-                Official College Board Question Bank Format (Reading & Writing + Math)
+                Official College Board Question Bank Format (English Reading & Writing)
               </span>
             </div>
           </div>
 
           {/* SECTION 2: Choose Your Categories */}
-          <div className="space-y-4">
+          <div className="space-y-3">
             <div className="flex items-center justify-between">
               <h3 className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-[#a1a1aa]">
                 2. Choose your categories
@@ -406,135 +319,31 @@ export const SetupDashboard: React.FC<SetupDashboardProps> = ({
               </span>
             </div>
 
-            {/* Category Card 1: Reading & Writing */}
+            {/* Master Category Card: Reading & Writing */}
             <div className="bg-slate-50 dark:bg-[#141a24] border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-xs">
-              {/* Header Bar */}
+              {/* Master Header Bar */}
               <div className="p-4 bg-slate-100 dark:bg-[#1a2233] border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
                 <label className="flex items-center gap-3 cursor-pointer group">
                   <input
                     type="checkbox"
-                    checked={selectedSections.includes('Reading and Writing')}
-                    onChange={() => handleToggleSection('Reading and Writing')}
+                    checked={masterCategory}
+                    onChange={handleToggleMaster}
                     className="w-5 h-5 rounded-md accent-blue-600 cursor-pointer"
                   />
                   <div className="flex items-center gap-2">
                     <span className="font-bold text-base text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition">
-                      Reading &amp; Writing
+                      Reading & Writing
                     </span>
                     <span className="bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 text-xs font-semibold px-2 py-0.5 rounded-full border border-blue-200 dark:border-blue-800">
-                      {counts.sectionMap['Reading and Writing'] || 753} Questions
+                      752 Questions
                     </span>
                   </div>
                 </label>
               </div>
 
-              {/* 4 R&W Domains List */}
+              {/* 4 Domains List */}
               <div className="divide-y divide-slate-200 dark:divide-slate-800">
-                {READING_WRITING_DOMAINS.map(domain => {
-                  const isDomainSelected = selectedDomains.includes(domain);
-                  const isExpanded = expandedDomains[domain] ?? false;
-                  const skills = SKILLS_BY_DOMAIN[domain] || [];
-                  const domainCount = counts.domainMap[domain] || 0;
-
-                  return (
-                    <div key={domain} className="bg-white dark:bg-[#111726]">
-                      {/* Domain Header Row */}
-                      <div className="p-3.5 pl-6 flex items-center justify-between hover:bg-slate-50 dark:hover:bg-[#1a2233] transition">
-                        <label className="flex items-center gap-3 cursor-pointer">
-                          <input
-                            type="checkbox"
-                            checked={isDomainSelected}
-                            onChange={() => handleToggleDomain(domain)}
-                            className="w-4 h-4 rounded accent-blue-600 cursor-pointer"
-                          />
-                          <span className={`font-semibold text-sm ${isDomainSelected ? 'text-slate-900 dark:text-white' : 'text-slate-500 dark:text-[#a1a1aa]'}`}>
-                            {domain}
-                          </span>
-                          <span className="text-xs text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded-md font-mono">
-                            {domainCount}
-                          </span>
-                        </label>
-
-                        {/* Expand / Collapse Chevron */}
-                        <button
-                          type="button"
-                          onClick={() => toggleDomainExpanded(domain)}
-                          className="p-1 text-slate-400 hover:text-slate-700 dark:hover:text-white rounded-md hover:bg-slate-100 dark:hover:bg-slate-800 transition flex items-center gap-1 text-xs cursor-pointer"
-                          title={isExpanded ? 'Collapse subtopics' : 'Expand subtopics'}
-                        >
-                          <span className="text-[11px] text-slate-500 dark:text-slate-400 hidden sm:inline">
-                            {skills.length} subtopics
-                          </span>
-                          {isExpanded ? (
-                            <ChevronUp className="w-4 h-4 text-blue-600 dark:text-blue-400" />
-                          ) : (
-                            <ChevronDown className="w-4 h-4" />
-                          )}
-                        </button>
-                      </div>
-
-                      {/* Expandable Skills List */}
-                      {isExpanded && (
-                        <div className="bg-slate-50 dark:bg-[#0b0e14] border-t border-slate-200 dark:border-slate-800/80 pl-12 pr-6 py-2.5 space-y-2 animate-in fade-in duration-150">
-                          {skills.map(skill => {
-                            const isSkillSelected = selectedSkills.includes(skill);
-                            const skillCount = counts.skillMap[skill] || 0;
-
-                            return (
-                              <label
-                                key={skill}
-                                className="flex items-center justify-between py-1 px-2 rounded-lg hover:bg-slate-100 dark:hover:bg-[#141a24] cursor-pointer group transition"
-                              >
-                                <div className="flex items-center gap-2.5">
-                                  <input
-                                    type="checkbox"
-                                    checked={isSkillSelected}
-                                    onChange={() => handleToggleSkill(domain, skill)}
-                                    className="w-3.5 h-3.5 rounded accent-blue-600 cursor-pointer"
-                                  />
-                                  <span className={`text-xs ${isSkillSelected ? 'text-slate-900 dark:text-white font-medium' : 'text-slate-500 dark:text-[#71717a]'}`}>
-                                    {skill}
-                                  </span>
-                                </div>
-                                <span className="text-[11px] text-slate-400 dark:text-slate-500 font-mono group-hover:text-slate-700 dark:group-hover:text-slate-300">
-                                  {skillCount} qs
-                                </span>
-                              </label>
-                            );
-                          })}
-                        </div>
-                      )}
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* Category Card 2: Mathematics */}
-            <div className="bg-slate-50 dark:bg-[#141a24] border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden shadow-xs">
-              {/* Header Bar */}
-              <div className="p-4 bg-slate-100 dark:bg-[#1a2233] border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
-                <label className="flex items-center gap-3 cursor-pointer group">
-                  <input
-                    type="checkbox"
-                    checked={selectedSections.includes('Math')}
-                    onChange={() => handleToggleSection('Math')}
-                    className="w-5 h-5 rounded-md accent-blue-600 cursor-pointer"
-                  />
-                  <div className="flex items-center gap-2">
-                    <span className="font-bold text-base text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition">
-                      Mathematics
-                    </span>
-                    <span className="bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 text-xs font-semibold px-2 py-0.5 rounded-full border border-emerald-200 dark:border-emerald-800">
-                      {counts.sectionMap['Math'] || 993} Questions
-                    </span>
-                  </div>
-                </label>
-              </div>
-
-              {/* 4 Math Domains List */}
-              <div className="divide-y divide-slate-200 dark:divide-slate-800">
-                {MATH_DOMAINS.map(domain => {
+                {ALL_DOMAINS.map(domain => {
                   const isDomainSelected = selectedDomains.includes(domain);
                   const isExpanded = expandedDomains[domain] ?? false;
                   const skills = SKILLS_BY_DOMAIN[domain] || [];
@@ -738,7 +547,7 @@ export const SetupDashboard: React.FC<SetupDashboardProps> = ({
                 {matchedQuestions.length} Questions matching criteria
               </span>
               <span className="text-xs text-slate-500 dark:text-[#71717a] hidden sm:inline">
-                (from {allQuestions.length} official items)
+                (from 752 official items)
               </span>
             </div>
             <span className="text-xs text-slate-400 dark:text-[#71717a] hidden md:inline">

@@ -22,7 +22,6 @@ export const AnalyticsView: React.FC<AnalyticsViewProps> = ({
   onStartSkillPractice,
 }) => {
   const [timeframe, setTimeframe] = useState<TimeframeFilter>('all');
-  const [sectionFilter, setSectionFilter] = useState<'all' | 'Reading and Writing' | 'Math'>('all');
   const [storageVersion, setStorageVersion] = useState<number>(0);
   const [isResetModalOpen, setIsResetModalOpen] = useState<boolean>(false);
 
@@ -35,31 +34,21 @@ export const AnalyticsView: React.FC<AnalyticsViewProps> = ({
 
   const allAnswers = useMemo(() => getAttempts(), [storageVersion]);
 
-  // Filter answers by timeframe and section
+  // Filter answers by timeframe
   const filteredAnswers = useMemo(() => {
     const now = Date.now();
-    let answers = allAnswers;
-
     if (timeframe === 'today') {
       const todayStr = new Date().toISOString().slice(0, 10);
-      answers = answers.filter(a => new Date(a.timestamp).toISOString().slice(0, 10) === todayStr);
+      return allAnswers.filter(a => new Date(a.timestamp).toISOString().slice(0, 10) === todayStr);
     } else if (timeframe === '7d') {
       const cutoff = now - 7 * 86400000;
-      answers = answers.filter(a => a.timestamp >= cutoff);
+      return allAnswers.filter(a => a.timestamp >= cutoff);
     } else if (timeframe === '30d') {
       const cutoff = now - 30 * 86400000;
-      answers = answers.filter(a => a.timestamp >= cutoff);
+      return allAnswers.filter(a => a.timestamp >= cutoff);
     }
-
-    const mathDomains = ['Algebra', 'Advanced Math', 'Problem-Solving and Data Analysis', 'Geometry and Trigonometry'];
-    if (sectionFilter === 'Reading and Writing') {
-      answers = answers.filter(a => !mathDomains.includes(a.domain));
-    } else if (sectionFilter === 'Math') {
-      answers = answers.filter(a => mathDomains.includes(a.domain));
-    }
-
-    return answers;
-  }, [allAnswers, timeframe, sectionFilter]);
+    return allAnswers;
+  }, [allAnswers, timeframe]);
 
   // Optimized single O(N) reduction pass across filtered answers (< 2ms)
   const {
@@ -101,26 +90,13 @@ export const AnalyticsView: React.FC<AnalyticsViewProps> = ({
       }
     }
 
-    const rwDomains = [
+    const domains = [
       'Craft and Structure',
       'Information and Ideas',
       'Expression of Ideas',
       'Standard English Conventions',
     ];
-    const mathDomains = [
-      'Algebra',
-      'Advanced Math',
-      'Problem-Solving and Data Analysis',
-      'Geometry and Trigonometry',
-    ];
-
-    const activeDomains = sectionFilter === 'Reading and Writing'
-      ? rwDomains
-      : sectionFilter === 'Math'
-      ? mathDomains
-      : [...rwDomains, ...mathDomains];
-
-    const domainItems = activeDomains.map(dName => {
+    const domainItems = domains.map(dName => {
       const st = domainMap[dName] || { attempted: 0, correct: 0 };
       return {
         domain: dName,
@@ -143,7 +119,6 @@ export const AnalyticsView: React.FC<AnalyticsViewProps> = ({
     });
 
     const allSkills = [
-      // Reading & Writing
       { name: 'Words in Context', domain: 'Craft and Structure' },
       { name: 'Text Structure and Purpose', domain: 'Craft and Structure' },
       { name: 'Cross-Text Connections', domain: 'Craft and Structure' },
@@ -154,30 +129,8 @@ export const AnalyticsView: React.FC<AnalyticsViewProps> = ({
       { name: 'Transitions', domain: 'Expression of Ideas' },
       { name: 'Boundaries', domain: 'Standard English Conventions' },
       { name: 'Form, Structure, and Sense', domain: 'Standard English Conventions' },
-      // Math
-      { name: 'Linear equations in one variable', domain: 'Algebra' },
-      { name: 'Linear equations in two variables', domain: 'Algebra' },
-      { name: 'Linear functions', domain: 'Algebra' },
-      { name: 'Systems of two linear equations in two variables', domain: 'Algebra' },
-      { name: 'Linear inequalities in one or two variables', domain: 'Algebra' },
-      { name: 'Equivalent expressions', domain: 'Advanced Math' },
-      { name: 'Nonlinear equations in one variable and systems of equations in two variables', domain: 'Advanced Math' },
-      { name: 'Nonlinear functions', domain: 'Advanced Math' },
-      { name: 'Ratios, rates, proportional relationships, and units', domain: 'Problem-Solving and Data Analysis' },
-      { name: 'Percentages', domain: 'Problem-Solving and Data Analysis' },
-      { name: 'One-variable data: Distributions and measures of center and spread', domain: 'Problem-Solving and Data Analysis' },
-      { name: 'Two-variable data: Models and scatterplots', domain: 'Problem-Solving and Data Analysis' },
-      { name: 'Probability and conditional probability', domain: 'Problem-Solving and Data Analysis' },
-      { name: 'Inference from sample statistics and margin of error', domain: 'Problem-Solving and Data Analysis' },
-      { name: 'Evaluating statistical claims: Observational studies and experiments', domain: 'Problem-Solving and Data Analysis' },
-      { name: 'Area and volume', domain: 'Geometry and Trigonometry' },
-      { name: 'Lines, angles, and triangles', domain: 'Geometry and Trigonometry' },
-      { name: 'Right triangles and trigonometry', domain: 'Geometry and Trigonometry' },
-      { name: 'Circles', domain: 'Geometry and Trigonometry' },
     ];
-
-    const relevantSkills = allSkills.filter(sk => activeDomains.includes(sk.domain));
-    const skillStatsItems = relevantSkills.map(sk => {
+    const skillStatsItems = allSkills.map(sk => {
       const st = skillMap[sk.name] || { attempted: 0, correct: 0 };
       return {
         ...sk,
@@ -202,7 +155,7 @@ export const AnalyticsView: React.FC<AnalyticsViewProps> = ({
       difficultyBreakdown: diffItems,
       lowestAccuracySkills: lowest,
     };
-  }, [filteredAnswers, sectionFilter]);
+  }, [filteredAnswers]);
 
   return (
     <div className="w-full h-full overflow-y-auto overflow-x-hidden bg-neutral-50 dark:bg-[#090A0F] text-zinc-950 dark:text-[#F4F4F6] px-4 sm:px-6 md:px-10 py-6 sm:py-8 space-y-6 sm:space-y-8 select-text">
@@ -222,28 +175,7 @@ export const AnalyticsView: React.FC<AnalyticsViewProps> = ({
           </p>
         </div>
 
-        <div className="flex flex-wrap items-center gap-2.5">
-          {/* Section Filter Buttons */}
-          <div className="inline-flex items-center p-0.5 bg-white dark:bg-[#11131A] border border-zinc-200 dark:border-[#222634] rounded-xl shadow-2xs">
-            {[
-              { id: 'all', label: 'All Sections' },
-              { id: 'Reading and Writing', label: 'R&W' },
-              { id: 'Math', label: 'Math' },
-            ].map(sec => (
-              <button
-                key={sec.id}
-                onClick={() => setSectionFilter(sec.id as 'all' | 'Reading and Writing' | 'Math')}
-                className={`px-2.5 sm:px-3 py-1 rounded-lg text-xs font-mono font-medium transition-all duration-150 active:scale-95 cursor-pointer ${
-                  sectionFilter === sec.id
-                    ? 'bg-blue-700 text-white dark:bg-blue-600 font-semibold shadow-2xs'
-                    : 'text-zinc-600 dark:text-[#8E95A5] hover:text-zinc-950 dark:hover:text-white'
-                }`}
-              >
-                {sec.label}
-              </button>
-            ))}
-          </div>
-
+        <div className="flex items-center gap-2.5">
           <button
             onClick={() => setIsResetModalOpen(true)}
             className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-zinc-200 dark:border-[#222634] bg-white dark:bg-[#11131A] hover:bg-zinc-100 dark:hover:bg-[#181B24] text-zinc-600 dark:text-[#8E95A5] hover:text-rose-600 dark:hover:text-rose-400 font-medium text-xs transition-all duration-150 active:scale-95 cursor-pointer"
@@ -264,7 +196,7 @@ export const AnalyticsView: React.FC<AnalyticsViewProps> = ({
               <button
                 key={btn.id}
                 onClick={() => setTimeframe(btn.id as TimeframeFilter)}
-                className={`px-3 py-1 rounded-lg text-xs font-mono font-medium transition-all duration-150 active:scale-95 cursor-pointer ${
+                className={`px-3 py-1 rounded-lg text-xs font-mono font-medium transition-all duration-150 active:scale-95 ${
                   timeframe === btn.id
                     ? 'bg-blue-700 text-white dark:bg-blue-600 font-semibold shadow-2xs'
                     : 'text-zinc-600 dark:text-[#8E95A5] hover:text-zinc-950 dark:hover:text-white'

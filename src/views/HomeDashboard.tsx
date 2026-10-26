@@ -19,7 +19,6 @@ import {
   getQuestionAnalytics, 
   getSkillStatsMap, 
   get10DayActivityTrend,
-  getAttempts,
   clearAllProgress
 } from '../utils/storage';
 import { ActivityTrendChart } from '../components/charts/ActivityTrendChart';
@@ -29,82 +28,28 @@ interface HomeDashboardProps {
   questions: MockQuestion[];
   onStartSkillPractice: (skillName: string, domainName: string) => void;
   onOpenQuestionBank: () => void;
-  onStartMathPractice?: () => void;
 }
 
 const DOMAINS_CONFIG = [
-  // Reading & Writing Domains
   {
     name: 'Craft and Structure',
-    section: 'Reading and Writing',
-    badgeColor: 'border-blue-200 dark:border-blue-900 bg-blue-50 dark:bg-blue-950/40 text-blue-800 dark:text-blue-300',
+    badgeColor: 'border-zinc-300 dark:border-[#222634] bg-zinc-100 dark:bg-[#181B24] text-zinc-800 dark:text-[#C5CAD6]',
     skills: ['Words in Context', 'Text Structure and Purpose', 'Cross-Text Connections'],
   },
   {
     name: 'Information and Ideas',
-    section: 'Reading and Writing',
-    badgeColor: 'border-blue-200 dark:border-blue-900 bg-blue-50 dark:bg-blue-950/40 text-blue-800 dark:text-blue-300',
+    badgeColor: 'border-zinc-300 dark:border-[#222634] bg-zinc-100 dark:bg-[#181B24] text-zinc-800 dark:text-[#C5CAD6]',
     skills: ['Central Ideas and Details', 'Command of Evidence', 'Inferences'],
   },
   {
     name: 'Expression of Ideas',
-    section: 'Reading and Writing',
-    badgeColor: 'border-blue-200 dark:border-blue-900 bg-blue-50 dark:bg-blue-950/40 text-blue-800 dark:text-blue-300',
+    badgeColor: 'border-zinc-300 dark:border-[#222634] bg-zinc-100 dark:bg-[#181B24] text-zinc-800 dark:text-[#C5CAD6]',
     skills: ['Rhetorical Synthesis', 'Transitions'],
   },
   {
     name: 'Standard English Conventions',
-    section: 'Reading and Writing',
-    badgeColor: 'border-blue-200 dark:border-blue-900 bg-blue-50 dark:bg-blue-950/40 text-blue-800 dark:text-blue-300',
+    badgeColor: 'border-zinc-300 dark:border-[#222634] bg-zinc-100 dark:bg-[#181B24] text-zinc-800 dark:text-[#C5CAD6]',
     skills: ['Boundaries', 'Form, Structure, and Sense'],
-  },
-  // Math Domains
-  {
-    name: 'Algebra',
-    section: 'Math',
-    badgeColor: 'border-emerald-200 dark:border-emerald-900 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-300',
-    skills: [
-      'Linear equations in one variable',
-      'Linear equations in two variables',
-      'Linear functions',
-      'Systems of two linear equations in two variables',
-      'Linear inequalities in one or two variables',
-    ],
-  },
-  {
-    name: 'Advanced Math',
-    section: 'Math',
-    badgeColor: 'border-emerald-200 dark:border-emerald-900 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-300',
-    skills: [
-      'Equivalent expressions',
-      'Nonlinear equations in one variable and systems of equations in two variables',
-      'Nonlinear functions',
-    ],
-  },
-  {
-    name: 'Problem-Solving and Data Analysis',
-    section: 'Math',
-    badgeColor: 'border-emerald-200 dark:border-emerald-900 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-300',
-    skills: [
-      'Ratios, rates, proportional relationships, and units',
-      'Percentages',
-      'One-variable data: Distributions and measures of center and spread',
-      'Two-variable data: Models and scatterplots',
-      'Probability and conditional probability',
-      'Inference from sample statistics and margin of error',
-      'Evaluating statistical claims: Observational studies and experiments',
-    ],
-  },
-  {
-    name: 'Geometry and Trigonometry',
-    section: 'Math',
-    badgeColor: 'border-emerald-200 dark:border-emerald-900 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-300',
-    skills: [
-      'Area and volume',
-      'Lines, angles, and triangles',
-      'Right triangles and trigonometry',
-      'Circles',
-    ],
   },
 ];
 
@@ -112,9 +57,7 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({
   questions,
   onStartSkillPractice,
   onOpenQuestionBank,
-  onStartMathPractice,
 }) => {
-  const [selectedDomainSection, setSelectedDomainSection] = useState<'all' | 'Reading and Writing' | 'Math'>('all');
   const [storageVersion, setStorageVersion] = useState<number>(0);
   const [isResetModalOpen, setIsResetModalOpen] = useState<boolean>(false);
 
@@ -128,7 +71,6 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({
   const analytics = useMemo(() => getQuestionAnalytics(), [storageVersion]);
   const skillStatsMap = useMemo(() => getSkillStatsMap(), [storageVersion]);
   const activityTrend = useMemo(() => get10DayActivityTrend(), [storageVersion]);
-  const maxTrendDay = useMemo(() => Math.max(...activityTrend.map(d => d.total), 1), [activityTrend]);
 
   // Skill question counts from extracted bank
   const skillQuestionCounts = useMemo(() => {
@@ -139,32 +81,19 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({
     return counts;
   }, [questions]);
 
-  // Section question sets and stats
-  const totalRWQuestions = useMemo(() => questions.filter(q => q.section === 'Reading and Writing').length || 753, [questions]);
-  const totalMathQuestions = useMemo(() => questions.filter(q => q.section === 'Math').length || 993, [questions]);
-
-  const attempts = useMemo(() => getAttempts(), [storageVersion]);
-  const mathDomains = ['Algebra', 'Advanced Math', 'Problem-Solving and Data Analysis', 'Geometry and Trigonometry'];
-  const mathAttempts = useMemo(() => attempts.filter(a => mathDomains.includes(a.domain)), [attempts]);
-  const rwAttempts = useMemo(() => attempts.filter(a => !mathDomains.includes(a.domain)), [attempts]);
-
-  const rwSolved = rwAttempts.length;
+  // Overall Section stats
+  const totalRWQuestions = questions.length;
+  const rwSolved = analytics.attempted;
   const rwSolvedPercent = totalRWQuestions > 0 ? Math.min(100, Math.round((rwSolved / totalRWQuestions) * 100)) : 0;
-  const rwCorrect = rwAttempts.filter(a => a.isCorrect).length;
-  const rwWrong = rwSolved - rwCorrect;
-
-  const mathSolved = mathAttempts.length;
-  const mathSolvedPercent = totalMathQuestions > 0 ? Math.min(100, Math.round((mathSolved / totalMathQuestions) * 100)) : 0;
-  const mathCorrect = mathAttempts.filter(a => a.isCorrect).length;
-  const mathWrong = mathSolved - mathCorrect;
 
   // Projected RW Score (200 - 800) based on accuracy and completion
   const projectedRWScore = useMemo(() => {
-    if (rwSolved === 0) return 400;
-    const rwAcc = (rwCorrect / rwSolved) * 100;
-    const baseScore = 200 + Math.round((rwAcc / 100) * 60) * 10;
+    if (analytics.attempted === 0) return 400;
+    const baseScore = 200 + Math.round((analytics.accuracy / 100) * 60) * 10;
     return Math.min(800, Math.max(200, baseScore));
-  }, [rwSolved, rwCorrect]);
+  }, [analytics.attempted, analytics.accuracy]);
+
+  const maxTrendDay = Math.max(1, ...activityTrend.map(d => d.total));
 
   const formatTimeSpent = (totalSeconds: number) => {
     if (totalSeconds <= 0) return '0m';
@@ -188,10 +117,10 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({
               </span>
             </div>
             <h1 className="text-2xl sm:text-3xl font-semibold tracking-tight text-zinc-950 dark:text-[#F4F4F6] mt-0.5">
-              Study Dashboard &amp; Performance
+              Study Dashboard & Performance
             </h1>
             <p className="text-xs sm:text-sm text-zinc-600 dark:text-[#8E95A5] mt-1">
-              Calibrated reading stimuli, math problem sets, multistage pacing analytics, and targeted skill drills.
+              Calibrated reading stimuli, multistage pacing analytics, and targeted skill drills.
             </p>
           </div>
 
@@ -222,13 +151,13 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({
             <div className="flex items-start justify-between">
               <div>
                 <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded border border-blue-200 dark:border-blue-900 bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300 text-[10px] font-mono font-semibold uppercase tracking-wider">
-                  <span>Section 1 • Reading &amp; Writing</span>
+                  <span>Section 1 • Reading & Writing</span>
                 </div>
                 <h2 className="text-lg font-semibold tracking-tight text-zinc-950 dark:text-[#F4F4F6] mt-2">
-                  Official R&amp;W Question Bank
+                  Official R&W Question Bank
                 </h2>
                 <p className="text-xs text-zinc-600 dark:text-[#8E95A5] mt-1 leading-relaxed">
-                  Craft &amp; Structure, Information &amp; Ideas, Expression of Ideas, Standard English Conventions.
+                  Craft & Structure, Information & Ideas, Expression of Ideas, Standard English Conventions.
                 </p>
               </div>
               <BookOpen className="w-5 h-5 text-blue-700 dark:text-blue-400 shrink-0" strokeWidth={1.75} />
@@ -248,7 +177,7 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({
 
               <div className="pt-2 flex items-center justify-between">
                 <span className="text-[11px] text-zinc-500 dark:text-[#8E95A5] font-mono">
-                  {rwCorrect} correct • {rwWrong} incorrect
+                  {analytics.correct} correct • {analytics.wrong} incorrect
                 </span>
                 <button
                   onClick={onOpenQuestionBank}
@@ -261,52 +190,36 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({
             </div>
           </div>
 
-          {/* Section 2: Math Card - UNLOCKED & ACTIVE */}
-          <div className="p-6 rounded-xl border border-zinc-200 dark:border-[#222634] bg-white dark:bg-[#11131A] shadow-xs flex flex-col justify-between space-y-4">
+          {/* Section 2: Math Card (Solid secondary surface) */}
+          <div className="p-6 rounded-xl border border-zinc-200 dark:border-[#222634] bg-zinc-50/60 dark:bg-[#0e1017] shadow-xs flex flex-col justify-between space-y-4">
             <div className="flex items-start justify-between">
               <div>
-                <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded border border-emerald-200 dark:border-emerald-900 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 text-[10px] font-mono font-semibold uppercase tracking-wider">
+                <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded border border-zinc-200 dark:border-[#222634] bg-white dark:bg-[#181B24] text-zinc-600 dark:text-[#8E95A5] text-[10px] font-mono font-semibold uppercase tracking-wider">
                   <span>Section 2 • Mathematics</span>
                   <span className="text-zinc-400 dark:text-zinc-600">|</span>
-                  <span className="text-emerald-600 dark:text-emerald-400 font-bold">Active</span>
+                  <span className="text-amber-600 dark:text-amber-400 font-bold">Planned Q4</span>
                 </div>
                 <h2 className="text-lg font-semibold tracking-tight text-zinc-950 dark:text-[#F4F4F6] mt-2">
-                  Official Digital SAT Math Bank
+                  Math Module (Calculator & Desmos)
                 </h2>
-                <p className="text-xs text-zinc-600 dark:text-[#8E95A5] mt-1 leading-relaxed">
-                  Algebra, Advanced Math, Problem-Solving &amp; Data Analysis, Geometry &amp; Trigonometry.
+                <p className="text-xs text-zinc-500 dark:text-[#8E95A5] mt-1 leading-relaxed">
+                  Algebra, Advanced Math, Problem-Solving & Data Analysis, Geometry & Trigonometry.
                 </p>
               </div>
-              <Target className="w-5 h-5 text-emerald-600 dark:text-emerald-400 shrink-0" strokeWidth={1.75} />
+              <Target className="w-5 h-5 text-zinc-400 dark:text-[#8E95A5] shrink-0" strokeWidth={1.75} />
             </div>
 
-            <div className="space-y-2 pt-2 border-t border-zinc-100 dark:border-[#181B24]">
-              <div className="flex justify-between text-xs font-mono tabular-nums text-zinc-600 dark:text-[#8E95A5]">
-                <span>{mathSolved} of {totalMathQuestions} questions solved</span>
-                <span className="font-semibold text-zinc-950 dark:text-[#F4F4F6]">{mathSolvedPercent}% Completed</span>
+            <div className="space-y-2 pt-2 border-t border-zinc-200/60 dark:border-[#181B24]">
+              <div className="flex justify-between text-xs font-mono tabular-nums text-zinc-500 dark:text-[#8E95A5]">
+                <span>0 of 0 solved (0%)</span>
+                <span>Module Inactive</span>
               </div>
-              <div className="w-full h-2 bg-zinc-100 dark:bg-[#181B24] rounded-full overflow-hidden">
-                <div 
-                  className="h-full bg-emerald-600 dark:bg-emerald-500 transition-all duration-500 ease-out"
-                  style={{ width: `${mathSolvedPercent}%` }}
-                />
-              </div>
-
-              <div className="pt-2 flex items-center justify-between">
-                <span className="text-[11px] text-zinc-500 dark:text-[#8E95A5] font-mono">
-                  {mathCorrect} correct • {mathWrong} incorrect
-                </span>
-                <button
-                  onClick={onStartMathPractice || onOpenQuestionBank}
-                  className="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-700 hover:text-emerald-800 dark:text-emerald-400 dark:hover:text-emerald-300 transition-colors duration-150 cursor-pointer"
-                >
-                  <span>Start Math Practice</span>
-                  <ArrowRight className="w-3.5 h-3.5" strokeWidth={1.75} />
-                </button>
+              <div className="w-full h-2 bg-zinc-200/70 dark:bg-[#181B24] rounded-full overflow-hidden" />
+              <div className="pt-2 flex items-center justify-between text-[11px] text-zinc-400 dark:text-[#8E95A5] font-mono">
+                <span>Integrated Desmos Graphing Calculator ready</span>
               </div>
             </div>
           </div>
-        </div>
         </div>
 
         {/* Bento Metric Grid (Unified 1px hairline borders, p-5 padding, tabular-nums) */}
@@ -354,10 +267,10 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({
               <span className="text-2xl sm:text-3xl font-semibold tracking-tight tabular-nums text-zinc-950 dark:text-[#F4F4F6]">
                 {analytics.attempted}
               </span>
-              <span className="text-xs font-mono text-zinc-400">/ {questions.length}</span>
+              <span className="text-xs font-mono text-zinc-400">/ {totalRWQuestions}</span>
             </div>
             <span className="mt-1 text-[11px] font-mono text-zinc-500 dark:text-[#8E95A5]">
-              {questions.length - analytics.attempted} remaining in bank
+              {totalRWQuestions - analytics.attempted} remaining in bank
             </span>
           </div>
 
@@ -386,36 +299,17 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({
 
         {/* Domain & Skill Mastery Breakdown */}
         <div className="space-y-4">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            <div>
-              <h3 className="font-semibold text-lg text-zinc-950 dark:text-[#F4F4F6] tracking-tight">
-                Domain &amp; Skill Mastery Breakdown
-              </h3>
-              <p className="text-xs text-zinc-600 dark:text-[#8E95A5]">
-                Select specific skills to launch focused practice drills with calibrated timer pacing.
-              </p>
-            </div>
-
-            {/* Section Filter Pills: All, Reading & Writing, Math */}
-            <div className="inline-flex p-1 rounded-xl bg-zinc-100 dark:bg-[#181B24] border border-zinc-200 dark:border-[#222634] text-xs font-medium self-start sm:self-auto">
-              {(['all', 'Reading and Writing', 'Math'] as const).map(sec => (
-                <button
-                  key={sec}
-                  onClick={() => setSelectedDomainSection(sec)}
-                  className={`px-3 py-1.5 rounded-lg transition-all duration-150 cursor-pointer ${
-                    selectedDomainSection === sec
-                      ? 'bg-white dark:bg-[#11131A] text-blue-700 dark:text-blue-400 font-semibold shadow-2xs'
-                      : 'text-zinc-600 dark:text-[#8E95A5] hover:text-zinc-950 dark:hover:text-[#F4F4F6]'
-                  }`}
-                >
-                  {sec === 'all' ? 'All Sections' : sec === 'Reading and Writing' ? 'Reading & Writing' : 'Mathematics'}
-                </button>
-              ))}
-            </div>
+          <div>
+            <h3 className="font-semibold text-lg text-zinc-950 dark:text-[#F4F4F6] tracking-tight">
+              Domain & Skill Mastery Breakdown
+            </h3>
+            <p className="text-xs text-zinc-600 dark:text-[#8E95A5]">
+              Select specific skills to launch focused practice drills with calibrated timer pacing.
+            </p>
           </div>
 
           <div className="space-y-4">
-            {DOMAINS_CONFIG.filter(d => selectedDomainSection === 'all' || d.section === selectedDomainSection).map((domain) => (
+            {DOMAINS_CONFIG.map((domain) => (
               <div 
                 key={domain.name}
                 className="p-5 rounded-xl bg-white dark:bg-[#11131A] border border-zinc-200 dark:border-[#222634] shadow-xs space-y-4"
@@ -426,11 +320,8 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({
                     <span className={`px-2.5 py-1 rounded text-xs font-semibold border ${domain.badgeColor}`}>
                       {domain.name}
                     </span>
-                    <span className="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-zinc-100 dark:bg-[#181B24] text-zinc-600 dark:text-[#8E95A5]">
-                      {domain.section}
-                    </span>
                     <span className="text-xs font-mono text-zinc-500 dark:text-[#8E95A5] hidden sm:inline">
-                      • {domain.skills.length} Focused Skills
+                      {domain.skills.length} Focused Skills
                     </span>
                   </div>
                 </div>
@@ -494,6 +385,7 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({
               </div>
             ))}
           </div>
+        </div>
 
         {/* Minimal Footer */}
         <footer className="pt-6 pb-4 border-t border-zinc-200 dark:border-[#222634] text-center text-xs font-mono text-zinc-500 dark:text-[#8E95A5]">
