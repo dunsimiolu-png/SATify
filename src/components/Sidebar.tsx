@@ -49,26 +49,25 @@ export const Sidebar: React.FC<SidebarProps> = ({
 }) => {
   const { isDark, toggleTheme } = useTheme();
 
-  const navItems: { id: AppRoute; label: string; icon: React.ReactNode; shortcut: string; badge?: string | number }[] = [
-    { id: 'home', label: 'Dashboard', icon: <Home className="w-4 h-4" strokeWidth={1.75} />, shortcut: '1' },
-    { id: 'analytics', label: 'Analytics', icon: <BarChart3 className="w-4 h-4" strokeWidth={1.75} />, shortcut: '2' },
+  const navItems: { id: AppRoute; label: string; icon: React.ReactNode; badge?: string | number }[] = [
+    { id: 'home', label: 'Dashboard', icon: <Home className="w-4 h-4" strokeWidth={1.75} /> },
+    { id: 'analytics', label: 'Analytics', icon: <BarChart3 className="w-4 h-4" strokeWidth={1.75} /> },
     { 
       id: 'saved', 
       label: 'Saved & Review', 
       icon: <Bookmark className="w-4 h-4" strokeWidth={1.75} />, 
-      shortcut: '3',
       badge: savedCount > 0 ? savedCount : undefined 
     },
-    { id: 'question-bank', label: 'Question Bank', icon: <Layers className="w-4 h-4" strokeWidth={1.75} />, shortcut: '4' },
-    { id: 'rush', label: 'Question Rush', icon: <Zap className="w-4 h-4 text-amber-500" strokeWidth={1.75} />, shortcut: '5' },
-    { id: 'vocab', label: 'Vocab SRS', icon: <BookOpen className="w-4 h-4" strokeWidth={1.75} />, shortcut: '6' },
-    { id: 'calculator', label: 'Score Calculator', icon: <Calculator className="w-4 h-4" strokeWidth={1.75} />, shortcut: '7' },
+    { id: 'question-bank', label: 'Question Bank', icon: <Layers className="w-4 h-4" strokeWidth={1.75} /> },
+    { id: 'rush', label: 'Question Rush', icon: <Zap className="w-4 h-4 text-amber-500" strokeWidth={1.75} /> },
+    { id: 'vocab', label: 'Vocab SRS', icon: <BookOpen className="w-4 h-4" strokeWidth={1.75} /> },
+    { id: 'calculator', label: 'Score Calculator', icon: <Calculator className="w-4 h-4" strokeWidth={1.75} /> },
   ];
 
   return (
     <aside className={`w-60 h-full bg-white dark:bg-[#11131A] border-r border-zinc-200 dark:border-[#222634] flex flex-col justify-between text-zinc-950 dark:text-[#F4F4F6] select-none z-30 shrink-0 ${className}`}>
-      {/* Top Header: SATIFY Logo & Academic Spec Badge */}
-      <div className="p-4 border-b border-zinc-200 dark:border-[#222634] space-y-3">
+      {/* Top Header: SATIFY Logo */}
+      <div className="p-4 border-b border-zinc-200 dark:border-[#222634]">
         <div className="flex items-center justify-between">
           <Logo size="sm" variant="full" inverted={isDark} />
           {onCloseMobile && (
@@ -80,19 +79,6 @@ export const Sidebar: React.FC<SidebarProps> = ({
               <X className="w-4 h-4" strokeWidth={1.75} />
             </button>
           )}
-        </div>
-
-        {/* Workspace Status Tag */}
-        <div className="flex items-center justify-between px-2.5 py-1.5 rounded-lg border border-zinc-200 dark:border-[#222634] bg-neutral-50 dark:bg-[#090A0F] shadow-2xs">
-          <div className="flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-            <span className="text-[11px] font-mono font-medium tracking-tight text-zinc-600 dark:text-[#8E95A5]">
-              Digital SAT 2026
-            </span>
-          </div>
-          <span className="text-[10px] font-mono font-semibold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/50 px-1.5 py-0.2 rounded border border-blue-100 dark:border-blue-900/40 uppercase">
-            v1.0
-          </span>
         </div>
       </div>
 
@@ -126,20 +112,15 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 <span className="truncate">{item.label}</span>
               </div>
 
-              <div className="flex items-center gap-1.5 shrink-0 ml-2">
-                {item.badge !== undefined && (
-                  <span className={`px-1.5 py-0.2 rounded-full text-[10px] font-mono font-bold tabular-nums transition-colors ${
-                    isActive 
-                      ? 'bg-blue-700 text-white dark:bg-blue-600 shadow-xs' 
-                      : 'bg-zinc-200/80 dark:bg-[#222634] text-zinc-700 dark:text-[#8E95A5]'
-                  }`}>
-                    {item.badge}
-                  </span>
-                )}
-                <span className="hidden sm:inline font-mono text-[10px] text-zinc-400 dark:text-[#8E95A5]/60 group-hover:text-zinc-600 dark:group-hover:text-zinc-300">
-                  {item.shortcut}
+              {item.badge !== undefined && (
+                <span className={`px-1.5 py-0.2 rounded-full text-[10px] font-mono font-bold tabular-nums transition-colors ml-2 shrink-0 ${
+                  isActive 
+                    ? 'bg-blue-700 text-white dark:bg-blue-600 shadow-xs' 
+                    : 'bg-zinc-200/80 dark:bg-[#222634] text-zinc-700 dark:text-[#8E95A5]'
+                }`}>
+                  {item.badge}
                 </span>
-              </div>
+              )}
             </button>
           );
         })}

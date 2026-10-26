@@ -18,13 +18,14 @@ import { Sidebar, AppRoute } from './components/Sidebar';
 
 // Dynamically lazy-loaded view chunks with Suspense for instant page loads (Requirement 1)
 const HomeDashboard = React.lazy(() => import('./views/HomeDashboard').then(m => ({ default: m.HomeDashboard })));
+const QuestionBankHub = React.lazy(() => import('./components/QuestionBankHub').then(m => ({ default: m.QuestionBankHub })));
 const AnalyticsView = React.lazy(() => import('./views/AnalyticsView').then(m => ({ default: m.AnalyticsView })));
 const SavedMistakesView = React.lazy(() => import('./views/SavedMistakesView').then(m => ({ default: m.SavedMistakesView })));
 const VocabPracticeView = React.lazy(() => import('./views/VocabPracticeView').then(m => ({ default: m.VocabPracticeView })));
 const ScoreCalculatorView = React.lazy(() => import('./views/ScoreCalculatorView').then(m => ({ default: m.ScoreCalculatorView })));
 const QuestionRush = React.lazy(() => import('./components/QuestionRush').then(m => ({ default: m.QuestionRush })));
 
-import { allEnglishQuestions } from './data/mockQuestions';
+import { allEnglishQuestions, allMathQuestions } from './data/mockQuestions';
 import { 
   MockQuestion, 
   UserQuestionState, 
@@ -528,6 +529,19 @@ export const App: React.FC = () => {
     }
   }, [loadInitialUserStates]);
 
+  const handleStartDailyQuestion = useCallback((subject: 'Math' | 'Reading and Writing') => {
+    const pool = subject === 'Math' ? allMathQuestions : allEnglishQuestions;
+    const now = new Date();
+    const todayIndex = Math.abs(now.getFullYear() * 365 + now.getMonth() * 31 + now.getDate());
+    const dailyQ = pool[todayIndex % pool.length];
+    handleStartCustomPractice([dailyQ]);
+  }, [handleStartCustomPractice]);
+
+  const handleStartSectionPractice = useCallback((section: 'Reading and Writing' | 'Math') => {
+    const pool = section === 'Math' ? allMathQuestions : allEnglishQuestions;
+    handleStartCustomPractice(pool);
+  }, [handleStartCustomPractice]);
+
   // Practice session configuration started from SetupDashboard
   const handleStartPractice = useCallback((filtered: MockQuestion[], config: EnglishFilterConfig) => {
     setFilterConfig(config);
@@ -771,11 +785,7 @@ export const App: React.FC = () => {
               currentRoute={currentRoute as AppRoute}
               onRouteChange={(route) => {
                 setIsMobileNavOpen(false);
-                if (route === 'question-bank') {
-                  setIsSetupOpen(true);
-                } else {
-                  setCurrentRoute(route);
-                }
+                setCurrentRoute(route);
               }}
               savedCount={savedCount}
               onCloseMobile={() => setIsMobileNavOpen(false)}
@@ -796,11 +806,7 @@ export const App: React.FC = () => {
           <Sidebar
             currentRoute={currentRoute as AppRoute}
             onRouteChange={(route) => {
-              if (route === 'question-bank') {
-                setIsSetupOpen(true);
-              } else {
-                setCurrentRoute(route);
-              }
+              setCurrentRoute(route);
             }}
             savedCount={savedCount}
             user={currentUser}
@@ -822,6 +828,25 @@ export const App: React.FC = () => {
               questions={allQuestions}
               onStartSkillPractice={handleStartSkillPractice}
               onOpenQuestionBank={() => setIsSetupOpen(true)}
+              onResumePractice={() => {
+                if (sessionQuestions.length > 0) {
+                  setCurrentRoute('practice');
+                } else {
+                  handleStartCustomPractice(allEnglishQuestions);
+                }
+              }}
+              onStartDailyQuestion={handleStartDailyQuestion}
+            />
+          )}
+
+          {currentRoute === 'question-bank' && (
+            <QuestionBankHub
+              questions={allQuestions}
+              onStartPracticeSection={handleStartSectionPractice}
+              onOpenFilterModal={(_section) => {
+                setIsSetupOpen(true);
+              }}
+              onNavigateRoute={(route) => setCurrentRoute(route)}
             />
           )}
 
