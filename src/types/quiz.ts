@@ -8,10 +8,19 @@ export type EnglishDomain =
   | 'Information and Ideas'
   | 'Standard English Conventions';
 
+export type MathDomain =
+  | 'Algebra'
+  | 'Advanced Math'
+  | 'Problem-Solving and Data Analysis'
+  | 'Geometry and Trigonometry';
+
+export type QuestionType = 'mcq' | 'spr';
+
 export interface AnswerChoice {
   id: 'A' | 'B' | 'C' | 'D';
   label?: 'A' | 'B' | 'C' | 'D';
   text: string;
+  imageUrl?: string;
 }
 
 export interface ChoiceExplanation {
@@ -30,24 +39,26 @@ export interface MockQuestion {
   id: string; // 8-char hex/hash
   questionNumber: number;
   totalQuestions: number;
-  section: 'Reading and Writing';
+  section: SectionType;
   module?: number;
   difficulty: DifficultyLevel;
   domain: string;
   skill: string;
+  questionType?: QuestionType;
   
-  // Left pane: Reading passage
+  // Left pane: Reading passage or Math directions / stimulus
   passage: string;
   passageText?: string;
   passageTitle?: string;
   imageUrl?: string;
   
-  // Right pane: Prompt and 4 options A-D
+  // Right pane: Prompt and 4 options A-D or SPR input
   prompt: string;
   stem?: string; // backwards compatibility alias for prompt
   options: AnswerChoice[];
   choices?: AnswerChoice[]; // backwards compatibility alias for options
   correctAnswer: 'A' | 'B' | 'C' | 'D' | string;
+  acceptedAnswers?: string[];
   
   // Rationale
   rationale: string | RationaleData;
@@ -55,6 +66,7 @@ export interface MockQuestion {
 
 export interface UserQuestionState {
   selectedChoice: 'A' | 'B' | 'C' | 'D' | null;
+  sprAnswer?: string;
   eliminatedChoices: ('A' | 'B' | 'C' | 'D')[];
   isMarkedForReview: boolean;
   isAnswerChecked: boolean;
@@ -78,8 +90,9 @@ export interface TextHighlight {
 
 export interface EnglishFilterConfig {
   test: 'SAT';
-  masterCategory: boolean; // Reading & Writing master checkbox
-  selectedDomains: string[]; // Craft and Structure, Expression of Ideas, Information and Ideas, Standard English Conventions
+  masterCategory?: boolean; // backwards compatibility
+  selectedSections?: SectionType[];
+  selectedDomains: string[]; // R&W or Math domains
   selectedSkills: string[]; // Specific skills selected
   selectedDifficulties: DifficultyLevel[]; // Easy, Medium, Hard
   shuffle: boolean;

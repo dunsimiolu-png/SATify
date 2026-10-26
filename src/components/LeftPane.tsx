@@ -264,12 +264,32 @@ export const LeftPane: React.FC<LeftPaneProps> = ({
       {/* Visual Graph / Table / Chart Figure Card */}
       {question.imageUrl && (
         <div className="mb-6 p-4 bg-white dark:bg-[#11131A] border border-zinc-200 dark:border-[#222634] rounded-xl overflow-hidden flex flex-col items-center max-w-[65ch]">
-          <img
-            src={question.imageUrl}
-            alt="Question Graph or Table"
-            className="max-w-full h-auto object-contain rounded-md select-none"
-            loading="lazy"
-          />
+          <div className="p-2 bg-white rounded-lg flex items-center justify-center w-full">
+            <img
+              src={question.imageUrl}
+              alt="Question Graph or Table"
+              className="max-w-full h-auto object-contain rounded-md select-none"
+              loading="eager"
+            />
+          </div>
+        </div>
+      )}
+
+      {/* Official Bluebook Student-Produced Response Directions */}
+      {question.questionType === 'spr' && (
+        <div className="mb-6 p-4 rounded-xl border border-blue-200 dark:border-blue-900/60 bg-blue-50/60 dark:bg-blue-950/20 max-w-[65ch] shadow-2xs">
+          <h4 className="font-sans font-bold text-xs uppercase tracking-wider text-blue-900 dark:text-blue-300 mb-2.5 flex items-center gap-1.5">
+            <span className="w-2 h-2 rounded-full bg-blue-600 dark:bg-blue-400" />
+            Student-produced response directions
+          </h4>
+          <ul className="text-xs text-zinc-700 dark:text-[#C5CAD6] space-y-1.5 list-disc pl-4 leading-relaxed font-sans">
+            <li>If you find more than one correct answer, enter only one answer.</li>
+            <li>You can enter up to 5 characters for a positive answer and up to 6 characters (including the negative sign) for a negative answer.</li>
+            <li>If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.</li>
+            <li>If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit (or enter as an equivalent fraction).</li>
+            <li>If you enter a fraction, it doesn't need to be reduced to lowest terms unless it doesn't fit in the space.</li>
+            <li>Do not enter symbols such as percent signs, commas, or dollar signs.</li>
+          </ul>
         </div>
       )}
 

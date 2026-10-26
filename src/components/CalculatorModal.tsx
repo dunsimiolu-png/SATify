@@ -170,6 +170,30 @@ export const CalculatorModal: React.FC<CalculatorModalProps> = ({ isOpen, onClos
     }
   }, [isDragging, isResizing, activeTab]);
 
+  const [isMobileScreen, setIsMobileScreen] = useState<boolean>(() => 
+    typeof window !== 'undefined' ? window.innerWidth < 640 : false
+  );
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobileScreen(window.innerWidth < 640);
+      if (activeTab === 'graphing' && graphCalcRef.current) graphCalcRef.current.resize();
+      if (activeTab === 'scientific' && sciCalcRef.current) sciCalcRef.current.resize();
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [activeTab]);
+
+  // ESC key listener to close calculator
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, onClose]);
+
   useEffect(() => {
     if (isDragging || isResizing) {
       window.addEventListener('mousemove', handleMouseMove);
@@ -183,15 +207,23 @@ export const CalculatorModal: React.FC<CalculatorModalProps> = ({ isOpen, onClos
 
   return (
     <div
-      style={{
-        display: isOpen ? 'flex' : 'none',
-        position: 'fixed',
-        left: `${position.x}px`,
-        top: `${position.y}px`,
-        width: `${size.width}px`,
-        height: `${size.height}px`,
-      }}
-      className="z-50 flex-col bg-white rounded-lg shadow-2xl border border-gray-700 overflow-visible select-none animate-in fade-in-50 duration-150"
+      style={
+        isMobileScreen
+          ? { display: isOpen ? 'flex' : 'none' }
+          : {
+              display: isOpen ? 'flex' : 'none',
+              position: 'fixed',
+              left: `${position.x}px`,
+              top: `${position.y}px`,
+              width: `${size.width}px`,
+              height: `${size.height}px`,
+            }
+      }
+      className={
+        isMobileScreen
+          ? "fixed inset-x-0 bottom-0 h-[82vh] w-full z-50 flex-col bg-white rounded-t-2xl shadow-2xl border-t border-zinc-700 overflow-hidden select-none animate-in slide-in-from-bottom-6 duration-200"
+          : "z-50 flex-col bg-white rounded-lg shadow-2xl border border-gray-700 overflow-visible select-none animate-in fade-in-50 duration-150"
+      }
     >
       {/* 1. Exact Dark Header Bar (bg-[#1e1e1e] h-11 px-3 flex items-center justify-between) */}
       <div className="bg-[#1e1e1e] h-11 px-3 flex items-center justify-between select-none text-white rounded-t-lg flex-shrink-0">
@@ -271,13 +303,15 @@ export const CalculatorModal: React.FC<CalculatorModalProps> = ({ isOpen, onClos
       </div>
 
       {/* 3. Bottom-Right Circular Resize Handle */}
-      <div
-        onMouseDown={handleResizeStart}
-        className="w-7 h-7 rounded-full bg-white border border-gray-300 shadow-md flex items-center justify-center cursor-nwse-resize absolute -bottom-3 -right-3 z-20 hover:scale-110 active:scale-95 transition-transform"
-        title="Drag to resize calculator"
-      >
-        <ArrowDownRight className="w-4 h-4 text-gray-700" />
-      </div>
+      {!isMobileScreen && (
+        <div
+          onMouseDown={handleResizeStart}
+          className="w-7 h-7 rounded-full bg-white border border-gray-300 shadow-md flex items-center justify-center cursor-nwse-resize absolute -bottom-3 -right-3 z-20 hover:scale-110 active:scale-95 transition-transform"
+          title="Drag to resize calculator"
+        >
+          <ArrowDownRight className="w-4 h-4 text-gray-700" />
+        </div>
+      )}
     </div>
   );
 };

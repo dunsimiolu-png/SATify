@@ -6,6 +6,24 @@ import { createCanvas, DOMMatrix, Path2D } from '@napi-rs/canvas';
 globalThis.DOMMatrix = DOMMatrix;
 globalThis.Path2D = Path2D;
 
+// Custom canvas factory backed by @napi-rs/canvas for pdfjs-dist rendering
+const canvasFactory = {
+  create: (w, h) => {
+    const canvas = createCanvas(w, h);
+    return { canvas, context: canvas.getContext('2d') };
+  },
+  reset: (c, w, h) => {
+    c.canvas.width = w;
+    c.canvas.height = h;
+  },
+  destroy: (c) => {
+    c.canvas.width = 0;
+    c.canvas.height = 0;
+    c.canvas = null;
+    c.context = null;
+  }
+};
+
 import * as pdfjsLib from 'pdfjs-dist/legacy/build/pdf.js';
 
 // Ensure public images directory exists
@@ -15,7 +33,7 @@ if (!fs.existsSync(IMAGES_DIR)) {
 }
 
 // -----------------------------------------------------------------------------
-// Canonical Domain and Skill Definitions
+// Canonical Domain and Skill Definitions (Reading & Writing + Math)
 // -----------------------------------------------------------------------------
 const DOMAIN_TO_SKILLS = {
   'Craft and Structure': ['Words in Context', 'Text Structure and Purpose', 'Cross-Text Connections'],
@@ -24,8 +42,43 @@ const DOMAIN_TO_SKILLS = {
   'Standard English Conventions': ['Boundaries', 'Form, Structure, and Sense'],
 };
 
+const MATH_DOMAIN_TO_SKILLS = {
+  'Algebra': [
+    'Linear equations in one variable',
+    'Linear equations in two variables',
+    'Linear functions',
+    'Systems of two linear equations in two variables',
+    'Linear inequalities in one or two variables',
+  ],
+  'Advanced Math': [
+    'Equivalent expressions',
+    'Nonlinear equations in one variable and systems of equations in two variables',
+    'Nonlinear functions',
+  ],
+  'Problem-Solving and Data Analysis': [
+    'Ratios, rates, proportional relationships, and units',
+    'Percentages',
+    'One-variable data: Distributions and measures of center and spread',
+    'Two-variable data: Models and scatterplots',
+    'Probability and conditional probability',
+    'Inference from sample statistics and margin of error',
+    'Evaluating statistical claims: Observational studies and experiments',
+  ],
+  'Geometry and Trigonometry': [
+    'Area and volume',
+    'Lines, angles, and triangles',
+    'Right triangles and trigonometry',
+    'Circles',
+  ],
+};
+
 const SKILL_TO_DOMAIN = {};
 for (const [dom, skills] of Object.entries(DOMAIN_TO_SKILLS)) {
+  for (const sk of skills) {
+    SKILL_TO_DOMAIN[sk] = dom;
+  }
+}
+for (const [dom, skills] of Object.entries(MATH_DOMAIN_TO_SKILLS)) {
   for (const sk of skills) {
     SKILL_TO_DOMAIN[sk] = dom;
   }
@@ -202,6 +255,47 @@ function cleanText(text) {
     [/\bdistinct\s+ive(ly)?\b/gi, m => m.replace(/\s+/g, '')],
     [/\bChoice\s*([A-D])\s*is\b/g, 'Choice $1 is'],
     [/\bChoice\s*([A-D])\b/g, 'Choice $1'],
+    // Math specific kerning repairs
+    [/\bAlgebr\s+a\b/gi, 'Algebra'],
+    [/\bT\s+rigonometry\b/gi, 'Trigonometry'],
+    [/\br\s+ates?\b/gi, m => m.replace(/\s+/g, '')],
+    [/\bpropor\s+tional\b/gi, 'proportional'],
+    [/\bpropor\s+tions?\b/gi, m => m.replace(/\s+/g, '')],
+    [/\bT\s+wo-variable\b/gi, 'Two-variable'],
+    [/\bOne-variable\b/gi, 'One-variable'],
+    [/\bdistr\s+ibution(s)?\b/gi, m => m.replace(/\s+/g, '')],
+    [/\bdistr\s+ibutive\b/gi, 'distributive'],
+    [/\bmeasur\s+e(s)?\b/gi, m => m.replace(/\s+/g, '')],
+    [/\btr\s+iangle(s)?\b/gi, m => m.replace(/\s+/g, '')],
+    [/\bCir\s+cle(s)?\b/gi, m => m.replace(/\s+/g, '')],
+    [/\bquadr\s+atic\b/gi, 'quadratic'],
+    [/\bquadr\s+ilateral(s)?\b/gi, m => m.replace(/\s+/g, '')],
+    [/\bper\s+pendicular\b/gi, 'perpendicular'],
+    [/\bcoor\s+dinate(s)?\b/gi, m => m.replace(/\s+/g, '')],
+    [/\btr\s+anspor\s*t\b/gi, 'transport'],
+    [/\bpar\s+abola(s)?\b/gi, m => m.replace(/\s+/g, '')],
+    [/\bline\s+ar\b/gi, 'linear'],
+    [/\bequ\s+ation(s)?\b/gi, m => m.replace(/\s+/g, '')],
+    [/\binequ\s+alit(y|ies)\b/gi, m => m.replace(/\s+/g, '')],
+    [/\bco\s+efficient(s)?\b/gi, m => m.replace(/\s+/g, '')],
+    [/\bcon\s+stant(s)?\b/gi, m => m.replace(/\s+/g, '')],
+    [/\binter\s+sect(s|ed|ing|ion|ions)?\b/gi, m => m.replace(/\s+/g, '')],
+    [/\binter\s+cept(s|ed|ing)?\b/gi, m => m.replace(/\s+/g, '')],
+    [/\bprob\s+abilit(y|ies)\b/gi, m => m.replace(/\s+/g, '')],
+    [/\bper\s+cent(age|ages)?\b/gi, m => m.replace(/\s+/g, '')],
+    [/\bexper\s+iment(s|al)?\b/gi, m => m.replace(/\s+/g, '')],
+    [/\bstatis\s+tic(s|al)?\b/gi, m => m.replace(/\s+/g, '')],
+    [/\bproper\s+ty\b/gi, 'property'],
+    [/\bsubtr\s+act(ing|ion|ed|s)?\b/gi, m => m.replace(/\s+/g, '')],
+    [/\bmultip\s+ly(ing)?\b/gi, m => m.replace(/\s+/g, '')],
+    [/\bdivi\s+d(e|ed|ing|ion)\b/gi, m => m.replace(/\s+/g, '')],
+    [/\bxy\s*-\s*plane\b/gi, 'xy-plane'],
+    [/\bx\s*-\s*axis\b/gi, 'x-axis'],
+    [/\by\s*-\s*axis\b/gi, 'y-axis'],
+    [/\bx\s*-\s*intercept\b/gi, 'x-intercept'],
+    [/\by\s*-\s*intercept\b/gi, 'y-intercept'],
+    [/\bx\s*-\s*coordinate\b/gi, 'x-coordinate'],
+    [/\by\s*-\s*coordinate\b/gi, 'y-coordinate'],
   ];
 
   for (const [pattern, replacement] of wordPairs) {
@@ -308,6 +402,101 @@ function cleanText(text) {
   // Collapse consecutive horizontal whitespace (preserving newlines)
   res = res.replace(/[ \t]+/g, ' ').replace(/[ \t]*\n[ \t]*/g, '\n').trim();
   return res;
+}
+
+// -----------------------------------------------------------------------------
+// Official Digital SAT Math Skill Extraction & Accepted Answers Generator
+// -----------------------------------------------------------------------------
+function getMathSkill(normalizedHeader, defaultDomain) {
+  const h = normalizedHeader.toLowerCase();
+
+  if (defaultDomain === 'Algebra') {
+    if (h.includes('system')) return 'Systems of two linear equations in two variables';
+    if (h.includes('inequalit')) return 'Linear inequalities in one or two variables';
+    if (h.includes('linear function')) return 'Linear functions';
+    if (h.includes('one') && h.includes('variable')) return 'Linear equations in one variable';
+    if (h.includes('two') && h.includes('variable')) return 'Linear equations in two variables';
+    return 'Linear equations in one variable';
+  }
+
+  if (defaultDomain === 'Advanced Math') {
+    if (h.includes('equivalent')) return 'Equivalent expressions';
+    if (h.includes('nonlinear function')) return 'Nonlinear functions';
+    if (h.includes('nonlinear') || h.includes('system')) return 'Nonlinear equations in one variable and systems of equations in two variables';
+    return 'Nonlinear functions';
+  }
+
+  if (defaultDomain === 'Problem-Solving and Data Analysis') {
+    if (h.includes('evaluating') || h.includes('observational') || h.includes('experiment')) {
+      return 'Evaluating statistical claims: Observational studies and experiments';
+    }
+    if (h.includes('inference') || h.includes('margin of error') || h.includes('sample statistic')) {
+      return 'Inference from sample statistics and margin of error';
+    }
+    if (h.includes('ratio') || h.includes('rate') || h.includes('proport')) {
+      return 'Ratios, rates, proportional relationships, and units';
+    }
+    if (h.includes('percent')) {
+      return 'Percentages';
+    }
+    if (h.includes('one') && (h.includes('variable') || h.includes('distribution') || h.includes('spread') || h.includes('center'))) {
+      return 'One-variable data: Distributions and measures of center and spread';
+    }
+    if (h.includes('two') && (h.includes('variable') || h.includes('scatter') || h.includes('model'))) {
+      return 'Two-variable data: Models and scatterplots';
+    }
+    if (h.includes('probabilit')) {
+      return 'Probability and conditional probability';
+    }
+    return 'Ratios, rates, proportional relationships, and units';
+  }
+
+  if (defaultDomain === 'Geometry and Trigonometry') {
+    if (h.includes('area') || h.includes('volume')) return 'Area and volume';
+    if (h.includes('circle')) return 'Circles';
+    if (h.includes('right') || h.includes('trigonometr')) return 'Right triangles and trigonometry';
+    if (h.includes('line') || h.includes('angle') || h.includes('triangle')) return 'Lines, angles, and triangles';
+    return 'Lines, angles, and triangles';
+  }
+
+  return 'Linear equations in one variable';
+}
+
+function generateAcceptedAnswers(rawStr) {
+  const set = new Set();
+  if (!rawStr) return set;
+  const parts = rawStr.split(/[,;]|\bor\b/i).map(s => s.trim()).filter(Boolean);
+  for (const part of parts) {
+    const p = cleanText(part);
+    if (!p) continue;
+    set.add(p);
+    // Fraction case: calculate decimal equivalents
+    if (p.includes('/')) {
+      const fParts = p.split('/');
+      const num = parseFloat(fParts[0]);
+      const den = parseFloat(fParts[1]);
+      if (!isNaN(num) && !isNaN(den) && den !== 0) {
+        const dec = num / den;
+        set.add(String(dec));
+        set.add(dec.toFixed(3));
+        set.add(dec.toFixed(4));
+        const decStr = String(dec);
+        if (decStr.startsWith('0.')) {
+          set.add(decStr.slice(1)); // e.g. .6
+        }
+      }
+    } else {
+      const num = parseFloat(p);
+      if (!isNaN(num)) {
+        if (p.startsWith('.')) {
+          set.add('0' + p);
+        } else if (p.startsWith('0.')) {
+          set.add(p.slice(1));
+        }
+      }
+    }
+  }
+  return set;
 }
 
 // -----------------------------------------------------------------------------
@@ -914,14 +1103,18 @@ function assembleQuestionPassageAndPrompt(lines, domain, skill) {
 // -----------------------------------------------------------------------------
 async function convertPdfs() {
   console.log('========================================================================');
-  console.log('   SATify: High-Precision Reading & Writing PDF Question Bank Engine   ');
+  console.log('       SATify: Digital SAT Complete Reading & Writing + Math Engine     ');
   console.log('========================================================================\n');
 
   const pdfFiles = [
-    { file: 'CRAFT_AND_STRUCTURE.pdf', defaultDomain: 'Craft and Structure' },
-    { file: 'EXPRESSION_OF_IDEAS.pdf', defaultDomain: 'Expression of Ideas' },
-    { file: 'Information_&_Ideas.pdf', defaultDomain: 'Information and Ideas' },
-    { file: 'STANDARD_ENGLISH_CONVENTIONS.pdf', defaultDomain: 'Standard English Conventions' },
+    { file: 'CRAFT_AND_STRUCTURE.pdf', defaultDomain: 'Craft and Structure', section: 'Reading and Writing' },
+    { file: 'EXPRESSION_OF_IDEAS.pdf', defaultDomain: 'Expression of Ideas', section: 'Reading and Writing' },
+    { file: 'Information_&_Ideas.pdf', defaultDomain: 'Information and Ideas', section: 'Reading and Writing' },
+    { file: 'STANDARD_ENGLISH_CONVENTIONS.pdf', defaultDomain: 'Standard English Conventions', section: 'Reading and Writing' },
+    { file: 'ALGEBRA.pdf', defaultDomain: 'Algebra', section: 'Math' },
+    { file: 'ADVANCED_MATHS.pdf', defaultDomain: 'Advanced Math', section: 'Math' },
+    { file: 'PROBLEM_SOLVING_AND_DATA_ANALYSIS.pdf', defaultDomain: 'Problem-Solving and Data Analysis', section: 'Math' },
+    { file: 'GEOMETRY_AND_TRIGONOMETRY.pdf', defaultDomain: 'Geometry and Trigonometry', section: 'Math' },
   ];
 
   const allQuestions = [];
@@ -930,7 +1123,7 @@ async function convertPdfs() {
   let totalVisualChartsCropped = 0;
   let totalUnderlinedQuestions = 0;
 
-  for (const { file, defaultDomain } of pdfFiles) {
+  for (const { file, defaultDomain, section } of pdfFiles) {
     const filePath = path.join('raw-pdfs', file);
     if (!fs.existsSync(filePath)) {
       console.warn(`[WARN] File not found: ${filePath}`);
@@ -939,7 +1132,7 @@ async function convertPdfs() {
 
     process.stdout.write(`Scanning ${file}... `);
     const data = new Uint8Array(fs.readFileSync(filePath));
-    const doc = await pdfjsLib.getDocument({ data }).promise;
+    const doc = await pdfjsLib.getDocument({ data, canvasFactory }).promise;
     console.log(`(${doc.numPages} pages)`);
 
     // Preload all pages and lines with underline detection and italic font detection
@@ -965,6 +1158,8 @@ async function convertPdfs() {
 
     let extractedInFile = 0;
     const fileSkills = {};
+    let fileMcq = 0;
+    let fileSpr = 0;
 
     for (let qIdx = 0; qIdx < questionStartPages.length; qIdx++) {
       const startEntry = questionStartPages[qIdx];
@@ -991,6 +1186,15 @@ async function convertPdfs() {
         .replace(/\bCentr\s+al\b/gi, 'Central')
         .replace(/\bCr\s+aft\b/gi, 'Craft')
         .replace(/\bT\s*r\s*ansitions\b/gi, 'Transitions')
+        .replace(/\bAlgebr\s+a\b/gi, 'Algebra')
+        .replace(/\bT\s+rigonometry\b/gi, 'Trigonometry')
+        .replace(/\br\s+ates,?\s+propor\s+tional\b/gi, 'rates, proportional')
+        .replace(/\bT\s+wo-variable\b/gi, 'Two-variable')
+        .replace(/\bOne-variable\b/gi, 'One-variable')
+        .replace(/\bdistr\s+ibutions\b/gi, 'distributions')
+        .replace(/\bmeasur\s+es\b/gi, 'measures')
+        .replace(/\bpropor\s+tional\b/gi, 'proportional')
+        .replace(/\bCir\s+cles\b/gi, 'Circles')
         .replace(/&/g, 'and');
 
       // Difficulty
@@ -1003,203 +1207,345 @@ async function convertPdfs() {
 
       // Canonical Header Skill detection
       let headerSkill = null;
-      if (/Cross[\s\-]+Text\s+Connections/i.test(normalizedHeader)) {
-        headerSkill = 'Cross-Text Connections';
-      } else if (/Text\s+Structure\s+and(?:\s+(?:Easy|Medium|Hard))?\s+Purpose/i.test(normalizedHeader) || /Text\s+Structure\s+and\s+Purpose/i.test(normalizedHeader)) {
-        headerSkill = 'Text Structure and Purpose';
-      } else if (/Words\s+in\s+Context/i.test(normalizedHeader)) {
-        headerSkill = 'Words in Context';
-      } else if (/Rhetorical\s+Synthesis/i.test(normalizedHeader)) {
-        headerSkill = 'Rhetorical Synthesis';
-      } else if (/Transitions/i.test(normalizedHeader)) {
-        headerSkill = 'Transitions';
-      } else if (/Central\s+Ideas\s+and\s+Details/i.test(normalizedHeader)) {
-        headerSkill = 'Central Ideas and Details';
-      } else if (/Command\s+of\s+Evidence/i.test(normalizedHeader)) {
-        headerSkill = 'Command of Evidence';
-      } else if (/Inferences/i.test(normalizedHeader)) {
-        headerSkill = 'Inferences';
-      } else if (/Boundaries/i.test(normalizedHeader)) {
-        headerSkill = 'Boundaries';
-      } else if (/Form,?\s*Structure,?\s*(?:and|&).*?Sense/i.test(normalizedHeader) || /Form,?\s*Structure,?\s*(?:and|&)\s*Sense/i.test(normalizedHeader)) {
-        headerSkill = 'Form, Structure, and Sense';
+      if (section === 'Math') {
+        headerSkill = getMathSkill(normalizedHeader, defaultDomain);
+      } else {
+        if (/Cross[\s\-]+Text\s+Connections/i.test(normalizedHeader)) {
+          headerSkill = 'Cross-Text Connections';
+        } else if (/Text\s+Structure\s+and(?:\s+(?:Easy|Medium|Hard))?\s+Purpose/i.test(normalizedHeader) || /Text\s+Structure\s+and\s+Purpose/i.test(normalizedHeader)) {
+          headerSkill = 'Text Structure and Purpose';
+        } else if (/Words\s+in\s+Context/i.test(normalizedHeader)) {
+          headerSkill = 'Words in Context';
+        } else if (/Rhetorical\s+Synthesis/i.test(normalizedHeader)) {
+          headerSkill = 'Rhetorical Synthesis';
+        } else if (/Transitions/i.test(normalizedHeader)) {
+          headerSkill = 'Transitions';
+        } else if (/Central\s+Ideas\s+and\s+Details/i.test(normalizedHeader)) {
+          headerSkill = 'Central Ideas and Details';
+        } else if (/Command\s+of\s+Evidence/i.test(normalizedHeader)) {
+          headerSkill = 'Command of Evidence';
+        } else if (/Inferences/i.test(normalizedHeader)) {
+          headerSkill = 'Inferences';
+        } else if (/Boundaries/i.test(normalizedHeader)) {
+          headerSkill = 'Boundaries';
+        } else if (/Form,?\s*Structure,?\s*(?:and|&).*?Sense/i.test(normalizedHeader) || /Form,?\s*Structure,?\s*(?:and|&)\s*Sense/i.test(normalizedHeader)) {
+          headerSkill = 'Form, Structure, and Sense';
+        }
       }
 
       // -----------------------------------------------------------------------
-      // Detect Visual Figure on First Page (Requirements 2 & 3)
+      // Detect Visual Figure on First Page
       // -----------------------------------------------------------------------
-      const ansHeaderIdx = firstLines.findIndex(l => l.text.startsWith('Answer'));
-      const qEndLineIdx = ansHeaderIdx !== -1 ? ansHeaderIdx : firstLines.length;
+      const ansHeaderIdx = firstLines.findIndex(l => l.text.trim() === 'Answer' || l.text.startsWith('Answer '));
+      const corrAnsIdx = firstLines.findIndex(l => /Correct\s+Answer/i.test(l.text));
+      const isSPR = section === 'Math' && ansHeaderIdx === -1;
+      const questionType = isSPR ? 'spr' : 'mcq';
 
+      const qEndLineIdx = ansHeaderIdx !== -1 ? ansHeaderIdx : (corrAnsIdx !== -1 ? corrAnsIdx : firstLines.length);
       const betweenLines = firstLines.slice(qHeaderIdx + 1, qEndLineIdx);
       const betweenText = betweenLines.map(l => l.text).join(' ');
-
-      // Never crop for Text Structure and Purpose or Craft and Structure
-      const isTextStructure = headerSkill === 'Text Structure and Purpose' || /Text\s+Structure/i.test(normalizedHeader);
-      const isCraftAndStructure = defaultDomain === 'Craft and Structure';
-
-      // (a) Prompt explicitly mentions table, graph, chart, or figure
-      const promptCandidateText = betweenLines.slice(Math.max(0, betweenLines.length - 4)).map(l => l.text).join(' ');
-      const promptMentionsVisual = /\b(graph|table|chart|figure)\b/i.test(promptCandidateText);
-
-      // Detect first full-width prose sentence below the table (spanning > 250pt forming complete sentence)
-      let proseLineIdx = -1;
-      for (let i = 0; i < betweenLines.length; i++) {
-        if (isProseSentence(betweenLines[i])) {
-          proseLineIdx = i;
-          break;
-        }
-      }
-
-      // (b) Operator list contains table grid rectangles/lines above prose paragraph (>= 4 lines)
-      let hasGridOps = false;
-      if (proseLineIdx > 0) {
-        const proseY = betweenLines[proseLineIdx].y;
-        const qHeaderY = firstLines[qHeaderIdx].y;
-        const pathsInRegion = (firstPageObj.underlines || []).filter(u => u.y < qHeaderY && u.y > proseY);
-        if (pathsInRegion.length >= 4) {
-          hasGridOps = true;
-        }
-      }
-
-      // (c) Multiple lines above prose paragraph contain 2+ distinct X-column clusters or numeric data rows
-      let hasDataRows = false;
-      if (proseLineIdx > 0) {
-        let dataRowCount = 0;
-        for (let i = 0; i < proseLineIdx; i++) {
-          const l = betweenLines[i];
-          const numMatches = l.text.match(/[\-−]?\d+(?:\.\d+)?/g);
-          if (numMatches && numMatches.length >= 2) {
-            dataRowCount++;
-          } else if (l.rawItems && l.rawItems.length >= 3) {
-            let columnGaps = 0;
-            for (let j = 1; j < l.rawItems.length; j++) {
-              const gap = l.rawItems[j].transform[4] - (l.rawItems[j - 1].transform[4] + l.rawItems[j - 1].width);
-              if (gap > 25) columnGaps++;
-            }
-            if (columnGaps >= 2) dataRowCount++;
-          }
-        }
-        if (dataRowCount >= 2) {
-          hasDataRows = true;
-        }
-      }
-
-      const shouldCrop = !isTextStructure && !isCraftAndStructure && proseLineIdx > 0 && (promptMentionsVisual || hasGridOps || (hasDataRows && /\b(table|graph|chart|figure)\b/i.test(betweenText)));
-
-      // Delete any erroneously cropped images for Text Structure and Purpose or Craft and Structure
-      if (isTextStructure || isCraftAndStructure) {
-        const erroneousImgPath = path.join(IMAGES_DIR, `${id}.png`);
-        if (fs.existsSync(erroneousImgPath)) {
-          try {
-            fs.unlinkSync(erroneousImgPath);
-          } catch (e) {}
-        }
-      }
 
       let imageUrl = undefined;
       let finalQuestionLines = betweenLines;
 
-      // Crop graph / table if detected
-      if (shouldCrop) {
+      if (section === 'Reading and Writing') {
+        const isTextStructure = headerSkill === 'Text Structure and Purpose' || /Text\s+Structure/i.test(normalizedHeader);
+        const isCraftAndStructure = defaultDomain === 'Craft and Structure';
+
+        const promptCandidateText = betweenLines.slice(Math.max(0, betweenLines.length - 4)).map(l => l.text).join(' ');
+        const promptMentionsVisual = /\b(graph|table|chart|figure)\b/i.test(promptCandidateText);
+
+        let proseLineIdx = -1;
+        for (let i = 0; i < betweenLines.length; i++) {
+          if (isProseSentence(betweenLines[i])) {
+            proseLineIdx = i;
+            break;
+          }
+        }
+
+        let hasGridOps = false;
+        if (proseLineIdx > 0) {
+          const proseY = betweenLines[proseLineIdx].y;
+          const qHeaderY = firstLines[qHeaderIdx].y;
+          const pathsInRegion = (firstPageObj.underlines || []).filter(u => u.y < qHeaderY && u.y > proseY);
+          if (pathsInRegion.length >= 4) {
+            hasGridOps = true;
+          }
+        }
+
+        let hasDataRows = false;
+        if (proseLineIdx > 0) {
+          let dataRowCount = 0;
+          for (let i = 0; i < proseLineIdx; i++) {
+            const l = betweenLines[i];
+            const numMatches = l.text.match(/[\-−]?\d+(?:\.\d+)?/g);
+            if (numMatches && numMatches.length >= 2) {
+              dataRowCount++;
+            } else if (l.rawItems && l.rawItems.length >= 3) {
+              let columnGaps = 0;
+              for (let j = 1; j < l.rawItems.length; j++) {
+                const gap = l.rawItems[j].transform[4] - (l.rawItems[j - 1].transform[4] + l.rawItems[j - 1].width);
+                if (gap > 25) columnGaps++;
+              }
+              if (columnGaps >= 2) dataRowCount++;
+            }
+          }
+          if (dataRowCount >= 2) {
+            hasDataRows = true;
+          }
+        }
+
+        const shouldCrop = !isTextStructure && !isCraftAndStructure && proseLineIdx > 0 && (promptMentionsVisual || hasGridOps || (hasDataRows && /\b(table|graph|chart|figure)\b/i.test(betweenText)));
+
+        if (shouldCrop) {
+          const qHeaderY = firstLines[qHeaderIdx].y;
+          const proseY = betweenLines[proseLineIdx].y;
+          const gapPt = qHeaderY - proseY;
+
+          if (gapPt >= 50) {
+            try {
+              const viewport = firstPageObj.page.getViewport({ scale: 2.0 });
+              const pageCanvas = createCanvas(viewport.width, viewport.height);
+              const ctx = pageCanvas.getContext('2d');
+              await firstPageObj.page.render({ canvasContext: ctx, viewport, canvasFactory }).promise;
+
+              const pageHeightPt = firstPageObj.page.view[3] || 792;
+              const sourceTopCanvasY = Math.round((pageHeightPt - (qHeaderY - 4)) * 2);
+              const proseTopCanvasY = Math.round((pageHeightPt - (proseY + 10)) * 2);
+              const sourceBottomCanvasY = proseTopCanvasY - 10;
+              const sourceH = Math.max(80, sourceBottomCanvasY - sourceTopCanvasY);
+              const cropW = Math.round(viewport.width - 60);
+              const cropX = 30;
+
+              const cropCanvas = createCanvas(cropW, sourceH + 14);
+              const cropCtx = cropCanvas.getContext('2d');
+              cropCtx.fillStyle = '#ffffff';
+              cropCtx.fillRect(0, 0, cropW, sourceH + 14);
+              cropCtx.drawImage(pageCanvas, cropX, sourceTopCanvasY, cropW, sourceH, 0, 14, cropW, sourceH);
+
+              const imageFileName = `${id}.png`;
+              const imagePath = path.join(IMAGES_DIR, imageFileName);
+              fs.writeFileSync(imagePath, cropCanvas.toBuffer('image/png'));
+              imageUrl = `/images/questions/${imageFileName}`;
+              totalVisualChartsCropped++;
+
+              finalQuestionLines = betweenLines.slice(proseLineIdx);
+            } catch (err) {
+              console.warn(`[WARN] Failed to crop graph on question ${id}:`, err.message);
+            }
+          }
+        }
+      } else {
+        // Section === 'Math' Figure & Stimulus Cropping:
+        const promptCandidateText = betweenLines.map(l => l.text).join(' ');
+        const promptMentionsVisual = /\b(graph|table|chart|figure|scatterplot|diagram|plane|line\s+[a-z]|triangle|circle|polygon|rectangle|cylinder|sphere|cone|pyramid)\b/i.test(promptCandidateText);
+
         const qHeaderY = firstLines[qHeaderIdx].y;
-        const proseY = betweenLines[proseLineIdx].y;
-        const gapPt = qHeaderY - proseY;
+        const ansY = ansHeaderIdx !== -1 ? firstLines[ansHeaderIdx].y : (corrAnsIdx !== -1 ? firstLines[corrAnsIdx].y : 0);
 
-        if (gapPt >= 50) {
+        let firstProseLineY = null;
+        if (betweenLines.length > 0) {
+          firstProseLineY = betweenLines[0].y;
+        }
+
+        let lastProseLineY = null;
+        if (betweenLines.length > 0) {
+          lastProseLineY = betweenLines[betweenLines.length - 1].y;
+        }
+
+        const isRegionAGap = firstProseLineY !== null && (qHeaderY - firstProseLineY >= 50);
+        const isRegionBGap = lastProseLineY !== null && ansY > 0 && (lastProseLineY - ansY >= 50);
+        const isEntireRegionFigure = betweenLines.length === 0 && ansY > 0 && (qHeaderY - ansY >= 60);
+
+        if (promptMentionsVisual || isRegionAGap || isRegionBGap || isEntireRegionFigure) {
           try {
-            const viewport = firstPageObj.page.getViewport({ scale: 2.0 });
-            const pageCanvas = createCanvas(viewport.width, viewport.height);
-            const ctx = pageCanvas.getContext('2d');
-            await firstPageObj.page.render({ canvasContext: ctx, viewport }).promise;
+            let topCropPt = qHeaderY - 4;
+            let bottomCropPt = ansY + 8;
 
-            const pageHeightPt = firstPageObj.page.view[3] || 792;
-            // Top crop boundary strictly 4px below baseline of bold "Question" header label
-            const sourceTopCanvasY = Math.round((pageHeightPt - (qHeaderY - 4)) * 2);
-            // Down to 10px above that first prose sentence
-            const proseTopCanvasY = Math.round((pageHeightPt - (proseY + 10)) * 2);
-            const sourceBottomCanvasY = proseTopCanvasY - 10;
-            const sourceH = Math.max(80, sourceBottomCanvasY - sourceTopCanvasY);
-            const cropW = Math.round(viewport.width - 60);
-            const cropX = 30;
+            if (isRegionAGap && !isRegionBGap) {
+              topCropPt = qHeaderY - 4;
+              bottomCropPt = firstProseLineY + 8;
+            } else if (isRegionBGap && !isRegionAGap) {
+              topCropPt = lastProseLineY - 4;
+              bottomCropPt = ansY + 8;
+            }
 
-            // Include 14px of top white padding so multi-line titles are 100% visible
-            const cropCanvas = createCanvas(cropW, sourceH + 14);
-            const cropCtx = cropCanvas.getContext('2d');
-            cropCtx.fillStyle = '#ffffff';
-            cropCtx.fillRect(0, 0, cropW, sourceH + 14);
-            cropCtx.drawImage(pageCanvas, cropX, sourceTopCanvasY, cropW, sourceH, 0, 14, cropW, sourceH);
+            const gapPt = topCropPt - bottomCropPt;
+            if (gapPt >= 45) {
+              const viewport = firstPageObj.page.getViewport({ scale: 2.0 });
+              const pageCanvas = createCanvas(viewport.width, viewport.height);
+              const ctx = pageCanvas.getContext('2d');
+              await firstPageObj.page.render({ canvasContext: ctx, viewport, canvasFactory }).promise;
 
-            const imageFileName = `${id}.png`;
-            const imagePath = path.join(IMAGES_DIR, imageFileName);
-            fs.writeFileSync(imagePath, cropCanvas.toBuffer('image/png'));
-            imageUrl = `/images/questions/${imageFileName}`;
-            totalVisualChartsCropped++;
+              const pageHeightPt = firstPageObj.page.view[3] || 792;
+              const sourceTopY = Math.max(0, Math.round((pageHeightPt - topCropPt) * 2));
+              const sourceBottomY = Math.min(viewport.height, Math.round((pageHeightPt - bottomCropPt) * 2));
+              const sourceH = Math.max(50, sourceBottomY - sourceTopY);
+              const cropW = Math.round(viewport.width - 40);
+              const cropX = 20;
 
-            // Completely strip all text items located above that first prose sentence's Y-coordinate
-            finalQuestionLines = betweenLines.slice(proseLineIdx);
+              const cropCanvas = createCanvas(cropW, sourceH + 14);
+              const cropCtx = cropCanvas.getContext('2d');
+              cropCtx.fillStyle = '#ffffff';
+              cropCtx.fillRect(0, 0, cropW, sourceH + 14);
+              cropCtx.drawImage(pageCanvas, cropX, sourceTopY, cropW, sourceH, 0, 7, cropW, sourceH);
+
+              const imageFileName = `${id}.png`;
+              const imagePath = path.join(IMAGES_DIR, imageFileName);
+              fs.writeFileSync(imagePath, cropCanvas.toBuffer('image/png'));
+              imageUrl = `/images/questions/${imageFileName}`;
+              totalVisualChartsCropped++;
+            }
           } catch (err) {
-            console.warn(`[WARN] Failed to crop graph on question ${id}:`, err.message);
+            console.warn(`[WARN] Failed to crop math figure on question ${id}:`, err.message);
           }
         }
       }
 
       // -----------------------------------------------------------------------
-      // Build Passage vs Prompt (Preserve Excerpt Indentation, Notes, Poems)
+      // Build Passage vs Prompt
       // -----------------------------------------------------------------------
-      const { passage, prompt } = assembleQuestionPassageAndPrompt(finalQuestionLines, defaultDomain, headerSkill);
+      let passage = '';
+      let prompt = '';
 
-      if (passage.includes('<u>')) {
-        totalUnderlinedQuestions++;
+      if (section === 'Reading and Writing') {
+        const assembled = assembleQuestionPassageAndPrompt(finalQuestionLines, defaultDomain, headerSkill);
+        passage = assembled.passage;
+        prompt = assembled.prompt;
+
+        if (passage.includes('<u>')) {
+          totalUnderlinedQuestions++;
+        }
+      } else {
+        // Section === 'Math'
+        if (isSPR) {
+          passage = "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.";
+        } else {
+          passage = "";
+        }
+        prompt = cleanText(betweenLines.map(l => l.text).join(' '));
+        if (!prompt && imageUrl) {
+          prompt = "Refer to the figure or equation above to answer the question.";
+        }
       }
 
       // -----------------------------------------------------------------------
-      // Parse Options & Rationale Across All Pages of This Question
+      // Parse Options, Accepted Answers & Rationale Across All Pages
       // -----------------------------------------------------------------------
       let allAnswerPartLines = [];
       if (ansHeaderIdx !== -1) {
         allAnswerPartLines.push(...firstLines.slice(ansHeaderIdx + 1));
+      } else if (corrAnsIdx !== -1) {
+        allAnswerPartLines.push(...firstLines.slice(corrAnsIdx));
       }
       for (let pIdx = startPageIdx + 1; pIdx < endPageIdx; pIdx++) {
         allAnswerPartLines.push(...pagesInfo[pIdx].lines);
       }
 
       const fullAnswerText = allAnswerPartLines.map(l => l.text).join(' ');
-      const correctSplit = fullAnswerText.split(/Correct\s+Answer\s*:\s*([A-D])/i);
-      const optionsText = correctSplit[0] || '';
 
       let correctAnswer = 'A';
-      if (correctSplit.length > 1) {
-        correctAnswer = correctSplit[1].trim().toUpperCase();
-      }
-
-      // Extract options A-D
+      let acceptedAnswers = undefined;
       let options = [];
-      const optMatch = optionsText.match(/(?:^|\s+)A\s*\.\s*([\s\S]+?)(?:^|\s+)B\s*\.\s*([\s\S]+?)(?:^|\s+)C\s*\.\s*([\s\S]+?)(?:^|\s+)D\s*\.\s*([\s\S]+?)$/i);
 
-      if (optMatch) {
-        options = [
-          { id: 'A', label: 'A', text: cleanText(optMatch[1]) },
-          { id: 'B', label: 'B', text: cleanText(optMatch[2]) },
-          { id: 'C', label: 'C', text: cleanText(optMatch[3]) },
-          { id: 'D', label: 'D', text: cleanText(optMatch[4]) },
-        ];
+      if (isSPR) {
+        const corrMatch = fullAnswerText.match(/Correct\s+Answer\s*:\s*([^Rationale]+?)(?=\s*Rationale|$)/i);
+        const rawAns = corrMatch ? corrMatch[1].trim() : '';
+        correctAnswer = cleanText(rawAns);
+        acceptedAnswers = Array.from(generateAcceptedAnswers(rawAns));
+        options = [];
+        fileSpr++;
       } else {
-        const optA = optionsText.match(/(?:^|\s+)A\s*\.\s*([\s\S]+?)(?=(?:^|\s+)B\s*\.|$)/i);
-        const optB = optionsText.match(/(?:^|\s+)B\s*\.\s*([\s\S]+?)(?=(?:^|\s+)C\s*\.|$)/i);
-        const optC = optionsText.match(/(?:^|\s+)C\s*\.\s*([\s\S]+?)(?=(?:^|\s+)D\s*\.|$)/i);
-        const optD = optionsText.match(/(?:^|\s+)D\s*\.\s*([\s\S]+?)$/i);
-        if (optA && optB && optC && optD) {
-          options = [
-            { id: 'A', label: 'A', text: cleanText(optA[1]) },
-            { id: 'B', label: 'B', text: cleanText(optB[1]) },
-            { id: 'C', label: 'C', text: cleanText(optC[1]) },
-            { id: 'D', label: 'D', text: cleanText(optD[1]) },
-          ];
-        }
-      }
+        const correctSplit = fullAnswerText.split(/Correct\s+Answer\s*:\s*([A-D])/i);
+        const optionsText = correctSplit[0] || '';
 
-      if (options.length < 4) continue;
+        if (correctSplit.length > 1) {
+          correctAnswer = correctSplit[1].trim().toUpperCase();
+        }
+
+        // Extract options A-D
+        const optMatch = optionsText.match(/(?:^|\s+)A\s*\.\s*([\s\S]+?)(?:^|\s+)B\s*\.\s*([\s\S]+?)(?:^|\s+)C\s*\.\s*([\s\S]+?)(?:^|\s+)D\s*\.\s*([\s\S]+?)$/i);
+
+        if (optMatch) {
+          options = [
+            { id: 'A', label: 'A', text: cleanText(optMatch[1]) },
+            { id: 'B', label: 'B', text: cleanText(optMatch[2]) },
+            { id: 'C', label: 'C', text: cleanText(optMatch[3]) },
+            { id: 'D', label: 'D', text: cleanText(optMatch[4]) },
+          ];
+        } else {
+          const optA = optionsText.match(/(?:^|\s+)A\s*\.\s*([\s\S]+?)(?=(?:^|\s+)B\s*\.|$)/i);
+          const optB = optionsText.match(/(?:^|\s+)B\s*\.\s*([\s\S]+?)(?=(?:^|\s+)C\s*\.|$)/i);
+          const optC = optionsText.match(/(?:^|\s+)C\s*\.\s*([\s\S]+?)(?=(?:^|\s+)D\s*\.|$)/i);
+          const optD = optionsText.match(/(?:^|\s+)D\s*\.\s*([\s\S]+?)$/i);
+          if (optA && optB && optC && optD) {
+            options = [
+              { id: 'A', label: 'A', text: cleanText(optA[1]) },
+              { id: 'B', label: 'B', text: cleanText(optB[1]) },
+              { id: 'C', label: 'C', text: cleanText(optC[1]) },
+              { id: 'D', label: 'D', text: cleanText(optD[1]) },
+            ];
+          }
+        }
+
+        // Check if options are graphical choices (e.g. a8e6bd75 where choices A-D are coordinate planes)
+        if (section === 'Math' && options.length === 4 && options.every(o => o.text.trim().length <= 2)) {
+          try {
+            const viewport = firstPageObj.page.getViewport({ scale: 2.0 });
+            const pageCanvas = createCanvas(viewport.width, viewport.height);
+            const ctx = pageCanvas.getContext('2d');
+            await firstPageObj.page.render({ canvasContext: ctx, viewport, canvasFactory }).promise;
+
+            const pageHeightPt = firstPageObj.page.view[3] || 792;
+            const optItems = (firstPageObj.content.items || [])
+              .filter(i => /^[A-D]\.?$/.test(i.str.trim()))
+              .map(i => ({ str: i.str.trim()[0], y: i.transform[5] }));
+            optItems.sort((a, b) => b.y - a.y);
+
+            if (optItems.length >= 4) {
+              const optA = optItems.find(o => o.str === 'A');
+              const optB = optItems.find(o => o.str === 'B');
+              const optC = optItems.find(o => o.str === 'C');
+              const optD = optItems.find(o => o.str === 'D');
+
+              if (optA && optB && optC && optD && (optA.y - optB.y >= 50)) {
+                const optRanges = [
+                  { id: 'A', top: optA.y, bottom: optB.y + 10 },
+                  { id: 'B', top: optB.y, bottom: optC.y + 10 },
+                  { id: 'C', top: optC.y, bottom: optD.y + 10 },
+                  { id: 'D', top: optD.y, bottom: 10 },
+                ];
+                for (const r of optRanges) {
+                  const sTopY = Math.max(0, Math.round((pageHeightPt - r.top) * 2));
+                  const sBottomY = Math.min(viewport.height, Math.round((pageHeightPt - r.bottom) * 2));
+                  const sH = Math.max(40, sBottomY - sTopY);
+                  const cW = Math.round(viewport.width - 60);
+
+                  const cCanvas = createCanvas(cW, sH + 10);
+                  const cCtx = cCanvas.getContext('2d');
+                  cCtx.fillStyle = '#ffffff';
+                  cCtx.fillRect(0, 0, cW, sH + 10);
+                  cCtx.drawImage(pageCanvas, 30, sTopY, cW, sH, 0, 5, cW, sH);
+
+                  const optFileName = `${id}_opt_${r.id}.png`;
+                  const optPath = path.join(IMAGES_DIR, optFileName);
+                  fs.writeFileSync(optPath, cCanvas.toBuffer('image/png'));
+
+                  const optChoice = options.find(o => o.id === r.id);
+                  if (optChoice) {
+                    optChoice.imageUrl = `/images/questions/${optFileName}`;
+                  }
+                }
+              }
+            }
+          } catch (err) {
+            console.warn(`[WARN] Failed to crop option graphs on question ${id}:`, err.message);
+          }
+        }
+
+        if (options.length < 4) continue;
+        fileMcq++;
+      }
 
       // Extract Rationale
       let rationale = '';
@@ -1208,100 +1554,98 @@ async function convertPdfs() {
         rationale = cleanText(fullAnswerText.substring(ratIdx + 9));
       }
 
-      if (!passage || !prompt) continue;
+      if (!prompt) continue;
 
-      // -----------------------------------------------------------------------
-      // Enforce Strict Canonical Pairing & Prompt Signatures Cross-Verification
-      // -----------------------------------------------------------------------
+      // Canonical Domain & Skill assignment
       let domain = defaultDomain;
       let finalSkill = headerSkill;
 
-      if (defaultDomain === 'Craft and Structure') {
-        if ((/Text\s+1/i.test(passage) && /Text\s+2/i.test(passage)) ||
-            (/Text\s+1/i.test(prompt) && /Text\s+2/i.test(prompt)) ||
-            /both texts|author of Text 2|respond to.*Text 1/i.test(prompt)) {
-          finalSkill = 'Cross-Text Connections';
-        } else if (/overall structure of the text|main purpose of the text|function of the (?:underlined|portion|sentence)|best describes the function/i.test(prompt)) {
-          finalSkill = 'Text Structure and Purpose';
-        } else if (/most logical and precise word or phrase|most nearly means?/i.test(prompt)) {
-          finalSkill = 'Words in Context';
-        } else if (!finalSkill) {
-          finalSkill = 'Words in Context';
-        }
-      } else if (defaultDomain === 'Expression of Ideas') {
-        if ((/student has taken the following notes/i.test(passage) || /following notes/i.test(passage)) &&
-            /accomplish this goal|relevant information from the notes/i.test(prompt)) {
-          finalSkill = 'Rhetorical Synthesis';
-        } else if (/most logical transition/i.test(prompt)) {
-          finalSkill = 'Transitions';
-        } else if (!finalSkill) {
-          finalSkill = 'Rhetorical Synthesis';
-        }
-      } else if (defaultDomain === 'Information and Ideas') {
-        // (g) Inferences: prompt asks "Which choice most logically completes the text?" or what "can most reasonably be inferred/concluded" from text (such as ID 87aa7bab)
-        if (/most logically completes the text|can (?:most )?reasonably be inferred|can (?:most )?reasonably be concluded|what can be concluded|most strongly suggests? about|most directly suggests?/i.test(prompt) || id === '87aa7bab') {
-          finalSkill = 'Inferences';
-        } else if (/most effectively illustrates the claim|illustrates the claim|data from the (?:graph|table|chart)|(?:graph|table|chart) that (?:supports?|weakens?)|(?:support|weaken|undermine) (?:the|a) (?:hypothesis|claim|conclusion|finding|theory|argument)|finding, if true, would|statement, if true, would|support the .* claim|weaken the .* claim|support the .* hypothesis|weaken the .* hypothesis|most effective evidence for the .* to include in support of this claim/i.test(prompt)) {
-          finalSkill = 'Command of Evidence';
-        } else if (/main idea of the text|According to the text|text indicates about|text makes which point|based on the text, (?:what|how|why|which)|what does the text|best states the text’s main idea|statement about .* is best supported by information in the text|best describes how .* presents/i.test(prompt)) {
-          finalSkill = 'Central Ideas and Details';
-        } else if (headerSkill) {
-          finalSkill = headerSkill;
-        } else {
-          finalSkill = 'Central Ideas and Details';
-        }
-      } else if (defaultDomain === 'Standard English Conventions') {
-        // Distinguish Boundaries vs Form, Structure, and Sense via:
-        // 1. Header if available
-        // 2. Official rationale text
-        // 3. Option comparison
-        let rationaleIndicatesBoundaries = false;
-        let rationaleIndicatesFSS = false;
-
-        if (rationale) {
-          if (/punctuation|clause|independent clause|subordinate clause|supplementary|nonessential|comma|semicolon|colon|dash|parenthes|period|FANBOYS|run-on|comma splice/i.test(rationale)) {
-            rationaleIndicatesBoundaries = true;
+      if (section === 'Reading and Writing') {
+        if (defaultDomain === 'Craft and Structure') {
+          if ((/Text\s+1/i.test(passage) && /Text\s+2/i.test(passage)) ||
+              (/Text\s+1/i.test(prompt) && /Text\s+2/i.test(prompt)) ||
+              /both texts|author of Text 2|respond to.*Text 1/i.test(prompt)) {
+            finalSkill = 'Cross-Text Connections';
+          } else if (/overall structure of the text|main purpose of the text|function of the (?:underlined|portion|sentence)|best describes the function/i.test(prompt)) {
+            finalSkill = 'Text Structure and Purpose';
+          } else if (/most logical and precise word or phrase|most nearly means?/i.test(prompt)) {
+            finalSkill = 'Words in Context';
+          } else if (!finalSkill) {
+            finalSkill = 'Words in Context';
           }
-          if (/subject-verb agreement|verb tense|verb aspect|finite|nonfinite|pronoun-antecedent|plural|singular|possessive|apostrophe|subject-modifier|parallel structure/i.test(rationale)) {
-            rationaleIndicatesFSS = true;
+        } else if (defaultDomain === 'Expression of Ideas') {
+          if ((/student has taken the following notes/i.test(passage) || /following notes/i.test(passage)) &&
+              /accomplish this goal|relevant information from the notes/i.test(prompt)) {
+            finalSkill = 'Rhetorical Synthesis';
+          } else if (/most logical transition/i.test(prompt)) {
+            finalSkill = 'Transitions';
+          } else if (!finalSkill) {
+            finalSkill = 'Rhetorical Synthesis';
           }
-        }
+        } else if (defaultDomain === 'Information and Ideas') {
+          if (/most logically completes the text|can (?:most )?reasonably be inferred|can (?:most )?reasonably be concluded|what can be concluded|most strongly suggests? about|most directly suggests?/i.test(prompt) || id === '87aa7bab') {
+            finalSkill = 'Inferences';
+          } else if (/most effectively illustrates the claim|illustrates the claim|data from the (?:graph|table|chart)|(?:graph|table|chart) that (?:supports?|weakens?)|(?:support|weaken|undermine) (?:the|a) (?:hypothesis|claim|conclusion|finding|theory|argument)|finding, if true, would|statement, if true, would|support the .* claim|weaken the .* claim|support the .* hypothesis|weaken the .* hypothesis|most effective evidence for the .* to include in support of this claim/i.test(prompt)) {
+            finalSkill = 'Command of Evidence';
+          } else if (/main idea of the text|According to the text|text indicates about|text makes which point|based on the text, (?:what|how|why|which)|what does the text|best states the text’s main idea|statement about .* is best supported by information in the text|best describes how .* presents/i.test(prompt)) {
+            finalSkill = 'Central Ideas and Details';
+          } else if (headerSkill) {
+            finalSkill = headerSkill;
+          } else {
+            finalSkill = 'Central Ideas and Details';
+          }
+        } else if (defaultDomain === 'Standard English Conventions') {
+          let rationaleIndicatesBoundaries = false;
+          let rationaleIndicatesFSS = false;
 
-        // Option comparison
-        let optionAllIdenticalWords = false;
-        if (options.length === 4) {
-          const stripped = options.map(o => (o.text || '').toLowerCase().replace(/[^a-z0-9]/g, ''));
-          optionAllIdenticalWords = stripped.every(s => s === stripped[0]);
-        }
+          if (rationale) {
+            if (/punctuation|clause|independent clause|subordinate clause|supplementary|nonessential|comma|semicolon|colon|dash|parenthes|period|FANBOYS|run-on|comma splice/i.test(rationale)) {
+              rationaleIndicatesBoundaries = true;
+            }
+            if (/subject-verb agreement|verb tense|verb aspect|finite|nonfinite|pronoun-antecedent|plural|singular|possessive|apostrophe|subject-modifier|parallel structure/i.test(rationale)) {
+              rationaleIndicatesFSS = true;
+            }
+          }
 
-        if (headerSkill === 'Boundaries' || headerSkill === 'Form, Structure, and Sense') {
-          finalSkill = headerSkill;
-        } else if (rationaleIndicatesBoundaries && !rationaleIndicatesFSS) {
-          finalSkill = 'Boundaries';
-        } else if (rationaleIndicatesFSS && !rationaleIndicatesBoundaries) {
-          finalSkill = 'Form, Structure, and Sense';
-        } else if (optionAllIdenticalWords) {
-          finalSkill = 'Boundaries';
-        } else {
-          finalSkill = 'Form, Structure, and Sense';
+          let optionAllIdenticalWords = false;
+          if (options.length === 4) {
+            const stripped = options.map(o => (o.text || '').toLowerCase().replace(/[^a-z0-9]/g, ''));
+            optionAllIdenticalWords = stripped.every(s => s === stripped[0]);
+          }
+
+          if (headerSkill === 'Boundaries' || headerSkill === 'Form, Structure, and Sense') {
+            finalSkill = headerSkill;
+          } else if (rationaleIndicatesBoundaries && !rationaleIndicatesFSS) {
+            finalSkill = 'Boundaries';
+          } else if (rationaleIndicatesFSS && !rationaleIndicatesBoundaries) {
+            finalSkill = 'Form, Structure, and Sense';
+          } else if (optionAllIdenticalWords) {
+            finalSkill = 'Boundaries';
+          } else {
+            finalSkill = 'Form, Structure, and Sense';
+          }
         }
       }
 
-      // Final canonical integrity enforcement
       domain = SKILL_TO_DOMAIN[finalSkill] || defaultDomain;
 
       const questionObj = {
         id,
-        section: 'Reading and Writing',
+        section,
         domain,
         skill: finalSkill,
         difficulty,
+        questionType,
         passage,
         prompt,
         options,
         correctAnswer,
         rationale,
       };
+
+      if (acceptedAnswers && acceptedAnswers.length > 0) {
+        questionObj.acceptedAnswers = acceptedAnswers;
+      }
 
       if (imageUrl) {
         questionObj.imageUrl = imageUrl;
@@ -1315,13 +1659,16 @@ async function convertPdfs() {
 
     auditResults.push({
       file,
+      section,
       defaultDomain,
       rawQuestionCount: questionStartPages.length,
       extractedCount: extractedInFile,
-      fileSkills
+      fileSkills,
+      mcq: fileMcq,
+      spr: fileSpr,
     });
 
-    console.log(`  -> Successfully extracted ${extractedInFile} questions from ${file}`);
+    console.log(`  -> Successfully extracted ${extractedInFile} questions from ${file} (${fileMcq} MCQ, ${fileSpr} SPR)`);
   }
 
   // ---------------------------------------------------------------------------
@@ -1343,30 +1690,41 @@ async function convertPdfs() {
   // Full Terminal Audit Table (Requirement 1 & 4)
   // ---------------------------------------------------------------------------
   console.log('========================================================================');
-  console.log('             SATIFY READING & WRITING QUESTION BANK AUDIT TABLE          ');
+  console.log('            SATIFY DIGITAL SAT OFFICIAL QUESTION BANK AUDIT TABLE       ');
   console.log('========================================================================');
-  console.log('PDF Filename                     Raw Question IDs Extracted JSON');
+  console.log('Section & PDF Filename           Raw Question IDs Extracted JSON');
   console.log('------------------------------------------------------------------------');
   let totalRaw = 0;
   let totalExtracted = 0;
+  let totalRWCount = 0;
+  let totalMathCount = 0;
+  let totalMCQ = 0;
+  let totalSPR = 0;
   const grandSkillTotals = {};
 
   for (const res of auditResults) {
     totalRaw += res.rawQuestionCount;
     totalExtracted += res.extractedCount;
-    console.log(`${res.file.padEnd(32)} ${String(res.rawQuestionCount).padEnd(16)} ${res.extractedCount}`);
+    if (res.section === 'Reading and Writing') totalRWCount += res.extractedCount;
+    else totalMathCount += res.extractedCount;
+    totalMCQ += res.mcq;
+    totalSPR += res.spr;
+
+    console.log(`[${res.section}] ${res.file.padEnd(28)} ${String(res.rawQuestionCount).padEnd(16)} ${res.extractedCount} (${res.mcq} MCQ, ${res.spr} SPR)`);
     for (const [sk, count] of Object.entries(res.fileSkills)) {
-      console.log(`  • ${sk.padEnd(28)} : ${count}`);
+      console.log(`  • ${sk.padEnd(36)} : ${count}`);
       grandSkillTotals[sk] = (grandSkillTotals[sk] || 0) + count;
     }
   }
   console.log('------------------------------------------------------------------------');
-  console.log(`TOTAL QUESTIONS:                 ${String(totalRaw).padEnd(16)} ${totalExtracted}  (${totalRaw - totalExtracted} DROPPED)`);
+  console.log(`TOTAL READING & WRITING:         ${totalRWCount} questions`);
+  console.log(`TOTAL MATHEMATICS:               ${totalMathCount} questions (${totalSPR} SPR, ${totalMathCount - totalSPR} MCQ)`);
+  console.log(`TOTAL ALL SECTIONS:              ${String(totalRaw).padEnd(16)} ${totalExtracted}  (${totalRaw - totalExtracted} DROPPED)`);
   console.log('========================================================================\n');
 
-  console.log('--- ALL 10 SKILLS GRAND TOTALS ---');
+  console.log('--- ALL SKILLS GRAND TOTALS ---');
   for (const [sk, count] of Object.entries(grandSkillTotals)) {
-    console.log(`  • ${sk.padEnd(30)}: ${count} questions`);
+    console.log(`  • ${sk.padEnd(45)}: ${count} questions`);
   }
 
   console.log('\n--- BY DIFFICULTY ---');
@@ -1375,22 +1733,29 @@ async function convertPdfs() {
   }
 
   // ---------------------------------------------------------------------------
-  // Target Verification: a15b3219, d5b9ed0d, 6f626ae5, 6df33868, c966ad55, 87aa7bab
+  // Target Verification: R&W + Math targets
   // ---------------------------------------------------------------------------
   console.log('\n========================================================================');
   console.log('                   VERIFICATION OF TARGET QUESTIONS                     ');
   console.log('========================================================================');
 
-  const targets = ['a15b3219', 'd5b9ed0d', '6f626ae5', '6df33868', 'c966ad55', '87aa7bab', 'f8244f7c', '4042ff0b'];
+  const targets = [
+    'a15b3219', 'd5b9ed0d', '6f626ae5', '6df33868', 'c966ad55', '87aa7bab', 'f8244f7c', '4042ff0b', // R&W
+    'ac472881', '002dba45', 'f224df07', 'e10d8313', '1adb39f0', 'a8e6bd75', '512bd5b4'  // Math
+  ];
   for (const tid of targets) {
     const q = allQuestions.find(x => x.id === tid);
     if (q) {
-      console.log(`\n[Question ${q.id}] (${q.domain} • ${q.skill} • ${q.difficulty})`);
+      console.log(`\n[Question ${q.id}] [${q.section}] (${q.domain} • ${q.skill} • ${q.difficulty} • Type: ${q.questionType})`);
       if (q.imageUrl) console.log(`  • Visual Crop : ${q.imageUrl}`);
-      console.log(`  • Passage     : ${q.passage.substring(0, 150)}...`);
-      console.log(`  • Prompt      : ${q.prompt}`);
-      console.log(`  • Options     : A: "${q.options[0]?.text.substring(0, 40)}...", B: "${q.options[1]?.text.substring(0, 40)}..."`);
-      console.log(`  • Answer      : ${q.correctAnswer}`);
+      if (q.passage) console.log(`  • Passage     : ${q.passage.substring(0, 100)}...`);
+      console.log(`  • Prompt      : ${q.prompt.substring(0, 100)}...`);
+      if (q.questionType === 'spr') {
+        console.log(`  • SPR Answer  : "${q.correctAnswer}" (Accepted: ${JSON.stringify(q.acceptedAnswers)})`);
+      } else {
+        console.log(`  • Options     : A: "${q.options[0]?.text.substring(0, 30)}...", B: "${q.options[1]?.text.substring(0, 30)}..."`);
+        console.log(`  • Answer      : ${q.correctAnswer}`);
+      }
     } else {
       console.warn(`[WARN] Target question ${tid} not found!`);
     }

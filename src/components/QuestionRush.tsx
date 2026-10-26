@@ -13,7 +13,8 @@ import {
   Sparkles,
   Layers,
   ChevronDown,
-  ChevronUp
+  ChevronUp,
+  Calculator
 } from 'lucide-react';
 import { MockQuestion, AnswerChoice } from '../types/quiz';
 import { 
@@ -27,6 +28,8 @@ import { BulletPassage, isBulletPassage } from './BulletPassage';
 import { PairedPassage, isPairedPassage } from './PairedPassage';
 import { ExplanationRenderer } from './ExplanationRenderer';
 import { recordAnswer, saveQuestion } from '../utils/storage';
+import { CalculatorModal } from './CalculatorModal';
+import { evaluateNumericEquivalence, formatSprPreview } from '../utils/mathEvaluator';
 
 interface QuestionRushProps {
   questions: MockQuestion[];
@@ -35,7 +38,7 @@ interface QuestionRushProps {
 
 interface QuestionResult {
   question: MockQuestion;
-  selectedChoice: 'A' | 'B' | 'C' | 'D' | null;
+  selectedChoice: 'A' | 'B' | 'C' | 'D' | string | null;
   isCorrect: boolean;
   timeSpent: number;
   targetTime: number;
@@ -52,15 +55,20 @@ export const QuestionRush: React.FC<QuestionRushProps> = ({
   // Configuration state
   const [selectedMode, setSelectedMode] = useState<RushMode>('normal');
   const [sessionSize, setSessionSize] = useState<number>(10);
+  const [mathSelectedMode, setMathSelectedMode] = useState<RushMode>('normal');
+  const [mathSessionSize, setMathSessionSize] = useState<number>(10);
+  const [activeMode, setActiveMode] = useState<RushMode>('normal');
 
   // Active Game state
   const [rushQueue, setRushQueue] = useState<MockQuestion[]>([]);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
-  const [selectedChoice, setSelectedChoice] = useState<'A' | 'B' | 'C' | 'D' | null>(null);
+  const [selectedChoice, setSelectedChoice] = useState<'A' | 'B' | 'C' | 'D' | string | null>(null);
+  const [sprInput, setSprInput] = useState<string>('');
   const [isAnswerRevealed, setIsAnswerRevealed] = useState<boolean>(false);
   const [results, setResults] = useState<QuestionResult[]>([]);
   const [showRationale, setShowRationale] = useState<boolean>(false);
   const [mobileRushTab, setMobileRushTab] = useState<'both' | 'passage' | 'question'>('both');
+  const [isCalculatorOpen, setIsCalculatorOpen] = useState<boolean>(false);
 
   // Timer state
   const [targetSeconds, setTargetSeconds] = useState<number>(45);
@@ -70,18 +78,47 @@ export const QuestionRush: React.FC<QuestionRushProps> = ({
 
   const currentQuestion = rushQueue[currentIndex];
 
+  const rwQuestions = useMemo(() => questions.filter(q => q.section === 'Reading and Writing'), [questions]);
+  const mathQuestions = useMemo(() => questions.filter(q => q.section === 'Math'), [questions]);
+
+  // Global keyboard shortcut 'C' for calculator
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      const target = e.target as HTMLElement;
+      if (target && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable)) return;
+      if ((e.key === 'c' || e.key === 'C') && !e.ctrlKey && !e.metaKey && !e.altKey) {
+        e.preventDefault();
+        setIsCalculatorOpen(prev => !prev);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
   // Start a new rush session
-  const handleStartRush = () => {
-    if (questions.length === 0) return;
+  const handleStartRush = (section?: 'Reading and Writing' | 'Math') => {
+    let pool = questions;
+    const mode = section === 'Math' ? mathSelectedMode : selectedMode;
+    const size = section === 'Math' ? mathSessionSize : sessionSize;
+    setActiveMode(mode);
+
+    if (section === 'Reading and Writing' && rwQuestions.length > 0) {
+      pool = rwQuestions;
+    } else if (section === 'Math' && mathQuestions.length > 0) {
+      pool = mathQuestions;
+    }
+
+    if (pool.length === 0) return;
 
     // Shuffle and pick session questions
-    const shuffled = [...questions].sort(() => Math.random() - 0.5);
-    const selected = shuffled.slice(0, sessionSize);
+    const shuffled = [...pool].sort(() => Math.random() - 0.5);
+    const selected = shuffled.slice(0, size);
 
     setRushQueue(selected);
     setCurrentIndex(0);
     setResults([]);
     setSelectedChoice(null);
+    setSprInput('');
     setIsAnswerRevealed(false);
     setShowRationale(false);
     setViewState('playing');
@@ -91,7 +128,7 @@ export const QuestionRush: React.FC<QuestionRushProps> = ({
   useEffect(() => {
     if (viewState !== 'playing' || !currentQuestion) return;
 
-    const target = getQuestionTargetSeconds(currentQuestion, selectedMode);
+    const target = getQuestionTargetSeconds(currentQuestion, activeMode);
     setTargetSeconds(target);
     setTimeRemaining(target);
     setElapsedTime(0);
@@ -112,7 +149,7 @@ export const QuestionRush: React.FC<QuestionRushProps> = ({
     };
   }, [viewState, currentIndex, currentQuestion, selectedMode]);
 
-  // Handle user choice selection
+  // Handle user choice selection (MCQ)
   const handleSelectChoice = (choiceId: 'A' | 'B' | 'C' | 'D') => {
     if (isAnswerRevealed) return;
 
@@ -139,6 +176,46 @@ export const QuestionRush: React.FC<QuestionRushProps> = ({
     recordAnswer(
       currentQuestion.id,
       choiceId,
+      isCorrect,
+      currentQuestion.domain,
+      currentQuestion.skill,
+      currentQuestion.difficulty,
+      elapsedTime || 15
+    );
+    saveQuestion(currentQuestion.id);
+  };
+
+  // Handle Student-Produced Response submission (SPR)
+  const handleCheckSprAnswer = () => {
+    if (isAnswerRevealed || !sprInput.trim()) return;
+
+    if (timerRef.current) clearInterval(timerRef.current);
+
+    const trimmed = sprInput.trim();
+    setSelectedChoice(trimmed);
+    setIsAnswerRevealed(true);
+
+    const isCorrect = evaluateNumericEquivalence(
+      trimmed,
+      currentQuestion.correctAnswer,
+      currentQuestion.acceptedAnswers
+    );
+    const stars = calculateRushStars(isCorrect, elapsedTime, targetSeconds);
+
+    const resultEntry: QuestionResult = {
+      question: currentQuestion,
+      selectedChoice: trimmed,
+      isCorrect,
+      timeSpent: elapsedTime,
+      targetTime: targetSeconds,
+      starsEarned: stars,
+    };
+
+    setResults(prev => [...prev, resultEntry]);
+
+    recordAnswer(
+      currentQuestion.id,
+      trimmed,
       isCorrect,
       currentQuestion.domain,
       currentQuestion.skill,
@@ -214,8 +291,16 @@ export const QuestionRush: React.FC<QuestionRushProps> = ({
               ⚡ {selectedMode.toUpperCase()}
             </span>
 
-            {/* Mobile-only Stars & Streak in top row */}
+            {/* Mobile-only Stars & Streak & Calculator in top row */}
             <div className="sm:hidden flex items-center gap-1.5 ml-auto">
+              <button
+                type="button"
+                onClick={() => setIsCalculatorOpen(prev => !prev)}
+                className="p-1.5 rounded-lg border border-zinc-200 dark:border-[#222634] bg-zinc-100 dark:bg-[#181B24] text-blue-700 dark:text-blue-400 cursor-pointer"
+                title="Open Desmos Calculator (C)"
+              >
+                <Calculator className="w-3.5 h-3.5" />
+              </button>
               <div className="flex items-center gap-1 bg-zinc-100 dark:bg-[#181B24] px-2.5 py-1 rounded-xl border border-zinc-200 dark:border-[#222634] text-xs font-semibold text-amber-500">
                 <span>⭐</span>
                 <span>{totalStarsEarned}</span>
@@ -252,8 +337,19 @@ export const QuestionRush: React.FC<QuestionRushProps> = ({
             </div>
           </div>
 
-          {/* Desktop Star & Streak Tally */}
+          {/* Desktop Star & Streak Tally & Desmos Calculator */}
           <div className="hidden sm:flex items-center gap-3">
+            <button
+              type="button"
+              onClick={() => setIsCalculatorOpen(prev => !prev)}
+              className="flex items-center gap-1.5 px-3 py-1 rounded-xl border border-zinc-200 dark:border-[#222634] bg-zinc-100 dark:bg-[#181B24] hover:bg-zinc-200 dark:hover:bg-[#202534] text-xs font-semibold text-zinc-900 dark:text-[#F4F4F6] transition-all duration-150 cursor-pointer shadow-2xs"
+              title="Toggle Desmos Calculator (Keyboard shortcut: C)"
+            >
+              <Calculator className="w-3.5 h-3.5 text-blue-700 dark:text-blue-400" />
+              <span>Calculator</span>
+              <span className="text-[10px] font-mono text-zinc-400 bg-zinc-200/80 dark:bg-[#222634] px-1 rounded">C</span>
+            </button>
+
             <div className="flex items-center gap-1.5 bg-zinc-100 dark:bg-[#181B24] px-3 py-1 rounded-xl border border-zinc-200 dark:border-[#222634] shadow-2xs">
               <span className="text-sm">⭐</span>
               <span className="text-xs font-semibold text-amber-500 dark:text-amber-400">
@@ -374,75 +470,125 @@ export const QuestionRush: React.FC<QuestionRushProps> = ({
                 <RichText text={currentQuestion.prompt} />
               </div>
 
-              {/* Choices A-D */}
-              <div className="space-y-2.5 pt-2">
-                {currentQuestion.options.map((opt: AnswerChoice) => {
-                  const isSelected = selectedChoice === opt.id;
-                  const isCorrectAnswer = opt.id === currentQuestion.correctAnswer;
+              {/* Choices A-D or SPR Input */}
+              {currentQuestion.questionType === 'spr' ? (
+                <div className="space-y-4 pt-2">
+                  <div className="p-4 rounded-xl border border-zinc-200 dark:border-[#222634] bg-neutral-50/50 dark:bg-[#141620] space-y-3">
+                    <label className="block text-xs font-semibold text-zinc-700 dark:text-zinc-300">
+                      Enter your numeric answer:
+                    </label>
+                    <div className="flex items-center gap-3">
+                      <input
+                        type="text"
+                        value={sprInput}
+                        disabled={isAnswerRevealed}
+                        maxLength={6}
+                        onChange={(e) => {
+                          const val = e.target.value.replace(/[^0-9./-]/g, '');
+                          setSprInput(val);
+                        }}
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter') handleCheckSprAnswer();
+                        }}
+                        placeholder="e.g. 3/5 or 0.6"
+                        className="w-48 px-3.5 py-2.5 text-base font-mono font-semibold rounded-xl border border-zinc-300 dark:border-[#222634] bg-white dark:bg-[#11131A] text-zinc-950 dark:text-white focus:outline-hidden focus:ring-2 focus:ring-blue-600 disabled:opacity-60"
+                        autoFocus
+                      />
+                      <button
+                        type="button"
+                        disabled={isAnswerRevealed || !sprInput.trim()}
+                        onClick={handleCheckSprAnswer}
+                        className="px-4 py-2.5 rounded-xl bg-blue-700 hover:bg-blue-800 disabled:bg-zinc-200 dark:bg-blue-600 dark:hover:bg-blue-500 dark:disabled:bg-zinc-800 text-white font-semibold text-xs transition cursor-pointer disabled:cursor-not-allowed shadow-2xs"
+                      >
+                        Submit Answer
+                      </button>
+                    </div>
 
-                  let buttonStyles = "border-zinc-200 dark:border-[#222634] bg-white dark:bg-[#141620] hover:bg-zinc-50 dark:hover:bg-[#1a1d2a] hover:border-zinc-300 dark:hover:border-zinc-700 text-zinc-900 dark:text-zinc-200";
-
-                  if (isAnswerRevealed) {
-                    if (isCorrectAnswer) {
-                      buttonStyles = "border-emerald-500 bg-emerald-50/80 dark:bg-emerald-950/40 text-emerald-950 dark:text-emerald-200 ring-2 ring-emerald-500/50";
-                    } else if (isSelected && !isCorrectAnswer) {
-                      buttonStyles = "border-rose-500 bg-rose-50/80 dark:bg-rose-950/40 text-rose-950 dark:text-rose-200 ring-2 ring-rose-500/50";
-                    } else {
-                      buttonStyles = "border-zinc-200/60 dark:border-[#181B24] bg-zinc-50/50 dark:bg-[#090A0F]/50 text-zinc-400 dark:text-zinc-600 opacity-60";
-                    }
-                  } else if (isSelected) {
-                    buttonStyles = "border-blue-600 bg-blue-50/80 dark:bg-blue-950/50 text-blue-950 dark:text-white ring-2 ring-blue-600";
-                  }
-
-                  return (
-                    <button
-                      key={opt.id}
-                      disabled={isAnswerRevealed}
-                      onClick={() => handleSelectChoice(opt.id)}
-                      className={`w-full min-h-[48px] text-left p-3.5 rounded-xl border transition-all duration-150 ease-spring active:scale-[0.99] shadow-2xs flex items-start gap-3 cursor-pointer disabled:cursor-default ${buttonStyles}`}
-                    >
-                      <span className={`w-6 h-6 rounded-lg font-bold text-xs flex items-center justify-center shrink-0 border transition-transform duration-150 ${
-                        isAnswerRevealed && isCorrectAnswer
-                          ? 'bg-emerald-500 text-white border-emerald-400'
-                          : isAnswerRevealed && isSelected && !isCorrectAnswer
-                          ? 'bg-rose-500 text-white border-rose-400'
-                          : isSelected
-                          ? 'bg-blue-600 text-white border-blue-600'
-                          : 'bg-zinc-100 dark:bg-[#181B24] text-zinc-700 dark:text-[#8E95A5] border-zinc-300 dark:border-[#222634]'
-                      }`}>
-                        {opt.id}
-                      </span>
-                      <div className="text-xs sm:text-sm font-medium leading-relaxed pt-0.5">
-                        <RichText text={opt.text} />
+                    {sprInput && (
+                      <div className="text-[11px] font-mono text-zinc-500 dark:text-[#8E95A5] flex items-center gap-1.5">
+                        <span>Preview:</span>
+                        <span className="px-2 py-0.5 rounded bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300 font-bold border border-blue-200 dark:border-blue-900/60">
+                          {formatSprPreview(sprInput).helperText}
+                        </span>
                       </div>
-                    </button>
-                  );
-                })}
-              </div>
+                    )}
+                  </div>
+                </div>
+              ) : (
+                <div className="space-y-2.5 pt-2">
+                  {currentQuestion.options.map((opt: AnswerChoice) => {
+                    const isSelected = selectedChoice === opt.id;
+                    const isCorrectAnswer = opt.id === currentQuestion.correctAnswer;
+
+                    let buttonStyles = "border-zinc-200 dark:border-[#222634] bg-white dark:bg-[#141620] hover:bg-zinc-50 dark:hover:bg-[#1a1d2a] hover:border-zinc-300 dark:hover:border-zinc-700 text-zinc-900 dark:text-zinc-200";
+
+                    if (isAnswerRevealed) {
+                      if (isCorrectAnswer) {
+                        buttonStyles = "border-emerald-500 bg-emerald-50/80 dark:bg-emerald-950/40 text-emerald-950 dark:text-emerald-200 ring-2 ring-emerald-500/50";
+                      } else if (isSelected && !isCorrectAnswer) {
+                        buttonStyles = "border-rose-500 bg-rose-50/80 dark:bg-rose-950/40 text-rose-950 dark:text-rose-200 ring-2 ring-rose-500/50";
+                      } else {
+                        buttonStyles = "border-zinc-200/60 dark:border-[#181B24] bg-zinc-50/50 dark:bg-[#090A0F]/50 text-zinc-400 dark:text-zinc-600 opacity-60";
+                      }
+                    } else if (isSelected) {
+                      buttonStyles = "border-blue-600 bg-blue-50/80 dark:bg-blue-950/50 text-blue-950 dark:text-white ring-2 ring-blue-600";
+                    }
+
+                    return (
+                      <button
+                        key={opt.id}
+                        disabled={isAnswerRevealed}
+                        onClick={() => handleSelectChoice(opt.id)}
+                        className={`w-full min-h-[48px] text-left p-3.5 rounded-xl border transition-all duration-150 ease-spring active:scale-[0.99] shadow-2xs flex items-start gap-3 cursor-pointer disabled:cursor-default ${buttonStyles}`}
+                      >
+                        <span className={`w-6 h-6 rounded-lg font-bold text-xs flex items-center justify-center shrink-0 border transition-transform duration-150 ${
+                          isAnswerRevealed && isCorrectAnswer
+                            ? 'bg-emerald-500 text-white border-emerald-400'
+                            : isAnswerRevealed && isSelected && !isCorrectAnswer
+                            ? 'bg-rose-500 text-white border-rose-400'
+                            : isSelected
+                            ? 'bg-blue-600 text-white border-blue-600'
+                            : 'bg-zinc-100 dark:bg-[#181B24] text-zinc-700 dark:text-[#8E95A5] border-zinc-300 dark:border-[#222634]'
+                        }`}>
+                          {opt.id}
+                        </span>
+                        <div className="flex-1 text-xs sm:text-sm font-medium leading-relaxed pt-0.5">
+                          {opt.text && <RichText text={opt.text} />}
+                          {opt.imageUrl && (
+                            <div className="mt-2 p-1.5 bg-white rounded-lg border border-zinc-200 dark:border-[#222634] inline-block">
+                              <img src={opt.imageUrl} alt={`Choice ${opt.id} figure`} className="max-h-28 object-contain" />
+                            </div>
+                          )}
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
             </div>
 
             {/* Immediate Result Banner & Controls */}
             {isAnswerRevealed && (
               <div className="pt-4 border-t border-zinc-200 dark:border-[#222634] space-y-4 animate-in fade-in duration-200">
                 <div className={`p-4 rounded-xl flex items-center justify-between ${
-                  selectedChoice === currentQuestion.correctAnswer
+                  results[results.length - 1]?.isCorrect
                     ? 'bg-emerald-50/80 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-500/40 text-emerald-950 dark:text-emerald-300'
                     : 'bg-rose-50/80 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-500/40 text-rose-950 dark:text-rose-300'
                 }`}>
                   <div className="flex items-center gap-3">
-                    {selectedChoice === currentQuestion.correctAnswer ? (
+                    {results[results.length - 1]?.isCorrect ? (
                       <CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0" />
                     ) : (
                       <XCircle className="w-5 h-5 text-rose-500 shrink-0" />
                     )}
                     <div>
                       <div className="font-bold text-sm">
-                        {selectedChoice === currentQuestion.correctAnswer ? 'Correct!' : 'Incorrect'}
+                        {results[results.length - 1]?.isCorrect ? 'Correct!' : 'Incorrect'}
                       </div>
                       <div className="text-xs opacity-80">
-                        {selectedChoice === currentQuestion.correctAnswer
+                        {results[results.length - 1]?.isCorrect
                           ? `Answered in ${elapsedTime}s (Target: ${targetSeconds}s)`
-                          : `Correct answer was option ${currentQuestion.correctAnswer}`}
+                          : `Correct answer was ${currentQuestion.correctAnswer}`}
                       </div>
                     </div>
                   </div>
@@ -621,7 +767,7 @@ export const QuestionRush: React.FC<QuestionRushProps> = ({
             </button>
 
             <button
-              onClick={handleStartRush}
+              onClick={() => handleStartRush()}
               className="px-6 py-2.5 rounded-xl bg-blue-700 hover:bg-blue-800 dark:bg-blue-600 text-white font-semibold text-xs uppercase tracking-wider shadow-xs hover:shadow transition-all duration-150 active:scale-95 cursor-pointer flex items-center gap-2"
             >
               <Zap className="w-4 h-4" />
@@ -782,47 +928,92 @@ export const QuestionRush: React.FC<QuestionRushProps> = ({
 
             {/* Launch Button */}
             <button
-              onClick={handleStartRush}
+              onClick={() => handleStartRush('Reading and Writing')}
               className="w-full py-2.5 px-4 rounded-xl bg-blue-700 hover:bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-500 text-white font-semibold text-xs transition-all duration-150 active:scale-95 shadow-xs hover:shadow flex items-center justify-between cursor-pointer"
             >
-              <span>Start Timed Rush</span>
+              <span>Start Reading &amp; Writing Rush</span>
               <ChevronRight className="w-4 h-4" strokeWidth={1.75} />
             </button>
           </div>
 
-          {/* Hero Card 2: Math (Coming Soon) */}
-          <div className="relative rounded-2xl bg-white dark:bg-[#11131A] border border-zinc-200 dark:border-[#222634] text-zinc-950 dark:text-[#F4F4F6] p-6 sm:p-7 flex flex-col justify-between space-y-6 opacity-85 shadow-xs">
+          {/* Hero Card 2: Math Rush - UNLOCKED & ACTIVE */}
+          <div className="rounded-2xl bg-white dark:bg-[#11131A] text-zinc-950 dark:text-[#F4F4F6] border border-zinc-200 dark:border-[#222634] p-5 sm:p-6 flex flex-col justify-between space-y-5 shadow-xs">
             <div className="space-y-4">
               <div className="flex items-center justify-between">
-                <span className="px-2.5 py-0.5 rounded-full text-[10px] font-semibold uppercase tracking-wider bg-zinc-100 text-zinc-500 border border-zinc-200 dark:bg-[#181B24] dark:text-[#8E95A5] dark:border-[#222634]">
-                  Coming Soon
+                <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-semibold uppercase tracking-wider bg-emerald-50 text-emerald-700 border border-emerald-200 dark:bg-emerald-950/40 dark:text-emerald-400 dark:border-emerald-800 shadow-2xs">
+                  Ready to Practice
                 </span>
-                <span className="text-xs font-semibold text-zinc-400 dark:text-zinc-600">
-                  0 questions
+                <span className="text-xs font-mono text-zinc-500 dark:text-[#8E95A5] tabular-nums">
+                  {mathQuestions.length || 993} questions
                 </span>
               </div>
 
               <div>
-                <h3 className="text-xl font-bold text-zinc-950 dark:text-[#F4F4F6] tracking-tight">
+                <h3 className="text-lg font-bold text-zinc-950 dark:text-[#F4F4F6] tracking-tight">
                   Math Rush
                 </h3>
-                <p className="text-xs sm:text-sm text-zinc-500 dark:text-[#8E95A5] mt-1.5 leading-relaxed">
-                  Fast-paced drills across Algebra, Advanced Math, Problem-Solving &amp; Data Analysis, and Geometry &amp; Trigonometry.
+                <p className="text-xs text-zinc-600 dark:text-[#8E95A5] mt-1 leading-relaxed">
+                  Fast-paced drills across Algebra, Advanced Math, Problem-Solving &amp; Data Analysis, and Geometry &amp; Trigonometry with Desmos.
                 </p>
               </div>
 
-              <div className="p-4 rounded-xl bg-zinc-50 dark:bg-[#141620] border border-zinc-200 dark:border-[#222634] text-xs text-zinc-500 dark:text-[#8E95A5] space-y-1">
-                <span className="font-semibold text-zinc-700 dark:text-zinc-300 block">Digital SAT Math Timing:</span>
-                <span>Calibrated to 95 seconds per problem with built-in Desmos scientific graphing workflows.</span>
+              {/* Speed Mode Selector */}
+              <div className="space-y-1.5 pt-1">
+                <label className="block text-[11px] font-mono font-semibold text-zinc-500 dark:text-[#8E95A5] uppercase tracking-wider">
+                  Pacing Multiplier
+                </label>
+                <div className="grid grid-cols-3 gap-2">
+                  {[
+                    { id: 'blitz', label: 'Blitz', sub: '0.8x Target' },
+                    { id: 'normal', label: 'Normal', sub: '1.0x Target' },
+                    { id: 'relaxed', label: 'Relaxed', sub: '1.25x Target' },
+                  ].map(mode => (
+                    <button
+                      key={mode.id}
+                      type="button"
+                      onClick={() => setMathSelectedMode(mode.id as RushMode)}
+                      className={`p-2 rounded-xl border text-center transition-all duration-150 active:scale-95 cursor-pointer ${
+                        mathSelectedMode === mode.id
+                          ? 'border-emerald-600 dark:border-emerald-500 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 ring-1 ring-emerald-600 shadow-2xs'
+                          : 'border-zinc-200 dark:border-[#222634] bg-zinc-50 dark:bg-[#181B24] text-zinc-700 dark:text-[#8E95A5] hover:border-zinc-300 dark:hover:border-zinc-700'
+                      }`}
+                    >
+                      <div className="text-xs font-semibold">{mode.label}</div>
+                      <div className="text-[10px] font-mono text-zinc-500 dark:text-[#8E95A5] mt-0.5">{mode.sub}</div>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Sprint Length Selector */}
+              <div className="flex items-center justify-between text-xs pt-1">
+                <span className="text-zinc-600 dark:text-[#8E95A5] font-mono text-[11px]">Sprint Length:</span>
+                <div className="flex items-center gap-1.5">
+                  {[5, 10, 15, 20].map(sz => (
+                    <button
+                      key={sz}
+                      type="button"
+                      onClick={() => setMathSessionSize(sz)}
+                      className={`px-3 py-1 rounded-lg text-xs font-mono font-semibold transition-all duration-150 active:scale-95 cursor-pointer tabular-nums ${
+                        mathSessionSize === sz
+                          ? 'bg-zinc-950 dark:bg-emerald-600 text-white shadow-2xs'
+                          : 'bg-zinc-100 dark:bg-[#181B24] text-zinc-700 dark:text-[#8E95A5] border border-zinc-200 dark:border-[#222634] hover:bg-zinc-200 dark:hover:bg-[#202534]'
+                      }`}
+                    >
+                      {sz} Qs
+                    </button>
+                  ))}
+                </div>
               </div>
             </div>
 
+            {/* Launch Button */}
             <button
-              disabled
-              className="w-full py-3 px-5 rounded-xl bg-zinc-100 dark:bg-[#181B24] text-zinc-400 dark:text-[#8E95A5] font-semibold text-xs uppercase tracking-wider border border-zinc-200 dark:border-[#222634] cursor-not-allowed flex items-center justify-between"
+              onClick={() => handleStartRush('Math')}
+              className="w-full py-2.5 px-4 rounded-xl bg-emerald-700 hover:bg-emerald-800 dark:bg-emerald-600 dark:hover:bg-emerald-500 text-white font-semibold text-xs transition-all duration-150 active:scale-95 shadow-xs hover:shadow flex items-center justify-between cursor-pointer"
             >
-              <span>Math Rush (Coming Soon)</span>
-              <span className="text-xs">🔒</span>
+              <span>Start Math Rush</span>
+              <ChevronRight className="w-4 h-4" strokeWidth={1.75} />
             </button>
           </div>
         </div>
@@ -848,7 +1039,7 @@ export const QuestionRush: React.FC<QuestionRushProps> = ({
                 Pick Your Focus
               </h4>
               <p className="text-xs text-zinc-600 dark:text-[#8E95A5] leading-relaxed">
-                Choose Reading &amp; Writing and set your speed intensity: Blitz (0.8x), Normal (1.0x), or Relaxed (1.25x) to challenge your limits.
+                Choose Reading &amp; Writing or Mathematics and calibrate your speed intensity: Blitz (0.8x), Normal (1.0x), or Relaxed (1.25x).
               </p>
             </div>
 
@@ -858,10 +1049,10 @@ export const QuestionRush: React.FC<QuestionRushProps> = ({
                 <Clock className="w-5 h-5" />
               </div>
               <h4 className="font-semibold text-sm text-zinc-950 dark:text-[#F4F4F6]">
-                Race the Clock
+                Race the Clock &amp; Desmos
               </h4>
               <p className="text-xs text-zinc-600 dark:text-[#8E95A5] leading-relaxed">
-                Each question features a live countdown clock based on its Skill &amp; Difficulty (25s for grammar up to 120s for inferences + 10s for graphs).
+                Each question features a live countdown clock based on Skill &amp; Difficulty, with built-in instant Desmos calculator access.
               </p>
             </div>
 
@@ -885,6 +1076,12 @@ export const QuestionRush: React.FC<QuestionRushProps> = ({
           © Oluwole Inuoluwadunsimi 2026 • SATify Question Rush
         </div>
       </div>
+
+      {/* Floating Desmos Calculator Modal */}
+      <CalculatorModal
+        isOpen={isCalculatorOpen}
+        onClose={() => setIsCalculatorOpen(false)}
+      />
     </div>
   );
 };

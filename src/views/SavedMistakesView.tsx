@@ -31,6 +31,7 @@ export const SavedMistakesView: React.FC<SavedMistakesViewProps> = ({
   onStartCustomPractice,
 }) => {
   const [tab, setTab] = useState<'answered' | 'mistakes' | 'saved'>('answered');
+  const [sectionFilter, setSectionFilter] = useState<'all' | 'Reading and Writing' | 'Math'>('all');
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [selectedDifficulty, setSelectedDifficulty] = useState<string>('all');
   const [storageVersion, setStorageVersion] = useState<number>(0);
@@ -69,19 +70,25 @@ export const SavedMistakesView: React.FC<SavedMistakesViewProps> = ({
     ? mistakeQuestions 
     : savedQuestions;
 
-  // Apply search and difficulty filter
+  const mathDomains = ['Algebra', 'Advanced Math', 'Problem-Solving and Data Analysis', 'Geometry and Trigonometry'];
+
+  // Apply search, section, and difficulty filter
   const displayedQuestions = useMemo(() => {
     return currentList.filter(q => {
+      const isMath = q.section === 'Math' || mathDomains.includes(q.domain);
+      if (sectionFilter === 'Reading and Writing' && isMath) return false;
+      if (sectionFilter === 'Math' && !isMath) return false;
+
       const matchSearch = searchTerm === '' ||
-        q.passage.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        q.prompt.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        q.skill.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        q.id.toLowerCase().includes(searchTerm.toLowerCase());
+        (q.passage && q.passage.toLowerCase().includes(searchTerm.toLowerCase())) ||
+        (q.prompt && q.prompt.toLowerCase().includes(searchTerm.toLowerCase())) ||
+        (q.skill && q.skill.toLowerCase().includes(searchTerm.toLowerCase())) ||
+        (q.id && q.id.toLowerCase().includes(searchTerm.toLowerCase()));
 
       const matchDiff = selectedDifficulty === 'all' || q.difficulty === selectedDifficulty;
       return matchSearch && matchDiff;
     });
-  }, [currentList, searchTerm, selectedDifficulty]);
+  }, [currentList, searchTerm, selectedDifficulty, sectionFilter]);
 
   const handleToggleBookmark = (id: string) => {
     toggleSaveQuestion(id);
@@ -133,44 +140,67 @@ export const SavedMistakesView: React.FC<SavedMistakesViewProps> = ({
       </div>
 
       {/* Tabs & Search Filter Strip */}
-      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+      <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3">
         {/* Toggle Pill */}
-        <div className="inline-flex p-1 bg-white dark:bg-[#11131A] border border-zinc-200 dark:border-[#222634] rounded-xl shadow-2xs flex-wrap gap-1">
-          <button
-            onClick={() => setTab('answered')}
-            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono font-medium transition-all duration-150 active:scale-95 cursor-pointer ${
-              tab === 'answered'
-                ? 'bg-blue-700 text-white dark:bg-blue-600 font-semibold shadow-xs'
-                : 'text-zinc-600 dark:text-[#8E95A5] hover:text-zinc-950 dark:hover:text-white'
-            }`}
-          >
-            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" strokeWidth={1.75} />
-            <span>Answered ({answeredQuestions.length})</span>
-          </button>
+        <div className="flex flex-wrap items-center gap-2">
+          <div className="inline-flex p-1 bg-white dark:bg-[#11131A] border border-zinc-200 dark:border-[#222634] rounded-xl shadow-2xs flex-wrap gap-1">
+            <button
+              onClick={() => setTab('answered')}
+              className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono font-medium transition-all duration-150 active:scale-95 cursor-pointer ${
+                tab === 'answered'
+                  ? 'bg-blue-700 text-white dark:bg-blue-600 font-semibold shadow-xs'
+                  : 'text-zinc-600 dark:text-[#8E95A5] hover:text-zinc-950 dark:hover:text-white'
+              }`}
+            >
+              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" strokeWidth={1.75} />
+              <span>Answered ({answeredQuestions.length})</span>
+            </button>
 
-          <button
-            onClick={() => setTab('mistakes')}
-            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono font-medium transition-all duration-150 active:scale-95 cursor-pointer ${
-              tab === 'mistakes'
-                ? 'bg-blue-700 text-white dark:bg-blue-600 font-semibold shadow-xs'
-                : 'text-zinc-600 dark:text-[#8E95A5] hover:text-zinc-950 dark:hover:text-white'
-            }`}
-          >
-            <XCircle className="w-3.5 h-3.5 text-rose-400" strokeWidth={1.75} />
-            <span>Mistakes ({mistakeQuestions.length})</span>
-          </button>
+            <button
+              onClick={() => setTab('mistakes')}
+              className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono font-medium transition-all duration-150 active:scale-95 cursor-pointer ${
+                tab === 'mistakes'
+                  ? 'bg-blue-700 text-white dark:bg-blue-600 font-semibold shadow-xs'
+                  : 'text-zinc-600 dark:text-[#8E95A5] hover:text-zinc-950 dark:hover:text-white'
+              }`}
+            >
+              <XCircle className="w-3.5 h-3.5 text-rose-400" strokeWidth={1.75} />
+              <span>Mistakes ({mistakeQuestions.length})</span>
+            </button>
 
-          <button
-            onClick={() => setTab('saved')}
-            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono font-medium transition-all duration-150 active:scale-95 cursor-pointer ${
-              tab === 'saved'
-                ? 'bg-blue-700 text-white dark:bg-blue-600 font-semibold shadow-xs'
-                : 'text-zinc-600 dark:text-[#8E95A5] hover:text-zinc-950 dark:hover:text-white'
-            }`}
-          >
-            <Bookmark className="w-3.5 h-3.5" strokeWidth={1.75} />
-            <span>Saved ({savedQuestions.length})</span>
-          </button>
+            <button
+              onClick={() => setTab('saved')}
+              className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono font-medium transition-all duration-150 active:scale-95 cursor-pointer ${
+                tab === 'saved'
+                  ? 'bg-blue-700 text-white dark:bg-blue-600 font-semibold shadow-xs'
+                  : 'text-zinc-600 dark:text-[#8E95A5] hover:text-zinc-950 dark:hover:text-white'
+              }`}
+            >
+              <Bookmark className="w-3.5 h-3.5" strokeWidth={1.75} />
+              <span>Saved ({savedQuestions.length})</span>
+            </button>
+          </div>
+
+          {/* Section Filter Pills */}
+          <div className="inline-flex p-1 bg-white dark:bg-[#11131A] border border-zinc-200 dark:border-[#222634] rounded-xl shadow-2xs gap-1">
+            {[
+              { id: 'all', label: 'All Sections' },
+              { id: 'Reading and Writing', label: 'R&W' },
+              { id: 'Math', label: 'Math' },
+            ].map(sec => (
+              <button
+                key={sec.id}
+                onClick={() => setSectionFilter(sec.id as 'all' | 'Reading and Writing' | 'Math')}
+                className={`px-2.5 py-1 rounded-lg text-xs font-mono font-medium transition-all duration-150 active:scale-95 cursor-pointer ${
+                  sectionFilter === sec.id
+                    ? 'bg-blue-700 text-white dark:bg-blue-600 font-semibold shadow-xs'
+                    : 'text-zinc-600 dark:text-[#8E95A5] hover:text-zinc-950 dark:hover:text-white'
+                }`}
+              >
+                {sec.label}
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* Search & Difficulty Filter */}
@@ -182,7 +212,7 @@ export const SavedMistakesView: React.FC<SavedMistakesViewProps> = ({
               placeholder="Search passage, prompt, or skill..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-9 pr-3 py-2 bg-white dark:bg-[#11131A] border border-zinc-200 dark:border-[#222634] rounded-xl text-xs font-medium text-zinc-950 dark:text-[#F4F4F6] placeholder-zinc-400 dark:placeholder-zinc-600 focus:outline-hidden focus:border-blue-600 focus:ring-1 focus:ring-blue-600 w-48 sm:w-64 transition-colors shadow-2xs"
+              className="pl-9 pr-3 py-2 bg-white dark:bg-[#11131A] border border-zinc-200 dark:border-[#222634] rounded-xl text-xs font-medium text-zinc-950 dark:text-[#F4F4F6] placeholder-zinc-400 dark:placeholder-zinc-600 focus:outline-hidden focus:border-blue-600 focus:ring-1 focus:ring-blue-600 w-44 sm:w-56 transition-colors shadow-2xs"
             />
           </div>
 
@@ -222,6 +252,7 @@ export const SavedMistakesView: React.FC<SavedMistakesViewProps> = ({
             const attempt = attemptsMap[q.id];
             const isExpanded = expandedQuestionId === q.id;
             const options: AnswerChoice[] = q.options || q.choices || [];
+            const isMath = q.section === 'Math' || mathDomains.includes(q.domain);
 
             return (
               <div
@@ -235,7 +266,14 @@ export const SavedMistakesView: React.FC<SavedMistakesViewProps> = ({
                       <span className="font-mono text-xs font-bold text-zinc-400 dark:text-[#8E95A5]">
                         ID: {q.id}
                       </span>
-                      <span className="px-2 py-0.5 rounded text-[11px] font-bold bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-900/60">
+                      <span className={`px-2 py-0.5 rounded text-[11px] font-bold ${
+                        isMath
+                          ? 'bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-900/60'
+                          : 'bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-900/60'
+                      }`}>
+                        {isMath ? 'Math' : 'R&W'}
+                      </span>
+                      <span className="px-2 py-0.5 rounded text-[11px] font-bold bg-zinc-100 dark:bg-[#181B24] text-zinc-700 dark:text-[#C5CAD6] border border-zinc-200 dark:border-[#222634]">
                         {q.skill}
                       </span>
                       <span className={`px-2 py-0.5 rounded text-[11px] font-bold ${
@@ -245,16 +283,21 @@ export const SavedMistakesView: React.FC<SavedMistakesViewProps> = ({
                       }`}>
                         {q.difficulty}
                       </span>
+                      {q.questionType === 'spr' && (
+                        <span className="px-2 py-0.5 rounded text-[11px] font-mono font-bold bg-purple-50 dark:bg-purple-950/40 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-800">
+                          SPR
+                        </span>
+                      )}
                       {attempt ? (
                         attempt.isCorrect ? (
                           <span className="px-2 py-0.5 rounded text-[11px] font-bold bg-emerald-100 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 flex items-center gap-1">
                             <CheckCircle2 className="w-3 h-3 text-emerald-600 dark:text-emerald-400" />
-                            <span>Answered • Choice ({attempt.selectedOption}) Correct</span>
+                            <span>Answered • {q.questionType === 'spr' ? `Entered (${attempt.selectedOption}) Correct` : `Choice (${attempt.selectedOption}) Correct`}</span>
                           </span>
                         ) : (
                           <span className="px-2 py-0.5 rounded text-[11px] font-bold bg-rose-100 text-rose-700 dark:bg-rose-950/40 dark:text-rose-300 border border-rose-200 dark:border-rose-800 flex items-center gap-1">
                             <XCircle className="w-3 h-3 text-rose-600 dark:text-rose-400" />
-                            <span>Answered • Chose ({attempt.selectedOption}) • Correct: ({q.correctAnswer})</span>
+                            <span>Answered • {q.questionType === 'spr' ? `Entered (${attempt.selectedOption}) • Correct: ${q.correctAnswer}` : `Chose (${attempt.selectedOption}) • Correct: (${q.correctAnswer})`}</span>
                           </span>
                         )
                       ) : answeredIds.has(q.id) ? (
@@ -337,58 +380,100 @@ export const SavedMistakesView: React.FC<SavedMistakesViewProps> = ({
                     </div>
 
                     {/* Options Breakdown */}
-                    <div className="space-y-2.5">
-                      <span className="text-[11px] font-bold text-zinc-400 dark:text-[#8E95A5] uppercase tracking-wider block">
-                        Answer Choices
-                      </span>
-                      <div className="grid grid-cols-1 gap-2.5">
-                        {options.map(opt => {
-                          const optLabel = opt.id || opt.label || 'A';
-                          const isCorrect = optLabel === q.correctAnswer;
-                          const wasChosenWrong = attempt && attempt.selectedOption === optLabel && !isCorrect;
-
-                          let cardStyle = 'border-zinc-200 dark:border-[#222634] bg-white dark:bg-[#11131A] text-zinc-950 dark:text-[#F4F4F6] shadow-2xs';
-                          let badge = null;
-
-                          if (isCorrect) {
-                            cardStyle = 'border-2 border-emerald-500 bg-emerald-50/70 dark:bg-emerald-950/30 text-emerald-950 dark:text-emerald-100 font-medium shadow-xs';
-                            badge = (
-                              <span className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-700 dark:text-emerald-300 bg-emerald-100 dark:bg-emerald-900/60 px-2 py-0.5 rounded-full shrink-0">
-                                <Check className="w-3 h-3 stroke-[3]" /> Correct Answer
-                              </span>
-                            );
-                          } else if (wasChosenWrong) {
-                            cardStyle = 'border-2 border-rose-500 bg-rose-50/70 dark:bg-rose-950/30 text-rose-950 dark:text-rose-100 shadow-xs';
-                            badge = (
-                              <span className="inline-flex items-center gap-1 text-[11px] font-bold text-rose-700 dark:text-rose-300 bg-rose-100 dark:bg-rose-900/60 px-2 py-0.5 rounded-full shrink-0">
-                                <X className="w-3 h-3 stroke-[3]" /> Your Selection
-                              </span>
-                            );
-                          }
-
-                          return (
-                            <div
-                              key={optLabel}
-                              className={`p-3.5 rounded-xl border flex items-start justify-between gap-3 ${cardStyle}`}
-                            >
-                              <div className="flex items-start gap-3">
-                                <span className={`w-6 h-6 rounded-lg flex items-center justify-center font-bold text-xs shrink-0 ${
-                                  isCorrect ? 'bg-emerald-600 text-white' :
-                                  wasChosenWrong ? 'bg-rose-600 text-white' :
-                                  'bg-zinc-100 dark:bg-[#181B24] text-zinc-700 dark:text-[#8E95A5] border border-zinc-200 dark:border-[#222634]'
+                    {q.questionType === 'spr' ? (
+                      <div className="space-y-2.5">
+                        <span className="text-[11px] font-bold text-zinc-400 dark:text-[#8E95A5] uppercase tracking-wider block">
+                          Student-Produced Response
+                        </span>
+                        <div className="p-4 rounded-xl border border-zinc-200 dark:border-[#222634] bg-white dark:bg-[#11131A] space-y-3 shadow-2xs">
+                          <div className="flex flex-wrap items-center gap-6">
+                            <div>
+                              <div className="text-[11px] font-bold text-zinc-500 dark:text-[#8E95A5] uppercase tracking-wider">
+                                Official Correct Answer
+                              </div>
+                              <div className="font-mono text-lg font-bold text-emerald-600 dark:text-emerald-400 mt-0.5">
+                                {q.correctAnswer}
+                                {q.acceptedAnswers && q.acceptedAnswers.length > 1 && (
+                                  <span className="text-xs font-normal text-zinc-500 dark:text-[#8E95A5] ml-2 font-sans">
+                                    (also accepted: {q.acceptedAnswers.filter(a => a !== q.correctAnswer).join(', ')})
+                                  </span>
+                                )}
+                              </div>
+                            </div>
+                            {attempt && attempt.selectedOption && (
+                              <div>
+                                <div className="text-[11px] font-bold text-zinc-500 dark:text-[#8E95A5] uppercase tracking-wider">
+                                  Your Recorded Response
+                                </div>
+                                <div className={`font-mono text-lg font-bold mt-0.5 ${
+                                  attempt.isCorrect ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400'
                                 }`}>
-                                  {optLabel}
-                                </span>
-                                <div className="font-serif text-sm pt-0.5">
-                                  <RichText text={opt.text} />
+                                  {attempt.selectedOption}
                                 </div>
                               </div>
-                              {badge}
-                            </div>
-                          );
-                        })}
+                            )}
+                          </div>
+                        </div>
                       </div>
-                    </div>
+                    ) : (
+                      <div className="space-y-2.5">
+                        <span className="text-[11px] font-bold text-zinc-400 dark:text-[#8E95A5] uppercase tracking-wider block">
+                          Answer Choices
+                        </span>
+                        <div className="grid grid-cols-1 gap-2.5">
+                          {options.map(opt => {
+                            const optLabel = opt.id || opt.label || 'A';
+                            const isCorrect = optLabel === q.correctAnswer;
+                            const wasChosenWrong = attempt && attempt.selectedOption === optLabel && !isCorrect;
+
+                            let cardStyle = 'border-zinc-200 dark:border-[#222634] bg-white dark:bg-[#11131A] text-zinc-950 dark:text-[#F4F4F6] shadow-2xs';
+                            let badge = null;
+
+                            if (isCorrect) {
+                              cardStyle = 'border-2 border-emerald-500 bg-emerald-50/70 dark:bg-emerald-950/30 text-emerald-950 dark:text-emerald-100 font-medium shadow-xs';
+                              badge = (
+                                <span className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-700 dark:text-emerald-300 bg-emerald-100 dark:bg-emerald-900/60 px-2 py-0.5 rounded-full shrink-0">
+                                  <Check className="w-3 h-3 stroke-[3]" /> Correct Answer
+                                </span>
+                              );
+                            } else if (wasChosenWrong) {
+                              cardStyle = 'border-2 border-rose-500 bg-rose-50/70 dark:bg-rose-950/30 text-rose-950 dark:text-rose-100 shadow-xs';
+                              badge = (
+                                <span className="inline-flex items-center gap-1 text-[11px] font-bold text-rose-700 dark:text-rose-300 bg-rose-100 dark:bg-rose-900/60 px-2 py-0.5 rounded-full shrink-0">
+                                  <X className="w-3 h-3 stroke-[3]" /> Your Selection
+                                </span>
+                              );
+                            }
+
+                            return (
+                              <div
+                                key={optLabel}
+                                className={`p-3.5 rounded-xl border flex items-start justify-between gap-3 ${cardStyle}`}
+                              >
+                                <div className="flex items-start gap-3 flex-1">
+                                  <span className={`w-6 h-6 rounded-lg flex items-center justify-center font-bold text-xs shrink-0 ${
+                                    isCorrect ? 'bg-emerald-600 text-white' :
+                                    wasChosenWrong ? 'bg-rose-600 text-white' :
+                                    'bg-zinc-100 dark:bg-[#181B24] text-zinc-700 dark:text-[#8E95A5] border border-zinc-200 dark:border-[#222634]'
+                                  }`}>
+                                    {optLabel}
+                                  </span>
+                                  <div className="font-serif text-sm pt-0.5 space-y-2 flex-1">
+                                    {opt.text && <RichText text={opt.text} />}
+                                    {opt.imageUrl && (
+                                      <div className="p-2 bg-zinc-50 dark:bg-[#181B24] border border-zinc-200 dark:border-[#222634] rounded-lg inline-block">
+                                        <img src={opt.imageUrl} alt={`Choice ${optLabel}`} className="max-h-24 max-w-full object-contain rounded" />
+                                      </div>
+                                    )}
+                                  </div>
+                                </div>
+                                {badge}
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    )}
 
                     {/* Official Rationale / Explanation */}
                     {q.rationale && (

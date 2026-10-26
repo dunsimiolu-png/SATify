@@ -24,7 +24,8 @@ const VocabPracticeView = React.lazy(() => import('./views/VocabPracticeView').t
 const ScoreCalculatorView = React.lazy(() => import('./views/ScoreCalculatorView').then(m => ({ default: m.ScoreCalculatorView })));
 const QuestionRush = React.lazy(() => import('./components/QuestionRush').then(m => ({ default: m.QuestionRush })));
 
-import { allEnglishQuestions } from './data/mockQuestions';
+import { allQuestions as mockAllQuestions, allMathQuestions } from './data/mockQuestions';
+import { evaluateNumericEquivalence } from './utils/mathEvaluator';
 import { 
   MockQuestion, 
   UserQuestionState, 
@@ -151,10 +152,10 @@ export const App: React.FC = () => {
   const [currentRoute, setCurrentRoute] = useState<AppRoute | 'practice'>('home');
 
   // Master questions pool from extracted JSON
-  const [allQuestions] = useState<MockQuestion[]>(allEnglishQuestions);
+  const [allQuestions] = useState<MockQuestion[]>(mockAllQuestions);
 
   // Active session questions pool
-  const [sessionQuestions, setSessionQuestions] = useState<MockQuestion[]>(allEnglishQuestions);
+  const [sessionQuestions, setSessionQuestions] = useState<MockQuestion[]>(mockAllQuestions);
   const [filterConfig, setFilterConfig] = useState<EnglishFilterConfig | undefined>(undefined);
 
   // Numbered active questions pool
@@ -195,14 +196,17 @@ export const App: React.FC = () => {
       if (saved) {
         map[idx] = {
           selectedChoice: saved.selectedChoice,
+          sprAnswer: saved.sprAnswer,
           eliminatedChoices: saved.eliminatedChoices || [],
           isMarkedForReview: saved.isMarkedForReview || isSaved,
           isAnswerChecked: saved.isAnswerChecked || false,
           isExplanationOpen: saved.isExplanationOpen || false,
         };
       } else if (attempt) {
+        const isOpt = ['A', 'B', 'C', 'D'].includes(attempt.selectedOption);
         map[idx] = {
-          selectedChoice: (attempt.selectedOption as 'A' | 'B' | 'C' | 'D') || null,
+          selectedChoice: isOpt ? (attempt.selectedOption as 'A' | 'B' | 'C' | 'D') : null,
+          sprAnswer: !isOpt ? attempt.selectedOption : undefined,
           eliminatedChoices: [],
           isMarkedForReview: isSaved,
           isAnswerChecked: true,
@@ -223,7 +227,7 @@ export const App: React.FC = () => {
   }, []);
 
   // Per-question state map (user answers, review flags)
-  const [userStates, setUserStates] = useState<Record<number, UserQuestionState>>(() => loadInitialUserStates(allEnglishQuestions));
+  const [userStates, setUserStates] = useState<Record<number, UserQuestionState>>(() => loadInitialUserStates(mockAllQuestions));
 
   // Sync initial user states when session questions change or storage updates
   useEffect(() => {
@@ -255,7 +259,7 @@ export const App: React.FC = () => {
   });
 
   const safeIndex = Math.min(currentQuestionIndex, Math.max(0, activeQuestions.length - 1));
-  const currentQuestion = activeQuestions[safeIndex] || allEnglishQuestions[0];
+  const currentQuestion = activeQuestions[safeIndex] || mockAllQuestions[0];
   const currentState: UserQuestionState = userStates[safeIndex] || {
     selectedChoice: null,
     eliminatedChoices: [],
@@ -263,7 +267,7 @@ export const App: React.FC = () => {
     isAnswerChecked: false,
     isExplanationOpen: false,
   };
-  const isCurrentAnswered = currentState.selectedChoice !== null || currentState.isAnswerChecked || isQuestionAnswered(currentQuestion.id);
+  const isCurrentAnswered = (currentQuestion.questionType === 'spr' ? !!currentState.sprAnswer?.trim() : currentState.selectedChoice !== null) || currentState.isAnswerChecked || isQuestionAnswered(currentQuestion.id);
   const currentHighlights = highlightsByQuestion[currentQuestion?.id || ''] || [];
 
   // State update helper
@@ -279,6 +283,18 @@ export const App: React.FC = () => {
       })
     }));
   }, [safeIndex]);
+
+  // SPR Answer Input Handler
+  const handleSprAnswerChange = useCallback((value: string) => {
+    updateCurrentState(prev => {
+      const nextState: UserQuestionState = {
+        ...prev,
+        sprAnswer: value,
+      };
+      saveUserState(currentQuestion.id, nextState);
+      return nextState;
+    });
+  }, [updateCurrentState, currentQuestion.id]);
 
   // Choice Selection (Multiple Choice)
   const handleSelectChoice = useCallback((choice: 'A' | 'B' | 'C' | 'D') => {
@@ -344,15 +360,22 @@ export const App: React.FC = () => {
     });
   }, [updateCurrentState, currentQuestion.id]);
 
-  // Check Answer & Record to Statistics
+  // Check Answer & Record to Statistics (Evaluates both MCQ and SPR Equivalence)
   const handleCheckAnswer = useCallback((timeSpentSeconds?: number) => {
-    if (!currentState.selectedChoice) return;
-    const isCorrect = currentState.selectedChoice === currentQuestion.correctAnswer;
-    
+    const isSpr = currentQuestion.questionType === 'spr';
+    if (!isSpr && !currentState.selectedChoice) return;
+    if (isSpr && (!currentState.sprAnswer || !currentState.sprAnswer.trim())) return;
+
+    const isCorrect = isSpr
+      ? evaluateNumericEquivalence(currentState.sprAnswer || '', currentQuestion.correctAnswer, currentQuestion.acceptedAnswers)
+      : currentState.selectedChoice === currentQuestion.correctAnswer;
+
+    const recordedOption = isSpr ? (currentState.sprAnswer || '').trim() : currentState.selectedChoice!;
+
     // Record to persistent storage (satify_attempts)
     recordAnswer(
       currentQuestion.id,
-      currentState.selectedChoice,
+      recordedOption,
       isCorrect,
       currentQuestion.domain,
       currentQuestion.skill,
@@ -707,6 +730,55 @@ export const App: React.FC = () => {
     }
   }, [currentRoute]);
 
+  // Global Keyboard Shortcut: 'C' toggles Desmos Calculator (when not typing in text fields)
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      const target = e.target as HTMLElement | null;
+      if (
+        target &&
+        (target.tagName === 'INPUT' ||
+          target.tagName === 'TEXTAREA' ||
+          target.isContentEditable ||
+          target.getAttribute('contenteditable') === 'true')
+      ) {
+        return;
+      }
+
+      if (e.key === 'c' || e.key === 'C') {
+        if (!e.metaKey && !e.ctrlKey && !e.altKey) {
+          e.preventDefault();
+          setIsCalculatorOpen(prev => !prev);
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
+  // Preload next 2 questions' graph & figure images in memory for zero-delay rendering
+  useEffect(() => {
+    const nextIdx1 = safeIndex + 1;
+    const nextIdx2 = safeIndex + 2;
+    [nextIdx1, nextIdx2].forEach(idx => {
+      if (idx < activeQuestions.length) {
+        const q = activeQuestions[idx];
+        if (q?.imageUrl) {
+          const img = new Image();
+          img.src = q.imageUrl;
+        }
+        if (q?.options) {
+          q.options.forEach(opt => {
+            if (opt.imageUrl) {
+              const optImg = new Image();
+              optImg.src = opt.imageUrl;
+            }
+          });
+        }
+      }
+    });
+  }, [safeIndex, activeQuestions]);
+
   const savedCount = useMemo(() => getSavedQuestionIds().length, [currentState, storageVersion]);
 
   return (
@@ -822,6 +894,7 @@ export const App: React.FC = () => {
               questions={allQuestions}
               onStartSkillPractice={handleStartSkillPractice}
               onOpenQuestionBank={() => setIsSetupOpen(true)}
+              onStartMathPractice={() => handleStartCustomPractice(allMathQuestions)}
             />
           )}
 
@@ -955,6 +1028,7 @@ export const App: React.FC = () => {
                       question={currentQuestion}
                       userState={currentState}
                       onSelectChoice={handleSelectChoice}
+                      onSprAnswerChange={handleSprAnswerChange}
                       onToggleEliminate={handleToggleEliminate}
                       onToggleMarkForReview={handleToggleMarkForReview}
                       onCheckAnswer={handleCheckAnswer}
@@ -983,6 +1057,7 @@ export const App: React.FC = () => {
                       question={currentQuestion}
                       userState={currentState}
                       onSelectChoice={handleSelectChoice}
+                      onSprAnswerChange={handleSprAnswerChange}
                       onToggleEliminate={handleToggleEliminate}
                       onToggleMarkForReview={handleToggleMarkForReview}
                       onCheckAnswer={handleCheckAnswer}

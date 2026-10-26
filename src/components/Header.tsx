@@ -145,6 +145,8 @@ export const Header: React.FC<HeaderProps> = ({
     };
   }, [isUserMenuOpen]);
 
+  const isMath = currentQuestion?.section === 'Math' || section === 'Math' || ['Algebra', 'Advanced Math', 'Problem-Solving and Data Analysis', 'Geometry and Trigonometry'].includes(currentQuestion?.domain || '');
+
   return (
     <header className="shrink-0 w-full bg-white dark:bg-[#11131A] border-b border-zinc-200 dark:border-[#222634] text-zinc-950 dark:text-[#F4F4F6] select-none z-30 pt-[max(env(safe-area-inset-top,0px),4px)]">
       <div className="px-3 sm:px-5 flex items-center justify-between gap-2 h-14">
@@ -181,7 +183,10 @@ export const Header: React.FC<HeaderProps> = ({
           <div className="flex flex-col justify-center min-w-0 hidden sm:flex">
             <div className="flex items-center gap-2">
               <span className="text-zinc-950 dark:text-[#F4F4F6] font-semibold text-xs sm:text-sm tracking-tight truncate">
-                <span className="hidden lg:inline text-zinc-500 dark:text-[#8E95A5]">Section 1, Module {moduleNumber}: </span>Reading & Writing
+                <span className="hidden lg:inline text-zinc-500 dark:text-[#8E95A5]">
+                  {isMath ? 'Section 2, Module 1: ' : `Section 1, Module ${moduleNumber}: `}
+                </span>
+                {isMath ? 'Math' : 'Reading & Writing'}
               </span>
               {isAnswered && (
                 <span className="hidden md:inline-flex items-center gap-1 px-2 py-0.5 rounded border border-emerald-300 dark:border-emerald-800 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 text-[10px] font-mono font-semibold">
@@ -293,23 +298,26 @@ export const Header: React.FC<HeaderProps> = ({
               </button>
             )}
 
-            {/* Calculator & Math Reference: Hidden when practicing Reading & Writing */}
-            {section !== 'Reading and Writing' && (
+            {/* Calculator & Math Reference: Shown when practicing Math */}
+            {isMath && (
               <>
                 <button
                   onClick={onOpenCalculator}
-                  className="h-9 px-2.5 rounded-lg border border-transparent hover:border-zinc-200 dark:hover:border-[#222634] hover:bg-zinc-100 dark:hover:bg-[#181B24] text-zinc-700 dark:text-[#8E95A5] hover:text-zinc-950 dark:hover:text-[#F4F4F6] text-xs font-medium transition-colors duration-150 flex items-center gap-1.5 cursor-pointer"
-                  title="Open Graphing / Scientific Calculator"
+                  className="h-9 px-2.5 rounded-lg border border-blue-200 dark:border-blue-900/60 bg-blue-50/80 dark:bg-blue-950/40 hover:bg-blue-100 dark:hover:bg-blue-900/60 text-blue-800 dark:text-blue-300 text-xs font-semibold transition-colors duration-150 flex items-center gap-1.5 cursor-pointer shadow-2xs"
+                  title="Open Graphing / Scientific Calculator (Keyboard shortcut: C)"
                 >
-                  <Calculator className="w-4 h-4" strokeWidth={1.75} />
+                  <Calculator className="w-4 h-4 text-blue-700 dark:text-blue-400" strokeWidth={2} />
                   <span className="hidden md:inline">Calculator</span>
+                  <kbd className="hidden lg:inline-block px-1.5 py-0.2 text-[10px] font-mono font-bold bg-white dark:bg-[#11131A] border border-blue-200 dark:border-blue-800/80 rounded text-blue-700 dark:text-blue-300">
+                    C
+                  </kbd>
                 </button>
                 <button
                   onClick={onOpenReference}
-                  className="h-9 px-2.5 rounded-lg border border-transparent hover:border-zinc-200 dark:hover:border-[#222634] hover:bg-zinc-100 dark:hover:bg-[#181B24] text-zinc-700 dark:text-[#8E95A5] hover:text-zinc-950 dark:hover:text-[#F4F4F6] text-xs font-medium transition-colors duration-150 flex items-center gap-1.5 cursor-pointer"
-                  title="Open SAT Geometry Reference Sheet"
+                  className="h-9 px-2.5 rounded-lg border border-zinc-200 dark:border-[#222634] hover:bg-zinc-100 dark:hover:bg-[#181B24] text-zinc-700 dark:text-[#8E95A5] hover:text-zinc-950 dark:hover:text-[#F4F4F6] text-xs font-medium transition-colors duration-150 flex items-center gap-1.5 cursor-pointer"
+                  title="Open Official Digital SAT Math Reference Sheet"
                 >
-                  <BookOpen className="w-4 h-4" strokeWidth={1.75} />
+                  <BookOpen className="w-4 h-4 text-blue-700 dark:text-blue-400" strokeWidth={1.75} />
                   <span className="hidden md:inline">Reference</span>
                 </button>
               </>
@@ -339,6 +347,18 @@ export const Header: React.FC<HeaderProps> = ({
             </button>
           </div>
 
+          {/* Mobile quick calculator button */}
+          {isMath && (
+            <button
+              onClick={onOpenCalculator}
+              className="sm:hidden p-2 rounded-xl bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-900/60 text-blue-700 dark:text-blue-400 min-h-[36px] min-w-[36px] flex items-center justify-center cursor-pointer active:scale-95 shadow-2xs"
+              title="Open Calculator (C)"
+              aria-label="Open Calculator"
+            >
+              <Calculator className="w-4 h-4" />
+            </button>
+          )}
+
           {/* Mobile-only: compact overflow menu for tools (< sm / 640px) */}
           <div className="sm:hidden relative">
             <button
@@ -353,11 +373,23 @@ export const Header: React.FC<HeaderProps> = ({
             {/* Dropdown popover for mobile tools */}
             {isMobileToolsOpen && (
               <div className="absolute right-0 top-full mt-2 w-52 rounded-2xl bg-white/95 dark:bg-[#11131A]/95 backdrop-blur-md border border-zinc-200/90 dark:border-[#222634] shadow-2xl p-1.5 z-50 animate-in fade-in zoom-in-95 duration-150">
+                {isMath && (
+                  <>
+                    <button onClick={() => { onOpenCalculator(); setIsMobileToolsOpen(false); }} className="w-full p-2.5 text-left rounded-xl hover:bg-zinc-100 dark:hover:bg-[#181B24] flex items-center gap-2.5 cursor-pointer transition-colors duration-150 text-xs font-semibold text-blue-700 dark:text-blue-400 active:scale-[0.98]">
+                      <Calculator className="w-4 h-4" />
+                      <span>Calculator (C)</span>
+                    </button>
+                    <button onClick={() => { onOpenReference(); setIsMobileToolsOpen(false); }} className="w-full p-2.5 text-left rounded-xl hover:bg-zinc-100 dark:hover:bg-[#181B24] flex items-center gap-2.5 cursor-pointer transition-colors duration-150 text-xs font-semibold text-zinc-800 dark:text-[#F4F4F6] active:scale-[0.98]">
+                      <BookOpen className="w-4 h-4 text-blue-700 dark:text-blue-400" />
+                      <span>Reference Sheet</span>
+                    </button>
+                  </>
+                )}
                 <button onClick={() => { onOpenFilter(); setIsMobileToolsOpen(false); }} className="w-full p-2.5 text-left rounded-xl hover:bg-zinc-100 dark:hover:bg-[#181B24] flex items-center gap-2.5 cursor-pointer transition-colors duration-150 text-xs font-semibold text-zinc-800 dark:text-[#F4F4F6] active:scale-[0.98]">
                   <SlidersHorizontal className="w-4 h-4 text-blue-700 dark:text-blue-400" />
                   <span>Filter Topics</span>
                 </button>
-                {onOpenGrammarGuide && (
+                {onOpenGrammarGuide && !isMath && (
                   <button onClick={() => { onOpenGrammarGuide(); setIsMobileToolsOpen(false); }} className="w-full p-2.5 text-left rounded-xl hover:bg-zinc-100 dark:hover:bg-[#181B24] flex items-center gap-2.5 cursor-pointer transition-colors duration-150 text-xs font-semibold text-zinc-800 dark:text-[#F4F4F6] active:scale-[0.98]">
                     <Split className="w-4 h-4 text-blue-700 dark:text-blue-400" />
                     <span>Grammar Guide</span>

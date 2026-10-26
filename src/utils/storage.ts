@@ -14,7 +14,7 @@ export interface AttemptRecord {
 
 export interface UserAnswerRecord {
   questionId: string;
-  selectedChoice: 'A' | 'B' | 'C' | 'D';
+  selectedChoice: 'A' | 'B' | 'C' | 'D' | string;
   isCorrect: boolean;
   domain: string;
   skill: string;
@@ -173,7 +173,7 @@ export function recordAttempt(attempt: AttemptRecord): void {
 
 export function recordAnswer(
   questionId: string,
-  selectedChoice: 'A' | 'B' | 'C' | 'D',
+  selectedChoice: 'A' | 'B' | 'C' | 'D' | string,
   isCorrect: boolean,
   domain: string,
   skill: string,
