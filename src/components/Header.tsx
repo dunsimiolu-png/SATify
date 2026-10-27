@@ -46,6 +46,7 @@ interface HeaderProps {
   onOpenAccount?: () => void;
   onToggleLayout?: () => void;
   isTwoPane?: boolean;
+  isMathSingleColumn?: boolean;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -68,6 +69,7 @@ export const Header: React.FC<HeaderProps> = ({
   onOpenAccount,
   onToggleLayout,
   isTwoPane = true,
+  isMathSingleColumn = false,
 }) => {
   const { isDark, toggleTheme } = useTheme();
   const [stopwatchSeconds, setStopwatchSeconds] = useState<number>(0);
@@ -278,7 +280,7 @@ export const Header: React.FC<HeaderProps> = ({
             </button>
 
             {/* View Layout Toggle (Split vs Stacked) - Tablet & Desktop only */}
-            {onToggleLayout && (
+            {onToggleLayout && !isMathSingleColumn && (
               <button
                 onClick={onToggleLayout}
                 className="hidden md:flex h-9 px-2.5 rounded-lg border border-transparent hover:border-zinc-200 dark:border-[#222634] hover:bg-zinc-100 dark:hover:bg-[#181B24] text-zinc-700 dark:text-[#8E95A5] hover:text-zinc-950 dark:hover:text-[#F4F4F6] text-xs font-medium transition-colors duration-150 items-center gap-1.5 cursor-pointer"

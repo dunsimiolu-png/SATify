@@ -411,6 +411,51 @@ html.dark .bluebook-dashed-border {
   font-variant-numeric: tabular-nums;
 }
 
+/* Official SAT Math Structured Table Styling */
+.sat-table-container {
+  display: flex;
+  justify-content: center;
+  margin: 1.25rem 0;
+  width: 100%;
+  overflow-x: auto;
+}
+
+.sat-table {
+  border-collapse: collapse;
+  margin: 0 auto;
+  font-size: 0.95rem;
+  background-color: transparent;
+  border: 1px solid #71717A;
+  min-width: 160px;
+}
+
+.sat-table th,
+.sat-table td {
+  border: 1px solid #71717A;
+  padding: 8px 18px;
+  text-align: center;
+  vertical-align: middle;
+  font-family: 'Inter', sans-serif;
+}
+
+.sat-table th {
+  font-weight: 600;
+  background-color: rgba(244, 244, 245, 0.6);
+}
+
+html.dark .sat-table {
+  border-color: #475569;
+}
+
+html.dark .sat-table th,
+html.dark .sat-table td {
+  border-color: #475569;
+}
+
+html.dark .sat-table th {
+  background-color: rgba(30, 41, 59, 0.5);
+}
+
 /* Custom crisp scrollbars for authentic desktop app experience */
 ::-webkit-scrollbar {
   width: 6px;

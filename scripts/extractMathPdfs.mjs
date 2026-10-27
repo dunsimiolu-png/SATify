@@ -24,6 +24,7 @@ const canvasFactory = {
 };
 
 import * as pdfjsLib from 'pdfjs-dist/legacy/build/pdf.js';
+import { ALGEBRA_GRAPH_IDS, ALGEBRA_CORRECTIONS } from './algebraCorrections.mjs';
 
 // Ensure public math images directory exists
 const IMAGES_DIR = path.join('public', 'question-images', 'math');
@@ -710,7 +711,7 @@ async function extractMathPdfs() {
       const corrAnsIdx = firstLines.findIndex(l => /Correct\s+Answer/i.test(l.text));
       const ratHeaderIdx = firstLines.findIndex(l => /^Rationale\b/i.test(l.text.trim()));
       const isSPR = ansHeaderIdx === -1;
-      const questionType = isSPR ? 'spr' : 'mcq';
+      let questionType = isSPR ? 'spr' : 'mcq';
 
       const qEndLineIdx = ansHeaderIdx !== -1 
         ? ansHeaderIdx 
@@ -750,7 +751,13 @@ async function extractMathPdfs() {
 
       let imageUrl = undefined;
 
-      if (promptMentionsVisual || hasDrawingsInRegion || isTopGap || isBottomGap || isEntireRegionFigure) {
+      // In Algebra, strictly restrict images to genuine coordinate plane graphs only.
+      // In other domains, only crop true coordinate graphs, scatterplots or geometric figures (never tables or text).
+      const shouldAttemptFigureCrop = defaultDomain === 'Algebra'
+        ? ALGEBRA_GRAPH_IDS.has(id)
+        : (imagesInRegion.some(img => img.w >= 100 && img.h >= 80) || (pathsInRegion.length >= 8 && !promptCandidateText.includes('table')));
+
+      if (shouldAttemptFigureCrop) {
         const imageFileName = `${id}.png`;
         const imagePath = path.join(IMAGES_DIR, imageFileName);
 
@@ -916,124 +923,12 @@ async function extractMathPdfs() {
             }
           }
 
-          // Check if options are graphical or vector choices
-          const isPotentialGraphicalOptions = options.length === 4 && (
-            options.every(o => !o.text || o.text.trim() === '') ||
-            options.every(o => !o.text.replace(/[\s\(\),]/g, ''))
-          );
-
-          if (isPotentialGraphicalOptions) {
-            try {
-              const optLetterMarkers = [];
-              for (let pIdx = startPageIdx; pIdx < endPageIdx; pIdx++) {
-                const pObj = pagesInfo[pIdx];
-                for (const it of (pObj.content.items || [])) {
-                  const s = it.str.trim();
-                  // Support sequentially ordered option markers even if letter has dot, Cyrillic В, or lowercase
-                  const normMarker = s.replace(/В/, 'B').replace(/^([a-d])/, (_, l) => l.toUpperCase());
-                  if (/^[A-D]\.?$/.test(normMarker)) {
-                    optLetterMarkers.push({
-                      letter: normMarker[0],
-                      pIdx,
-                      y: it.transform[5],
-                      pageObj: pObj,
-                    });
-                  }
-                }
-              }
-
-              const uniqueMarkers = {};
-              for (const m of optLetterMarkers) {
-                if (!uniqueMarkers[m.letter]) {
-                  uniqueMarkers[m.letter] = m;
-                }
-              }
-
-              if (uniqueMarkers['A'] && uniqueMarkers['B'] && uniqueMarkers['C'] && uniqueMarkers['D']) {
-                const letters = ['A', 'B', 'C', 'D'];
-                const graphicalOptions = [];
-
-                for (let li = 0; li < letters.length; li++) {
-                  const curL = letters[li];
-                  const curMarker = uniqueMarkers[curL];
-                  const nextMarker = li < 3 ? uniqueMarkers[letters[li + 1]] : null;
-
-                  let curPageObj = curMarker.pageObj;
-                  let topCropPt = curMarker.y + 16;
-                  let bottomCropPt = 15;
-
-                  if (nextMarker && nextMarker.pIdx === curMarker.pIdx) {
-                    bottomCropPt = nextMarker.y + 2;
-                  } else if (li === 3) {
-                    const corrLine = curPageObj.lines.find(l => /Correct\s+Answer/i.test(l.text));
-                    if (corrLine) {
-                      bottomCropPt = corrLine.y + 10;
-                    } else if (curMarker.pIdx + 1 < endPageIdx) {
-                      const nextP = pagesInfo[curMarker.pIdx + 1];
-                      const corrOnNext = nextP.lines.find(l => /Correct\s+Answer/i.test(l.text));
-                      if (corrOnNext) {
-                        curPageObj = nextP;
-                        const pageH = nextP.page.view[3] || 792;
-                        topCropPt = pageH - 20;
-                        bottomCropPt = corrOnNext.y + 12;
-                      }
-                    }
-                  }
-
-                  const optFileName = `${id}_opt_${curL}.png`;
-                  const optPath = path.join(IMAGES_DIR, optFileName);
-
-                  if (fs.existsSync(optPath) && fs.statSync(optPath).size > 1000) {
-                    totalOptionGraphsCropped++;
-                    graphicalOptions.push({
-                      id: curL,
-                      label: curL,
-                      text: '',
-                      imageUrl: `/question-images/math/${optFileName}`,
-                    });
-                  } else {
-                    const viewport = curPageObj.page.getViewport({ scale: 2.0 });
-                    const pageCanvas = createCanvas(viewport.width, viewport.height);
-                    const ctx = pageCanvas.getContext('2d');
-                    ctx.fillStyle = '#ffffff';
-                    ctx.fillRect(0, 0, viewport.width, viewport.height);
-                    await curPageObj.page.render({ canvasContext: ctx, viewport, canvasFactory }).promise;
-
-                    const pageHeightPt = curPageObj.page.view[3] || 792;
-                    const sTopY = Math.max(0, Math.round((pageHeightPt - topCropPt) * 2));
-                    const sBottomY = Math.min(viewport.height, Math.round((pageHeightPt - bottomCropPt) * 2));
-                    const sH = Math.max(35, sBottomY - sTopY);
-                    const cW = Math.min(500, Math.round(viewport.width - 40));
-
-                    const cCanvas = createCanvas(cW, sH + 12);
-                    const cCtx = cCanvas.getContext('2d');
-                    cCtx.fillStyle = '#ffffff';
-                    cCtx.fillRect(0, 0, cW, sH + 12);
-                    cCtx.drawImage(pageCanvas, 20, sTopY, cW, sH, 0, 6, cW, sH);
-
-                    fs.writeFileSync(optPath, cCanvas.toBuffer('image/png'));
-                    totalOptionGraphsCropped++;
-
-                    graphicalOptions.push({
-                      id: curL,
-                      label: curL,
-                      text: '',
-                      imageUrl: `/question-images/math/${optFileName}`,
-                    });
-                  }
-                }
-
-                if (graphicalOptions.length === 4) {
-                  options = graphicalOptions;
-                  if (pathsInRegion.length === 0 && imagesInRegion.length === 0) {
-                    imageUrl = undefined;
-                  }
-                }
-              }
-            } catch (err) {
-              console.warn(`[WARN] Failed to crop option graphs on question ${id}:`, err.message);
-            }
-          }
+          // Ensure options A-D are clean text objects (never screenshot strips)
+          options = options.map(o => ({
+            id: o.id,
+            label: o.label || o.id,
+            text: cleanMathText(o.text) || '',
+          }));
         }
 
         if (options.length < 4) continue;
@@ -1049,6 +944,28 @@ async function extractMathPdfs() {
       }
 
       if (!prompt) continue;
+
+      // Apply curated Algebra corrections (HTML tables, exact LaTeX options, vector math gap fills)
+      if (ALGEBRA_CORRECTIONS[id]) {
+        const corr = ALGEBRA_CORRECTIONS[id];
+        if (corr.passage !== undefined) passage = corr.passage;
+        if (corr.prompt !== undefined) prompt = corr.prompt;
+        if (corr.options !== undefined) options = corr.options;
+        if (corr.correctAnswer !== undefined) correctAnswer = corr.correctAnswer;
+        if (corr.acceptedAnswers !== undefined) acceptedAnswers = corr.acceptedAnswers;
+        if (corr.questionType !== undefined) questionType = corr.questionType;
+      }
+
+      // Restrict imageUrl strictly:
+      // In Algebra, only genuine coordinate graphs have an image.
+      // If the question has a structured table in passage, imageUrl is NEVER set.
+      if (defaultDomain === 'Algebra') {
+        if (!ALGEBRA_GRAPH_IDS.has(id)) {
+          imageUrl = undefined;
+        }
+      } else if (passage && passage.includes('<table')) {
+        imageUrl = undefined;
+      }
 
       const questionObj = {
         id,

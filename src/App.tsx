@@ -268,6 +268,19 @@ export const App: React.FC = () => {
   const isCurrentAnswered = currentState.selectedChoice !== null || currentState.isAnswerChecked || isQuestionAnswered(currentQuestion.id);
   const currentHighlights = highlightsByQuestion[currentQuestion?.id || ''] || [];
 
+  // Official Bluebook Digital SAT Math Layout:
+  // Math questions render in single-column centered layout unless there is a coordinate graph (imageUrl),
+  // a structured stimulus table (<table in passage), or an explicit passage title.
+  const isMathSingleColumn = useMemo(() => {
+    if (currentQuestion?.section !== 'Math') return false;
+    if (currentQuestion.imageUrl) return false;
+    const passage = currentQuestion.passage || currentQuestion.passageText || '';
+    if (passage.includes('<table') || currentQuestion.passageTitle) return false;
+    return true;
+  }, [currentQuestion]);
+
+  const effectiveLeftCollapsed = isLeftCollapsed || isMathSingleColumn;
+
   // Preload next 2 questions' math graph/figure images in memory so diagrams appear instantaneously
   useEffect(() => {
     if (typeof window === 'undefined' || !activeQuestions || activeQuestions.length === 0) return;
@@ -993,15 +1006,16 @@ export const App: React.FC = () => {
               onOpenAccount={() => setIsAccountModalOpen(true)}
               onToggleLayout={handleToggleLayout}
               isTwoPane={isTwoPane}
+              isMathSingleColumn={isMathSingleColumn}
             />
 
             {/* Split Pane / Stacked Mobile Workspace */}
             <main className={`flex-1 min-h-0 w-full relative bg-white dark:bg-[#090A0F] ${
-              isTwoPane && !isLeftCollapsed
+              isTwoPane && !effectiveLeftCollapsed
                 ? 'flex flex-row overflow-hidden'
                 : 'flex flex-col overflow-y-auto overscroll-contain'
             }`}>
-              {!isLeftCollapsed ? (
+              {!effectiveLeftCollapsed ? (
                 <>
                   {/* Left Pane: Reading Passage, Visual Graphs, Paired Texts, Poems */}
                   <section
@@ -1082,16 +1096,18 @@ export const App: React.FC = () => {
               ) : (
                 /* Collapsed Full Width View */
                 <div className="relative w-full h-full bg-white dark:bg-[#090A0F] overflow-y-auto flex flex-col">
-                  <button
-                    onClick={() => setIsLeftCollapsed(false)}
-                    className="absolute left-6 top-3 z-30 flex items-center gap-1.5 px-3 py-1.5 bg-white dark:bg-[#11131A] hover:bg-zinc-100 dark:hover:bg-[#181B24] border border-zinc-200 dark:border-[#222634] rounded-lg text-xs font-semibold text-zinc-900 dark:text-[#F4F4F6] shadow-xs transition-colors duration-150 cursor-pointer"
-                    title="Restore Two-Pane Split View"
-                  >
-                    <Columns className="w-3.5 h-3.5 text-blue-700 dark:text-blue-400" strokeWidth={1.75} />
-                    <span>Split View</span>
-                  </button>
+                  {!isMathSingleColumn && (
+                    <button
+                      onClick={() => setIsLeftCollapsed(false)}
+                      className="absolute left-6 top-3 z-30 flex items-center gap-1.5 px-3 py-1.5 bg-white dark:bg-[#11131A] hover:bg-zinc-100 dark:hover:bg-[#181B24] border border-zinc-200 dark:border-[#222634] rounded-lg text-xs font-semibold text-zinc-900 dark:text-[#F4F4F6] shadow-xs transition-colors duration-150 cursor-pointer"
+                      title="Restore Two-Pane Split View"
+                    >
+                      <Columns className="w-3.5 h-3.5 text-blue-700 dark:text-blue-400" strokeWidth={1.75} />
+                      <span>Split View</span>
+                    </button>
+                  )}
 
-                  <div className="w-full max-w-4xl mx-auto h-full flex flex-col">
+                  <div className={`w-full ${isMathSingleColumn ? 'max-w-3xl' : 'max-w-4xl'} mx-auto h-full flex flex-col`}>
                     <RightPane
                       question={currentQuestion}
                       userState={currentState}
