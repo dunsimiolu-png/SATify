@@ -156,7 +156,7 @@ export const App: React.FC = () => {
   const [allQuestions] = useState<MockQuestion[]>(fullQuestionBank);
 
   // Active session questions pool
-  const [sessionQuestions, setSessionQuestions] = useState<MockQuestion[]>(allEnglishQuestions);
+  const [sessionQuestions, setSessionQuestions] = useState<MockQuestion[]>(fullQuestionBank);
   const [filterConfig, setFilterConfig] = useState<EnglishFilterConfig | undefined>(undefined);
 
   // Numbered active questions pool
@@ -225,7 +225,7 @@ export const App: React.FC = () => {
   }, []);
 
   // Per-question state map (user answers, review flags)
-  const [userStates, setUserStates] = useState<Record<number, UserQuestionState>>(() => loadInitialUserStates(allEnglishQuestions));
+  const [userStates, setUserStates] = useState<Record<number, UserQuestionState>>(() => loadInitialUserStates(fullQuestionBank));
 
   // Sync initial user states when session questions change or storage updates
   useEffect(() => {
@@ -257,7 +257,7 @@ export const App: React.FC = () => {
   });
 
   const safeIndex = Math.min(currentQuestionIndex, Math.max(0, activeQuestions.length - 1));
-  const currentQuestion = activeQuestions[safeIndex] || allEnglishQuestions[0];
+  const currentQuestion = activeQuestions[safeIndex] || allQuestions[0];
   const currentState: UserQuestionState = userStates[safeIndex] || {
     selectedChoice: null,
     eliminatedChoices: [],
@@ -267,6 +267,26 @@ export const App: React.FC = () => {
   };
   const isCurrentAnswered = currentState.selectedChoice !== null || currentState.isAnswerChecked || isQuestionAnswered(currentQuestion.id);
   const currentHighlights = highlightsByQuestion[currentQuestion?.id || ''] || [];
+
+  // Preload next 2 questions' math graph/figure images in memory so diagrams appear instantaneously
+  useEffect(() => {
+    if (typeof window === 'undefined' || !activeQuestions || activeQuestions.length === 0) return;
+    const nextQuestions = activeQuestions.slice(safeIndex + 1, safeIndex + 3);
+    for (const q of nextQuestions) {
+      if (q.imageUrl) {
+        const img = new Image();
+        img.src = q.imageUrl;
+      }
+      if (q.options) {
+        for (const opt of q.options) {
+          if (opt.imageUrl) {
+            const optImg = new Image();
+            optImg.src = opt.imageUrl;
+          }
+        }
+      }
+    }
+  }, [safeIndex, activeQuestions]);
 
   // State update helper
   const updateCurrentState = useCallback((updater: (prev: UserQuestionState) => UserQuestionState) => {
@@ -584,6 +604,33 @@ export const App: React.FC = () => {
     handleStartCustomPractice(pool);
   }, [handleStartCustomPractice]);
 
+  const handleOpenFilterModal = useCallback((section?: 'Reading and Writing' | 'Math') => {
+    if (section === 'Math') {
+      const mathDomains = ['Algebra', 'Advanced Math', 'Problem-Solving and Data Analysis', 'Geometry and Trigonometry'];
+      const mathSkills = allMathQuestions.map(q => q.skill).filter((v, i, a) => a.indexOf(v) === i);
+      setFilterConfig(prev => ({
+        test: 'SAT',
+        selectedDifficulties: prev?.selectedDifficulties ?? ['Easy', 'Medium', 'Hard'],
+        shuffle: prev?.shuffle ?? false,
+        hideAnswered: prev?.hideAnswered ?? false,
+        selectedDomains: mathDomains,
+        selectedSkills: mathSkills,
+      }));
+    } else if (section === 'Reading and Writing') {
+      const rwDomains = ['Craft and Structure', 'Information and Ideas', 'Expression of Ideas', 'Standard English Conventions'];
+      const rwSkills = allEnglishQuestions.map(q => q.skill).filter((v, i, a) => a.indexOf(v) === i);
+      setFilterConfig(prev => ({
+        test: 'SAT',
+        selectedDifficulties: prev?.selectedDifficulties ?? ['Easy', 'Medium', 'Hard'],
+        shuffle: prev?.shuffle ?? false,
+        hideAnswered: prev?.hideAnswered ?? false,
+        selectedDomains: rwDomains,
+        selectedSkills: rwSkills,
+      }));
+    }
+    setIsSetupOpen(true);
+  }, []);
+
   // Practice session configuration started from SetupDashboard
   const handleStartPractice = useCallback((filtered: MockQuestion[], config: EnglishFilterConfig) => {
     setFilterConfig(config);
@@ -874,7 +921,7 @@ export const App: React.FC = () => {
                 if (sessionQuestions.length > 0) {
                   setCurrentRoute('practice');
                 } else {
-                  handleStartCustomPractice(allEnglishQuestions);
+                  handleStartCustomPractice(allQuestions);
                 }
               }}
               onStartDailyQuestion={handleStartDailyQuestion}
@@ -885,9 +932,7 @@ export const App: React.FC = () => {
             <QuestionBankHub
               questions={allQuestions}
               onStartPracticeSection={handleStartSectionPractice}
-              onOpenFilterModal={(_section) => {
-                setIsSetupOpen(true);
-              }}
+              onOpenFilterModal={handleOpenFilterModal}
               onNavigateRoute={(route) => setCurrentRoute(route)}
             />
           )}

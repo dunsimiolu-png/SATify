@@ -125,6 +125,26 @@ export const QuestionRush: React.FC<QuestionRushProps> = ({
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [viewState, currentQuestion, activeRushSection]);
 
+  // Preload next 2 questions' math graph/figure images in memory so diagrams appear instantaneously
+  useEffect(() => {
+    if (typeof window === 'undefined' || viewState !== 'playing' || !rushQueue || rushQueue.length === 0) return;
+    const nextQuestions = rushQueue.slice(currentIndex + 1, currentIndex + 3);
+    for (const q of nextQuestions) {
+      if (q.imageUrl) {
+        const img = new Image();
+        img.src = q.imageUrl;
+      }
+      if (q.options) {
+        for (const opt of q.options) {
+          if (opt.imageUrl) {
+            const optImg = new Image();
+            optImg.src = opt.imageUrl;
+          }
+        }
+      }
+    }
+  }, [currentIndex, rushQueue, viewState]);
+
   // Set up timer whenever currentIndex changes
   useEffect(() => {
     if (viewState !== 'playing' || !currentQuestion) return;
