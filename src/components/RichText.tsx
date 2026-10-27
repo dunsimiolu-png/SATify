@@ -1,5 +1,6 @@
 import React from 'react';
 import { TextHighlight } from '../types/quiz';
+import { MathText } from './MathText';
 
 export interface RichTextProps {
   text: string;
@@ -120,7 +121,10 @@ export const renderFormattedContent = (
 
   // Render segments into React elements
   return segments.map((seg, idx) => {
-    let node: React.ReactNode = seg.text;
+    let node: React.ReactNode =
+      seg.text.includes('$') || (seg.text.includes('<') && seg.text.includes('>'))
+        ? <MathText text={seg.text} />
+        : seg.text;
 
     if (seg.isSub) {
       node = <sub key={`sub-${idx}`}>{node}</sub>;
