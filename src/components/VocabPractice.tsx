@@ -1263,9 +1263,7 @@ export const VocabPractice: React.FC = () => {
                                     {word.partOfSpeech.slice(0, 3)}
                                   </span>
                                 </div>
-                                <p className="text-[11px] text-gray-500 dark:text-slate-400 truncate">
-                                  {word.definition}
-                                </p>
+
                               </div>
                             </button>
                           );

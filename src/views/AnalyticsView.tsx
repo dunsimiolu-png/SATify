@@ -16,12 +16,14 @@ interface AnalyticsViewProps {
 }
 
 type TimeframeFilter = 'all' | '30d' | '7d' | 'today';
+type SubjectFilter = 'all' | 'rw' | 'math';
 
 export const AnalyticsView: React.FC<AnalyticsViewProps> = ({
   questions: _questions,
   onStartSkillPractice,
 }) => {
   const [timeframe, setTimeframe] = useState<TimeframeFilter>('all');
+  const [subjectFilter, setSubjectFilter] = useState<SubjectFilter>('all');
   const [storageVersion, setStorageVersion] = useState<number>(0);
   const [isResetModalOpen, setIsResetModalOpen] = useState<boolean>(false);
 
@@ -35,7 +37,7 @@ export const AnalyticsView: React.FC<AnalyticsViewProps> = ({
   const allAnswers = useMemo(() => getAttempts(), [storageVersion]);
 
   // Filter answers by timeframe
-  const filteredAnswers = useMemo(() => {
+  const timeframeAnswers = useMemo(() => {
     const now = Date.now();
     if (timeframe === 'today') {
       const todayStr = new Date().toISOString().slice(0, 10);
@@ -50,7 +52,19 @@ export const AnalyticsView: React.FC<AnalyticsViewProps> = ({
     return allAnswers;
   }, [allAnswers, timeframe]);
 
-  // Optimized single O(N) reduction pass across filtered answers (< 2ms)
+  const mathDomains = ['Algebra', 'Advanced Math', 'Problem-Solving and Data Analysis', 'Geometry and Trigonometry'];
+
+  // Filter answers by subject
+  const filteredAnswers = useMemo(() => {
+    if (subjectFilter === 'math') {
+      return timeframeAnswers.filter(a => mathDomains.includes(a.domain));
+    } else if (subjectFilter === 'rw') {
+      return timeframeAnswers.filter(a => !mathDomains.includes(a.domain));
+    }
+    return timeframeAnswers;
+  }, [timeframeAnswers, subjectFilter]);
+
+  // Single O(N) reduction pass across filtered answers
   const {
     totalAttempted,
     totalCorrect,
@@ -71,7 +85,7 @@ export const AnalyticsView: React.FC<AnalyticsViewProps> = ({
     for (let i = 0; i < len; i++) {
       const a = filteredAnswers[i];
       if (a.isCorrect) correctCount++;
-      totalTime += a.timeSpentSeconds || 35;
+      totalTime += a.timeSpentSeconds || (mathDomains.includes(a.domain) ? 45 : 35);
 
       if (a.domain) {
         if (!domainMap[a.domain]) domainMap[a.domain] = { attempted: 0, correct: 0 };
@@ -90,13 +104,27 @@ export const AnalyticsView: React.FC<AnalyticsViewProps> = ({
       }
     }
 
-    const domains = [
+    // Active domains based on subject filter
+    const rwDomains = [
       'Craft and Structure',
       'Information and Ideas',
       'Expression of Ideas',
       'Standard English Conventions',
     ];
-    const domainItems = domains.map(dName => {
+    const officialMathDomains = [
+      'Algebra',
+      'Advanced Math',
+      'Problem-Solving and Data Analysis',
+      'Geometry and Trigonometry',
+    ];
+
+    const activeDomains = subjectFilter === 'math'
+      ? officialMathDomains
+      : subjectFilter === 'rw'
+      ? rwDomains
+      : [...rwDomains, ...officialMathDomains];
+
+    const domainItems = activeDomains.map(dName => {
       const st = domainMap[dName] || { attempted: 0, correct: 0 };
       return {
         domain: dName,
@@ -118,7 +146,8 @@ export const AnalyticsView: React.FC<AnalyticsViewProps> = ({
       };
     });
 
-    const allSkills = [
+    // Active skills based on subject filter
+    const rwSkills = [
       { name: 'Words in Context', domain: 'Craft and Structure' },
       { name: 'Text Structure and Purpose', domain: 'Craft and Structure' },
       { name: 'Cross-Text Connections', domain: 'Craft and Structure' },
@@ -130,7 +159,35 @@ export const AnalyticsView: React.FC<AnalyticsViewProps> = ({
       { name: 'Boundaries', domain: 'Standard English Conventions' },
       { name: 'Form, Structure, and Sense', domain: 'Standard English Conventions' },
     ];
-    const skillStatsItems = allSkills.map(sk => {
+
+    const mathSkills = [
+      { name: 'Linear equations in one variable', domain: 'Algebra' },
+      { name: 'Linear equations in two variables', domain: 'Algebra' },
+      { name: 'Linear inequalities in one or two variables', domain: 'Algebra' },
+      { name: 'Systems of two linear equations in two variables', domain: 'Algebra' },
+      { name: 'Linear functions', domain: 'Algebra' },
+      { name: 'Nonlinear functions', domain: 'Advanced Math' },
+      { name: 'Nonlinear equations in one variable and systems of equations in two variables', domain: 'Advanced Math' },
+      { name: 'Equivalent expressions', domain: 'Advanced Math' },
+      { name: 'Ratios, rates, proportional relationships, and units', domain: 'Problem-Solving and Data Analysis' },
+      { name: 'Percentages', domain: 'Problem-Solving and Data Analysis' },
+      { name: 'One-variable data: Distributions and measures of center and spread', domain: 'Problem-Solving and Data Analysis' },
+      { name: 'Two-variable data: Models and scatterplots', domain: 'Problem-Solving and Data Analysis' },
+      { name: 'Probability and conditional probability', domain: 'Problem-Solving and Data Analysis' },
+      { name: 'Inference from sample statistics and margin of error', domain: 'Problem-Solving and Data Analysis' },
+      { name: 'Evaluating statistical claims: Observational studies and experiments', domain: 'Problem-Solving and Data Analysis' },
+      { name: 'Area and volume', domain: 'Geometry and Trigonometry' },
+      { name: 'Right triangles and trigonometry', domain: 'Geometry and Trigonometry' },
+      { name: 'Circles', domain: 'Geometry and Trigonometry' },
+    ];
+
+    const activeSkills = subjectFilter === 'math'
+      ? mathSkills
+      : subjectFilter === 'rw'
+      ? rwSkills
+      : [...rwSkills, ...mathSkills];
+
+    const skillStatsItems = activeSkills.map(sk => {
       const st = skillMap[sk.name] || { attempted: 0, correct: 0 };
       return {
         ...sk,
@@ -155,11 +212,11 @@ export const AnalyticsView: React.FC<AnalyticsViewProps> = ({
       difficultyBreakdown: diffItems,
       lowestAccuracySkills: lowest,
     };
-  }, [filteredAnswers]);
+  }, [filteredAnswers, subjectFilter]);
 
   return (
     <div className="w-full h-full overflow-y-auto overflow-x-hidden bg-neutral-50 dark:bg-[#090A0F] text-zinc-950 dark:text-[#F4F4F6] px-4 sm:px-6 md:px-10 py-6 sm:py-8 space-y-6 sm:space-y-8 select-text">
-      {/* Header & Timeframe Filters */}
+      {/* Header & Subject / Timeframe Filters */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-zinc-200 dark:border-[#222634]">
         <div>
           <div className="flex items-center gap-2">
@@ -175,15 +232,27 @@ export const AnalyticsView: React.FC<AnalyticsViewProps> = ({
           </p>
         </div>
 
-        <div className="flex items-center gap-2.5">
-          <button
-            onClick={() => setIsResetModalOpen(true)}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-zinc-200 dark:border-[#222634] bg-white dark:bg-[#11131A] hover:bg-zinc-100 dark:hover:bg-[#181B24] text-zinc-600 dark:text-[#8E95A5] hover:text-rose-600 dark:hover:text-rose-400 font-medium text-xs transition-all duration-150 active:scale-95 cursor-pointer"
-            title="Reset All Progress"
-          >
-            <RotateCcw className="w-3.5 h-3.5" strokeWidth={1.75} />
-            <span>Reset</span>
-          </button>
+        <div className="flex items-center gap-2.5 flex-wrap">
+          {/* Subject Filter Toggle */}
+          <div className="inline-flex items-center p-0.5 bg-white dark:bg-[#11131A] border border-zinc-200 dark:border-[#222634] rounded-xl shadow-2xs">
+            {[
+              { id: 'all', label: 'All Subjects' },
+              { id: 'rw', label: 'Reading & Writing' },
+              { id: 'math', label: 'Math' },
+            ].map(btn => (
+              <button
+                key={btn.id}
+                onClick={() => setSubjectFilter(btn.id as SubjectFilter)}
+                className={`px-3 py-1 rounded-lg text-xs font-mono font-medium transition-all duration-150 active:scale-95 cursor-pointer ${
+                  subjectFilter === btn.id
+                    ? 'bg-blue-700 text-white dark:bg-blue-600 font-semibold shadow-2xs'
+                    : 'text-zinc-600 dark:text-[#8E95A5] hover:text-zinc-950 dark:hover:text-white'
+                }`}
+              >
+                {btn.label}
+              </button>
+            ))}
+          </div>
 
           {/* Timeframe Filter Buttons */}
           <div className="inline-flex items-center p-0.5 bg-white dark:bg-[#11131A] border border-zinc-200 dark:border-[#222634] rounded-xl shadow-2xs">
@@ -196,7 +265,7 @@ export const AnalyticsView: React.FC<AnalyticsViewProps> = ({
               <button
                 key={btn.id}
                 onClick={() => setTimeframe(btn.id as TimeframeFilter)}
-                className={`px-3 py-1 rounded-lg text-xs font-mono font-medium transition-all duration-150 active:scale-95 ${
+                className={`px-3 py-1 rounded-lg text-xs font-mono font-medium transition-all duration-150 active:scale-95 cursor-pointer ${
                   timeframe === btn.id
                     ? 'bg-blue-700 text-white dark:bg-blue-600 font-semibold shadow-2xs'
                     : 'text-zinc-600 dark:text-[#8E95A5] hover:text-zinc-950 dark:hover:text-white'
@@ -206,6 +275,15 @@ export const AnalyticsView: React.FC<AnalyticsViewProps> = ({
               </button>
             ))}
           </div>
+
+          <button
+            onClick={() => setIsResetModalOpen(true)}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-zinc-200 dark:border-[#222634] bg-white dark:bg-[#11131A] hover:bg-zinc-100 dark:hover:bg-[#181B24] text-zinc-600 dark:text-[#8E95A5] hover:text-rose-600 dark:hover:text-rose-400 font-medium text-xs transition-all duration-150 active:scale-95 cursor-pointer"
+            title="Reset All Progress"
+          >
+            <RotateCcw className="w-3.5 h-3.5" strokeWidth={1.75} />
+            <span className="hidden sm:inline">Reset</span>
+          </button>
         </div>
       </div>
 
@@ -214,7 +292,9 @@ export const AnalyticsView: React.FC<AnalyticsViewProps> = ({
         <div className="p-5 rounded-2xl bg-white dark:bg-[#11131A] border border-zinc-200 dark:border-[#222634] shadow-xs space-y-1 transition-all duration-200 hover:border-zinc-300 dark:hover:border-zinc-700 hover:-translate-y-0.5">
           <div className="text-xs font-medium text-zinc-500 dark:text-[#8E95A5]">Attempted Questions</div>
           <div className="text-2xl sm:text-3xl font-mono font-semibold tabular-nums text-zinc-950 dark:text-[#F4F4F6]">{totalAttempted}</div>
-          <div className="text-[11px] font-mono text-zinc-400 dark:text-[#8E95A5]">Total in timeframe</div>
+          <div className="text-[11px] font-mono text-zinc-400 dark:text-[#8E95A5]">
+            {subjectFilter === 'math' ? 'Math questions' : subjectFilter === 'rw' ? 'R&W questions' : 'Total in timeframe'}
+          </div>
         </div>
 
         <div className="p-5 rounded-2xl bg-white dark:bg-[#11131A] border border-zinc-200 dark:border-[#222634] shadow-xs space-y-1 transition-all duration-200 hover:border-zinc-300 dark:hover:border-zinc-700 hover:-translate-y-0.5">
@@ -226,7 +306,13 @@ export const AnalyticsView: React.FC<AnalyticsViewProps> = ({
         <div className="p-5 rounded-2xl bg-white dark:bg-[#11131A] border border-zinc-200 dark:border-[#222634] shadow-xs space-y-1 transition-all duration-200 hover:border-zinc-300 dark:hover:border-zinc-700 hover:-translate-y-0.5">
           <div className="text-xs font-medium text-zinc-500 dark:text-[#8E95A5]">Average Question Pace</div>
           <div className="text-2xl sm:text-3xl font-mono font-semibold tabular-nums text-blue-700 dark:text-blue-400">{avgTimeSeconds}s</div>
-          <div className="text-[11px] font-mono text-zinc-500 dark:text-[#8E95A5]">Benchmark: 71s / question</div>
+          <div className="text-[11px] font-mono text-zinc-500 dark:text-[#8E95A5]">
+            {subjectFilter === 'math'
+              ? 'Benchmark: 95s / question'
+              : subjectFilter === 'rw'
+              ? 'Benchmark: 71s / question'
+              : 'Benchmark: 71s (R&W) • 95s (Math)'}
+          </div>
         </div>
 
         <div className="p-5 rounded-2xl bg-white dark:bg-[#11131A] border border-zinc-200 dark:border-[#222634] shadow-xs space-y-1 transition-all duration-200 hover:border-zinc-300 dark:hover:border-zinc-700 hover:-translate-y-0.5">
@@ -238,7 +324,7 @@ export const AnalyticsView: React.FC<AnalyticsViewProps> = ({
         </div>
       </div>
 
-      {/* 5 Lowest-Accuracy Skills Ranked List (Requirement 10) */}
+      {/* 5 Lowest-Accuracy Skills Ranked List */}
       <LowestAccuracyList 
         skills={lowestAccuracySkills} 
         onStartSkillPractice={onStartSkillPractice} 
@@ -304,3 +390,5 @@ export const AnalyticsView: React.FC<AnalyticsViewProps> = ({
     </div>
   );
 };
+
+export default AnalyticsView;

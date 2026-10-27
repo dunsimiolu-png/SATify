@@ -25,7 +25,7 @@ const VocabPracticeView = React.lazy(() => import('./views/VocabPracticeView').t
 const ScoreCalculatorView = React.lazy(() => import('./views/ScoreCalculatorView').then(m => ({ default: m.ScoreCalculatorView })));
 const QuestionRush = React.lazy(() => import('./components/QuestionRush').then(m => ({ default: m.QuestionRush })));
 
-import { allEnglishQuestions, allMathQuestions } from './data/mockQuestions';
+import { allQuestions as fullQuestionBank, allEnglishQuestions, allMathQuestions } from './data/mockQuestions';
 import { evaluateNumericEquivalence } from './utils/mathEvaluator';
 import { 
   MockQuestion, 
@@ -153,7 +153,7 @@ export const App: React.FC = () => {
   const [currentRoute, setCurrentRoute] = useState<AppRoute | 'practice'>('home');
 
   // Master questions pool from extracted JSON
-  const [allQuestions] = useState<MockQuestion[]>(allEnglishQuestions);
+  const [allQuestions] = useState<MockQuestion[]>(fullQuestionBank);
 
   // Active session questions pool
   const [sessionQuestions, setSessionQuestions] = useState<MockQuestion[]>(allEnglishQuestions);

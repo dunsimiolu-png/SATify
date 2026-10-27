@@ -46,22 +46,26 @@ export function isGrammarOrVocabSkill(skill: string): boolean {
  * and whether it includes an image (+10s bonus).
  */
 export function getQuestionTargetSeconds(
-  question: { skill?: string; difficulty?: DifficultyLevel | string; imageUrl?: string },
+  question: { section?: string; domain?: string; skill?: string; difficulty?: DifficultyLevel | string; imageUrl?: string },
   mode: RushMode = 'normal'
 ): number {
-  const skillName = question.skill || '';
+  const isMath = question.section === 'Math' || ['Algebra', 'Advanced Math', 'Problem-Solving and Data Analysis', 'Geometry and Trigonometry'].includes(question.domain || '');
   const diff: DifficultyLevel = (question.difficulty as DifficultyLevel) || 'Medium';
 
-  // Find matching skill in matrix (case-insensitive fuzzy match)
-  let pacing = DEFAULT_PACING;
-  for (const [key, matrix] of Object.entries(SKILL_PACING_MATRIX)) {
-    if (skillName.toLowerCase().includes(key.toLowerCase()) || key.toLowerCase().includes(skillName.toLowerCase())) {
-      pacing = matrix;
-      break;
+  let baseSeconds = 65;
+  if (isMath) {
+    baseSeconds = diff === 'Easy' ? 75 : diff === 'Hard' ? 120 : 95;
+  } else {
+    const skillName = question.skill || '';
+    let pacing = DEFAULT_PACING;
+    for (const [key, matrix] of Object.entries(SKILL_PACING_MATRIX)) {
+      if (skillName.toLowerCase().includes(key.toLowerCase()) || key.toLowerCase().includes(skillName.toLowerCase())) {
+        pacing = matrix;
+        break;
+      }
     }
+    baseSeconds = pacing[diff] || DEFAULT_PACING[diff] || 65;
   }
-
-  let baseSeconds = pacing[diff] || DEFAULT_PACING[diff] || 65;
 
   // Add +10 extra seconds for table / graph questions
   if (question.imageUrl) {

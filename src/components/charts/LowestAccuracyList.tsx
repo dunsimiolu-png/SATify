@@ -31,7 +31,7 @@ export const LowestAccuracyList: React.FC<LowestAccuracyListProps> = React.memo(
               5 Lowest-Accuracy Skills (Recommended Focus)
             </h3>
             <p className="text-xs text-slate-500 dark:text-slate-400">
-              Prioritize these skills to maximize your Digital SAT Reading &amp; Writing score gains.
+              Prioritize these skills to maximize your Digital SAT score gains.
             </p>
           </div>
         </div>
