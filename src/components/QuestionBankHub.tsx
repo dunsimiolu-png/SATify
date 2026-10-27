@@ -254,7 +254,7 @@ export const QuestionBankHub: React.FC<QuestionBankHubProps> = ({
     return Math.max(...activityTrend.map(d => d.total), 1);
   }, [activityTrend]);
 
-  // If a section is selected, render the CookSAT Section Breakdown View
+  // If a section is selected, render the Section Breakdown View
   if (selectedSection) {
     const isMath = selectedSection === 'Math';
     const sectionDomains = isMath ? MATH_SECTION_DOMAINS : RW_SECTION_DOMAINS;
@@ -284,7 +284,7 @@ export const QuestionBankHub: React.FC<QuestionBankHubProps> = ({
                   {isMath ? 'Math' : 'Reading & Writing'}
                 </h1>
                 <p className="text-xs text-slate-500 dark:text-[#8E95A5]">
-                  CookSAT Domain &amp; Skill Breakdown • {allSectionQuestions.length} Questions
+                  Domain &amp; Skill Breakdown • {allSectionQuestions.length} Questions
                 </p>
               </div>
             </div>
