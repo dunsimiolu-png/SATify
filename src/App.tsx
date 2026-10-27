@@ -43,7 +43,10 @@ import {
   getSavedUserStates,
   saveUserState,
   getLatestAttemptsMap,
-  isQuestionAnswered
+  isQuestionAnswered,
+  saveLastSession,
+  getLastSession,
+  getAttempts
 } from './utils/storage';
 import { GripVertical, Columns, Menu, Sun, Moon } from 'lucide-react';
 import { Logo } from './components/Logo';
@@ -267,6 +270,26 @@ export const App: React.FC = () => {
   };
   const isCurrentAnswered = currentState.selectedChoice !== null || currentState.isAnswerChecked || isQuestionAnswered(currentQuestion.id);
   const currentHighlights = highlightsByQuestion[currentQuestion?.id || ''] || [];
+
+  // Automatically persist last practice session whenever user views or answers a question in practice mode
+  useEffect(() => {
+    if (currentRoute === 'practice' && currentQuestion) {
+      const snippet = (currentQuestion.prompt || currentQuestion.passage || '')
+        .replace(/<[^>]+>/g, '')
+        .replace(/\s+/g, ' ')
+        .trim()
+        .slice(0, 110);
+      saveLastSession({
+        section: currentQuestion.section,
+        domain: currentQuestion.domain,
+        skill: currentQuestion.skill,
+        difficulty: currentQuestion.difficulty,
+        questionId: currentQuestion.id,
+        questionIndex: safeIndex,
+        questionSnippet: snippet,
+      });
+    }
+  }, [currentRoute, currentQuestion, safeIndex]);
 
   // Official Bluebook Digital SAT Math Layout:
   // Math questions render in single-column centered layout unless there is a coordinate graph (imageUrl),
@@ -617,6 +640,39 @@ export const App: React.FC = () => {
     handleStartCustomPractice(pool);
   }, [handleStartCustomPractice]);
 
+  // Resume practice from last session or first unattempted question
+  const handleResumePractice = useCallback(() => {
+    const lastSession = getLastSession();
+    if (lastSession?.questionId) {
+      const qIndexInAll = allQuestions.findIndex(q => q.id === lastSession.questionId);
+      if (qIndexInAll !== -1) {
+        let targetPool = allQuestions;
+        if (lastSession.skill) {
+          const skillPool = allQuestions.filter(q => q.skill === lastSession.skill);
+          if (skillPool.some(q => q.id === lastSession.questionId)) {
+            targetPool = skillPool;
+          }
+        }
+        setSessionQuestions(targetPool);
+        const targetIndex = targetPool.findIndex(q => q.id === lastSession.questionId);
+        const safeTargetIndex = targetIndex !== -1 ? targetIndex : 0;
+        setCurrentQuestionIndex(safeTargetIndex);
+        setUserStates(loadInitialUserStates(targetPool));
+        setCurrentRoute('practice');
+        return;
+      }
+    }
+
+    // Fallback: first unattempted question in bank
+    const answeredIds = new Set(getAttempts().map(a => a.questionId));
+    const unattemptedIdx = allQuestions.findIndex(q => !answeredIds.has(q.id));
+    const targetIndex = unattemptedIdx !== -1 ? unattemptedIdx : 0;
+    setSessionQuestions(allQuestions);
+    setCurrentQuestionIndex(targetIndex);
+    setUserStates(loadInitialUserStates(allQuestions));
+    setCurrentRoute('practice');
+  }, [allQuestions, loadInitialUserStates]);
+
   const handleOpenFilterModal = useCallback((section?: 'Reading and Writing' | 'Math') => {
     if (section === 'Math') {
       const mathDomains = ['Algebra', 'Advanced Math', 'Problem-Solving and Data Analysis', 'Geometry and Trigonometry'];
@@ -641,6 +697,7 @@ export const App: React.FC = () => {
         selectedSkills: rwSkills,
       }));
     }
+    setCurrentRoute('question-filter');
     setIsSetupOpen(true);
   }, []);
 
@@ -929,24 +986,20 @@ export const App: React.FC = () => {
             <HomeDashboard
               questions={allQuestions}
               onStartSkillPractice={handleStartSkillPractice}
-              onOpenQuestionBank={() => setIsSetupOpen(true)}
-              onResumePractice={() => {
-                if (sessionQuestions.length > 0) {
-                  setCurrentRoute('practice');
-                } else {
-                  handleStartCustomPractice(allQuestions);
-                }
-              }}
+              onOpenQuestionBank={() => setCurrentRoute('question-bank')}
+              onOpenQuestionFilter={() => setCurrentRoute('question-filter')}
+              onResumePractice={handleResumePractice}
               onStartDailyQuestion={handleStartDailyQuestion}
             />
           )}
 
-          {currentRoute === 'question-bank' && (
+          {(currentRoute === 'question-bank' || currentRoute === 'question-filter') && (
             <QuestionBankHub
               questions={allQuestions}
               onStartPracticeSection={handleStartSectionPractice}
               onOpenFilterModal={handleOpenFilterModal}
               onNavigateRoute={(route) => setCurrentRoute(route)}
+              onStartSkillPractice={handleStartSkillPractice}
             />
           )}
 
@@ -971,7 +1024,7 @@ export const App: React.FC = () => {
           {currentRoute === 'rush' && (
             <QuestionRush
               questions={allQuestions}
-              onOpenQuestionBank={() => setIsSetupOpen(true)}
+              onOpenQuestionBank={() => setCurrentRoute('question-bank')}
             />
           )}
 
@@ -1185,9 +1238,17 @@ export const App: React.FC = () => {
 
       {/* Question Bank Filter Setup Modal */}
       <SetupDashboard
-        isOpen={isSetupOpen}
-        onClose={() => setIsSetupOpen(false)}
-        onStartPractice={handleStartPractice}
+        isOpen={isSetupOpen || currentRoute === 'question-filter'}
+        onClose={() => {
+          setIsSetupOpen(false);
+          if (currentRoute === 'question-filter') {
+            setCurrentRoute('question-bank');
+          }
+        }}
+        onStartPractice={(filtered, config) => {
+          setIsSetupOpen(false);
+          handleStartPractice(filtered, config);
+        }}
         currentConfig={filterConfig}
       />
 

@@ -19,13 +19,15 @@ import {
   getAttempts, 
   getStudyStreak, 
   get10DayActivityTrend, 
-  getSkillStatsMap 
+  getSkillStatsMap,
+  getLastSession
 } from '../utils/storage';
 
 interface HomeProps {
   questions: MockQuestion[];
   onStartSkillPractice?: (skillName: string, domainName: string) => void;
   onOpenQuestionBank: () => void;
+  onOpenQuestionFilter?: () => void;
   onResumePractice?: () => void;
   onStartDailyQuestion?: (subject: 'Math' | 'Reading and Writing') => void;
 }
@@ -34,6 +36,7 @@ export const Home: React.FC<HomeProps> = ({
   questions,
   onStartSkillPractice: _onStartSkillPractice,
   onOpenQuestionBank,
+  onOpenQuestionFilter,
   onResumePractice,
   onStartDailyQuestion,
 }) => {
@@ -124,7 +127,29 @@ export const Home: React.FC<HomeProps> = ({
     };
   }, [attempts]);
 
-  // Last attempt for the "START PRACTICING" card description
+  // Last practice session (satify_last_session) or fallback to last attempt
+  const lastSession = useMemo(() => {
+    return getLastSession();
+  }, []);
+
+  const lastSessionQuestion = useMemo(() => {
+    if (!lastSession?.questionId) return null;
+    return questions.find(q => q.id === lastSession.questionId) || null;
+  }, [lastSession, questions]);
+
+  const activeSnippet = useMemo(() => {
+    if (lastSession?.questionSnippet) return lastSession.questionSnippet;
+    if (lastSessionQuestion) {
+      return (lastSessionQuestion.prompt || lastSessionQuestion.passage || '')
+        .replace(/<[^>]+>/g, '')
+        .replace(/\s+/g, ' ')
+        .trim()
+        .slice(0, 110);
+    }
+    return '';
+  }, [lastSession, lastSessionQuestion]);
+
+  // Last attempt for fallback
   const lastAttempt = useMemo(() => {
     if (attempts.length === 0) return null;
     return attempts[attempts.length - 1];
@@ -294,10 +319,10 @@ export const Home: React.FC<HomeProps> = ({
           {/* (b) START PRACTICING CARD (Bottom-Left) */}
           <div className="rounded-2xl border border-zinc-200 dark:border-[#222634] bg-white dark:bg-[#11131A] shadow-xs overflow-hidden flex flex-col">
             
-            {/* Blue/Emerald Header Bar */}
-            <div className="bg-gradient-to-r from-blue-700 to-emerald-600 dark:from-blue-600 dark:to-emerald-500 px-4 sm:px-5 py-3.5 text-white flex items-center justify-between">
+            {/* Royal-Blue Header Bar */}
+            <div className="bg-gradient-to-r from-blue-700 to-indigo-800 dark:from-blue-600 dark:to-indigo-700 px-4 sm:px-5 py-3.5 text-white flex items-center justify-between">
               <span className="font-bold text-sm tracking-wider uppercase">START PRACTICING</span>
-              <span className="text-xs font-mono bg-black/20 text-white/90 px-2 py-0.5 rounded-full font-medium">
+              <span className="text-xs font-mono bg-black/25 text-white/95 px-2.5 py-0.5 rounded-full font-medium">
                 {questions.length} Items in Bank
               </span>
             </div>
@@ -305,17 +330,22 @@ export const Home: React.FC<HomeProps> = ({
             <div className="p-4 sm:p-5 flex flex-col justify-between space-y-4">
               <div>
                 <span className="text-[11px] font-mono uppercase text-zinc-400 dark:text-[#8E95A5] tracking-wider font-semibold">
-                  {lastAttempt ? 'Resume Previous Session' : 'Quick Start Practice'}
+                  {lastSession || lastAttempt ? 'Resume Previous Session' : 'Quick Start Practice'}
                 </span>
                 
-                {lastAttempt ? (
-                  <div className="mt-1">
+                {lastSession || lastAttempt ? (
+                  <div className="mt-1 space-y-1">
                     <h4 className="font-semibold text-sm text-zinc-950 dark:text-[#F4F4F6]">
-                      {lastAttempt.skill || 'Standard English Conventions'}
+                      {lastSession?.skill || lastAttempt?.skill || 'Standard English Conventions'}
                     </h4>
-                    <p className="text-xs text-zinc-500 dark:text-[#8E95A5] mt-0.5 line-clamp-2">
-                      Domain: {lastAttempt.domain || 'Reading & Writing'} • Difficulty: {lastAttempt.difficulty || 'Medium'}
+                    <p className="text-xs text-zinc-500 dark:text-[#8E95A5]">
+                      Domain: {lastSession?.domain || lastAttempt?.domain || 'Reading & Writing'} • Difficulty: {lastSession?.difficulty || lastAttempt?.difficulty || 'Medium'}
                     </p>
+                    {activeSnippet && (
+                      <p className="text-xs text-zinc-600 dark:text-[#8E95A5] italic line-clamp-1 border-l-2 border-blue-500/60 pl-2 mt-1">
+                        &ldquo;{activeSnippet}&rdquo;
+                      </p>
+                    )}
                   </div>
                 ) : (
                   <div className="mt-1">
@@ -333,7 +363,7 @@ export const Home: React.FC<HomeProps> = ({
               <div className="flex items-center gap-3 pt-2">
                 <button
                   type="button"
-                  onClick={onOpenQuestionBank}
+                  onClick={onOpenQuestionFilter || onOpenQuestionBank}
                   className="flex-1 py-2.5 px-3.5 rounded-xl border border-zinc-200 dark:border-[#222634] hover:bg-zinc-100 dark:hover:bg-[#181B24] text-zinc-700 dark:text-[#8E95A5] font-semibold text-xs transition-all duration-150 active:scale-95 flex items-center justify-center gap-1.5 cursor-pointer shadow-2xs"
                 >
                   <Filter className="w-3.5 h-3.5" strokeWidth={2} />

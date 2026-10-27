@@ -42,7 +42,19 @@ export const STORAGE_KEYS = {
   VOCAB_DECKS: 'satify_vocab_decks',
   VOCAB_RATINGS: 'satify_vocab_word_ratings',
   SOUND_ENABLED: 'satify_sound_enabled',
+  LAST_SESSION: 'satify_last_session',
 };
+
+export interface LastSessionRecord {
+  section?: 'Reading and Writing' | 'Math' | string;
+  domain?: string;
+  skill?: string;
+  difficulty?: string;
+  questionId: string;
+  questionIndex: number;
+  questionSnippet?: string;
+  timestamp: number;
+}
 
 /**
  * Returns a normalized identifier for the active account (or 'guest')
@@ -503,6 +515,41 @@ export function getSkillStatsMap() {
 }
 
 // -----------------------------------------------------------------------------
+// Last Practice Session Persistence (satify_last_session)
+// -----------------------------------------------------------------------------
+export function saveLastSession(record: Omit<LastSessionRecord, 'timestamp'>): void {
+  if (typeof window === 'undefined') return;
+  try {
+    const data: LastSessionRecord = {
+      ...record,
+      timestamp: Date.now(),
+    };
+    const key = getScopedKey(STORAGE_KEYS.LAST_SESSION);
+    localStorage.setItem(key, JSON.stringify(data));
+    localStorage.setItem(STORAGE_KEYS.LAST_SESSION, JSON.stringify(data));
+  } catch (e) {
+    console.warn('Failed to save last session:', e);
+  }
+}
+
+export function getLastSession(): LastSessionRecord | null {
+  if (typeof window === 'undefined') return null;
+  try {
+    const key = getScopedKey(STORAGE_KEYS.LAST_SESSION);
+    let raw = localStorage.getItem(key);
+    if (!raw) {
+      raw = localStorage.getItem(STORAGE_KEYS.LAST_SESSION);
+    }
+    if (raw) {
+      return JSON.parse(raw);
+    }
+  } catch (e) {
+    console.warn('Failed to get last session:', e);
+  }
+  return null;
+}
+
+// -----------------------------------------------------------------------------
 // Cross-Device Sync & Data Transfer
 // -----------------------------------------------------------------------------
 export interface UserDataBackup {
@@ -834,6 +881,11 @@ export function migrateGuestDataToUser(): void {
       localStorage.removeItem(STORAGE_KEYS.SAVED);
       localStorage.removeItem(`${STORAGE_KEYS.USER_STATES}_guest`);
       localStorage.removeItem(STORAGE_KEYS.USER_STATES);
+      const guestSessionRaw = localStorage.getItem(`${STORAGE_KEYS.LAST_SESSION}_guest`);
+      if (guestSessionRaw) {
+        localStorage.setItem(getScopedKey(STORAGE_KEYS.LAST_SESSION), guestSessionRaw);
+        localStorage.removeItem(`${STORAGE_KEYS.LAST_SESSION}_guest`);
+      }
     }
   } catch (e) {
     console.warn('Guest migration error:', e);

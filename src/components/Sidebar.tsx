@@ -6,6 +6,7 @@ import {
   BookOpen, 
   Calculator, 
   Layers, 
+  SlidersHorizontal,
   Zap,
   Sun,
   Moon,
@@ -22,6 +23,7 @@ export type AppRoute =
   | 'analytics' 
   | 'saved' 
   | 'question-bank' 
+  | 'question-filter'
   | 'rush'
   | 'vocab' 
   | 'calculator';
@@ -59,6 +61,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
       badge: savedCount > 0 ? savedCount : undefined 
     },
     { id: 'question-bank', label: 'Question Bank', icon: <Layers className="w-4 h-4" strokeWidth={1.75} /> },
+    { id: 'question-filter', label: 'Question Filter', icon: <SlidersHorizontal className="w-4 h-4" strokeWidth={1.75} /> },
     { id: 'rush', label: 'Question Rush', icon: <Zap className="w-4 h-4 text-amber-500" strokeWidth={1.75} /> },
     { id: 'vocab', label: 'Vocab SRS', icon: <BookOpen className="w-4 h-4" strokeWidth={1.75} /> },
     { id: 'calculator', label: 'Score Calculator', icon: <Calculator className="w-4 h-4" strokeWidth={1.75} /> },
