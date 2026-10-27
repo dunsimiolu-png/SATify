@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { 
   Flame, 
   Clock, 
-  Target, 
+  Compass, 
   Zap, 
   Filter, 
   Play, 
@@ -455,7 +455,7 @@ export const Home: React.FC<HomeProps> = ({
                 <span className="text-[11px] font-mono uppercase font-semibold text-zinc-400 dark:text-[#8E95A5]">
                   Today's Goals
                 </span>
-                <Target className="w-4 h-4 text-emerald-500" />
+                <Compass className="w-4 h-4 text-emerald-500" />
               </div>
               <div>
                 <div className="text-2xl font-bold tracking-tight text-zinc-950 dark:text-[#F4F4F6] tabular-nums">
@@ -600,7 +600,7 @@ export const Home: React.FC<HomeProps> = ({
                 {/* Weakest Skills */}
                 <div className="space-y-2 pt-2 border-t border-zinc-100 dark:border-[#181B24]">
                   <span className="text-xs font-bold text-amber-700 dark:text-amber-400 uppercase font-mono tracking-wider flex items-center gap-1">
-                    <Target className="w-3.5 h-3.5" />
+                    <Compass className="w-3.5 h-3.5" />
                     Weakest Skills
                   </span>
                   <div className="space-y-1.5">

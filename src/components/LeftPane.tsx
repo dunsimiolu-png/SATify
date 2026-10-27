@@ -32,6 +32,7 @@ export const LeftPane: React.FC<LeftPaneProps> = ({
   isSplitView = true,
 }) => {
   const passageText = question.passage || question.passageText || '';
+  const isSpr = question.questionType === 'spr' || !question.options || question.options.length === 0;
   const lastValidSelectionRef = useRef<{
     start: number;
     end: number;
@@ -270,6 +271,73 @@ export const LeftPane: React.FC<LeftPaneProps> = ({
             className="max-w-full h-auto object-contain rounded-md select-none"
             loading="lazy"
           />
+        </div>
+      )}
+
+      {/* Official Bluebook Student-Produced Response Directions */}
+      {isSpr && (
+        <div className="mb-6 rounded-2xl border border-zinc-200 dark:border-[#222634] bg-white dark:bg-[#11131A] shadow-xs overflow-hidden">
+          <div className="bg-zinc-100 dark:bg-[#181B24] border-b border-zinc-200 dark:border-[#222634] px-4 py-3 flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <span className="w-5 h-5 rounded-md bg-blue-600 text-white flex items-center justify-center font-bold text-xs">
+                #
+              </span>
+              <h4 className="font-bold text-xs text-zinc-950 dark:text-[#F4F4F6] tracking-tight uppercase">
+                Student-Produced Response Directions
+              </h4>
+            </div>
+            <span className="text-[10px] font-mono text-zinc-500 dark:text-[#8E95A5] px-2 py-0.5 rounded bg-zinc-200/60 dark:bg-[#222634]">
+              Official SAT Format
+            </span>
+          </div>
+
+          <div className="p-4 sm:p-5 space-y-3.5 text-xs text-zinc-700 dark:text-[#C5CAD6] leading-relaxed">
+            <ul className="space-y-2.5 list-disc list-outside ml-4">
+              <li>
+                <strong className="text-zinc-950 dark:text-[#F4F4F6]">One answer only:</strong> If you find more than one correct answer, enter only one answer.
+              </li>
+              <li>
+                <strong className="text-zinc-950 dark:text-[#F4F4F6]">Character limit:</strong> Enter up to 5 characters for positive answers, or up to 6 characters (including the negative sign) for negative answers.
+              </li>
+              <li>
+                <strong className="text-zinc-950 dark:text-[#F4F4F6]">Fractions:</strong> If your fraction answer does not fit in the provided space, enter its decimal equivalent.
+              </li>
+              <li>
+                <strong className="text-zinc-950 dark:text-[#F4F4F6]">Decimals:</strong> If your decimal answer does not fit, truncate or round it to the third decimal place.
+              </li>
+              <li>
+                <strong className="text-zinc-950 dark:text-[#F4F4F6]">Mixed numbers:</strong> Enter mixed numbers (such as 3 1/2) as improper fractions (7/2) or their decimal equivalents (3.5).
+              </li>
+              <li>
+                <strong className="text-zinc-950 dark:text-[#F4F4F6]">No symbols:</strong> Do not enter symbols such as %, commas, or $.
+              </li>
+            </ul>
+
+            {/* Examples Card */}
+            <div className="mt-4 pt-3 border-t border-zinc-100 dark:border-[#181B24]">
+              <span className="font-mono text-[11px] font-bold uppercase text-zinc-500 dark:text-[#8E95A5] block mb-2">
+                Acceptable Equivalent Examples
+              </span>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px]">
+                <div className="p-2.5 rounded-xl bg-zinc-50 dark:bg-[#141620] border border-zinc-200/70 dark:border-[#222634]">
+                  <div className="font-semibold text-zinc-800 dark:text-zinc-200 mb-0.5">Fraction 3/5:</div>
+                  <div className="font-mono text-blue-700 dark:text-blue-400 font-bold">3/5, 0.6, or .6</div>
+                </div>
+                <div className="p-2.5 rounded-xl bg-zinc-50 dark:bg-[#141620] border border-zinc-200/70 dark:border-[#222634]">
+                  <div className="font-semibold text-zinc-800 dark:text-zinc-200 mb-0.5">Repeating 2/3:</div>
+                  <div className="font-mono text-blue-700 dark:text-blue-400 font-bold">2/3, .6666, 0.667</div>
+                </div>
+                <div className="p-2.5 rounded-xl bg-zinc-50 dark:bg-[#141620] border border-zinc-200/70 dark:border-[#222634]">
+                  <div className="font-semibold text-zinc-800 dark:text-zinc-200 mb-0.5">Negative -1/4:</div>
+                  <div className="font-mono text-blue-700 dark:text-blue-400 font-bold">-1/4, -.25, -0.25</div>
+                </div>
+                <div className="p-2.5 rounded-xl bg-zinc-50 dark:bg-[#141620] border border-zinc-200/70 dark:border-[#222634]">
+                  <div className="font-semibold text-zinc-800 dark:text-zinc-200 mb-0.5">Mixed 3 1/2:</div>
+                  <div className="font-mono text-blue-700 dark:text-blue-400 font-bold">7/2 or 3.5 (never 3 1/2)</div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       )}
 

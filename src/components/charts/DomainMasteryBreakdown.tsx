@@ -1,5 +1,5 @@
 import React from 'react';
-import { Target, Play } from 'lucide-react';
+import { Compass, Play } from 'lucide-react';
 import { CircularGauge } from './CircularGauge';
 
 export interface DomainConfig {
@@ -22,7 +22,7 @@ export const DomainMasteryBreakdown: React.FC<DomainMasteryBreakdownProps> = Rea
   return (
     <div className="space-y-4">
       <div className="flex items-center gap-2">
-        <Target className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+        <Compass className="w-5 h-5 text-blue-600 dark:text-blue-400" />
         <h3 className="font-extrabold text-base text-slate-900 dark:text-white">
           Domain Mastery Breakdown
         </h3>

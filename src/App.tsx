@@ -26,6 +26,7 @@ const ScoreCalculatorView = React.lazy(() => import('./views/ScoreCalculatorView
 const QuestionRush = React.lazy(() => import('./components/QuestionRush').then(m => ({ default: m.QuestionRush })));
 
 import { allEnglishQuestions, allMathQuestions } from './data/mockQuestions';
+import { evaluateNumericEquivalence } from './utils/mathEvaluator';
 import { 
   MockQuestion, 
   UserQuestionState, 
@@ -345,15 +346,40 @@ export const App: React.FC = () => {
     });
   }, [updateCurrentState, currentQuestion.id]);
 
+  // Handle Student-Produced Response input change
+  const handleSprAnswerChange = useCallback((value: string) => {
+    updateCurrentState(prev => {
+      const nextState: UserQuestionState = {
+        ...prev,
+        sprAnswer: value,
+      };
+      saveUserState(currentQuestion.id, nextState);
+      return nextState;
+    });
+  }, [updateCurrentState, currentQuestion.id]);
+
   // Check Answer & Record to Statistics
   const handleCheckAnswer = useCallback((timeSpentSeconds?: number) => {
-    if (!currentState.selectedChoice) return;
-    const isCorrect = currentState.selectedChoice === currentQuestion.correctAnswer;
+    const isSpr = currentQuestion.questionType === 'spr' || !currentQuestion.options || currentQuestion.options.length === 0;
+
+    if (isSpr) {
+      if (!currentState.sprAnswer || currentState.sprAnswer.trim().length === 0) return;
+    } else {
+      if (!currentState.selectedChoice) return;
+    }
+
+    const isCorrect = isSpr
+      ? evaluateNumericEquivalence(
+          currentState.sprAnswer || '',
+          String(currentQuestion.correctAnswer),
+          currentQuestion.acceptedAnswers
+        )
+      : currentState.selectedChoice === currentQuestion.correctAnswer;
     
     // Record to persistent storage (satify_attempts)
     recordAnswer(
       currentQuestion.id,
-      currentState.selectedChoice,
+      isSpr ? (currentState.sprAnswer || '') : (currentState.selectedChoice || 'A'),
       isCorrect,
       currentQuestion.domain,
       currentQuestion.skill,
@@ -483,8 +509,24 @@ export const App: React.FC = () => {
       if (['INPUT', 'TEXTAREA'].includes((e.target as HTMLElement).tagName)) return;
 
       const key = e.key.toUpperCase();
-      if (['A', 'B', 'C', 'D'].includes(key)) {
-        handleSelectChoice(key as 'A' | 'B' | 'C' | 'D');
+      const isMath = currentQuestion.section === 'Math' || ['Algebra', 'Advanced Math', 'Problem-Solving and Data Analysis', 'Geometry and Trigonometry'].includes(currentQuestion.domain || '');
+      const isSpr = currentQuestion.questionType === 'spr' || !currentQuestion.options || currentQuestion.options.length === 0;
+
+      if (key === 'C') {
+        if (isMath) {
+          setIsCalculatorOpen(prev => !prev);
+        } else {
+          handleSelectChoice('C');
+        }
+      } else if (['A', 'B', 'D'].includes(key)) {
+        if (!isSpr) {
+          handleSelectChoice(key as 'A' | 'B' | 'D');
+        }
+      } else if (['1', '2', '3', '4'].includes(e.key)) {
+        if (!isSpr) {
+          const map: Record<string, 'A' | 'B' | 'C' | 'D'> = { '1': 'A', '2': 'B', '3': 'C', '4': 'D' };
+          handleSelectChoice(map[e.key]);
+        }
       } else if (e.key === 'ArrowRight') {
         handleNext();
       } else if (e.key === 'ArrowLeft') {
@@ -980,6 +1022,7 @@ export const App: React.FC = () => {
                       question={currentQuestion}
                       userState={currentState}
                       onSelectChoice={handleSelectChoice}
+                      onSprAnswerChange={handleSprAnswerChange}
                       onToggleEliminate={handleToggleEliminate}
                       onToggleMarkForReview={handleToggleMarkForReview}
                       onCheckAnswer={handleCheckAnswer}
@@ -1008,6 +1051,7 @@ export const App: React.FC = () => {
                       question={currentQuestion}
                       userState={currentState}
                       onSelectChoice={handleSelectChoice}
+                      onSprAnswerChange={handleSprAnswerChange}
                       onToggleEliminate={handleToggleEliminate}
                       onToggleMarkForReview={handleToggleMarkForReview}
                       onCheckAnswer={handleCheckAnswer}

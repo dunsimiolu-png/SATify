@@ -3,7 +3,7 @@ import {
   Zap, 
   Flame, 
   Clock, 
-  Target, 
+  Compass, Calculator, 
   Award, 
   ChevronRight, 
   ArrowLeft, 
@@ -791,7 +791,10 @@ export const QuestionRush: React.FC<QuestionRushProps> = ({
           </div>
 
           {/* Hero Card 2: Math (Coming Soon) */}
-          <div className="relative rounded-2xl bg-white dark:bg-[#11131A] border border-zinc-200 dark:border-[#222634] text-zinc-950 dark:text-[#F4F4F6] p-6 sm:p-7 flex flex-col justify-between space-y-6 opacity-85 shadow-xs">
+          <div className="relative rounded-2xl bg-white dark:bg-[#11131A] border border-zinc-200 dark:border-[#222634] text-zinc-950 dark:text-[#F4F4F6] p-6 sm:p-7 flex flex-col justify-between space-y-6 opacity-85 shadow-xs overflow-hidden">
+            <div className="absolute right-[-15px] bottom-[-15px] pointer-events-none opacity-5 dark:opacity-10 transform -rotate-12">
+              <Calculator className="w-36 h-36" strokeWidth={1} />
+            </div>
             <div className="space-y-4">
               <div className="flex items-center justify-between">
                 <span className="px-2.5 py-0.5 rounded-full text-[10px] font-semibold uppercase tracking-wider bg-zinc-100 text-zinc-500 border border-zinc-200 dark:bg-[#181B24] dark:text-[#8E95A5] dark:border-[#222634]">
@@ -842,7 +845,7 @@ export const QuestionRush: React.FC<QuestionRushProps> = ({
             {/* Column 1: Pick Your Focus */}
             <div className="p-5 rounded-2xl bg-white dark:bg-[#11131A] border border-zinc-200 dark:border-[#222634] text-zinc-950 dark:text-[#F4F4F6] shadow-xs space-y-3 transition-all duration-200 hover:border-zinc-300 dark:hover:border-zinc-700 hover:-translate-y-0.5">
               <div className="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-500/20 text-blue-600 dark:text-blue-400 flex items-center justify-center font-bold">
-                <Target className="w-5 h-5" />
+                <Compass className="w-5 h-5" />
               </div>
               <h4 className="font-semibold text-sm text-zinc-950 dark:text-[#F4F4F6]">
                 Pick Your Focus
