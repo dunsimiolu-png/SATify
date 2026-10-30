@@ -7,7 +7,7 @@
     "difficulty": "Hard",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "In the given equation, and are constants, and. If the equation has infinitely many solutions, what is the value of?",
+    "prompt": "$$\\frac{48x + 112}{16} - \\frac{s}{13} = r(x - 8)$$\n\nIn the given equation, $s$ and $r$ are constants, and $s > 0$. If the equation has infinitely many solutions, what is the value of $s$?",
     "options": [],
     "correctAnswer": "403",
     "rationale": "The correct answer is. For a linear equation in one variable to have infinitely many solutions, the coefficients of the variable must be equal on both sides of the equation and the constant terms must also be equal on both sides of the equation. The given equation can be rewritten as, or. Applying the distributive proper ty to the right-hand side of this equation yields. For this equation to have infinitely many solutions, the coefficients of must be equal, so it follows that. Additionally, the constant terms must be equal, which means. Substituting for in this equation yields, or. Adding to both sides of this equation yields. Adding to both sides of this equation yields. Multiplying both sides of this equation by yields. Therefore, if the equation has infinitely many solutions, the value of is.",
@@ -23,20 +23,17 @@
     "difficulty": "Medium",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "Line is defined by. Line is perpendicular to line in the xy-plane. What is the slope of line?",
+    "prompt": "Line $k$ is defined by $y = -\\frac{17}{3}x + 5$. Line $j$ is perpendicular to line $k$ in the $xy$-plane. What is the slope of line $j$?",
     "options": [],
     "correctAnswer": "3/17",
     "rationale": "The correct answer is. It’s given that line is perpendicular to line in the xy-plane. This means that the slope of line is the negative reciprocal of the slope of line. The equation of line,, is written in slope-intercept form, where is the slope of the line and is the y-coordinate of the y-intercept of the line. It follows that the slope of line is. The negative reciprocal of a number is divided by the number. Therefore, the negative reciprocal of is, or. Thus, the slope of line is. Note that 3/17,.1764,.1765, and 0.176 are examples of ways to enter a correct answer.",
     "acceptedAnswers": [
-      "0.1764",
-      ".1764",
-      "0.1765",
-      ".1765",
       "3/17",
-      "0.17647058823529413",
+      ".1764",
+      ".1765",
       "0.176",
-      ".17647058823529413",
-      ".176"
+      "0.1764",
+      "0.1765"
     ]
   },
   {
@@ -97,17 +94,13 @@
     "difficulty": "Hard",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "<img src=\"/question-images/math/eq_p5_249.png\" class=\"inline-math-img\" alt=\"math\" /> If satisfies the system of equations above, what is the value of y? <img src=\"/question-images/math/eq_p5_273.png\" class=\"inline-math-img\" alt=\"math\" /> Rationale",
+    "prompt": "$$\\begin{aligned} -x + y &= -3.5 \\\\ x + 3y &= 9.5 \\end{aligned}$$\n\nIf $(x, y)$ satisfies the system of equations above, what is the value of $y$?",
     "options": [],
     "correctAnswer": "3/2",
     "rationale": "",
     "acceptedAnswers": [
       "3/2",
-      "1.5",
-      "1.500",
-      "1.5000",
-      "5",
-      "339"
+      "1.5"
     ]
   },
   {
@@ -187,17 +180,17 @@
     "difficulty": "Hard",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The graph of the equation is a line in the xy-plane, where a and k are constants. If the line contains the points and <img src=\"/question-images/math/eq_p9_256.png\" class=\"inline-math-img\" alt=\"math\" /> <img src=\"/question-images/math/eq_p9_340.png\" class=\"inline-math-img\" alt=\"math\" />, what is the value of k? <img src=\"/question-images/math/eq_p9_364.png\" class=\"inline-math-img\" alt=\"math\" />",
+    "prompt": "The graph of the equation $ax + ky = 6$ is a line in the $xy$-plane, where $a$ and $k$ are constants. If the line contains the points $(-2, -6)$ and $(0, -3)$, what is the value of $k$?",
     "options": [
       {
         "id": "A",
         "label": "A",
-        "text": "<img src=\"/question-images/math/eq_p9_426.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "-2"
       },
       {
         "id": "B",
         "label": "B",
-        "text": "<img src=\"/question-images/math/eq_p9_448.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "-1"
       },
       {
         "id": "C",
@@ -221,7 +214,7 @@
     "difficulty": "Hard",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "In the given system of equations, is a constant. If the system has no solution, what is the value of?",
+    "prompt": "$$\\begin{aligned} \\frac{3}{2}y - \\frac{1}{4}x &= \\frac{2}{3} - \\frac{3}{2}y \\\\ \\frac{1}{2}x + \\frac{3}{2} &= py + \\frac{9}{2} \\end{aligned}$$\n\nIn the given system of equations, $p$ is a constant. If the system has no solution, what is the value of $p$?",
     "options": [],
     "correctAnswer": "6",
     "rationale": "The correct answer is. A system of two linear equations in two variables, and, has no solution if the lines represented by the equations in the xy-plane are parallel and distinct. Lines represented by equations in standard form, and, are parallel if the coefficients for and in one equation are proportional to the corresponding coefficients in the other equation, meaning; and the lines are distinct if the constants are not proportional, meaning is not equal to or. The first equation in the given system is. Multiplying each side of this equation by yields. Adding to each side of this equation yields, or. The second equation in the given system is. Multiplying each side of this equation by yields. Subtracting from each side of this equation yields. Subtracting from each side of this equation yields. Therefore, the two equations in the given system, written in standard form, are and. As previously stated, if this system has no solution, the lines represented by the equations in the xy-plane are parallel and distinct, meaning the proportion, or, is true and the proportion is not true. The proportion is not true. Multiplying each side of the true proportion,, by yields. Therefore, if the system has no solution, then the value of is.",
@@ -358,27 +351,27 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Hiro and Sofia purchased shir ts and pants from a store. The price of each shir t purchased was the same and the price of each pair of pants purchased was the same. Hiro purchased 4 shir ts and 2 pairs of pants for $86, and Sofia purchased 3 shir ts and 5 pairs of pants for $166. Which of the following systems of linear equations represents the situation, if x represents the price, in dollars, of each shir t and y represents the price, in dollars, of each pair of pants?",
+    "prompt": "Hiro and Sofia purchased shirts and pants from a store. The price of each shirt purchased was the same and the price of each pair of pants purchased was the same. Hiro purchased 4 shirts and 2 pairs of pants for \\$86, and Sofia purchased 3 shirts and 5 pairs of pants for \\$166. Which of the following systems of linear equations represents the situation, if $x$ represents the price, in dollars, of each shirt and $y$ represents the price, in dollars, of each pair of pants?",
     "options": [
       {
         "id": "A",
         "label": "A",
-        "text": "<img src=\"/question-images/math/eq_p15_336.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$$\\begin{aligned} 4x + 2y &= 86 \\\\ 3x + 5y &= 166 \\end{aligned}$$"
       },
       {
         "id": "B",
         "label": "B",
-        "text": "<img src=\"/question-images/math/eq_p15_358.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$$\\begin{aligned} 4x + 3y &= 86 \\\\ 2x + 5y &= 166 \\end{aligned}$$"
       },
       {
         "id": "C",
         "label": "C",
-        "text": "<img src=\"/question-images/math/eq_p15_380.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$$\\begin{aligned} 4x + 2y &= 166 \\\\ 3x + 5y &= 86 \\end{aligned}$$"
       },
       {
         "id": "D",
         "label": "D",
-        "text": "<img src=\"/question-images/math/eq_p15_402.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$$\\begin{aligned} 4x + 3y &= 166 \\\\ 2x + 5y &= 86 \\end{aligned}$$"
       }
     ],
     "correctAnswer": "A",
@@ -460,27 +453,27 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The front of a roller-coaster car is at the bottom of a hill and is 15 feet above the ground. If the front of the roller-coaster car rises at a constant rate of 8 feet per second, which of the following equations gives the height h, in feet, of the front of the roller-coaster car s seconds after it star ts up the hill?",
+    "prompt": "The front of a roller-coaster car is at the bottom of a hill and is 15 feet above the ground. If the front of the roller-coaster car rises at a constant rate of 8 feet per second, which of the following equations gives the height $h$, in feet, of the front of the roller-coaster car $s$ seconds after it starts up the hill?",
     "options": [
       {
         "id": "A",
         "label": "A",
-        "text": "<img src=\"/question-images/math/eq_p18_322.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$h = 8s + 15$"
       },
       {
         "id": "B",
         "label": "B",
-        "text": "<img src=\"/question-images/math/eq_p18_344.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$h = 15s + \\frac{335}{8}$"
       },
       {
         "id": "C",
         "label": "C",
-        "text": "<img src=\"/question-images/math/eq_p18_366.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$h = 8s + \\frac{335}{15}$"
       },
       {
         "id": "D",
         "label": "D",
-        "text": "<img src=\"/question-images/math/eq_p18_388.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$h = 15s + 8$"
       }
     ],
     "correctAnswer": "A",
@@ -588,17 +581,14 @@
     "difficulty": "Hard",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "Line is defined by. Line is perpendicular to line in the xy-plane. What is the slope of line?",
+    "prompt": "Line $p$ is defined by $4y + 8x = 6$. Line $r$ is perpendicular to line $p$ in the $xy$-plane. What is the slope of line $r$?",
     "options": [],
     "correctAnswer": "1/2",
     "rationale": "The correct answer is. For an equation in slope-intercept form, represents the slope of the line in the xy-plane defined by this equation. It's given that line is defined by. Subtracting from both sides of this equation yields. Dividing both sides of this equation by yields, or. Thus, the slope of line is. If line is perpendicular to line, then the slope of line is the negative reciprocal of the slope of line. The negative reciprocal of is. Note that 1/2 and.5 are examples of ways to enter a correct answer.",
     "acceptedAnswers": [
-      "5",
       "1/2",
-      "0.5",
-      "0.500",
-      "0.5000",
-      ".5"
+      ".5",
+      "0.5"
     ]
   },
   {
@@ -644,7 +634,7 @@
     "difficulty": "Easy",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "The function is defined by. What is the value of?",
+    "prompt": "The function $f$ is defined by $f(x) = \\frac{7}{10}x + 55$. What is the value of $f(20)$?",
     "options": [],
     "correctAnswer": "69",
     "rationale": "The correct answer is. The value of can be found by evaluating the function for. Substituting for in this function yields, or. Therefore, the value of is.",
@@ -660,27 +650,27 @@
     "difficulty": "Hard",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Adam’s school is a 20-minute walk or a 5-minute bus ride away from his house. The bus runs once every 30 minutes, and the number of minutes, w, that Adam waits for the bus varies between 0 and 30. Which of the following inequalities gives the values of w for which it would be faster for Adam to walk to school?",
+    "prompt": "Adam’s school is a 20-minute walk or a 5-minute bus ride away from his house. The bus runs once every 30 minutes, and the number of minutes, $w$, that Adam waits for the bus varies between 0 and 30. Which of the following inequalities gives the values of $w$ for which it would be faster for Adam to walk to school?",
     "options": [
       {
         "id": "A",
         "label": "A",
-        "text": "<img src=\"/question-images/math/eq_p25_336.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$w - 5 < 20$"
       },
       {
         "id": "B",
         "label": "B",
-        "text": "<img src=\"/question-images/math/eq_p25_358.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$w - 5 > 20$"
       },
       {
         "id": "C",
         "label": "C",
-        "text": "<img src=\"/question-images/math/eq_p25_380.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$w + 5 < 20$"
       },
       {
         "id": "D",
         "label": "D",
-        "text": "<img src=\"/question-images/math/eq_p25_402.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$w + 5 > 20$"
       }
     ],
     "correctAnswer": "D",
@@ -694,17 +684,17 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "If f is the function defined by, what is the value of? <img src=\"/question-images/math/eq_p26_298.png\" class=\"inline-math-img\" alt=\"math\" /> <img src=\"/question-images/math/eq_p26_274.png\" class=\"inline-math-img\" alt=\"math\" />",
+    "prompt": "If $f$ is the function defined by $f(x) = \\frac{2x - 1}{3}$, what is the value of $f(5)$?",
     "options": [
       {
         "id": "A",
         "label": "A",
-        "text": "<img src=\"/question-images/math/eq_p26_340.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$\\frac{4}{3}$"
       },
       {
         "id": "B",
         "label": "B",
-        "text": "<img src=\"/question-images/math/eq_p26_362.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$\\frac{7}{3}$"
       },
       {
         "id": "C",
@@ -1084,27 +1074,27 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Valentina bought two containers of beads. In the first container 30% of the beads are red, and in the second container 70% of the beads are red. Together, the containers have at least 400 red beads. Which inequality shows this relationship, where x is the total number of beads in the first container and y is the total number of beads in the second container?",
+    "prompt": "Valentina bought two containers of beads. In the first container 30% of the beads are red, and in the second container 70% of the beads are red. Together, the containers have at least 400 red beads. Which inequality shows this relationship, where $x$ is the total number of beads in the first container and $y$ is the total number of beads in the second container?",
     "options": [
       {
         "id": "A",
         "label": "A",
-        "text": "<img src=\"/question-images/math/eq_p38_327.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$0.3x + 0.7y \\ge 400$"
       },
       {
         "id": "B",
         "label": "B",
-        "text": "<img src=\"/question-images/math/eq_p38_349.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$0.7x + 0.3y \\ge 400$"
       },
       {
         "id": "C",
         "label": "C",
-        "text": "<img src=\"/question-images/math/eq_p38_371.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$\\frac{x}{3} + \\frac{y}{7} \\le 400$"
       },
       {
         "id": "D",
         "label": "D",
-        "text": "<img src=\"/question-images/math/eq_p38_393.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$30x + 70y \\ge 400$"
       }
     ],
     "correctAnswer": "A",
@@ -1206,7 +1196,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "<img src=\"/question-images/math/eq_p42_247.png\" class=\"inline-math-img\" alt=\"math\" /> A shipping company charged a customer $25 to ship some small boxes and some large boxes. The equation above represents the relationship between a, the number of small boxes, and b, the number of large boxes, the customer had shipped. If the customer had 3 small boxes shipped, how many large boxes were shipped?",
+    "prompt": "$$3a + 4b = 25$$\n\nA shipping company charged a customer \\$25 to ship some small boxes and some large boxes. The equation above represents the relationship between $a$, the number of small boxes, and $b$, the number of large boxes, the customer had shipped. If the customer had 3 small boxes shipped, how many large boxes were shipped?",
     "options": [
       {
         "id": "A",
@@ -1308,27 +1298,27 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "A petting zoo sells two types of tickets. The standard ticket, for admission only, costs $5. The premium ticket, which includes admission and food to give to the animals, costs $12. One Saturday, the petting zoo sold a total of 250 tickets and collected a total of $2,300 from ticket sales. Which of the following systems of equations can be used to find the number of standard tickets, s, and premium tickets, p, sold on that Saturday?",
+    "prompt": "A petting zoo sells two types of tickets. The standard ticket, for admission only, costs \\$5. The premium ticket, which includes admission and food to give to the animals, costs \\$12. One Saturday, the petting zoo sold a total of 250 tickets and collected a total of \\$2,300 from ticket sales. Which of the following systems of equations can be used to find the number of standard tickets, $s$, and premium tickets, $p$, sold on that Saturday?",
     "options": [
       {
         "id": "A",
         "label": "A",
-        "text": "<img src=\"/question-images/math/eq_p45_334.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$$\\begin{aligned} s + p &= 250 \\\\ 5s + 12p &= 2{,}300 \\end{aligned}$$"
       },
       {
         "id": "B",
         "label": "B",
-        "text": "<img src=\"/question-images/math/eq_p45_356.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$$\\begin{aligned} s + p &= 250 \\\\ 12s + 5p &= 2{,}300 \\end{aligned}$$"
       },
       {
         "id": "C",
         "label": "C",
-        "text": "<img src=\"/question-images/math/eq_p45_378.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$$\\begin{aligned} 5s + 12p &= 250 \\\\ s + p &= 2{,}300 \\end{aligned}$$"
       },
       {
         "id": "D",
         "label": "D",
-        "text": "<img src=\"/question-images/math/eq_p45_400.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$$\\begin{aligned} 12s + 5p &= 250 \\\\ s + p &= 2{,}300 \\end{aligned}$$"
       }
     ],
     "correctAnswer": "A",
@@ -1376,27 +1366,27 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "In Nor th America, the standard width of a parking space is at least 7.5 feet and no more than 9.0 feet. A restaurant owner recently resurfaced the restaurant’s parking lot and wants to determine the number of parking spaces, n, in the parking lot that could be placed perpendicular to a curb that is 135 feet long, based on the standard width of a parking space. Which of the following describes all the possible values of n?",
+    "prompt": "In North America, the standard width of a parking space is at least 7.5 feet and no more than 9.0 feet. A restaurant owner recently resurfaced the restaurant’s parking lot and wants to determine the number of parking spaces, $n$, in the parking lot that could be placed perpendicular to a curb that is 135 feet long, based on the standard width of a parking space. Which of the following describes all the possible values of $n$?",
     "options": [
       {
         "id": "A",
         "label": "A",
-        "text": "<img src=\"/question-images/math/eq_p47_338.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$18 \\le n \\le 135$"
       },
       {
         "id": "B",
         "label": "B",
-        "text": "<img src=\"/question-images/math/eq_p47_360.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$7.5 \\le n \\le 9$"
       },
       {
         "id": "C",
         "label": "C",
-        "text": "<img src=\"/question-images/math/eq_p47_382.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$15 \\le n \\le 135$"
       },
       {
         "id": "D",
         "label": "D",
-        "text": "<img src=\"/question-images/math/eq_p47_404.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$15 \\le n \\le 18$"
       }
     ],
     "correctAnswer": "D",
@@ -1410,7 +1400,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "<img src=\"/question-images/math/eq_p48_247.png\" class=\"inline-math-img\" alt=\"math\" /> The equation above relates the number of minutes, x, Maria spends running each day and the number of minutes, y, she spends biking each day. In the equation, what does the number 75 represent?",
+    "prompt": "$$x + y = 75$$\n\nThe equation above relates the number of minutes, $x$, Maria spends running each day and the number of minutes, $y$, she spends biking each day. In the equation, what does the number 75 represent?",
     "options": [
       {
         "id": "A",
@@ -1444,27 +1434,27 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "<img src=\"/question-images/math/eq_p49_247.png\" class=\"inline-math-img\" alt=\"math\" /> If x is the solution to the equation above, what is the value of? <img src=\"/question-images/math/eq_p49_293.png\" class=\"inline-math-img\" alt=\"math\" />",
+    "prompt": "$$3(2x - 6) - 11 = 4(x - 3) + 6$$\n\nIf $x$ is the solution to the equation above, what is the value of $x - 3$?",
     "options": [
       {
         "id": "A",
         "label": "A",
-        "text": "<img src=\"/question-images/math/eq_p49_335.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$\\frac{23}{2}$"
       },
       {
         "id": "B",
         "label": "B",
-        "text": "<img src=\"/question-images/math/eq_p49_357.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$\\frac{17}{2}$"
       },
       {
         "id": "C",
         "label": "C",
-        "text": "<img src=\"/question-images/math/eq_p49_379.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$\\frac{15}{2}$"
       },
       {
         "id": "D",
         "label": "D",
-        "text": "<img src=\"/question-images/math/eq_p49_401.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$\\frac{13}{2}$"
       }
     ],
     "correctAnswer": "B",
@@ -1478,27 +1468,27 @@
     "difficulty": "Hard",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Alan drives an average of 100 miles each week. His car can travel an average of 25 miles per gallon of gasoline. Alan would like to reduce his weekly expenditure on gasoline by $5. Assuming gasoline costs $4 per gallon, which equation can Alan use to determine how many fewer average miles, m, he should drive each week?",
+    "prompt": "Alan drives an average of 100 miles each week. His car can travel an average of 25 miles per gallon of gasoline. Alan would like to reduce his weekly expenditure on gasoline by \\$5. Assuming gasoline costs \\$4 per gallon, which equation can Alan use to determine how many fewer average miles, $m$, he should drive each week?",
     "options": [
       {
         "id": "A",
         "label": "A",
-        "text": "<img src=\"/question-images/math/eq_p51_325.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$\\frac{25}{4}m = 95$"
       },
       {
         "id": "B",
         "label": "B",
-        "text": "<img src=\"/question-images/math/eq_p51_347.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$\\frac{25}{4}m = 5$"
       },
       {
         "id": "C",
         "label": "C",
-        "text": "<img src=\"/question-images/math/eq_p51_369.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$\\frac{4}{25}m = 95$"
       },
       {
         "id": "D",
         "label": "D",
-        "text": "<img src=\"/question-images/math/eq_p51_391.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$\\frac{4}{25}m = 5$"
       }
     ],
     "correctAnswer": "D",
@@ -1528,12 +1518,12 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The function g is defined by. What is the value of? <img src=\"/question-images/math/eq_p53_274.png\" class=\"inline-math-img\" alt=\"math\" /> <img src=\"/question-images/math/eq_p53_298.png\" class=\"inline-math-img\" alt=\"math\" />",
+    "prompt": "The function $g$ is defined by $g(x) = -x + 8$. What is the value of $g(0)$?",
     "options": [
       {
         "id": "A",
         "label": "A",
-        "text": "<img src=\"/question-images/math/eq_p53_340.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "-8"
       },
       {
         "id": "B",
@@ -1562,27 +1552,27 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "<img src=\"/question-images/math/eq_p54_247.png\" class=\"inline-math-img\" alt=\"math\" /> <img src=\"/question-images/math/eq_p54_259.png\" class=\"inline-math-img\" alt=\"math\" /> Which of the following ordered pairs is a solution to the system of inequalities above? <img src=\"/question-images/math/eq_p54_283.png\" class=\"inline-math-img\" alt=\"math\" />",
+    "prompt": "$$\\begin{aligned} y &\\le x \\\\ y &\\le -x \\end{aligned}$$\n\nWhich of the following ordered pairs $(x, y)$ is a solution to the system of inequalities above?",
     "options": [
       {
         "id": "A",
         "label": "A",
-        "text": "<img src=\"/question-images/math/eq_p54_325.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$(1, 0)$"
       },
       {
         "id": "B",
         "label": "B",
-        "text": "<img src=\"/question-images/math/eq_p54_347.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$(-1, 0)$"
       },
       {
         "id": "C",
         "label": "C",
-        "text": "<img src=\"/question-images/math/eq_p54_369.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$(0, 1)$"
       },
       {
         "id": "D",
         "label": "D",
-        "text": "<img src=\"/question-images/math/eq_p54_391.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$(0, -1)$"
       }
     ],
     "correctAnswer": "D",
@@ -1630,7 +1620,7 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "<img src=\"/question-images/math/eq_p56_247.png\" class=\"inline-math-img\" alt=\"math\" /> A tree had a height of 6 feet when it was planted. The equation above can be used to find how many years n it took the tree to reach a height of 14 feet. Which of the following is the best interpretation of the number 2 in this context?",
+    "prompt": "$$2n + 6 = 14$$\n\nA tree had a height of 6 feet when it was planted. The equation above can be used to find how many years $n$ it took the tree to reach a height of 14 feet. Which of the following is the best interpretation of the number 2 in this context?",
     "options": [
       {
         "id": "A",
@@ -1664,7 +1654,7 @@
     "difficulty": "Medium",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "In the given equation, is a constant. If the equation has infinitely many solutions, what is the value of?",
+    "prompt": "$$2x + 16 = a(x + 8)$$\n\nIn the given equation, $a$ is a constant. If the equation has infinitely many solutions, what is the value of $a$?",
     "options": [],
     "correctAnswer": "2",
     "rationale": "The correct answer is. An equation with one variable,, has infinitely many solutions only when both sides of the equation are equal for any defined value of. It's given that, where is a constant. This equation can be rewritten as. If this equation has infinitely many solutions, then both sides of this equation are equal for any defined value of. Both sides of this equation are equal for any defined value of when. Therefore, if the equation has infinitely many solutions, the value of is. Alternate approach: If the given equation,, has infinitely many solutions, then both sides of this equation are equal for any value of. If, then substituting for in yields, or. Dividing both sides of this equation by yields.",
@@ -1748,7 +1738,7 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "<img src=\"/question-images/math/eq_p60_247.png\" class=\"inline-math-img\" alt=\"math\" /> In the given equation, b is a constant. If the equation has no solution, what is the value of b?",
+    "prompt": "$$(b - 2)x = 8$$\n\nIn the given equation, $b$ is a constant. If the equation has no solution, what is the value of $b$?",
     "options": [
       {
         "id": "A",
@@ -1900,7 +1890,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The equation models the relationship between the number of different pieces of music a cer tain pianist practices, y, during an x- <img src=\"/question-images/math/eq_p65_257.png\" class=\"inline-math-img\" alt=\"math\" /> minute practice session. How many pieces did the pianist practice if the session lasted 30 minutes?",
+    "prompt": "The equation $y = 0.1x$ models the relationship between the number of different pieces of music a certain pianist practices, $y$, during an $x$-minute practice session. How many pieces did the pianist practice if the session lasted 30 minutes?",
     "options": [
       {
         "id": "A",
@@ -2054,14 +2044,12 @@
     "difficulty": "Hard",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "In the xy-plane, line k intersects the y-axis at the point and passes through the point. If the point lies on line k, what is <img src=\"/question-images/math/eq_p70_316.png\" class=\"inline-math-img\" alt=\"math\" /> <img src=\"/question-images/math/eq_p70_340.png\" class=\"inline-math-img\" alt=\"math\" /> <img src=\"/question-images/math/eq_p70_374.png\" class=\"inline-math-img\" alt=\"math\" /> the value of w? Rationale",
+    "prompt": "In the $xy$-plane, line $k$ intersects the $y$-axis at the point $(0, -6)$ and passes through the point $(2, 2)$. If the point $(20, w)$ lies on line $k$, what is the value of $w$?",
     "options": [],
     "correctAnswer": "74",
     "rationale": "",
     "acceptedAnswers": [
-      "74",
-      "70",
-      "500"
+      "74"
     ]
   },
   {
@@ -2072,7 +2060,7 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "A team of workers has been moving cargo off of a ship. The equation below models the approximate number of tons of cargo, y, that remains to be moved x hours after the team star ted working. <img src=\"/question-images/math/eq_p71_300.png\" class=\"inline-math-img\" alt=\"math\" /> The graph of this equation in the xy-plane is a line. What is the best interpretation of the x-intercept in this context?",
+    "prompt": "A team of workers has been moving cargo off of a ship. The equation below models the approximate number of tons of cargo, $y$, that remains to be moved $x$ hours after the team started working.\n\n$$y = 120 - 25x$$\n\nThe graph of this equation in the $xy$-plane is a line. What is the best interpretation of the $x$-intercept in this context?",
     "options": [
       {
         "id": "A",
@@ -2092,7 +2080,7 @@
       {
         "id": "D",
         "label": "D",
-        "text": "The team star ted with 120 tons of cargo to move."
+        "text": "The team started with 120 tons of cargo to move."
       }
     ],
     "correctAnswer": "A",
@@ -2105,28 +2093,28 @@
     "skill": "Linear equations in two variables",
     "difficulty": "Easy",
     "questionType": "mcq",
-    "passage": "",
-    "prompt": "Which of the following is an equation of the graph shown in the xy-plane above?",
+    "passage": "<img src=\"/question-images/math/b2845d88.png\" alt=\"Coordinate plane graph\" class=\"sat-stimulus-graph\" />",
+    "prompt": "Which of the following is an equation of the graph shown in the $xy$-plane above?",
     "options": [
       {
         "id": "A",
         "label": "A",
-        "text": "<img src=\"/question-images/math/eq_p72_304.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$y = -\\frac{1}{4}x - 1$"
       },
       {
         "id": "B",
         "label": "B",
-        "text": "<img src=\"/question-images/math/eq_p72_326.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$y = -\\frac{1}{4}x - 4$"
       },
       {
         "id": "C",
         "label": "C",
-        "text": "<img src=\"/question-images/math/eq_p72_348.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$y = -4x - 4$"
       },
       {
         "id": "D",
         "label": "D",
-        "text": "<img src=\"/question-images/math/eq_p72_370.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$y = -4x - 1$"
       }
     ],
     "correctAnswer": "A",
@@ -2141,7 +2129,7 @@
     "difficulty": "Hard",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "In the given system of equations, is a constant. If the system has no solution, what is the value of?",
+    "prompt": "$$\\begin{aligned} 4x - 6y &= 10y + 2 \\\\ ty &= 3 + 2x \\end{aligned}$$\n\nIn the given system of equations, $t$ is a constant. If the system has no solution, what is the value of $t$?",
     "options": [],
     "correctAnswer": "8",
     "rationale": "The correct answer is. The given system of equations can be solved using the elimination method. Multiplying both sides of the second equation in the given system by yields, or. Adding this equation to the first equation in the given system,, yields, or. Subtracting from both sides of this equation yields, or. If the given system has no solution, then the equation has no solution. If this equation has no solution, the coefficients of on each side of the equation, and, must be equal, which yields the equation. Dividing both sides of this equation by yields. Thus, if the system has no solution, the value of is. Alternate approach: A system of two linear equations in two variables, and, has no solution if the lines represented by the equations in the xy-plane are parallel and distinct. Lines represented by equations in the form, where,, and are constant terms, are parallel if the ratio of the x-coefficients is equal to the ratio of the y-coefficients, and distinct if the ratio of the x-coefficients are not equal to the ratio of the constant terms. Subtracting from both sides of the first equation in the given system yields, or. Subtracting from both sides of the second equation in the given system yields, or. The ratio of the x-coefficients for these equations is, or. The ratio of the y-coefficients for these equations is. The ratio of the constant terms for these equations is, or. Since the ratio of the x-coefficients,, is not equal to the ratio of the constants,, the lines represented by the equations are distinct. Setting the ratio of the x-coefficients equal to the ratio of the y-coefficients yields. Multiplying both sides of this equation by yields, or. Therefore, when, the lines represented by these equations are parallel. Thus, if the system has no solution, the value of is.",
@@ -2347,20 +2335,17 @@
     "difficulty": "Hard",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "In the given equation, is a constant. The equation has no solution. What is the value of?",
+    "prompt": "$$3(kx + 13) = \\frac{48}{17}x + 36$$\n\nIn the given equation, $k$ is a constant. The equation has no solution. What is the value of $k$?",
     "options": [],
     "correctAnswer": "16/17",
     "rationale": "The correct answer is. It's given that the equation has no solution. A linear equation in the form, where,,, and are constants, has no solution only when the coefficients of on each side of the equation are equal and the constant terms aren't equal. Dividing both sides of the given equation by yields, or. Since the coefficients of on each side of the equation must be equal, it follows that the value of is. Note that 16/17,.9411,.9412, and 0.941 are examples of ways to enter a correct answer.",
     "acceptedAnswers": [
-      "0.9411",
-      ".9411",
-      "0.9412",
-      ".9412",
       "16/17",
-      "0.9411764705882353",
+      ".9411",
+      ".9412",
       "0.941",
-      ".9411764705882353",
-      ".941"
+      "0.9411",
+      "0.9412"
     ]
   },
   {
@@ -2439,27 +2424,27 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Which of the following is equivalent to? <img src=\"/question-images/math/eq_p84_257.png\" class=\"inline-math-img\" alt=\"math\" />",
+    "prompt": "Which of the following is equivalent to $4x + 6 = 12$?",
     "options": [
       {
         "id": "A",
         "label": "A",
-        "text": "<img src=\"/question-images/math/eq_p84_299.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$2x + 4 = 6$"
       },
       {
         "id": "B",
         "label": "B",
-        "text": "<img src=\"/question-images/math/eq_p84_321.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$x + 3 = 3$"
       },
       {
         "id": "C",
         "label": "C",
-        "text": "<img src=\"/question-images/math/eq_p84_343.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$3x + 2 = 4$"
       },
       {
         "id": "D",
         "label": "D",
-        "text": "<img src=\"/question-images/math/eq_p84_365.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$2x + 3 = 6$"
       }
     ],
     "correctAnswer": "D",
@@ -2591,27 +2576,27 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "One pound of grapes costs $2. At this rate, how many dollars will c pounds of grapes cost?",
+    "prompt": "One pound of grapes costs \\$2. At this rate, how many dollars will $c$ pounds of grapes cost?",
     "options": [
       {
         "id": "A",
         "label": "A",
-        "text": "<img src=\"/question-images/math/eq_p89_305.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$2c$"
       },
       {
         "id": "B",
         "label": "B",
-        "text": "<img src=\"/question-images/math/eq_p89_327.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$2 + c$"
       },
       {
         "id": "C",
         "label": "C",
-        "text": "<img src=\"/question-images/math/eq_p89_349.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$\\frac{2}{c}$"
       },
       {
         "id": "D",
         "label": "D",
-        "text": "<img src=\"/question-images/math/eq_p89_371.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$\\frac{c}{2}$"
       }
     ],
     "correctAnswer": "A",
@@ -2744,27 +2729,27 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "<img src=\"/question-images/math/eq_p95_250.png\" class=\"inline-math-img\" alt=\"math\" /> What is the solution to the given system of equations? <img src=\"/question-images/math/eq_p95_274.png\" class=\"inline-math-img\" alt=\"math\" />",
+    "prompt": "$$\\begin{aligned} y &= 2x + 3 \\\\ x &= 1 \\end{aligned}$$\n\nWhat is the solution $(x, y)$ to the given system of equations?",
     "options": [
       {
         "id": "A",
         "label": "A",
-        "text": "<img src=\"/question-images/math/eq_p95_316.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$(1, 2)$"
       },
       {
         "id": "B",
         "label": "B",
-        "text": "<img src=\"/question-images/math/eq_p95_338.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$(1, 5)$"
       },
       {
         "id": "C",
         "label": "C",
-        "text": "<img src=\"/question-images/math/eq_p95_360.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$(2, 3)$"
       },
       {
         "id": "D",
         "label": "D",
-        "text": "<img src=\"/question-images/math/eq_p95_382.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$(2, 7)$"
       }
     ],
     "correctAnswer": "B",
@@ -2777,28 +2762,28 @@
     "skill": "Systems of two linear equations in two variables",
     "difficulty": "Easy",
     "questionType": "mcq",
-    "passage": "",
-    "prompt": "A system of two linear equations is graphed in the xy-plane below. Which of the following points is the solution to the system of equations?",
+    "passage": "<img src=\"/question-images/math/e1259a5a.png\" alt=\"Coordinate plane graph\" class=\"sat-stimulus-graph\" />",
+    "prompt": "A system of two linear equations is graphed in the $xy$-plane above. Which of the following points is the solution to the system of equations?",
     "options": [
       {
         "id": "A",
         "label": "A",
-        "text": "<img src=\"/question-images/math/eq_p96_317.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$(3, 9)$"
       },
       {
         "id": "B",
         "label": "B",
-        "text": "<img src=\"/question-images/math/eq_p96_339.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$(6, 15)$"
       },
       {
         "id": "C",
         "label": "C",
-        "text": "<img src=\"/question-images/math/eq_p96_361.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$(8, 10)$"
       },
       {
         "id": "D",
         "label": "D",
-        "text": "<img src=\"/question-images/math/eq_p96_383.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$(12, 18)$"
       }
     ],
     "correctAnswer": "A",
@@ -3015,7 +3000,7 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "<img src=\"/question-images/math/eq_p104_250.png\" class=\"inline-math-img\" alt=\"math\" /> If the system of equations above has solution, what is the value of? <img src=\"/question-images/math/eq_p104_298.png\" class=\"inline-math-img\" alt=\"math\" /> <img src=\"/question-images/math/eq_p104_274.png\" class=\"inline-math-img\" alt=\"math\" />",
+    "prompt": "$$\\begin{aligned} 4x + 5y &= 100 \\\\ 5x + 4y &= 62 \\end{aligned}$$\n\nIf the system of equations above has solution $(x, y)$, what is the value of $x + y$?",
     "options": [
       {
         "id": "A",
@@ -3202,7 +3187,7 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "In the xy-plane, the graph of intersects the graph of at the point. What is the value of a? <img src=\"/question-images/math/eq_p110_280.png\" class=\"inline-math-img\" alt=\"math\" /> <img src=\"/question-images/math/eq_p110_304.png\" class=\"inline-math-img\" alt=\"math\" /> <img src=\"/question-images/math/eq_p110_328.png\" class=\"inline-math-img\" alt=\"math\" />",
+    "prompt": "In the $xy$-plane, the graph of $y = x + 3$ intersects the graph of $y = 2x - 6$ at the point $(a, b)$. What is the value of $a$?",
     "options": [
       {
         "id": "A",
@@ -3270,7 +3255,7 @@
     "difficulty": "Hard",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "In the xy-plane, line passes through the point and is parallel to the line represented by the equation. If line also passes through the point, what is the value of?",
+    "prompt": "In the $xy$-plane, line $\\ell$ passes through the point $(0, 0)$ and is parallel to the line represented by the equation $y = 8x + 2$. If line $\\ell$ also passes through the point $(3, d)$, what is the value of $d$?",
     "options": [],
     "correctAnswer": "24",
     "rationale": "The correct answer is. A line in the xy-plane can be defined by the equation, where is the slope of the line and is the y-coordinate of the y-intercept of the line. It's given that line passes through the point. Therefore, the y-coordinate of the y-intercept of line is. It's given that line is parallel to the line represented by the equation. Since parallel lines have the same slope, it follows that the slope of line is. Therefore, line can be defined by an equation in the form, where and. Substituting for and for in yields the equation, or. If line passes through the point, then when, for the equation. Substituting for and for in the equation yields, or.",
@@ -3307,27 +3292,27 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Tom scored 85, 78, and 98 on his first three exams in history class. Solving which inequality gives the score, G, on Tom’s four th exam that will result in a mean score on all four exams of at least 90?",
+    "prompt": "Tom scored 85, 78, and 98 on his first three exams in history class. Solving which inequality gives the score, $G$, on Tom’s fourth exam that will result in a mean score on all four exams of at least 90?",
     "options": [
       {
         "id": "A",
         "label": "A",
-        "text": "<img src=\"/question-images/math/eq_p114_310.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$90 - (85 + 78 + 98) \\le 4G$"
       },
       {
         "id": "B",
         "label": "B",
-        "text": "<img src=\"/question-images/math/eq_p114_332.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$4G + 85 + 78 + 98 \\ge 360$"
       },
       {
         "id": "C",
         "label": "C",
-        "text": "<img src=\"/question-images/math/eq_p114_354.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$\\frac{G + 85 + 78 + 98}{4} \\ge 90$"
       },
       {
         "id": "D",
         "label": "D",
-        "text": "<img src=\"/question-images/math/eq_p114_376.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$\\frac{85 + 78 + 98}{4} \\ge 90 - 4G$"
       }
     ],
     "correctAnswer": "C",
@@ -3341,12 +3326,12 @@
     "difficulty": "Hard",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "In the system of equations below, a and c are constants. <img src=\"/question-images/math/eq_p115_299.png\" class=\"inline-math-img\" alt=\"math\" /> If the system of equations has an infinite number of solutions, what is the value of a? <img src=\"/question-images/math/eq_p115_325.png\" class=\"inline-math-img\" alt=\"math\" />",
+    "prompt": "$$\\begin{aligned} \\frac{1}{2}x + \\frac{1}{3}y &= \\frac{1}{6} \\\\ ax + y &= c \\end{aligned}$$\n\nIn the system of equations above, $a$ and $c$ are constants. If the system of equations has an infinite number of solutions, what is the value of $a$?",
     "options": [
       {
         "id": "A",
         "label": "A",
-        "text": "<img src=\"/question-images/math/eq_p115_387.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$-\\frac{1}{2}$"
       },
       {
         "id": "B",
@@ -3356,12 +3341,12 @@
       {
         "id": "C",
         "label": "C",
-        "text": "<img src=\"/question-images/math/eq_p115_427.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$\\frac{1}{2}$"
       },
       {
         "id": "D",
         "label": "D",
-        "text": "<img src=\"/question-images/math/eq_p115_449.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$\\frac{3}{2}$"
       }
     ],
     "correctAnswer": "D",
@@ -3410,27 +3395,27 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The boiling point of water at sea level is 212 degrees Fahrenheit. For every 550 feet above sea level, the boiling point of water is lowered by <img src=\"/question-images/math/eq_p117_256.png\" class=\"inline-math-img\" alt=\"math\" /> about. Which of the following equations can be used to find the boiling point B of water, in, x feet above sea level? <img src=\"/question-images/math/eq_p117_284.png\" class=\"inline-math-img\" alt=\"math\" /> <img src=\"/question-images/math/eq_p117_330.png\" class=\"inline-math-img\" alt=\"math\" />",
+    "prompt": "The boiling point of water at sea level is 212 degrees Fahrenheit ($^\\circ\\text{F}$). For every 550 feet above sea level, the boiling point of water is lowered by about $1^\\circ\\text{F}$. Which of the following equations can be used to find the boiling point $B$ of water, in $^\\circ\\text{F}$, $x$ feet above sea level?",
     "options": [
       {
         "id": "A",
         "label": "A",
-        "text": "<img src=\"/question-images/math/eq_p117_392.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$B = 550 + \\frac{x}{212}$"
       },
       {
         "id": "B",
         "label": "B",
-        "text": "<img src=\"/question-images/math/eq_p117_414.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$B = 550 - \\frac{x}{212}$"
       },
       {
         "id": "C",
         "label": "C",
-        "text": "<img src=\"/question-images/math/eq_p117_436.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$B = 212 + \\frac{x}{550}$"
       },
       {
         "id": "D",
         "label": "D",
-        "text": "<img src=\"/question-images/math/eq_p117_458.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$B = 212 - \\frac{x}{550}$"
       }
     ],
     "correctAnswer": "D",
@@ -3546,17 +3531,17 @@
     "difficulty": "Hard",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "<img src=\"/question-images/math/eq_p121_249.png\" class=\"inline-math-img\" alt=\"math\" /> If is the solution to the system of equations above, what is the value of? <img src=\"/question-images/math/eq_p121_273.png\" class=\"inline-math-img\" alt=\"math\" /> <img src=\"/question-images/math/eq_p121_303.png\" class=\"inline-math-img\" alt=\"math\" />",
+    "prompt": "$$\\begin{aligned} 7x - 5y &= 4 \\\\ 4x - 8y &= 9 \\end{aligned}$$\n\nIf $(x, y)$ is the solution to the system of equations above, what is the value of $3x + 3y$?",
     "options": [
       {
         "id": "A",
         "label": "A",
-        "text": "<img src=\"/question-images/math/eq_p121_345.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "-13"
       },
       {
         "id": "B",
         "label": "B",
-        "text": "<img src=\"/question-images/math/eq_p121_367.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "-5"
       },
       {
         "id": "C",
@@ -3615,27 +3600,27 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "A city’s total expense budget for one year was x million dollars. The city budgeted y million dollars for depar tmental expenses and 201 million dollars for all other expenses. Which of the following represents the relationship between x and y in this context?",
+    "prompt": "A city’s total expense budget for one year was $x$ million dollars. The city budgeted $y$ million dollars for departmental expenses and 201 million dollars for all other expenses. Which of the following represents the relationship between $x$ and $y$ in this context?",
     "options": [
       {
         "id": "A",
         "label": "A",
-        "text": "<img src=\"/question-images/math/eq_p123_397.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$x + y = 201$"
       },
       {
         "id": "B",
         "label": "B",
-        "text": "<img src=\"/question-images/math/eq_p123_419.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$x - y = 201$"
       },
       {
         "id": "C",
         "label": "C",
-        "text": "<img src=\"/question-images/math/eq_p123_441.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$2x - y = 201$"
       },
       {
         "id": "D",
         "label": "D",
-        "text": "<img src=\"/question-images/math/eq_p123_463.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$y - x = 201$"
       }
     ],
     "correctAnswer": "B",
@@ -3649,27 +3634,27 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "A cer tain elephant weighs 200 pounds at bir th and gains more than 2 but less than 3 pounds per day during its first year. Which of the following inequalities represents all possible weights w, in pounds, for the elephant 365 days after bir th?",
+    "prompt": "A certain elephant weighs 200 pounds at birth and gains more than 2 but less than 3 pounds per day during its first year. Which of the following inequalities represents all possible weights $w$, in pounds, for the elephant 365 days after birth?",
     "options": [
       {
         "id": "A",
         "label": "A",
-        "text": "<img src=\"/question-images/math/eq_p124_308.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$400 < w < 600$"
       },
       {
         "id": "B",
         "label": "B",
-        "text": "<img src=\"/question-images/math/eq_p124_330.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$565 < w < 830$"
       },
       {
         "id": "C",
         "label": "C",
-        "text": "<img src=\"/question-images/math/eq_p124_352.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$730 < w < 1{,}095$"
       },
       {
         "id": "D",
         "label": "D",
-        "text": "<img src=\"/question-images/math/eq_p124_374.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$930 < w < 1{,}295$"
       }
     ],
     "correctAnswer": "D",
@@ -3683,7 +3668,7 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "<img src=\"/question-images/math/eq_p125_244.png\" class=\"inline-math-img\" alt=\"math\" /> For the function f defined above, what is the value of? <img src=\"/question-images/math/eq_p125_288.png\" class=\"inline-math-img\" alt=\"math\" />",
+    "prompt": "$$f(x) = \\frac{x + 7}{4}$$\n\nFor the function $f$ defined above, what is the value of $f(9) - f(1)$?",
     "options": [
       {
         "id": "A",
@@ -3698,12 +3683,12 @@
       {
         "id": "C",
         "label": "C",
-        "text": "<img src=\"/question-images/math/eq_p125_366.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$\\frac{1}{4}$"
       },
       {
         "id": "D",
         "label": "D",
-        "text": "<img src=\"/question-images/math/eq_p125_388.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$\\frac{9}{4}$"
       }
     ],
     "correctAnswer": "B",
@@ -3717,27 +3702,27 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "<img src=\"/question-images/math/eq_p126_247.png\" class=\"inline-math-img\" alt=\"math\" /> In the equation above, a and b are constants. If the equation has infinitely many solutions, what are the values of a and b?",
+    "prompt": "$$a(3 - x) - b = -1 - 2x$$\n\nIn the equation above, $a$ and $b$ are constants. If the equation has infinitely many solutions, what are the values of $a$ and $b$?",
     "options": [
       {
         "id": "A",
         "label": "A",
-        "text": "and <img src=\"/question-images/math/eq_p126_371.png\" class=\"inline-math-img\" alt=\"math\" /> <img src=\"/question-images/math/eq_p126_395.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$a = 2$ and $b = 1$"
       },
       {
         "id": "B",
         "label": "B",
-        "text": "and <img src=\"/question-images/math/eq_p126_416.png\" class=\"inline-math-img\" alt=\"math\" /> <img src=\"/question-images/math/eq_p126_440.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$a = 2$ and $b = 7$"
       },
       {
         "id": "C",
         "label": "C",
-        "text": "and <img src=\"/question-images/math/eq_p126_462.png\" class=\"inline-math-img\" alt=\"math\" /> <img src=\"/question-images/math/eq_p126_486.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$a = -2$ and $b = 5$"
       },
       {
         "id": "D",
         "label": "D",
-        "text": "and <img src=\"/question-images/math/eq_p126_507.png\" class=\"inline-math-img\" alt=\"math\" /> <img src=\"/question-images/math/eq_p126_531.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$a = -2$ and $b = -5$"
       }
     ],
     "correctAnswer": "B",
@@ -3789,27 +3774,27 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "<img src=\"/question-images/math/eq_p129_247.png\" class=\"inline-math-img\" alt=\"math\" /> The Karvonen formula above shows the relationship between Alice’s target hear t rate H, in beats per minute (bpm), and the intensity level p of different activities. When, Alice has a resting hear t rate. When, Alice has her maximum hear t rate. It is recommended that p be <img src=\"/question-images/math/eq_p129_324.png\" class=\"inline-math-img\" alt=\"math\" /> <img src=\"/question-images/math/eq_p129_348.png\" class=\"inline-math-img\" alt=\"math\" /> between 0.5 and 0.85 for Alice when she trains. Which of the following inequalities describes Alice’s target training hear t rate?",
+    "prompt": "$$H = 120p + 60$$\n\nThe Karvonen formula above shows the relationship between Alice’s target heart rate $H$, in beats per minute (bpm), and the intensity level $p$ of different activities. When $p = 0$, Alice has a resting heart rate. When $p = 1$, Alice has her maximum heart rate. It is recommended that $p$ be between 0.5 and 0.85 for Alice when she trains. Which of the following inequalities describes Alice’s target training heart rate?",
     "options": [
       {
         "id": "A",
         "label": "A",
-        "text": "<img src=\"/question-images/math/eq_p129_422.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$120 \\le H \\le 162$"
       },
       {
         "id": "B",
         "label": "B",
-        "text": "<img src=\"/question-images/math/eq_p129_444.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$102 \\le H \\le 120$"
       },
       {
         "id": "C",
         "label": "C",
-        "text": "<img src=\"/question-images/math/eq_p129_466.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$60 \\le H \\le 162$"
       },
       {
         "id": "D",
         "label": "D",
-        "text": "<img src=\"/question-images/math/eq_p129_488.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$60 \\le H \\le 102$"
       }
     ],
     "correctAnswer": "A",
@@ -3940,7 +3925,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "<img src=\"/question-images/math/eq_p135_247.png\" class=\"inline-math-img\" alt=\"math\" /> Mario purchased 4 binders that cost x dollars each and 3 notebooks that cost y dollars each. If the given equation represents this situation, which of the following is the best interpretation of 24 in this context?",
+    "prompt": "$$4x + 3y = 24$$\n\nMario purchased 4 binders that cost $x$ dollars each and 3 notebooks that cost $y$ dollars each. If the given equation represents this situation, which of the following is the best interpretation of 24 in this context?",
     "options": [
       {
         "id": "A",
@@ -3974,7 +3959,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "<img src=\"/question-images/math/eq_p136_247.png\" class=\"inline-math-img\" alt=\"math\" /> How many solutions exist to the equation shown above?",
+    "prompt": "$$10 = 2x + 4$$\n\nHow many solutions exist to the equation shown above?",
     "options": [
       {
         "id": "A",
@@ -4092,27 +4077,27 @@
     "difficulty": "Hard",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Oil and gas production in a cer tain area dropped from 4 million barrels in 2000 to 1.9 million barrels in 2013. Assuming that the oil and gas production decreased at a constant rate, which of the following linear functions f best models the production, in millions of barrels, t years after the year 2000?",
+    "prompt": "Oil and gas production in a certain area dropped from 4 million barrels in 2000 to 1.9 million barrels in 2013. Assuming that the oil and gas production decreased at a constant rate, which of the following linear functions $f$ best models the production, in millions of barrels, $t$ years after the year 2000?",
     "options": [
       {
         "id": "A",
         "label": "A",
-        "text": "<img src=\"/question-images/math/eq_p140_346.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$f(t) = \\frac{21}{130}t + 4$"
       },
       {
         "id": "B",
         "label": "B",
-        "text": "<img src=\"/question-images/math/eq_p140_368.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$f(t) = \\frac{19}{130}t + 4$"
       },
       {
         "id": "C",
         "label": "C",
-        "text": "<img src=\"/question-images/math/eq_p140_390.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$f(t) = -\\frac{21}{130}t + 4$"
       },
       {
         "id": "D",
         "label": "D",
-        "text": "<img src=\"/question-images/math/eq_p140_412.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$f(t) = -\\frac{19}{130}t + 4$"
       }
     ],
     "correctAnswer": "C",
@@ -4160,27 +4145,27 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "In the xy-plane, the points and lie on the graph of which of the following linear functions? <img src=\"/question-images/math/eq_p142_274.png\" class=\"inline-math-img\" alt=\"math\" /> <img src=\"/question-images/math/eq_p142_298.png\" class=\"inline-math-img\" alt=\"math\" />",
+    "prompt": "In the $xy$-plane, the points $(-2, 3)$ and $(4, -5)$ lie on the graph of which of the following linear functions?",
     "options": [
       {
         "id": "A",
         "label": "A",
-        "text": "<img src=\"/question-images/math/eq_p142_342.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$f(x) = x + 5$"
       },
       {
         "id": "B",
         "label": "B",
-        "text": "<img src=\"/question-images/math/eq_p142_364.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$f(x) = \\frac{1}{2}x + 4$"
       },
       {
         "id": "C",
         "label": "C",
-        "text": "<img src=\"/question-images/math/eq_p142_386.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$f(x) = -\\frac{4}{3}x + \\frac{1}{3}$"
       },
       {
         "id": "D",
         "label": "D",
-        "text": "<img src=\"/question-images/math/eq_p142_408.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$f(x) = -\\frac{3}{2}x + 1$"
       }
     ],
     "correctAnswer": "C",
@@ -4244,28 +4229,28 @@
     "skill": "Linear functions",
     "difficulty": "Medium",
     "questionType": "mcq",
-    "passage": "",
-    "prompt": "The graph above shows the distance traveled d, in feet, by a product on a conveyor belt m minutes after the product is placed on the belt. Which of the following equations correctly relates d and m?",
+    "passage": "<img src=\"/question-images/math/11e1ab81.png\" alt=\"Conveyor belt graph\" class=\"sat-stimulus-graph\" />",
+    "prompt": "The graph above shows the distance traveled $d$, in feet, by a product on a conveyor belt $m$ minutes after the product is placed on the belt. Which of the following equations correctly relates $d$ and $m$?",
     "options": [
       {
         "id": "A",
         "label": "A",
-        "text": "<img src=\"/question-images/math/eq_p145_373.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$d = 2m$"
       },
       {
         "id": "B",
         "label": "B",
-        "text": "<img src=\"/question-images/math/eq_p145_395.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$d = \\frac{1}{2}m$"
       },
       {
         "id": "C",
         "label": "C",
-        "text": "<img src=\"/question-images/math/eq_p145_417.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$d = m + 2$"
       },
       {
         "id": "D",
         "label": "D",
-        "text": "<img src=\"/question-images/math/eq_p145_439.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$d = 2m + 2$"
       }
     ],
     "correctAnswer": "A",
@@ -4402,17 +4387,12 @@
     "difficulty": "Medium",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "<img src=\"/question-images/math/eq_p150_244.png\" class=\"inline-math-img\" alt=\"math\" /> A company’s total cost, in dollars, to produce x shir ts is given by the function above, where m is a constant and. The total cost to <img src=\"/question-images/math/eq_p150_275.png\" class=\"inline-math-img\" alt=\"math\" /> <img src=\"/question-images/math/eq_p150_339.png\" class=\"inline-math-img\" alt=\"math\" /> produce 100 shir ts is $800. What is the total cost, in dollars, to produce 1000 shir ts? (Disregard the $ sign when gridding your answer.) Rationale",
+    "prompt": "$$C(x) = mx + 500$$\n\nA company’s total cost $C(x)$, in dollars, to produce $x$ shirts is given by the function above, where $m$ is a constant and $x > 0$. The total cost to produce 100 shirts is \\$800. What is the total cost, in dollars, to produce 1,000 shirts? (Disregard the \\$ sign when gridding your answer.)",
     "options": [],
     "correctAnswer": "3500",
     "rationale": "",
     "acceptedAnswers": [
-      "3500",
-      "800",
-      "100",
-      "1000",
-      "150",
-      "393"
+      "3500"
     ]
   },
   {
@@ -4423,27 +4403,27 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "A gardener buys two kinds of fer tilizer. Fer tilizer A contains 60% filler materials by weight and Fer tilizer B contains 40% filler materials by weight. Together, the fer tilizers bought by the gardener contain a total of 240 pounds of filler materials. Which equation models this relationship, where x is the number of pounds of Fer tilizer A and y is the number of pounds of Fer tilizer B?",
+    "prompt": "A gardener buys two kinds of fertilizer. Fertilizer A contains 60% filler materials by weight and Fertilizer B contains 40% filler materials by weight. Together, the fertilizers bought by the gardener contain a total of 240 pounds of filler materials. Which equation models this relationship, where $x$ is the number of pounds of Fertilizer A and $y$ is the number of pounds of Fertilizer B?",
     "options": [
       {
         "id": "A",
         "label": "A",
-        "text": "<img src=\"/question-images/math/eq_p151_364.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$0.4x + 0.6y = 240$"
       },
       {
         "id": "B",
         "label": "B",
-        "text": "<img src=\"/question-images/math/eq_p151_386.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$0.6x + 0.4y = 240$"
       },
       {
         "id": "C",
         "label": "C",
-        "text": "<img src=\"/question-images/math/eq_p151_408.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$40x + 60y = 240$"
       },
       {
         "id": "D",
         "label": "D",
-        "text": "<img src=\"/question-images/math/eq_p151_430.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$60x + 40y = 240$"
       }
     ],
     "correctAnswer": "B",
@@ -4593,27 +4573,27 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "In the xy-plane, a line has a slope of 6 and passes through the point. Which of the following is an equation of this line? <img src=\"/question-images/math/eq_p156_279.png\" class=\"inline-math-img\" alt=\"math\" />",
+    "prompt": "In the $xy$-plane, a line has a slope of 6 and passes through the point $(0, 8)$. Which of the following is an equation of this line?",
     "options": [
       {
         "id": "A",
         "label": "A",
-        "text": "<img src=\"/question-images/math/eq_p156_323.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$y = 6x + 8$"
       },
       {
         "id": "B",
         "label": "B",
-        "text": "<img src=\"/question-images/math/eq_p156_345.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$y = 6x + 48$"
       },
       {
         "id": "C",
         "label": "C",
-        "text": "<img src=\"/question-images/math/eq_p156_367.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$y = 8x + 6$"
       },
       {
         "id": "D",
         "label": "D",
-        "text": "<img src=\"/question-images/math/eq_p156_389.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$y = 8x + 48$"
       }
     ],
     "correctAnswer": "A",
@@ -4660,28 +4640,28 @@
     "skill": "Linear equations in two variables",
     "difficulty": "Medium",
     "questionType": "mcq",
-    "passage": "",
-    "prompt": "An ar tist paints and sells square tiles. The selling price P, in dollars, of a painted tile is a linear function of the side length of the tile s, in inches, as shown in the table below. Side length, s (inches) Price, P (dollars) 3 8.00 6 18.00 9 28.00 Which of the following could define the relationship between s and P?",
+    "passage": "<table class=\"sat-table\"><thead><tr><th>Side length, $s$ (inches)</th><th>Price, $P$ (dollars)</th></tr></thead><tbody><tr><td>3</td><td>8.00</td></tr><tr><td>6</td><td>18.00</td></tr><tr><td>9</td><td>28.00</td></tr></tbody></table>",
+    "prompt": "An artist paints and sells square tiles. The selling price $P$, in dollars, of a painted tile is a linear function of the side length of the tile $s$, in inches, as shown in the table above. Which of the following could define the relationship between $s$ and $P$?",
     "options": [
       {
         "id": "A",
         "label": "A",
-        "text": "<img src=\"/question-images/math/eq_p158_539.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$P = 3s + 10$"
       },
       {
         "id": "B",
         "label": "B",
-        "text": "<img src=\"/question-images/math/eq_p158_561.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$P = \\frac{10}{3}s + 8$"
       },
       {
         "id": "C",
         "label": "C",
-        "text": "<img src=\"/question-images/math/eq_p158_583.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$P = \\frac{10}{3}s - 2$"
       },
       {
         "id": "D",
         "label": "D",
-        "text": "<img src=\"/question-images/math/eq_p158_605.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$P = \\frac{3}{10}s - \\frac{1}{10}$"
       }
     ],
     "correctAnswer": "C",
@@ -4695,27 +4675,27 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Cathy has n CDs. Gerry has 3 more than twice the number of CDs that Cathy has. In terms of n, how many CDs does Gerry have?",
+    "prompt": "Cathy has $n$ CDs. Gerry has 3 more than twice the number of CDs that Cathy has. In terms of $n$, how many CDs does Gerry have?",
     "options": [
       {
         "id": "A",
         "label": "A",
-        "text": "<img src=\"/question-images/math/eq_p159_317.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$3n - 2$"
       },
       {
         "id": "B",
         "label": "B",
-        "text": "<img src=\"/question-images/math/eq_p159_339.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$3n + 2$"
       },
       {
         "id": "C",
         "label": "C",
-        "text": "<img src=\"/question-images/math/eq_p159_361.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$2n - 3$"
       },
       {
         "id": "D",
         "label": "D",
-        "text": "<img src=\"/question-images/math/eq_p159_383.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$2n + 3$"
       }
     ],
     "correctAnswer": "D",
@@ -4729,17 +4709,17 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Marisol drove 3 hours from City A to City B. The equation below estimates the distance d, in miles, Marisol traveled after driving for t hours. <img src=\"/question-images/math/eq_p160_296.png\" class=\"inline-math-img\" alt=\"math\" /> Which of the following does 45 represent in the equation?",
+    "prompt": "Marisol drove 3 hours from City A to City B. The equation below estimates the distance $d$, in miles, Marisol traveled after driving for $t$ hours.\n\n$$d = 45t$$\n\nWhich of the following does 45 represent in the equation?",
     "options": [
       {
         "id": "A",
         "label": "A",
-        "text": "Marisol took 45 trips from City A to City"
+        "text": "Marisol took 45 trips from City A to City B."
       },
       {
         "id": "B",
         "label": "B",
-        "text": "B. The distance between City A and City B is 45 miles."
+        "text": "The distance between City A and City B is 45 miles."
       },
       {
         "id": "C",
@@ -4831,27 +4811,27 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "For what value of w does? <img src=\"/question-images/math/eq_p163_282.png\" class=\"inline-math-img\" alt=\"math\" />",
+    "prompt": "For what value of $w$ does $w - 10 = 2(w + 5)$?",
     "options": [
       {
         "id": "A",
         "label": "A",
-        "text": "<img src=\"/question-images/math/eq_p163_327.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "5"
       },
       {
         "id": "B",
         "label": "B",
-        "text": "<img src=\"/question-images/math/eq_p163_349.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "0"
       },
       {
         "id": "C",
         "label": "C",
-        "text": "<img src=\"/question-images/math/eq_p163_371.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "-15"
       },
       {
         "id": "D",
         "label": "D",
-        "text": "<img src=\"/question-images/math/eq_p163_393.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "-20"
       }
     ],
     "correctAnswer": "D",
@@ -4899,7 +4879,7 @@
     "difficulty": "Medium",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "The function is defined by. What is the -coordinate of the x-intercept of the graph of in the xy-plane?",
+    "prompt": "The function $f$ is defined by $f(x) = -9x + 9$. What is the $y$-coordinate of the $y$-intercept of the graph of $y = f(x)$ in the $xy$-plane?",
     "options": [],
     "correctAnswer": "9",
     "rationale": "The correct answer is. The y-intercept of the graph of in the xy-plane is the point where the graph of crosses the y-axis, which occurs at. It’s given that the function is defined by. Substituting for and for in this equation yields, or. It follows that when and that the y-intercept of the graph of in the xy-plane is. Therefore, the y-coordinate of the y-intercept of the graph of in the xy-plane is.",
@@ -4915,7 +4895,7 @@
     "difficulty": "Hard",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Line in the xy-plane is perpendicular to the line with equation. What is the slope of line? <img src=\"/question-images/math/eq_p166_256.png\" class=\"inline-math-img\" alt=\"math\" /> <img src=\"/question-images/math/eq_p166_300.png\" class=\"inline-math-img\" alt=\"math\" /> <img src=\"/question-images/math/eq_p166_323.png\" class=\"inline-math-img\" alt=\"math\" />",
+    "prompt": "Line $\\ell$ in the $xy$-plane is perpendicular to the line with equation $x = 2$. What is the slope of line $\\ell$?",
     "options": [
       {
         "id": "A",
@@ -4925,17 +4905,17 @@
       {
         "id": "B",
         "label": "B",
-        "text": "<img src=\"/question-images/math/eq_p166_383.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$-\\frac{1}{2}$"
       },
       {
         "id": "C",
         "label": "C",
-        "text": "<img src=\"/question-images/math/eq_p166_405.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "-2"
       },
       {
         "id": "D",
         "label": "D",
-        "text": "The slope of line is undefined. <img src=\"/question-images/math/eq_p166_436.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "The slope of line $\\ell$ is undefined."
       }
     ],
     "correctAnswer": "A",
@@ -4983,15 +4963,13 @@
     "difficulty": "Medium",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "<img src=\"/question-images/math/eq_p168_247.png\" class=\"inline-math-img\" alt=\"math\" /> What value of p is the solution of the equation above? Rationale",
+    "prompt": "$$2(p + 1) + 8(p - 1) = 5p$$\n\nWhat value of $p$ is the solution of the equation above?",
     "options": [],
-    "correctAnswer": "1.2",
+    "correctAnswer": "6/5",
     "rationale": "",
     "acceptedAnswers": [
-      "1.2",
-      "1",
-      "168",
-      "312"
+      "6/5",
+      "1.2"
     ]
   },
   {
@@ -5104,7 +5082,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "<img src=\"/question-images/math/eq_p173_244.png\" class=\"inline-math-img\" alt=\"math\" /> In the equation above, T represents Brittany’s total take-home pay, in dollars, for her first week of work, where h represents the number of hours she worked that week and 1,000 represents a sign-on bonus. If Brittany’s total take-home pay was $1,576, for how many hours was Brittany paid for her first week of work?",
+    "prompt": "$$T = 1{,}000 + 18h$$\n\nIn the equation above, $T$ represents Brittany’s total take-home pay, in dollars, for her first week of work, where $h$ represents the number of hours she worked that week and 1,000 represents a sign-on bonus. If Brittany’s total take-home pay was \\$1,576, for how many hours was Brittany paid for her first week of work?",
     "options": [
       {
         "id": "A",
@@ -5138,27 +5116,27 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The function is defined as, where a is a constant. If, what is the value of a? <img src=\"/question-images/math/eq_p174_254.png\" class=\"inline-math-img\" alt=\"math\" /> <img src=\"/question-images/math/eq_p174_278.png\" class=\"inline-math-img\" alt=\"math\" /> <img src=\"/question-images/math/eq_p174_322.png\" class=\"inline-math-img\" alt=\"math\" />",
+    "prompt": "The function $g$ is defined as $g(x) = 5x + a$, where $a$ is a constant. If $g(4) = 31$, what is the value of $a$?",
     "options": [
       {
         "id": "A",
         "label": "A",
-        "text": "<img src=\"/question-images/math/eq_p174_384.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "30"
       },
       {
         "id": "B",
         "label": "B",
-        "text": "<img src=\"/question-images/math/eq_p174_406.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "22"
       },
       {
         "id": "C",
         "label": "C",
-        "text": "<img src=\"/question-images/math/eq_p174_428.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "11"
       },
       {
         "id": "D",
         "label": "D",
-        "text": "<img src=\"/question-images/math/eq_p174_450.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "-23"
       }
     ],
     "correctAnswer": "C",
@@ -5172,27 +5150,27 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Tony spends $80 per month on public transpor tation. A 10-ride pass costs $12.50, and a single-ride pass costs $1.50. If g represents the number of 10-ride passes Tony buys in a month and t represents the number of single-ride passes Tony buys in a month, which of the following equations best represents the relationship between g and t?",
+    "prompt": "Tony spends \\$80 per month on public transportation. A 10-ride pass costs \\$12.50, and a single-ride pass costs \\$1.50. If $g$ represents the number of 10-ride passes Tony buys in a month and $t$ represents the number of single-ride passes Tony buys in a month, which of the following equations best represents the relationship between $g$ and $t$?",
     "options": [
       {
         "id": "A",
         "label": "A",
-        "text": "<img src=\"/question-images/math/eq_p175_365.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$g + t = 80$"
       },
       {
         "id": "B",
         "label": "B",
-        "text": "<img src=\"/question-images/math/eq_p175_387.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$g + t = 1.50 + 12.50$"
       },
       {
         "id": "C",
         "label": "C",
-        "text": "<img src=\"/question-images/math/eq_p175_409.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$1.50g + 12.50t = 80$"
       },
       {
         "id": "D",
         "label": "D",
-        "text": "<img src=\"/question-images/math/eq_p175_431.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$12.50g + 1.50t = 80$"
       }
     ],
     "correctAnswer": "D",
@@ -5308,15 +5286,12 @@
     "difficulty": "Hard",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "<img src=\"/question-images/math/eq_p179_246.png\" class=\"inline-math-img\" alt=\"math\" /> The formula above is Ohm’s law for an electric circuit with current I, in amperes, potential difference V, in volts, and resistance R, in ohms. A circuit has a resistance of 500 ohms, and its potential difference will be generated by n six-volt batteries that produce a total potential difference of volts. If the circuit is to have a current of no more than 0.25 ampere, what is the greatest number, n, of six-volt batteries that can be used? <img src=\"/question-images/math/eq_p179_365.png\" class=\"inline-math-img\" alt=\"math\" /> Rationale",
+    "prompt": "$$I = \\frac{V}{R}$$\n\nThe formula above is Ohm’s law for an electric circuit with current $I$, in amperes, potential difference $V$, in volts, and resistance $R$, in ohms. A circuit has a resistance of 500 ohms, and its potential difference will be generated by $n$ six-volt batteries that produce a total potential difference of $6n$ volts. If the circuit is to have a current of no more than 0.25 ampere, what is the greatest number, $n$, of six-volt batteries that can be used?",
     "options": [],
     "correctAnswer": "20",
     "rationale": "",
     "acceptedAnswers": [
-      "20",
-      "500",
-      "179",
-      "492"
+      "20"
     ]
   },
   {
@@ -5327,7 +5302,7 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "If, what is the value of? <img src=\"/question-images/math/eq_p180_281.png\" class=\"inline-math-img\" alt=\"math\" /> <img src=\"/question-images/math/eq_p180_257.png\" class=\"inline-math-img\" alt=\"math\" />",
+    "prompt": "If $4x - \\frac{1}{2} = -5$, what is the value of $8x - 1$?",
     "options": [
       {
         "id": "A",
@@ -5337,17 +5312,17 @@
       {
         "id": "B",
         "label": "B",
-        "text": "<img src=\"/question-images/math/eq_p180_341.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$-\\frac{9}{2}$"
       },
       {
         "id": "C",
         "label": "C",
-        "text": "<img src=\"/question-images/math/eq_p180_363.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$-\\frac{5}{2}$"
       },
       {
         "id": "D",
         "label": "D",
-        "text": "<img src=\"/question-images/math/eq_p180_385.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "-10"
       }
     ],
     "correctAnswer": "D",
@@ -5395,7 +5370,7 @@
     "difficulty": "Medium",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "A museum rents tablets to visitors. The museum earns revenue of for each tablet rented for the day. On Wednesday, the museum earned in profit from renting tablets after paying daily expenses of. How many tablets did the museum rent on Wednesday?",
+    "prompt": "A museum rents tablets to visitors. The museum earns revenue of \\$14 for each tablet rented for the day. On Wednesday, the museum earned \\$406 in profit from renting tablets after paying daily expenses of \\$112. How many tablets did the museum rent on Wednesday?\n\n($\\text{profit} = \\text{total revenue} - \\text{total expenses}$)",
     "options": [],
     "correctAnswer": "37",
     "rationale": "The correct answer is. It's given that the museum earns revenue of for each tablet rented for the day. It's also given that on Wednesday, the museum earned in profit from renting tablets after paying daily expenses of. Let represent the number of tablets the museum rented on Wednesday. It follows that the total revenue can be represented by the expression. Because, the equation represents this situation. Adding to both sides of this equation yields. Dividing both sides of this equation by yields. Therefore, the museum rented tablets on Wednesday.",
@@ -5411,15 +5386,13 @@
     "difficulty": "Hard",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "The solution to the given system of equations is. What is the value of?",
+    "prompt": "$$\\begin{aligned} 5x + 14y &= 45 \\\\ 10x + 7y &= 27 \\end{aligned}$$\n\nThe solution to the given system of equations is $(x, y)$. What is the value of $xy$?",
     "options": [],
     "correctAnswer": "9/5",
     "rationale": "The correct answer is. Multiplying the first equation in the given system by yields. Subtracting the second equation in the given system,, from yields, which is equivalent to, or. Dividing both sides of this equation by yields. The value of can be found by substituting for in either of the two given equations. Substituting for in the equation yields, or. Subtracting from both sides of this equation yields. Dividing both sides of this equation by yields, or. Therefore, the value of is, or. Note that 9/5 and 1.8 are examples of ways to enter a correct answer.",
     "acceptedAnswers": [
-      "1.8",
       "9/5",
-      "1.800",
-      "1.8000"
+      "1.8"
     ]
   },
   {
@@ -5518,7 +5491,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Which of the following ordered pairs satisfies the inequality? <img src=\"/question-images/math/eq_p187_257.png\" class=\"inline-math-img\" alt=\"math\" /> <img src=\"/question-images/math/eq_p187_281.png\" class=\"inline-math-img\" alt=\"math\" /> 1. <img src=\"/question-images/math/eq_p187_313.png\" class=\"inline-math-img\" alt=\"math\" /> 2. <img src=\"/question-images/math/eq_p187_335.png\" class=\"inline-math-img\" alt=\"math\" /> 3. <img src=\"/question-images/math/eq_p187_357.png\" class=\"inline-math-img\" alt=\"math\" />",
+    "prompt": "Which of the following ordered pairs $(x, y)$ satisfies the inequality $5x - 3y < 4$?\n\nI. $(1, 1)$\nII. $(2, 5)$\nIII. $(3, 2)$",
     "options": [
       {
         "id": "A",
@@ -5654,27 +5627,27 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "A dance teacher ordered outfits for students for a dance recital. Outfits for boys cost $26, and outfits for girls cost $35. The dance teacher ordered a total of 28 outfits and spent $881. If b represents the number of outfits the dance teacher ordered for boys and g represents the number of outfits the dance teacher ordered for girls, which of the following systems of equations can be solved to find b and g?",
+    "prompt": "A dance teacher ordered outfits for students for a dance recital. Outfits for boys cost \\$26, and outfits for girls cost \\$35. The dance teacher ordered a total of 28 outfits and spent \\$881. If $b$ represents the number of outfits the dance teacher ordered for boys and $g$ represents the number of outfits the dance teacher ordered for girls, which of the following systems of equations can be solved to find $b$ and $g$?",
     "options": [
       {
         "id": "A",
         "label": "A",
-        "text": "<img src=\"/question-images/math/eq_p191_372.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$$\\begin{aligned} 26b + 35g &= 28 \\\\ b + g &= 881 \\end{aligned}$$"
       },
       {
         "id": "B",
         "label": "B",
-        "text": "<img src=\"/question-images/math/eq_p191_394.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$$\\begin{aligned} 26b + 35g &= 881 \\\\ b + g &= 28 \\end{aligned}$$"
       },
       {
         "id": "C",
         "label": "C",
-        "text": "<img src=\"/question-images/math/eq_p191_416.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$$\\begin{aligned} 26g + 35b &= 28 \\\\ b + g &= 881 \\end{aligned}$$"
       },
       {
         "id": "D",
         "label": "D",
-        "text": "<img src=\"/question-images/math/eq_p191_438.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$$\\begin{aligned} 26g + 35b &= 881 \\\\ b + g &= 28 \\end{aligned}$$"
       }
     ],
     "correctAnswer": "B",
@@ -5722,19 +5695,14 @@
     "difficulty": "Hard",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "<img src=\"/question-images/math/eq_p193_249.png\" class=\"inline-math-img\" alt=\"math\" /> In the system of equations above, c is a constant. If the system has no solution, what is the value of c? Rationale",
+    "prompt": "$$\\begin{aligned} y &= \\frac{1}{2}x + 8 \\\\ y &= cx + 10 \\end{aligned}$$\n\nIn the system of equations above, $c$ is a constant. If the system has no solution, what is the value of $c$?",
     "options": [],
     "correctAnswer": "1/2",
     "rationale": "",
     "acceptedAnswers": [
       "1/2",
-      "0.5",
-      "0.500",
-      "0.5000",
       ".5",
-      "5",
-      "193",
-      "335"
+      "0.5"
     ]
   },
   {
@@ -5829,27 +5797,27 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "A clothing store is having a sale on shir ts and pants. During the sale, the cost of each shir t is $15 and the cost of each pair of pants is $25. Geoff can spend at most $120 at the store. If Geoff buys s shir ts and p pairs of pants, which of the following must be true?",
+    "prompt": "A clothing store is having a sale on shirts and pants. During the sale, the cost of each shirt is \\$15 and the cost of each pair of pants is \\$25. Geoff can spend at most \\$120 at the store. If Geoff buys $s$ shirts and $p$ pairs of pants, which of the following must be true?",
     "options": [
       {
         "id": "A",
         "label": "A",
-        "text": "<img src=\"/question-images/math/eq_p197_323.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$15s + 25p \\le 120$"
       },
       {
         "id": "B",
         "label": "B",
-        "text": "<img src=\"/question-images/math/eq_p197_345.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$15s + 25p \\ge 120$"
       },
       {
         "id": "C",
         "label": "C",
-        "text": "<img src=\"/question-images/math/eq_p197_367.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$25s + 15p \\le 120$"
       },
       {
         "id": "D",
         "label": "D",
-        "text": "<img src=\"/question-images/math/eq_p197_389.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$25s + 15p \\ge 120$"
       }
     ],
     "correctAnswer": "A",
@@ -5863,7 +5831,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "If, what is the value of? <img src=\"/question-images/math/eq_p198_281.png\" class=\"inline-math-img\" alt=\"math\" /> <img src=\"/question-images/math/eq_p198_257.png\" class=\"inline-math-img\" alt=\"math\" />",
+    "prompt": "If $\\frac{2n}{5} = 10$, what is the value of $2n - 1$?",
     "options": [
       {
         "id": "A",
@@ -6026,27 +5994,27 @@
     "difficulty": "Hard",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "A shipping service restricts the dimensions of the boxes it will ship for a cer tain type of service. The restriction states that for boxes shaped like rectangular prisms, the sum of the perimeter of the base of the box and the height of the box cannot exceed 130 inches. The perimeter of the base is determined using the width and length of the box. If a box has a height of 60 inches and its length is 2.5 times the width, which inequality shows the allowable width x, in inches, of the box?",
+    "prompt": "A shipping service restricts the dimensions of the boxes it will ship for a certain type of service. The restriction states that for boxes shaped like rectangular prisms, the sum of the perimeter of the base of the box and the height of the box cannot exceed 130 inches. The perimeter of the base is determined using the width and length of the box. If a box has a height of 60 inches and its length is 2.5 times the width, which inequality shows the allowable width $x$, in inches, of the box?",
     "options": [
       {
         "id": "A",
         "label": "A",
-        "text": "<img src=\"/question-images/math/eq_p204_341.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$0 < x \\le 10$"
       },
       {
         "id": "B",
         "label": "B",
-        "text": "<img src=\"/question-images/math/eq_p204_363.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$0 < x \\le 11\\frac{2}{3}$"
       },
       {
         "id": "C",
         "label": "C",
-        "text": "<img src=\"/question-images/math/eq_p204_385.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$0 < x \\le 17\\frac{1}{2}$"
       },
       {
         "id": "D",
         "label": "D",
-        "text": "<img src=\"/question-images/math/eq_p204_407.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$0 < x \\le 20$"
       }
     ],
     "correctAnswer": "A",
@@ -6162,7 +6130,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "<img src=\"/question-images/math/eq_p208_250.png\" class=\"inline-math-img\" alt=\"math\" /> <img src=\"/question-images/math/eq_p208_262.png\" class=\"inline-math-img\" alt=\"math\" /> If is the solution to the given system of equations, what is the value of y? <img src=\"/question-images/math/eq_p208_286.png\" class=\"inline-math-img\" alt=\"math\" />",
+    "prompt": "$$\\begin{aligned} x + y &= 20 \\\\ 2(x + y) + 3y &= 85 \\end{aligned}$$\n\nIf $(x, y)$ is the solution to the given system of equations, what is the value of $y$?",
     "options": [
       {
         "id": "A",
@@ -6196,12 +6164,12 @@
     "difficulty": "Hard",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "<img src=\"/question-images/math/eq_p209_249.png\" class=\"inline-math-img\" alt=\"math\" /> In the system of equations above, a is a constant. If the system of equations has no solution, what is the value of a?",
+    "prompt": "$$\\begin{aligned} y &= 2x + 1 \\\\ y &= ax - 8 \\end{aligned}$$\n\nIn the system of equations above, $a$ is a constant. If the system of equations has no solution, what is the value of $a$?",
     "options": [
       {
         "id": "A",
         "label": "A",
-        "text": "<img src=\"/question-images/math/eq_p209_349.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$\\frac{1}{2}$"
       },
       {
         "id": "B",
@@ -6230,27 +6198,27 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "On January 1, 2015, a city’s minimum hourly wage was $9.25. It will increase by $0.50 on the first day of the year for the next 5 years. Which of the following functions best models the minimum hourly wage, in dollars, x years after January 1, 2015, where? <img src=\"/question-images/math/eq_p210_289.png\" class=\"inline-math-img\" alt=\"math\" />",
+    "prompt": "On January 1, 2015, a city’s minimum hourly wage was \\$9.25. It will increase by \\$0.50 on the first day of the year for the next 5 years. Which of the following functions best models the minimum hourly wage, in dollars, $x$ years after January 1, 2015, where $x = 1, 2, 3, 4, 5$?",
     "options": [
       {
         "id": "A",
         "label": "A",
-        "text": "<img src=\"/question-images/math/eq_p210_331.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$f(x) = 9.25 - 0.50x$"
       },
       {
         "id": "B",
         "label": "B",
-        "text": "<img src=\"/question-images/math/eq_p210_353.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$f(x) = 9.25x - 0.50$"
       },
       {
         "id": "C",
         "label": "C",
-        "text": "<img src=\"/question-images/math/eq_p210_375.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$f(x) = 9.25 + 0.50x$"
       },
       {
         "id": "D",
         "label": "D",
-        "text": "<img src=\"/question-images/math/eq_p210_397.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$f(x) = 9.25x + 0.50$"
       }
     ],
     "correctAnswer": "C",
@@ -6518,17 +6486,17 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "If, what is the value of x? <img src=\"/question-images/math/eq_p219_257.png\" class=\"inline-math-img\" alt=\"math\" />",
+    "prompt": "If $\\frac{1}{2}x - \\frac{1}{6}x = 1$, what is the value of $x$?",
     "options": [
       {
         "id": "A",
         "label": "A",
-        "text": "<img src=\"/question-images/math/eq_p219_319.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "-4"
       },
       {
         "id": "B",
         "label": "B",
-        "text": "<img src=\"/question-images/math/eq_p219_341.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$\\frac{1}{3}$"
       },
       {
         "id": "C",
@@ -6781,7 +6749,7 @@
     "difficulty": "Hard",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "In the given system of equations, is a constant. In the xy-plane, the graphs of these equations intersect at the point, where is a constant. What is the value of?",
+    "prompt": "$$\\begin{aligned} -x - wy &= -337 \\\\ 2x - wy &= 47 \\end{aligned}$$\n\nIn the given system of equations, $w$ is a constant. In the $xy$-plane, the graphs of these equations intersect at the point $(g, 19)$, where $g$ is a constant. What is the value of $w$?",
     "options": [],
     "correctAnswer": "11",
     "rationale": "The correct answer is. It’s given that the graphs of the equations in the given system intersect at the point, where is a constant. Therefore, the coordinates of this point must satisfy both equations. Substituting the point into the first equation,, yields. Adding to both sides of this equation yields, which is equivalent to. Substituting the point into the second equation yields. Substituting in place of in the equation yields. Applying the distributive proper ty to the left-hand side of this equation yields. Combining like terms on the left-hand side of this equation yields. Subtracting from both sides of this equation yields. Dividing both sides of this equation by yields.",
@@ -6831,7 +6799,7 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "<img src=\"/question-images/math/eq_p229_244.png\" class=\"inline-math-img\" alt=\"math\" /> The equation above represents the speed y, in feet per second, of Sheila’s bicycle x seconds after she applied the brakes at the end of a ride. If the equation is graphed in the xy-plane, which of the following is the best interpretation of the x-coordinate of the line’s x-intercept in the context of the problem?",
+    "prompt": "$$y = 18 - 5x$$\n\nThe equation above represents the speed $y$, in feet per second, of Sheila’s bicycle $x$ seconds after she applied the brakes at the end of a ride. If the equation is graphed in the $xy$-plane, which of the following is the best interpretation of the $x$-coordinate of the line’s $x$-intercept in the context of the problem?",
     "options": [
       {
         "id": "A",
@@ -6933,17 +6901,17 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "<img src=\"/question-images/math/eq_p232_250.png\" class=\"inline-math-img\" alt=\"math\" /> In the solution to the system of equations above, what is the value of y?",
+    "prompt": "$$\\begin{aligned} y &= 2x - 3 \\\\ 3y &= 5x \\end{aligned}$$\n\nIn the solution to the system of equations above, what is the value of $y$?",
     "options": [
       {
         "id": "A",
         "label": "A",
-        "text": "<img src=\"/question-images/math/eq_p232_314.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "-15"
       },
       {
         "id": "B",
         "label": "B",
-        "text": "<img src=\"/question-images/math/eq_p232_336.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "-9"
       },
       {
         "id": "C",
@@ -6967,27 +6935,27 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "An elementary school teacher is ordering x workbooks and y sets of flash cards for a math class. The teacher must order at least 20 items, but the total cost of the order must not be over $80. If the workbooks cost $3 each and the flash cards cost $4 per set, which of the following systems of inequalities models this situation?",
+    "prompt": "An elementary school teacher is ordering $x$ workbooks and $y$ sets of flash cards for a math class. The teacher must order at least 20 items, but the total cost of the order must not be over \\$80. If the workbooks cost \\$3 each and the flash cards cost \\$4 per set, which of the following systems of inequalities models this situation?",
     "options": [
       {
         "id": "A",
         "label": "A",
-        "text": "<img src=\"/question-images/math/eq_p233_325.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$$\\begin{aligned} x + y &\\ge 20 \\\\ 3x + 4y &\\le 80 \\end{aligned}$$"
       },
       {
         "id": "B",
         "label": "B",
-        "text": "<img src=\"/question-images/math/eq_p233_347.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$$\\begin{aligned} x + y &\\ge 20 \\\\ 3x + 4y &\\ge 80 \\end{aligned}$$"
       },
       {
         "id": "C",
         "label": "C",
-        "text": "<img src=\"/question-images/math/eq_p233_369.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$$\\begin{aligned} 3x + 4y &\\ge 20 \\\\ x + y &\\ge 80 \\end{aligned}$$"
       },
       {
         "id": "D",
         "label": "D",
-        "text": "<img src=\"/question-images/math/eq_p233_391.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$$\\begin{aligned} x + y &\\le 20 \\\\ 3x + 4y &\\le 80 \\end{aligned}$$"
       }
     ],
     "correctAnswer": "A",
@@ -7237,19 +7205,13 @@
     "difficulty": "Hard",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "The line with the equation is graphed in the xy‑plane. What is the x-coordinate of the x‑intercept of the line? <img src=\"/question-images/math/eq_p242_256.png\" class=\"inline-math-img\" alt=\"math\" /> Rationale",
+    "prompt": "$$\\frac{4}{5}x + \\frac{1}{7}y = 1$$\n\nThe line with the equation above is graphed in the $xy$-plane. What is the $x$-coordinate of the $x$-intercept of the line?",
     "options": [],
     "correctAnswer": "5/4",
     "rationale": "",
     "acceptedAnswers": [
-      "1.25",
-      "0",
       "5/4",
-      "1.250",
-      "1.2500",
-      "1",
-      "242",
-      "427"
+      "1.25"
     ]
   },
   {
@@ -7328,27 +7290,27 @@
     "difficulty": "Hard",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "One of the two equations in a linear system is. The system has no solution. Which of the following could be the other equation <img src=\"/question-images/math/eq_p245_259.png\" class=\"inline-math-img\" alt=\"math\" /> in the system?",
+    "prompt": "One of the two equations in a linear system is $2x + 6y = 10$. The system has no solution. Which of the following could be the other equation in the system?",
     "options": [
       {
         "id": "A",
         "label": "A",
-        "text": "<img src=\"/question-images/math/eq_p245_305.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$x + 3y = 5$"
       },
       {
         "id": "B",
         "label": "B",
-        "text": "<img src=\"/question-images/math/eq_p245_327.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$x + 3y = -20$"
       },
       {
         "id": "C",
         "label": "C",
-        "text": "<img src=\"/question-images/math/eq_p245_349.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$6x - 2y = 0$"
       },
       {
         "id": "D",
         "label": "D",
-        "text": "<img src=\"/question-images/math/eq_p245_371.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$6x + 2y = 10$"
       }
     ],
     "correctAnswer": "B",
@@ -7430,28 +7392,28 @@
     "skill": "Systems of two linear equations in two variables",
     "difficulty": "Medium",
     "questionType": "mcq",
-    "passage": "",
+    "passage": "<img src=\"/question-images/math/2704399f.png\" alt=\"Coordinate plane graph\" class=\"sat-stimulus-graph\" />",
     "prompt": "Which of the following systems of equations has the same solution as the system of equations graphed above?",
     "options": [
       {
         "id": "A",
         "label": "A",
-        "text": "<img src=\"/question-images/math/eq_p249_289.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$$\\begin{aligned} y &= 0 \\\\ x &= \\frac{3}{2} \\end{aligned}$$"
       },
       {
         "id": "B",
         "label": "B",
-        "text": "<img src=\"/question-images/math/eq_p249_311.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$$\\begin{aligned} y &= \\frac{3}{2} \\\\ x &= 0 \\end{aligned}$$"
       },
       {
         "id": "C",
         "label": "C",
-        "text": "<img src=\"/question-images/math/eq_p249_333.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$$\\begin{aligned} y &= 0 \\\\ x &= 1 \\end{aligned}$$"
       },
       {
         "id": "D",
         "label": "D",
-        "text": "<img src=\"/question-images/math/eq_p249_355.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$$\\begin{aligned} y &= 1 \\\\ x &= 0 \\end{aligned}$$"
       }
     ],
     "correctAnswer": "A",
@@ -7466,7 +7428,7 @@
     "difficulty": "Hard",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "An object hangs from a spring. The formula relates the length, in centimeters, of the spring to the weight w, in newtons, of the <img src=\"/question-images/math/eq_p251_253.png\" class=\"inline-math-img\" alt=\"math\" /> <img src=\"/question-images/math/eq_p251_277.png\" class=\"inline-math-img\" alt=\"math\" /> object. Which of the following describes the meaning of the 2 in this context?",
+    "prompt": "An object hangs from a spring. The formula $\\ell = 30 + 2w$ relates the length $\\ell$, in centimeters, of the spring to the weight $w$, in newtons, of the object. Which of the following describes the meaning of the 2 in this context?",
     "options": [
       {
         "id": "A",
@@ -7500,7 +7462,7 @@
     "difficulty": "Hard",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The equation, where a and b are constants, has no solutions. Which of the following must be true? <img src=\"/question-images/math/eq_p252_256.png\" class=\"inline-math-img\" alt=\"math\" /> I. <img src=\"/question-images/math/eq_p252_332.png\" class=\"inline-math-img\" alt=\"math\" /> II. <img src=\"/question-images/math/eq_p252_356.png\" class=\"inline-math-img\" alt=\"math\" /> III. <img src=\"/question-images/math/eq_p252_380.png\" class=\"inline-math-img\" alt=\"math\" />",
+    "prompt": "The equation $9x + 5 = a(x + b)$, where $a$ and $b$ are constants, has no solutions. Which of the following must be true?\n\nI. $a = 9$\nII. $b = 5$\nIII. $b \\ne \\frac{5}{9}$",
     "options": [
       {
         "id": "A",
@@ -7569,15 +7531,12 @@
     "difficulty": "Easy",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "<img src=\"/question-images/math/eq_p254_250.png\" class=\"inline-math-img\" alt=\"math\" /> If is the solution to the given system of equations, what is the value of y? <img src=\"/question-images/math/eq_p254_274.png\" class=\"inline-math-img\" alt=\"math\" /> Rationale",
+    "prompt": "$$\\begin{aligned} 3x + y &= 29 \\\\ x &= 2 \\end{aligned}$$\n\nIf $(x, y)$ is the solution to the given system of equations, what is the value of $y$?",
     "options": [],
     "correctAnswer": "23",
     "rationale": "",
     "acceptedAnswers": [
-      "23",
-      "2",
-      "254",
-      "347"
+      "23"
     ]
   },
   {
@@ -7588,7 +7547,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "<img src=\"/question-images/math/eq_p255_247.png\" class=\"inline-math-img\" alt=\"math\" /> In the equation above, F represents the total amount of money, in dollars, a food truck charges for x drinks and y salads. The price, in dollars, of each drink is the same, and the price, in dollars, of each salad is the same. Which of the following is the best interpretation for the number 7.00 in this context?",
+    "prompt": "$$F = 2.50x + 7.00y$$\n\nIn the equation above, $F$ represents the total amount of money, in dollars, a food truck charges for $x$ drinks and $y$ salads. The price, in dollars, of each drink is the same, and the price, in dollars, of each salad is the same. Which of the following is the best interpretation for the number 7.00 in this context?",
     "options": [
       {
         "id": "A",
@@ -7622,17 +7581,17 @@
     "difficulty": "Hard",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "For the function f, if for all values of x, what is the value of? <img src=\"/question-images/math/eq_p256_273.png\" class=\"inline-math-img\" alt=\"math\" /> <img src=\"/question-images/math/eq_p256_317.png\" class=\"inline-math-img\" alt=\"math\" />",
+    "prompt": "For the function $f$, if $f(3x) = x - 6$ for all values of $x$, what is the value of $f(6)$?",
     "options": [
       {
         "id": "A",
         "label": "A",
-        "text": "<img src=\"/question-images/math/eq_p256_359.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "-6"
       },
       {
         "id": "B",
         "label": "B",
-        "text": "<img src=\"/question-images/math/eq_p256_381.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "-4"
       },
       {
         "id": "C",
@@ -7656,12 +7615,12 @@
     "difficulty": "Medium",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "In the xy-plane, line passes through the points and and is defined by the equation. What is the value of?",
+    "prompt": "In the $xy$-plane, line $k$ passes through the points $(8, 6)$ and $(9, 12)$ and is defined by the equation $y = mx + b$. What is the value of $b$?",
     "options": [],
-    "correctAnswer": "42",
+    "correctAnswer": "-42",
     "rationale": "The correct answer is. For a linear equation in the form, represents the slope and represents the y-coordinate of the y-intercept of the graph in the xy-plane. The slope of the graph of a line containing any two points, and, can be found using the slope formula. It’s given that in the xy-plane, line passes through the points and. Substituting and for and, respectively, in the slope formula yields, or. Since line passes through the point and the slope of the line is, substituting for, for, and for in the equation yields, or. Subtracting from both sides of this equation yields. Therefore, the value of is.",
     "acceptedAnswers": [
-      "42"
+      "-42"
     ]
   },
   {
@@ -7672,27 +7631,27 @@
     "difficulty": "Hard",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "In the xy-plane, line k is defined by. Line j is perpendicular to line k, and the y-intercept of line j is. Which of the following is an <img src=\"/question-images/math/eq_p258_296.png\" class=\"inline-math-img\" alt=\"math\" /> <img src=\"/question-images/math/eq_p258_400.png\" class=\"inline-math-img\" alt=\"math\" /> equation of line j?",
+    "prompt": "In the $xy$-plane, line $k$ is defined by $x + y = 0$. Line $j$ is perpendicular to line $k$, and the $y$-intercept of line $j$ is $(0, 3)$. Which of the following is an equation of line $j$?",
     "options": [
       {
         "id": "A",
         "label": "A",
-        "text": "<img src=\"/question-images/math/eq_p258_464.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$x + y = 3$"
       },
       {
         "id": "B",
         "label": "B",
-        "text": "<img src=\"/question-images/math/eq_p258_486.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$x + y = -3$"
       },
       {
         "id": "C",
         "label": "C",
-        "text": "<img src=\"/question-images/math/eq_p258_508.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$x - y = 3$"
       },
       {
         "id": "D",
         "label": "D",
-        "text": "<img src=\"/question-images/math/eq_p258_530.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$x - y = -3$"
       }
     ],
     "correctAnswer": "D",
@@ -7774,27 +7733,27 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The average annual energy cost for a cer tain home is $4,334. The homeowner plans to spend $25,000 to install a geothermal heating system. The homeowner estimates that the average annual energy cost will then be $2,712. Which of the following inequalities can be solved to find t, the number of years after installation at which the total amount of energy cost savings will exceed the installation cost?",
+    "prompt": "The average annual energy cost for a certain home is \\$4,334. The homeowner plans to spend \\$25,000 to install a geothermal heating system. The homeowner estimates that the average annual energy cost will then be \\$2,712. Which of the following inequalities can be solved to find $t$, the number of years after installation at which the total amount of energy cost savings will exceed the installation cost?",
     "options": [
       {
         "id": "A",
         "label": "A",
-        "text": "<img src=\"/question-images/math/eq_p261_318.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$25{,}000 > (4{,}334 - 2{,}712)t$"
       },
       {
         "id": "B",
         "label": "B",
-        "text": "<img src=\"/question-images/math/eq_p261_340.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$25{,}000 < (4{,}334 - 2{,}712)t$"
       },
       {
         "id": "C",
         "label": "C",
-        "text": "<img src=\"/question-images/math/eq_p261_362.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$25{,}000 - 4{,}334 > 2{,}712t$"
       },
       {
         "id": "D",
         "label": "D",
-        "text": "<img src=\"/question-images/math/eq_p261_384.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$25{,}000 > \\frac{4{,}334}{2{,}712}t$"
       }
     ],
     "correctAnswer": "B",
@@ -7863,27 +7822,27 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The width of a rectangular dance floor is w feet. The length of the floor is 6 feet longer than its width. Which of the following expresses the perimeter, in feet, of the dance floor in terms of w?",
+    "prompt": "The width of a rectangular dance floor is $w$ feet. The length of the floor is 6 feet longer than its width. Which of the following expresses the perimeter, in feet, of the dance floor in terms of $w$?",
     "options": [
       {
         "id": "A",
         "label": "A",
-        "text": "<img src=\"/question-images/math/eq_p264_319.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$2w + 6$"
       },
       {
         "id": "B",
         "label": "B",
-        "text": "<img src=\"/question-images/math/eq_p264_341.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$4w + 12$"
       },
       {
         "id": "C",
         "label": "C",
-        "text": "<img src=\"/question-images/math/eq_p264_363.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$w^2 + 6$"
       },
       {
         "id": "D",
         "label": "D",
-        "text": "<img src=\"/question-images/math/eq_p264_385.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$w^2 + 6w$"
       }
     ],
     "correctAnswer": "B",
@@ -7985,7 +7944,7 @@
       {
         "id": "D",
         "label": "D",
-        "text": "29 Rationale Choice B is correct. Subtracting the number of books left over from the total number of books results in, which is the number of <img src=\"/question-images/math/eq_p267_376.png\" class=\"inline-math-img\" alt=\"math\" /> books distributed. Dividing the number of books distributed by the number of books given to each child results in. <img src=\"/question-images/math/eq_p267_406.png\" class=\"inline-math-img\" alt=\"math\" /> Choice A is incorrect and results from dividing the total number of books by the number of books given to each child,, then <img src=\"/question-images/math/eq_p267_444.png\" class=\"inline-math-img\" alt=\"math\" /> subtracting the number of books left over from the result,. Choice C is incorrect and results from adding the number of books left <img src=\"/question-images/math/eq_p267_472.png\" class=\"inline-math-img\" alt=\"math\" /> over to the total number of books,, then dividing the result by the number of books given to each child,. Choice D is <img src=\"/question-images/math/eq_p267_500.png\" class=\"inline-math-img\" alt=\"math\" /> <img src=\"/question-images/math/eq_p267_526.png\" class=\"inline-math-img\" alt=\"math\" /> incorrect and results from dividing the total number of books by the number of books given to each child,, then adding the number of <img src=\"/question-images/math/eq_p267_555.png\" class=\"inline-math-img\" alt=\"math\" /> books left over,. <img src=\"/question-images/math/eq_p267_581.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "29"
       }
     ],
     "correctAnswer": "B",
@@ -7999,27 +7958,27 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The graph of the function f is a line in the xy-plane. If the line has slope and, which of the following defines f? <img src=\"/question-images/math/eq_p268_318.png\" class=\"inline-math-img\" alt=\"math\" /> <img src=\"/question-images/math/eq_p268_294.png\" class=\"inline-math-img\" alt=\"math\" />",
+    "prompt": "The graph of the function $f$ is a line in the $xy$-plane. If the line has slope $\\frac{3}{4}$ and $f(0) = 3$, which of the following defines $f$?",
     "options": [
       {
         "id": "A",
         "label": "A",
-        "text": "<img src=\"/question-images/math/eq_p268_380.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$f(x) = \\frac{3}{4}x - 3$"
       },
       {
         "id": "B",
         "label": "B",
-        "text": "<img src=\"/question-images/math/eq_p268_402.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$f(x) = \\frac{3}{4}x + 3$"
       },
       {
         "id": "C",
         "label": "C",
-        "text": "<img src=\"/question-images/math/eq_p268_424.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$f(x) = 4x - 3$"
       },
       {
         "id": "D",
         "label": "D",
-        "text": "<img src=\"/question-images/math/eq_p268_446.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$f(x) = 4x + 3$"
       }
     ],
     "correctAnswer": "B",
@@ -8171,14 +8130,12 @@
     "difficulty": "Easy",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "<img src=\"/question-images/math/eq_p275_247.png\" class=\"inline-math-img\" alt=\"math\" /> In the given equation, k is a constant. If the equation has infinitely many solutions, what is the value of k? Rationale",
+    "prompt": "$$6x + k = 6x + 5$$\n\nIn the given equation, $k$ is a constant. If the equation has infinitely many solutions, what is the value of $k$?",
     "options": [],
     "correctAnswer": "5",
     "rationale": "",
     "acceptedAnswers": [
-      "5",
-      "275",
-      "333"
+      "5"
     ]
   },
   {
@@ -8280,14 +8237,12 @@
     "difficulty": "Medium",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "<img src=\"/question-images/math/eq_p279_250.png\" class=\"inline-math-img\" alt=\"math\" /> In the solution to the system of equations above, what is the value of x? <img src=\"/question-images/math/eq_p279_274.png\" class=\"inline-math-img\" alt=\"math\" /> Rationale",
+    "prompt": "$$\\begin{aligned} 5x + 3y &= 38 \\\\ x + 3y &= 10 \\end{aligned}$$\n\nIn the solution $(x, y)$ to the system of equations above, what is the value of $x$?",
     "options": [],
     "correctAnswer": "7",
     "rationale": "",
     "acceptedAnswers": [
-      "7",
-      "279",
-      "364"
+      "7"
     ]
   },
   {
@@ -8298,27 +8253,27 @@
     "difficulty": "Hard",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "A science teacher is preparing the 5 stations of a science laboratory. Each station will have either Experiment A materials or Experiment B materials, but not both. Experiment A requires 6 teaspoons of salt, and Experiment B requires 4 teaspoons of salt. If x is the number of stations that will be set up for Experiment A and the remaining stations will be set up for Experiment B, which of the following expressions represents the total number of teaspoons of salt required?",
+    "prompt": "A science teacher is preparing the 5 stations of a science laboratory. Each station will have either Experiment A materials or Experiment B materials, but not both. Experiment A requires 6 teaspoons of salt, and Experiment B requires 4 teaspoons of salt. If $x$ is the number of stations that will be set up for Experiment A and the remaining stations will be set up for Experiment B, which of the following expressions represents the total number of teaspoons of salt required?",
     "options": [
       {
         "id": "A",
         "label": "A",
-        "text": "<img src=\"/question-images/math/eq_p280_361.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$5x$"
       },
       {
         "id": "B",
         "label": "B",
-        "text": "<img src=\"/question-images/math/eq_p280_383.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$10x$"
       },
       {
         "id": "C",
         "label": "C",
-        "text": "<img src=\"/question-images/math/eq_p280_405.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$2x + 20$"
       },
       {
         "id": "D",
         "label": "D",
-        "text": "<img src=\"/question-images/math/eq_p280_427.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$10x + 20$"
       }
     ],
     "correctAnswer": "C",
@@ -8351,7 +8306,7 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "If, what is the value of? <img src=\"/question-images/math/eq_p282_257.png\" class=\"inline-math-img\" alt=\"math\" /> <img src=\"/question-images/math/eq_p282_281.png\" class=\"inline-math-img\" alt=\"math\" />",
+    "prompt": "If $2(x - 5) + 3(x - 5) = 10$, what is the value of $x - 5$?",
     "options": [
       {
         "id": "A",
@@ -8490,27 +8445,27 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "A discount airline sells a cer tain number of tickets, x, for a flight for $90 each. It sells the number of remaining tickets, y, for $250 each. For a par ticular flight, the airline sold 120 tickets and collected a total of $27,600 from the sale of those tickets. Which system of equations represents this relationship between x and y?",
+    "prompt": "A discount airline sells a certain number of tickets, $x$, for a flight for \\$90 each. It sells the number of remaining tickets, $y$, for \\$250 each. For a particular flight, the airline sold 120 tickets and collected a total of \\$27,600 from the sale of those tickets. Which system of equations represents this relationship between $x$ and $y$?",
     "options": [
       {
         "id": "A",
         "label": "A",
-        "text": "<img src=\"/question-images/math/eq_p287_370.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$$\\begin{aligned} x + y &= 120 \\\\ 90x + 250y &= 27{,}600 \\end{aligned}$$"
       },
       {
         "id": "B",
         "label": "B",
-        "text": "<img src=\"/question-images/math/eq_p287_392.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$$\\begin{aligned} x + y &= 120 \\\\ 90x + 250y &= 120(27{,}600) \\end{aligned}$$"
       },
       {
         "id": "C",
         "label": "C",
-        "text": "<img src=\"/question-images/math/eq_p287_414.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$$\\begin{aligned} x + y &= 27{,}600 \\\\ 90x + 250y &= 120(27{,}600) \\end{aligned}$$"
       },
       {
         "id": "D",
         "label": "D",
-        "text": "<img src=\"/question-images/math/eq_p287_436.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$$\\begin{aligned} 90x &= 250y \\\\ 120x + 120y &= 27{,}600 \\end{aligned}$$"
       }
     ],
     "correctAnswer": "A",
@@ -8575,27 +8530,27 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "A movie theater charges $11 for each full-price ticket and $8.25 for each reduced-price ticket. For one movie showing, the theater sold a total of 214 full-price and reduced-price tickets for $2,145. Which of the following systems of equations could be used to determine the number of full- price tickets, f, and the number of reduced-price tickets, r, sold?",
+    "prompt": "A movie theater charges \\$11 for each full-price ticket and \\$8.25 for each reduced-price ticket. For one movie showing, the theater sold a total of 214 full-price and reduced-price tickets for \\$2,145. Which of the following systems of equations could be used to determine the number of full-price tickets, $f$, and the number of reduced-price tickets, $r$, sold?",
     "options": [
       {
         "id": "A",
         "label": "A",
-        "text": "<img src=\"/question-images/math/eq_p290_337.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$$\\begin{aligned} f + r &= 2{,}145 \\\\ 11f + 8.25r &= 214 \\end{aligned}$$"
       },
       {
         "id": "B",
         "label": "B",
-        "text": "<img src=\"/question-images/math/eq_p290_359.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$$\\begin{aligned} f + r &= 214 \\\\ 11f + 8.25r &= 2{,}145 \\end{aligned}$$"
       },
       {
         "id": "C",
         "label": "C",
-        "text": "<img src=\"/question-images/math/eq_p290_381.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$$\\begin{aligned} f + r &= 214 \\\\ 8.25f + 11r &= 2{,}145 \\end{aligned}$$"
       },
       {
         "id": "D",
         "label": "D",
-        "text": "<img src=\"/question-images/math/eq_p290_403.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$$\\begin{aligned} f + r &= 2{,}145 \\\\ 8.25f + 11r &= 214 \\end{aligned}$$"
       }
     ],
     "correctAnswer": "B",
@@ -8609,14 +8564,12 @@
     "difficulty": "Medium",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "The function f is defined by, where m and b are constants. If and, what is the value of m? <img src=\"/question-images/math/eq_p291_274.png\" class=\"inline-math-img\" alt=\"math\" /> <img src=\"/question-images/math/eq_p291_338.png\" class=\"inline-math-img\" alt=\"math\" /> <img src=\"/question-images/math/eq_p291_362.png\" class=\"inline-math-img\" alt=\"math\" /> Rationale",
+    "prompt": "The function $f$ is defined by $f(x) = mx + b$, where $m$ and $b$ are constants. If $f(0) = 18$ and $f(1) = 20$, what is the value of $m$?",
     "options": [],
     "correctAnswer": "2",
     "rationale": "",
     "acceptedAnswers": [
-      "2",
-      "291",
-      "432"
+      "2"
     ]
   },
   {
@@ -8643,7 +8596,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "<img src=\"/question-images/math/eq_p293_244.png\" class=\"inline-math-img\" alt=\"math\" /> The population of snow leopards in a cer tain area can be modeled by the function P defined above, where is the population t years after <img src=\"/question-images/math/eq_p293_290.png\" class=\"inline-math-img\" alt=\"math\" /> 1990. Of the following, which is the best interpretation of the equation? <img src=\"/question-images/math/eq_p293_338.png\" class=\"inline-math-img\" alt=\"math\" />",
+    "prompt": "$$P(t) = 250 + 10t$$\n\nThe population of snow leopards in a certain area can be modeled by the function $P$ defined above, where $P(t)$ is the population $t$ years after 1990. Of the following, which is the best interpretation of the equation $P(30) = 550$?",
     "options": [
       {
         "id": "A",
@@ -8761,27 +8714,27 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Angela is playing a video game. In this game, players can score points only by collecting coins and stars. Each coin is wor th c points, and each star is wor th s points. The first time she played, Angela scored 700 points. She collected 20 coins and 10 stars. The second time she played, Angela scored 850 points. She collected 25 coins and 12 stars. Which system of equations can be used to correctly determine the values of c and s?",
+    "prompt": "Angela is playing a video game. In this game, players can score points only by collecting coins and stars. Each coin is worth $c$ points, and each star is worth $s$ points.\n\n• The first time she played, Angela scored 700 points. She collected 20 coins and 10 stars.\n• The second time she played, Angela scored 850 points. She collected 25 coins and 12 stars.\n\nWhich system of equations can be used to correctly determine the values of $c$ and $s$?",
     "options": [
       {
         "id": "A",
         "label": "A",
-        "text": "<img src=\"/question-images/math/eq_p297_404.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$$\\begin{aligned} 10c + 20s &= 700 \\\\ 12c + 25s &= 850 \\end{aligned}$$"
       },
       {
         "id": "B",
         "label": "B",
-        "text": "<img src=\"/question-images/math/eq_p297_426.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$$\\begin{aligned} 20c + 10s &= 700 \\\\ 25c + 12s &= 850 \\end{aligned}$$"
       },
       {
         "id": "C",
         "label": "C",
-        "text": "<img src=\"/question-images/math/eq_p297_448.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$$\\begin{aligned} 20c + 700s &= 10 \\\\ 25c + 850s &= 12 \\end{aligned}$$"
       },
       {
         "id": "D",
         "label": "D",
-        "text": "<img src=\"/question-images/math/eq_p297_470.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$$\\begin{aligned} 700c + 20s &= 10 \\\\ 850c + 25s &= 12 \\end{aligned}$$"
       }
     ],
     "correctAnswer": "B",
@@ -8829,12 +8782,12 @@
     "difficulty": "Easy",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "The y-intercept of the graph of in the xy-plane is. What is the value of?",
+    "prompt": "The $y$-intercept of the graph of $y = -6x - 32$ in the $xy$-plane is $(0, y)$. What is the value of $y$?",
     "options": [],
-    "correctAnswer": "32",
+    "correctAnswer": "-32",
     "rationale": "The correct answer is. It’s given that the y-intercept of the graph of is. Substituting for in this equation yields, or. Therefore, the value of that corresponds to the y-intercept of the graph of in the xy-plane is.",
     "acceptedAnswers": [
-      "32"
+      "-32"
     ]
   },
   {
@@ -8844,28 +8797,28 @@
     "skill": "Linear equations in two variables",
     "difficulty": "Easy",
     "questionType": "mcq",
-    "passage": "",
-    "prompt": "What is the equation of the line shown in the xy-plane above?",
+    "passage": "<img src=\"/question-images/math/8a1544f1.png\" alt=\"Coordinate plane graph\" class=\"sat-stimulus-graph\" />",
+    "prompt": "What is the equation of the line shown in the $xy$-plane above?",
     "options": [
       {
         "id": "A",
         "label": "A",
-        "text": "<img src=\"/question-images/math/eq_p300_302.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$y = 3x - 3$"
       },
       {
         "id": "B",
         "label": "B",
-        "text": "<img src=\"/question-images/math/eq_p300_324.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$y = -3x + 3$"
       },
       {
         "id": "C",
         "label": "C",
-        "text": "<img src=\"/question-images/math/eq_p300_346.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$y = -\\frac{1}{3}x - 3$"
       },
       {
         "id": "D",
         "label": "D",
-        "text": "<img src=\"/question-images/math/eq_p300_368.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$y = -\\frac{1}{3}x + 3$"
       }
     ],
     "correctAnswer": "B",
@@ -8880,7 +8833,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "What is the solution to the equation? <img src=\"/question-images/math/eq_p301_257.png\" class=\"inline-math-img\" alt=\"math\" />",
+    "prompt": "What is the solution to the equation $2x + 3 = 7$?",
     "options": [
       {
         "id": "A",
@@ -9016,7 +8969,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "<img src=\"/question-images/math/eq_p305_250.png\" class=\"inline-math-img\" alt=\"math\" /> In the given system of equations, a is a constant. If the system has infinitely many solutions, what is the value of a?",
+    "prompt": "$$\\begin{aligned} 2x + 7y &= 9 \\\\ 8x + 28y &= a \\end{aligned}$$\n\nIn the given system of equations, $a$ is a constant. If the system has infinitely many solutions, what is the value of $a$?",
     "options": [
       {
         "id": "A",
@@ -9156,27 +9109,27 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "<img src=\"/question-images/math/eq_p310_263.png\" class=\"inline-math-img\" alt=\"math\" /> <img src=\"/question-images/math/eq_p310_275.png\" class=\"inline-math-img\" alt=\"math\" /> Which of the following ordered pairs (x, y) satisfies the system of inequalities above?",
+    "prompt": "$$\\begin{aligned} y &< 3x + 1 \\\\ x - y &> 1 \\end{aligned}$$\n\nWhich of the following ordered pairs $(x, y)$ satisfies the system of inequalities above?",
     "options": [
       {
         "id": "A",
         "label": "A",
-        "text": "<img src=\"/question-images/math/eq_p310_364.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$(-2, -1)$"
       },
       {
         "id": "B",
         "label": "B",
-        "text": "<img src=\"/question-images/math/eq_p310_386.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$(-1, 3)$"
       },
       {
         "id": "C",
         "label": "C",
-        "text": "<img src=\"/question-images/math/eq_p310_408.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$(1, 5)$"
       },
       {
         "id": "D",
         "label": "D",
-        "text": "<img src=\"/question-images/math/eq_p310_430.png\" class=\"inline-math-img\" alt=\"math\" />"
+        "text": "$(2, -1)$"
       }
     ],
     "correctAnswer": "D",
