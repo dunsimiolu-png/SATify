@@ -1,0 +1,2302 @@
+{
+  "39617468": {
+    "prompt": "The given equation relates the total number of maple trees,, and the total number of birch trees,, planted in a -acre forest preserve. If maple trees were planted in the forest preserve, how many birch trees were planted in the forest preserve?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$14$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$25$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$105$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$245$"
+      }
+    ],
+    "correctAnswer": "C"
+  },
+  "65833256": {
+    "prompt": "What is the solution to the given system of equations?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$(-4,-8)$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$20 80$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$8. (-%-%)$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$(4,40)$"
+      }
+    ],
+    "correctAnswer": "A"
+  },
+  "6e6a3241": {
+    "prompt": "$$\\begin{aligned} x + 5y &= 5 \\\\ 2x - y &= -4 \\end{aligned}$$\n\nWhich of the following graphs in the $xy$-plane could be used to solve the system of equations above?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "",
+        "imageUrl": "/question-images/math/6e6a3241_opt_A.png"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "",
+        "imageUrl": "/question-images/math/6e6a3241_opt_B.png"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "",
+        "imageUrl": "/question-images/math/6e6a3241_opt_C.png"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "",
+        "imageUrl": "/question-images/math/6e6a3241_opt_D.png"
+      }
+    ],
+    "correctAnswer": "C"
+  },
+  "0b46bad5": {
+    "prompt": "$$ax + by = b$$\n\nIn the equation above, $a$ and $b$ are constants and $0 < a < b$. Which of the following could represent the graph of the equation in the $xy$-plane?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "",
+        "imageUrl": "/question-images/math/0b46bad5_opt_A.png"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "",
+        "imageUrl": "/question-images/math/0b46bad5_opt_B.png"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "",
+        "imageUrl": "/question-images/math/0b46bad5_opt_C.png"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "",
+        "imageUrl": "/question-images/math/0b46bad5_opt_D.png"
+      }
+    ],
+    "correctAnswer": "C"
+  },
+  "a8e6bd75": {
+    "prompt": "Which of the following is the graph of the equation $y = 2x - 5$ in the $xy$-plane?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "",
+        "imageUrl": "/question-images/math/a8e6bd75_opt_A.png"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "",
+        "imageUrl": "/question-images/math/a8e6bd75_opt_B.png"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "",
+        "imageUrl": "/question-images/math/a8e6bd75_opt_C.png"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "",
+        "imageUrl": "/question-images/math/a8e6bd75_opt_D.png"
+      }
+    ],
+    "correctAnswer": "D"
+  },
+  "4acd05cd": {
+    "prompt": "The graph shows the linear relationship between $x$ and $y$. Which table gives three values of $x$ and their corresponding values of $y$ for this relationship?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$$\\begin{array}{|c|c|}\\hline x & y \\\\ \\hline 0 & 0 \\\\ \\hline 1 & -7 \\\\ \\hline 2 & -9 \\\\ \\hline \\end{array}$$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$$\\begin{array}{|c|c|}\\hline x & y \\\\ \\hline 0 & 0 \\\\ \\hline 1 & -3 \\\\ \\hline 2 & -1 \\\\ \\hline \\end{array}$$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$$\\begin{array}{|c|c|}\\hline x & y \\\\ \\hline 0 & -5 \\\\ \\hline 1 & -7 \\\\ \\hline 2 & -9 \\\\ \\hline \\end{array}$$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$$\\begin{array}{|c|c|}\\hline x & y \\\\ \\hline 0 & -5 \\\\ \\hline 1 & -3 \\\\ \\hline 2 & -1 \\\\ \\hline \\end{array}$$"
+      }
+    ],
+    "correctAnswer": "D"
+  },
+  "9b7a1b67": {
+    "prompt": "The graph of line $h$ is shown in the $xy$-plane. Line $k$ (not shown) is defined by $sx + 48y = t$, where $s$ and $t$ are constants. If line $k$ is graphed in this $xy$-plane, the result is a graph of two linear equations. This system of two linear equations has no solution. Which of the following is NOT a possible value of $t$?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$-432$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$-9$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$72$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$288$"
+      }
+    ],
+    "correctAnswer": "A"
+  },
+  "608eeb6e": {
+    "prompt": "$$\\begin{aligned} 5x &= 15 \\\\ -4x + y &= -2 \\end{aligned}$$\n\nThe solution to the given system of equations is $(x, y)$. What is the value of $x + y$?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$-17$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$-13$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$13$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$17$"
+      }
+    ],
+    "correctAnswer": "C"
+  },
+  "b0fc3166": {
+    "prompt": "The graph of a system of linear equations is shown. What is the solution $(x, y)$ to the system?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$(0, 3)$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$(1, 3)$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$(2, 3)$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$(3, 3)$"
+      }
+    ],
+    "correctAnswer": "C"
+  },
+  "9b886541": {
+    "prompt": "If $3x - 8 = 7$, what is the value of $3x + 8$?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$-1$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$5$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$13$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$23$"
+      }
+    ],
+    "correctAnswer": "D"
+  },
+  "d914abec": {
+    "prompt": "To complete a landscaping project, Adam charges a fee of $\\$20.00$ for his equipment and $\\$9.50$ per hour spent working on the project. To complete this same landscaping project, Caroline charges a fee of $\\$17.00$ for her equipment and $\\$10.00$ per hour spent working on the project. If $x$ represents the number of hours spent working on the landscaping project, what are all the values of $x$ for which Caroline's total charge is greater than Adam's total charge?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$5 < x < 6$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$6 < x < 7$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$x < 5$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$x > 6$"
+      }
+    ],
+    "correctAnswer": "D"
+  },
+  "00b9bd37": {
+    "prompt": "The graph models the relationship between the number of T-shirts, $x$, and the number of sweatshirts, $y$, that Kira can purchase for a school fundraiser. Which equation could represent this relationship?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$y = 7x + 18$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$7x + 18y = 630$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$y = 18x + 7$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$18x + 7y = 630$"
+      }
+    ],
+    "correctAnswer": "B"
+  },
+  "340afb12": {
+    "prompt": "Ellen bought two types of snack bags for a school event. Each bag of pretzels cost $\\$11$, and each bag of cookies cost $\\$24$. She bought a total of $33$ bags for $\\$497$. If $x$ represents the number of bags of pretzels and $y$ represents the number of bags of cookies, which system of equations represents this situation?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$$\\begin{aligned} 11x + 16y &= 968 \\\\ 24x + 9y &= 497 \\end{aligned}$$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$$\\begin{aligned} 11x + 9y &= 968 \\\\ 24x + 16y &= 497 \\end{aligned}$$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$$\\begin{aligned} 11x + 9y &= 497 \\\\ 24x + 16y &= 968 \\end{aligned}$$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$$\\begin{aligned} 9x + 11y &= 497 \\\\ 16x + 24y &= 968 \\end{aligned}$$"
+      }
+    ],
+    "correctAnswer": "C"
+  },
+  "1e0a46e4": {
+    "prompt": "$$\\begin{aligned} 2x - 3y &= 9 \\\\ 3x + 4y &= 10 \\end{aligned}$$\n\nWhich of the following systems of equations has the same solution as the system of equations above?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$$\\begin{aligned} -2x + 3y &= -9 \\\\ 2x - 3y &= 9 \\end{aligned}$$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$$\\begin{aligned} 2x - 3y &= 9 \\\\ 3x + 4y &= 10 \\end{aligned}$$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$$\\begin{aligned} 2x - 3y &= 9 \\\\ -6x + 9y &= -27 \\end{aligned}$$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$$\\begin{aligned} -2x + 3y &= 9 \\\\ 4x - 6y &= 18 \\end{aligned}$$"
+      }
+    ],
+    "correctAnswer": "B"
+  },
+  "e77a76ce": {
+    "prompt": "Which of the following systems of linear equations has no solution?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$$\\begin{aligned} y &= 6x + 3 \\\\ y &= 6x + 9 \\end{aligned}$$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$$\\begin{aligned} y &= 10 \\\\ y &= 10x + 10 \\end{aligned}$$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$$\\begin{aligned} y &= 14x + 14 \\\\ y &= 10x + 14 \\end{aligned}$$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$$\\begin{aligned} x &= 3 \\\\ y &= 10 \\end{aligned}$$"
+      }
+    ],
+    "correctAnswer": "A"
+  },
+  "6e50ce28": {
+    "prompt": "The sum of a number $x$ and $7$ is twice as large as a number $y$. The number $y$ is $3$ less than $x$. Which system of equations represents this situation?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$$\\begin{aligned} x + 7 &= 2y \\\\ y &= x - 3 \\end{aligned}$$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$$\\begin{aligned} x + 7 &= 2y \\\\ y &= 3 - x \\end{aligned}$$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$$\\begin{aligned} 2(x + 7) &= y \\\\ y &= x - 3 \\end{aligned}$$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$$\\begin{aligned} 2(x + 7) &= y \\\\ y &= 3 - x \\end{aligned}$$"
+      }
+    ],
+    "correctAnswer": "A"
+  },
+  "6daf8d70": {
+    "prompt": "A city employee is organizing a 5k charity walk. The goal is to raise more than $\\$164$. The ticket price is $\\$3$ for adults and $\\$1$ for students. The employee also wants the number of adult participants $a$ to be more than three times the number of student participants $b$. Which system of inequalities represents this situation?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$a + b > 164$ and $3a > b$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$a + b > 164$ and $a < 3b$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$a + b < 164$ and $3a > b$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$a + b < 164$ and $a < 3b$"
+      }
+    ],
+    "correctAnswer": "A"
+  },
+  "e142f83c": {
+    "prompt": "$$\\begin{aligned} y - 6 &= \\frac{1}{2}(x + 5) \\\\ y - v &= \\frac{1}{2}(x + 10) \\end{aligned}$$\n\nIn the given system of equations, $v$ is a constant. The system has infinitely many solutions. What is the value of $v$?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$0$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$\\frac{7}{2}$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$4$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$12$"
+      }
+    ],
+    "correctAnswer": "B"
+  },
+  "f14484a5": {
+    "prompt": "A manufacturing plant makes 10-inch, 9-inch, and 7-inch frying pans. During a certain day, the number of 10-inch frying pans that the manufacturing plant makes is 4 times the number of 9-inch frying pans it makes, and the number of 7-inch frying pans it makes is 10. During this day, the manufacturing plant makes 100 frying pans total. If $n$ represents the number of 9-inch frying pans made, which equation represents this situation?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$10(4n) + 9n + 7(10) = 100$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$10n + 9n + 7n = 100$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$4n + 10 = 100$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$5n + 10 = 100$"
+      }
+    ],
+    "correctAnswer": "D"
+  },
+  "be9cb6a2": {
+    "prompt": "The cost of renting a backhoe for up to days is for the first day and for each additional day. Which of the following equations gives the cost, in dollars, of renting the backhoe for days, where is a positive integer and?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$Ay =270x - 135$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$y = 270x + 135$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$y = 1352 + 270$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$y = 135x +135$"
+      }
+    ],
+    "correctAnswer": "D"
+  },
+  "7e3f8363": {
+    "prompt": "In the xy-plane, the graph of the linear function contains the points and. Which equation defines, where?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$f(z) =28x+34$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$f(z) = 3x +38$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$f(z)=4x+3$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$f(z) =Tz+3$"
+      }
+    ],
+    "correctAnswer": "C"
+  },
+  "55ea0659": {
+    "prompt": "In the given equation, is a positive integer. If the given equation has exactly one solution, what CANNOT be the value of?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$Ad$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$9$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$23$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$28$"
+      }
+    ],
+    "correctAnswer": "D"
+  },
+  "7efe5495": {
+    "prompt": "The solution to the given system of equations is. What is the value of?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$24$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$15$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$12$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$5$"
+      }
+    ],
+    "correctAnswer": "C"
+  },
+  "0dd6227f": {
+    "prompt": "At how many points do the graphs of the equations and intersect in the xy-plane?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$A0$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$1$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$2$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$8$"
+      }
+    ],
+    "correctAnswer": "B"
+  },
+  "4d8ccb96": {
+    "prompt": "A chemist studying the impact of salt on a process mixes kilograms of a low-salt mixture, which is salt by weight, with kilograms of a high-salt mixture, which is salt by weight, to create kilograms of a mixture that is salt by weight. Which equation represents this situation?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$0.96 + 0.02y = (0.04)(24)$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$0.02x + 0.96y = (0.04)(24)$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$0.96x + 0.02y = 24$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$0.02x + 0.96y = 24$"
+      }
+    ],
+    "correctAnswer": "B"
+  },
+  "59813abf": {
+    "prompt": "One of the equations in a system of two linear equations is given, where is a positive constant. The system has no solution. Which equation could be the second equation in this system?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$Adz -4y=28n$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$4x +4y=4n$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$C4x+4y=28n$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$4x -4y=4n$"
+      }
+    ],
+    "correctAnswer": "D"
+  },
+  "9f3cb472": {
+    "prompt": "Line in the xy-plane has a slope of and passes through the point. Which equation defines line?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$Ay=13x-}$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$y=9x +10$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$=_z$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$Cy=--%+10$"
+      }
+    ],
+    "correctAnswer": "D"
+  },
+  "d7c8ba0b": {
+    "prompt": "In the xy-plane, line passes through the points and. Which equation defines line?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$Ay=1x+9$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$By=z+3$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$Cy=z+8$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$Dy=8x+9$"
+      }
+    ],
+    "correctAnswer": "D"
+  },
+  "088bc84e": {
+    "prompt": "1f2 (52) = 6, what is the value of 52?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$4$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$As$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$5$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$B3$"
+      }
+    ],
+    "correctAnswer": "C"
+  },
+  "6fa1dc0f": {
+    "prompt": "Line in the xy-plane has a slope of and passes through the point. Which equation defines line?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$Ay=-6x+4$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$By=6x+4$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$Cy=4x-6$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$Dy=4zr+6$"
+      }
+    ],
+    "correctAnswer": "D"
+  },
+  "99ea3715": {
+    "prompt": "If the graph of is shifted down units in the xy-plane, what is the y-intercept of the resulting graph?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$(0,4)$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$8.(0,6)$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$(0,14)$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$(0,28)$"
+      }
+    ],
+    "correctAnswer": "A"
+  },
+  "58c7daed": {
+    "prompt": "For the linear function, and. Which equation defines?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$=10$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$Ah(z)=q2$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$=10$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$h(z)= yz +10$"
+      }
+    ],
+    "correctAnswer": "A"
+  },
+  "b3abf40f": {
+    "prompt": "The function gives the temperature, in degrees Fahrenheit, that corresponds to a temperature of kelvins. If a temperature increased by kelvins, by how much did the temperature increase, in degrees Fahrenheit?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$16.38$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$48.38$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$475.29$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$507.29$"
+      }
+    ],
+    "correctAnswer": "A"
+  },
+  "1a2a0f59": {
+    "prompt": "A yoga studio is offering a deal where the first session is free, the second session is half off the regular price, and the remaining sessions are at the regular price. If the regular price of a session is, which function gives the total cost, in dollars, of purchasing sessions using this deal, where?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$f(x) = 25.40(z- 1) + 12.70$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$f (x) = 25.40(z - 2) + 12.70$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$f(z) =25.40(x-1)+12.70(z - 2)$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$f(x) = 25.40 (z - 2) + 12.70 (z - 1)$"
+      }
+    ],
+    "correctAnswer": "B"
+  },
+  "ee1f63c0": {
+    "prompt": "The function is defined by. What is the value of when?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$AT2$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$62$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$17.2$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$16.2$"
+      }
+    ],
+    "correctAnswer": "B"
+  },
+  "ea8bd66f": {
+    "prompt": "The solution to the given system of equations is. What is the value of?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$Ad$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$6$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$8$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$10$"
+      }
+    ],
+    "correctAnswer": "D"
+  },
+  "114ae8a9": {
+    "prompt": "A train traveled miles in the first hours of a trip and traveled at an average speed of miles per hour for the remainder of the trip. Which equation gives the total number of miles,, the train traveled if the trip was hours long and?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$y=\"53x +173$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$y=53x +14$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$y= 14x +226$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$y=14x +53$"
+      }
+    ],
+    "correctAnswer": "B"
+  },
+  "018a2704": {
+    "prompt": "If 46 = 16 + 2(z - 8), what is the value of 2(z - 8)?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$16$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$23$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$30$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$38$"
+      }
+    ],
+    "correctAnswer": "C"
+  },
+  "8383771a": {
+    "prompt": "One of the two equations in a system of linear equations is given. The system has exactly one solution. Which equation could be the second equation in the system?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$3x + 3y = 60$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$-z-y=40$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$C3z+3y=14$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$Dz-y=20$"
+      }
+    ],
+    "correctAnswer": "D"
+  },
+  "3d04de9c": {
+    "prompt": "A principal used a total of flags that were either blue or yellow for field day. The principal used blue flags. How many yellow flags were used?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$AB$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$20$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$25$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$30$"
+      }
+    ],
+    "correctAnswer": "A"
+  },
+  "fc4a0d2a": {
+    "prompt": "What is the y-coordinate of the y-intercept of the graph of in the xy-plane?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$-47$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$-45$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$17$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$-15$"
+      }
+    ],
+    "correctAnswer": "A"
+  },
+  "a775af14": {
+    "prompt": "In the xy-plane, the graph of the linear function contains the points and. Which equation defines, where?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$f(z) =22+42$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$f(z) = 32x + 36$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$flx)=4x+2$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$f(z) =8x+2$"
+      }
+    ],
+    "correctAnswer": "C"
+  },
+  "8eb0e19e": {
+    "prompt": "The graph of the linear function is shown, where. Which equation defines function?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$Af(z)=-2x-38$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$f(z)=-2x+8$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$Cc. f(z)=2x--8$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$f(x)=2x+8$"
+      }
+    ],
+    "correctAnswer": "B"
+  },
+  "5e9b6079": {
+    "prompt": "One of the equations in a system of two linear equations is given. The system has no solution. Which equation could be the second equation in the system?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$-2lz+y=>54$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$-2lz+y=18$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$C--Tx+y=21$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$-Tr+y=18$"
+      }
+    ],
+    "correctAnswer": "C"
+  },
+  "05bb1af9": {
+    "prompt": "The graph of is shown. Which equation defines function?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$f(z) =-%z-12$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$f(z) =-%z +16$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$fx)=-%z+2$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$f(z) =-%z-14$"
+      }
+    ],
+    "correctAnswer": "A"
+  },
+  "94b48cbf": {
+    "prompt": "The graph of in the xy-plane has an -intercept at and a -intercept at, where and are constants. What is the value of?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$7$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$--7$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$2$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$--7$"
+      }
+    ],
+    "correctAnswer": "D"
+  },
+  "c307283c": {
+    "prompt": "What is an equation of the graph shown?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$Ay=--2x-8$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$By=z-8$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$cy=--z--8$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$Dy=2x-8$"
+      }
+    ],
+    "correctAnswer": "C"
+  },
+  "a396ed75": {
+    "prompt": "For a training program, Juan rides his bike at an average rate of minutes per mile. Which function models the number of minutes it will take Juan to ride miles at this rate?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$Am(z) = &$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$m(z)=z+5.7$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$m(z)=x-57$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$m(x) =5.Tz$"
+      }
+    ],
+    "correctAnswer": "D"
+  },
+  "a309803e": {
+    "prompt": "One gallon of paint will cover square feet of a surface. A room has a total wall area of square feet. Which equation represents the total amount of paint, in gallons, needed to paint the walls of the room twice?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$=u$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$P= +f$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$P = 440w$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$=u$"
+      }
+    ],
+    "correctAnswer": "A"
+  },
+  "0e926898": {
+    "prompt": "Students and chaperones from a middle school are going on a field trip to a museum. Admission to the museum will cost for each student and for each chaperone. It will cost a total of for admission to the museum for all people on the field trip. How many students are going on the field trip?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$31$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$70$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$76$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$86$"
+      }
+    ],
+    "correctAnswer": "C"
+  },
+  "0d1b1e35": {
+    "prompt": "A batch of banana milkshakes consists of cups of ice cream and bananas and has of calcium. There is of calcium in cup of the ice cream used to make this batch of milkshakes. How much calcium,, is in banana?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$AB$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$10$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$419$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$1,104$"
+      }
+    ],
+    "correctAnswer": "A"
+  },
+  "55ea82f3": {
+    "prompt": "A team hosting an event to raise money for new uniforms plans to sell at least tickets before this event and at least tickets during this event to raise a total of at least from all tickets sold. The price of a ticket during this event is less than the price of a ticket before this event. Which inequality represents this situation, where is the price, in dollars, of a ticket sold during this event?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$140(z + 3) + 220x < 5,820$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$140(z + 3) + 220x > 5,820$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$140(z - 3) + 220x < 5,820$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$140(z - 3) + 220x > 5,820$"
+      }
+    ],
+    "correctAnswer": "B"
+  },
+  "620abf36": {
+    "prompt": "If5(z + 4) = 4(z + 4) + 29, what is the value of z + 4?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$A-4$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$25$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$29$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$33$"
+      }
+    ],
+    "correctAnswer": "C"
+  },
+  "23dedddd": {
+    "prompt": "In the linear function, and. Which equation defines?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$f(z) =122+8$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$8. f(z) = 4=$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$f(z) =4x +12$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$f(z) =4x +8$"
+      }
+    ],
+    "correctAnswer": "D"
+  },
+  "6989c80a": {
+    "prompt": "The function gives the temperature, in degrees Fahrenheit, that corresponds to a temperature of kelvins. If a temperature increased by kelvins, by how much did the temperature increase, in degrees Fahrenheit?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$3.78$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$35.78$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$487.89$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$519.89$"
+      }
+    ],
+    "correctAnswer": "A"
+  },
+  "bd45df49": {
+    "prompt": "The solution to the given system of equations is. What is the value of?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$-123$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$-33$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$3$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$57$"
+      }
+    ],
+    "correctAnswer": "D"
+  },
+  "a7e2859a": {
+    "prompt": "The cost of renting a large canopy tent for up to days is for the first day and for each additional day. Which of the following equations gives the cost, in dollars, of renting the tent for days, where is a positive integer and?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$y=215x +215$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$y = 430x - 215$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$y = 430x +215$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$y = 215x + 430$"
+      }
+    ],
+    "correctAnswer": "A"
+  },
+  "2875ba81": {
+    "prompt": "The solution to the given system of equations is. What is the value of y?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$-2$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$7$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$14$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$18$"
+      }
+    ],
+    "correctAnswer": "A"
+  },
+  "265f2a53": {
+    "prompt": "When line is graphed in the xy-plane, it has an x-intercept of and a y-intercept of. What is the slope of line?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$3$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$3a$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$6$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$Ba$"
+      }
+    ],
+    "correctAnswer": "C"
+  },
+  "0ef4a7b6": {
+    "prompt": "A par ticular botanist classifies a species of plant as tall if its typical height when fully grown is more than centimeters. Each of the following inequalities represents the possible heights, in centimeters, for a specific plant species when fully grown. Which inequality represents the possible heights, in centimeters, for a tall plant species?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$A106 < h < 158$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$80 < h< 100$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$C42<h<87$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$17<h<85$"
+      }
+    ],
+    "correctAnswer": "A"
+  },
+  "dcc4886a": {
+    "prompt": "One of the two equations in a system of linear equations is given. The system has infinitely many solutions. If the second equation in the system is, where and are constants, what is the value of?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$=3$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$-1$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$3$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$1$"
+      }
+    ],
+    "correctAnswer": "D"
+  },
+  "10c448d6": {
+    "prompt": "A line in the xy-plane has a slope of and passes through the point. Which equation represents this line?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$Ay=-}z-14$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$By=-3x+14$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$=1lyp_$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$Cy=gz-14$"
+      }
+    ],
+    "correctAnswer": "D"
+  },
+  "76f29fa5": {
+    "prompt": "The cost to rent a commercial fishing boat from a cer tain company is for the first hours and an additional per hour for each hour after the first hours. If the total cost to rent the commercial fishing boat from the company for hours, where, is, which equation represents this situation?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$950(t - 2) + 50t = 1,100$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$950(2t) + 50t = 1,100$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$950 + 50(t - 2) = 1,100$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$950 + 50(2t) = 1,100$"
+      }
+    ],
+    "correctAnswer": "C"
+  },
+  "042aa429": {
+    "prompt": "If and, what is the value of?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$-5$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$1$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$22$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$28$"
+      }
+    ],
+    "correctAnswer": "C"
+  },
+  "e8fd6d99": {
+    "prompt": "Terry has a goal to collect at least items per week for a donation drive. This week, Terry has collected items. If represents the additional number of items Terry needs to collect this week to meet the goal, which inequality represents this situation?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$Ad4-z<L16$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$4+2x<16$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$C4-2>16$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$4+2x2>16$"
+      }
+    ],
+    "correctAnswer": "D"
+  },
+  "4fb8adf7": {
+    "prompt": "What is the solution to the given system of equations?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$(8,9)$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$(8,-24)$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$(8,-9)$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$(8,24)$"
+      }
+    ],
+    "correctAnswer": "A"
+  },
+  "c39dbbdf": {
+    "prompt": "Line is defined by the equation. Line is parallel to line in the xy-plane. What is the slope of line?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$9$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$Al$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$4$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$Bo$"
+      }
+    ],
+    "correctAnswer": "B"
+  },
+  "1e11190a": {
+    "prompt": "Store A sells raspberries for per pint and blackberries for per pint. Store B sells raspberries for per pint and blackberries for per pint. A cer tain purchase of raspberries and blackberries would cost at Store A or at Store B. How many pints of blackberries are in this purchase?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$Ad$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$5$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$8$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$12$"
+      }
+    ],
+    "correctAnswer": "B"
+  },
+  "2869fe95": {
+    "prompt": "For a -week period in a town in Illinois, the lowest recorded temperature was degrees Fahrenheit and the highest recorded temperature was. Which inequality is true for any recorded temperature, in, in this town for this -week period?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$At>98$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$t > 67$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$31<t<67$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$t<31$"
+      }
+    ],
+    "correctAnswer": "C"
+  },
+  "029c2dc2": {
+    "prompt": "A teacher is creating an assignment wor th points. The assignment will consist of questions wor th point and questions wor th points. Which equation represents this situation, where represents the number of -point questions and represents the number of -point questions?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$Adzy=\"T0$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$4(z+y)=\"T0$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$C3z+y=\"70$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$z+4+3y=\"70$"
+      }
+    ],
+    "correctAnswer": "D"
+  },
+  "5eb4918d": {
+    "prompt": "If 92 + 4 = 67, what is the value of 90z + 40?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$AT$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$70$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$130$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$670$"
+      }
+    ],
+    "correctAnswer": "D"
+  },
+  "6efcc0a3": {
+    "prompt": "In the linear function, and. Which equation defines?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$h(x) =-z+41$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$h(z)=-2x$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$h(z) =-41x$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$h(z) =-41$"
+      }
+    ],
+    "correctAnswer": "A"
+  },
+  "f01ef454": {
+    "prompt": "A geologist estimates that the volume of a slab of granite is greater than cubic feet but less than cubic feet. The geologist also estimates that the slab of granite weighs pounds per cubic foot of volume. Which inequality represents this situation, where represents the estimated total weight, in pounds, of the slab of granite?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$165-15.7< x < 165-12.7$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$165+ 12.7 < x < 165+ 15.7$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$165(12.7) < z < 165(15.7)$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$165 165$"
+      }
+    ],
+    "correctAnswer": "C"
+  },
+  "ed856e9c": {
+    "prompt": "What is the y-intercept of the graph of in the xy-plane?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$(0,81)$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$8. (0,34)$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$(0,-34)$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$(0,81)$"
+      }
+    ],
+    "correctAnswer": "A"
+  },
+  "e9ef0e6b": {
+    "prompt": "A model estimates that whales from the genus Eschrichtius travel to miles in the ocean each day during their migration. Based on this model, which inequality represents the estimated total number of miles,, a whale from the genus Eschrichtius could travel in days of its migration?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$AT2+16<z<T77+16$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$(72)(16) < z < (77)(16)$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$C72<16+2<77$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$72< 162 < 77$"
+      }
+    ],
+    "correctAnswer": "B"
+  },
+  "eeebe166": {
+    "prompt": "What is the y-intercept of the line graphed?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$(=5,0)$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$(0,0)$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$(0,5)$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$p.(0,9)$"
+      }
+    ],
+    "correctAnswer": "C"
+  },
+  "080e75c2": {
+    "prompt": "y 16 14 12 10 Number of 8 participants (in thousands) 6 4 2 x O 2 4 6 8 10 12 14 16 Years since 2010 The functions and model the number of par ticipants, in thousands, in two different programs years since. The graphs of and are shown. Which of the following could represent functions and?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$-_4$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$f(z)=-{fz+13$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$=2247$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$9(@)= z+$"
+      }
+    ],
+    "correctAnswer": "C"
+  },
+  "74d0906a": {
+    "prompt": "A tow truck travels at a speed of at least miles per hour but no more than miles per hour for a section of a road. Which inequality represents this situation, where is the speed of the tow truck, in miles per hour, on this section of the road?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$Ax>25$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$x >45$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$25<z<45$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$z<L70$"
+      }
+    ],
+    "correctAnswer": "C"
+  },
+  "1fe778dc": {
+    "prompt": "A line in the xy-plane has a slope of and passes through the point. Which equation represents this line?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$=-1g_$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$Ay=-32-3$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$=-1$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$By=-32+3$"
+      }
+    ],
+    "correctAnswer": "B"
+  },
+  "0ea7ef01": {
+    "prompt": "Oxygen gas is placed inside a tank with a constant volume. The graph shows the estimated temperature, in kelvins, of the oxygen gas when its pressure is atmospheres. What is the estimated temperature, in kelvins, of the oxygen gas when its pressure is atmospheres?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$6$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$60$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$Cc. 700$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$760$"
+      }
+    ],
+    "correctAnswer": "C"
+  },
+  "8da536c6": {
+    "prompt": "In, a swim club had a total of swimmers, each classified as either advanced or intermediate. From to, the number of advanced swimmers in the club increased by approximately, and the number of intermediate swimmers in the club increased by approximately. The total number of swimmers in the club increased by approximately. Which equation best represents this situation, where represents the number of advanced swimmers in the club in and represents the number of intermediate swimmers in the club in?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$1.53a + 1.49b = 35(1.44)$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$1.49a + 0.53b = 35(1.44)$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$1.53a + 1.44b = 35(1.49)$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$1.44a + 1.53b = 35(1.49)$"
+      }
+    ],
+    "correctAnswer": "C"
+  },
+  "f40552a9": {
+    "prompt": "What is the y-intercept of the line graphed?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$(0,-8)$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$1$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$8.(0,-%)$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$(0,0)$"
+      }
+    ],
+    "correctAnswer": "D"
+  },
+  "0c490cd5": {
+    "prompt": "Sam has a flag with an area of. Sam plans to enlarge the flag by sewing on pieces of colored nylon, where each piece would increase the flag's area by. Which equation gives the flag's total area, in square inches, after Sam sews on pieces of nylon?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$Ay=64x$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$y=64 + 110x$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$y=110 + 64x$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$y=174x$"
+      }
+    ],
+    "correctAnswer": "C"
+  },
+  "bbf9e5ce": {
+    "prompt": "For groups of or more people, a museum charges per person for the first people and for each additional person. Which function gives the total charge, in dollars, for a tour group with people, where?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$f(n) =14n +175$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$f(n) = 14n + 525$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$f(n) = 35n - 350$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$f(n) =14n +21$"
+      }
+    ],
+    "correctAnswer": "A"
+  },
+  "a73a5c22": {
+    "prompt": "The function is defined by. What is the value of when?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$A0$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$8$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$10$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$88$"
+      }
+    ],
+    "correctAnswer": "D"
+  },
+  "4722abd2": {
+    "prompt": "Line is defined by. Line is perpendicular to line in the xy-plane. What is the slope of line?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$A-4$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$1$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$-1$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$1$"
+      }
+    ],
+    "correctAnswer": "C"
+  },
+  "1993561d": {
+    "prompt": "For the linear function, the graph of in the xy-plane has a slope of and passes through the point. Which equation defines?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$Af(@)=fz+5$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$-1 1$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$f(z)=g2+3$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$-1 5$"
+      }
+    ],
+    "correctAnswer": "A"
+  },
+  "8c515062": {
+    "prompt": "A candle is made of ounces of wax. When the candle is burning, the amount of wax in the candle decreases by ounce every hours. If ounces of wax remain in this candle, for how many hours has it been burning?",
+    "options": [
+      {
+        "id": "A",
+        "label": "A",
+        "text": "$A3$"
+      },
+      {
+        "id": "B",
+        "label": "B",
+        "text": "$6$"
+      },
+      {
+        "id": "C",
+        "label": "C",
+        "text": "$24$"
+      },
+      {
+        "id": "D",
+        "label": "D",
+        "text": "$44$"
+      }
+    ],
+    "correctAnswer": "D"
+  }
+}

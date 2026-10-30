@@ -954,6 +954,7 @@ async function extractMathPdfs() {
         if (corr.correctAnswer !== undefined) correctAnswer = corr.correctAnswer;
         if (corr.acceptedAnswers !== undefined) acceptedAnswers = corr.acceptedAnswers;
         if (corr.questionType !== undefined) questionType = corr.questionType;
+        if (corr.imageUrl !== undefined) imageUrl = corr.imageUrl;
       }
 
       // Restrict imageUrl strictly:

@@ -1,0 +1,710 @@
+{
+  "optGraphs": [
+    {
+      "id": "6e6a3241",
+      "page": 78,
+      "isOptionGraph": true,
+      "imgCount": 27,
+      "pathCount": 63,
+      "prompt": "<img src=\"/question-images/math/eq_p78_250.png\" class=\"inline-math-img"
+    },
+    {
+      "id": "0b46bad5",
+      "page": 127,
+      "isOptionGraph": true,
+      "imgCount": 6,
+      "pathCount": 42,
+      "prompt": "<img src=\"/question-images/math/eq_p127_246.png\" class=\"inline-math-im"
+    },
+    {
+      "id": "a8e6bd75",
+      "page": 308,
+      "isOptionGraph": true,
+      "imgCount": 4,
+      "pathCount": 41,
+      "prompt": "Which of the following is the graph of the equation in the xy-plane? <"
+    }
+  ],
+  "vectorText": [
+    {
+      "id": "9b7a1b67",
+      "page": 7,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 397,
+      "prompt": "The graph of line is shown in the xy-plane. Line (not shown) is define"
+    },
+    {
+      "id": "608eeb6e",
+      "page": 16,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 172,
+      "prompt": "The solution to the given system of equations is. What is the value of"
+    },
+    {
+      "id": "be9cb6a2",
+      "page": 17,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 310,
+      "prompt": "The cost of renting a backhoe for up to days is for the first day and "
+    },
+    {
+      "id": "b0fc3166",
+      "page": 20,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 284,
+      "prompt": "The graph of a system of linear equations is shown. What is the soluti"
+    },
+    {
+      "id": "9b886541",
+      "page": 21,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 136,
+      "prompt": "If, what is the value of?"
+    },
+    {
+      "id": "e142f83c",
+      "page": 27,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 366,
+      "prompt": "In the given system of equations, is a constant. The system has infini"
+    },
+    {
+      "id": "f14484a5",
+      "page": 29,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 248,
+      "prompt": "A manufacturing plant makes -inch, -inch, and -inch frying pans. Durin"
+    },
+    {
+      "id": "7e3f8363",
+      "page": 31,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 417,
+      "prompt": "In the xy-plane, the graph of the linear function contains the points "
+    },
+    {
+      "id": "55ea0659",
+      "page": 35,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 238,
+      "prompt": "In the given equation, is a positive integer. If the given equation ha"
+    },
+    {
+      "id": "0dd6227f",
+      "page": 36,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 106,
+      "prompt": "At how many points do the graphs of the equations and intersect in the"
+    },
+    {
+      "id": "7efe5495",
+      "page": 37,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 144,
+      "prompt": "The solution to the given system of equations is. What is the value of"
+    },
+    {
+      "id": "4d8ccb96",
+      "page": 41,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 415,
+      "prompt": "A chemist studying the impact of salt on a process mixes kilograms of "
+    },
+    {
+      "id": "59813abf",
+      "page": 46,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 525,
+      "prompt": "One of the equations in a system of two linear equations is given, whe"
+    },
+    {
+      "id": "9f3cb472",
+      "page": 55,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 404,
+      "prompt": "Line in the xy-plane has a slope of and passes through the point. Whic"
+    },
+    {
+      "id": "d7c8ba0b",
+      "page": 58,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 320,
+      "prompt": "In the xy-plane, line passes through the points and. Which equation de"
+    },
+    {
+      "id": "088bc84e",
+      "page": 59,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 88,
+      "prompt": "If, what is the value of?"
+    },
+    {
+      "id": "6fa1dc0f",
+      "page": 61,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 275,
+      "prompt": "Line in the xy-plane has a slope of and passes through the point. Whic"
+    },
+    {
+      "id": "99ea3715",
+      "page": 63,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 408,
+      "prompt": "If the graph of is shifted down units in the xy-plane, what is the y-i"
+    },
+    {
+      "id": "58c7daed",
+      "page": 74,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 437,
+      "prompt": "For the linear function, and. Which equation defines?"
+    },
+    {
+      "id": "b3abf40f",
+      "page": 76,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 261,
+      "prompt": "The function gives the temperature, in degrees Fahrenheit, that corres"
+    },
+    {
+      "id": "1a2a0f59",
+      "page": 83,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 430,
+      "prompt": "A yoga studio is offering a deal where the first session is free, the "
+    },
+    {
+      "id": "d914abec",
+      "page": 85,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 575,
+      "prompt": "To complete a landscaping project, Adam charges a fee of for his equip"
+    },
+    {
+      "id": "ee1f63c0",
+      "page": 86,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 282,
+      "prompt": "The function is defined by. What is the value of when?"
+    },
+    {
+      "id": "ea8bd66f",
+      "page": 88,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 248,
+      "prompt": "The solution to the given system of equations is. What is the value of"
+    },
+    {
+      "id": "114ae8a9",
+      "page": 92,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 272,
+      "prompt": "A train traveled miles in the first hours of a trip and traveled at an"
+    },
+    {
+      "id": "8383771a",
+      "page": 94,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 455,
+      "prompt": "One of the two equations in a system of linear equations is given. The"
+    },
+    {
+      "id": "018a2704",
+      "page": 97,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 130,
+      "prompt": "If, what is the value of?"
+    },
+    {
+      "id": "3d04de9c",
+      "page": 99,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 86,
+      "prompt": "A principal used a total of flags that were either blue or yellow for "
+    },
+    {
+      "id": "fc4a0d2a",
+      "page": 103,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 358,
+      "prompt": "What is the y-coordinate of the y-intercept of the graph of in the xy-"
+    },
+    {
+      "id": "8eb0e19e",
+      "page": 107,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 640,
+      "prompt": "The graph of the linear function is shown, where. Which equation defin"
+    },
+    {
+      "id": "a775af14",
+      "page": 111,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 417,
+      "prompt": "In the xy-plane, the graph of the linear function contains the points "
+    },
+    {
+      "id": "05bb1af9",
+      "page": 116,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 562,
+      "prompt": "The graph of is shown. Which equation defines function?"
+    },
+    {
+      "id": "5e9b6079",
+      "page": 119,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 328,
+      "prompt": "One of the equations in a system of two linear equations is given. The"
+    },
+    {
+      "id": "c307283c",
+      "page": 122,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 536,
+      "prompt": "What is an equation of the graph shown?"
+    },
+    {
+      "id": "94b48cbf",
+      "page": 133,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 322,
+      "prompt": "The graph of in the xy-plane has an -intercept at and a -intercept at,"
+    },
+    {
+      "id": "a396ed75",
+      "page": 137,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 165,
+      "prompt": "For a training program, Juan rides his bike at an average rate of minu"
+    },
+    {
+      "id": "0e926898",
+      "page": 149,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 388,
+      "prompt": "Students and chaperones from a middle school are going on a field trip"
+    },
+    {
+      "id": "a309803e",
+      "page": 152,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 157,
+      "prompt": "One gallon of paint will cover square feet of a surface. A room has a "
+    },
+    {
+      "id": "55ea82f3",
+      "page": 153,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 410,
+      "prompt": "A team hosting an event to raise money for new uniforms plans to sell "
+    },
+    {
+      "id": "0d1b1e35",
+      "page": 155,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 260,
+      "prompt": "A batch of banana milkshakes consists of cups of ice cream and bananas"
+    },
+    {
+      "id": "620abf36",
+      "page": 157,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 154,
+      "prompt": "If, what is the value of?"
+    },
+    {
+      "id": "23dedddd",
+      "page": 164,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 418,
+      "prompt": "In the linear function, and. Which equation defines?"
+    },
+    {
+      "id": "340afb12",
+      "page": 167,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 440,
+      "prompt": "Ellen bought two types of snack bags for a school event. Each box of c"
+    },
+    {
+      "id": "6989c80a",
+      "page": 171,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 255,
+      "prompt": "The function gives the temperature, in degrees Fahrenheit, that corres"
+    },
+    {
+      "id": "bd45df49",
+      "page": 177,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 300,
+      "prompt": "The solution to the given system of equations is. What is the value of"
+    },
+    {
+      "id": "a7e2859a",
+      "page": 181,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 393,
+      "prompt": "The cost of renting a large canopy tent for up to days is for the firs"
+    },
+    {
+      "id": "6e50ce28",
+      "page": 184,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 280,
+      "prompt": "The sum of a number and is twice as large as a number. The number is l"
+    },
+    {
+      "id": "2875ba81",
+      "page": 188,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 254,
+      "prompt": "The solution to the given system of equations is. What is the value of"
+    },
+    {
+      "id": "0ef4a7b6",
+      "page": 189,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 216,
+      "prompt": "A par ticular botanist classifies a species of plant as tall if its ty"
+    },
+    {
+      "id": "265f2a53",
+      "page": 190,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 317,
+      "prompt": "When line is graphed in the xy-plane, it has an x-intercept of and a y"
+    },
+    {
+      "id": "dcc4886a",
+      "page": 192,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 164,
+      "prompt": "One of the two equations in a system of linear equations is given. The"
+    },
+    {
+      "id": "6daf8d70",
+      "page": 196,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 260,
+      "prompt": "A city employee will plant two types of bushes, azaleas and boxwoods, "
+    },
+    {
+      "id": "10c448d6",
+      "page": 200,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 305,
+      "prompt": "A line in the xy-plane has a slope of and passes through the point. Wh"
+    },
+    {
+      "id": "4acd05cd",
+      "page": 201,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 357,
+      "prompt": "The graph shows the linear relationship between and. Which table gives"
+    },
+    {
+      "id": "76f29fa5",
+      "page": 205,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 340,
+      "prompt": "The cost to rent a commercial fishing boat from a cer tain company is "
+    },
+    {
+      "id": "042aa429",
+      "page": 207,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 338,
+      "prompt": "If and, what is the value of?"
+    },
+    {
+      "id": "e8fd6d99",
+      "page": 211,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 126,
+      "prompt": "Terry has a goal to collect at least items per week for a donation dri"
+    },
+    {
+      "id": "4fb8adf7",
+      "page": 214,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 208,
+      "prompt": "What is the solution to the given system of equations?"
+    },
+    {
+      "id": "1e0a46e4",
+      "page": 215,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 260,
+      "prompt": "Which system of linear equations has no solution?"
+    },
+    {
+      "id": "1e11190a",
+      "page": 216,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 662,
+      "prompt": "Store A sells raspberries for per pint and blackberries for per pint. "
+    },
+    {
+      "id": "c39dbbdf",
+      "page": 217,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 196,
+      "prompt": "Line is defined by the equation. Line is parallel to line in the xy-pl"
+    },
+    {
+      "id": "e77a76ce",
+      "page": 221,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 232,
+      "prompt": "Which of the following systems of linear equations has no solution?"
+    },
+    {
+      "id": "2869fe95",
+      "page": 228,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 148,
+      "prompt": "For a -week period in a town in Illinois, the lowest recorded temperat"
+    },
+    {
+      "id": "029c2dc2",
+      "page": 230,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 162,
+      "prompt": "A teacher is creating an assignment wor th points. The assignment will"
+    },
+    {
+      "id": "5eb4918d",
+      "page": 234,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 170,
+      "prompt": "If, what is the value of?"
+    },
+    {
+      "id": "f01ef454",
+      "page": 235,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 388,
+      "prompt": "A geologist estimates that the volume of a slab of granite is greater "
+    },
+    {
+      "id": "6efcc0a3",
+      "page": 236,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 537,
+      "prompt": "In the linear function, and. Which equation defines?"
+    },
+    {
+      "id": "e9ef0e6b",
+      "page": 241,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 276,
+      "prompt": "A model estimates that whales from the genus Eschrichtius travel to mi"
+    },
+    {
+      "id": "ed856e9c",
+      "page": 243,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 164,
+      "prompt": "What is the y-intercept of the graph of in the xy-plane?"
+    },
+    {
+      "id": "080e75c2",
+      "page": 246,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 743,
+      "prompt": "y 16 14 12 10 Number of 8 participants (in thousands) 6 4 2 x O 2 4 6 "
+    },
+    {
+      "id": "eeebe166",
+      "page": 253,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 210,
+      "prompt": "What is the y-intercept of the line graphed?"
+    },
+    {
+      "id": "74d0906a",
+      "page": 259,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 136,
+      "prompt": "A tow truck travels at a speed of at least miles per hour but no more "
+    },
+    {
+      "id": "1fe778dc",
+      "page": 260,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 306,
+      "prompt": "A line in the xy-plane has a slope of and passes through the point. Wh"
+    },
+    {
+      "id": "39617468",
+      "page": 265,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 164,
+      "prompt": "The given equation relates the total number of maple trees,, and the t"
+    },
+    {
+      "id": "8da536c6",
+      "page": 271,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 556,
+      "prompt": "In, a swim club had a total of swimmers, each classified as either adv"
+    },
+    {
+      "id": "0ea7ef01",
+      "page": 272,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 286,
+      "prompt": "Oxygen gas is placed inside a tank with a constant volume. The graph s"
+    },
+    {
+      "id": "0c490cd5",
+      "page": 277,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 270,
+      "prompt": "Sam has a flag with an area of. Sam plans to enlarge the flag by sewin"
+    },
+    {
+      "id": "f40552a9",
+      "page": 289,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 223,
+      "prompt": "What is the y-intercept of the line graphed?"
+    },
+    {
+      "id": "bbf9e5ce",
+      "page": 294,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 313,
+      "prompt": "For groups of or more people, a museum charges per person for the firs"
+    },
+    {
+      "id": "65833256",
+      "page": 296,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 350,
+      "prompt": "What is the solution to the given system of equations?"
+    },
+    {
+      "id": "4722abd2",
+      "page": 302,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 213,
+      "prompt": "Line is defined by. Line is perpendicular to line in the xy-plane. Wha"
+    },
+    {
+      "id": "a73a5c22",
+      "page": 303,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 210,
+      "prompt": "The function is defined by. What is the value of when?"
+    },
+    {
+      "id": "8c515062",
+      "page": 304,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 174,
+      "prompt": "A candle is made of ounces of wax. When the candle is burning, the amo"
+    },
+    {
+      "id": "1993561d",
+      "page": 306,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 391,
+      "prompt": "For the linear function, the graph of in the xy-plane has a slope of a"
+    },
+    {
+      "id": "00b9bd37",
+      "page": 311,
+      "isOptionGraph": false,
+      "imgCount": 0,
+      "pathCount": 611,
+      "prompt": "y 50 40 30 Number of sweatshirts 20 10 x O 20 40 60 80 100 Number of T"
+    }
+  ]
+}

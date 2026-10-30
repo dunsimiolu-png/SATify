@@ -1,0 +1,666 @@
+[
+  {
+    "id": "71b74a44",
+    "page": 11,
+    "skill": "Nonlinear functions",
+    "difficulty": "Medium",
+    "prompt": "The given equation estimates the value, in dollars, of a cer tain piece of equipment years after it ",
+    "hasExistingImage": true
+  },
+  {
+    "id": "ebed7dc6",
+    "page": 15,
+    "skill": "Nonlinear functions",
+    "difficulty": "Hard",
+    "prompt": "An auditorium has seats for people. Tickets to attend a show at the auditorium currently cost. For e",
+    "hasExistingImage": true
+  },
+  {
+    "id": "6abec9a8",
+    "page": 19,
+    "skill": "Nonlinear functions",
+    "difficulty": "Easy",
+    "prompt": "What is the y-intercept of the graph shown?",
+    "hasExistingImage": true
+  },
+  {
+    "id": "788bfd56",
+    "page": 30,
+    "skill": "Nonlinear functions",
+    "difficulty": "Easy",
+    "prompt": "The function is defined by. What is the value of?",
+    "hasExistingImage": true
+  },
+  {
+    "id": "5ba187d4",
+    "page": 32,
+    "skill": "Equivalent expressions",
+    "difficulty": "Easy",
+    "prompt": "Which expression is equivalent to?",
+    "hasExistingImage": true
+  },
+  {
+    "id": "3cf2698e",
+    "page": 34,
+    "skill": "Nonlinear functions",
+    "difficulty": "Easy",
+    "prompt": "The number of cells of a cer tain bacteria doubles every minutes during its growth period when place",
+    "hasExistingImage": true
+  },
+  {
+    "id": "252a3b3a",
+    "page": 46,
+    "skill": "Nonlinear functions",
+    "difficulty": "Medium",
+    "prompt": "Which of the following could be the equation of the graph shown in the xy-plane?",
+    "hasExistingImage": true
+  },
+  {
+    "id": "58443765",
+    "page": 48,
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
+    "difficulty": "Easy",
+    "prompt": "Which ordered pair is a solution to the given system of equations?",
+    "hasExistingImage": true
+  },
+  {
+    "id": "70482e20",
+    "page": 49,
+    "skill": "Equivalent expressions",
+    "difficulty": "Easy",
+    "prompt": "Which expression is equivalent to?",
+    "hasExistingImage": true
+  },
+  {
+    "id": "b39d74a0",
+    "page": 50,
+    "skill": "Nonlinear functions",
+    "difficulty": "Easy",
+    "prompt": "x y 0 0 1 1 2 8 3 27 The table shown includes some values of x and their corresponding values of y. ",
+    "hasExistingImage": false
+  },
+  {
+    "id": "e833de9a",
+    "page": 54,
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
+    "difficulty": "Hard",
+    "prompt": "In the given system of equations, and are negative constants. In the xy-plane, the graphs of the equ",
+    "hasExistingImage": true
+  },
+  {
+    "id": "0536ad4f",
+    "page": 55,
+    "skill": "Equivalent expressions",
+    "difficulty": "Easy",
+    "prompt": "Which expression is equivalent to?",
+    "hasExistingImage": true
+  },
+  {
+    "id": "433184f1",
+    "page": 56,
+    "skill": "Equivalent expressions",
+    "difficulty": "Hard",
+    "prompt": "Which expression is equivalent to?",
+    "hasExistingImage": true
+  },
+  {
+    "id": "4ca30186",
+    "page": 58,
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
+    "difficulty": "Easy",
+    "prompt": "The graph of a system of a linear equation and a nonlinear equation is shown. What is the solution t",
+    "hasExistingImage": true
+  },
+  {
+    "id": "d4950429",
+    "page": 62,
+    "skill": "Nonlinear functions",
+    "difficulty": "Medium",
+    "prompt": "A rectangle has a length of units and a width of units. If the rectangle has an area of square units",
+    "hasExistingImage": true
+  },
+  {
+    "id": "58b4c6f3",
+    "page": 66,
+    "skill": "Nonlinear functions",
+    "difficulty": "Hard",
+    "prompt": "The function is defined by, where and are positive constants. The graph of in the xy-plane passes th",
+    "hasExistingImage": true
+  },
+  {
+    "id": "7bbfbe70",
+    "page": 70,
+    "skill": "Nonlinear functions",
+    "difficulty": "Hard",
+    "prompt": "A lab analyst observes a sample of a substance. An exponential model estimates that the mass, in gra",
+    "hasExistingImage": true
+  },
+  {
+    "id": "35e05e19",
+    "page": 71,
+    "skill": "Nonlinear functions",
+    "difficulty": "Hard",
+    "prompt": "A park ranger hung squirrel houses each in the shape of a right rectangular prism for fox squirrels.",
+    "hasExistingImage": true
+  },
+  {
+    "id": "341ba5db",
+    "page": 73,
+    "skill": "Nonlinear functions",
+    "difficulty": "Medium",
+    "prompt": "What is the minimum value of the given function?",
+    "hasExistingImage": true
+  },
+  {
+    "id": "18e35375",
+    "page": 74,
+    "skill": "Nonlinear functions",
+    "difficulty": "Hard",
+    "prompt": "The function is defined by the given equation. For what value of does reach its minimum?",
+    "hasExistingImage": true
+  },
+  {
+    "id": "5da5c665",
+    "page": 76,
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
+    "difficulty": "Hard",
+    "prompt": "What is the greatest solution to the given equation?",
+    "hasExistingImage": true
+  },
+  {
+    "id": "a1e65979",
+    "page": 77,
+    "skill": "Nonlinear functions",
+    "difficulty": "Hard",
+    "prompt": "The function is a quadratic function. In the xy-plane, the graph of has a ver tex at and passes thro",
+    "hasExistingImage": true
+  },
+  {
+    "id": "b5c43226",
+    "page": 79,
+    "skill": "Nonlinear functions",
+    "difficulty": "Easy",
+    "prompt": "What is the y-intercept of the graph shown?",
+    "hasExistingImage": true
+  },
+  {
+    "id": "11ccf3e1",
+    "page": 84,
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
+    "difficulty": "Medium",
+    "prompt": "The given equation relates the numbers,, and. Which equation correctly expresses in terms of and?",
+    "hasExistingImage": true
+  },
+  {
+    "id": "cfff8f8e",
+    "page": 86,
+    "skill": "Nonlinear functions",
+    "difficulty": "Easy",
+    "prompt": "At the time of posting a video, a social media channel had subscribers. Each day for five days after",
+    "hasExistingImage": true
+  },
+  {
+    "id": "88a0c425",
+    "page": 87,
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
+    "difficulty": "Hard",
+    "prompt": "In the given equation, is a constant. The equation has exactly one solution. What is the value of?",
+    "hasExistingImage": true
+  },
+  {
+    "id": "8462b105",
+    "page": 88,
+    "skill": "Nonlinear functions",
+    "difficulty": "Hard",
+    "prompt": "The function gives the product of a number,, and a number that is more than. Which equation defines?",
+    "hasExistingImage": true
+  },
+  {
+    "id": "ce579859",
+    "page": 89,
+    "skill": "Nonlinear functions",
+    "difficulty": "Hard",
+    "prompt": "A model estimates that at the end of each year from to, the number of squirrels in a population was ",
+    "hasExistingImage": true
+  },
+  {
+    "id": "d139cf4b",
+    "page": 93,
+    "skill": "Nonlinear functions",
+    "difficulty": "Hard",
+    "prompt": "The function is defined by the given equation. The function is defined by. Which expression represen",
+    "hasExistingImage": true
+  },
+  {
+    "id": "75a32330",
+    "page": 95,
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
+    "difficulty": "Medium",
+    "prompt": "Which graph represents the given system of equations?",
+    "hasExistingImage": true
+  },
+  {
+    "id": "6d04c89d",
+    "page": 102,
+    "skill": "Equivalent expressions",
+    "difficulty": "Medium",
+    "prompt": "The expression is equivalent to, where b is a constant and. What is the value of b?",
+    "hasExistingImage": true
+  },
+  {
+    "id": "203774bc",
+    "page": 106,
+    "skill": "Nonlinear functions",
+    "difficulty": "Medium",
+    "prompt": "The product of two positive integers is. If the first integer is greater than twice the second integ",
+    "hasExistingImage": true
+  },
+  {
+    "id": "c8db0e19",
+    "page": 109,
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
+    "difficulty": "Hard",
+    "prompt": "In the given equation,,, and are positive numbers. Which expression is equivalent to?",
+    "hasExistingImage": true
+  },
+  {
+    "id": "5f10c095",
+    "page": 111,
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
+    "difficulty": "Medium",
+    "prompt": "The graph of a system of a linear equation and a quadratic equation is shown. A solution to the syst",
+    "hasExistingImage": true
+  },
+  {
+    "id": "68607eca",
+    "page": 112,
+    "skill": "Nonlinear functions",
+    "difficulty": "Medium",
+    "prompt": "On April, there were views of an adver tisement posted on a website. Every days after April, the num",
+    "hasExistingImage": true
+  },
+  {
+    "id": "d675744f",
+    "page": 116,
+    "skill": "Nonlinear functions",
+    "difficulty": "Medium",
+    "prompt": "<img src=\"/question-images/math/eq_p116_244.png\" class=\"inline-math-img\" alt=\"math\" /> Which of the ",
+    "hasExistingImage": false
+  },
+  {
+    "id": "5acbdc30",
+    "page": 119,
+    "skill": "Nonlinear functions",
+    "difficulty": "Hard",
+    "prompt": "The function is defined by. For any positive integer, the value of is less than the value of. What i",
+    "hasExistingImage": true
+  },
+  {
+    "id": "f880f910",
+    "page": 121,
+    "skill": "Nonlinear functions",
+    "difficulty": "Medium",
+    "prompt": "The area of a triangle is square centimeters. The length of the base of the triangle is centimeters ",
+    "hasExistingImage": true
+  },
+  {
+    "id": "769b612d",
+    "page": 126,
+    "skill": "Nonlinear functions",
+    "difficulty": "Medium",
+    "prompt": "The function g is defined by. What is the value of when is equal to?",
+    "hasExistingImage": true
+  },
+  {
+    "id": "b8c4a1cd",
+    "page": 129,
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
+    "difficulty": "Easy",
+    "prompt": "The given equation relates the distinct positive numbers,, and. Which equation correctly expresses i",
+    "hasExistingImage": true
+  },
+  {
+    "id": "7dbd46d9",
+    "page": 131,
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
+    "difficulty": "Hard",
+    "prompt": "The graphs of the equations in the given system of equations intersect at the point in the xy-plane.",
+    "hasExistingImage": true
+  },
+  {
+    "id": "f123e039",
+    "page": 134,
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
+    "difficulty": "Easy",
+    "prompt": "The graph of a system of a linear and a quadratic equation is shown. Which system of equations is re",
+    "hasExistingImage": true
+  },
+  {
+    "id": "20722644",
+    "page": 137,
+    "skill": "Nonlinear functions",
+    "difficulty": "Easy",
+    "prompt": "The function is defined by. What is the value of?",
+    "hasExistingImage": true
+  },
+  {
+    "id": "bba18ecb",
+    "page": 138,
+    "skill": "Nonlinear functions",
+    "difficulty": "Hard",
+    "prompt": "When the quadratic function is graphed in the xy-plane, where, its ver tex is. One of the x-intercep",
+    "hasExistingImage": true
+  },
+  {
+    "id": "04887c7b",
+    "page": 142,
+    "skill": "Equivalent expressions",
+    "difficulty": "Medium",
+    "prompt": "The functions,, and are defined as shown. If, where,, and are constants, what is the value of?",
+    "hasExistingImage": true
+  },
+  {
+    "id": "cef0eada",
+    "page": 143,
+    "skill": "Nonlinear functions",
+    "difficulty": "Medium",
+    "prompt": "The graph of is shown. What is the y-intercept of?",
+    "hasExistingImage": true
+  },
+  {
+    "id": "53c07bf9",
+    "page": 146,
+    "skill": "Nonlinear functions",
+    "difficulty": "Medium",
+    "prompt": "The value of a cer tain fishing boat was when it was purchased. Each year, the value of the fishing ",
+    "hasExistingImage": true
+  },
+  {
+    "id": "29ed5d39",
+    "page": 147,
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
+    "difficulty": "Medium",
+    "prompt": "The given equation relates the numbers and, where is not equal to and. Which equation correctly expr",
+    "hasExistingImage": true
+  },
+  {
+    "id": "895628b5",
+    "page": 148,
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
+    "difficulty": "Medium",
+    "prompt": "Which ordered pair is the solution to the given system of equations?",
+    "hasExistingImage": true
+  },
+  {
+    "id": "8f82ad81",
+    "page": 149,
+    "skill": "Equivalent expressions",
+    "difficulty": "Easy",
+    "prompt": "Which expression is equivalent to?",
+    "hasExistingImage": true
+  },
+  {
+    "id": "26eb61c1",
+    "page": 150,
+    "skill": "Equivalent expressions",
+    "difficulty": "Medium",
+    "prompt": "Which expression is equivalent to?",
+    "hasExistingImage": true
+  },
+  {
+    "id": "dd8ac009",
+    "page": 151,
+    "skill": "Nonlinear functions",
+    "difficulty": "Medium",
+    "prompt": "Time (years) Total amount (dollars) Sara opened a savings account at a bank. The table shows the exp",
+    "hasExistingImage": false
+  },
+  {
+    "id": "d0e8e8f5",
+    "page": 153,
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
+    "difficulty": "Easy",
+    "prompt": "The graph of a system of a linear and a quadratic equation is shown. What is the solution to this sy",
+    "hasExistingImage": true
+  },
+  {
+    "id": "18c7c3e0",
+    "page": 155,
+    "skill": "Equivalent expressions",
+    "difficulty": "Easy",
+    "prompt": "Which expression is equivalent to?",
+    "hasExistingImage": true
+  },
+  {
+    "id": "c7a187a7",
+    "page": 171,
+    "skill": "Nonlinear functions",
+    "difficulty": "Medium",
+    "prompt": "If the given function is graphed in the xy-plane, where, what is an x-intercept of the graph?",
+    "hasExistingImage": true
+  },
+  {
+    "id": "290cdc2c",
+    "page": 176,
+    "skill": "Equivalent expressions",
+    "difficulty": "Medium",
+    "prompt": "Which expression is equivalent to, where?",
+    "hasExistingImage": true
+  },
+  {
+    "id": "abc61109",
+    "page": 177,
+    "skill": "Equivalent expressions",
+    "difficulty": "Medium",
+    "prompt": "Which expression is equivalent to, where?",
+    "hasExistingImage": true
+  },
+  {
+    "id": "d46da42c",
+    "page": 179,
+    "skill": "Nonlinear functions",
+    "difficulty": "Easy",
+    "prompt": "<img src=\"/question-images/math/eq_p179_244.png\" class=\"inline-math-img\" alt=\"math\" /> The function ",
+    "hasExistingImage": false
+  },
+  {
+    "id": "9833d0e3",
+    "page": 181,
+    "skill": "Nonlinear functions",
+    "difficulty": "Hard",
+    "prompt": "According to a model, the estimated volume of a cer tain tree in a forest increases by for every inc",
+    "hasExistingImage": true
+  },
+  {
+    "id": "91aa9aa9",
+    "page": 186,
+    "skill": "Equivalent expressions",
+    "difficulty": "Easy",
+    "prompt": "Which expression is equivalent to?",
+    "hasExistingImage": true
+  },
+  {
+    "id": "de39858a",
+    "page": 188,
+    "skill": "Nonlinear functions",
+    "difficulty": "Hard",
+    "prompt": "The function is defined by, where and are positive constants. The graph of in the xy-plane passes th",
+    "hasExistingImage": true
+  },
+  {
+    "id": "45df91ee",
+    "page": 191,
+    "skill": "Nonlinear functions",
+    "difficulty": "Easy",
+    "prompt": "If the given function is graphed in the xy-plane, where, what is the y-intercept of the graph?",
+    "hasExistingImage": true
+  },
+  {
+    "id": "f8871ccd",
+    "page": 192,
+    "skill": "Equivalent expressions",
+    "difficulty": "Medium",
+    "prompt": "Which expression is equivalent to?",
+    "hasExistingImage": true
+  },
+  {
+    "id": "67e866b5",
+    "page": 193,
+    "skill": "Equivalent expressions",
+    "difficulty": "Easy",
+    "prompt": "Which expression is equivalent to?",
+    "hasExistingImage": true
+  },
+  {
+    "id": "97158b3a",
+    "page": 194,
+    "skill": "Nonlinear functions",
+    "difficulty": "Medium",
+    "prompt": "The area A, in square centimeters, of a rectangular painting can be represented by the expression, w",
+    "hasExistingImage": true
+  },
+  {
+    "id": "84e8cc72",
+    "page": 195,
+    "skill": "Nonlinear functions",
+    "difficulty": "Hard",
+    "prompt": "A quadratic function models the height, in feet, of an object above the ground in terms of the time,",
+    "hasExistingImage": true
+  },
+  {
+    "id": "d9137a84",
+    "page": 206,
+    "skill": "Equivalent expressions",
+    "difficulty": "Hard",
+    "prompt": "Which expression represents the product of and?",
+    "hasExistingImage": true
+  },
+  {
+    "id": "c5d83a99",
+    "page": 209,
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
+    "difficulty": "Easy",
+    "prompt": "What is the solution to the given equation?",
+    "hasExistingImage": true
+  },
+  {
+    "id": "0aaef7aa",
+    "page": 215,
+    "skill": "Nonlinear functions",
+    "difficulty": "Medium",
+    "prompt": "The function is defined by. What is the value of when is equal to?",
+    "hasExistingImage": true
+  },
+  {
+    "id": "6011a3f8",
+    "page": 227,
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
+    "difficulty": "Hard",
+    "prompt": "In the given equation, is a constant. For which of the following values of will the equation have mo",
+    "hasExistingImage": true
+  },
+  {
+    "id": "50338a48",
+    "page": 229,
+    "skill": "Equivalent expressions",
+    "difficulty": "Easy",
+    "prompt": "Which expression is equivalent to?",
+    "hasExistingImage": true
+  },
+  {
+    "id": "79ba511a",
+    "page": 231,
+    "skill": "Nonlinear functions",
+    "difficulty": "Easy",
+    "prompt": "The function is defined by. What is the value of?",
+    "hasExistingImage": true
+  },
+  {
+    "id": "fe62f031",
+    "page": 236,
+    "skill": "Nonlinear functions",
+    "difficulty": "Easy",
+    "prompt": "The function is defined by. In the xy-plane, the graph of is the result of shifting the graph of up ",
+    "hasExistingImage": true
+  },
+  {
+    "id": "efc469c4",
+    "page": 237,
+    "skill": "Equivalent expressions",
+    "difficulty": "Hard",
+    "prompt": "The given expression can be rewritten as, where,, and are constants. What is the value of?",
+    "hasExistingImage": true
+  },
+  {
+    "id": "09e5e4d3",
+    "page": 239,
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
+    "difficulty": "Medium",
+    "prompt": "If, what is the value of?",
+    "hasExistingImage": true
+  },
+  {
+    "id": "1fe10d97",
+    "page": 240,
+    "skill": "Nonlinear functions",
+    "difficulty": "Hard",
+    "prompt": "The given function models the population of Lowell years after a census. Which of the following func",
+    "hasExistingImage": true
+  },
+  {
+    "id": "6acdcece",
+    "page": 241,
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
+    "difficulty": "Medium",
+    "prompt": "The given equation relates the positive numbers,, and. Which equation correctly expresses in terms o",
+    "hasExistingImage": true
+  },
+  {
+    "id": "3918e8bc",
+    "page": 244,
+    "skill": "Nonlinear functions",
+    "difficulty": "Medium",
+    "prompt": "An object is kicked from a platform. The equation represents this situation, where is the height of ",
+    "hasExistingImage": true
+  },
+  {
+    "id": "e597050f",
+    "page": 246,
+    "skill": "Equivalent expressions",
+    "difficulty": "Easy",
+    "prompt": "Which expression is equivalent to?",
+    "hasExistingImage": true
+  },
+  {
+    "id": "b5ebd31c",
+    "page": 260,
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
+    "difficulty": "Easy",
+    "prompt": "The given equation relates the variables,, and. Which equation correctly expresses in terms of and?",
+    "hasExistingImage": true
+  },
+  {
+    "id": "0de8359f",
+    "page": 262,
+    "skill": "Nonlinear functions",
+    "difficulty": "Hard",
+    "prompt": "The function is defined by the given equation. The function is defined by. Which expression represen",
+    "hasExistingImage": true
+  },
+  {
+    "id": "5d93c782",
+    "page": 264,
+    "skill": "Equivalent expressions",
+    "difficulty": "Easy",
+    "prompt": "Which expression is equivalent to?",
+    "hasExistingImage": true
+  },
+  {
+    "id": "d4d513ff",
+    "page": 268,
+    "skill": "Equivalent expressions",
+    "difficulty": "Easy",
+    "prompt": "Which expression is equivalent to?",
+    "hasExistingImage": true
+  }
+]

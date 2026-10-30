@@ -1,0 +1,167 @@
+{
+  "genuineGraphs": [
+    {
+      "id": "6abec9a8",
+      "page": 19,
+      "qY": 658,
+      "proseY": 356,
+      "gap": 302,
+      "pathCount": 259,
+      "textSnippet": "Question   ID:   6abec9a8  Assessment   T est   Domain   Skill   Difficulty  SA T   Math   Advanced "
+    },
+    {
+      "id": "252a3b3a",
+      "page": 46,
+      "qY": 658,
+      "proseY": 356,
+      "gap": 302,
+      "pathCount": 642,
+      "textSnippet": "Question   ID:   252a3b3a  Assessment   T est   Domain   Skill   Difficulty  SA T   Math   Advanced "
+    },
+    {
+      "id": "b39d74a0",
+      "page": 50,
+      "qY": 658,
+      "proseY": 538,
+      "gap": 120,
+      "pathCount": 67,
+      "textSnippet": "Question   ID:   b39d74a0  Assessment   T est   Domain   Skill   Difficulty  SA T   Math   Advanced "
+    },
+    {
+      "id": "4ca30186",
+      "page": 58,
+      "qY": 635,
+      "proseY": 337,
+      "gap": 298,
+      "pathCount": 242,
+      "textSnippet": "Question   ID:   4ca30186  Assessment   T est   Domain   Skill   Difficulty  SA T   Math   Advanced "
+    },
+    {
+      "id": "b5c43226",
+      "page": 79,
+      "qY": 658,
+      "proseY": 360,
+      "gap": 298,
+      "pathCount": 220,
+      "textSnippet": "Question   ID:   b5c43226  Assessment   T est   Domain   Skill   Difficulty  SA T   Math   Advanced "
+    },
+    {
+      "id": "97e50fa2",
+      "page": 101,
+      "qY": 635,
+      "proseY": 487,
+      "gap": 148,
+      "pathCount": 68,
+      "textSnippet": "Question   ID:   97e50fa2  Assessment   T est   Domain   Skill   Difficulty  SA T   Math   Advanced "
+    },
+    {
+      "id": "df71424b",
+      "page": 105,
+      "qY": 658,
+      "proseY": 380,
+      "gap": 278,
+      "pathCount": 335,
+      "textSnippet": "Question   ID:   df71424b  Assessment   T est   Domain   Skill   Difficulty  SA T   Math   Advanced "
+    },
+    {
+      "id": "5f10c095",
+      "page": 111,
+      "qY": 635,
+      "proseY": 333,
+      "gap": 302,
+      "pathCount": 231,
+      "textSnippet": "Question   ID:   5f10c095  Assessment   T est   Domain   Skill   Difficulty  SA T   Math   Advanced "
+    },
+    {
+      "id": "0121a235",
+      "page": 132,
+      "qY": 658,
+      "proseY": 498,
+      "gap": 160,
+      "pathCount": 107,
+      "textSnippet": "Question   ID:   0121a235  Assessment   T est   Domain   Skill   Difficulty  SA T   Math   Advanced "
+    },
+    {
+      "id": "f123e039",
+      "page": 134,
+      "qY": 635,
+      "proseY": 333,
+      "gap": 302,
+      "pathCount": 321,
+      "textSnippet": "Question   ID:   f123e039  Assessment   T est   Domain   Skill   Difficulty  SA T   Math   Advanced "
+    },
+    {
+      "id": "04887c7b",
+      "page": 142,
+      "qY": 658,
+      "proseY": 575,
+      "gap": 83,
+      "pathCount": 598,
+      "textSnippet": "Question   ID:   04887c7b  Assessment   T est   Domain   Skill   Difficulty  SA T   Math   Advanced "
+    },
+    {
+      "id": "cef0eada",
+      "page": 143,
+      "qY": 658,
+      "proseY": 356,
+      "gap": 302,
+      "pathCount": 464,
+      "textSnippet": "Question   ID:   cef0eada  Assessment   T est   Domain   Skill   Difficulty  SA T   Math   Advanced "
+    },
+    {
+      "id": "5e63b9cf",
+      "page": 144,
+      "qY": 658,
+      "proseY": 383,
+      "gap": 275,
+      "pathCount": 139,
+      "textSnippet": "Question   ID:   5e63b9cf  Assessment   T est   Domain   Skill   Difficulty  SA T   Math   Advanced "
+    },
+    {
+      "id": "d0e8e8f5",
+      "page": 153,
+      "qY": 635,
+      "proseY": 333,
+      "gap": 302,
+      "pathCount": 221,
+      "textSnippet": "Question   ID:   d0e8e8f5  Assessment   T est   Domain   Skill   Difficulty  SA T   Math   Advanced "
+    },
+    {
+      "id": "ebe4bde0",
+      "page": 172,
+      "qY": 658,
+      "proseY": 471,
+      "gap": 187,
+      "pathCount": 41,
+      "textSnippet": "Question   ID:   ebe4bde0  Assessment   T est   Domain   Skill   Difficulty  SA T   Math   Advanced "
+    },
+    {
+      "id": "1178f2df",
+      "page": 190,
+      "qY": 658,
+      "proseY": 575,
+      "gap": 83,
+      "pathCount": 820,
+      "textSnippet": "Question   ID:   1178f2df  Assessment   T est   Domain   Skill   Difficulty  SA T   Math   Advanced "
+    },
+    {
+      "id": "d45572cc",
+      "page": 226,
+      "qY": 658,
+      "proseY": 356,
+      "gap": 302,
+      "pathCount": 309,
+      "textSnippet": "Question   ID:   d45572cc  Assessment   T est   Domain   Skill   Difficulty  SA T   Math   Advanced "
+    },
+    {
+      "id": "50418728",
+      "page": 233,
+      "qY": 658,
+      "proseY": 360,
+      "gap": 298,
+      "pathCount": 219,
+      "textSnippet": "Question   ID:   50418728  Assessment   T est   Domain   Skill   Difficulty  SA T   Math   Advanced "
+    }
+  ],
+  "optionGraphs": []
+}
