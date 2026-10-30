@@ -25,6 +25,7 @@ const canvasFactory = {
 
 import * as pdfjsLib from 'pdfjs-dist/legacy/build/pdf.js';
 import { ALGEBRA_GRAPH_IDS, ALGEBRA_CORRECTIONS } from './algebraCorrections.mjs';
+import { ADVANCED_MATH_GRAPH_IDS, ADVANCED_MATH_CORRECTIONS } from './advancedMathCorrections.mjs';
 
 // Ensure public math images directory exists
 const IMAGES_DIR = path.join('public', 'question-images', 'math');
@@ -707,9 +708,15 @@ async function extractMathPdfs() {
       const domain = SKILL_TO_DOMAIN[canonicalSkill] || defaultDomain;
 
       // Locate Answer / Correct Answer markers
-      const ansHeaderIdx = firstLines.findIndex(l => /^Answer\b/i.test(l.text.trim()) || /\bAnswer\s+[A-D]\./i.test(l.text));
+      let ansHeaderIdx = firstLines.findIndex(l => /^Answer\b/i.test(l.text.trim()) || /\bAnswer\s+[A-D]\./i.test(l.text));
       const corrAnsIdx = firstLines.findIndex(l => /Correct\s+Answer/i.test(l.text));
       const ratHeaderIdx = firstLines.findIndex(l => /^Rationale\b/i.test(l.text.trim()));
+
+      // An "Answer" section header for options can NEVER be below Rationale!
+      if (ansHeaderIdx !== -1 && ratHeaderIdx !== -1 && ansHeaderIdx > ratHeaderIdx) {
+        ansHeaderIdx = -1;
+      }
+
       const isSPR = ansHeaderIdx === -1;
       let questionType = isSPR ? 'spr' : 'mcq';
 
@@ -751,10 +758,12 @@ async function extractMathPdfs() {
 
       let imageUrl = undefined;
 
-      // In Algebra, strictly restrict images to genuine coordinate plane graphs only.
+      // In Algebra and Advanced Math, strictly restrict images to genuine coordinate plane graphs only.
       // In other domains, only crop true coordinate graphs, scatterplots or geometric figures (never tables or text).
       const shouldAttemptFigureCrop = defaultDomain === 'Algebra'
         ? ALGEBRA_GRAPH_IDS.has(id)
+        : defaultDomain === 'Advanced Math'
+        ? ADVANCED_MATH_GRAPH_IDS.has(id)
         : (imagesInRegion.some(img => img.w >= 100 && img.h >= 80) || (pathsInRegion.length >= 8 && !promptCandidateText.includes('table')));
 
       if (shouldAttemptFigureCrop) {
@@ -945,9 +954,15 @@ async function extractMathPdfs() {
 
       if (!prompt) continue;
 
-      // Apply curated Algebra corrections (HTML tables, exact LaTeX options, vector math gap fills)
-      if (ALGEBRA_CORRECTIONS[id]) {
-        const corr = ALGEBRA_CORRECTIONS[id];
+      // Apply curated domain corrections (HTML tables, exact LaTeX options, vector math gap fills)
+      const domainCorrections = defaultDomain === 'Algebra'
+        ? ALGEBRA_CORRECTIONS
+        : defaultDomain === 'Advanced Math'
+        ? ADVANCED_MATH_CORRECTIONS
+        : {};
+
+      if (domainCorrections[id]) {
+        const corr = domainCorrections[id];
         if (corr.passage !== undefined) passage = corr.passage;
         if (corr.prompt !== undefined) prompt = corr.prompt;
         if (corr.options !== undefined) options = corr.options;
@@ -958,10 +973,14 @@ async function extractMathPdfs() {
       }
 
       // Restrict imageUrl strictly:
-      // In Algebra, only genuine coordinate graphs have an image.
+      // In Algebra and Advanced Math, only genuine coordinate graphs have an image.
       // If the question has a structured table in passage, imageUrl is NEVER set.
       if (defaultDomain === 'Algebra') {
         if (!ALGEBRA_GRAPH_IDS.has(id)) {
+          imageUrl = undefined;
+        }
+      } else if (defaultDomain === 'Advanced Math') {
+        if (!ADVANCED_MATH_GRAPH_IDS.has(id)) {
           imageUrl = undefined;
         }
       } else if (passage && passage.includes('<table')) {
