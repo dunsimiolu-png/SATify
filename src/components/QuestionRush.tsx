@@ -455,8 +455,8 @@ export const QuestionRush: React.FC<QuestionRushProps> = ({
 
             {/* Visual Figure / Diagram if present */}
             {currentQuestion.imageUrl && (
-              <div className="mb-4 p-3 bg-zinc-50 dark:bg-[#181B24] border border-zinc-200 dark:border-[#222634] rounded-xl flex items-center justify-center">
-                <img src={currentQuestion.imageUrl} alt="Question figure" className="max-w-full max-h-64 object-contain rounded" />
+              <div className="mb-4 p-3.5 bg-white dark:bg-black border border-zinc-200 dark:border-[#222634] rounded-2xl shadow-xs flex items-center justify-center overflow-hidden">
+                <img src={currentQuestion.imageUrl} alt="Question figure" className="max-w-full max-h-72 object-contain rounded select-none transition-all dark:invert dark:contrast-[1.1] dark:brightness-[0.95]" />
               </div>
             )}
 
@@ -585,8 +585,8 @@ export const QuestionRush: React.FC<QuestionRushProps> = ({
                         <div className="text-xs sm:text-sm font-medium leading-relaxed pt-0.5 flex-1">
                           <RichText text={opt.text} />
                           {opt.imageUrl && (
-                            <div className="mt-2 p-1.5 bg-zinc-50 dark:bg-[#11131A] border border-zinc-200 dark:border-[#222634] rounded inline-block">
-                              <img src={opt.imageUrl} alt={`Option ${opt.id}`} className="max-h-24 object-contain rounded" />
+                            <div className="mt-2.5 p-2 bg-white dark:bg-black border border-zinc-200 dark:border-[#222634] rounded-xl inline-flex items-center justify-center overflow-hidden shadow-xs">
+                              <img src={opt.imageUrl} alt={`Option ${opt.id}`} className="max-h-28 sm:max-h-36 w-auto object-contain rounded select-none transition-all dark:invert dark:contrast-[1.1] dark:brightness-[0.95]" />
                             </div>
                           )}
                         </div>

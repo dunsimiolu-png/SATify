@@ -1,4 +1,4 @@
-<svg aria-label="Graph of a line in the x y plane with the origin labeled O. The x axis is labeled Company A. It ranges from 0 to 100 in increments of 5, with values marked every 2 grid lines. The y axis is labeled Company B. It ranges from 0 to 50 in increments of 5, with values marked every 2 grid lines. Refer to long description." height="374.051875px" role="img" version="1.1" viewbox="0 0 399.251875 374.051875" width="399.251875px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg preserveAspectRatio="xMidYMid meet" aria-label="Graph of a line in the x y plane with the origin labeled O. The x axis is labeled Company A. It ranges from 0 to 100 in increments of 5, with values marked every 2 grid lines. The y axis is labeled Company B. It ranges from 0 to 50 in increments of 5, with values marked every 2 grid lines. Refer to long description." height="374.051875" role="img" version="1.1" viewBox="0 0 399.251875 374.051875" width="399.251875" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <defs>
 <style type="text/css">
 *{stroke-linecap:butt;stroke-linejoin:round;}
@@ -11,7 +11,7 @@ L 399.251875 374.051875
 L 399.251875 0 
 L 0 0 
 z
-" style="fill:none;"></path>
+" style="fill:#ffffff;"></path>
 </g>
 <g id="axes_1">
 <g id="patch_2">

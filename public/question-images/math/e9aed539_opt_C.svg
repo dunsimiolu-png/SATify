@@ -1,4 +1,4 @@
-<svg aria-label="Graph of a parabola in the x y plane with the origin labeled O. The x axis ranges from negative 6 to 10. The y axis ranges from negative 8 to 5. Refer to long description." role="img" version="1.1" viewbox="0 0 378.885664 362.16" width="378.885664px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg preserveAspectRatio="xMidYMid meet" aria-label="Graph of a parabola in the x y plane with the origin labeled O. The x axis ranges from negative 6 to 10. The y axis ranges from negative 8 to 5. Refer to long description." role="img" version="1.1" viewBox="0 0 378.885664 362.16" width="378.885664" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <defs>
 <style type="text/css">
 *{stroke-linecap:butt;stroke-linejoin:round;}
@@ -11,7 +11,7 @@ L 378.885664 362.16
 L 378.885664 0 
 L 0 0 
 z
-" style="fill:none;"></path>
+" style="fill:#ffffff;"></path>
 </g>
 <g id="axes_1">
 <g id="patch_2">
@@ -1104,7 +1104,7 @@ L 162.914686 44.890176
 </g>
 <defs>
 <clippath id="pd77b4f68a1">
-<rect height="347.76" width="358.531327" x="7.2" y="7.2"></rect>
+<rect height="362.16" width="358.531327" x="7.2" y="7.2"></rect>
 </clippath>
 </defs>
 </svg>

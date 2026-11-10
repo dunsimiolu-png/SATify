@@ -1,4 +1,4 @@
-<svg aria-label="A scatterplot in the x y plane with the origin labeled O. The x axis is labeled Growing season after transplantation. It ranges from 0 to 10. The y axis is labeled Weight of nectarines, in pounds. It ranges from 0 to 90. Refer to long description." height="285.181094pt" role="img" version="1.1" viewbox="0 0 304.856875 285.181094" width="304.856875pt" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg preserveAspectRatio="xMidYMid meet" aria-label="A scatterplot in the x y plane with the origin labeled O. The x axis is labeled Growing season after transplantation. It ranges from 0 to 10. The y axis is labeled Weight of nectarines, in pounds. It ranges from 0 to 90. Refer to long description." height="285.181094" role="img" version="1.1" viewBox="0 0 304.856875 285.181094" width="304.856875" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <defs>
 <style type="text/css">
 *{stroke-linecap:butt;stroke-linejoin:round;}
@@ -11,7 +11,7 @@ L 304.856875 285.181094
 L 304.856875 0 
 L 0 0 
 z
-" style="fill:none;"></path>
+" style="fill:#ffffff;"></path>
 </g>
 <g id="axes_1">
 <g id="patch_2">

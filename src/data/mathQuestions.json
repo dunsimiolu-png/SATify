@@ -219,7 +219,7 @@
     "difficulty": "Hard",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "A business owner plans to purchase the same model of chair for each of the $81$ employees. The total budget to spend on these chairs is \\$14,000, which includes a $7%$ sales tax. Which of the following is closest to the maximum possible price per chair, before sales tax, the business owner could pay based on this budget?",
+    "prompt": "A business owner plans to purchase the same model of chair for each of the $81$ employees. The total budget to spend on these chairs is \\$14,000, which includes a $7\\%$ sales tax. Which of the following is closest to the maximum possible price per chair, before sales tax, the business owner could pay based on this budget?",
     "options": [
       {
         "id": "A",
@@ -875,7 +875,7 @@
       }
     ],
     "correctAnswer": "A",
-    "rationale": "**Core Concept:** Converting between linear forms ($Ax + By = C$ and $y = mx + b$) and identifying slopes and coordinates.\n\n**Method 1 (Algebraic Solution):**\nIt's given that a batch of banana milkshakes consists of $4$ cups of ice cream and $2$ bananas and has $1,114$ mg of calcium. It's also given that there is $276$ mg of calcium in $1$ cup of the ice cream used to make this batch of milkshakes. It follows that the total amount of calcium in $4$ cups of ice cream is $4⁢(276)$, or $1,104$ mg. Let $x$ represent the amount of calcium, in mg, in $1$ banana. It follows that the total amount of calcium in $2$ bananas is $2x$ mg. Since the batch of banana milkshakes has $1,114$ mg of calcium, the equation $1,104+2x=1,114$ represents this situation. Subtracting $1,104$ from both sides of this equation yields $2x=10$. Dividing both sides of this equation by $2$ yields $x=5$. Therefore, the amount of calcium in $1$ banana is $5$ mg.\n\n**Method 2 (Desmos Shortcut):**\nType the equation into Desmos. You can test each answer choice by graphing them simultaneously to find the matching line.\n\n**Common Trap:**\nForgetting to divide every term by the coefficient of $y$ when converting to slope-intercept form.\n\nChoice B is incorrect. This is the amount of calcium, in mg, in $2$ bananas, not in $1$ banana.\n\nChoice D is incorrect. This is the amount of calcium, in mg, in $4$ cups of ice cream, not in $1$ banana."
+    "rationale": "**Core Concept:** Converting between linear forms ($Ax + By = C$ and $y = mx + b$) and identifying slopes and coordinates.\n\n**Method 1 (Algebraic Solution):**\nIt's given that a batch of banana milkshakes consists of $4$ cups of ice cream and $2$ bananas and has $1,114$ mg of calcium. It's also given that there is $276$ mg of calcium in $1$ cup of the ice cream used to make this batch of milkshakes. It follows that the total amount of calcium in $4$ cups of ice cream is $4 (276)$, or $1,104$ mg. Let $x$ represent the amount of calcium, in mg, in $1$ banana. It follows that the total amount of calcium in $2$ bananas is $2x$ mg. Since the batch of banana milkshakes has $1,114$ mg of calcium, the equation $1,104+2x=1,114$ represents this situation. Subtracting $1,104$ from both sides of this equation yields $2x=10$. Dividing both sides of this equation by $2$ yields $x=5$. Therefore, the amount of calcium in $1$ banana is $5$ mg.\n\n**Method 2 (Desmos Shortcut):**\nType the equation into Desmos. You can test each answer choice by graphing them simultaneously to find the matching line.\n\n**Common Trap:**\nForgetting to divide every term by the coefficient of $y$ when converting to slope-intercept form.\n\nChoice B is incorrect. This is the amount of calcium, in mg, in $2$ bananas, not in $1$ banana.\n\nChoice D is incorrect. This is the amount of calcium, in mg, in $4$ cups of ice cream, not in $1$ banana."
   },
   {
     "id": "0d391910",
@@ -5315,7 +5315,7 @@
     "difficulty": "Hard",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "While walking on a trail, Mary stopped to read a trail sign. The graph shows the total distance $y$, in meters, Mary had walked on the trail $x$ minutes after leaving the trail sign.\n\nThe line segment slants gradually up from left to right.\nThe line segment begins at the point .\nThe line segment ends at the point .\n\nWhat distance, in meters, did Mary walk on the trail in the $10$ minutes after leaving the trail sign?",
+    "prompt": "While walking on a trail, Mary stopped to read a trail sign. The graph shows the total distance $y$, in meters, Mary had walked on the trail $x$ minutes after leaving the trail sign.\n\nWhat distance, in meters, did Mary walk on the trail in the $10$ minutes after leaving the trail sign?",
     "options": [],
     "correctAnswer": "500",
     "rationale": "**Core Concept:** Constructing and interpreting linear functions $f(x) = mx + b$ in real-world contexts.\n\n**Method 1 (Algebraic Solution):**\nIt's given that the graph shows the total distance $y$, in meters, Mary had walked on the trail $x$ minutes after leaving the trail sign. The graph represents a linear relationship between time and distance, so the distance walked in a given time interval corresponds to the change in the $y$-values over that interval. At $x=0$, the graph shows a $y$-value of $150$, and at $x=10$, the graph shows a $y$-value of $650$. The distance Mary walked in the $10$ minutes after leaving the trail sign is the difference between these $y$-values, which can be written as $650-150$, or $500$. Therefore, the distance, in meters, Mary walked in the $10$ minutes after leaving the trail sign is $500$.\n\n**Method 2 (Desmos Shortcut):**\nGraph the candidate linear functions in Desmos and check which function matches the given initial value and slope conditions.\n\n**Common Trap:**\nReversing the independent variable ($x$) and dependent variable ($y$) when constructing the model.",
@@ -8728,7 +8728,7 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The combined original price for a mirror and a vase is \\$60. After a $25%$ discount to the mirror and a $45%$ discount to the vase are applied, the combined sale price for the two items is \\$39. Which system of equations gives the original price $m$, in dollars, of the mirror and the original price $v$, in dollars, of the vase?",
+    "prompt": "The combined original price for a mirror and a vase is \\$60. After a $25\\%$ discount to the mirror and a $45\\%$ discount to the vase are applied, the combined sale price for the two items is \\$39. Which system of equations gives the original price $m$, in dollars, of the mirror and the original price $v$, in dollars, of the vase?",
     "options": [
       {
         "id": "A",
@@ -8752,7 +8752,7 @@
       }
     ],
     "correctAnswer": "C",
-    "rationale": "**Core Concept:** Solving a system of two linear equations in two variables to determine their intersection point $(x, y)$.\n\n**Method 1 (Algebraic Solution):**\nIt's given that $m$ represents the original price, in dollars, of the mirror, and $v$ represents the original price, in dollars, of the vase. It's also given that the combined original price for the mirror and the vase is \\$60. This can be represented by the equation $m+v=60$. After a $25%$ discount to the mirror is applied, the sale price of the mirror is $75%$ of its original price. This can be represented by the expression $0.75m$. After a $45%$ discount to the vase is applied, the sale price of the vase is $55%$ of its original price. This can be represented by the expression $0.55v$. It's given that the combined sale price for the two items is \\$39. This can be represented by the equation $0.75m+0.55v=39$. Therefore, the system of equations consisting of the equations $m+v=60$ and $0.75m+0.55v=39$ gives the original price $m$, in dollars, of the mirror and the original price $v$, in dollars, of the vase.\n\n**Method 2 (Desmos Shortcut):**\nType both equations into Desmos on separate lines. Click the gray dot at the intersection point of the two lines to read the solution $(x, y)$ instantly.\n\n**Common Trap:**\nSign errors when subtracting equations during elimination or substituting expressions with parentheses.\n\nChoice A is incorrect. The second equation in this system of equations represents a $45\\%$ discount to the mirror and a $25\\%$ discount to the vase.\n\nChoice B is incorrect. The second equation in this system of equations represents a $55\\%$ discount to the mirror and a $75\\%$ discount to the vase."
+    "rationale": "**Core Concept:** Solving a system of two linear equations in two variables to determine their intersection point $(x, y)$.\n\n**Method 1 (Algebraic Solution):**\nIt's given that $m$ represents the original price, in dollars, of the mirror, and $v$ represents the original price, in dollars, of the vase. It's also given that the combined original price for the mirror and the vase is \\$60. This can be represented by the equation $m+v=60$. After a $25\\%$ discount to the mirror is applied, the sale price of the mirror is $75\\%$ of its original price. This can be represented by the expression $0.75m$. After a $45\\%$ discount to the vase is applied, the sale price of the vase is $55\\%$ of its original price. This can be represented by the expression $0.55v$. It's given that the combined sale price for the two items is \\$39. This can be represented by the equation $0.75m+0.55v=39$. Therefore, the system of equations consisting of the equations $m+v=60$ and $0.75m+0.55v=39$ gives the original price $m$, in dollars, of the mirror and the original price $v$, in dollars, of the vase.\n\n**Method 2 (Desmos Shortcut):**\nType both equations into Desmos on separate lines. Click the gray dot at the intersection point of the two lines to read the solution $(x, y)$ instantly.\n\n**Common Trap:**\nSign errors when subtracting equations during elimination or substituting expressions with parentheses.\n\nChoice A is incorrect. The second equation in this system of equations represents a $45\\%$ discount to the mirror and a $25\\%$ discount to the vase.\n\nChoice B is incorrect. The second equation in this system of equations represents a $55\\%$ discount to the mirror and a $75\\%$ discount to the vase."
   },
   {
     "id": "9aaf7786",
@@ -14636,7 +14636,7 @@
     "difficulty": "Easy",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "Moving from left to right:\n\nThe curve passes from quadrant 2 to quadrant 1.\nIn quadrant 2, the curve trends down sharply to the point (0 comma 3).\nIn quadrant 1, the curve trends down gradually.\n\nAs x increases, the curve approaches the line y equals 0.\nThe curve passes through the following points:\n\n(0 comma 3)\napproximately (0.5 comma 0.7)\n\nThe graph of the exponential function $f$ is shown, where $y=f\\left(x\\right)$. The y-intercept of the graph is $\\left(0,y\\right)$. What is the value of $y$?",
+    "prompt": "The graph of the exponential function $f$ is shown, where $y=f\\left(x\\right)$. The y-intercept of the graph is $\\left(0,y\\right)$. What is the value of $y$?",
     "options": [],
     "correctAnswer": "3",
     "rationale": "The correct answer is $3$. It's given that the y-intercept of the graph shown is $\\left(0,y\\right)$. The graph passes through the point $\\left(0,3\\right)$. Therefore, the value of $y$ is $3$.",
@@ -15026,7 +15026,7 @@
     "difficulty": "Hard",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "The parabola opens upward.\nThe vertex is at point (negative 1 comma negative 8).\nThe parabola passes through the following points:\n\n(negative 2 comma negative 6)\n(negative 1 comma negative 8) \n(0 comma negative 6)\n\nThe graph of $y=2x^{2}+bx+c$ is shown, where $b$ and $c$ are constants. What is the value of $bc$?",
+    "prompt": "The graph of $y=2x^{2}+bx+c$ is shown, where $b$ and $c$ are constants. What is the value of $bc$?",
     "options": [],
     "correctAnswer": "-24",
     "rationale": "The correct answer is $-24$. Since the graph passes through the point $\\left(0,-6\\right)$, it follows that when the value of $x$ is $0$, the value of $y$ is $-6$. Substituting $0$ for $x$ and $-6$ for $y$ in the given equation yields $-6=2{\\left(0\\right)}^{2}+b\\left(0\\right)+c$, or $-6=c$. Therefore, the value of $c$ is $-6$. Substituting $-6$ for $c$ in the given equation yields $y=2x^{2}+bx-6$. Since the graph passes through the point $\\left(-1,-8\\right)$, it follows that when the value of $x$ is $-1$, the value of $y$ is $-8$. Substituting $-1$ for $x$ and $-8$ for $y$ in the equation $y=2x^{2}+bx-6$ yields $-8=2{\\left(-1\\right)}^{2}+b\\left(-1\\right)-6$, or $-8=2-b-6$, which is equivalent to $-8=-4-b$. Adding $4$ to each side of this equation yields $-4=-b$. Dividing each side of this equation by $-1$ yields $4=b$. Since the value of $b$ is $4$ and the value of $c$ is $-6$, it follows that the value of $bc$ is $\\left(4\\right)\\left(-6\\right)$, or $-24$.\n\nAlternate approach: The given equation represents a parabola in the xy-plane with a vertex at $\\left(-1,-8\\right)$. Therefore, the given equation, $y=2x^{2}+bx+c$, which is written in standard form, can be written in vertex form, $y=a{\\left(x-h\\right)}^{2}+k$, where $\\left(h,k\\right)$ is the vertex of the parabola and $a$ is the value of the coefficient on the $x^{2}$ term when the equation is written in standard form. It follows that $a=2$. Substituting $2$ for $a$, $-1$ for $h$, and $-8$ for $k$ in this equation yields $y=2{\\left(x-\\left(-1\\right)\\right)}^{2}+\\left(-8\\right)$, or $y=2{\\left(x+1\\right)}^{2}-8$. Squaring the binomial on the right-hand side of this equation yields $y=2\\left(x^{2}+2x+1\\right)-8$. Multiplying each term inside the parentheses on the right-hand side of this equation by $2$ yields $y=2x^{2}+4x+2-8$, which is equivalent to $y=2x^{2}+4x-6$. From the given equation $y=2x^{2}+bx+c$, it follows that the value of $b$ is $4$ and the value of $c$ is $-6$. Therefore, the value of $bc$ is $\\left(4\\right)\\left(-6\\right)$, or $-24$.",
@@ -15875,7 +15875,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The parabola opens downward.\nThe vertex is at point (2 comma 28).\nThe parabola passes through the following points:\n\n(0 comma 8.4)\n(2 comma 28)\n(4 comma 8.4)\n\nAn object was launched upward from a platform. The graph shown models the height above ground, $y$, in meters, of the object $x$ seconds after it was launched. For which of the following intervals of time was the height of the object increasing for the entire interval?",
+    "prompt": "An object was launched upward from a platform. The graph shown models the height above ground, $y$, in meters, of the object $x$ seconds after it was launched. For which of the following intervals of time was the height of the object increasing for the entire interval?",
     "options": [
       {
         "id": "A",
@@ -16130,7 +16130,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The parabola opens upward.\nThe parabola passes through the following points:\n\n(0 comma 0)\n(3 comma negative 12)\n(6 comma 0)\n\nScientists recorded data about the ocean water levels at a certain location over a period of $6$ hours. The graph shown models the data, where $y=0$ represents sea level. Which table gives values of $x$ and their corresponding values of $y$ based on the model?",
+    "prompt": "Scientists recorded data about the ocean water levels at a certain location over a period of $6$ hours. The graph shown models the data, where $y=0$ represents sea level. Which table gives values of $x$ and their corresponding values of $y$ based on the model?",
     "options": [
       {
         "id": "A",
@@ -16419,7 +16419,7 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "In quadrant 3:\n\nThe curve rises sharply to touch the x axis at point (negative 5 comma 0).\nThe curve falls gradually to a relative minimum at point (negative 2 comma negative 11).\nThe curve rises gradually to cross both axes at the origin.\n\nIn quadrant 1:\n\nThe curve rises gradually to a relative maximum at point (2.5 comma 21).\nThe curve falls sharply to cross the x axis at point (4 comma 0).\n\nIn quadrant 4 the curve falls sharply.\n\nWhich of the following could be the equation of the graph shown in the xy-plane?",
+    "prompt": "Which of the following could be the equation of the graph shown in the xy-plane?",
     "options": [
       {
         "id": "A",
@@ -16556,7 +16556,7 @@
     "difficulty": "Easy",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "Moving from left to right, the curve passes from quadrant 2 to quadrant 1.\nThe curve has 1 relative maximum and 1 relative minimum.\nThe curve passes through the following points:(0 comma 40)(4 comma 40)(7 comma 40)\n\nThe y-intercept of the graph shown is $\\left(x,y\\right)$. What is the value of $y$?",
+    "prompt": "The y-intercept of the graph shown is $\\left(x,y\\right)$. What is the value of $y$?",
     "options": [],
     "correctAnswer": "40",
     "rationale": "The correct answer is $40$. The y-intercept of a graph in the xy-plane is the point $\\left(x,y\\right)$ on the graph where $x=0$. The y-intercept of the graph shown is $\\left(0,40\\right)$. Therefore, the value of $y$ is $40$.",
@@ -16793,7 +16793,7 @@
     "difficulty": "Easy",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "Moving from left to right:\n\nThe curve passes from quadrant 3 to quadrant 4 to quadrant 1.\nIn quadrant 3, the curve trends up gradually to the y axis.\nIn quadrant 4, the curve trends up gradually to the point (6 comma 0).\nIn quadrant 1, the curve trends up sharply.\n\nAs x decreases, the curve approaches the line y equals negative 2.\nThe curve passes through the following points:\n\n(5 comma negative four thirds)\n(6 comma 0)\n\nWhat is the x-coordinate of the x-intercept of the graph shown?",
+    "prompt": "What is the x-coordinate of the x-intercept of the graph shown?",
     "options": [],
     "correctAnswer": "6",
     "rationale": "The correct answer is $6$. An x-intercept of a graph is a point on the graph where it intersects the x-axis, or where the value of $y$ is $0$. The graph shown intersects the x-axis at the point $\\left(6,0\\right)$. Therefore, the x-coordinate of the x-intercept of the graph shown is $6$.",
@@ -17015,7 +17015,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The curve is in quadrant 1.\nThe curve trends gradually up from left to right. \nThe curve begins at the point (0 comma 20,000).\nThe curve passes through the following points:\n\n(0 comma 20,000)\napproximately (5 comma 26,263)\napproximately (10 comma 34,488)\n\nThe graph shown models the number of residents of a certain city $x$ years after $2010$. How many residents does this model estimate the city had in $2010$?",
+    "prompt": "(0 comma 20,000)\napproximately (5 comma 26,263)\napproximately (10 comma 34,488)\n\nThe graph shown models the number of residents of a certain city $x$ years after $2010$. How many residents does this model estimate the city had in $2010$?",
     "options": [
       {
         "id": "A",
@@ -17050,7 +17050,7 @@
     "difficulty": "Easy",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "The parabola opens upward.\nThe vertex is at the point (0 comma 7).\nThe parabola passes through the following points:\n\n(negative 1 comma StartFraction 26 Over 3 EndFraction)\n(0 comma 7)\n(1 comma StartFraction 26 Over 3 EndFraction)\n\nThe parabola shown intersects the y-axis at the point $\\left(x,y\\right)$. What is the value of $y$?",
+    "prompt": "The parabola shown intersects the y-axis at the point $\\left(x,y\\right)$. What is the value of $y$?",
     "options": [],
     "correctAnswer": "7",
     "rationale": "The correct answer is $7$. It's given that the parabola intersects the y-axis at the point $\\left(x,y\\right)$. The graph shows that the parabola intersects the y-axis at the point $\\left(0,7\\right)$. Therefore, the value of $y$ is $7$.",
@@ -17437,7 +17437,7 @@
     "difficulty": "Hard",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Moving from left to right:The curve passes from quadrant 2 to quadrant 1 to quadrant 4.In quadrant 2, the curve trends down gradually to the point (0 comma 8).In quadrant 1:The curve trends down gradually to the approximate point (1 comma 6.0).The curve then trends down sharply to the x axis.In quadrant 4, the curve trends down sharply.As x decreases, the curve approaches the line y equals 9.The curve passes through the following points:(0 comma 8)(1 comma 6)\n\nThe graph of $y=f\\left(x\\right)+4$ is shown. Which equation defines function $f$?",
+    "prompt": "The graph of $y=f\\left(x\\right)+4$ is shown. Which equation defines function $f$?",
     "options": [
       {
         "id": "A",
@@ -17893,7 +17893,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "For the curve in the system:\n\nThe curve passes from quadrant 2 to quadrant 1.\nIn quadrant 2, the curve trends up gradually to the approximate point (0 comma 4.063).\nIn quadrant 1:\n\nThe curve trends up gradually to point (4 comma 5).\nThe curve then trends up sharply.\n\nThe curve passes through the following points:\n\n(3 comma nine halves)\n(4 comma 5)\n(5 comma 6)\n\nFor the line in the system:\n\nThe line slants sharply down from left to right.\nThe line passes through the following points:\n\n(3 comma 9)\n(4 comma 5)\n\nThe graph of a system of a linear equation and a nonlinear equation is shown. What is the solution $\\left(x,y\\right)$ to this system?",
+    "prompt": "The curve passes through the following points:\n\nThe graph of a system of a linear equation and a nonlinear equation is shown. What is the solution $\\left(x,y\\right)$ to this system?",
     "options": [
       {
         "id": "A",
@@ -18350,7 +18350,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "For the absolute value function in the system:\n\nMoving from left to right:\n\nThe function slants sharply down to the point (negative 3 comma 4).\nThe function then slants sharply up.\n\nThe function passes through the following points:\n\n(negative seven halves comma nine halves)\n(negative 3 comma 4)\n(negative five halves comma nine halves)\n\nFor the linear function in the system:\n\nThe function slants sharply up from left to right.\nThe function passes through the following points:\n\n(negative seven halves comma nine halves)\n(0 comma 8)\n\nThe graph of a system of an absolute value function and a linear function is shown. What is the solution $\\left(x,y\\right)$ to this system of two equations?",
+    "prompt": "The function passes through the following points:\n\nFor the linear function in the system:\n\nThe graph of a system of an absolute value function and a linear function is shown. What is the solution $\\left(x,y\\right)$ to this system of two equations?",
     "options": [
       {
         "id": "A",
@@ -18553,7 +18553,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "For the curve in the system:\n\nMoving from left to right:\n\nThe curve passes from quadrant 2 to quadrant 1.\nIn quadrant 2, the curve trends up gradually to point (0 comma 3.25).\nIn quadrant 1, the curve trends up sharply.\n\nThe curve passes through the following points:\n\n(1 comma 3.5)\n(2 comma 4)\n(4 comma 7)\n\nFor the line in the system:\n\nThe line slants gradually up from left to right.\nThe line passes through the following points:\n\n(2 comma 4)\n(7 comma 7.5)\n\nThe graph of a system of a linear equation and a nonlinear equation is shown. What is the solution $\\left(x,y\\right)$ to this system?",
+    "prompt": "The curve passes through the following points:\n\nThe graph of a system of a linear equation and a nonlinear equation is shown. What is the solution $\\left(x,y\\right)$ to this system?",
     "options": [
       {
         "id": "A",
@@ -18588,7 +18588,7 @@
     "difficulty": "Hard",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Moving from left to right:\n\nThe curve is in quadrant 3.\nThe curve trends down sharply.\n\nAs x increases, the curve approaches the line x equals negative 4.\nAs x decreases, the curve approaches the line y equals 0.\nThe curve passes through the following points:\n\n(negative 7 comma negative 2)\n(negative 6 comma negative 3)\n(negative 5 comma negative 6)\n\nThe rational function $f$ is defined by an equation in the form $f\\left(x\\right)=\\frac{a}{x+b}$, where $a$ and $b$ are constants. The partial graph of $y=f\\left(x\\right)$ is shown. If $g\\left(x\\right)=f\\left(x+4\\right)$, which equation could define function $g$?",
+    "prompt": "The rational function $f$ is defined by an equation in the form $f\\left(x\\right)=\\frac{a}{x+b}$, where $a$ and $b$ are constants. The partial graph of $y=f\\left(x\\right)$ is shown. If $g\\left(x\\right)=f\\left(x+4\\right)$, which equation could define function $g$?",
     "options": [
       {
         "id": "A",
@@ -18861,7 +18861,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "All values are approximate.\nThe parabola opens downward.\nThe vertex of the parabola is at (0.6 comma 5.5).\nThe parabola passes through the following points:\n\n(0.0 comma 3.8)\n(0.6 comma 5.5)\n(1.0 comma 4.8)\n(1.7 comma 0.0)\n\nThe graph shows the height above ground, in meters, of a ball $x$ seconds after the ball was launched upward from a platform. Which statement is the best interpretation of the marked point $\\left(1.0,4.8\\right)$ in this context?",
+    "prompt": "(0.0 comma 3.8)\n(0.6 comma 5.5)\n(1.0 comma 4.8)\n(1.7 comma 0.0)\n\nThe graph shows the height above ground, in meters, of a ball $x$ seconds after the ball was launched upward from a platform. Which statement is the best interpretation of the marked point $\\left(1.0,4.8\\right)$ in this context?",
     "options": [
       {
         "id": "A",
@@ -18930,7 +18930,7 @@
     "difficulty": "Easy",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "In quadrant 3, the curve rises to its maximum at point (0 comma negative 3).\nIn quadrant 4, the curve then falls.\n\nThe graph of the polynomial function $f$, where $y=f\\left(x\\right)$, is shown. The y-intercept of the graph is $\\left(0,y\\right)$. What is the value of $y$?",
+    "prompt": "The graph of the polynomial function $f$, where $y=f\\left(x\\right)$, is shown. The y-intercept of the graph is $\\left(0,y\\right)$. What is the value of $y$?",
     "options": [],
     "correctAnswer": "-3",
     "rationale": "The correct answer is $-3$. The y-intercept of the graph of a function in the xy-plane is the point where the graph crosses the y-axis. The graph of the polynomial function shown crosses the y-axis at the point $\\left(0,-3\\right)$. It's given that the y-intercept of the graph is $\\left(0,y\\right)$. Thus, the value of $y$ is $-3$.",
@@ -19527,7 +19527,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "For the line in the system:\n\nThe line slants sharply down from left to right.\nThe line passes through the following points:\n\n(negative 2 comma 6)\napproximately (0 comma 3.8)\n\nFor the curve in the system:\n\nMoving from left to right:\n\nThe curve passes from quadrant 2 to quadrant 1.\nIn quadrant 2:\n\nThe curve trends down sharply to the point (negative 2 comma 6).\nThe curve then trends down gradually to the y axis.\n\nIn quadrant 1, the curve trends down gradually.\n\nAs x increases, the curve approaches the line y equals 5.\nThe curve passes through the following points:\n\n(negative 3 comma 8)\n(negative 2 comma 6)\n\nThe graph of a system of a linear equation and a nonlinear equation is shown. What is the solution $\\left(x,y\\right)$ to this system?",
+    "prompt": "The graph of a system of a linear equation and a nonlinear equation is shown. What is the solution $\\left(x,y\\right)$ to this system?",
     "options": [
       {
         "id": "A",
@@ -19664,7 +19664,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The parabola opens upward.\nThe vertex is at the point (4 comma 2).\nThe parabola passes through the following points:\n\n(0 comma 8)\n(4 comma 2)\n(8 comma 8)\n\nThe graph shows a marble's height above the ground $y$, in inches, $x$ seconds after it started moving on an elevated track of a marble run. Which of the following is the best interpretation of the $y$-intercept of the graph?",
+    "prompt": "The graph shows a marble's height above the ground $y$, in inches, $x$ seconds after it started moving on an elevated track of a marble run. Which of the following is the best interpretation of the $y$-intercept of the graph?",
     "options": [
       {
         "id": "A",
@@ -19718,7 +19718,7 @@
     "difficulty": "Easy",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "In quadrant 2, the curve falls to its minimum at the point (0 comma 4).In quadrant 1, the curve then rises.\n\nThe graph of the polynomial function $f$, where $y=f\\left(x\\right)$, is shown. The y-intercept of the graph is $\\left(0,y\\right)$. What is the value of $y$?",
+    "prompt": "The graph of the polynomial function $f$, where $y=f\\left(x\\right)$, is shown. The y-intercept of the graph is $\\left(0,y\\right)$. What is the value of $y$?",
     "options": [],
     "correctAnswer": "4",
     "rationale": "The correct answer is $4$. The y-intercept of the graph of a function in the xy-plane is the point where the graph intersects the y-axis. The graph of the polynomial function shown intersects the y-axis at the point $(0,4)$. It's given that the y-intercept of the graph is $(0,y)$. Therefore, the value of $y$ is $4$.",
@@ -19735,7 +19735,7 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "For the line in the system:\n\nThe line is horizontal.\nThe line passes through the following points:\n\n(0 comma 7.2)\n(4 comma 7.2)\n(6 comma 7.2)\n\nFor the parabola in the system:\n\nThe parabola opens downward.\nThe vertex is at the point (5 comma 8.1).\nThe parabola passes through the following points:\n\n(2 comma 0) \n(4 comma 7.2)\n(6 comma 7.2)\n(8 comma 0)\n\nThe graph of a system of a linear equation and a quadratic equation is shown. A solution to the system is $\\left(x,y\\right)$. What is a possible value of $x$?",
+    "prompt": "(0 comma 7.2)\n(4 comma 7.2)\n(6 comma 7.2)\n\nFor the parabola in the system:\n\nThe graph of a system of a linear equation and a quadratic equation is shown. A solution to the system is $\\left(x,y\\right)$. What is a possible value of $x$?",
     "options": [
       {
         "id": "A",
@@ -19956,7 +19956,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Moving from left to right:\n\nThe curve passes from quadrant 3 to quadrant 4.\nIn quadrant 3, the curve trends up sharply to point (0 comma negative 5).\nIn quadrant 4, the curve trends up gradually.\n\nAs x increases, the curve approaches the line y equals negative 4.\nThe curve passes through the following points:\n\n(negative 1 comma negative 9)\n(0 comma negative 5)\n(1 comma negative 4.2)\n\nWhat is the y-intercept of the graph shown?",
+    "prompt": "What is the y-intercept of the graph shown?",
     "options": [
       {
         "id": "A",
@@ -20350,7 +20350,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Moving from left to right:\n\nThe curve passes from quadrant 3 to quadrant 4.\nIn quadrant 3, the curve trends up sharply to point (0 comma negative 6).\nIn quadrant 4, the curve trends up gradually.\n\nAs x increases, the curve approaches the line y equals negative 5.\nThe curve passes through the following points:\n\n(0 comma negative 6)\n(1 comma negative 5 and one sixth)\n\nWhat is the y-intercept of the graph shown?",
+    "prompt": "What is the y-intercept of the graph shown?",
     "options": [
       {
         "id": "A",
@@ -20898,7 +20898,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The parabola opens upward.The parabola passes through the following points:(negative 1 comma 5)(0 comma 2)(1 comma 5)\n\nThe graph of the quadratic function $y=f\\left(x\\right)$ is shown. What is the vertex of the graph?",
+    "prompt": "The graph of the quadratic function $y=f\\left(x\\right)$ is shown. What is the vertex of the graph?",
     "options": [
       {
         "id": "A",
@@ -21035,7 +21035,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Moving from left to right:\n\nThe curve passes from quadrant 2 to quadrant 1 to quadrant 4.\nIn quadrant 2, the curve trends down gradually to the approximate point (0 comma 2.5).\nIn quadrant 1, the curve trends down sharply to point (5 comma 0).\nIn quadrant 4, the curve trends down sharply.\n\nThe curve passes through the following points:\n\napproximately (0 comma 2.5)\napproximately (4 comma 0.8)\n\nWhat is the x-intercept of the graph shown?",
+    "prompt": "The curve passes through the following points:\n\napproximately (0 comma 2.5)\napproximately (4 comma 0.8)\n\nWhat is the x-intercept of the graph shown?",
     "options": [
       {
         "id": "A",
@@ -21273,7 +21273,7 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The parabola opens downward.The parabola passes through the following approximate points:(50 comma negative 33.83)(149.02 comma 186.05)(250 comma 315.37)\n\nThe graph shows the estimated boiling point $y$, in degrees Celsius, of a normal paraffin with a molecular weight of $x$ grams per mole, where $1 \\le x \\le 280$. Which statement is the best interpretation of the point $\\left(149.02186.05\\right)$?",
+    "prompt": "The graph shows the estimated boiling point $y$, in degrees Celsius, of a normal paraffin with a molecular weight of $x$ grams per mole, where $1 \\le x \\le 280$. Which statement is the best interpretation of the point $\\left(149.02186.05\\right)$?",
     "options": [
       {
         "id": "A",
@@ -21410,7 +21410,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Moving from left to right:The curve is in quadrant 1.The curve trends down gradually.The curve passes through the following approximate points:(0 comma 225)(24 comma 50)\n\nThe graph shown gives the estimated value, in dollars, of a tablet as a function of the number of months since it was purchased. What is the best interpretation of the y-intercept of the graph in this context?",
+    "prompt": "The graph shown gives the estimated value, in dollars, of a tablet as a function of the number of months since it was purchased. What is the best interpretation of the y-intercept of the graph in this context?",
     "options": [
       {
         "id": "A",
@@ -21434,7 +21434,7 @@
       }
     ],
     "correctAnswer": "A",
-    "rationale": "Choice A is correct. It's given that the graph shown gives the estimated value $y$, in dollars, of a tablet as a function of the number of months since it was purchased, $x$. The y-intercept of a graph is the point at which the graph intersects the y-axis, or when $x$ is $0$. The graph shown intersects the y-axis at the point $\\left(0,225\\right)$. It follows that $0$ months after the tablet was purchased, or when the tablet was purchased, the estimated value of the tablet was $225$ dollars. Therefore, the best interpretation of the y-intercept is that the estimated value of the tablet was \\$225 when it was purchased.\n\nChoice B is incorrect. The estimated value of the tablet $24$ months after it was purchased was \\$50, not \\$225.\n\nChoice C is incorrect. The estimated value of the tablet had decreased by $\\text{\\$}225-\\text{\\$}50$, or \\$175, not \\$225, in the $24$ months after it was purchased.\n\nChoice D is incorrect and may result from conceptual errors.",
+    "rationale": "Choice A is correct. It's given that the graph shown gives the estimated value $y$, in dollars, of a tablet as a function of the number of months since it was purchased, $x$. The y-intercept of a graph is the point at which the graph intersects the y-axis, or when $x$ is $0$. The graph shown intersects the y-axis at the point $\\left(0,225\\right)$. It follows that $0$ months after the tablet was purchased, or when the tablet was purchased, the estimated value of the tablet was $225$ dollars. Therefore, the best interpretation of the y-intercept is that the estimated value of the tablet was \\$225 when it was purchased.\n\nChoice B is incorrect. The estimated value of the tablet $24$ months after it was purchased was \\$50, not \\$225.\n\nChoice C is incorrect. The estimated value of the tablet had decreased by $\\$225-\\$50$, or \\$175, not \\$225, in the $24$ months after it was purchased.\n\nChoice D is incorrect and may result from conceptual errors.",
     "imageUrl": "/question-images/math/7f2524bf.svg"
   },
   {
@@ -21463,7 +21463,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "During the first part of an experiment, a ball was launched from a $7$-foot-tall platform. The graph shows the height $y$, in feet, of the ball $x$ seconds after it was launched during the first part of the experiment.\n\nThe parabola opens downward.\nThe vertex is at the approximate point (0.3 comma 8.3).\nThe parabola passes through the following points:\n\n(0 comma 7)\napproximately (0.3 comma 8.3)\napproximately (0.6 comma 7)\n\nDuring the second part of the experiment, the ball was launched the same way, but from a platform that is $2$ feet shorter than the first platform. Which of the following graphs could represent the height $y$, in feet, of the ball $x$ seconds after it was launched during the second part of the experiment?",
+    "prompt": "During the first part of an experiment, a ball was launched from a $7$-foot-tall platform. The graph shows the height $y$, in feet, of the ball $x$ seconds after it was launched during the first part of the experiment.\n\nDuring the second part of the experiment, the ball was launched the same way, but from a platform that is $2$ feet shorter than the first platform. Which of the following graphs could represent the height $y$, in feet, of the ball $x$ seconds after it was launched during the second part of the experiment?",
     "options": [
       {
         "id": "A",
@@ -21843,7 +21843,7 @@
     "difficulty": "Easy",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "Moving from left to right:\n\nThe curve passes from quadrant 2 to quadrant 1.\nIn quadrant 2, the curve trends up sharply to the point (0 comma 3).\nIn quadrant 1, the curve trends up sharply.\n\nThe curve passes through the following points:\n\napproximately (negative 1 comma 0.2)\n(0 comma 3)\n\nThe graph of the exponential function $f$ is shown, where $y=f\\left(x\\right)$. The y-intercept of the graph is $\\left(0,y\\right)$. What is the value of $y$?",
+    "prompt": "The curve passes through the following points:\n\nThe graph of the exponential function $f$ is shown, where $y=f\\left(x\\right)$. The y-intercept of the graph is $\\left(0,y\\right)$. What is the value of $y$?",
     "options": [],
     "correctAnswer": "3",
     "rationale": "The correct answer is $3$. For the graph of the exponential function $f$ shown, where $y=f\\left(x\\right)$, it's given that the y-intercept of the graph is $\\left(0,y\\right)$. The graph intersects the y-axis at the point $\\left(0,3\\right)$. Therefore, the value of $y$ is $3$.",
@@ -22100,7 +22100,7 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The parabola opens downward.\nThe vertex is at point (4 comma 9).\nThe parabola passes through the following points:\n\n(0 comma 5)\n(2 comma 8)\n(4 comma 9)\n(6 comma 8)\n\nThe graph models the number of active projects a company was working on $x$ months after the end of November $2012$, where $0 \\le x \\le 6$. According to the model, what is the predicted number of active projects the company was working on at the end of November $2012$?",
+    "prompt": "The graph models the number of active projects a company was working on $x$ months after the end of November $2012$, where $0 \\le x \\le 6$. According to the model, what is the predicted number of active projects the company was working on at the end of November $2012$?",
     "options": [
       {
         "id": "A",
@@ -22494,7 +22494,7 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The parabola opens downward.\nThe vertex is at the approximate point (0.2 comma 10.2).\nThe parabola passes through the following points:\n\n(0 comma 10)\napproximately (0.2 comma 10.2)\napproximately (1 comma 6.9)\napproximately (1.6 comma 0)\n\nA competitive diver dives from a platform into the water. The graph shown gives the height above the water $y$, in meters, of the diver $x$ seconds after diving from the platform. What is the best interpretation of the x-intercept of the graph?",
+    "prompt": "A competitive diver dives from a platform into the water. The graph shown gives the height above the water $y$, in meters, of the diver $x$ seconds after diving from the platform. What is the best interpretation of the x-intercept of the graph?",
     "options": [
       {
         "id": "A",
@@ -22851,7 +22851,7 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Moving from left to right:\n\nThe curve is shown in quadrant 1.\nThe curve trends down sharply to x equals 3.\nThe curve then trends down gradually.\n\nAs x increases, the curve approaches the line y equals 0.\nThe curve passes through the following points:\n\n(2 comma nine halves)\n(3 comma 3)\n(6 comma three halves)\n\nThe graph of the rational function $f$ is shown, where $y=f(x)$ and $x \\ge 0$. Which of the following is the graph of $y=f(x)+5$, where $x \\ge 0$?",
+    "prompt": "The graph of the rational function $f$ is shown, where $y=f(x)$ and $x \\ge 0$. Which of the following is the graph of $y=f(x)+5$, where $x \\ge 0$?",
     "options": [
       {
         "id": "A",
@@ -22958,7 +22958,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "For the first curve: \n\nMoving from left to right:\n\nThe curve passes from quadrant 2 to quadrant 1.\nIn quadrant 2, the curve trends up gradually to point (0 comma 3).\nIn quadrant 1, the curve trends up sharply.\n\nAs x increases, the curve approaches the line x equals 4.\nAs x decreases, the curve approaches the line y equals 1.\nThe curve passes through the following points:\n\n(negative 3 comma 2)\n(0 comma 3)\n\nFor the second curve: \n\nMoving from left to right:\n\nThe curve is in quadrant 4.\nIn quadrant 4, the curve trends up sharply.\n\nAs x increases, the curve approaches the line y equals 1.\nAs x decreases, the curve approaches the line x equals 4.\nThe curve passes through the following point:\n\n(6 comma negative 4)\n\nThe graph of $y=f\\left(x\\right)$ is shown in the xy-plane. What is the value of $f\\left(0\\right)$?",
+    "prompt": "For the first curve:\n\nFor the second curve:\n\nThe graph of $y=f\\left(x\\right)$ is shown in the xy-plane. What is the value of $f\\left(0\\right)$?",
     "options": [
       {
         "id": "A",
@@ -23145,7 +23145,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Moving from left to right:\n\nThe curve passes from quadrant 2 to quadrant 1.\nIn quadrant 2, the curve trends up gradually to point (0 comma 2).\nIn quadrant 1, the curve trends up sharply.\n\nThe curve passes through the following points:\n\n(negative 1 comma 1)\n(0 comma 2)\n(2 comma 8)\n\nWhat is the y-intercept of the graph shown?",
+    "prompt": "The curve passes through the following points:\n\nWhat is the y-intercept of the graph shown?",
     "options": [
       {
         "id": "A",
@@ -24200,7 +24200,7 @@
     "difficulty": "Hard",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Moving from left to right, the curve passes from quadrant 3 to quadrant 2 to quadrant 1.\nThe curve has 2 relative maximums and 2 relative minimums.\nThe curve crosses the x axis at the point (negative 2 comma 0).\nThe curve touches the x axis at the following points:\n\n(1 comma 0)\n(3 comma 0)\n\nThe graph of $y=g\\left(x\\right)$ is shown. If $g\\left(x+28\\right)=\\frac{1}{10}{\\left(x-a\\right)}^{2}{\\left(x-b\\right)}^{2}\\left(x-c\\right)$, where $a$, $b$, and $c$ are constants, which of the following could be the value of $b$?",
+    "prompt": "The graph of $y=g\\left(x\\right)$ is shown. If $g\\left(x+28\\right)=\\frac{1}{10}{\\left(x-a\\right)}^{2}{\\left(x-b\\right)}^{2}\\left(x-c\\right)$, where $a$, $b$, and $c$ are constants, which of the following could be the value of $b$?",
     "options": [
       {
         "id": "A",
@@ -24254,7 +24254,7 @@
     "difficulty": "Easy",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "For the first curve:\n\nMoving from left to right, the curve is in quadrant 3.\nAs x decreases, the curve approaches the line y equals negative 1.\nAs x increases, the curve approaches the line x equals negative 1.\n\nFor the second curve:\n\nMoving from left to right, the curve passes from quadrant 2 to quadrant 1 to quadrant 4.\nAs x decreases, the curve approaches the line x equals negative 1.\nAs x increases, the curve approaches the line y equals negative 1.\n\nThe 2 curves pass through the following points:\n\n(negative 6 comma negative nine fifths)\n(0 comma 3)\n(4 comma negative one fifth)\n\nWhat is the y-coordinate of the y-intercept of the graph shown?",
+    "prompt": "For the first curve:\n\nFor the second curve:\n\nThe 2 curves pass through the following points:\n\nWhat is the y-coordinate of the y-intercept of the graph shown?",
     "options": [],
     "correctAnswer": "3",
     "rationale": "The correct answer is $3$. A y-intercept of a graph in the xy-plane is a point $\\left(x,y\\right)$ on the graph where $x=0$. For the graph shown, at $x=0$, the corresponding value of $y$ is $3$. Therefore, the y-coordinate of the y-intercept of the graph shown is $3$.",
@@ -24271,7 +24271,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The graph shows the predicted value $y$, in dollars, of a certain sport utility vehicle $x$ years after it is first purchased.\n\nThe curve is in quadrant 1.\nThe curve trends down gradually from left to right.\nThe curve passes through the following approximate points:\n\n(0 comma 23,000)\n(1 comma 19,320)\n(3 comma 13,632)\n(5 comma 9,619)\n\nWhich of the following is closest to the predicted value of the sport utility vehicle $3$ years after it is first purchased?",
+    "prompt": "The graph shows the predicted value $y$, in dollars, of a certain sport utility vehicle $x$ years after it is first purchased.\n\n(0 comma 23,000)\n(1 comma 19,320)\n(3 comma 13,632)\n(5 comma 9,619)\n\nWhich of the following is closest to the predicted value of the sport utility vehicle $3$ years after it is first purchased?",
     "options": [
       {
         "id": "A",
@@ -24359,7 +24359,7 @@
     "difficulty": "Easy",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "The parabola opens upward.\nThe vertex is at point (7 comma 0).\nThe parabola passes through the following points:\n\n(6 comma 3)\n(7 comma 0)\n(8 comma 3)\n\nThe x-intercept of the graph shown is $\\left(x,0\\right)$. What is the value of $x$?",
+    "prompt": "The x-intercept of the graph shown is $\\left(x,0\\right)$. What is the value of $x$?",
     "options": [],
     "correctAnswer": "7",
     "rationale": "The correct answer is $7$. It’s given that the x-intercept of the graph shown is $\\left(x,0\\right)$. The graph passes through the point $\\left(7,0\\right)$. Therefore, the value of $x$ is $7$.",
@@ -24376,7 +24376,7 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "In quadrant 2 the curve falls sharply to cross the x axis at point (negative 1 comma 0).\nIn quadrant 3 the curve falls sharply to cross the y axis at point (0 comma negative 5.5).\nIn quadrant 4:\n\nThe curve falls gradually to a relative minimum at point (1 comma negative 7).\nThe curve rises sharply to cross the x axis at point (4 comma 0).\n\nIn quadrant 1:\n\nThe curve rises sharply to a relative maximum at point (5.5 comma 3).\nThe curve falls sharply to cross the x axis at point (7 comma 0).\n\nIn quadrant 4 the curve falls sharply. \n\nThe graph of $y=f\\left(x\\right)$ is shown, where the function $f$ is defined by $f\\left(x\\right)=ax^{3}+bx^{2}+cx+d$ and $a$, $b$, $c$, and $d$ are constants. For how many values of $x$ does $f\\left(x\\right)=0$?",
+    "prompt": "The graph of $y=f\\left(x\\right)$ is shown, where the function $f$ is defined by $f\\left(x\\right)=ax^{3}+bx^{2}+cx+d$ and $a$, $b$, $c$, and $d$ are constants. For how many values of $x$ does $f\\left(x\\right)=0$?",
     "options": [
       {
         "id": "A",
@@ -24566,7 +24566,7 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Moving from left to right, the curve rises from quadrant 3 to quadrant 2 to quadrant 1.\nThe curve passes through the following points:\n\n(negative 1 comma eight thirds)\n(0 comma 3)\n(1 comma StartFraction 10 Over 3 EndFraction)\n\nThe graph of $y=f\\left(x\\right)$ is shown. What is the y-intercept of $y=f\\left(x\\right)+5$?",
+    "prompt": "The graph of $y=f\\left(x\\right)$ is shown. What is the y-intercept of $y=f\\left(x\\right)+5$?",
     "options": [
       {
         "id": "A",
@@ -24651,7 +24651,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "For the parabola in the system:\n\nThe parabola opens upward.\nThe vertex is at point (4 comma 1).\nThe parabola passes through the following points:\n\n(3 comma 2)\n(4 comma 1)\n(5 comma 2)\n\nFor the line in the system:\n\nThe line is horizontal.\nThe line passes through the following points:\n\n(0 comma 1)\n(4 comma 1)\n\nThe graph of a system of a linear and a quadratic equation is shown. What is the solution $\\left(x,y\\right)$ to this system?",
+    "prompt": "For the parabola in the system:\n\nThe graph of a system of a linear and a quadratic equation is shown. What is the solution $\\left(x,y\\right)$ to this system?",
     "options": [
       {
         "id": "A",
@@ -24736,7 +24736,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "For the absolute value function:\n\nMoving from left to right:\n\nThe function slants sharply down to the point (4 comma 2).\nThe function then slants sharply up.\n\nThe function passes through the following points:\n\n(1 comma 5) \n(4 comma 2)\n(6 comma 4)\n\nFor the linear function:\n\nThe function slants sharply up from left to right.\nThe function passes through the following points:\n\n(0 comma 4)\n(1 comma 5)\n\nThe graph of a system of an absolute value function and a linear function is shown. What is the solution $\\left(x,y\\right)$ to this system of two equations?",
+    "prompt": "The function passes through the following points:\n\nFor the linear function:\n\nThe graph of a system of an absolute value function and a linear function is shown. What is the solution $\\left(x,y\\right)$ to this system of two equations?",
     "options": [
       {
         "id": "A",
@@ -24805,7 +24805,7 @@
     "difficulty": "Easy",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "For the first curve:\n\nMoving from left to right:\n\nThe curve is in quadrant 3.\nAs x decreases, the curve approaches the line y equals 0.\nAs x increases, the curve approaches the line x equals negative 4.\n\nFor the second curve:\n\nMoving from left to right:\n\nThe curve passes from quadrant 2 to quadrant 1.\nAs x decreases, the curve approaches the line x equals negative 4.\nAs x increases, the curve approaches the line y equals 0.\n\nThe 2 curves pass through the following points:\n\napproximately (negative 7 comma negative 4.9)\n(0 comma 3)\napproximately (7 comma 0.8)\n\nThe graph of $y=f\\left(x\\right)$ is shown in the xy-plane. The value of $f\\left(0\\right)$ is an integer. What is the value of $f\\left(0\\right)$?",
+    "prompt": "For the first curve:\n\nFor the second curve:\n\nThe 2 curves pass through the following points:\n\nThe graph of $y=f\\left(x\\right)$ is shown in the xy-plane. The value of $f\\left(0\\right)$ is an integer. What is the value of $f\\left(0\\right)$?",
     "options": [],
     "correctAnswer": "3",
     "rationale": "The correct answer is $3$. The value of $f(0)$ is the value of $y$ on the graph of $y=f(x)$ in the xy-plane that corresponds with $x=0$. It's given that the value of $f(0)$ is an integer. For the graph of $y=f(x)$ shown, when $x=0$, the corresponding integer value of $y$ is $3$. Therefore, the value of $f(0)$ is $3$.",
@@ -25076,7 +25076,7 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Moving from left to right:\n\nThe curve is in quadrant 1.\nFrom point (0 comma 9), the curve trends down sharply.\nFrom point (5 comma 1), the curve trends down gradually.\n\nThe graph gives the estimated number of catalogs $y$, in thousands, a company sent to its customers at the end of each year, where $x$ represents the number of years since the end of $1992$, where $0 \\le x \\le 10$. Which statement is the best interpretation of the y-intercept in this context?",
+    "prompt": "The graph gives the estimated number of catalogs $y$, in thousands, a company sent to its customers at the end of each year, where $x$ represents the number of years since the end of $1992$, where $0 \\le x \\le 10$. Which statement is the best interpretation of the y-intercept in this context?",
     "options": [
       {
         "id": "A",
@@ -25229,7 +25229,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "For the absolute value function:\n\nMoving from left to right:\n\nThe function slants sharply down to the point (4 comma 2).\nThe function then slants sharply up.\n\nThe function passes through the following points:\n\n(1 comma 5) \n(4 comma 2)\n(6 comma 4)\n\nFor the linear function:\n\nThe function slants sharply up from left to right.\nThe function passes through the following points:\n\n(0 comma 4)\n(1 comma 5)\n\nThe graph of a system of an absolute value function and a linear function is shown. What is the solution $\\left(x,y\\right)$ to this system of two equations?",
+    "prompt": "The function passes through the following points:\n\nFor the linear function:\n\nThe graph of a system of an absolute value function and a linear function is shown. What is the solution $\\left(x,y\\right)$ to this system of two equations?",
     "options": [
       {
         "id": "A",
@@ -25385,7 +25385,7 @@
     "prompt": "A certain bowl was sold online for prices varying between \\$7 and \\$13. The number of bowls sold can be modeled by a quadratic function based on the price, where $5$ bowls were sold for \\$12 each and the maximum of $9$ bowls were sold for \\$10 each. According to the model, what is the number of bowls that were sold for \\$8 each?",
     "options": [],
     "correctAnswer": "5",
-    "rationale": "The correct answer is $5$. It’s given that the number of bowls sold can be modeled by a quadratic function based on the price, where a maximum of $9$ bowls were sold for \\$10 each and $5$ bowls were sold for \\$12 each. This quadratic function can be defined by an equation of the form $N\\left(p\\right)=a{(p-h)}^{2}+k$, where $N(p)$ is the number of bowls sold when the price is $\\text{\\$}p$ each, and $a$, $h$, and $k$ are constants such that the function reaches its maximum value, $k$, when $p=h$. Since the model indicates the maximum number of bowls sold is $9$ when the price is \\$10 each, $N(p)$ reaches its maximum value, $9$, when $p=10$. Therefore, $k=9$ and $h=10$. Substituting $10$ for $h$ and $9$ for $k$ in the function $N\\left(p\\right)=a{(p-h)}^{2}+k$ yields $N\\left(p\\right)=a{(p-10)}^{2}+9$. Since the model indicates the number of bowls sold is $5$ when the price is \\$12 each, the value of $N(p)$ is $5$ when $p=12$. Substituting $12$ for $p$ and $5$ for $N(p)$ in the equation $N\\left(p\\right)=a{(p-10)}^{2}+9$ yields $5=a{(12-10)}^{2}+9$, or $5=4a+9$. Subtracting $9$ from both sides of this equation yields $-4=4a$. Dividing both sides of this equation by $4$ yields $-1=a$. Therefore, the model can be represented by the equation $N\\left(p\\right)=-{(p-10)}^{2}+9$. Substituting $8$ for $p$ in this equation yields $N\\left(8\\right)=-{(8-10)}^{2}+9$, or $N(8)=-4+9$, or $N(8)=5$. Therefore, according to the model, the number of bowls sold for \\$8 each was $5$.",
+    "rationale": "The correct answer is $5$. It’s given that the number of bowls sold can be modeled by a quadratic function based on the price, where a maximum of $9$ bowls were sold for \\$10 each and $5$ bowls were sold for \\$12 each. This quadratic function can be defined by an equation of the form $N\\left(p\\right)=a{(p-h)}^{2}+k$, where $N(p)$ is the number of bowls sold when the price is $\\$p$ each, and $a$, $h$, and $k$ are constants such that the function reaches its maximum value, $k$, when $p=h$. Since the model indicates the maximum number of bowls sold is $9$ when the price is \\$10 each, $N(p)$ reaches its maximum value, $9$, when $p=10$. Therefore, $k=9$ and $h=10$. Substituting $10$ for $h$ and $9$ for $k$ in the function $N\\left(p\\right)=a{(p-h)}^{2}+k$ yields $N\\left(p\\right)=a{(p-10)}^{2}+9$. Since the model indicates the number of bowls sold is $5$ when the price is \\$12 each, the value of $N(p)$ is $5$ when $p=12$. Substituting $12$ for $p$ and $5$ for $N(p)$ in the equation $N\\left(p\\right)=a{(p-10)}^{2}+9$ yields $5=a{(12-10)}^{2}+9$, or $5=4a+9$. Subtracting $9$ from both sides of this equation yields $-4=4a$. Dividing both sides of this equation by $4$ yields $-1=a$. Therefore, the model can be represented by the equation $N\\left(p\\right)=-{(p-10)}^{2}+9$. Substituting $8$ for $p$ in this equation yields $N\\left(8\\right)=-{(8-10)}^{2}+9$, or $N(8)=-4+9$, or $N(8)=5$. Therefore, according to the model, the number of bowls sold for \\$8 each was $5$.",
     "acceptedAnswers": [
       "5"
     ]
@@ -25398,7 +25398,7 @@
     "difficulty": "Hard",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Moving from left to right, the curve passes from quadrant 3 to quadrant 4.As x decreases, the curve approaches line y equals negative 7.The curve passes through the following approximate points:(negative 1 comma negative 7.3)(0 comma negative 7.9)\n\nThe graph of $y=f\\left(x\\right)$ is shown, where $f\\left(x\\right)=ab^{x}+c$, and $a$, $b$, and $c$ are constants. For how many values of $x$ does $f\\left(x\\right)=0$?",
+    "prompt": "The graph of $y=f\\left(x\\right)$ is shown, where $f\\left(x\\right)=ab^{x}+c$, and $a$, $b$, and $c$ are constants. For how many values of $x$ does $f\\left(x\\right)=0$?",
     "options": [
       {
         "id": "A",
@@ -25483,7 +25483,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The parabola opens upward.\nThe vertex is at point (4 comma 0).\nThe parabola passes through the following points:\n\n(3 comma 5)\n(4 comma 0)\n(5 comma 5)\n\nWhat is the x-intercept of the graph shown?",
+    "prompt": "What is the x-intercept of the graph shown?",
     "options": [
       {
         "id": "A",
@@ -25670,7 +25670,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The parabola opens upward.The vertex is at the point (2 comma negative 2).The parabola passes through the following points:(1 comma negative nine tenths)(2 comma negative 2)(3 comma negative nine tenths)\n\nThe graph shown will be translated up $4$ units. Which of the following will be the resulting graph?",
+    "prompt": "The graph shown will be translated up $4$ units. Which of the following will be the resulting graph?",
     "options": [
       {
         "id": "A",
@@ -25893,7 +25893,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "For the line in the system:\n\nThe line slants sharply up from left to right.\nThe line passes through the following points:\n\n(negative 1 comma negative 5)\n(0 comma 0)\n\nFor the parabola in the system:\n\nThe parabola opens upward.\nThe vertex is at the point (0 comma negative 8).\nThe parabola passes through the following points:\n\n(negative 1 comma negative 7)\n(0 comma negative 8)\n(1 comma negative 7)\n\n1 intersection of the line and the parabola is shown in the graph.\n\nThe graph of a system of a linear and a quadratic equation is shown. Which system of equations is represented by the graph?",
+    "prompt": "For the parabola in the system:\n\n1 intersection of the line and the parabola is shown in the graph.\n\nThe graph of a system of a linear and a quadratic equation is shown. Which system of equations is represented by the graph?",
     "options": [
       {
         "id": "A",
@@ -25944,7 +25944,7 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Moving from left to right:\n\nThe curve passes through quadrant 1.\nThe curve trends up sharply.\n\nThe curve passes through the following points:\n\n(0 comma 6)\n(1 comma 9.0)\n\nThe graph gives the estimated population $y$, in thousands, of a town $x$ years since $2003$, where $0 \\le x \\le 5$. Which of the following best describes the increase in the estimated population from $x=0$ to $x=1$?",
+    "prompt": "The curve passes through quadrant 1.\nThe curve trends up sharply.\n\nThe curve passes through the following points:\n\nThe graph gives the estimated population $y$, in thousands, of a town $x$ years since $2003$, where $0 \\le x \\le 5$. Which of the following best describes the increase in the estimated population from $x=0$ to $x=1$?",
     "options": [
       {
         "id": "A",
@@ -26131,7 +26131,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Moving from left to right:\n\nThe curve passes from quadrant 2 to quadrant 1.\nIn quadrant 2, the curve trends up gradually to point (0 comma 8).\nIn quadrant 1, the curve trends up sharply.\n\nThe curve passes through the following points:\n\n(0 comma 8)\n(1 comma 9)\n\nWhat is the y-intercept of the graph shown?",
+    "prompt": "The curve passes through the following points:\n\nWhat is the y-intercept of the graph shown?",
     "options": [
       {
         "id": "A",
@@ -26863,7 +26863,7 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The scatterplot shows the relationship between two variables, $x$ and $y$. A line of best fit is also shown.\n\nThe scatterplot has 10 data points.\nThe data points are in a linear pattern trending down from left to right.\nA line of best fit is shown:\n\nThe line of best fit slants down from left to right.\n2 points are touching the line of best fit.\n3 points are above the line of best fit.\n5 points are below the line of best fit.\nThe line of best fit passes through the following approximate coordinates:\n\n(0 comma 12.9)\n(6 comma 8)\n(12 comma 3.2)\n\nWhich of the following is closest to the slope of the line of best fit shown?",
+    "prompt": "The scatterplot shows the relationship between two variables, $x$ and $y$. A line of best fit is also shown.\n\nWhich of the following is closest to the slope of the line of best fit shown?",
     "options": [
       {
         "id": "A",
@@ -26901,7 +26901,7 @@
     "prompt": "The regular price of a shirt at a store is \\$11.70. The sale price of the shirt is $80\\%$ less than the regular price, and the sale price is $30\\%$ greater than the store's cost for the shirt. What was the store’s cost, in dollars, for the shirt? (Disregard the \\$ sign when entering your answer. For example, if your answer is \\$4.97, enter $4.97$)",
     "options": [],
     "correctAnswer": "9/5",
-    "rationale": "The correct answer is $1.8$. It’s given that the regular price of a shirt at a store is \\$11.70, and the sale price of the shirt is $80\\%$ less than the regular price. It follows that the sale price of the shirt is $\\text{\\$}11.70\\left(1-\\frac{80}{100}\\right)$, or $\\text{\\$}11.70\\left(1-0.8\\right)$, which is equivalent to \\$2.34. It’s also given that the sale price of the shirt is $30\\%$ greater than the store’s cost for the shirt. Let $x$ represent the store’s cost for the shirt. It follows that $2.34=\\left(1+\\frac{30}{100}\\right)x$, or $2.34=1.3x$. Dividing both sides of this equation by $1.3$ yields $x=1.80$. Therefore, the store’s cost, in dollars, for the shirt is $1.80$. Note that 1.8 and 9/5 are examples of ways to enter a correct answer.",
+    "rationale": "The correct answer is $1.8$. It’s given that the regular price of a shirt at a store is \\$11.70, and the sale price of the shirt is $80\\%$ less than the regular price. It follows that the sale price of the shirt is $\\$11.70\\left(1-\\frac{80}{100}\\right)$, or $\\$11.70\\left(1-0.8\\right)$, which is equivalent to \\$2.34. It’s also given that the sale price of the shirt is $30\\%$ greater than the store’s cost for the shirt. Let $x$ represent the store’s cost for the shirt. It follows that $2.34=\\left(1+\\frac{30}{100}\\right)x$, or $2.34=1.3x$. Dividing both sides of this equation by $1.3$ yields $x=1.80$. Therefore, the store’s cost, in dollars, for the shirt is $1.80$. Note that 1.8 and 9/5 are examples of ways to enter a correct answer.",
     "acceptedAnswers": [
       "1.8",
       "1.800",
@@ -27259,7 +27259,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The scatterplot shows the relationship between two variables, $x$ and $y$.\n\nThe scatterplot has 8 data points.\nThe data points are in an exponential pattern trending up from left to right. \nThe data points have the following approximate coordinates:\n\n(0.3 comma 75)\n(1.9 comma 200)\n(2.6 comma 183)\n(3.5 comma 898)\n(4.2 comma 802)\n(5.1 comma 2,173)\n(5.7 comma 2,658)\n(6.4 comma 4,766)\n\nWhich of the following graphs shows the most appropriate model for the data?",
+    "prompt": "The scatterplot shows the relationship between two variables, $x$ and $y$.\n\n(0.3 comma 75)\n(1.9 comma 200)\n(2.6 comma 183)\n(3.5 comma 898)\n(4.2 comma 802)\n(5.1 comma 2,173)\n(5.7 comma 2,658)\n(6.4 comma 4,766)\n\nWhich of the following graphs shows the most appropriate model for the data?",
     "options": [
       {
         "id": "A",
@@ -27333,7 +27333,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The scatterplot shows the relationship between two variables, $x$ and $y$.\n\nThe scatterplot has 5 data points.\nThe data points are in a linear pattern trending up from left to right.\nThe data points have the following coordinates:\n\n(1 comma 3.0)\n(3 comma 5.0)\n(5 comma 6.0)\n(7 comma 8.0)\n(9 comma 10.0)\n\nWhich equation is the most appropriate linear model for this relationship?",
+    "prompt": "The scatterplot shows the relationship between two variables, $x$ and $y$.\n\n(1 comma 3.0)\n(3 comma 5.0)\n(5 comma 6.0)\n(7 comma 8.0)\n(9 comma 10.0)\n\nWhich equation is the most appropriate linear model for this relationship?",
     "options": [
       {
         "id": "A",
@@ -27812,7 +27812,7 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The scatterplot shows the relationship between two variables, $x$ and $y$. A line of best fit is also shown.\n\nThe scatterplot has 5 data points.\nThe data points are in a linear pattern trending down from left to right.\nA line of best fit is shown:\n\nThe line of best fit slants down from left to right.\nThe line of best fit passes through the following approximate coordinates:\n\n(0 comma 14.1)\n(12.7 comma 0)\n\nWhich of the following is closest to the slope of this line of best fit?",
+    "prompt": "The scatterplot shows the relationship between two variables, $x$ and $y$. A line of best fit is also shown.\n\n(0 comma 14.1)\n(12.7 comma 0)\n\nWhich of the following is closest to the slope of this line of best fit?",
     "options": [
       {
         "id": "A",
@@ -28329,7 +28329,7 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "In the given scatterplot, a line of best fit for the data is shown.\n\nThe scatterplot has 10 data points.\nThe data points are in a linear pattern trending down from left to right.\nA line of best fit is shown:\nThe line of best fit slants down from left to right.\n\n5 points are touching the line of best fit.\n2 points are above the line of best fit.\n3 points are below the line of best fit.\nThe line of best fit passes through the following approximate coordinates:\n\n(1 comma 7)\n(4 comma 5)\n(10 comma 1)\n\nWhich of the following is closest to the slope of this line of best fit?",
+    "prompt": "In the given scatterplot, a line of best fit for the data is shown.\n\n5 points are touching the line of best fit.\n2 points are above the line of best fit.\n3 points are below the line of best fit.\nThe line of best fit passes through the following approximate coordinates:\n\nWhich of the following is closest to the slope of this line of best fit?",
     "options": [
       {
         "id": "A",
@@ -28364,7 +28364,7 @@
     "difficulty": "Hard",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The scatterplot has 10 data points.\nThe data points are in a linear pattern trending up from left to right.\nA line of best fit is shown:\n\nThe line of best fit slants up from left to right.\nThe line of best fit passes through the following approximate coordinates:\n\n(0 comma 11.9)\n(12 comma 30.3)\n(20 comma 42.6)\n\nThe scatterplot shows the relationship between two variables, $x$ and $y$, for data set E. A line of best fit is shown. Data set F is created by multiplying the y-coordinate of each data point from data set E by $3.9$. Which of the following could be an equation of a line of best fit for data set F?",
+    "prompt": "(0 comma 11.9)\n(12 comma 30.3)\n(20 comma 42.6)\n\nThe scatterplot shows the relationship between two variables, $x$ and $y$, for data set E. A line of best fit is shown. Data set F is created by multiplying the y-coordinate of each data point from data set E by $3.9$. Which of the following could be an equation of a line of best fit for data set F?",
     "options": [
       {
         "id": "A",
@@ -28600,7 +28600,7 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The scatterplot shows the relationship between $x$ and $y$. A line of best fit is also shown. \n\nThe scatterplot has 5 data points.The data points are in a linear pattern trending up from left to right.A line of best fit is shown:The line of best fit slants up from left to right.The line of best fit passes through the following approximate coordinates:(0 comma 3.20)(1 comma 3.80)(2 comma 4.40)\n\nWhich of the following is closest to the slope of this line of best fit?",
+    "prompt": "The scatterplot shows the relationship between $x$ and $y$. A line of best fit is also shown.\n\nWhich of the following is closest to the slope of this line of best fit?",
     "options": [
       {
         "id": "A",
@@ -28669,7 +28669,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The scatterplot shows the relationship between $x$ and $y$. A line of best fit is also shown.\n\nThe scatterplot has 6 data points.\nThe data points are in a linear pattern trending up from left to right.\nA line of best fit is shown:\n\nThe line of best fit slants up from left to right.\n1 point is touching the line of best fit.\n2 points are above the line of best fit.\n3 points are below the lines of best fit.\nThe line of best fit passes through the following approximate coordinates:\n\n(0 comma 0.2)\n(4 comma 2)\n\nWhich of the following is closest to the slope of the line of best fit shown?",
+    "prompt": "The scatterplot shows the relationship between $x$ and $y$. A line of best fit is also shown.\n\nWhich of the following is closest to the slope of the line of best fit shown?",
     "options": [
       {
         "id": "A",
@@ -28773,7 +28773,7 @@
     "prompt": "A gift shop buys souvenirs at a wholesale price of $7.00$ dollars each and resells them each at a retail price that is $290\\%$ of the wholesale price. At the end of the season, any remaining souvenirs are marked at a discounted price that is $80\\%$ off the retail price. What is the discounted price of each remaining souvenir, in dollars?",
     "options": [],
     "correctAnswer": "203/50",
-    "rationale": "The correct answer is $4.06$. It's given that the retail price is $290\\%$ of the wholesale price of \\$7.00. Thus, the retail price is \\$7.00290100, which is equivalent to \\$7.002.9, or \\$20.30. It's also given that the discounted price is $80\\%$ off the retail price. Thus, the discounted price is $\\text{\\$}20.30\\left(1-\\frac{80}{100}\\right)$, which is equivalent to \\$20.300.20, or \\$4.06.",
+    "rationale": "The correct answer is $4.06$. It's given that the retail price is $290\\%$ of the wholesale price of \\$7.00. Thus, the retail price is \\$7.00290100, which is equivalent to \\$7.002.9, or \\$20.30. It's also given that the discounted price is $80\\%$ off the retail price. Thus, the discounted price is $\\$20.30\\left(1-\\frac{80}{100}\\right)$, which is equivalent to \\$20.300.20, or \\$4.06.",
     "acceptedAnswers": [
       "203/50",
       "4.06",
@@ -29181,7 +29181,7 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "In the given scatterplot, a line of best fit for the data is shown.\n\nThe scatterplot has 5 data points.\nThe data points are in a linear pattern trending up from left to right.\nA line of best fit is shown:\n\nThe line of best fit slants up from left to right.\nThe line of best fit passes through the following approximate coordinates:\n\n(0 comma 0.2)\n(5 comma 9.3)\n\nWhich of the following is closest to the slope of the line of best fit shown?",
+    "prompt": "In the given scatterplot, a line of best fit for the data is shown.\n\n(0 comma 0.2)\n(5 comma 9.3)\n\nWhich of the following is closest to the slope of the line of best fit shown?",
     "options": [
       {
         "id": "A",
@@ -29284,7 +29284,7 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The scatterplot shows the relationship between two variables, $x$ and $y$.\n\nThe scatterplot has 10 data points.\nThe data points are in a linear pattern trending down from left to right.\nThe data points have the following approximate coordinates:\n\n(0 comma 10)\n(1.2 comma 9)\n(2.3 comma 8)\n(3.1 comma 5)\n(4.8 comma 5)\n(5.2 comma 3)\n(6.5 comma 3)\n(7.2 comma 3)\n(9.6 comma 2)\n(8.8 comma 1)\n\nWhich of the following equations is the most appropriate linear model for the data shown?",
+    "prompt": "The scatterplot shows the relationship between two variables, $x$ and $y$.\n\nWhich of the following equations is the most appropriate linear model for the data shown?",
     "options": [
       {
         "id": "A",
@@ -29726,7 +29726,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "From left to right the values of the vertical bars in the box plot are as follows:\n\nFirst vertical bar: 2\nSecond vertical bar: 4\nThird vertical bar: 5\nFourth vertical bar: 7\nFifth vertical bar: 8\n\nThe box plot summarizes $15$ data values. What is the median of this data set?",
+    "prompt": "First vertical bar: 2\nSecond vertical bar: 4\nThird vertical bar: 5\nFourth vertical bar: 7\nFifth vertical bar: 8\n\nThe box plot summarizes $15$ data values. What is the median of this data set?",
     "options": [
       {
         "id": "A",
@@ -29882,7 +29882,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The scatterplot has 10 data points.\nThe data points are in a linear pattern trending down from left to right.\nSelect data points have the following approximate coordinates:\n\n(0.8 comma 8.9)\n(2.8 comma 5.1)\n(4.1 comma 2.9)\n\nWhich of the following equations is the most appropriate linear model for the data shown in the scatterplot?",
+    "prompt": "(0.8 comma 8.9)\n(2.8 comma 5.1)\n(4.1 comma 2.9)\n\nWhich of the following equations is the most appropriate linear model for the data shown in the scatterplot?",
     "options": [
       {
         "id": "A",
@@ -30041,7 +30041,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The graph of the function $f$ is shown, where $y=f\\left(x\\right)$.\n\nMoving from left to right:\n\nThe curve passes from quadrant 2 to quadrant 1.\nIn quadrant 2, the curve trends up gradually to point (0 comma 1).\nIn quadrant 1, the curve trends up sharply.\n\nAs x decreases, the curve approaches the line y equals 0.\nThe curve passes through the following points:\n\napproximately (negative 1 comma 0.2)\n(0 comma 1)\napproximately (1 comma 5.3)\n\nWhich of the following best describes the function $f$?",
+    "prompt": "The graph of the function $f$ is shown, where $y=f\\left(x\\right)$.\n\nWhich of the following best describes the function $f$?",
     "options": [
       {
         "id": "A",
@@ -30233,7 +30233,7 @@
     "difficulty": "Hard",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "From left to right, the values of the vertical bars in the Class A box plot are as follows:\n\nFirst vertical bar: 0\nSecond vertical bar: 1\nThird vertical bar: 2\nFourth vertical bar: 4\nFifth vertical bar: 5\n\nFrom left to right, the values of the vertical bars in the Class B box plot are as follows:\n\nFirst vertical bar: 1\nSecond vertical bar: 4\nThird vertical bar: 7\nFourth vertical bar: 9\nFifth vertical bar: 10\n\nThe two box plots show the distribution of number of books read over the summer by the students in two different English classes. What is the positive difference between the ranges of number of books read over the summer for the two classes?",
+    "prompt": "First vertical bar: 0\nSecond vertical bar: 1\nThird vertical bar: 2\nFourth vertical bar: 4\nFifth vertical bar: 5\n\nFirst vertical bar: 1\nSecond vertical bar: 4\nThird vertical bar: 7\nFourth vertical bar: 9\nFifth vertical bar: 10\n\nThe two box plots show the distribution of number of books read over the summer by the students in two different English classes. What is the positive difference between the ranges of number of books read over the summer for the two classes?",
     "options": [],
     "correctAnswer": "4",
     "rationale": "The correct answer is $4$. It's given that the two boxplots show the distribution of number of books read over the summer by the students in two different English classes. In a boxplot, the first vertical line represents the minimum value of the data set and the last vertical line represents the maximum value of the data set. The range of a data set is the difference between its maximum value and its minimum value. In class A, the maximum number of books read is $5$ and the minimum number of books read is $0$. The difference between those values is $5-0$, or $5$. Therefore, the range of the number of books read in class A is $5$. In class B, the maximum number of books read is $10$ and the minimum number of books read is $1$. The difference between those values is $10-1$, or $9$. Therefore, the range of the number of books read in class B is $9$. To find the positive difference between the ranges of the number of books read for the two classes, the smaller range must be subtracted from the larger range. Therefore, the positive difference between the ranges of number of books read over the summer for the two classes is $9-5$, or $4$.",
@@ -30387,7 +30387,7 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "As part of a study of lake conditions, the water temperature was recorded at different depths below the surface of a certain lake. The data shown in the scatterplot give the recorded temperature, in degrees Celsius, for $7$ depths, in meters, below the surface of the lake.\n\nThe scatterplot has 7 data points.The data points are in a linear pattern trending down from left to right.The data points have the following approximate coordinates:(15 comma 21.80)(22 comma 20.70)(35 comma 15.70)(47 comma 16.80)(51 comma 15.70)(54 comma 13.70)(70 comma 12.70)\n\nWhich of the following is closest to the slope of a line of best fit for the data shown?",
+    "prompt": "As part of a study of lake conditions, the water temperature was recorded at different depths below the surface of a certain lake. The data shown in the scatterplot give the recorded temperature, in degrees Celsius, for $7$ depths, in meters, below the surface of the lake.\n\nWhich of the following is closest to the slope of a line of best fit for the data shown?",
     "options": [
       {
         "id": "A",
@@ -30674,7 +30674,7 @@
     "difficulty": "Hard",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "The scatterplot shows the relationship between the length of time $y$, in hours, a certain bird spent in flight and the number of days after January $11$, $x$.\n\nThe scatterplot has 10 data points.\nThe data points are spread out.\nThe data points have the following coordinates:\n\n(1 comma 14)\n(2 comma 6)\n(3 comma 10)\n(4 comma 15)\n(5 comma 14.2)\n(6 comma 7)\n(7 comma 11)\n(8 comma 14)\n(9 comma 13.5)\n(10 comma 13.2)\n\nWhat is the average rate of change, in hours per day, of the length of time the bird spent in flight on January $13$ to the length of time the bird spent in flight on January $15$?",
+    "prompt": "The scatterplot shows the relationship between the length of time $y$, in hours, a certain bird spent in flight and the number of days after January $11$, $x$.\n\nWhat is the average rate of change, in hours per day, of the length of time the bird spent in flight on January $13$ to the length of time the bird spent in flight on January $15$?",
     "options": [],
     "correctAnswer": "9/2",
     "rationale": "The correct answer is $\\frac{9}{2}$. It's given that the scatterplot shows the relationship between the length of time $y$, in hours, a certain bird spent in flight and the number of days after January $11$, $x$. Since January $13$ is $2$ days after January $11$, it follows that January $13$ corresponds to an x-value of $2$ in the scatterplot. In the scatterplot, when $x=2$, the corresponding value of $y$ is $6$. In other words, on January $13$, the bird spent $6$ hours in flight. Since January $15$ is $4$ days after January $11$, it follows that January $15$ corresponds to an x-value of $4$ in the scatterplot. In the scatterplot, when $x=4$, the corresponding value of $y$ is $15$. In other words, on January $15$, the bird spent $15$ hours in flight. Therefore, the average rate of change, in hours per day, of the length of time the bird spent in flight on January $13$ to the length of time the bird spent in flight on January $15$ is the difference in the length of time, in hours, the bird spent in flight divided by the difference in the number of days after January $11$, or $\\frac{15-6}{4-2}$, which is equivalent to $\\frac{9}{2}$. Note that 9/2 and 4.5 are examples of ways to enter a correct answer.",
@@ -30955,7 +30955,7 @@
       }
     ],
     "correctAnswer": "A",
-    "rationale": "Choice A is correct. It's given that the mean price of a carton of grape tomatoes in Utah was estimated to be \\$4.23, with an associated margin of error of \\$0.08. It follows that plausible values for this mean price are between $\\text{\\$}4.23-\\text{\\$}0.08$ and $\\text{\\$}4.23+\\text{\\$}0.08$. Therefore, it's plausible that the mean price of a carton of grape tomatoes for all locations that sell this product in Utah is between \\$4.15 and \\$4.31.\n\nChoice B is incorrect and may result from conceptual or calculation errors.\n\nChoice C is incorrect and may result from conceptual or calculation errors.\n\nChoice D is incorrect and may result from conceptual or calculation errors."
+    "rationale": "Choice A is correct. It's given that the mean price of a carton of grape tomatoes in Utah was estimated to be \\$4.23, with an associated margin of error of \\$0.08. It follows that plausible values for this mean price are between $\\$4.23-\\$0.08$ and $\\$4.23+\\$0.08$. Therefore, it's plausible that the mean price of a carton of grape tomatoes for all locations that sell this product in Utah is between \\$4.15 and \\$4.31.\n\nChoice B is incorrect and may result from conceptual or calculation errors.\n\nChoice C is incorrect and may result from conceptual or calculation errors.\n\nChoice D is incorrect and may result from conceptual or calculation errors."
   },
   {
     "id": "81d0f1e6",
@@ -31087,7 +31087,7 @@
     "prompt": "A customer spent \\$27 to purchase oranges at \\$3 per pound. How many pounds of oranges did the customer purchase?",
     "options": [],
     "correctAnswer": "9",
-    "rationale": "The correct answer is $9$. It’s given that the customer spent \\$27 to purchase oranges at \\$3 per pound. Therefore, the number of pounds of oranges the customer purchased is $\\text{\\$}27\\left(\\frac{1\\text{pound}}{\\text{\\$}3}\\right)$, or $9$ pounds.",
+    "rationale": "The correct answer is $9$. It’s given that the customer spent \\$27 to purchase oranges at \\$3 per pound. Therefore, the number of pounds of oranges the customer purchased is $\\$27\\left(\\frac{1\\text{pound}}{\\$3}\\right)$, or $9$ pounds.",
     "acceptedAnswers": [
       "9"
     ]
@@ -31253,7 +31253,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The scatterplot shows the relationship between two variables, $x$ and $y$. A line of best fit is also shown.\n\nThe scatterplot has 10 data points.\nThe data points are in a linear pattern trending down from left to right.\nA line of best fit is shown:\n\nThe line of best slants down from left to right.\n1 point is touching the line of best fit.\n4 points are above the line of best fit.\n5 points are below the line of best fit.\nThe line of best fit passes through the following approximate coordinates:\n\n(2 comma 12)\n(8 comma 7)\n(13 comma 3)\n\nWhich of the following equations best represents the line of best fit shown?",
+    "prompt": "The scatterplot shows the relationship between two variables, $x$ and $y$. A line of best fit is also shown.\n\nWhich of the following equations best represents the line of best fit shown?",
     "options": [
       {
         "id": "A",
@@ -31409,7 +31409,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The scatterplot shows the relationship between the weight, in pounds, of each of $9$ female gray wolves on April $30$ and the number of offspring each gray wolf produced.\n\nThe scatterplot has 9 data points.\nThe data points are in a linear pattern trending up from left to right.\nThe data points have the following coordinates:\n\n(40 comma 5)\n(43 comma 5)\n(47 comma 6)\n(50 comma 6)\n(53 comma 7)\n(55 comma 6)\n(60 comma 7)\n(64 comma 7)\n(66 comma 8)\n\nHow many offspring did the $50$-pound gray wolf produce?",
+    "prompt": "The scatterplot shows the relationship between the weight, in pounds, of each of $9$ female gray wolves on April $30$ and the number of offspring each gray wolf produced.\n\nHow many offspring did the $50$-pound gray wolf produce?",
     "options": [
       {
         "id": "A",
@@ -31444,7 +31444,7 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "In the given scatterplot, a line of best fit for the data is shown.\n\nThe scatterplot has 10 data points.The data points are in a linear pattern trending up from left to right.A line of best fit is shown:The line of best fit slants up from left to right.The line of best fit passes through the following approximate coordinates:(1 comma 3.3)(3 comma 7.0)(5 comma 10.8)\n\nWhich of the following is closest to the slope of the line of best fit shown?",
+    "prompt": "In the given scatterplot, a line of best fit for the data is shown.\n\nWhich of the following is closest to the slope of the line of best fit shown?",
     "options": [
       {
         "id": "A",
@@ -31798,7 +31798,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The scatterplot has 6 data points.The data points are in a linear pattern trending up from left to right.The data points have the following approximate coordinates:(0 comma 0)(1 comma 0.7)(2 comma 1.1)(3 comma 1.9)(4 comma 2.4)(5 comma 3.1)\n\nWhich of the following equations is the most appropriate linear model for the data shown in the scatterplot?",
+    "prompt": "Which of the following equations is the most appropriate linear model for the data shown in the scatterplot?",
     "options": [
       {
         "id": "A",
@@ -31833,7 +31833,7 @@
     "difficulty": "Medium",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "In quadrant 1:\n\nThe curve begins at point (0 comma 1).\nThe curve rises sharply to point (2 comma 6).\nThe curve rises gradually to point (4 comma 7).\nThe curve rises gradually to point (6 comma 8).\nThe curve rises sharply and ends at point (8 comma 10).\n\nThe graph shows the momentum $y$, in newton-seconds, of an object $x$ seconds after the object started moving, for $0 \\le x \\le 8$. What is the average rate of change, in newton-seconds per second, in the momentum of the object from $x=2$ to $x=6$?",
+    "prompt": "The graph shows the momentum $y$, in newton-seconds, of an object $x$ seconds after the object started moving, for $0 \\le x \\le 8$. What is the average rate of change, in newton-seconds per second, in the momentum of the object from $x=2$ to $x=6$?",
     "options": [],
     "correctAnswer": "1/2",
     "rationale": "The correct answer is $\\frac{1}{2}$. For the graph shown, $x$ represents time, in seconds, and $y$ represents momentum, in newton-seconds. Therefore, the average rate of change, in newton-seconds per second, in the momentum of the object between two x-values is the difference in the corresponding y-values divided by the difference in the x-values. The graph shows that at $x=2$, the corresponding y-value is $6$. The graph also shows that at $x=6$, the corresponding y-value is $8$. It follows that the average rate of change, in newton-seconds per second, from $x=2$ to $x=6$ is $\\frac{8-6}{6-2}$, which is equivalent to $\\frac{2}{4}$, or $\\frac{1}{2}$. Note that 1/2 and .5 are examples of ways to enter a correct answer.",
@@ -32259,7 +32259,7 @@
     "difficulty": "Medium",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "The scatterplot has 11 data points.\nThe data points are in a linear pattern trending up from left to right.\nA line of best fit is shown:\n\nThe line of best fit slants up from left to right.\n5 points are above the line of best fit.\n6 points are below the line of best fit.\nThe line of best fit passes through the following approximate coordinates:\n\n(2 comma 2.9)\n(8 comma 7.7)\n\nThe scatterplot shows the relationship between two variables, $x$ and $y$. A line of best fit is also shown. For how many of the $11$ data points does the line of best fit predict a greater $y$-value than the actual $y$-value?",
+    "prompt": "(2 comma 2.9)\n(8 comma 7.7)\n\nThe scatterplot shows the relationship between two variables, $x$ and $y$. A line of best fit is also shown. For how many of the $11$ data points does the line of best fit predict a greater $y$-value than the actual $y$-value?",
     "options": [],
     "correctAnswer": "6",
     "rationale": "The correct answer is $6$. The line of best fit predicts a greater y-value than the actual y-value for any data point that's located below the line of best fit. For the scatterplot shown, $6$ of the data points are below the line of best fit. Therefore, the line of best fit predicts a greater y-value than the actual y-value for $6$ of the data points.",
@@ -32310,7 +32310,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The scatterplot has 12 data points.\nThe data points are in a linear pattern trending up from left to right.\nA line of best fit is shown:\n\nThe line of best fit slants up from left to right.\nThe line of best fit passes through the following approximate coordinates:\n\n(600 comma 5.6)\n(1,200 comma 11.0)\n(1,500 comma 13.8)\n(1,800 comma 16.5)\n\nTwelve data points are shown in the scatterplot. A line of best fit for the data is also shown. At $x=1,200$, which of the following is closest to the y-value predicted by the line of best fit?",
+    "prompt": "(600 comma 5.6)\n(1,200 comma 11.0)\n(1,500 comma 13.8)\n(1,800 comma 16.5)\n\nTwelve data points are shown in the scatterplot. A line of best fit for the data is also shown. At $x=1,200$, which of the following is closest to the y-value predicted by the line of best fit?",
     "options": [
       {
         "id": "A",
@@ -32413,7 +32413,7 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "A group of $10$ botanists recorded data on the germination rates of a certain type of seed for one growing season. The scatterplot shows the relationship between the number of seeds planted, $x$, and the number of seeds that germinated, $y$, for each of the botanists. A line of best fit is also shown. \n\nThe scatterplot has 10 data points.The data points are in a linear pattern trending up from left to right. A line of best fit is shown: The line of best fit slants up from left to right.The line of best fit passes through the following approximate coordinates:(0 comma 0)(200 comma 120)(500 comma 300)\n\nWhich of the following is the best interpretation of the slope of the line of best fit in this context?",
+    "prompt": "A group of $10$ botanists recorded data on the germination rates of a certain type of seed for one growing season. The scatterplot shows the relationship between the number of seeds planted, $x$, and the number of seeds that germinated, $y$, for each of the botanists. A line of best fit is also shown.\n\nWhich of the following is the best interpretation of the slope of the line of best fit in this context?",
     "options": [
       {
         "id": "A",
@@ -32448,7 +32448,7 @@
     "difficulty": "Easy",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "An orchard owner recorded the weight, in pounds, of all nectarines that grew on a dwarf nectarine tree during each growing season after the tree's transplantation. The scatterplot shows this weight, in pounds, for each growing season after the tree's transplantation.\n\nThe scatterplot has 8 data points.\nThe data points are in a linear pattern trending up from left to right.\nThe data points have the following coordinates:\n\n(1 comma 0)\n(2 comma 10)\n(3 comma 21)\n(4 comma 40)\n(5 comma 46)\n(6 comma 60)\n(7 comma 76)\n(8 comma 85)\n\nWhat was the weight, to the nearest pound, of all nectarines that grew on the tree during the $4\\text{th}$ growing season after the tree's transplantation?",
+    "prompt": "An orchard owner recorded the weight, in pounds, of all nectarines that grew on a dwarf nectarine tree during each growing season after the tree's transplantation. The scatterplot shows this weight, in pounds, for each growing season after the tree's transplantation.\n\nWhat was the weight, to the nearest pound, of all nectarines that grew on the tree during the $4\\text{th}$ growing season after the tree's transplantation?",
     "options": [],
     "correctAnswer": "40",
     "rationale": "The correct answer is $40$. For each data point on the scatterplot, the x-value represents the growing season after transplantation and the y-value represents the weight, in pounds, of all nectarines that grew on the tree during the season. The scatterplot shows a data point at $\\left(4,40\\right)$. It follows that during the $4\\text{th}$ growing season after the tree’s transplantation, $40$ pounds of nectarines grew on the tree.",
@@ -32737,7 +32737,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The scatterplot shows the temperature, $\\text{in}\\text{degrees}\\text{Fahrenheit}\\left(^\\circ\\text{F}\\right)$, and the distance above sea level, in feet, measured at $6$ locations on Mount Jefferson. A line of best fit is also shown.\n\nThe scatterplot has 6 data points.\nThe data points are in a linear pattern trending down from left to right.\nA line of best fit is shown:\n\nThe line of best fit slants down from left to right.\nThe line of best fit passes through the following coordinates:\n\n(0 comma 47)\n(4,000 comma 35)\n(7,000 comma 26)\n\nAt a distance of $4,000$ feet above sea level, what is the temperature, $\\text{in}^\\circ\\text{F}$, predicted by the line of best fit?",
+    "prompt": "The scatterplot shows the temperature, $\\text{in}\\text{degrees}\\text{Fahrenheit}\\left(^\\circ\\text{F}\\right)$, and the distance above sea level, in feet, measured at $6$ locations on Mount Jefferson. A line of best fit is also shown.\n\nAt a distance of $4,000$ feet above sea level, what is the temperature, $\\text{in}^\\circ\\text{F}$, predicted by the line of best fit?",
     "options": [
       {
         "id": "A",
@@ -32874,7 +32874,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The graph of function $f$ is shown, where $y=f\\left(x\\right)$.\n\nThe line slants gradually up from left to right.\nThe line passes through the following points:\n\n(negative 6 comma negative StartFraction 16 Over 5 EndFraction)\n(0 comma 0)\n(6 comma StartFraction 16 Over 5 EndFraction)\n\nWhich of the following describes function $f$?",
+    "prompt": "The graph of function $f$ is shown, where $y=f\\left(x\\right)$.\n\nWhich of the following describes function $f$?",
     "options": [
       {
         "id": "A",
@@ -33077,7 +33077,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The scatterplot shows the relationship between two variables, $x$ and $y$. A line of best fit is also shown.\n\nThe scatterplot has 6 data points.\nThe data points are in a linear pattern trending up from left to right.\nA line of best fit is shown:\n\nThe line of best fit slants up from left to right.\nThe line of best fit passes through the following approximate coordinates:\n\n(0 comma 3.4)\n(8 comma 11)\n(12 comma 14.8)\n\nWhich of the following equations best represents the line of best fit shown?",
+    "prompt": "The scatterplot shows the relationship between two variables, $x$ and $y$. A line of best fit is also shown.\n\nWhich of the following equations best represents the line of best fit shown?",
     "options": [
       {
         "id": "A",
@@ -33315,7 +33315,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The scatterplot shows the temperature $y$, in $^\\circ\\text{F}$, recorded by a meteorologist at various times $x$, in days since June $1$. \n\nThe scatterplot has 7 data points.\nThe data points are in a linear pattern trending approximately horizontally.\nThe data points have the following coordinates:\n\n(1 comma 69)\n(2 comma 60)\n(3 comma 73)\n(4 comma 67)\n(5 comma 64)\n(6 comma 62)\n(7 comma 65)\n\nDuring which of the following time periods did the greatest increase in recorded temperature take place?",
+    "prompt": "The scatterplot shows the temperature $y$, in $^\\circ\\text{F}$, recorded by a meteorologist at various times $x$, in days since June $1$.\n\nDuring which of the following time periods did the greatest increase in recorded temperature take place?",
     "options": [
       {
         "id": "A",
@@ -33384,7 +33384,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The scatterplot shows the relationship between two variables, $x$ and $y$. A line of best fit is also shown.\n\nThe scatterplot has 10 data points.\nThe data points are in a linear pattern trending up from left to right.\nA line of best fit is shown.\n\nThe line of best fit slants up from left to right.\n1 point is touching the line of best fit.\n5 points are above the line of best fit.\n4 points are below the line of best fit.\nThe line of best fit passes through the following approximate coordinates:\n\n(0 comma 3)\n(3 comma 8)\n(7 comma 15)\n\nWhich of the following equations best represents the line of best fit shown?",
+    "prompt": "The scatterplot shows the relationship between two variables, $x$ and $y$. A line of best fit is also shown.\n\nWhich of the following equations best represents the line of best fit shown?",
     "options": [
       {
         "id": "A",
@@ -33419,7 +33419,7 @@
     "difficulty": "Hard",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "From left to right the values of the vertical bars in the Group 1 box plot are as follows:\n\nFirst vertical bar: 21\nSecond vertical bar: 22\nThird vertical bar: 25\nFourth vertical bar: 26\nFifth vertical bar: 28\n\nFrom left to right the values of the vertical bars in the Group 2 box plot are as follows:\n\nFirst vertical bar: 22\nSecond vertical bar: 23\nThird vertical bar: 24\nFourth vertical bar: 25\nFifth vertical bar: 28\n\nThe box plots summarize the masses, in kilograms, of two groups of gazelles. Based on the box plots, which of the following statements must be true?",
+    "prompt": "First vertical bar: 21\nSecond vertical bar: 22\nThird vertical bar: 25\nFourth vertical bar: 26\nFifth vertical bar: 28\n\nFirst vertical bar: 22\nSecond vertical bar: 23\nThird vertical bar: 24\nFourth vertical bar: 25\nFifth vertical bar: 28\n\nThe box plots summarize the masses, in kilograms, of two groups of gazelles. Based on the box plots, which of the following statements must be true?",
     "options": [
       {
         "id": "A",
@@ -33794,7 +33794,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The scatterplot shows the relationship between the number of swans, $y$, in a certain population and the number of years since $1970$, $x$, where $0 \\le x \\le 50$. \n\nThe scatterplot has 6 data points.The data points are in an exponential pattern trending up from left to right.The data points have the following approximate coordinates:(0 comma 43.53)(10 comma 64.53)(20 comma 84.47)(30 comma 149.47)(40 comma 187.53)(50 comma 290.53) \n\nWhich of the following equations is the most appropriate exponential model for the data shown in the scatterplot?",
+    "prompt": "The scatterplot shows the relationship between the number of swans, $y$, in a certain population and the number of years since $1970$, $x$, where $0 \\le x \\le 50$.\n\nWhich of the following equations is the most appropriate exponential model for the data shown in the scatterplot?",
     "options": [
       {
         "id": "A",
@@ -33913,7 +33913,7 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The scatterplot shows the relationship between two variables, $x$ and $y$. A line of best fit for the data is also shown.\n\nThe scatterplot has 10 data points.\nThe data points are in a linear pattern trending up from left to right.\nA line of best fit is shown:\n\nThe line of best fit slants up from left to right.\n6 points are above the line of best fit.\n4 points are below the line of best fit.\nThe line of best fit passes through the following approximate coordinates:\n\n(0 comma 0.1)\n(5 comma 5.1)\n\nFor how many of the $10$ data points is the actual y-value greater than the y-value predicted by the line of best fit?",
+    "prompt": "The scatterplot shows the relationship between two variables, $x$ and $y$. A line of best fit for the data is also shown.\n\n(0 comma 0.1)\n(5 comma 5.1)\n\nFor how many of the $10$ data points is the actual y-value greater than the y-value predicted by the line of best fit?",
     "options": [
       {
         "id": "A",
@@ -33964,7 +33964,7 @@
     "difficulty": "Medium",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "During a study, the temperature, $\\text{in}\\text{degrees}\\text{Celsius}\\left(^\\circ\\text{C}\\right)$, of the air in a chamber was recorded to the nearest integer at certain times. The scatterplot shows the recorded temperature $y$, $\\text{in}^\\circ\\text{C}$, of the air in the chamber $x$ minutes after the start of the study.\n\nThe scatterplot has 7 data points.The data points are in a linear pattern trending up from left to right.The data points have the following coordinates:(1 comma 4)(2 comma 6)(3 comma 12)(4 comma 10)(5 comma 14)(6 comma 16)(7 comma 24)\n\nWhat was the average rate of change, $\\text{in}^\\circ\\text{C}$ per minute, of the recorded temperature of the air in the chamber from $x=5$ to $x=7$?",
+    "prompt": "During a study, the temperature, $\\text{in}\\text{degrees}\\text{Celsius}\\left(^\\circ\\text{C}\\right)$, of the air in a chamber was recorded to the nearest integer at certain times. The scatterplot shows the recorded temperature $y$, $\\text{in}^\\circ\\text{C}$, of the air in the chamber $x$ minutes after the start of the study.\n\nWhat was the average rate of change, $\\text{in}^\\circ\\text{C}$ per minute, of the recorded temperature of the air in the chamber from $x=5$ to $x=7$?",
     "options": [],
     "correctAnswer": "5",
     "rationale": "The correct answer is $5$. For the graph shown, $x$ represents time, in minutes, and $y$ represents temperature, in degrees Celsius $\\left(^\\circ\\text{C}\\right)$. Therefore, the average rate of change, in $^\\circ\\text{C}$ per minute, of the recorded temperature of the air in the chamber between two x-values is the difference in the corresponding y-values divided by the difference in the x-values. The graph shows that at $x=5$, the corresponding y-value is $14$. The graph also shows that at $x=7$, the corresponding y-value is $24$. It follows that the average rate of change, in $^\\circ\\text{C}$ per minute, from $x=5$ to $x=7$ is $\\frac{24-14}{7-5}$, which is equivalent to $\\frac{10}{2}$, or $5$.",
@@ -34152,7 +34152,7 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "In the given scatterplot, a line of best fit for the data is shown.\n\nThe scatterplot has 7 data points.\nThe data points are in a linear pattern trending up from left to right.\nA line of best fit is shown:\n\nThe line of best fit slants up from left to right.\nThe line of best fit passes through the following approximate coordinates:\n\n(0 comma 2.5)\n(5 comma 3.6)\n(10 comma 4.7)\n\nWhich of the following is closest to the slope of the line of best fit?",
+    "prompt": "In the given scatterplot, a line of best fit for the data is shown.\n\n(0 comma 2.5)\n(5 comma 3.6)\n(10 comma 4.7)\n\nWhich of the following is closest to the slope of the line of best fit?",
     "options": [
       {
         "id": "A",
@@ -34187,7 +34187,7 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The owner of a restaurant supply store selects $10$ cutting boards to put on sale. The graph shows the width $x$, in centimeters, of each cutting board and its corresponding sale price $y$, in dollars, where each value of $y$ is an integer.\n\nThe scatterplot has 10 data points.The data points are in a linear pattern trending up from left to right.The data points have the following coordinates:(12 comma 5)(24 comma 10)(24 comma 15)(30 comma 20)(36 comma 30)(42 comma 40)(54 comma 45)(60 comma 55)(66 comma 70)(72 comma 85)\n\nAccording to the graph, which statement is true?",
+    "prompt": "The owner of a restaurant supply store selects $10$ cutting boards to put on sale. The graph shows the width $x$, in centimeters, of each cutting board and its corresponding sale price $y$, in dollars, where each value of $y$ is an integer.\n\nAccording to the graph, which statement is true?",
     "options": [
       {
         "id": "A",
@@ -34533,7 +34533,7 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The scatterplot shows the relationship between two variables, $x$ and $y$. A line of best fit for the data is also shown.\n\nThe scatterplot has 11 data points.\nThe data points are in a linear pattern trending down from left to right.\nA line of best fit is shown:\n\nThe line of best fit slants down from left to right.\n6 points are above the line of best fit.\n5 points are below the line of best fit.\nThe line of best fit goes through the following approximate coordinates:\n\n(28 comma 6)\n(33 comma 1.5)\n\nAt $x=25.5$, which of the following is closest to the y-value predicted by the line of best fit?",
+    "prompt": "The scatterplot shows the relationship between two variables, $x$ and $y$. A line of best fit for the data is also shown.\n\nAt $x=25.5$, which of the following is closest to the y-value predicted by the line of best fit?",
     "options": [
       {
         "id": "A",
@@ -34721,7 +34721,7 @@
     "difficulty": "Hard",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The scatterplot has 6 data points.\nThe data points are in an exponential pattern trending down from left to right.\nA curve of best fit is shown:\n\nThe curve of best fit trends down from left to right. \nThe curve of best fit passes through the following approximate coordinates:\n\n(0 comma 126)\n(1 comma 105)\n(5 comma 50)\n(10 comma 20)\n\nThe scatterplot shows the relationship between two variables, $x$ and $y$. An equation for the exponential model shown can be written as $y=a{\\left(b\\right)}^{x}$, where $a$ and $b$ are positive constants. Which of the following is closest to the value of $b$?",
+    "prompt": "The scatterplot shows the relationship between two variables, $x$ and $y$. An equation for the exponential model shown can be written as $y=a{\\left(b\\right)}^{x}$, where $a$ and $b$ are positive constants. Which of the following is closest to the value of $b$?",
     "options": [
       {
         "id": "A",
@@ -34756,7 +34756,7 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The scatterplot shows the relationship between two variables, $x$ and $y$. A line of best fit for the data is also shown.\n\nThe scatterplot has 11 data points.\nThe data points are in a linear pattern trending down from left to right.\nA line of best fit is shown:\n\nThe line of best fit slants down from left to right.\n6 points are above the line of best fit.\n5 points are below the line of best fit.\nThe line of best fit goes through the following approximate coordinates:\n\n(28 comma 6)\n(33 comma 1.5)\n\nAt $x=32$, which of the following is closest to the y-value predicted by the line of best fit?",
+    "prompt": "The scatterplot shows the relationship between two variables, $x$ and $y$. A line of best fit for the data is also shown.\n\nAt $x=32$, which of the following is closest to the y-value predicted by the line of best fit?",
     "options": [
       {
         "id": "A",
@@ -34876,7 +34876,7 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Clockwise from top left, the 3 lines are labeled t, j, and k.Line t intersects both line j and line k.At the intersection of line t and line j, 2 angles are labeled clockwise from top left as follows:Top right: w°Bottom left: 134°At the intersection of line t and line k, 3 angles are labeled clockwise from top left as follows:Top left: x°Top right: y°Bottom right: z°Note: Figure not drawn to scale.\n\nIn the figure, line $t$ intersects lines $j$ and $k$. Which additional piece of information is sufficient to prove that lines $j$ and $k$ are parallel?",
+    "prompt": "In the figure, line $t$ intersects lines $j$ and $k$. Which additional piece of information is sufficient to prove that lines $j$ and $k$ are parallel?",
     "options": [
       {
         "id": "A",
@@ -35117,7 +35117,7 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The center of the circle is point upper O.\nPoints upper S, upper R, upper Q, and upper P are on the circle.\nLine segment upper P upper R is a diameter of the circle.\nLine segment upper Q upper S is a diameter of the circle.\nDiameters upper P upper R and upper Q upper S intersect at point upper O.\nA note indicates the figure is not drawn to scale.\n\nThe circle shown has center $O$, circumference $144π$, and diameters $\\overline{PR}$ and $\\overline{QS}$. The length of arc $PS$ is twice the length of arc $PQ$. What is the length of arc $QR$?",
+    "prompt": "The circle shown has center $O$, circumference $144π$, and diameters $\\overline{PR}$ and $\\overline{QS}$. The length of arc $PS$ is twice the length of arc $PQ$. What is the length of arc $QR$?",
     "options": [
       {
         "id": "A",
@@ -35168,7 +35168,7 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "From left to right, the 3 points have the following coordinates:\n\n(4 comma 8)\n(7 comma 11)\n(7 comma 5)\n\nThe three points shown define a circle. The circumference of this circle is $kπ$, where $k$ is a constant. What is the value of $k$?",
+    "prompt": "The three points shown define a circle. The circumference of this circle is $kπ$, where $k$ is a constant. What is the value of $k$?",
     "options": [
       {
         "id": "A",
@@ -35203,7 +35203,7 @@
     "difficulty": "Hard",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The line segment slants gradually up from left to right.\nThe line segment begins at the point (negative 6 comma 4).\nThe line segment ends at the point (3 comma 10).\n\nThe line segment shown in the xy-plane represents one of the legs of a right triangle. The area of this triangle is $36\\sqrt{13}$ square units. What is the length, in units, of the other leg of this triangle?",
+    "prompt": "The line segment shown in the xy-plane represents one of the legs of a right triangle. The area of this triangle is $36\\sqrt{13}$ square units. What is the length, in units, of the other leg of this triangle?",
     "options": [
       {
         "id": "A",
@@ -35306,7 +35306,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Clockwise from top left, the lines are labeled t, m, and n.\nLine t intersects both line m and line n.\nAt the intersection of line t and line m, 1 angle is labeled clockwise from top left as follows:\n\nBottom left: x°\n\nAt the intersection of line t and line n, 1 angle is labeled clockwise from top left as follows:\n\nBottom right: 33°\n\nA note indicates the figure is not drawn to scale.\n\nIn the figure, line $m$ is parallel to line $n$, and line $t$ intersects both lines. What is the value of $x$?",
+    "prompt": "Bottom left: x°\n\nBottom right: 33°\n\nA note indicates the figure is not drawn to scale.\n\nIn the figure, line $m$ is parallel to line $n$, and line $t$ intersects both lines. What is the value of $x$?",
     "options": [
       {
         "id": "A",
@@ -35511,7 +35511,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Rectangle upper A upper B upper C upper D has vertices at the following points:upper A: (2 comma 2)upper B: (2 comma 9)upper C: (4 comma 9)upper D: (4 comma 2)\n\nRectangle $ABCD$ shown has a length of $7$ units and a width of $2$ units. What is the area, in square units, of rectangle $ABCD$?",
+    "prompt": "Rectangle $ABCD$ shown has a length of $7$ units and a width of $2$ units. What is the area, in square units, of rectangle $ABCD$?",
     "options": [
       {
         "id": "A",
@@ -35788,7 +35788,7 @@
     "difficulty": "Hard",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "Counterclockwise from top right, the lines are labeled s, r, q, and t.\nLine s intersects line r above line q.\nLine s and line r each intersect line q and line t.\nAt the intersection of line s and line r, 1 angle is labeled counterclockwise from top as follows:\n\nTop: a°\n\nAt the intersection of line s and line q, 1 angle is labeled counterclockwise from top-left as follows:\n\nTop left: b°\n\nAt the intersection of line r and line t:\n\nThe line segment divides the bottom-left angle into two equal angles, each labeled w°.\n\nA note indicates the figure is not drawn to scale.\n\nIn the figure, parallel lines $q$ and $t$ are intersected by lines $r$ and $s$. If $a=43$ and $b=122$, what is the value of $w$?",
+    "prompt": "Top: a°\n\nTop left: b°\n\nAt the intersection of line r and line t:\n\nThe line segment divides the bottom-left angle into two equal angles, each labeled w°.\n\nA note indicates the figure is not drawn to scale.\n\nIn the figure, parallel lines $q$ and $t$ are intersected by lines $r$ and $s$. If $a=43$ and $b=122$, what is the value of $w$?",
     "options": [],
     "correctAnswer": "101/2",
     "rationale": "The correct answer is $\\frac{101}{2}$. In the figure, lines $q$, $r$, and $s$ form a triangle. One interior angle of this triangle is vertical to the angle marked $a^\\circ$; therefore, the interior angle also has measure $a^\\circ$. It's given that $a=43$. Therefore, the interior angle of the triangle has measure $43^\\circ$. A second interior angle of the triangle forms a straight line, $q$, with the angle marked $b^\\circ$. Therefore, the sum of the measures of these two angles is $180^\\circ$. It's given that $b=122$. Therefore, the angle marked $b^\\circ$ has measure $122^\\circ$ and the second interior angle of the triangle has measure $\\left(180-122\\right)^\\circ$, or $58^\\circ$. The sum of the interior angles of a triangle is $180^\\circ$. Therefore, the measure of the third interior angle of the triangle is $\\left(180-43-58\\right)^\\circ$, or $79^\\circ$. It's given that parallel lines $q$ and $t$ are intersected by line $r$. It follows that the triangle's interior angle with measure $79^\\circ$ is congruent to the same side interior angle between lines $q$ and $t$ formed by lines $t$ and $r$. Since this angle is supplementary to the two angles marked $w^\\circ$, the sum of $79^\\circ$, $w^\\circ$, and $w^\\circ$ is $180^\\circ$. It follows that $79+w+w=180$, or $79+2w=180$. Subtracting $79$ from both sides of this equation yields $2w=101$. Dividing both sides of this equation by $2$ yields $w=\\frac{101}{2}$. Note that 101/2 and 50.5 are examples of ways to enter a correct answer.",
@@ -35811,7 +35811,7 @@
     "prompt": "A right circular cone has a height of $22\\text{centimeters}\\left(\\text{cm}\\right)$ and a base with a diameter of $18\\text{cm}$. The volume of this cone is $nπ{\\text{cm}}^{3}$. What is the value of $n$?",
     "options": [],
     "correctAnswer": "594",
-    "rationale": "The correct answer is $594$. It’s given that the right circular cone has a height of $22cm$ and a base with a diameter of $18cm$. Since the diameter of the base of the cone is $18cm$, the radius of the base is $9cm$. The volume $V$, in ${cm}^{3}$, of a right circular cone can be found using the formula $V=\\frac{1}{3}\\pir^{2}h$, where $h$ is the height, in $\\text{cm}$, of the cone and $r$ is the radius, in $\\text{cm}$, of the base of the cone. Substituting $22$ for $h$ and $9$ for $r$ in this formula yields $V=\\frac{1}{3}\\pi{\\left(9\\right)}^{2}(22)$, or $V=594\\pi$. Therefore, the volume of the cone is $594\\pi{cm}^{3}$. It’s given that the volume of the cone is $n\\pi{cm}^{3}$. Therefore, the value of $n$ is $594$.",
+    "rationale": "The correct answer is $594$. It’s given that the right circular cone has a height of $22cm$ and a base with a diameter of $18cm$. Since the diameter of the base of the cone is $18cm$, the radius of the base is $9cm$. The volume $V$, in ${cm}^{3}$, of a right circular cone can be found using the formula $V=\\frac{1}{3}\\pi r^{2}h$, where $h$ is the height, in $\\text{cm}$, of the cone and $r$ is the radius, in $\\text{cm}$, of the base of the cone. Substituting $22$ for $h$ and $9$ for $r$ in this formula yields $V=\\frac{1}{3}\\pi{\\left(9\\right)}^{2}(22)$, or $V=594\\pi$. Therefore, the volume of the cone is $594\\pi{cm}^{3}$. It’s given that the volume of the cone is $n\\pi{cm}^{3}$. Therefore, the value of $n$ is $594$.",
     "acceptedAnswers": [
       "594"
     ]
@@ -36457,7 +36457,7 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Clockwise from top left, the 3 lines are labeled t, m, and n.\nLine t intersects both line m and line n.\nAt the intersection of line t and line m, 2 angles are labeled clockwise from top left as follows:\n\nTop right: x°\nBottom left: y°\n\nAt the intersection of line t and line n, 1 angle is labeled clockwise from top left as follows:\n\nTop left: z°\n\nA note indicates the figure is not drawn to scale.\n\nIn the figure, lines $m$ and $n$ are parallel. If $x=6k+13$ and $y=8k-29$, what is the value of $z$?",
+    "prompt": "Top right: x°\nBottom left: y°\n\nTop left: z°\n\nA note indicates the figure is not drawn to scale.\n\nIn the figure, lines $m$ and $n$ are parallel. If $x=6k+13$ and $y=8k-29$, what is the value of $z$?",
     "options": [
       {
         "id": "A",
@@ -36700,7 +36700,7 @@
     "difficulty": "Hard",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "From left to right, the 4 points have the following coordinates:(negative 4 comma negative 1)(negative 1 comma negative 5)(4 comma 5)(7 comma 1)\n\nA rectangle is formed by the four points shown. What is the area, in square units, of the rectangle?",
+    "prompt": "A rectangle is formed by the four points shown. What is the area, in square units, of the rectangle?",
     "options": [],
     "correctAnswer": "50",
     "rationale": "The correct answer is $50$. The area of a rectangle is $lw$, where $l$ and $w$ are the lengths of two adjacent sides of the rectangle. It's given that the points $(-4,-1)$, $(4,5)$, $(7,1)$, and $(-1,-5)$ form a rectangle. The points $(-4,-1)$ and $(4,5)$ form a side of the rectangle that is adjacent to the side of the rectangle formed by the points $(4,5)$ and $(7,1)$. In the xy-plane, the distance between two points, $(x_{1},y_{1})$ and $(x_{2},y_{2})$, can be found as $\\sqrt{{(x_{2}-x_{1})}^{2}+{(y_{2}-y_{1})}^{2}}$. Thus, the length, in units, of the side formed by the points $(-4,-1)$ and $(4,5)$ can be found as $\\sqrt{{\\left(4-(-4)\\right)}^{2}+{\\left(5-(-1)\\right)}^{2}}$, which can be simplified to $\\sqrt{100}$, or $10$. The length, in units, of the side formed by the points $(4,5)$ and $(7,1)$ can be found as $\\sqrt{{\\left(7-4\\right)}^{2}+{\\left(1-5\\right)}^{2}}$, which can be simplified to $\\sqrt{25}$, or $5$. Therefore, the area, in square units, of the rectangle formed by the four points shown is $(10)(5)$, or $50$.",
@@ -37023,7 +37023,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Clockwise from top left, the 3 lines are labeled t, p, and q.Line t intersects both line p and line q.At the intersection of line t and line q, 2 angles are labeled clockwise from top left as follows:Top left: x°Top right: 142°A note indicates the figure is not drawn to scale.\n\nIn the figure, line $p$ is parallel to line $q$, and line $t$ intersects both lines. What is the value of $x+142$?",
+    "prompt": "In the figure, line $p$ is parallel to line $q$, and line $t$ intersects both lines. What is the value of $x+142$?",
     "options": [
       {
         "id": "A",
@@ -37058,7 +37058,7 @@
     "difficulty": "Easy",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "Clockwise from top left, the 3 lines are labeled t, j, and k.\nLine t intersects both line j and line k.\nAt the intersection of line t and line j, 2 angles are labeled clockwise from top left as follows:\n\nBottom right: 133°\nBottom left: x°\n\nA note indicates the figure is not drawn to scale.\n\nIn the figure, line $j$ is parallel to line $k$. What is the value of $x$?",
+    "prompt": "Bottom right: 133°\nBottom left: x°\n\nA note indicates the figure is not drawn to scale.\n\nIn the figure, line $j$ is parallel to line $k$. What is the value of $x$?",
     "options": [],
     "correctAnswer": "47",
     "rationale": "The correct answer is $47$. Based on the figure, the angle with measure $x^\\circ$ and the angle with measure $133^\\circ$ together form a straight line. Therefore, these two angles are supplementary, so the sum of their measures is $180^\\circ$. It follows that $x+133=180$. Subtracting $133$ from both sides of this equation yields $x=47$.",
@@ -37218,7 +37218,7 @@
       }
     ],
     "correctAnswer": "A",
-    "rationale": "Choice A is correct. The volume, $V$, of a right circular cylinder is given by the formula $V=\\pir^{2}h$, where $\\pir^{2}$ is the area of one of the bases of the cylinder and $h$ is the height. It’s given that the area of one of the bases of the cylinder is $81$ square centimeters and that the volume of the cylinder is $2,187$ cubic centimeters. Substituting $2,187$ for $V$ and $81$ for $\\pir^{2}$ in the formula $V=\\pir^{2}h$ yields $2,187=81h$. Dividing both sides of this equation by $81$ yields $27=h$. Therefore, the height, in centimeters, of the cylinder is $27$.\n\nChoice B is incorrect and may result from conceptual or calculation errors.\n\nChoice C is incorrect and may result from conceptual or calculation errors.\n\nChoice D is incorrect and may result from conceptual or calculation errors."
+    "rationale": "Choice A is correct. The volume, $V$, of a right circular cylinder is given by the formula $V=\\pi r^{2}h$, where $\\pi r^{2}$ is the area of one of the bases of the cylinder and $h$ is the height. It’s given that the area of one of the bases of the cylinder is $81$ square centimeters and that the volume of the cylinder is $2,187$ cubic centimeters. Substituting $2,187$ for $V$ and $81$ for $\\pi r^{2}$ in the formula $V=\\pi r^{2}h$ yields $2,187=81h$. Dividing both sides of this equation by $81$ yields $27=h$. Therefore, the height, in centimeters, of the cylinder is $27$.\n\nChoice B is incorrect and may result from conceptual or calculation errors.\n\nChoice C is incorrect and may result from conceptual or calculation errors.\n\nChoice D is incorrect and may result from conceptual or calculation errors."
   },
   {
     "id": "42b4493b",
@@ -37262,7 +37262,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Clockwise from top left, the 3 lines are labeled k, m, and n.\nLine k intersects both line m and line n.\nAt the intersection of line k and line n, 2 angles are labeled clockwise from top left as follows:\n\nTop left: x°\nBottom right: 145°\n\nA note indicates the figure is not drawn to scale.\n\nIn the figure, line $m$ is parallel to line $n$, and line $k$ intersects both lines. Which of the following statements is true?",
+    "prompt": "Top left: x°\nBottom right: 145°\n\nA note indicates the figure is not drawn to scale.\n\nIn the figure, line $m$ is parallel to line $n$, and line $k$ intersects both lines. Which of the following statements is true?",
     "options": [
       {
         "id": "A",
@@ -37483,7 +37483,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Clockwise from top left, the lines are labeled t, p, and r.Line t intersects both line p and line r.At the intersection of line t and line p, 2 angles are labeled clockwise from top left as follows:Top left: x°Bottom right: 72°Note: Figure not drawn to scale.\n\nIn the figure, line $p$ is parallel to line $r$, and line $t$ intersects both lines. What is the value of $x$?",
+    "prompt": "In the figure, line $p$ is parallel to line $r$, and line $t$ intersects both lines. What is the value of $x$?",
     "options": [
       {
         "id": "A",
@@ -37753,7 +37753,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Clockwise from top left, the 3 lines are labeled t, m, and n.\nLine t intersects both line m and line n.\nAt the intersection of line t and line m, 1 angle is labeled clockwise from top left as follows:\n\nBottom left: 170°\n\nAt the intersection of line t and line n, 1 angle is labeled clockwise from top left as follows:\n\nBottom left: w°\n\nA note indicates the figure is not drawn to scale.\n\nIn the figure, line $m$ is parallel to line $n$. What is the value of $w$?",
+    "prompt": "Bottom left: 170°\n\nBottom left: w°\n\nA note indicates the figure is not drawn to scale.\n\nIn the figure, line $m$ is parallel to line $n$. What is the value of $w$?",
     "options": [
       {
         "id": "A",
@@ -37943,7 +37943,7 @@
     "difficulty": "Easy",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "Clockwise from top left, the 3 lines are labeled script l, h, and g.\nLine script l intersects both line h and line g.\nAt the intersection of line script l and line h, 1 angle is labeled clockwise from top left as follows:\n\nBottom right: 175°\n\nAt the intersection of line script l and line g, 1 angle is labeled clockwise from top left as follows:\n\nBottom right: x°\n\nA note indicates the figure is not drawn to scale.\n\nIn the figure shown, line $g$ is parallel to line $h$. Line $𝓁$ intersects both lines. What is the value of $x$?",
+    "prompt": "In the figure shown, line $g$ is parallel to line $h$. Line $\\ell$ intersects both lines. What is the value of $x$?",
     "options": [],
     "correctAnswer": "175",
     "rationale": "The correct answer is $175$. It's given that line $g$ is parallel to line $h$. Since line $l$ intersects both lines, it's a transversal. The angles in the figure marked as $175^\\circ$ and $x^\\circ$ are on the same side of the transversal, where one is an interior angle with line $h$ as a side, and the other is an exterior angle with line $g$ as a side, respectively. Thus, the marked angles are corresponding angles. When two parallel lines are intersected by a transversal, corresponding angles have equal measure. Therefore, the value of $x$ is $175$.",
@@ -38101,7 +38101,7 @@
     "difficulty": "Easy",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "Clockwise from top left, the 3 lines are labeled n, r, and s.\nLine n intersects both line r and line s.\nAt the intersection of line n and line r, 1 angle is labeled clockwise from top left as follows:\n\nTop left: 162°\n\nAt the intersection of line n and line s, 1 angle is labeled clockwise from top left as follows:\n\nTop left: x°\n\nA note indicates the figure is not drawn to scale.\n\nIn the figure, line $n$ intersects lines $r$ and $s$. Line $r$ is parallel to line $s$. What is the value of $x$?",
+    "prompt": "Top left: 162°\n\nTop left: x°\n\nA note indicates the figure is not drawn to scale.\n\nIn the figure, line $n$ intersects lines $r$ and $s$. Line $r$ is parallel to line $s$. What is the value of $x$?",
     "options": [],
     "correctAnswer": "162",
     "rationale": "The correct answer is $162$. It's given that line $r$ is parallel to line $s$. Since line $n$ intersects both lines $r$ and $s$, it's a transversal. The angles in the figure marked as $162^\\circ$ and $x^\\circ$ are on the same side of the transversal, where one is an interior angle with line $s$ as a side, and the other is an exterior angle with line $r$ as a side. Thus, the marked angles are corresponding angles. When two parallel lines are intersected by a transversal, corresponding angles are congruent and, therefore, have equal measure. It follows that the value of $x$ is $162$.",
@@ -38237,7 +38237,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "At the intersection of the 2 lines, the angles are labeled clockwise from top as follows:\n\nTop: w°\nRight: unlabeled\nBottom: z°\nLeft: unlabeled\n\nA note indicates the figure is not drawn to scale.\n\nIn the figure, two lines intersect at a point. If $w=136$, what is the value of $z$?",
+    "prompt": "Top: w°\nRight: unlabeled\nBottom: z°\nLeft: unlabeled\n\nA note indicates the figure is not drawn to scale.\n\nIn the figure, two lines intersect at a point. If $w=136$, what is the value of $z$?",
     "options": [
       {
         "id": "A",
@@ -38375,7 +38375,7 @@
     "difficulty": "Medium",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "Clockwise from top left, the 3 lines are labeled s, q, and r.\nLine s intersects both line q and line r.\nAt the intersection of line s and line q, 1 angle is labeled clockwise from top left as follows:\n\nTop right: 58°\n\nAt the intersection of line s and line r, 1 angle is labeled clockwise from top left as follows:\n\nTop left: y°\n\nA note indicates the figure is not drawn to scale.\n\nIn the figure, line $q$ is parallel to line $r$, and both lines are intersected by line $s$. If $y=2x+8$, what is the value of $x$?",
+    "prompt": "Top right: 58°\n\nTop left: y°\n\nA note indicates the figure is not drawn to scale.\n\nIn the figure, line $q$ is parallel to line $r$, and both lines are intersected by line $s$. If $y=2x+8$, what is the value of $x$?",
     "options": [],
     "correctAnswer": "57",
     "rationale": "The correct answer is $57$. Based on the figure, the angle with measure $y^\\circ$ and the angle vertical to the angle with measure $58^\\circ$ are same side interior angles. Since vertical angles are congruent, the angle vertical to the angle with measure $58^\\circ$ also has measure $58^\\circ$. It’s given that lines $q$ and $r$ are parallel. Therefore, same side interior angles between lines $q$ and $r$ are supplementary. It follows that $y+58=180$. If $y=2x+8$, then the value of $x$ can be found by substituting $2x+8$ for $y$ in the equation $y+58=180$, which yields $\\left(2x+8\\right)+58=180$, or $2x+66=180$. Subtracting $66$ from both sides of this equation yields $2x=114$. Dividing both sides of this equation by $2$ yields $x=57$. Thus, if $y=2x+8$, the value of $x$ is $57$.",
@@ -38801,7 +38801,7 @@
     "difficulty": "Hard",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Clockwise from top left, the 2 lines are line script l and line m. \nFrom bottom to top, point upper A and point upper B are on line script l. \nFrom bottom to top, point upper E and point upper D are on line m. \nThe following line segments are drawn between line script l and line m:\n\nSegment upper B upper E\nSegment upper A upper D\n\nSegment upper A upper D intersects segment upper B upper E at point upper C.\nThe intersections of the lines and line segments form triangle upper A upper B upper C and triangle upper D upper E upper C. \n\nTriangle upper A upper B upper C has a common vertex with triangle upper D upper E upper C. \nThe common vertex is upper C. \n\nNote: Figure not drawn to scale. \n\nIn the figure, segment $AD$ and segment $BE$ intersect at point $C$. Segment $AD$ is perpendicular to line $l$ at point $A$. Which of the following additional pieces of information is(are) sufficient to determine that triangle $ABC$ is congruent to triangle $DEC$?\n\nSegment $AD$ is perpendicular to line $m$ at point $D$.\n$AC=13$ and $DC=13$",
+    "prompt": "Segment upper B upper E\nSegment upper A upper D\n\nSegment upper A upper D intersects segment upper B upper E at point upper C.\nThe intersections of the lines and line segments form triangle upper A upper B upper C and triangle upper D upper E upper C.\n\nTriangle upper A upper B upper C has a common vertex with triangle upper D upper E upper C. \nThe common vertex is upper C.\n\nNote: Figure not drawn to scale.\n\nIn the figure, segment $AD$ and segment $BE$ intersect at point $C$. Segment $AD$ is perpendicular to line $l$ at point $A$. Which of the following additional pieces of information is(are) sufficient to determine that triangle $ABC$ is congruent to triangle $DEC$?\n\nSegment $AD$ is perpendicular to line $m$ at point $D$.\n$AC=13$ and $DC=13$",
     "options": [
       {
         "id": "A",
@@ -38902,7 +38902,7 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Clockwise from top left, the following points are on the circle:\n\nupper M\nupper N\nupper P\n\nPoints $M$, $N$, and $P$ lie on the circle shown. On this circle, minor arc $MN$ has a length of $39$ centimeters and major arc $MPN$ has a length of $195$ centimeters. What is the circumference, in centimeters, of the circle shown?",
+    "prompt": "upper M\nupper N\nupper P\n\nPoints $M$, $N$, and $P$ lie on the circle shown. On this circle, minor arc $MN$ has a length of $39$ centimeters and major arc $MPN$ has a length of $195$ centimeters. What is the circumference, in centimeters, of the circle shown?",
     "options": [
       {
         "id": "A",
@@ -39557,7 +39557,7 @@
     "prompt": "In right triangle $XYZ$, angles $X$ and $Z$ are acute angles. Point $R$ lies on $\\overline{XZ}$ such that $\\overline{YR}$ is perpendicular to $\\overline{XZ}$. The measure of $\\angle XZY$ is $a^\\circ$, the measure of $\\angle XYR$ is $b^\\circ$, and the length of $\\overline{XY}$ is $19$. If $sina^\\circ=\\frac{12}{13}$, what is the value of $tanb^\\circ$?",
     "options": [],
     "correctAnswer": "12/5",
-    "rationale": "The correct answer is $\\frac{12}{5}$. It's given that in right triangle $XYZ$, $\\angle X$ and $\\angle Z$ are acute angles. It follows that $\\angle Y$ is a right angle. It's given that point $R$ lies on $XZ$ such that $YR$ is perpendicular to $XZ$. Since $\\angle Y$ is a right angle and is comprised of $\\angle XYR$ and $\\angle ZYR$, it follows that the sum of the measures of $\\angle XYR$ and $\\angle ZYR$ is $90^\\circ$. It's given that the measure of $\\angle XYR$ is $b^\\circ$. It follows that the measure of $\\angle ZYR$ is $(90-b)^\\circ$. Since $YR$ is perpendicular to $XZ$, it follows that $\\angle XRY$ and $\\angle ZRY$ are right angles. It follows that $∆XRY$ and $∆ZRY$ are right triangles. It's given that the measure of $\\angle XZY$ is $a^\\circ$. Because the sum of the measures of the interior angles of a triangle is $180^\\circ$, it follows that the measures of $\\angle ZRY$, $\\angle XZY$, and $\\angle ZYR$ have a sum of $180^\\circ$. Since the measure of $\\angle ZRY$ is $90^\\circ$, the measure of $\\angle YZR$ is $a^\\circ$, and the measure of $\\angle ZYR$ is $(90-b)^\\circ$, it follows that $90+a+90-b=180$, or $a-b+180=180$. Subtracting $180$ from both sides of this equation yields $a-b=0$. Adding $b$ to both sides of this equation yields $a=b$. It's given that $sina^\\circ=\\frac{12}{13}$. Since $a=b$, it follows that $sinb^\\circ=\\frac{12}{13}$. In a right triangle, the sine of an acute angle is the ratio of the length of the leg opposite the angle to the length of the hypotenuse. It follows that, for a positive constant $k$, $12k$ represents the length of the leg opposite $\\angle XYR$ and $13k$ represents the length of the hypotenuse of $\\triangle{}XRY$. The Pythagorean theorem states that in a right triangle, the square of the length of the hypotenuse is equal to the sum of the squares of the lengths of the other two sides. Let $nk$ represent the length of the leg adjacent to $\\angle XYR$. It follows that ${(13k)}^{2}={(12k)}^{2}+{(nk)}^{2}$, or $169k^{2}=144k^{2}+n^{2}k^{2}$. Subtracting $144k^{2}$ from both sides of this equation yields $25k^{2}=n^{2}k^{2}$. Taking the positive square root of both sides of this equation yields $5k=nk$. Therefore, the length of the leg adjacent to $\\angle XYR$ is $5k$. In a right triangle, the tangent of an acute angle is the ratio of the length of the leg opposite the angle to the length of the leg adjacent to the angle. It follows that $tanb^\\circ=\\frac{12k}{5k}$, or $tanb^\\circ=\\frac{12}{5}$. Note that 12/5 and 2.4 are examples of ways to enter a correct answer.",
+    "rationale": "The correct answer is $\\frac{12}{5}$. It's given that in right triangle $XYZ$, $\\angle X$ and $\\angle Z$ are acute angles. It follows that $\\angle Y$ is a right angle. It's given that point $R$ lies on $XZ$ such that $YR$ is perpendicular to $XZ$. Since $\\angle Y$ is a right angle and is comprised of $\\angle XYR$ and $\\angle ZYR$, it follows that the sum of the measures of $\\angle XYR$ and $\\angle ZYR$ is $90^\\circ$. It's given that the measure of $\\angle XYR$ is $b^\\circ$. It follows that the measure of $\\angle ZYR$ is $(90-b)^\\circ$. Since $YR$ is perpendicular to $XZ$, it follows that $\\angle XRY$ and $\\angle ZRY$ are right angles. It follows that $\\Delta XRY$ and $\\Delta ZRY$ are right triangles. It's given that the measure of $\\angle XZY$ is $a^\\circ$. Because the sum of the measures of the interior angles of a triangle is $180^\\circ$, it follows that the measures of $\\angle ZRY$, $\\angle XZY$, and $\\angle ZYR$ have a sum of $180^\\circ$. Since the measure of $\\angle ZRY$ is $90^\\circ$, the measure of $\\angle YZR$ is $a^\\circ$, and the measure of $\\angle ZYR$ is $(90-b)^\\circ$, it follows that $90+a+90-b=180$, or $a-b+180=180$. Subtracting $180$ from both sides of this equation yields $a-b=0$. Adding $b$ to both sides of this equation yields $a=b$. It's given that $sina^\\circ=\\frac{12}{13}$. Since $a=b$, it follows that $sinb^\\circ=\\frac{12}{13}$. In a right triangle, the sine of an acute angle is the ratio of the length of the leg opposite the angle to the length of the hypotenuse. It follows that, for a positive constant $k$, $12k$ represents the length of the leg opposite $\\angle XYR$ and $13k$ represents the length of the hypotenuse of $\\triangle{}XRY$. The Pythagorean theorem states that in a right triangle, the square of the length of the hypotenuse is equal to the sum of the squares of the lengths of the other two sides. Let $nk$ represent the length of the leg adjacent to $\\angle XYR$. It follows that ${(13k)}^{2}={(12k)}^{2}+{(nk)}^{2}$, or $169k^{2}=144k^{2}+n^{2}k^{2}$. Subtracting $144k^{2}$ from both sides of this equation yields $25k^{2}=n^{2}k^{2}$. Taking the positive square root of both sides of this equation yields $5k=nk$. Therefore, the length of the leg adjacent to $\\angle XYR$ is $5k$. In a right triangle, the tangent of an acute angle is the ratio of the length of the leg opposite the angle to the length of the leg adjacent to the angle. It follows that $tanb^\\circ=\\frac{12k}{5k}$, or $tanb^\\circ=\\frac{12}{5}$. Note that 12/5 and 2.4 are examples of ways to enter a correct answer.",
     "acceptedAnswers": [
       "12/5",
       "2.4",
@@ -39743,7 +39743,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Clockwise from top left, the 3 lines are labeled script l, j, and k.\nLine script l intersects both line j and line k.\nAt the intersection of line script l and line j, 2 angles are labeled clockwise from top left as follows:\n\nTop right: w°\nBottom left: x°\n\nAt the intersection of line script l and line k, 3 angles are labeled clockwise from top left as follows:\n\nTop right: 40°\nBottom right: z°\nBottom left: y°\n\nA note indicates the figure is not drawn to scale.\n\nIn the figure shown, line $l$ intersects lines $j$ and $k$. Which additional piece of information is sufficient to prove that lines $j$ and $k$ are parallel?",
+    "prompt": "Top right: w°\nBottom left: x°\n\nTop right: 40°\nBottom right: z°\nBottom left: y°\n\nA note indicates the figure is not drawn to scale.\n\nIn the figure shown, line $l$ intersects lines $j$ and $k$. Which additional piece of information is sufficient to prove that lines $j$ and $k$ are parallel?",
     "options": [
       {
         "id": "A",
@@ -40099,7 +40099,7 @@
     "difficulty": "Hard",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The center of the circle is the point (negative 2 comma 0).\nClockwise from top, the circle passes through the following points:\n\n(negative 2 comma 3)\n(1 comma 0)\n(negative 2 comma negative 3)\n(negative 5 comma 0)\n\nCircle A (shown) is defined by the equation ${\\left(x+2\\right)}^{2}+y^{2}=9$. Circle B (not shown) is the result of shifting circle A down $6$ units and increasing the radius so that the radius of circle B is $2$ times the radius of circle A. Which equation defines circle B?",
+    "prompt": "Circle A (shown) is defined by the equation ${\\left(x+2\\right)}^{2}+y^{2}=9$. Circle B (not shown) is the result of shifting circle A down $6$ units and increasing the radius so that the radius of circle B is $2$ times the radius of circle A. Which equation defines circle B?",
     "options": [
       {
         "id": "A",
@@ -40253,7 +40253,7 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Clockwise from top left, the 3 lines are labeled m, r, and s.\nLine m intersects both line r and line s.\nAt the intersection of line m and line r, 1 angle is labeled clockwise from top left as follows:\n\nTop right: x°\n\nAt the intersection of line m and line s, 1 angle is labeled clockwise from top left as follows:\n\nBottom right: y°\n\nA note indicates the figure is not drawn to scale.\n\nIn the figure shown, lines $r$ and $s$ are parallel, and line $m$ intersects both lines. If $y<65$, which of the following must be true?",
+    "prompt": "Top right: x°\n\nBottom right: y°\n\nA note indicates the figure is not drawn to scale.\n\nIn the figure shown, lines $r$ and $s$ are parallel, and line $m$ intersects both lines. If $y<65$, which of the following must be true?",
     "options": [
       {
         "id": "A",
@@ -40619,7 +40619,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Clockwise from top left, the 3 lines are labeled l, m, and n.\nLine l intersects both line m and line n.\nAt the intersection of line l and line m, 1 angle is labeled clockwise from top left as follows:\n\nTop right: x°\n\nAt the intersection of line l and line n, 1 angle is labeled clockwise from top left as follows:\n\nTop left: 26°\n\nA note indicates the figure is not drawn to scale.\n\nIn the figure shown, line $m$ is parallel to line $n$. What is the value of $x$?",
+    "prompt": "Top right: x°\n\nTop left: 26°\n\nA note indicates the figure is not drawn to scale.\n\nIn the figure shown, line $m$ is parallel to line $n$. What is the value of $x$?",
     "options": [
       {
         "id": "A",
@@ -40739,7 +40739,7 @@
     "difficulty": "Hard",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "From left to right, the 3 points have the following coordinates:\n\n(2 comma 6)\n(6 comma 10)\n(6 comma 2)\n\nThe three points shown define a circle. The circumference of this circle is $kπ$, where $k$ is a constant. What is the value of $k$?",
+    "prompt": "The three points shown define a circle. The circumference of this circle is $kπ$, where $k$ is a constant. What is the value of $k$?",
     "options": [],
     "correctAnswer": "8",
     "rationale": "The correct answer is $8$. It's given that the three points shown define a circle, so the center of that circle is an equal distance from each of the three points. The point $(6,6)$ is halfway between the points $(6,2)$ and $(6,10)$, and is a distance of $4$ units from each of those two points. The point $(6,6)$ is also a distance of $4$ units from $(2,6)$. Because the point $(6,6)$ is the same distance from all three points shown, it must be the center of the circle. Since that distance is $4$, it follows that the radius of the circle is $4$. The circumference of a circle with radius $r$ is equal to $2πr$. It follows that the circumference of the given circle is $2π(4)$, or $8π$. It's given that the circumference of the circle is $kπ$. Therefore, the value of $k$ is $8$.",
@@ -41094,7 +41094,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Clockwise from top left, the 3 lines are labeled t, m, and n.\nLine t intersects both line m and line n.\nAt the intersection of line t and line m, 1 angle is labeled clockwise from top left as follows:\n\nBottom left: 134°\n\nAt the intersection of line t and line n, 1 angle is labeled clockwise from top left as follows:\n\nBottom left: w°\n\nA note indicates the figure is not drawn to scale. \n\nIn the figure, line $m$ is parallel to line $n$. What is the value of $w$?",
+    "prompt": "Bottom left: 134°\n\nBottom left: w°\n\nA note indicates the figure is not drawn to scale.\n\nIn the figure, line $m$ is parallel to line $n$. What is the value of $w$?",
     "options": [
       {
         "id": "A",
@@ -41612,7 +41612,7 @@
     "difficulty": "Easy",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "Clockwise from top left, the 3 lines are labeled, c, s, and t.\nLine c intersects both line s and line t.\nAt the intersection of line c and line s, 1 angle is labeled clockwise from top left as follows:\n\nTop right: x°\n\nAt the intersection of line c and line t, 1 angle is labeled clockwise from top left as follows:\n\nTop left: 110°\n\nA note indicates the figure is not drawn to scale.\n\nIn the figure shown, line $c$ intersects parallel lines $s$ and $t$. What is the value of $x$?",
+    "prompt": "Top right: x°\n\nTop left: 110°\n\nA note indicates the figure is not drawn to scale.\n\nIn the figure shown, line $c$ intersects parallel lines $s$ and $t$. What is the value of $x$?",
     "options": [],
     "correctAnswer": "70",
     "rationale": "The correct answer is $70$. Based on the figure, the angle with measure $110^\\circ$ and the angle vertical to the angle with measure $x^\\circ$ are same side interior angles. Since vertical angles are congruent, the angle vertical to the angle with measure $x^\\circ$ also has measure $x^\\circ$. It’s given that lines $s$ and $t$ are parallel. Therefore, same side interior angles between lines $s$ and $t$ are supplementary. It follows that $x+110=180$. Subtracting $110$ from both sides of this equation yields $x=70$.",
@@ -41697,7 +41697,7 @@
     "difficulty": "Hard",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The center of the circle is the origin.The following points are on the circle:(2 comma k)(8 comma 0)A note indicates the figure is not drawn to scale.\n\nThe circle shown has its center at $(0,0)$. What is the value of $k$?",
+    "prompt": "The circle shown has its center at $(0,0)$. What is the value of $k$?",
     "options": [
       {
         "id": "A",
@@ -41766,7 +41766,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Clockwise from top left, the 3 lines are labeled t, r, and s.Line t intersects both line r and line s.At the intersection of line t and line r, 1 angle is labeled clockwise from top left as follows:Bottom right: 24°At the intersection of line t and line s, 1 angle is labeled clockwise from top left as follows:Top left: x°Note: Figure not drawn to scale.\n\nIn the figure, line $t$ intersects lines $r$ and $s$. Which additional piece of information is sufficient to prove that lines $r$ and $s$ are parallel?",
+    "prompt": "In the figure, line $t$ intersects lines $r$ and $s$. Which additional piece of information is sufficient to prove that lines $r$ and $s$ are parallel?",
     "options": [
       {
         "id": "A",
@@ -42146,7 +42146,7 @@
     "difficulty": "Hard",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "From left to right, horizontal line segment upper P upper V includes the following points:\n\nUpper P\nUpper Q\nUpper R\nUpper S\nUpper T\nUpper V\n\nPoints upper X and upper U are each below line segment upper P upper V.\nFrom left to right, the following 2 overlapping triangles are formed between points on line segment upper P upper V and points upper X and upper U: \n\nTriangle upper Q upper X upper S\nTriangle upper R upper U upper T\n\nLine segments upper R upper U and upper S upper X intersect at point upper W.\nA note indicates the figure is not drawn to scale.\n\nIn the figure shown, points $Q$, $R$, $S$, and $T$ lie on line segment $PV$, and line segment $RU$ intersects line segment $SX$ at point $W$. The measure of $\\angle SQX$ is $48^\\circ$, the measure of $\\angle SXQ$ is $86^\\circ$, the measure of $\\angle SWU$ is $85^\\circ$, and the measure of $\\angle VTU$ is $162^\\circ$. What is the measure, in degrees, of $\\angle TUR$?",
+    "prompt": "Upper P\nUpper Q\nUpper R\nUpper S\nUpper T\nUpper V\n\nTriangle upper Q upper X upper S\nTriangle upper R upper U upper T\n\nLine segments upper R upper U and upper S upper X intersect at point upper W.\nA note indicates the figure is not drawn to scale.\n\nIn the figure shown, points $Q$, $R$, $S$, and $T$ lie on line segment $PV$, and line segment $RU$ intersects line segment $SX$ at point $W$. The measure of $\\angle SQX$ is $48^\\circ$, the measure of $\\angle SXQ$ is $86^\\circ$, the measure of $\\angle SWU$ is $85^\\circ$, and the measure of $\\angle VTU$ is $162^\\circ$. What is the measure, in degrees, of $\\angle TUR$?",
     "options": [],
     "correctAnswer": "123",
     "rationale": "The correct answer is $123$. The triangle angle sum theorem states that the sum of the measures of the interior angles of a triangle is $180$ degrees. It's given that the measure of $\\angle SQX$ is $48^\\circ$ and the measure of $\\angle SXQ$ is $86^\\circ$. Since points $S$, $Q$, and $X$ form a triangle, it follows from the triangle angle sum theorem that the measure, in degrees, of $\\angle QSX$ is $180-48-86$, or $46$. It's also given that the measure of $\\angle SWU$ is $85^\\circ$. Since $\\angle SWU$ and $\\angle SWR$ are supplementary angles, the sum of their measures is $180$ degrees. It follows that the measure, in degrees, of $\\angle SWR$ is $180-85$, or $95$. Since points $R$, $S$, and $W$ form a triangle, and $\\angle RSW$ is the same angle as $\\angle QSX$, it follows from the triangle angle sum theorem that the measure, in degrees, of $\\angle WRS$ is $180-46-95$, or $39$. It's given that the measure of $\\angle VTU$ is $162^\\circ$. Since $\\angle VTU$ and $\\angle STU$ are supplementary angles, the sum of their measures is $180$ degrees. It follows that the measure, in degrees, of $\\angle STU$ is $180-162$, or $18$. Since points $R$, $T$, and $U$ form a triangle, and $\\angle URT$ is the same angle as $\\angle WRS$, it follows from the triangle angle sum theorem that the measure, in degrees, of $\\angle TUR$ is $180-39-18$, or $123$.",
@@ -42555,7 +42555,7 @@
     "difficulty": "Hard",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "Moving from left to right, the points have the following coordinates:\n\n(negative 3 comma 4)\n(4 comma negative 3)\n(5 comma 3)\n\nWhat is the area, in square units, of the triangle formed by connecting the three points shown?",
+    "prompt": "What is the area, in square units, of the triangle formed by connecting the three points shown?",
     "options": [],
     "correctAnswer": "49/2",
     "rationale": "The correct answer is $24.5$. It's given that a triangle is formed by connecting the three points shown, which are $\\left(-3,4\\right)$, $\\left(5,3\\right)$, and $\\left(4,-3\\right)$. Let this triangle be triangle A. The area of triangle A can be found by calculating the area of the rectangle that circumscribes it and subtracting the areas of the three triangles that are inside the rectangle but outside triangle A. The rectangle formed by the points $\\left(-3,4\\right)$, $\\left(5,4\\right)$, $\\left(5,-3\\right)$, and $\\left(-3,-3\\right)$ circumscribes triangle A. The width, in units, of this rectangle can be found by calculating the distance between the points $\\left(5,4\\right)$ and $\\left(5,-3\\right)$. This distance is $4-\\left(-3\\right)$, or $7$. The length, in units, of this rectangle can be found by calculating the distance between the points $\\left(5,4\\right)$ and $\\left(-3,4\\right)$. This distance is $5-\\left(-3\\right)$, or $8$. It follows that the area, in square units, of the rectangle is $\\left(7\\right)\\left(8\\right)$, or $56$. One of the triangles that lies inside the rectangle but outside triangle A is formed by the points $\\left(-3,4\\right)$, $\\left(5,4\\right)$, and $\\left(5,3\\right)$. The length, in units, of a base of this triangle can be found by calculating the distance between the points $\\left(5,4\\right)$ and $\\left(5,3\\right)$. This distance is $4-3$, or $1$. The corresponding height, in units, of this triangle can be found by calculating the distance between the points $\\left(5,4\\right)$ and $\\left(-3,4\\right)$. This distance is $5-\\left(-3\\right)$, or $8$. It follows that the area, in square units, of this triangle is $\\frac{1}{2}\\left(8\\right)\\left(1\\right)$, or $4$. A second triangle that lies inside the rectangle but outside triangle A is formed by the points $\\left(4,-3\\right)$, $\\left(5,3\\right)$, and $\\left(5,-3\\right)$. The length, in units, of a base of this triangle can be found by calculating the distance between the points $\\left(5,3\\right)$ and $\\left(5,-3\\right)$. This distance is $3-\\left(-3\\right)$ , or $6$. The corresponding height, in units, of this triangle can be found by calculating the distance between the points $\\left(5,-3\\right)$ and $\\left(4,-3\\right)$. This distance is $5-4$, or $1$. It follows that the area, in square units, of this triangle is $\\frac{1}{2}\\left(1\\right)\\left(6\\right)$, or $3$. The third triangle that lies inside the rectangle but outside triangle A is formed by the points $\\left(-3,4\\right)$, $\\left(-3,-3\\right)$, and $\\left(4,-3\\right)$. The length, in units, of a base of this triangle can be found by calculating the distance between the points $\\left(4,-3\\right)$ and $\\left(-3,-3\\right)$. This distance is $4-\\left(-3\\right)$, or $7$. The corresponding height, in units, of this triangle can be found by calculating the distance between the points $\\left(-3,4\\right)$ and $\\left(-3,-3\\right)$. This distance is $4-\\left(-3\\right)$, or $7$. It follows that the area, in square units, of this triangle is $\\frac{1}{2}\\left(7\\right)\\left(7\\right)$, or $24.5$. Thus, the area, in square units, of the triangle formed by connecting the three points shown is $56-4-3-24.5$, or $24.5$. Note that 24.5 and 49/2 are examples of ways to enter a correct answer.",
@@ -42607,7 +42607,7 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Clockwise from top left, the 3 lines are labeled k, r, and s.\nLine k intersects both line r and line s.\nAt the intersection of line k and line r, 2 angles are labeled clockwise from top left as follows:\n\nTop right: w°\nBottom right: x°\n\nAt the intersection of line k and line s, 2 angles are labeled clockwise from top left as follows:\n\nTop right: y°\nBottom right: z°\n\nA note indicates the figure is not drawn to scale.\n\nIn the figure shown, line $k$ intersects lines $r$ and $s$. If $w=147$, which additional piece of information is sufficient to prove that lines $r$ and $s$ are parallel?",
+    "prompt": "Top right: w°\nBottom right: x°\n\nTop right: y°\nBottom right: z°\n\nA note indicates the figure is not drawn to scale.\n\nIn the figure shown, line $k$ intersects lines $r$ and $s$. If $w=147$, which additional piece of information is sufficient to prove that lines $r$ and $s$ are parallel?",
     "options": [
       {
         "id": "A",

@@ -1,4 +1,4 @@
-<svg aria-label="A diagram of 3 lines. Refer to long description." height="215.575739pt" role="img" version="1.1" viewbox="0 0 189.409091 215.575739" width="189.409091pt" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg preserveAspectRatio="xMidYMid meet" aria-label="A diagram of 3 lines. Refer to long description." height="215.575739" role="img" version="1.1" viewBox="0 0 189.409091 215.575739" width="189.409091" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <defs>
 <style type="text/css">
 *{stroke-linecap:butt;stroke-linejoin:round;}
@@ -11,7 +11,7 @@ L 189.409091 215.575739
 L 189.409091 0 
 L 0 0 
 z
-" style="fill:none;"></path>
+" style="fill:#ffffff;"></path>
 </g>
 <g id="axes_1">
 <g id="matplotlib.axis_1"></g>

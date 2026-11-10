@@ -361,11 +361,11 @@ export const SavedMistakesView: React.FC<SavedMistakesViewProps> = ({
                   <div className="px-5 pb-6 pt-2 border-t border-zinc-100 dark:border-[#181B24] bg-neutral-50/50 dark:bg-[#090A0F]/50 space-y-5 animate-in fade-in duration-150">
                     {/* Visual Figure / Diagram if present */}
                     {q.imageUrl && (
-                      <div className="p-4 bg-white dark:bg-[#11131A] rounded-xl border border-zinc-200 dark:border-[#222634] flex flex-col items-center justify-center shadow-2xs">
+                      <div className="p-4 bg-white dark:bg-black rounded-2xl border border-zinc-200 dark:border-[#222634] flex flex-col items-center justify-center shadow-xs overflow-hidden">
                         <span className="text-[11px] font-bold text-zinc-400 dark:text-[#8E95A5] uppercase tracking-wider mb-2 self-start">
                           Question Diagram / Figure
                         </span>
-                        <img src={q.imageUrl} alt="Question figure" className="max-w-full max-h-72 object-contain rounded" />
+                        <img src={q.imageUrl} alt="Question figure" className="max-w-full max-h-72 object-contain rounded select-none transition-all dark:invert dark:contrast-[1.1] dark:brightness-[0.95]" />
                       </div>
                     )}
 
@@ -477,8 +477,8 @@ export const SavedMistakesView: React.FC<SavedMistakesViewProps> = ({
                                   <div className="font-serif text-sm pt-0.5">
                                     <RichText text={opt.text} />
                                     {opt.imageUrl && (
-                                      <div className="mt-2 p-1.5 bg-zinc-50 dark:bg-[#181B24] border border-zinc-200 dark:border-[#222634] rounded inline-block">
-                                        <img src={opt.imageUrl} alt={`Option ${optLabel}`} className="max-h-24 object-contain rounded" />
+                                      <div className="mt-2.5 p-2 bg-white dark:bg-black border border-zinc-200 dark:border-[#222634] rounded-xl inline-flex items-center justify-center overflow-hidden shadow-xs">
+                                        <img src={opt.imageUrl} alt={`Option ${optLabel}`} className="max-h-28 sm:max-h-36 w-auto object-contain rounded select-none transition-all dark:invert dark:contrast-[1.1] dark:brightness-[0.95]" />
                                       </div>
                                     )}
                                   </div>

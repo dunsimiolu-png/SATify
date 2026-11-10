@@ -1,4 +1,4 @@
-<svg aria-label="Graph of a line in the x y plane with the origin labeled O. The x axis has no values marked. The y axis has no values marked. Refer to long description." height="280.512pt" role="img" version="1.1" viewbox="0 0 280.512 280.512" width="280.512pt" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg preserveAspectRatio="xMidYMid meet" aria-label="Graph of a line in the x y plane with the origin labeled O. The x axis has no values marked. The y axis has no values marked. Refer to long description." height="280.512" role="img" version="1.1" viewBox="0 0 280.512 280.512" width="280.512" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <defs>
 <style type="text/css">
 *{stroke-linecap:butt;stroke-linejoin:round;}
@@ -20,7 +20,7 @@ L 273.312 273.312
 L 273.312 7.2 
 L 7.2 7.2 
 z
-" style="fill:none;"></path>
+" style="fill:#ffffff;"></path>
 </g>
 <g id="matplotlib.axis_1">
 <g id="xtick_1"></g>

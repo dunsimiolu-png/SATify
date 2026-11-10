@@ -435,8 +435,13 @@ export const RightPane: React.FC<RightPaneProps> = ({
                 <div className="flex-1 pt-0.5 font-serif text-[15px] sm:text-[16px] leading-relaxed text-zinc-950 dark:text-[#F4F4F6]">
                   <RichText text={choice.text} />
                   {choice.imageUrl && (
-                    <div className="mt-2.5 p-2 bg-white dark:bg-[#141620] border border-zinc-200 dark:border-[#222634] rounded-lg inline-block">
-                      <img src={choice.imageUrl} alt={`Option ${choiceId}`} className="max-h-28 object-contain rounded" loading="lazy" />
+                    <div className="mt-3 p-2.5 bg-white dark:bg-black border border-zinc-200 dark:border-[#222634] rounded-xl inline-flex items-center justify-center overflow-hidden shadow-xs">
+                      <img
+                        src={choice.imageUrl}
+                        alt={`Option ${choiceId}`}
+                        className="max-h-36 sm:max-h-44 w-auto object-contain rounded select-none transition-all dark:invert dark:contrast-[1.1] dark:brightness-[0.95]"
+                        loading="lazy"
+                      />
                     </div>
                   )}
                 </div>

@@ -39,11 +39,11 @@ export const MathVisual: React.FC<MathVisualProps> = ({
 
   return (
     <div className={`my-4 flex justify-center w-full ${className}`}>
-      <div className="p-3 sm:p-4 bg-white dark:bg-black border border-zinc-200 dark:border-[#222634] rounded-2xl shadow-xs transition-colors flex items-center justify-center max-w-[420px]">
+      <div className="p-3.5 sm:p-5 bg-white dark:bg-black border border-zinc-200 dark:border-[#222634] rounded-2xl shadow-xs transition-colors flex items-center justify-center max-w-[500px] w-full mx-auto overflow-hidden">
         <img
           src={imageUrl}
           alt={alt}
-          className="max-w-full h-auto max-h-[300px] object-contain select-none transition-all dark:invert dark:contrast-[1.1] dark:brightness-[0.95]"
+          className="max-w-full h-auto max-h-[380px] sm:max-h-[440px] object-contain select-none transition-all dark:invert dark:contrast-[1.1] dark:brightness-[0.95]"
           loading="lazy"
         />
       </div>

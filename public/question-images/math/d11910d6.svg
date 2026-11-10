@@ -1,4 +1,4 @@
-<svg aria-label="Graph of a line in the x y plane with the origin labeled O. The x axis ranges from negative 8 to 8. The y axis ranges from negative 1 to 10. Refer to long description." height="275.22pt" role="img" version="1.1" viewbox="0 0 287.764248 275.22" width="287.764248pt" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg preserveAspectRatio="xMidYMid meet" aria-label="Graph of a line in the x y plane with the origin labeled O. The x axis ranges from negative 8 to 8. The y axis ranges from negative 1 to 10. Refer to long description." height="275.22" role="img" version="1.1" viewBox="0 0 287.764248 275.22" width="287.764248" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <defs>
 <style type="text/css">
 *{stroke-linecap:butt;stroke-linejoin:round;}
@@ -11,7 +11,7 @@ L 287.764248 275.22
 L 287.764248 0 
 L -0 0 
 z
-" style="fill:none;"></path>
+" style="fill:#ffffff;"></path>
 </g>
 <g id="axes_1">
 <g id="patch_2">
