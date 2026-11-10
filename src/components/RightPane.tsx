@@ -17,6 +17,8 @@ import {
 } from 'lucide-react';
 import { MockQuestion, UserQuestionState, AnswerChoice, TextHighlight } from '../types/quiz';
 import { RichText } from './RichText';
+import { MathText } from './MathText';
+import { MathVisual } from './MathVisual';
 import { ExplanationRenderer } from './ExplanationRenderer';
 import { getQuestionTargetSeconds, getPacePillColor, formatSecondsToPace } from '../utils/pacingTargets';
 import { isQuestionAnswered } from '../utils/storage';
@@ -292,6 +294,13 @@ export const RightPane: React.FC<RightPaneProps> = ({
         </button>
         )}      </div>
 
+      {/* 2.5. Mathematical Visual (Coordinate Plane / Diagram / Table) */}
+      {question.imageUrl && (
+        <div className="w-full flex justify-center max-w-[65ch]">
+          <MathVisual imageUrl={question.imageUrl} alt="Question diagram or coordinate plane" />
+        </div>
+      )}
+
       {/* 3. Question Prompt / Stem (Constrained measure, high-legibility serif) */}
       <div data-annotate-target="prompt" className="mt-5 mb-5 font-serif text-[17px] leading-relaxed max-w-[65ch] text-zinc-950 dark:text-[#F4F4F6]">
         <RichText text={promptText} />
@@ -346,12 +355,16 @@ export const RightPane: React.FC<RightPaneProps> = ({
             <div className="flex items-center justify-between text-xs pt-1 flex-wrap gap-2">
               <div className="flex items-center gap-2">
                 <span className="font-mono text-[11px] font-bold uppercase text-zinc-400 dark:text-[#8E95A5]">Preview:</span>
-                <span className={`px-2 py-0.5 rounded font-mono font-bold text-xs ${
+                <span className={`inline-flex items-center px-2.5 py-0.5 rounded font-mono font-bold text-xs ${
                   sprPreview.isValid
                     ? 'bg-blue-50 text-blue-700 border border-blue-200 dark:bg-blue-950/40 dark:text-blue-300 dark:border-blue-800'
                     : 'bg-zinc-100 text-zinc-500 dark:bg-[#181B24] dark:text-[#8E95A5]'
                 }`}>
-                  {sprPreview.display}
+                  {sprPreview.isValid && sprPreview.latexDisplay && sprPreview.latexDisplay !== sprPreview.display ? (
+                    <MathText text={`$${sprPreview.latexDisplay}$`} />
+                  ) : (
+                    <span>{sprPreview.display}</span>
+                  )}
                   {sprPreview.valueNum !== null && !userState.sprAnswer?.includes('.') && (
                     <span className="ml-1 opacity-75">(= {sprPreview.valueNum.toFixed(4).replace(/\.?0+$/, '')})</span>
                   )}

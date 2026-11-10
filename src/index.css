@@ -411,49 +411,70 @@ html.dark .bluebook-dashed-border {
   font-variant-numeric: tabular-nums;
 }
 
-/* Official SAT Math Structured Table Styling */
+/* Official Bluebook Digital SAT Math Structured Table Styling */
 .sat-table-container {
   display: flex;
   justify-content: center;
-  margin: 1.25rem 0;
+  margin: 1rem 0;
   width: 100%;
   overflow-x: auto;
 }
 
-.sat-table {
-  border-collapse: collapse;
-  margin: 0 auto;
-  font-size: 0.95rem;
-  background-color: transparent;
-  border: 1px solid #71717A;
-  min-width: 160px;
+.sat-table,
+.math-rendered-content table,
+div[data-annotate-target] table,
+.sat-table-container table {
+  border-collapse: collapse !important;
+  margin: 0.5rem auto !important;
+  font-size: 0.95rem !important;
+  background-color: transparent !important;
+  border: 1px solid #cbd5e1 !important;
+  max-width: 100% !important;
 }
 
 .sat-table th,
-.sat-table td {
-  border: 1px solid #71717A;
-  padding: 8px 18px;
-  text-align: center;
-  vertical-align: middle;
-  font-family: 'Inter', sans-serif;
+.sat-table td,
+.math-rendered-content table th,
+.math-rendered-content table td,
+div[data-annotate-target] table th,
+div[data-annotate-target] table td {
+  border: 1px solid #cbd5e1 !important;
+  padding: 6px 16px !important;
+  text-align: center !important;
+  vertical-align: middle !important;
 }
 
-.sat-table th {
-  font-weight: 600;
-  background-color: rgba(244, 244, 245, 0.6);
+.sat-table th,
+.math-rendered-content table th,
+div[data-annotate-target] table th {
+  font-weight: 700 !important;
+  background-color: #f1f5f9 !important;
+  color: #0f172a !important;
 }
 
-html.dark .sat-table {
-  border-color: #475569;
+/* Dark mode table borders & shaded header */
+html.dark .sat-table,
+html.dark .math-rendered-content table,
+html.dark div[data-annotate-target] table,
+html.dark .sat-table-container table {
+  border-color: #475569 !important;
 }
 
 html.dark .sat-table th,
-html.dark .sat-table td {
-  border-color: #475569;
+html.dark .sat-table td,
+html.dark .math-rendered-content table th,
+html.dark .math-rendered-content table td,
+html.dark div[data-annotate-target] table th,
+html.dark div[data-annotate-target] table td {
+  border-color: #475569 !important;
+  color: #f1f5f9 !important;
 }
 
-html.dark .sat-table th {
-  background-color: rgba(30, 41, 59, 0.5);
+html.dark .sat-table th,
+html.dark .math-rendered-content table th,
+html.dark div[data-annotate-target] table th {
+  background-color: #1e293b !important;
+  color: #f8fafc !important;
 }
 
 /* Custom crisp scrollbars for authentic desktop app experience */

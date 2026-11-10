@@ -109,6 +109,7 @@ export function evaluateNumericEquivalence(
  */
 export function formatSprPreview(input: string): {
   display: string;
+  latexDisplay: string;
   valueNum: number | null;
   isValid: boolean;
   helperText: string;
@@ -116,6 +117,7 @@ export function formatSprPreview(input: string): {
   if (!input || input.trim() === '') {
     return {
       display: 'Empty',
+      latexDisplay: '\\text{Empty}',
       valueNum: null,
       isValid: false,
       helperText: 'Enter a number, fraction (e.g. 3/5), or decimal (e.g. 0.6)',
@@ -128,6 +130,7 @@ export function formatSprPreview(input: string): {
   if (!/^-?[0-9.\/]*$/.test(s)) {
     return {
       display: s,
+      latexDisplay: `\\text{${s}}`,
       valueNum: null,
       isValid: false,
       helperText: 'Invalid characters. Use only digits 0-9, ., /, and leading -',
@@ -137,6 +140,7 @@ export function formatSprPreview(input: string): {
   if (s === '-') {
     return {
       display: '-',
+      latexDisplay: '-',
       valueNum: null,
       isValid: false,
       helperText: 'Negative sign entered...',
@@ -148,6 +152,7 @@ export function formatSprPreview(input: string): {
     if (parts.length > 2) {
       return {
         display: s,
+        latexDisplay: `\\text{${s}}`,
         valueNum: null,
         isValid: false,
         helperText: 'Invalid fraction format (multiple slashes)',
@@ -156,6 +161,7 @@ export function formatSprPreview(input: string): {
     if (parts[1] === '') {
       return {
         display: s,
+        latexDisplay: `${parts[0]}/\\dots`,
         valueNum: null,
         isValid: false,
         helperText: 'Enter denominator...',
@@ -166,6 +172,7 @@ export function formatSprPreview(input: string): {
     if (den === 0) {
       return {
         display: s,
+        latexDisplay: `\\text{Undefined}`,
         valueNum: null,
         isValid: false,
         helperText: 'Division by zero is undefined',
@@ -174,8 +181,14 @@ export function formatSprPreview(input: string): {
     if (!isNaN(num) && !isNaN(den)) {
       const dec = num / den;
       const decFormatted = Number.isInteger(dec) ? String(dec) : dec.toFixed(4).replace(/0+$/, '');
+      const isNegative = (num < 0 && den > 0) || (num > 0 && den < 0) || parts[0].startsWith('-');
+      const absNum = Math.abs(num);
+      const absDen = Math.abs(den);
+      const latexFrac = `${isNegative ? '-' : ''}\\frac{${absNum}}{${absDen}}`;
+
       return {
         display: `${parts[0]}/${parts[1]}`,
+        latexDisplay: latexFrac,
         valueNum: dec,
         isValid: true,
         helperText: `Fraction: ${s} ≈ ${decFormatted}`,
@@ -186,8 +199,10 @@ export function formatSprPreview(input: string): {
   const val = parseMathValue(s);
   if (val !== null) {
     const isInt = Number.isInteger(val);
+    const displayStr = s.startsWith('.') ? '0' + s : s;
     return {
-      display: s.startsWith('.') ? '0' + s : s,
+      display: displayStr,
+      latexDisplay: displayStr,
       valueNum: val,
       isValid: true,
       helperText: isInt ? `Integer: ${val}` : `Decimal: ${val}`,
@@ -196,6 +211,7 @@ export function formatSprPreview(input: string): {
 
   return {
     display: s,
+    latexDisplay: s,
     valueNum: null,
     isValid: false,
     helperText: 'Incomplete number',

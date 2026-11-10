@@ -263,7 +263,7 @@ export const LeftPane: React.FC<LeftPaneProps> = ({
       )}
 
       {/* Visual Graph / Table / Chart Figure Card */}
-      {question.imageUrl && (
+      {question.imageUrl && question.section !== 'Math' && (
         <div className="mb-6 p-4 bg-white dark:bg-[#11131A] border border-zinc-200 dark:border-[#222634] rounded-xl overflow-hidden flex flex-col items-center max-w-[65ch]">
           <img
             src={question.imageUrl}

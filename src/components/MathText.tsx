@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import katex from 'katex';
 import 'katex/dist/katex.min.css';
+import { sanitizeMathText } from '../utils/mathSanitizer';
 
 export interface MathTextProps {
   text: string;
@@ -10,7 +11,7 @@ export interface MathTextProps {
 
 /**
  * Renders text containing LaTeX math ($...$ or $$...$$), HTML tables,
- * and inline math images with crisp KaTeX and theme-adaptive rendering.
+ * and currency with crisp KaTeX and theme-adaptive rendering.
  */
 export const MathText: React.FC<MathTextProps> = ({
   text,
@@ -20,20 +21,24 @@ export const MathText: React.FC<MathTextProps> = ({
   const renderedHtml = useMemo(() => {
     if (!text) return '';
 
-    // Check if there is any LaTeX math ($) or HTML tags (<)
-    const hasMath = text.includes('$');
-    const hasHtml = text.includes('<') && text.includes('>');
+    // Sanitize LaTeX delimiters and protect currency amounts ($14, $406)
+    const sanitized = sanitizeMathText(text);
 
-    if (!hasMath && !hasHtml) {
+    // Check if there is any LaTeX math ($), HTML tags (<), or HTML entities (&)
+    const hasMath = sanitized.includes('$');
+    const hasHtml = sanitized.includes('<') && sanitized.includes('>');
+    const hasEntities = sanitized.includes('&#');
+
+    if (!hasMath && !hasHtml && !hasEntities) {
       return null;
     }
 
-    let processed = text;
+    let processed = sanitized;
 
     // 1. Process display math $$...$$
     processed = processed.replace(/\$\$([\s\S]+?)\$\$/g, (_, math) => {
       try {
-        return `<div class="katex-display-wrapper my-2 overflow-x-auto py-1 text-center">${katex.renderToString(
+        return `<div class="katex-display-wrapper my-2.5 overflow-x-auto py-1 text-center select-text">${katex.renderToString(
           math.trim(),
           { displayMode: true, throwOnError: false }
         )}</div>`;
@@ -42,7 +47,7 @@ export const MathText: React.FC<MathTextProps> = ({
       }
     });
 
-    // 2. Process inline math $...$ (ignore escaped \$)
+    // 2. Process inline math $...$
     processed = processed.replace(/(?<!\\)\$([^\$\n]+?)\$/g, (_, math) => {
       try {
         return katex.renderToString(math.trim(), {
@@ -61,7 +66,8 @@ export const MathText: React.FC<MathTextProps> = ({
 
   // Pure text fast-path
   if (renderedHtml === null) {
-    return <Component className={className}>{text}</Component>;
+    const cleanText = sanitizeMathText(text).replace(/&#36;/g, '$');
+    return <Component className={className}>{cleanText}</Component>;
   }
 
   return (
@@ -71,3 +77,5 @@ export const MathText: React.FC<MathTextProps> = ({
     />
   );
 };
+
+export default MathText;

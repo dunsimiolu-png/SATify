@@ -292,14 +292,13 @@ export const App: React.FC = () => {
   }, [currentRoute, currentQuestion, safeIndex]);
 
   // Official Bluebook Digital SAT Math Layout:
-  // Math questions render in single-column centered layout unless there is a coordinate graph (imageUrl),
-  // a structured stimulus table (<table in passage), or an explicit passage title.
+  // Math MCQ questions render strictly in a centered single-column layout (never split screen).
+  // Math SPR (grid-in) questions strictly render in a 50/50 split-screen layout with the Directions panel on the left.
   const isMathSingleColumn = useMemo(() => {
-    if (currentQuestion?.section !== 'Math') return false;
-    if (currentQuestion.imageUrl) return false;
-    const passage = currentQuestion.passage || currentQuestion.passageText || '';
-    if (passage.includes('<table') || currentQuestion.passageTitle) return false;
-    return true;
+    const isMath = currentQuestion?.section === 'Math' || ['Algebra', 'Advanced Math', 'Problem-Solving and Data Analysis', 'Geometry and Trigonometry'].includes(currentQuestion?.domain || '');
+    if (!isMath) return false;
+    const isSpr = currentQuestion?.questionType === 'spr' || !currentQuestion?.options || currentQuestion.options.length === 0;
+    return !isSpr;
   }, [currentQuestion]);
 
   const effectiveLeftCollapsed = isLeftCollapsed || isMathSingleColumn;
@@ -1160,7 +1159,7 @@ export const App: React.FC = () => {
                     </button>
                   )}
 
-                  <div className={`w-full ${isMathSingleColumn ? 'max-w-3xl' : 'max-w-4xl'} mx-auto h-full flex flex-col`}>
+                  <div className={`w-full ${isMathSingleColumn ? 'max-w-[800px]' : 'max-w-4xl'} mx-auto h-full flex flex-col`}>
                     <RightPane
                       question={currentQuestion}
                       userState={currentState}

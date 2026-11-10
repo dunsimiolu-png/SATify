@@ -121,10 +121,17 @@ export const renderFormattedContent = (
 
   // Render segments into React elements
   return segments.map((seg, idx) => {
-    let node: React.ReactNode =
-      seg.text.includes('$') || (seg.text.includes('<') && seg.text.includes('>'))
-        ? <MathText text={seg.text} />
-        : seg.text;
+    const hasMathOrEntities =
+      seg.text.includes('$') ||
+      seg.text.includes('\\(') ||
+      seg.text.includes('\\[') ||
+      seg.text.includes('\\$') ||
+      seg.text.includes('\\frac') ||
+      (seg.text.includes('<') && seg.text.includes('>'));
+
+    let node: React.ReactNode = hasMathOrEntities
+      ? <MathText text={seg.text} />
+      : seg.text;
 
     if (seg.isSub) {
       node = <sub key={`sub-${idx}`}>{node}</sub>;
