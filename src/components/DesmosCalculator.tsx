@@ -26,7 +26,8 @@ declare global {
 // -----------------------------------------------------------------------------
 // Singleton Desmos API Script Loader
 // -----------------------------------------------------------------------------
-const DESMOS_API_URL = 'https://www.desmos.com/api/v1.9/calculator.js?apiKey=dcb31709b452b1cf9dc26972add0fda6';
+const DESMOS_API_KEY = (typeof import.meta !== 'undefined' && import.meta.env?.VITE_DESMOS_API_KEY) || 'dff6ea11e7df4482bab9a540c52a64a0';
+const DESMOS_API_URL = `https://www.desmos.com/api/v1.9/calculator.js?apiKey=${DESMOS_API_KEY}`;
 let desmosLoadingPromise: Promise<any> | null = null;
 
 export function loadDesmosScript(): Promise<any> {
@@ -35,9 +36,36 @@ export function loadDesmosScript(): Promise<any> {
   if (desmosLoadingPromise) return desmosLoadingPromise;
 
   desmosLoadingPromise = new Promise((resolve, reject) => {
-    const existing = document.querySelector(`script[src*="desmos.com/api"]`);
-    if (existing && window.Desmos) {
-      resolve(window.Desmos);
+    // Check if script tag is already in DOM (e.g. injected in index.html)
+    const existing = document.querySelector<HTMLScriptElement>(`script[src*="desmos.com/api"]`);
+    if (existing) {
+      if (window.Desmos) {
+        resolve(window.Desmos);
+        return;
+      }
+      existing.addEventListener('load', () => {
+        if (window.Desmos) {
+          resolve(window.Desmos);
+        } else {
+          reject(new Error('Desmos API script loaded but window.Desmos not defined'));
+        }
+      });
+      existing.addEventListener('error', (err) => {
+        desmosLoadingPromise = null;
+        reject(err);
+      });
+      // Fallback polling in case the load event already fired before listener attached
+      let retries = 0;
+      const interval = setInterval(() => {
+        retries++;
+        if (window.Desmos) {
+          clearInterval(interval);
+          resolve(window.Desmos);
+        } else if (retries > 50) {
+          clearInterval(interval);
+          reject(new Error('Timed out waiting for window.Desmos initialization'));
+        }
+      }, 100);
       return;
     }
 
@@ -65,16 +93,24 @@ export function loadDesmosScript(): Promise<any> {
 // DesmosCalculator Component
 // -----------------------------------------------------------------------------
 export const DesmosCalculator: React.FC<DesmosCalculatorProps> = ({ isOpen, onClose }) => {
+  const [hasBeenOpened, setHasBeenOpened] = useState<boolean>(isOpen);
   const [activeTab, setActiveTab] = useState<'graphing' | 'scientific'>('graphing');
   const [isExpandedWidth, setIsExpandedWidth] = useState<boolean>(false);
 
+  // Mark as opened at least once so we keep DOM mounted for persistence
+  useEffect(() => {
+    if (isOpen) {
+      setHasBeenOpened(true);
+    }
+  }, [isOpen]);
+
   // Floating Window Geometry for Desktop
   const [size, setSize] = useState<{ width: number; height: number }>({
-    width: 400,
+    width: 420,
     height: 560,
   });
   const [position, setPosition] = useState<{ x: number; y: number }>(() => {
-    const defaultX = Math.max(20, (typeof window !== 'undefined' ? window.innerWidth : 1200) - 430);
+    const defaultX = Math.max(20, (typeof window !== 'undefined' ? window.innerWidth : 1200) - 450);
     return { x: defaultX, y: 70 };
   });
 
@@ -90,7 +126,7 @@ export const DesmosCalculator: React.FC<DesmosCalculatorProps> = ({ isOpen, onCl
   const resizeStartRef = useRef<{ mouseX: number; mouseY: number; initialWidth: number; initialHeight: number }>({
     mouseX: 0,
     mouseY: 0,
-    initialWidth: 400,
+    initialWidth: 420,
     initialHeight: 560,
   });
 
@@ -114,40 +150,14 @@ export const DesmosCalculator: React.FC<DesmosCalculatorProps> = ({ isOpen, onCl
     return () => window.removeEventListener('resize', handleWinResize);
   }, []);
 
-  // Initialize Desmos via singleton Promise
+  // 1. Script Loader Trigger
   useEffect(() => {
+    if (!hasBeenOpened) return;
     let mounted = true;
 
     loadDesmosScript()
       .then((Desmos) => {
         if (!mounted || !Desmos) return;
-
-        // Initialize Graphing Calculator
-        if (graphContainerRef.current && !graphCalcRef.current) {
-          try {
-            graphCalcRef.current = Desmos.GraphingCalculator(graphContainerRef.current, {
-              keypad: true,
-              expressions: true,
-              settingsMenu: true,
-              zoomButtons: true,
-              border: false,
-            });
-          } catch (e) {
-            console.error('Failed to init Desmos Graphing Calculator:', e);
-          }
-        }
-
-        // Initialize Scientific Calculator
-        if (sciContainerRef.current && !sciCalcRef.current) {
-          try {
-            sciCalcRef.current = Desmos.ScientificCalculator(sciContainerRef.current, {
-              border: false,
-            });
-          } catch (e) {
-            console.error('Failed to init Desmos Scientific Calculator:', e);
-          }
-        }
-
         setIsDesmosReady(true);
       })
       .catch((err) => {
@@ -157,10 +167,67 @@ export const DesmosCalculator: React.FC<DesmosCalculatorProps> = ({ isOpen, onCl
     return () => {
       mounted = false;
     };
-  }, []);
+  }, [hasBeenOpened]);
 
-  // ResizeObserver on containers to call .resize() whenever container dimensions change
+  // 2. Calculator Instance Initialization & Resize on Tab / Visibility Changes
   useEffect(() => {
+    if (!hasBeenOpened || !isDesmosReady) return;
+    const Desmos = window.Desmos;
+    if (!Desmos) return;
+
+    if (activeTab === 'graphing') {
+      if (graphContainerRef.current && !graphCalcRef.current) {
+        try {
+          graphCalcRef.current = Desmos.GraphingCalculator(graphContainerRef.current, {
+            keypad: true,
+            expressions: true,
+            settingsMenu: true,
+            zoomButtons: true,
+            border: false,
+            showResetButtonOnGraphpaper: true,
+          });
+        } catch (e) {
+          console.error('Failed to init Desmos Graphing Calculator:', e);
+        }
+      }
+      if (isOpen && graphCalcRef.current?.resize) {
+        graphCalcRef.current.resize();
+        const raf = requestAnimationFrame(() => graphCalcRef.current?.resize?.());
+        const t1 = setTimeout(() => graphCalcRef.current?.resize?.(), 50);
+        const t2 = setTimeout(() => graphCalcRef.current?.resize?.(), 200);
+        return () => {
+          cancelAnimationFrame(raf);
+          clearTimeout(t1);
+          clearTimeout(t2);
+        };
+      }
+    } else if (activeTab === 'scientific') {
+      if (sciContainerRef.current && !sciCalcRef.current) {
+        try {
+          sciCalcRef.current = Desmos.ScientificCalculator(sciContainerRef.current, {
+            border: false,
+          });
+        } catch (e) {
+          console.error('Failed to init Desmos Scientific Calculator:', e);
+        }
+      }
+      if (isOpen && sciCalcRef.current?.resize) {
+        sciCalcRef.current.resize();
+        const raf = requestAnimationFrame(() => sciCalcRef.current?.resize?.());
+        const t1 = setTimeout(() => sciCalcRef.current?.resize?.(), 50);
+        const t2 = setTimeout(() => sciCalcRef.current?.resize?.(), 200);
+        return () => {
+          cancelAnimationFrame(raf);
+          clearTimeout(t1);
+          clearTimeout(t2);
+        };
+      }
+    }
+  }, [activeTab, isOpen, isDesmosReady, hasBeenOpened, size]);
+
+  // 3. ResizeObserver on active container for smooth responsive resizing
+  useEffect(() => {
+    if (!isOpen || !isDesmosReady) return;
     const activeContainer = activeTab === 'graphing' ? graphContainerRef.current : sciContainerRef.current;
     if (!activeContainer) return;
 
@@ -174,22 +241,31 @@ export const DesmosCalculator: React.FC<DesmosCalculatorProps> = ({ isOpen, onCl
 
     resizeObserver.observe(activeContainer);
     return () => resizeObserver.disconnect();
-  }, [activeTab, isDesmosReady]);
+  }, [activeTab, isOpen, isDesmosReady]);
 
-  // Handle Tab Switch & Modal Open Resize
+  // 4. Memory Cleanup on Unmount
   useEffect(() => {
-    if (!isOpen || !isDesmosReady) return;
-    const timer = setTimeout(() => {
-      if (activeTab === 'graphing' && graphCalcRef.current?.resize) {
-        graphCalcRef.current.resize();
-      } else if (activeTab === 'scientific' && sciCalcRef.current?.resize) {
-        sciCalcRef.current.resize();
+    return () => {
+      if (graphCalcRef.current) {
+        try {
+          graphCalcRef.current.destroy();
+        } catch (e) {
+          console.warn('Error destroying Desmos Graphing Calculator:', e);
+        }
+        graphCalcRef.current = null;
       }
-    }, 50);
-    return () => clearTimeout(timer);
-  }, [activeTab, isOpen, isDesmosReady, isExpandedWidth]);
+      if (sciCalcRef.current) {
+        try {
+          sciCalcRef.current.destroy();
+        } catch (e) {
+          console.warn('Error destroying Desmos Scientific Calculator:', e);
+        }
+        sciCalcRef.current = null;
+      }
+    };
+  }, []);
 
-  // ESC key to close
+  // 5. ESC key to close
   useEffect(() => {
     if (!isOpen) return;
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -203,7 +279,7 @@ export const DesmosCalculator: React.FC<DesmosCalculatorProps> = ({ isOpen, onCl
   const toggleWidth = () => {
     setIsExpandedWidth(prev => {
       const next = !prev;
-      const newWidth = next ? Math.min(680, window.innerWidth - 40) : 400;
+      const newWidth = next ? Math.min(720, window.innerWidth - 40) : 420;
       setSize(s => ({ ...s, width: newWidth }));
       return next;
     });
@@ -279,14 +355,18 @@ export const DesmosCalculator: React.FC<DesmosCalculatorProps> = ({ isOpen, onCl
     }
   }, [isDragging, isResizing, handleMouseMove, handleMouseUp]);
 
-  if (!isOpen) return null;
+  // If calculator has never been toggled, do not mount DOM
+  if (!hasBeenOpened) return null;
 
   return (
     <div
       style={
         isMobileScreen
-          ? undefined
+          ? {
+              display: isOpen ? 'flex' : 'none',
+            }
           : {
+              display: isOpen ? 'flex' : 'none',
               position: 'fixed',
               left: `${position.x}px`,
               top: `${position.y}px`,
@@ -374,6 +454,9 @@ export const DesmosCalculator: React.FC<DesmosCalculatorProps> = ({ isOpen, onCl
           color: '#000',
           backgroundColor: '#ffffff',
           isolation: 'isolate',
+          width: '100%',
+          height: isMobileScreen ? 'calc(82vh - 44px)' : `${size.height - 44}px`,
+          minHeight: '380px',
         }}
       >
         {/* Graphing Calculator Container */}
@@ -383,6 +466,7 @@ export const DesmosCalculator: React.FC<DesmosCalculatorProps> = ({ isOpen, onCl
             display: activeTab === 'graphing' ? 'block' : 'none',
             width: '100%',
             height: '100%',
+            minHeight: '380px',
             backgroundColor: '#ffffff',
           }}
           className="w-full h-full bg-white text-black"
@@ -395,6 +479,7 @@ export const DesmosCalculator: React.FC<DesmosCalculatorProps> = ({ isOpen, onCl
             display: activeTab === 'scientific' ? 'block' : 'none',
             width: '100%',
             height: '100%',
+            minHeight: '380px',
             backgroundColor: '#ffffff',
           }}
           className="w-full h-full bg-white text-black"
