@@ -1,6 +1,5 @@
 /**
- * Utility functions for sanitizing and normalizing LaTeX mathematical expressions
- * and protecting currency symbols ($14, $406) from colliding with KaTeX delimiters.
+ * Utility functions for sanitizing and normalizing LaTeX mathematical expressions.
  */
 
 export function sanitizeMathText(input: string): string {
@@ -8,27 +7,23 @@ export function sanitizeMathText(input: string): string {
 
   let s = input;
 
-  // 1. Literal escaped dollar signs (\$14 or \$ or \\$14) are definitely currency/symbols, not math!
-  // Replace with HTML entity &#36; to prevent KaTeX from attempting to parse as math delimiter
-  s = s.replace(/\\+\$/g, '&#36;');
+  // 1. Normalize LaTeX display delimiters: \[...\] -> $$...$$
+  s = s.replace(/\\\[([\s\S]*?)\\\]/g, '$$$$$1$$$$');
 
-  // 2. Unescaped currency amounts: $14, $406, $1,500, $3.50 (NOT math expressions like $x$ or $2x + 1$)
-  // A currency amount has a dollar sign, digits, but NO closing $ before whitespace or punctuation
-  s = s.replace(/\$(\d+(?:,\d+)*(?:\.\d+)?)(?=\s|[.,;!?)']|$)/g, '&#36;$1');
+  // 2. Normalize LaTeX inline delimiters: \(...\) -> $...$
+  s = s.replace(/\\\(([\s\S]*?)\\\)/g, '$$$1$$');
 
-  // 3. Normalize LaTeX display delimiters: \[...\] -> $$...$$
-  s = s.replace(/\\\[([\s\S]*?)\\\]/g, (_, math) => `$$${math}$$`);
+  // 3. Fix unescaped % inside math mode: e.g. $10%$ -> $10\%$
+  // Inside $...$, replace % not preceded by \ with \% so it doesn't comment out the closing $
+  s = s.replace(/(?<!\\)\$([^\$\n]+?)(?<!\\)\$/g, (_, math) => {
+    const fixedMath = math.replace(/(?<!\\)%/g, '\\%');
+    return `$${fixedMath}$`;
+  });
 
-  // 4. Normalize LaTeX inline delimiters: \(...\) -> $...$
-  s = s.replace(/\\\(([\s\S]*?)\\\)/g, (_, math) => `$${math}$`);
-
-  // 5. Remove stray backslashes before plain punctuation (e.g., \% -> %, \# -> #)
-  s = s.replace(/\\([%#&_])/g, '$1');
-
-  // 6. Fix double-escaped backslashes in LaTeX commands (\\frac -> \frac, \\sqrt -> \sqrt, etc.)
+  // 4. Double backslashes in LaTeX commands (\\frac -> \frac, \\sqrt -> \sqrt, etc.)
   s = s.replace(/\\\\([a-zA-Z]+)/g, '\\$1');
 
-  // 7. Clean up stray double backslashes before symbols (\\le -> \le, \\ge -> \ge)
+  // 5. Stray double backslashes before symbols (\\le -> \le, \\ge -> \ge, \\cdot -> \cdot)
   s = s.replace(/\\\\([{}()[\],.])/g, '\\$1');
 
   return s;
@@ -40,7 +35,6 @@ export function sanitizeMathText(input: string): string {
 export function sanitizePlainStem(input: string): string {
   if (!input) return '';
   return input
-    .replace(/\\+\$(\d+)/g, '$$$1')
-    .replace(/\\([$])/g, '$')
-    .replace(/\\([%#&_])/g, '$1');
+    .replace(/\\+\$/g, '$')
+    .replace(/\\+%/g, '%');
 }

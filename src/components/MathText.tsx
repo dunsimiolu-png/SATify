@@ -11,7 +11,7 @@ export interface MathTextProps {
 
 /**
  * Renders text containing LaTeX math ($...$ or $$...$$), HTML tables,
- * and currency with crisp KaTeX and theme-adaptive rendering.
+ * and currency ($14, $406) with crisp KaTeX and theme-adaptive rendering.
  */
 export const MathText: React.FC<MathTextProps> = ({
   text,
@@ -21,18 +21,16 @@ export const MathText: React.FC<MathTextProps> = ({
   const renderedHtml = useMemo(() => {
     if (!text) return '';
 
-    // Sanitize LaTeX delimiters and protect currency amounts ($14, $406)
-    const sanitized = sanitizeMathText(text);
+    // Check if there are any math delimiters ($), brackets, currency escapes (\$), or HTML tags (<)
+    const hasMath = text.includes('$') || text.includes('\\(') || text.includes('\\[');
+    const hasHtml = text.includes('<') && text.includes('>');
 
-    // Check if there is any LaTeX math ($), HTML tags (<), or HTML entities (&)
-    const hasMath = sanitized.includes('$');
-    const hasHtml = sanitized.includes('<') && sanitized.includes('>');
-    const hasEntities = sanitized.includes('&#');
-
-    if (!hasMath && !hasHtml && !hasEntities) {
+    if (!hasMath && !hasHtml) {
       return null;
     }
 
+    // Sanitize LaTeX delimiters and fix unescaped % inside math
+    const sanitized = sanitizeMathText(text);
     let processed = sanitized;
 
     // 1. Process display math $$...$$
@@ -48,6 +46,7 @@ export const MathText: React.FC<MathTextProps> = ({
     });
 
     // 2. Process inline math $...$
+    // The lookbehind (?<!\\) ensures that escaped currency (\$14, \$406) is NOT matched as math!
     processed = processed.replace(/(?<!\\)\$([^\$\n]+?)\$/g, (_, math) => {
       try {
         return katex.renderToString(math.trim(), {
@@ -59,14 +58,19 @@ export const MathText: React.FC<MathTextProps> = ({
       }
     });
 
+    // 3. AFTER KaTeX has parsed all math, unescape currency: \$ -> $
+    processed = processed.replace(/\\+\$/g, '$');
+    // Also unescape \% in plain text: \% -> %
+    processed = processed.replace(/\\+%/g, '%');
+
     return processed;
   }, [text]);
 
   if (!text) return null;
 
-  // Pure text fast-path
+  // Pure text fast-path: unescape any stray currency \$ -> $
   if (renderedHtml === null) {
-    const cleanText = sanitizeMathText(text).replace(/&#36;/g, '$');
+    const cleanText = text.replace(/\\+\$/g, '$').replace(/\\+%/g, '%');
     return <Component className={className}>{cleanText}</Component>;
   }
 
