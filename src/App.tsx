@@ -648,9 +648,17 @@ export const App: React.FC = () => {
 
   // Launch practice for a specific skill from dashboard
   const handleStartSkillPractice = useCallback((skillName: string, domainName: string) => {
-    // Strictly filter by exact skill and canonical domain
-    const filtered = allQuestions.filter(q => q.skill === skillName && (!domainName || q.domain === domainName));
-    const targetPool = filtered.length > 0 ? filtered : allQuestions.filter(q => q.skill === skillName);
+    // Filter by skill and canonical domain (case-insensitive for resilience)
+    const skillLower = skillName.toLowerCase().trim();
+    const domainLower = domainName ? domainName.toLowerCase().trim() : '';
+
+    const filtered = allQuestions.filter(q => 
+      q.skill?.toLowerCase().trim() === skillLower && 
+      (!domainLower || q.domain?.toLowerCase().trim() === domainLower)
+    );
+    const targetPool = filtered.length > 0 ? filtered : allQuestions.filter(q => 
+      q.skill?.toLowerCase().trim() === skillLower
+    );
     setSessionQuestions(targetPool);
     setCurrentQuestionIndex(0);
     setUserStates(loadInitialUserStates(targetPool));
