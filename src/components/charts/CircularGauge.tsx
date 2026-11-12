@@ -15,12 +15,12 @@ export const CircularGauge: React.FC<CircularGaugeProps> = React.memo(({
   const circumference = 2 * Math.PI * radius;
   const strokeDashoffset = circumference - (percent / 100) * circumference;
 
-  const strokeColor = percent >= 80 
+  const strokeColor = percent >= 75 
     ? '#10b981' // emerald
     : percent >= 50 
-      ? '#2563eb' // royal blue
+      ? '#f59e0b' // amber
       : percent > 0 
-        ? '#f59e0b' // amber
+        ? '#ef4444' // rose
         : '#e2e8f0'; // slate-200
 
   return (

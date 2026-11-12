@@ -6,6 +6,9 @@ import { authApiPlugin } from './server/authPlugin';
 export default defineConfig({
   plugins: [react(), authApiPlugin()],
   base: './',
+  build: {
+    emptyOutDir: false
+  },
   server: {
     port: 5173,
     host: '127.0.0.1'

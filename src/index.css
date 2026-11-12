@@ -65,14 +65,27 @@ body.dark .inline-math-img {
 
 /* Option choices KaTeX inline display override */
 .option-choice-text .katex-display {
-  display: inline !important;
+  display: inline-block;
   margin: 0 !important;
 }
 
 .option-choice-text .katex-display-wrapper {
-  display: inline !important;
+  display: inline-block;
   margin: 0 !important;
   padding: 0 !important;
+}
+
+/* When an option choice contains multiple equations (e.g. systems of equations), stack them vertically */
+.option-choice-text .katex-display-wrapper:not(:only-child) {
+  display: block !important;
+  margin: 0.25rem 0 !important;
+  text-align: left !important;
+}
+
+.option-choice-text .katex-display-wrapper:not(:only-child) .katex-display {
+  display: block !important;
+  margin: 0.15rem 0 !important;
+  text-align: left !important;
 }
 
 /* ========================================================================= */

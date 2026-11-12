@@ -389,31 +389,42 @@ export function getLocalDateString(d: Date = new Date()): string {
 
 export function calculateStreakFromAttempts(attempts: AttemptRecord[]): number {
   if (!attempts || attempts.length === 0) return 0;
-  const uniqueDates = Array.from(
-    new Set(attempts.map(a => getLocalDateString(new Date(a.timestamp))))
-  ).sort().reverse();
 
-  if (uniqueDates.length === 0) return 0;
+  // Normalize all activity timestamps to local YYYY-MM-DD strings
+  const activeDateSet = new Set<string>();
+  for (let i = 0; i < attempts.length; i++) {
+    const a = attempts[i];
+    if (a && a.timestamp) {
+      activeDateSet.add(getLocalDateString(new Date(a.timestamp)));
+    }
+  }
 
-  const today = getLocalDateString(new Date());
-  const yesterday = getLocalDateString(new Date(Date.now() - 86400000));
+  if (activeDateSet.size === 0) return 0;
 
-  // If latest attempt is neither today nor yesterday, streak has expired
-  if (uniqueDates[0] !== today && uniqueDates[0] !== yesterday) {
+  const now = new Date();
+  const todayStr = getLocalDateString(now);
+  const yesterday = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 1);
+  const yesterdayStr = getLocalDateString(yesterday);
+
+  // Check if active today or yesterday
+  const activeToday = activeDateSet.has(todayStr);
+  const activeYesterday = activeDateSet.has(yesterdayStr);
+
+  // If neither today nor yesterday had any activity, streak is broken
+  if (!activeToday && !activeYesterday) {
     return 0;
   }
 
-  let streak = 1;
-  let currentDate = new Date(uniqueDates[0]);
+  // Count consecutive calendar days walking backward from today (or yesterday if today === 0)
+  let streak = 0;
+  let offset = activeToday ? 0 : 1;
 
-  for (let i = 1; i < uniqueDates.length; i++) {
-    const prevDate = new Date(uniqueDates[i]);
-    const diffDays = Math.round((currentDate.getTime() - prevDate.getTime()) / (1000 * 60 * 60 * 24));
-    if (diffDays === 1) {
+  while (true) {
+    const checkDate = new Date(now.getFullYear(), now.getMonth(), now.getDate() - offset);
+    const checkDateStr = getLocalDateString(checkDate);
+    if (activeDateSet.has(checkDateStr)) {
       streak++;
-      currentDate = prevDate;
-    } else if (diffDays === 0) {
-      continue;
+      offset++;
     } else {
       break;
     }
@@ -452,8 +463,7 @@ export function getStudyStreak(): number {
   try {
     const attempts = getAttempts();
     if (attempts.length > 0) {
-      const computed = calculateStreakFromAttempts(attempts);
-      if (computed > 0) return computed;
+      return calculateStreakFromAttempts(attempts);
     }
 
     const key = getScopedKey(STORAGE_KEYS.STREAK);
@@ -463,8 +473,9 @@ export function getStudyStreak(): number {
     }
     if (!raw) return 0;
     const data = JSON.parse(raw);
-    const today = getLocalDateString(new Date());
-    const yesterday = getLocalDateString(new Date(Date.now() - 86400000));
+    const now = new Date();
+    const today = getLocalDateString(now);
+    const yesterday = getLocalDateString(new Date(now.getFullYear(), now.getMonth(), now.getDate() - 1));
 
     if (data.lastDate === today || data.lastDate === yesterday) {
       return data.streak || 1;

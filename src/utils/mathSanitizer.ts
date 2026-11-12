@@ -11,8 +11,9 @@ export function sanitizeMathText(input: string): string {
   s = s.replace(/&#36;|&amp;#36;/g, '$');
 
   // 0.5. Protect standalone currency amounts outside math mode: e.g. $14, $406, $112, $12.50
-  // Ensures currency amounts with trailing space or punctuation aren't treated as math delimiters
-  s = s.replace(/(?<![\$\\])\$(?!\$)(?=\d+(?:,\d+)*(?:\.\d+)?(?:\s|[.,;!?)](?!\$)))/g, '\\$');
+  // Matches $ followed by a number that is followed by whitespace + word or punctuation (not math delimiters or LaTeX macros)
+  // Ensures $90.0$ and $127,882\text{...}$ are preserved as valid math while $14 for each tablet is protected
+  s = s.replace(/(?<![\$\\])\$(?!\$)(\d+(?:,\d+)*(?:\.\d+)?)(?=\s+[a-zA-Z]|[.,;!?)](?:\s|$))/g, '\\$$$1');
 
   // 1. Normalize LaTeX display delimiters: \[...\] -> $$...$$
   s = s.replace(/\\\[([\s\S]*?)\\\]/g, '$$$$$1$$$$');

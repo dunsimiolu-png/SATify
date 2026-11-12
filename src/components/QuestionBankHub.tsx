@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useRef } from 'react';
 import { 
   BookOpen, 
   Calculator, 
@@ -15,8 +15,11 @@ import {
   PenTool, 
   ArrowRight,
   ArrowLeft,
-  Play
+  Play,
+  RotateCcw
 } from 'lucide-react';
+import { gsap } from 'gsap';
+import { useGSAP } from '@gsap/react';
 import { MockQuestion } from '../types/quiz';
 import { allEnglishQuestions, allMathQuestions } from '../data/mockQuestions';
 import { 
@@ -28,6 +31,21 @@ import {
   getValidSavedQuestions,
   getUniqueSolvedQuestions
 } from '../utils/storage';
+
+gsap.registerPlugin(useGSAP);
+
+export function getAccuracyBadgeClasses(accuracy: number | null, attempted: number): string {
+  if (attempted === 0 || accuracy === null) {
+    return 'bg-slate-200 text-slate-500 dark:bg-slate-800 dark:text-slate-400';
+  }
+  if (accuracy >= 75) {
+    return 'bg-emerald-500 text-white';
+  }
+  if (accuracy >= 50) {
+    return 'bg-amber-500 text-white';
+  }
+  return 'bg-rose-500 text-white';
+}
 
 interface QuestionBankHubProps {
   questions?: MockQuestion[];
@@ -176,7 +194,9 @@ const DualToneDonutGauge: React.FC<{
             fill="none"
             strokeDasharray={`${correctLen} ${c}`}
             strokeDashoffset="0"
-            strokeLinecap="butt"
+            data-start-offset={correctLen}
+            data-target-offset="0"
+            className="donut-ring-stroke"
           />
         )}
         {attempted > 0 && wrongLen > 0 && (
@@ -189,12 +209,14 @@ const DualToneDonutGauge: React.FC<{
             fill="none"
             strokeDasharray={`${wrongLen} ${c}`}
             strokeDashoffset={-correctLen}
-            strokeLinecap="butt"
+            data-start-offset={wrongLen - correctLen}
+            data-target-offset={-correctLen}
+            className="donut-ring-stroke"
           />
         )}
       </svg>
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <span className="text-[11px] font-bold font-mono text-slate-800 dark:text-slate-100">
+        <span className="text-[11px] font-bold font-mono text-slate-800 dark:text-slate-100 tabular-nums">
           {attempted > 0 ? `${accuracy}%` : '—'}
         </span>
       </div>
@@ -210,7 +232,50 @@ export const QuestionBankHub: React.FC<QuestionBankHubProps> = ({
   onStartSkillPractice,
   initialSection = null,
 }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
   const [selectedSection, setSelectedSection] = useState<'Reading and Writing' | 'Math' | null>(initialSection);
+
+  // GSAP Choreography (@gsap-react, @gsap-core)
+  useGSAP(() => {
+    const mm = gsap.matchMedia();
+    mm.add('(prefers-reduced-motion: no-preference)', () => {
+      // 1. Staggered card reveal (Domain containers & Skill cards)
+      gsap.fromTo(
+        '.domain-card-container, .skill-card-item',
+        { autoAlpha: 0, y: 12 },
+        { autoAlpha: 1, y: 0, stagger: 0.04, duration: 0.35, ease: 'power2.out', clearProps: 'transform' }
+      );
+
+      // 2. Donut rings stroke-dashoffset animation
+      const rings = containerRef.current?.querySelectorAll<SVGGeometryElement>('.donut-ring-stroke');
+      if (rings && rings.length > 0) {
+        gsap.fromTo(
+          rings,
+          {
+            strokeDashoffset: (_i, el) => {
+              const start = el.getAttribute('data-start-offset');
+              return start !== null ? parseFloat(start) : 132;
+            },
+          },
+          {
+            strokeDashoffset: (_i, el) => {
+              const target = el.getAttribute('data-target-offset');
+              return target !== null ? parseFloat(target) : 0;
+            },
+            duration: 0.6,
+            ease: 'power3.out',
+          }
+        );
+      }
+
+      // 3. Activity Trend bars scaleY animation
+      gsap.fromTo(
+        '.activity-trend-bar',
+        { scaleY: 0, transformOrigin: 'bottom center' },
+        { scaleY: 1, duration: 0.6, ease: 'power3.out' }
+      );
+    });
+  }, { dependencies: [selectedSection], scope: containerRef });
 
   const attempts = useMemo(() => getAttempts(), []);
   const latestAttemptsMap = useMemo(() => getLatestAttemptsMap(), []);
@@ -259,7 +324,7 @@ export const QuestionBankHub: React.FC<QuestionBankHubProps> = ({
     const allSectionQuestions = isMath ? allMathQuestions : allEnglishQuestions;
 
     return (
-      <div className="w-full h-full overflow-y-auto overflow-x-hidden bg-neutral-50 dark:bg-[#090A0F] text-zinc-950 dark:text-[#F4F4F6] p-4 sm:p-6 md:p-8 select-text">
+      <div ref={containerRef} className="w-full h-full overflow-y-auto overflow-x-hidden bg-neutral-50 dark:bg-[#090A0F] text-zinc-950 dark:text-[#F4F4F6] p-4 sm:p-6 md:p-8 select-text">
         <div className="max-w-6xl mx-auto space-y-6 animate-in fade-in duration-200">
           
           {/* Top Bar: Back button, subject title, Open Question Filter, Practice All */}
@@ -321,21 +386,15 @@ export const QuestionBankHub: React.FC<QuestionBankHubProps> = ({
               return (
                 <div
                   key={domain.name}
-                  className="rounded-2xl border border-slate-200 dark:border-slate-800/90 bg-white dark:bg-[#0b0f17] p-5 sm:p-6 space-y-5 shadow-xs"
+                  className="domain-card-container rounded-2xl border border-slate-200 dark:border-slate-800/90 bg-white dark:bg-[#0b0f17] p-5 sm:p-6 space-y-5 shadow-xs"
                 >
                   {/* Domain Header */}
                   <div className="flex items-center justify-between gap-3 pb-1 border-b border-slate-100 dark:border-slate-800/60">
                     <div className="flex items-center gap-3.5 min-w-0">
-                      {/* Square Mastery Score Badge */}
-                      {domainAccuracy !== null ? (
-                        <div className="w-10 h-10 rounded-xl font-bold bg-lime-500 text-slate-950 flex items-center justify-center text-sm shadow-xs font-mono shrink-0">
-                          {domainAccuracy}
-                        </div>
-                      ) : (
-                        <div className="w-10 h-10 rounded-xl font-bold bg-slate-100 dark:bg-[#161c28] text-slate-400 flex items-center justify-center text-base shrink-0">
-                          —
-                        </div>
-                      )}
+                      {/* Unified Square Mastery Score Badge */}
+                      <div className={`w-10 h-10 rounded-xl font-bold flex items-center justify-center text-sm shadow-xs font-mono shrink-0 ${getAccuracyBadgeClasses(domainAccuracy, domainSolved)}`}>
+                        {domainSolved > 0 && domainAccuracy !== null ? domainAccuracy : '—'}
+                      </div>
 
                       <div className="min-w-0">
                         <h3 className="font-bold text-base sm:text-lg text-slate-900 dark:text-[#F4F4F6] truncate">
@@ -374,7 +433,7 @@ export const QuestionBankHub: React.FC<QuestionBankHubProps> = ({
                       return (
                         <div
                           key={skill}
-                          className="rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#121722] flex overflow-hidden shadow-2xs hover:border-slate-300 dark:hover:border-slate-700 transition-colors"
+                          className="skill-card-item rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#121722] flex overflow-hidden shadow-2xs hover:border-slate-300 dark:hover:border-slate-700 transition-colors"
                         >
                           {/* (a) Left Side */}
                           <div className="flex-1 p-4 flex flex-col justify-between relative overflow-hidden space-y-3">
@@ -389,18 +448,10 @@ export const QuestionBankHub: React.FC<QuestionBankHubProps> = ({
 
                             <div className="relative z-10 space-y-2">
                               <div className="flex items-start gap-2.5">
-                                {/* Small Square Skill Score Badge */}
-                                {attempted > 0 ? (
-                                  <div className={`w-7 h-7 rounded-lg font-bold flex items-center justify-center text-xs shadow-2xs font-mono shrink-0 text-white ${
-                                    accuracy >= 80 ? 'bg-emerald-600' : accuracy >= 60 ? 'bg-amber-500' : 'bg-rose-500'
-                                  }`}>
-                                    {accuracy}
-                                  </div>
-                                ) : (
-                                  <div className="w-7 h-7 rounded-lg font-bold bg-slate-200 dark:bg-[#1a2233] text-slate-400 dark:text-slate-500 flex items-center justify-center text-xs shrink-0">
-                                    —
-                                  </div>
-                                )}
+                                {/* Unified Small Square Skill Score Badge */}
+                                <div className={`w-7 h-7 rounded-lg font-bold flex items-center justify-center text-xs shadow-2xs font-mono shrink-0 ${getAccuracyBadgeClasses(accuracy, attempted)}`}>
+                                  {attempted > 0 ? accuracy : '—'}
+                                </div>
 
                                 <div className="min-w-0 flex-1">
                                   <h4 
@@ -416,23 +467,29 @@ export const QuestionBankHub: React.FC<QuestionBankHubProps> = ({
                               </div>
                             </div>
 
-                            {/* Bottom row: total Qs + new pill badge, total time spent */}
+                            {/* Bottom row: total Qs + new pill badge / Completed pill, total time spent */}
                             <div className="relative z-10 flex items-center justify-between text-xs pt-2 border-t border-slate-200/60 dark:border-slate-800/60">
                               <div className="flex items-center gap-1.5 font-mono text-slate-600 dark:text-slate-300">
                                 <span>{totalQs} Qs</span>
-                                {unseenCount > 0 && (
-                                  <span className="px-1.5 py-0.2 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800 dark:bg-emerald-950/70 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800/80">
+                                {unseenCount > 0 ? (
+                                  <span className="px-1.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800 dark:bg-emerald-950/70 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800/80">
                                     {unseenCount} new
                                   </span>
-                                )}
+                                ) : attempted >= totalQs && totalQs > 0 ? (
+                                  <span className="px-1.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800 dark:bg-emerald-950/70 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800/80">
+                                    ✓ Completed
+                                  </span>
+                                ) : null}
                               </div>
 
-                              <span 
-                                className="text-[11px] font-mono text-slate-500 dark:text-slate-400"
-                                title="Total time spent on this skill"
-                              >
-                                ⏱ {formatDuration(timeSpentSeconds)}
-                              </span>
+                              {attempted > 0 && (
+                                <span 
+                                  className="text-[11px] font-mono text-slate-500 dark:text-[#8E95A5]"
+                                  title="Total time spent on this skill"
+                                >
+                                  ⏱ {formatDuration(timeSpentSeconds)}
+                                </span>
+                              )}
                             </div>
                           </div>
 
@@ -446,22 +503,28 @@ export const QuestionBankHub: React.FC<QuestionBankHubProps> = ({
                               accuracy={accuracy}
                             />
 
-                            {/* Correct and Wrong Counts */}
-                            <div className="flex items-center gap-2 text-[11px] font-mono tabular-nums">
-                              <span className="text-emerald-600 dark:text-emerald-400 font-semibold flex items-center gap-0.5">
-                                ✔ {correct}
-                              </span>
-                              <span className="text-rose-600 dark:text-rose-400 font-semibold flex items-center gap-0.5">
-                                ✖ {wrong}
-                              </span>
-                            </div>
+                            {/* Correct and Wrong Counts / Not Started */}
+                            {attempted > 0 ? (
+                              <div className="flex items-center gap-2 text-[11px] font-mono tabular-nums">
+                                <span className="text-emerald-600 dark:text-emerald-400 font-semibold flex items-center gap-0.5">
+                                  ✔ {correct}
+                                </span>
+                                <span className="text-rose-600 dark:text-rose-400 font-semibold flex items-center gap-0.5">
+                                  ✖ {wrong}
+                                </span>
+                              </div>
+                            ) : (
+                              <div className="text-xs text-slate-400 dark:text-[#8E95A5] font-mono font-medium">
+                                Not started
+                              </div>
+                            )}
 
                             {/* Divider with Attempted / Total */}
                             <div className="w-full text-center border-t border-slate-200 dark:border-slate-800 pt-1 text-[10px] font-mono text-slate-500 dark:text-slate-400 tabular-nums">
                               {attempted}/{totalQs}
                             </div>
 
-                            {/* Full-width > PRACTICE button */}
+                            {/* Upgraded Action Button: Practice or Review */}
                             <button
                               type="button"
                               onClick={() => {
@@ -471,9 +534,19 @@ export const QuestionBankHub: React.FC<QuestionBankHubProps> = ({
                                   onStartPracticeSection(selectedSection);
                                 }
                               }}
-                              className="w-full py-1.5 rounded-lg bg-slate-200 hover:bg-blue-600 hover:text-white dark:bg-[#2b3548] dark:hover:bg-blue-600 text-[11px] font-bold uppercase tracking-wider flex items-center justify-center gap-1 transition cursor-pointer active:scale-95 text-slate-800 dark:text-slate-200 shadow-2xs"
+                              className="w-full py-2 rounded-lg bg-slate-200 hover:bg-blue-600 hover:text-white dark:bg-[#2b3548] dark:hover:bg-blue-600 text-xs font-semibold tracking-wide flex items-center justify-center gap-1.5 transition-colors cursor-pointer active:scale-95 text-slate-800 dark:text-slate-200 shadow-2xs"
                             >
-                              <span>&gt; PRACTICE</span>
+                              {attempted >= totalQs && totalQs > 0 ? (
+                                <>
+                                  <RotateCcw className="w-3.5 h-3.5" />
+                                  <span>Review</span>
+                                </>
+                              ) : (
+                                <>
+                                  <Play className="w-3 h-3 fill-current" />
+                                  <span>Practice</span>
+                                </>
+                              )}
                             </button>
                           </div>
                         </div>
@@ -492,7 +565,7 @@ export const QuestionBankHub: React.FC<QuestionBankHubProps> = ({
 
   // Otherwise, render the Overview Hub
   return (
-    <div className="w-full h-full overflow-y-auto overflow-x-hidden bg-neutral-50 dark:bg-[#090A0F] text-zinc-950 dark:text-[#F4F4F6] p-4 sm:p-6 md:p-8 select-text">
+    <div ref={containerRef} className="w-full h-full overflow-y-auto overflow-x-hidden bg-neutral-50 dark:bg-[#090A0F] text-zinc-950 dark:text-[#F4F4F6] p-4 sm:p-6 md:p-8 select-text">
       <div className="max-w-6xl mx-auto space-y-8 animate-in fade-in duration-200">
         
         {/* =================================================================== */}
@@ -547,10 +620,12 @@ export const QuestionBankHub: React.FC<QuestionBankHubProps> = ({
                     <span className="font-bold text-white">{rwPercent}%</span>
                   </div>
 
-                  {/* Progress Bar with White Circular Indicator Dot */}
+                  {/* Progress Bar with Low-Percentage Pill Guard */}
                   <div className="relative w-full h-2.5 bg-black/25 rounded-full overflow-hidden">
                     <div 
-                      className="relative h-full bg-gradient-to-r from-blue-300 to-white rounded-full transition-all duration-500 ease-out"
+                      className={`relative h-full bg-gradient-to-r from-blue-300 to-white rounded-full transition-all duration-500 ease-out ${
+                        rwSolved > 0 ? 'min-w-[10px]' : ''
+                      }`}
                       style={{ width: `${rwPercent}%` }}
                     />
                   </div>
@@ -615,10 +690,12 @@ export const QuestionBankHub: React.FC<QuestionBankHubProps> = ({
                     <span className="font-bold text-white">{mathPercent}%</span>
                   </div>
 
-                  {/* Progress Bar with Smooth Track */}
+                  {/* Progress Bar with Low-Percentage Pill Guard */}
                   <div className="relative w-full h-2.5 bg-black/25 rounded-full overflow-hidden">
                     <div 
-                      className="relative h-full bg-gradient-to-r from-sky-200 to-white rounded-full transition-all duration-500 ease-out"
+                      className={`relative h-full bg-gradient-to-r from-sky-200 to-white rounded-full transition-all duration-500 ease-out ${
+                        mathSolved > 0 ? 'min-w-[10px]' : ''
+                      }`}
                       style={{ width: `${mathPercent}%` }}
                     />
                   </div>
@@ -764,22 +841,22 @@ export const QuestionBankHub: React.FC<QuestionBankHubProps> = ({
               </div>
             </div>
 
-            {/* Correct & Wrong Counters + Legend */}
-            <div className="flex items-center gap-4 text-xs font-semibold">
+            {/* Correct & Wrong Counters with clear Last 10 Days label */}
+            <div className="flex items-center gap-2 text-xs font-semibold flex-wrap">
+              <span className="text-zinc-500 dark:text-[#8E95A5] text-xs font-mono font-medium">Last 10 Days:</span>
               <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
                 <CheckCircle2 className="w-3.5 h-3.5" />
-                <span>{totalPast10Correct} Correct</span>
+                <span>✓ {totalPast10Correct} Correct</span>
               </div>
               <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-rose-50 dark:bg-rose-950/40 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-800">
                 <XCircle className="w-3.5 h-3.5" />
-                <span>{totalPast10Wrong} Wrong</span>
+                <span>ⓧ {totalPast10Wrong} Wrong</span>
               </div>
             </div>
           </div>
 
-          {/* Chart View with Average Dashed Line */}
-          <div className="relative pt-6 pb-2 border-b border-zinc-100 dark:border-[#181B24]">
-            
+          {/* Compact, Fixed-Height 10-Column CSS Grid Chart */}
+          <div className="relative">
             {/* Dashed Average Line Indicator */}
             {parseFloat(avgPerDay) > 0 && (
               <div 
@@ -792,46 +869,55 @@ export const QuestionBankHub: React.FC<QuestionBankHubProps> = ({
               </div>
             )}
 
-            {/* Bars */}
-            <div className="h-44 w-full flex items-end justify-between gap-1.5 sm:gap-3 px-1 sm:px-2">
+            {/* 10-Column Grid */}
+            <div className="h-48 w-full grid grid-cols-10 gap-2 sm:gap-3 items-end pt-6 pb-2 border-b border-zinc-100 dark:border-[#181B24]">
               {activityTrend.map((day, idx) => {
-                const heightPercent = day.total > 0 ? Math.max(16, (day.total / maxTrendDay) * 100) : 6;
-                const correctPercent = day.total > 0 ? (day.correct / day.total) * 100 : 0;
-                const wrongPercent = 100 - correctPercent;
+                const isToday = idx === 9;
+                const dateLabel = isToday ? 'Today' : day.label;
+                const accuracy = day.total > 0 ? Math.round((day.correct / day.total) * 100) : 0;
+                const heightPercent = day.total > 0 ? Math.min(100, Math.max(16, (day.total / maxTrendDay) * 100)) : 0;
+                const correctRatio = day.total > 0 ? (day.correct / day.total) * 100 : 0;
+                const wrongRatio = 100 - correctRatio;
 
                 return (
-                  <div key={idx} className="flex-1 flex flex-col items-center gap-1.5 h-full justify-end group min-w-0">
+                  <div key={day.date || idx} className="flex flex-col items-center gap-2 h-full justify-end group min-w-0 relative">
                     {/* Hover tooltip */}
-                    <div className="opacity-0 group-hover:opacity-100 transition-opacity bg-zinc-900 dark:bg-zinc-800 text-white text-[10px] py-0.5 px-1.5 rounded-sm pointer-events-none whitespace-nowrap shadow-xs font-mono">
-                      {day.total} Qs ({day.correct} ✓)
+                    <div className="absolute -top-8 opacity-0 group-hover:opacity-100 transition-opacity bg-zinc-900 dark:bg-zinc-800 text-white text-[10px] py-1 px-2 rounded pointer-events-none whitespace-nowrap shadow-lg font-mono z-20 border border-zinc-700">
+                      {dateLabel}: {day.correct} Correct, {day.wrong} Wrong • {accuracy}%
                     </div>
 
-                    {/* Stacked Colored Bar */}
-                    <div 
-                      className="w-full max-w-[28px] rounded-t-md overflow-hidden flex flex-col justify-end transition-all duration-300"
-                      style={{ height: `${heightPercent}%` }}
-                    >
+                    {/* Full-height subtle background track */}
+                    <div className="w-full bg-slate-100/70 dark:bg-slate-800/40 rounded-lg h-32 flex flex-col justify-end overflow-hidden p-0.5">
                       {day.total > 0 ? (
-                        <>
-                          <div 
-                            style={{ height: `${wrongPercent}%` }} 
-                            className="w-full bg-rose-500 transition-all"
-                            title={`${day.wrong} incorrect`}
-                          />
-                          <div 
-                            style={{ height: `${correctPercent}%` }} 
-                            className="w-full bg-emerald-500 transition-all"
-                            title={`${day.correct} correct`}
-                          />
-                        </>
+                        <div 
+                          className="w-full rounded-md overflow-hidden flex flex-col justify-end activity-trend-bar origin-bottom transition-all duration-300"
+                          style={{ height: `${heightPercent}%` }}
+                        >
+                          {day.wrong > 0 && (
+                            <div 
+                              style={{ height: `${wrongRatio}%` }} 
+                              className="w-full bg-rose-500"
+                            />
+                          )}
+                          {day.correct > 0 && (
+                            <div 
+                              style={{ height: `${correctRatio}%` }} 
+                              className="w-full bg-emerald-500"
+                            />
+                          )}
+                        </div>
                       ) : (
-                        <div className="w-full h-full bg-zinc-200 dark:bg-[#181B24] rounded-t-md" />
+                        <div className="w-full h-1 bg-slate-300 dark:bg-slate-700/60 rounded-full" />
                       )}
                     </div>
 
-                    {/* Day label */}
-                    <span className="text-[10px] font-bold text-zinc-500 dark:text-[#8E95A5] group-hover:text-zinc-900 dark:group-hover:text-white transition-colors truncate max-w-full text-center">
-                      {day.label}
+                    {/* Date label at bottom */}
+                    <span className={`text-[11px] sm:text-xs tabular-nums truncate max-w-full text-center transition-colors ${
+                      isToday 
+                        ? 'font-bold text-blue-600 dark:text-blue-400' 
+                        : 'text-slate-400 dark:text-[#8E95A5] group-hover:text-zinc-900 dark:group-hover:text-white'
+                    }`}>
+                      {dateLabel}
                     </span>
                   </div>
                 );

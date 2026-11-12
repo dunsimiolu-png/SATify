@@ -75,10 +75,10 @@ export const DomainMasteryBreakdown: React.FC<DomainMasteryBreakdownProps> = Rea
                       </span>
                       <div className="flex items-center gap-2">
                         <span className={`text-[11px] font-bold ${
-                          acc >= 80 ? 'text-emerald-600 dark:text-emerald-400' :
-                          acc >= 50 ? 'text-blue-600 dark:text-blue-400' :
-                          s.attempted > 0 ? 'text-amber-600 dark:text-amber-400' :
-                          'text-slate-400 dark:text-slate-500'
+                          s.attempted === 0 ? 'text-slate-400 dark:text-slate-500' :
+                          acc >= 75 ? 'text-emerald-600 dark:text-emerald-400' :
+                          acc >= 50 ? 'text-amber-600 dark:text-amber-400' :
+                          'text-rose-600 dark:text-rose-400'
                         }`}>
                           {s.attempted > 0 ? `${acc}%` : '—'}
                         </span>

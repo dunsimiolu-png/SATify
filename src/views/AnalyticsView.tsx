@@ -253,24 +253,29 @@ export const AnalyticsView: React.FC<AnalyticsViewProps> = ({
     });
 
     // Ranking algorithm:
-    // 1. Separate attempted skills from unattempted skills
-    const attemptedSkills = skillStatsItems.filter(s => s.attempted >= 1);
+    // 1. Partition skills by sample size: robust (>= 3 attempts), low-sample (1-2 attempts), and unattempted (0)
+    const robustAttempted = skillStatsItems.filter(s => s.attempted >= 3);
+    const lowSampleAttempted = skillStatsItems.filter(s => s.attempted > 0 && s.attempted < 3);
     const unattemptedSkills = skillStatsItems.filter(s => s.attempted === 0);
 
-    // 2. Prioritize skills with < 80% accuracy over >= 80% accuracy
-    const weakAttempted = attemptedSkills
+    // 2. Prioritize robust skills with < 80% accuracy first
+    const weakRobust = robustAttempted
       .filter(s => s.accuracy < 80)
       .sort((a, b) => a.accuracy - b.accuracy || b.attempted - a.attempted);
 
-    const strongAttempted = attemptedSkills
+    const strongRobust = robustAttempted
       .filter(s => s.accuracy >= 80)
       .sort((a, b) => a.accuracy - b.accuracy || b.attempted - a.attempted);
 
-    // 3. Pool top candidates, padding with unattempted skills if fewer than 5 attempted
-    const prioritizedPool = [...weakAttempted, ...strongAttempted];
+    // 3. Low-sample skills sorted by accuracy ASC, then attempted DESC
+    const sortedLowSample = lowSampleAttempted
+      .sort((a, b) => a.accuracy - b.accuracy || b.attempted - a.attempted);
+
+    // 4. Pool top 5 candidates: robust weak -> robust strong -> low-sample -> unattempted
+    const prioritizedPool = [...weakRobust, ...strongRobust, ...sortedLowSample];
     const top5Candidates = [...prioritizedPool, ...unattemptedSkills].slice(0, 5);
 
-    // 4. Strict final sort: Attempted first (strictly accuracy ASC, tie-break attempted DESC), unattempted last
+    // 5. Final order: Attempted first (accuracy ASC, tie-break attempted DESC), unattempted last
     const lowest = top5Candidates.sort((a, b) => {
       if (a.attempted > 0 && b.attempted === 0) return -1;
       if (a.attempted === 0 && b.attempted > 0) return 1;

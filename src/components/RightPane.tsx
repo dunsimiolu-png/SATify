@@ -449,7 +449,7 @@ export const RightPane: React.FC<RightPaneProps> = ({
                           <img
                             src={choice.imageUrl}
                             alt={`Option ${choiceId}`}
-                            className="max-h-32 w-auto object-contain rounded select-none dark:invert"
+                            className="max-h-32 w-auto object-contain rounded select-none dark:invert dark:contrast-[1.1] dark:brightness-[0.95]"
                             loading="lazy"
                           />
                         </div>
