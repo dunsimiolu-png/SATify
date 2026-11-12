@@ -143,7 +143,7 @@ export const renderFormattedContent = (
             <React.Fragment key={`blank-part-${pIdx}`}>
               {part.replace(/\\+\$/g, '$').replace(/\\+%/g, '%')}
               {pIdx < parts.length - 1 && (
-                <span className="inline-block border-b-2 border-zinc-900 dark:border-zinc-100 min-w-[3.5rem] h-[1.1em] mx-1 align-baseline bg-zinc-200/50 dark:bg-zinc-800/50 rounded-xs select-none">&nbsp;</span>
+                <span className="inline-block min-w-[4.5rem] border-b-2 border-current mx-1 bg-transparent align-baseline select-none">&nbsp;</span>
               )}
             </React.Fragment>
           ))}

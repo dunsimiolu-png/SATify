@@ -1,8 +1,12 @@
 import React, { useCallback, useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
+import { useGSAP } from '@gsap/react';
 import { MockQuestion, TextHighlight } from '../types/quiz';
 import { RichText } from './RichText';
 import { BulletPassage, isBulletPassage } from './BulletPassage';
 import { PairedPassage, isPairedPassage } from './PairedPassage';
+
+gsap.registerPlugin(useGSAP);
 
 interface LeftPaneProps {
   question: MockQuestion;
@@ -31,6 +35,7 @@ export const LeftPane: React.FC<LeftPaneProps> = ({
   onClearSelection,
   isSplitView = true,
 }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
   const passageText = question.passage || question.passageText || '';
   const isSpr = question.questionType === 'spr' || !question.options || question.options.length === 0;
   const lastValidSelectionRef = useRef<{
@@ -39,6 +44,21 @@ export const LeftPane: React.FC<LeftPaneProps> = ({
     text: string;
     rect: DOMRect;
   } | null>(null);
+
+  // GSAP animation on question change
+  useGSAP(() => {
+    const mm = gsap.matchMedia();
+    mm.add('(prefers-reduced-motion: no-preference)', () => {
+      if (containerRef.current) {
+        gsap.fromTo(
+          containerRef.current,
+          { autoAlpha: 0, y: 8 },
+          { autoAlpha: 1, y: 0, duration: 0.26, ease: 'power2.out', clearProps: 'transform' }
+        );
+      }
+    });
+    return () => mm.revert();
+  }, { scope: containerRef, dependencies: [question.id] });
 
   // Clean up selection on unmount
   useEffect(() => {
@@ -76,7 +96,7 @@ export const LeftPane: React.FC<LeftPaneProps> = ({
       // Locate offset within passageText
       let start = passageText.indexOf(selectedText);
 
-      // If exact substring not found directly (due to HTML tags like <u>, <em>, <i>, <sup>, <sub>), locate by stripped text
+      // If exact substring not found directly (due to HTML tags), locate by stripped text
       if (start === -1) {
         const stripped = passageText.replace(/<\/?(?:u|sup|sub|em|i)\b[^>]*>/gi, '');
         const strippedStart = stripped.indexOf(selectedText);
@@ -121,7 +141,7 @@ export const LeftPane: React.FC<LeftPaneProps> = ({
     return null;
   }, [passageText]);
 
-  // Touchscreen selection listener: cache selection on mobile selectionchange events
+  // Touchscreen selection listener
   useEffect(() => {
     if (!isAnnotateActive) return;
 
@@ -136,7 +156,7 @@ export const LeftPane: React.FC<LeftPaneProps> = ({
     return () => document.removeEventListener('selectionchange', handleSelectionChange);
   }, [isAnnotateActive, extractSelection]);
 
-  // Handle selection end (mouseup / touchend) to trigger floating highlighter toolbar
+  // Handle selection end
   const handleSelectionEnd = useCallback(() => {
     const sel = extractSelection();
     if (sel && onTextSelected) {
@@ -146,7 +166,6 @@ export const LeftPane: React.FC<LeftPaneProps> = ({
         ...sel,
       });
     } else if (!sel) {
-      // User clicked or tapped whitespace without selecting text
       lastValidSelectionRef.current = null;
       if (onClearSelection) {
         onClearSelection();
@@ -155,7 +174,7 @@ export const LeftPane: React.FC<LeftPaneProps> = ({
   }, [extractSelection, onTextSelected, onClearSelection]);
 
   const renderContent = () => {
-    // 1. Rhetorical Synthesis: Structured Bullet Notes List (Requirement 4)
+    // 1. Rhetorical Synthesis: Structured Bullet Notes List
     if (isBulletPassage(passageText)) {
       return (
         <BulletPassage
@@ -195,11 +214,15 @@ export const LeftPane: React.FC<LeftPaneProps> = ({
     );
   };
 
+  // Check if passage is just duplicate SPR directions
+  const isDuplicateSprDirections = isSpr && passageText.toLowerCase().includes('student-produced response directions');
+
   return (
     <div 
+      ref={containerRef}
       onMouseUp={handleSelectionEnd}
       onTouchEnd={handleSelectionEnd}
-      className={`px-4 sm:px-6 lg:px-8 py-5 sm:py-6 overflow-x-hidden bg-white dark:bg-[#090A0F] text-zinc-950 dark:text-[#F4F4F6] select-text passage-text ${
+      className={`px-4 sm:px-6 lg:px-8 py-5 sm:py-6 pb-24 overflow-x-hidden bg-white dark:bg-[#090A0F] text-zinc-950 dark:text-[#F4F4F6] select-text passage-text ${
         isSplitView 
           ? 'h-full overflow-y-auto' 
           : 'h-auto overflow-visible'
@@ -210,7 +233,7 @@ export const LeftPane: React.FC<LeftPaneProps> = ({
         <div className="sticky top-0 z-20 mb-4 pb-1 bg-white dark:bg-[#090A0F]">
           <div className="flex items-center justify-between p-2 rounded-lg bg-zinc-100 dark:bg-[#181B24] border border-zinc-200 dark:border-[#222634]">
             <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-blue-600 dark:bg-blue-400" />
+              <span className="w-2 h-2 rounded-full bg-blue-600 dark:blue-400" />
               <span className="text-xs font-semibold text-zinc-800 dark:text-[#F4F4F6]">
                 Highlighter Active
               </span>
@@ -341,10 +364,12 @@ export const LeftPane: React.FC<LeftPaneProps> = ({
         </div>
       )}
 
-      {/* Main passage stimulus content */}
-      <div data-annotate-target="passage" className="text-zinc-950 dark:text-[#F4F4F6] max-w-[65ch]">
-        {renderContent()}
-      </div>
+      {/* Main passage stimulus content (suppressed if duplicate SPR directions) */}
+      {!isDuplicateSprDirections && passageText.trim().length > 0 && (
+        <div data-annotate-target="passage" className="text-zinc-950 dark:text-[#F4F4F6] max-w-[65ch]">
+          {renderContent()}
+        </div>
+      )}
     </div>
   );
 };

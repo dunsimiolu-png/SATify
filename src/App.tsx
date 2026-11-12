@@ -188,13 +188,11 @@ export const App: React.FC = () => {
   // Helper to load initial question states from persistent storage
   const loadInitialUserStates = useCallback((questions: MockQuestion[]): Record<number, UserQuestionState> => {
     const savedStates = getSavedUserStates();
-    const attemptsMap = getLatestAttemptsMap();
     const savedIds = getSavedQuestionIds();
     const map: Record<number, UserQuestionState> = {};
 
     questions.forEach((q, idx) => {
       const saved = savedStates[q.id];
-      const attempt = attemptsMap[q.id];
       const isSaved = savedIds.includes(q.id);
 
       if (saved) {
@@ -205,19 +203,11 @@ export const App: React.FC = () => {
           isAnswerChecked: saved.isAnswerChecked || false,
           isExplanationOpen: saved.isExplanationOpen || false,
         };
-      } else if (attempt) {
-        map[idx] = {
-          selectedChoice: (attempt.selectedOption as 'A' | 'B' | 'C' | 'D') || null,
-          eliminatedChoices: [],
-          isMarkedForReview: isSaved,
-          isAnswerChecked: true,
-          isExplanationOpen: false,
-        };
-      } else if (isSaved) {
+      } else {
         map[idx] = {
           selectedChoice: null,
           eliminatedChoices: [],
-          isMarkedForReview: true,
+          isMarkedForReview: isSaved,
           isAnswerChecked: false,
           isExplanationOpen: false,
         };
@@ -229,6 +219,23 @@ export const App: React.FC = () => {
 
   // Per-question state map (user answers, review flags)
   const [userStates, setUserStates] = useState<Record<number, UserQuestionState>>(() => loadInitialUserStates(fullQuestionBank));
+
+  // Per-question elapsed time tracking (in seconds)
+  const [questionTimes, setQuestionTimes] = useState<Record<string, number>>(() => {
+    const attemptsMap = getLatestAttemptsMap();
+    const map: Record<string, number> = {};
+    for (const [id, a] of Object.entries(attemptsMap)) {
+      if (a.timeSpentSeconds) {
+        map[id] = a.timeSpentSeconds;
+      }
+    }
+    return map;
+  });
+  const questionTimesRef = useRef<Record<string, number>>(questionTimes);
+
+  useEffect(() => {
+    questionTimesRef.current = questionTimes;
+  }, [questionTimes]);
 
   // Sync initial user states when session questions change or storage updates
   useEffect(() => {
@@ -270,6 +277,25 @@ export const App: React.FC = () => {
   };
   const isCurrentAnswered = currentState.selectedChoice !== null || currentState.isAnswerChecked || isQuestionAnswered(currentQuestion.id);
   const currentHighlights = highlightsByQuestion[currentQuestion?.id || ''] || [];
+
+  // Per-question live count-up timer in practice mode (freezes on submit)
+  useEffect(() => {
+    if (currentRoute !== 'practice' || !currentQuestion) return;
+    const qId = currentQuestion.id;
+    if (currentState.isAnswerChecked) return;
+
+    const interval = setInterval(() => {
+      setQuestionTimes(prev => {
+        const nextTime = (prev[qId] || 0) + 1;
+        questionTimesRef.current[qId] = nextTime;
+        return { ...prev, [qId]: nextTime };
+      });
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [currentRoute, currentQuestion?.id, currentState.isAnswerChecked]);
+
+  const currentQuestionTime = questionTimes[currentQuestion?.id || ''] ?? 0;
 
   // Automatically persist last practice session whenever user views or answers a question in practice mode
   useEffect(() => {
@@ -424,6 +450,10 @@ export const App: React.FC = () => {
       if (!currentState.selectedChoice) return;
     }
 
+    const elapsed = typeof timeSpentSeconds === 'number'
+      ? timeSpentSeconds
+      : (questionTimesRef.current[currentQuestion.id] || 0);
+
     const isCorrect = isSpr
       ? evaluateNumericEquivalence(
           currentState.sprAnswer || '',
@@ -432,6 +462,10 @@ export const App: React.FC = () => {
         )
       : currentState.selectedChoice === currentQuestion.correctAnswer;
     
+    // Freeze elapsed time
+    questionTimesRef.current[currentQuestion.id] = elapsed;
+    setQuestionTimes(prev => ({ ...prev, [currentQuestion.id]: elapsed }));
+
     // Record to persistent storage (satify_attempts)
     recordAnswer(
       currentQuestion.id,
@@ -440,7 +474,7 @@ export const App: React.FC = () => {
       currentQuestion.domain,
       currentQuestion.skill,
       currentQuestion.difficulty,
-      timeSpentSeconds || 30
+      elapsed || 30
     );
 
     const nextState: UserQuestionState = {
@@ -450,9 +484,28 @@ export const App: React.FC = () => {
     };
 
     saveUserState(currentQuestion.id, nextState);
-
     updateCurrentState(() => nextState);
   }, [currentState, currentQuestion, updateCurrentState]);
+
+  // Reset active question state and timer for a fresh retry
+  const handleResetQuestion = useCallback(() => {
+    const qId = currentQuestion.id;
+    // 1. Reset timer in state and ref
+    questionTimesRef.current[qId] = 0;
+    setQuestionTimes(prev => ({ ...prev, [qId]: 0 }));
+
+    // 2. Reset user question state
+    const nextState: UserQuestionState = {
+      selectedChoice: null,
+      sprAnswer: '',
+      eliminatedChoices: [],
+      isMarkedForReview: currentState.isMarkedForReview,
+      isAnswerChecked: false,
+      isExplanationOpen: false,
+    };
+    saveUserState(qId, nextState);
+    updateCurrentState(() => nextState);
+  }, [currentQuestion.id, currentState.isMarkedForReview, updateCurrentState]);
 
   // Toggle Explanation Drawer
   const handleToggleExplanation = useCallback(() => {
@@ -1052,6 +1105,7 @@ export const App: React.FC = () => {
               currentQuestion={currentQuestion}
               isAnswerChecked={currentState.isAnswerChecked}
               isAnswered={isCurrentAnswered}
+              timeSpentSeconds={currentQuestionTime}
               user={currentUser}
               onOpenLogin={() => setIsLoginModalOpen(true)}
               onOpenAccount={() => setIsAccountModalOpen(true)}
@@ -1137,6 +1191,10 @@ export const App: React.FC = () => {
                       onToggleMarkForReview={handleToggleMarkForReview}
                       onCheckAnswer={handleCheckAnswer}
                       onToggleExplanation={handleToggleExplanation}
+                      onResetQuestion={handleResetQuestion}
+                      onNextQuestion={handleNext}
+                      isLastQuestion={safeIndex === activeQuestions.length - 1}
+                      timeSpentSeconds={currentQuestionTime}
                       highlights={currentHighlights}
                       onHighlightClick={handleHighlightClick}
                       onOpenGrammarGuide={() => setIsGrammarGuideOpen(true)}
@@ -1168,6 +1226,10 @@ export const App: React.FC = () => {
                       onToggleMarkForReview={handleToggleMarkForReview}
                       onCheckAnswer={handleCheckAnswer}
                       onToggleExplanation={handleToggleExplanation}
+                      onResetQuestion={handleResetQuestion}
+                      onNextQuestion={handleNext}
+                      isLastQuestion={safeIndex === activeQuestions.length - 1}
+                      timeSpentSeconds={currentQuestionTime}
                       highlights={currentHighlights}
                       onHighlightClick={handleHighlightClick}
                       onOpenGrammarGuide={() => setIsGrammarGuideOpen(true)}

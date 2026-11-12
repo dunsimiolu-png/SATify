@@ -63,6 +63,18 @@ body.dark .inline-math-img {
   margin: 0.5em 0 !important;
 }
 
+/* Option choices KaTeX inline display override */
+.option-choice-text .katex-display {
+  display: inline !important;
+  margin: 0 !important;
+}
+
+.option-choice-text .katex-display-wrapper {
+  display: inline !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
 /* ========================================================================= */
 /* SILKY SMOOTH ANIMATION ENGINE (Tailwind Animate Compatible)               */
 /* ========================================================================= */

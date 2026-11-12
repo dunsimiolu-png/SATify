@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { 
   Menu, 
-  Home, 
   ChevronDown, 
   Highlighter, 
   Maximize2, 
@@ -10,7 +9,6 @@ import {
   Moon, 
   Calculator, 
   BookOpen, 
-  Check, 
   MoreHorizontal,
   X,
   User,
@@ -37,6 +35,7 @@ interface HeaderProps {
   currentQuestion?: MockQuestion;
   isAnswerChecked?: boolean;
   isAnswered?: boolean;
+  timeSpentSeconds?: number;
   user?: UserProfile | null;
   onOpenLogin?: () => void;
   onOpenAccount?: () => void;
@@ -57,7 +56,8 @@ export const Header: React.FC<HeaderProps> = ({
   onOpenNav,
   currentQuestion,
   isAnswerChecked = false,
-  isAnswered = false,
+  isAnswered: _isAnswered = false,
+  timeSpentSeconds,
   user,
   onOpenLogin,
   onOpenAccount,
@@ -72,19 +72,21 @@ export const Header: React.FC<HeaderProps> = ({
   // Math detection
   const isMath = currentQuestion?.section === 'Math' || section === 'Math' || ['Algebra', 'Advanced Math', 'Problem-Solving and Data Analysis', 'Geometry and Trigonometry'].includes(currentQuestion?.domain || '');
 
-  // Reset stopwatch on question change
+  // Reset stopwatch on question change if timeSpentSeconds is not controlled externally
   useEffect(() => {
     setStopwatchSeconds(0);
   }, [currentQuestion?.id]);
 
-  // Per-question count-up timer
+  // Per-question count-up timer if timeSpentSeconds is not controlled externally
   useEffect(() => {
-    if (isAnswerChecked) return;
+    if (typeof timeSpentSeconds === 'number' || isAnswerChecked) return;
     const interval = setInterval(() => {
       setStopwatchSeconds((prev) => prev + 1);
     }, 1000);
     return () => clearInterval(interval);
-  }, [isAnswerChecked, currentQuestion?.id]);
+  }, [isAnswerChecked, currentQuestion?.id, timeSpentSeconds]);
+
+  const effectiveSeconds = typeof timeSpentSeconds === 'number' ? timeSpentSeconds : stopwatchSeconds;
 
   // Format stopwatch as M:SS
   const formatTime = (totalSec: number) => {
@@ -95,7 +97,7 @@ export const Header: React.FC<HeaderProps> = ({
 
   // Pacing calibration
   const targetSeconds = currentQuestion ? getQuestionTargetSeconds(currentQuestion) : 60;
-  const paceColor = getPacePillColor(stopwatchSeconds, targetSeconds, isAnswerChecked);
+  const paceColor = getPacePillColor(effectiveSeconds, targetSeconds, isAnswerChecked);
 
   // Fullscreen toggle
   const toggleFullscreen = () => {
@@ -137,10 +139,10 @@ export const Header: React.FC<HeaderProps> = ({
   }, [isUserMenuOpen]);
 
   return (
-    <header className="shrink-0 w-full bg-white dark:bg-[#11131A] border-b border-zinc-200 dark:border-[#222634] text-zinc-950 dark:text-[#F4F4F6] select-none z-30 pt-[max(env(safe-area-inset-top,0px),4px)]">
+    <header className="relative shrink-0 w-full bg-white dark:bg-[#11131A] border-b border-zinc-200 dark:border-[#222634] text-zinc-950 dark:text-[#F4F4F6] select-none z-30 pt-[max(env(safe-area-inset-top,0px),4px)]">
       <div className="px-3 sm:px-5 flex items-center justify-between gap-2 h-14">
         
-        {/* Left Section: Nav + Dashboard + Logo */}
+        {/* Left Section: Nav + Clickable SATIFY Logo */}
         <div className="flex items-center gap-2 sm:gap-3 min-w-0 shrink-1">
           {onOpenNav && (
             <button
@@ -153,21 +155,16 @@ export const Header: React.FC<HeaderProps> = ({
             </button>
           )}
 
-          {onExitToDashboard && (
-            <button
-              onClick={onExitToDashboard}
-              className="px-2.5 py-1.5 rounded-lg border border-zinc-200 dark:border-[#222634] bg-zinc-50 dark:bg-[#181B24] hover:bg-zinc-100 dark:hover:bg-[#202534] text-zinc-700 dark:text-[#8E95A5] text-xs font-semibold transition-colors duration-150 shrink-0 flex items-center gap-1.5 cursor-pointer"
-              title="Return to Dashboard"
-            >
-              <Home className="w-3.5 h-3.5 text-blue-700 dark:text-blue-400" strokeWidth={1.75} />
-              <span className="hidden md:inline">Dashboard</span>
-            </button>
-          )}
-
-          {/* Logo */}
-          <div className="shrink-0">
+          {/* Clickable SATIFY Logo leading to Dashboard */}
+          <button
+            type="button"
+            onClick={onExitToDashboard}
+            className="shrink-0 cursor-pointer hover:opacity-80 transition-opacity flex items-center"
+            title="Return to Dashboard"
+            aria-label="Return to Dashboard"
+          >
             <Logo variant="header" inverted={isDark} />
-          </div>
+          </button>
 
           {/* Title & Directions */}
           <div className="flex flex-col justify-center min-w-0 hidden sm:flex">
@@ -182,12 +179,6 @@ export const Header: React.FC<HeaderProps> = ({
                   </span>
                 )}
               </span>
-              {isAnswered && (
-                <span className="hidden md:inline-flex items-center gap-1 px-2 py-0.5 rounded border border-emerald-300 dark:border-emerald-800 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 text-[10px] font-mono font-semibold">
-                  <Check className="w-3 h-3 stroke-[2.5]" />
-                  <span>Answered</span>
-                </span>
-              )}
             </div>
             <button
               onClick={onOpenDirections}
@@ -199,37 +190,31 @@ export const Header: React.FC<HeaderProps> = ({
           </div>
         </div>
 
-        {/* Center: Count-up Stopwatch */}
-        <div className="flex flex-col items-center shrink-0">
+        {/* Center: Viewport-Centered Minimalist Clock Pill directly above split-pane divider */}
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 pointer-events-auto">
           {isTimerHidden ? (
             <button
+              type="button"
               onClick={() => setIsTimerHidden(false)}
-              className="px-2.5 py-1 rounded-md border border-zinc-200 dark:border-[#222634] bg-zinc-50 dark:bg-[#181B24] hover:bg-zinc-100 dark:hover:bg-[#202534] text-xs font-mono text-zinc-600 dark:text-[#8E95A5] hover:text-zinc-950 dark:hover:text-[#F4F4F6] transition-colors duration-150 cursor-pointer"
+              className="px-3 py-1 rounded-full border border-zinc-200 dark:border-[#222634] bg-zinc-50 dark:bg-[#181B24] hover:bg-zinc-100 dark:hover:bg-[#202534] text-xs font-mono text-zinc-600 dark:text-[#8E95A5] hover:text-zinc-950 dark:hover:text-[#F4F4F6] transition-colors cursor-pointer shadow-2xs"
             >
               Show Timer
             </button>
           ) : (
-            <div className="flex flex-col items-center">
-              <span className="font-mono text-base sm:text-lg font-bold tracking-tight text-zinc-950 dark:text-[#F4F4F6] tabular-nums leading-none">
-                {formatTime(stopwatchSeconds)}
+            <div className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-zinc-200/90 dark:border-[#222634] bg-zinc-50/95 dark:bg-[#181B24]/95 shadow-2xs">
+              <span className={`w-2 h-2 rounded-full shrink-0 ${paceColor.dotClass}`} />
+              <span className="font-mono text-xs sm:text-sm font-bold tracking-tight text-zinc-950 dark:text-[#F4F4F6] tabular-nums whitespace-nowrap">
+                {formatTime(effectiveSeconds)}
+                <span className="text-zinc-400 dark:text-zinc-500 font-normal"> / {formatSecondsToPace(targetSeconds)}</span>
               </span>
-              <div className="flex items-center gap-2 mt-0.5">
-                <button
-                  onClick={() => setIsTimerHidden(true)}
-                  className="px-1.5 py-0.2 text-zinc-400 hover:text-zinc-950 dark:text-[#8E95A5] dark:hover:text-[#F4F4F6] text-[10px] font-mono transition-colors duration-150 cursor-pointer"
-                >
-                  Hide
-                </button>
-                {currentQuestion && (
-                  <div
-                    className={`inline-flex items-center gap-1 px-1.5 py-0.2 rounded text-[10px] font-mono tabular-nums border transition-colors ${paceColor.badgeClass}`}
-                    title={`Pacing target for ${currentQuestion.skill} (${currentQuestion.difficulty}): ${targetSeconds}s`}
-                  >
-                    <span className={`w-1.5 h-1.5 rounded-full ${paceColor.dotClass}`} />
-                    <span>target {formatSecondsToPace(targetSeconds)}</span>
-                  </div>
-                )}
-              </div>
+              <button
+                type="button"
+                onClick={() => setIsTimerHidden(true)}
+                className="text-[10px] font-mono text-zinc-400 hover:text-zinc-800 dark:text-[#8E95A5] dark:hover:text-zinc-200 ml-0.5 pl-1.5 border-l border-zinc-200 dark:border-zinc-700 transition-colors cursor-pointer"
+                title="Hide Timer"
+              >
+                Hide
+              </button>
             </div>
           )}
         </div>

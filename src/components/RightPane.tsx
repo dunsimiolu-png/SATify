@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { 
   Bookmark, 
   Copy, 
@@ -12,17 +12,18 @@ import {
   XCircle, 
   HelpCircle,
   Undo2,
-  Split,
-  Clock
+  Split
 } from 'lucide-react';
+import { gsap } from 'gsap';
+import { useGSAP } from '@gsap/react';
 import { MockQuestion, UserQuestionState, AnswerChoice, TextHighlight } from '../types/quiz';
 import { RichText } from './RichText';
 import { MathText } from './MathText';
 import { MathVisual } from './MathVisual';
 import { ExplanationRenderer } from './ExplanationRenderer';
-import { getQuestionTargetSeconds, getPacePillColor, formatSecondsToPace } from '../utils/pacingTargets';
-import { isQuestionAnswered } from '../utils/storage';
 import { evaluateNumericEquivalence, formatSprPreview } from '../utils/mathEvaluator';
+
+gsap.registerPlugin(useGSAP);
 
 interface RightPaneProps {
   question: MockQuestion;
@@ -33,6 +34,10 @@ interface RightPaneProps {
   onToggleMarkForReview: () => void;
   onCheckAnswer: (timeSpentSeconds?: number) => void;
   onToggleExplanation: () => void;
+  onResetQuestion?: () => void;
+  onNextQuestion?: () => void;
+  isLastQuestion?: boolean;
+  timeSpentSeconds?: number;
   highlights: TextHighlight[];
   onHighlightClick: (highlight: TextHighlight, rect: DOMRect) => void;
   onOpenNote?: (highlight: TextHighlight, rect: DOMRect) => void;
@@ -49,35 +54,78 @@ export const RightPane: React.FC<RightPaneProps> = ({
   onToggleMarkForReview,
   onCheckAnswer,
   onToggleExplanation,
+  onResetQuestion,
+  onNextQuestion,
+  isLastQuestion = false,
+  timeSpentSeconds,
   highlights: _highlights,
   onHighlightClick: _onHighlightClick,
   onOpenNote: _onOpenNote,
   onOpenGrammarGuide,
   isSplitView = true,
 }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
   const [isCopied, setIsCopied] = useState<boolean>(false);
   const [isAbcModeActive, setIsAbcModeActive] = useState<boolean>(false);
   const [isBlindMode, setIsBlindMode] = useState<boolean>(false);
 
-  // Live per-question elapsed timer calibrated to pacingTargets
-  const [questionElapsed, setQuestionElapsed] = useState<number>(0);
+  // GSAP: Animate question transition on question change
+  useGSAP(() => {
+    const mm = gsap.matchMedia();
+    mm.add('(prefers-reduced-motion: no-preference)', () => {
+      if (containerRef.current) {
+        gsap.fromTo(
+          containerRef.current,
+          { autoAlpha: 0, y: 8 },
+          { autoAlpha: 1, y: 0, duration: 0.26, ease: 'power2.out', clearProps: 'transform' }
+        );
+      }
+    });
+    return () => mm.revert();
+  }, { scope: containerRef, dependencies: [question.id] });
 
-  // Reset elapsed time on question transition
+  // GSAP: Animate post-answer action bar entrance when answer is submitted
+  useGSAP(() => {
+    if (!userState.isAnswerChecked) return;
+    const mm = gsap.matchMedia();
+    mm.add('(prefers-reduced-motion: no-preference)', () => {
+      gsap.fromTo(
+        '.gsap-post-answer-bar',
+        { autoAlpha: 0, y: 6 },
+        { autoAlpha: 1, y: 0, duration: 0.24, ease: 'power2.out', clearProps: 'transform' }
+      );
+    });
+    return () => mm.revert();
+  }, { scope: containerRef, dependencies: [userState.isAnswerChecked] });
+
+  const promptText = question.prompt || question.stem || '';
+  const optionsList: AnswerChoice[] = question.options || question.choices || [];
+  const isSpr = question.questionType === 'spr' || !optionsList || optionsList.length === 0;
+
+  const isSprCorrect = isSpr && evaluateNumericEquivalence(
+    userState.sprAnswer || '',
+    String(question.correctAnswer),
+    question.acceptedAnswers
+  );
+  const isSelectedCorrect = isSpr ? isSprCorrect : (userState.selectedChoice === question.correctAnswer);
+  const sprPreview = formatSprPreview(userState.sprAnswer || '');
+
+  // Keyboard shortcut: Press Enter to submit "Check Answer" when an answer is drafted
   useEffect(() => {
-    setQuestionElapsed(0);
-  }, [question.id]);
-
-  // Pause timer when answer is checked
-  useEffect(() => {
-    if (userState.isAnswerChecked) return;
-    const interval = setInterval(() => {
-      setQuestionElapsed(prev => prev + 1);
-    }, 1000);
-    return () => clearInterval(interval);
-  }, [question.id, userState.isAnswerChecked]);
-
-  const targetSeconds = getQuestionTargetSeconds(question);
-  const paceColor = getPacePillColor(questionElapsed, targetSeconds, userState.isAnswerChecked);
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Enter' && !userState.isAnswerChecked) {
+        const hasAnswer = isSpr
+          ? Boolean(userState.sprAnswer && userState.sprAnswer.trim().length > 0)
+          : Boolean(userState.selectedChoice);
+        if (hasAnswer) {
+          e.preventDefault();
+          onCheckAnswer(timeSpentSeconds);
+        }
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [userState.isAnswerChecked, userState.selectedChoice, userState.sprAnswer, isSpr, onCheckAnswer, timeSpentSeconds]);
 
   const handleCopyId = () => {
     navigator.clipboard.writeText(question.id).then(() => {
@@ -86,8 +134,19 @@ export const RightPane: React.FC<RightPaneProps> = ({
     });
   };
 
-  const promptText = question.prompt || question.stem || '';
-  const optionsList: AnswerChoice[] = question.options || question.choices || [];
+  const handleSprInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const raw = e.target.value;
+    let filtered = raw.replace(/[^0-9.\/-]/g, '');
+    if (filtered.indexOf('-') > 0) {
+      filtered = filtered.charAt(0) === '-' ? '-' + filtered.slice(1).replace(/-/g, '') : filtered.replace(/-/g, '');
+    }
+    if (filtered.length > 6) {
+      filtered = filtered.slice(0, 6);
+    }
+    if (onSprAnswerChange) {
+      onSprAnswerChange(filtered);
+    }
+  };
 
   // 3-bar difficulty indicator
   const renderDifficultyBars = () => {
@@ -115,42 +174,19 @@ export const RightPane: React.FC<RightPaneProps> = ({
     );
   };
 
-  const isSpr = question.questionType === 'spr' || !optionsList || optionsList.length === 0;
-
-  const isAnswered = isSpr
-    ? Boolean((userState.sprAnswer && userState.sprAnswer.trim().length > 0) || userState.isAnswerChecked || isQuestionAnswered(question.id))
-    : Boolean(userState.selectedChoice !== null || userState.isAnswerChecked || isQuestionAnswered(question.id));
-  const isSprCorrect = isSpr && evaluateNumericEquivalence(
-    userState.sprAnswer || '',
-    String(question.correctAnswer),
-    question.acceptedAnswers
-  );
-  const isSelectedCorrect = isSpr ? isSprCorrect : (userState.selectedChoice === question.correctAnswer);
-  const sprPreview = formatSprPreview(userState.sprAnswer || '');
-
-  const handleSprInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const raw = e.target.value;
-    let filtered = raw.replace(/[^0-9.\/-]/g, '');
-    if (filtered.indexOf('-') > 0) {
-      filtered = filtered.charAt(0) === '-' ? '-' + filtered.slice(1).replace(/-/g, '') : filtered.replace(/-/g, '');
-    }
-    if (filtered.length > 6) {
-      filtered = filtered.slice(0, 6);
-    }
-    if (onSprAnswerChange) {
-      onSprAnswerChange(filtered);
-    }
-  };
   const rationaleText = typeof question.rationale === 'string' 
     ? question.rationale 
     : question.rationale?.summary || '';
 
   return (
-    <div className={`px-4 sm:px-6 lg:px-10 py-5 sm:py-6 overflow-x-hidden bg-white dark:bg-[#070a10] text-slate-900 dark:text-white select-text question-stem ${
-      isSplitView
-        ? 'h-full overflow-y-auto pb-24'
-        : 'h-auto overflow-visible pb-20'
-    }`}>
+    <div 
+      ref={containerRef}
+      className={`px-4 sm:px-6 lg:px-10 py-5 sm:py-6 pb-24 overflow-x-hidden bg-white dark:bg-[#070a10] text-slate-900 dark:text-white select-text question-stem ${
+        isSplitView
+          ? 'h-full overflow-y-auto'
+          : 'h-auto overflow-visible'
+      }`}
+    >
       {/* 1. Metadata Ribbon (Above Question Strip) */}
       <div className="mb-4 flex items-center justify-between gap-3 text-xs flex-wrap select-none">
         {/* Left Side Metadata */}
@@ -203,26 +239,6 @@ export const RightPane: React.FC<RightPaneProps> = ({
               </>
             )}
           </button>
-
-          {/* Answered Status Pill in Metadata Strip */}
-          {isAnswered && (
-            <div
-              className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-50 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800 shadow-2xs animate-in fade-in"
-              title={`Question is answered${isSpr && userState.sprAnswer ? ` (${userState.sprAnswer})` : userState.selectedChoice ? ` with Choice ${userState.selectedChoice}` : ''}`}
-            >
-              <Check className="w-3 h-3 stroke-[2.5]" />
-              <span>Answered{isSpr && userState.sprAnswer ? ` (${userState.sprAnswer})` : userState.selectedChoice ? ` (${userState.selectedChoice})` : ''}</span>
-            </div>
-          )}
-
-          {/* Live Per-Question Pace Pill */}
-          <div
-            className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-mono font-bold border transition-colors ${paceColor.badgeClass}`}
-            title={`Pacing target for ${question.skill} (${question.difficulty}): ${targetSeconds}s`}
-          >
-            <Clock className="w-3 h-3" />
-            <span>{formatSecondsToPace(questionElapsed)} / {formatSecondsToPace(targetSeconds)} target</span>
-          </div>
         </div>
 
         {/* Right Side: Blind Mode Toggle */}
@@ -272,19 +288,20 @@ export const RightPane: React.FC<RightPaneProps> = ({
         </div>
 
         {/* Right: ABC Option Eliminator Button (MCQ only) */}
-        {!isSpr && (
+        {!isSpr && !userState.isAnswerChecked && (
           <button
             onClick={() => setIsAbcModeActive(!isAbcModeActive)}
-          className={`text-xs px-2.5 py-1 rounded font-mono font-medium transition-colors duration-150 flex items-center gap-1 cursor-pointer ${
-            isAbcModeActive
-              ? 'bg-zinc-950 text-white dark:bg-blue-600 dark:text-white'
-              : 'bg-white border border-zinc-200 text-zinc-800 dark:bg-[#11131A] dark:border-[#222634] dark:text-[#F4F4F6] hover:bg-zinc-50 dark:hover:bg-[#181B24]'
-          }`}
-          title="Toggle ABC answer elimination tool"
-        >
-          <span className="line-through decoration-1">ABC</span>
-        </button>
-        )}      </div>
+            className={`text-xs px-2.5 py-1 rounded font-mono font-medium transition-colors duration-150 flex items-center gap-1 cursor-pointer ${
+              isAbcModeActive
+                ? 'bg-zinc-950 text-white dark:bg-blue-600 dark:text-white'
+                : 'bg-white border border-zinc-200 text-zinc-800 dark:bg-[#11131A] dark:border-[#222634] dark:text-[#F4F4F6] hover:bg-zinc-50 dark:hover:bg-[#181B24]'
+            }`}
+            title="Toggle ABC answer elimination tool"
+          >
+            <span className="line-through decoration-1">ABC</span>
+          </button>
+        )}
+      </div>
 
       {/* 2.5. Mathematical Visual (Coordinate Plane / Diagram / Table) */}
       {question.imageUrl && (
@@ -371,185 +388,206 @@ export const RightPane: React.FC<RightPaneProps> = ({
       ) : (
         <div className="space-y-2.5 max-w-[65ch]">
           {optionsList.map((choice: AnswerChoice) => {
-          const choiceId = choice.id || choice.label || 'A';
-          const isSelected = userState.selectedChoice === choiceId;
-          const isEliminated = userState.eliminatedChoices.includes(choiceId);
-          const isChecked = userState.isAnswerChecked;
-          const isCorrect = choiceId === question.correctAnswer;
+            const choiceId = choice.id || choice.label || 'A';
+            const isSelected = userState.selectedChoice === choiceId;
+            const isEliminated = userState.eliminatedChoices.includes(choiceId);
+            const isChecked = userState.isAnswerChecked;
+            const isCorrect = choiceId === question.correctAnswer;
 
-          // Compute card styling with clean hairline borders & active rings
-          let cardStyleClass = 'border border-zinc-200 dark:border-[#222634] bg-white dark:bg-[#11131A] hover:bg-zinc-50 hover:border-zinc-300 dark:hover:bg-[#181B24] dark:hover:border-zinc-700 text-zinc-950 dark:text-[#F4F4F6] shadow-2xs';
-          let badgeStyleClass = 'border border-zinc-300 dark:border-[#222634] bg-zinc-50 dark:bg-[#181B24] text-zinc-700 dark:text-[#8E95A5]';
+            // Strict Two-Step Styling
+            let cardClasses = 'border border-zinc-200 dark:border-[#222634] bg-white dark:bg-[#11131A] hover:bg-zinc-50 dark:hover:bg-[#181B24] hover:border-zinc-300 dark:hover:border-zinc-700 text-zinc-950 dark:text-[#F4F4F6] shadow-2xs';
+            let badgeClasses = 'border border-zinc-300 dark:border-[#222634] bg-zinc-50 dark:bg-[#181B24] text-zinc-700 dark:text-[#8E95A5]';
 
-          if (isChecked) {
-            if (isCorrect) {
-              cardStyleClass = 'ring-2 ring-emerald-600 border-transparent bg-emerald-50/70 dark:bg-emerald-950/30 text-emerald-950 dark:text-emerald-100 shadow-xs';
-              badgeStyleClass = 'bg-emerald-600 text-white border-emerald-600 font-bold';
-            } else if (isSelected && !isCorrect) {
-              cardStyleClass = 'ring-2 ring-rose-600 border-transparent bg-rose-50/70 dark:bg-rose-950/30 text-rose-950 dark:text-rose-100 shadow-xs';
-              badgeStyleClass = 'bg-rose-600 text-white border-rose-600 font-bold';
-            } else {
-              cardStyleClass = 'border border-zinc-200/60 dark:border-[#222634]/60 bg-zinc-50/30 dark:bg-[#11131A]/30 text-zinc-400 dark:text-zinc-600 opacity-50';
+            if (isChecked) {
+              if (isCorrect) {
+                cardClasses = 'border-2 border-emerald-500 bg-emerald-50/10 dark:bg-emerald-950/20 text-zinc-950 dark:text-[#F4F4F6] shadow-xs';
+                badgeClasses = 'bg-emerald-600 text-white border-emerald-600 font-bold';
+              } else if (isSelected && !isCorrect) {
+                cardClasses = 'border-2 border-rose-500 bg-rose-50/10 dark:bg-rose-950/20 text-zinc-950 dark:text-[#F4F4F6] shadow-xs';
+                badgeClasses = 'bg-rose-600 text-white border-rose-600 font-bold';
+              } else {
+                cardClasses = 'border border-zinc-200/60 dark:border-[#222634]/60 bg-zinc-50/30 dark:bg-[#11131A]/30 text-zinc-400 dark:text-zinc-600 opacity-40';
+              }
+            } else if (isSelected) {
+              cardClasses = 'border-2 border-blue-600 bg-blue-50/50 dark:bg-blue-950/30 text-zinc-950 dark:text-white shadow-xs';
+              badgeClasses = 'bg-blue-600 text-white border-blue-600 font-bold';
             }
-          } else if (isSelected) {
-            cardStyleClass = 'ring-2 ring-blue-600 dark:ring-blue-500 border-transparent bg-blue-50/60 dark:bg-blue-950/20 text-zinc-950 dark:text-white shadow-xs';
-            badgeStyleClass = 'bg-blue-600 dark:bg-blue-500 text-white border-blue-600 dark:border-blue-500 font-bold';
-          }
 
-          return (
-            <div key={choiceId} className="relative flex items-center gap-2 group">
-              <button
-                disabled={isEliminated}
-                onClick={() => onSelectChoice(choiceId as 'A' | 'B' | 'C' | 'D')}
-                className={`w-full min-h-[48px] relative text-left rounded-xl px-4 py-3 flex items-start gap-3 transition-all duration-150 ease-spring select-none ${cardStyleClass} ${
-                  isEliminated ? 'opacity-40 pointer-events-none' : 'cursor-pointer active:scale-[0.99]'
-                }`}
-              >
-                {/* Horizontal Strike-through line when eliminated */}
-                {isEliminated && (
-                  <div className="absolute inset-x-4 top-1/2 -translate-y-1/2 h-[1px] bg-zinc-500 dark:bg-zinc-400 pointer-events-none z-10" />
-                )}
-
-                {/* Bordered Letter Badge (A, B, C, D) - Always displays choice letter */}
-                <div
-                  className={`w-6 h-6 rounded-lg flex-shrink-0 flex items-center justify-center font-mono text-xs font-semibold tabular-nums transition-all duration-150 group-hover:scale-105 ${badgeStyleClass}`}
+            return (
+              <div key={choiceId} className="relative flex items-center gap-2 group">
+                <button
+                  type="button"
+                  disabled={isEliminated || isChecked}
+                  onClick={(e) => {
+                    onSelectChoice(choiceId as 'A' | 'B' | 'C' | 'D');
+                    // Micro-interaction click pulse
+                    gsap.fromTo(
+                      e.currentTarget,
+                      { scale: 0.985 },
+                      { scale: 1, duration: 0.16, ease: 'back.out(2)', clearProps: 'transform' }
+                    );
+                  }}
+                  className={`w-full min-h-[48px] relative text-left rounded-xl px-4 py-3.5 flex items-center justify-between gap-4 transition-all duration-150 select-none ${cardClasses} ${
+                    isEliminated ? 'opacity-40 pointer-events-none' : isChecked ? 'cursor-default' : 'cursor-pointer active:scale-[0.99]'
+                  }`}
                 >
-                  {choiceId}
-                </div>
+                  {/* Horizontal strike-through line when eliminated */}
+                  {isEliminated && (
+                    <div className="absolute inset-x-4 top-1/2 -translate-y-1/2 h-[1px] bg-zinc-500 dark:bg-zinc-400 pointer-events-none z-10" />
+                  )}
 
-                {/* Choice Text & Optional Status Icon */}
-                <div className="flex-1 pt-0.5 font-serif text-[15px] sm:text-[16px] leading-relaxed text-zinc-950 dark:text-[#F4F4F6]">
-                  <RichText text={choice.text} />
-                  {isChecked && isCorrect && (
-                    <span className="inline-flex items-center gap-1 mt-1 text-xs font-sans font-bold text-emerald-700 dark:text-emerald-400">
-                      <Check className="w-3.5 h-3.5 stroke-[2.5]" /> Correct Choice
-                    </span>
-                  )}
-                  {isChecked && isSelected && !isCorrect && (
-                    <span className="inline-flex items-center gap-1 mt-1 text-xs font-sans font-bold text-rose-700 dark:text-rose-400">
-                      <X className="w-3.5 h-3.5 stroke-[2.5]" /> Selected Choice (Incorrect)
-                    </span>
-                  )}
-                  {choice.imageUrl && (
-                    <div className="mt-3 p-2.5 bg-white dark:bg-black border border-zinc-200 dark:border-[#222634] rounded-xl inline-flex items-center justify-center overflow-hidden shadow-xs">
-                      <img
-                        src={choice.imageUrl}
-                        alt={`Option ${choiceId}`}
-                        className="max-h-36 sm:max-h-44 w-auto object-contain rounded select-none transition-all dark:invert dark:contrast-[1.1] dark:brightness-[0.95]"
-                        loading="lazy"
-                      />
+                  {/* Left: Option Letter Badge + Text/KaTeX strictly inline */}
+                  <div className="flex items-center gap-3.5 flex-1 min-w-0">
+                    <div className={`w-6 h-6 rounded-lg shrink-0 flex items-center justify-center font-mono text-xs font-semibold tabular-nums transition-transform ${badgeClasses}`}>
+                      {choiceId}
+                    </div>
+
+                    <div className="option-choice-text inline font-serif text-[15px] sm:text-[16px] leading-normal text-zinc-950 dark:text-[#F4F4F6] break-words">
+                      <RichText text={choice.text} />
+                      {choice.imageUrl && (
+                        <div className="mt-2.5 p-2 bg-white dark:bg-black border border-zinc-200 dark:border-[#222634] rounded-lg inline-flex items-center justify-center overflow-hidden">
+                          <img
+                            src={choice.imageUrl}
+                            alt={`Option ${choiceId}`}
+                            className="max-h-32 w-auto object-contain rounded select-none dark:invert"
+                            loading="lazy"
+                          />
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Right: Status badge when graded */}
+                  {isChecked && (
+                    <div className="ml-auto shrink-0 flex items-center">
+                      {isCorrect && (
+                        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-mono font-bold bg-emerald-100 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800">
+                          <Check className="w-3.5 h-3.5 stroke-[2.5]" />
+                          <span>Correct Answer</span>
+                        </span>
+                      )}
+                      {isSelected && !isCorrect && (
+                        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-mono font-bold bg-rose-100 text-rose-800 dark:bg-rose-950/60 dark:text-rose-300 border border-rose-300 dark:border-rose-800">
+                          <X className="w-3.5 h-3.5 stroke-[2.5]" />
+                          <span>Your Choice</span>
+                        </span>
+                      )}
                     </div>
                   )}
-                </div>
-              </button>
-
-              {/* Cross-out / Undo button for ABC elimination mode */}
-              {(isAbcModeActive || isEliminated) && (
-                <button
-                  onClick={() => onToggleEliminate(choiceId as 'A' | 'B' | 'C' | 'D')}
-                  className={`flex-shrink-0 h-9 w-9 flex items-center justify-center rounded-xl border transition-all duration-150 cursor-pointer active:scale-90 ${
-                    isEliminated
-                      ? 'border-zinc-300 bg-zinc-100 dark:bg-[#181B24] text-zinc-700 dark:text-[#8E95A5] hover:bg-zinc-200'
-                      : 'border-zinc-200 dark:border-[#222634] bg-white dark:bg-[#11131A] text-zinc-400 hover:text-rose-600 hover:border-rose-300 shadow-2xs'
-                  }`}
-                  title={isEliminated ? `Restore Option ${choiceId}` : `Eliminate Option ${choiceId}`}
-                >
-                  {isEliminated ? (
-                    <Undo2 className="w-3.5 h-3.5" strokeWidth={1.75} />
-                  ) : (
-                    <X className="w-3.5 h-3.5" strokeWidth={1.75} />
-                  )}
                 </button>
-              )}
-            </div>
-          );
-        })}
+
+                {/* Cross-out / Undo button for ABC elimination mode */}
+                {!isChecked && (isAbcModeActive || isEliminated) && (
+                  <button
+                    type="button"
+                    onClick={() => onToggleEliminate(choiceId as 'A' | 'B' | 'C' | 'D')}
+                    className={`shrink-0 h-9 w-9 flex items-center justify-center rounded-xl border transition-all duration-150 cursor-pointer active:scale-90 ${
+                      isEliminated
+                        ? 'border-zinc-300 bg-zinc-100 dark:bg-[#181B24] text-zinc-700 dark:text-[#8E95A5] hover:bg-zinc-200'
+                        : 'border-zinc-200 dark:border-[#222634] bg-white dark:bg-[#11131A] text-zinc-400 hover:text-rose-600 hover:border-rose-300 shadow-2xs'
+                    }`}
+                    title={isEliminated ? `Restore Option ${choiceId}` : `Eliminate Option ${choiceId}`}
+                  >
+                    {isEliminated ? (
+                      <Undo2 className="w-3.5 h-3.5" strokeWidth={1.75} />
+                    ) : (
+                      <X className="w-3.5 h-3.5" strokeWidth={1.75} />
+                    )}
+                  </button>
+                )}
+              </div>
+            );
+          })}
         </div>
       )}
 
-      {/* 5. Inline "Check Answer" & Explanation Controls */}
-      <div className="mt-6 pt-4 border-t border-zinc-200 dark:border-[#222634] max-w-[65ch] flex items-center justify-between gap-4 select-none flex-wrap">
-        <div className="flex items-center gap-3 flex-wrap">
+      {/* 5. Two-Step Action Flow: Draft "Check Answer" OR Post-Answer Action Bar */}
+      {!userState.isAnswerChecked ? (
+        <div className="mt-6 pt-4 border-t border-zinc-200 dark:border-[#222634] max-w-[65ch] flex items-center justify-between gap-4 select-none flex-wrap">
           <button
-            onClick={() => onCheckAnswer(questionElapsed)}
+            type="button"
+            onClick={() => onCheckAnswer(timeSpentSeconds)}
             disabled={isSpr ? (!userState.sprAnswer || userState.sprAnswer.trim().length === 0) : !userState.selectedChoice}
-            className={`min-h-[44px] px-6 py-2.5 rounded-xl text-sm font-semibold transition-all duration-150 shadow-xs flex items-center gap-2 ${
+            className={`h-11 px-7 rounded-xl text-sm font-semibold transition-all duration-150 flex items-center gap-2 ${
               (isSpr ? (userState.sprAnswer && userState.sprAnswer.trim().length > 0) : userState.selectedChoice)
-                ? 'bg-blue-700 hover:bg-blue-800 text-white dark:bg-blue-600 dark:hover:bg-blue-500 hover:shadow active:scale-95 cursor-pointer'
+                ? 'bg-blue-700 hover:bg-blue-800 text-white dark:bg-blue-600 dark:hover:bg-blue-500 shadow-xs hover:shadow active:scale-95 cursor-pointer'
                 : 'bg-zinc-200 dark:bg-[#181B24] text-zinc-400 dark:text-zinc-600 cursor-not-allowed border border-transparent'
             }`}
           >
-            <span>{userState.isAnswerChecked ? 'Recheck Answer' : 'Check Answer'}</span>
+            <span>Check Answer</span>
           </button>
 
-          {isAnswered && !userState.isAnswerChecked && (
-            <span className="text-xs font-semibold px-3 py-1.5 rounded-full bg-blue-50 text-blue-800 dark:bg-blue-950/40 dark:text-blue-300 flex items-center gap-1.5 border border-blue-200 dark:border-blue-800 animate-in fade-in duration-150">
-              <Check className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400 stroke-[2.5]" />
-              <span>{isSpr ? `Answered (${userState.sprAnswer})` : `Answered (Option ${userState.selectedChoice})`}</span>
-            </span>
-          )}
-
-          {userState.isAnswerChecked && (
-            <>
-              <span
-                className={`text-xs font-semibold px-3 py-1.5 rounded-full flex items-center gap-1.5 animate-in fade-in duration-150 ${
-                  isSelectedCorrect
-                    ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-950/40 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800/60'
-                    : 'bg-rose-100 text-rose-800 dark:bg-rose-950/40 dark:text-rose-300 border border-rose-200 dark:border-rose-800/60'
-                }`}
-              >
-                {isSelectedCorrect ? (
-                  <>
-                    <CheckCircle className="w-4 h-4 text-emerald-600 dark:text-emerald-400" /> Answered • Correct
-                  </>
-                ) : (
-                  <>
-                    <XCircle className="w-4 h-4 text-rose-600 dark:text-rose-400" /> Answered • Incorrect {isSpr ? `(Correct: ${String(question.correctAnswer)}${question.acceptedAnswers && question.acceptedAnswers.length > 0 ? ` or ${question.acceptedAnswers.join(', ')}` : ''})` : `(Answer: Option ${question.correctAnswer})`}
-                  </>
-                )}
-              </span>
-
-              {/* Recorded Pace Badge */}
-              <span
-                className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-full text-xs font-mono font-bold border transition-colors ${paceColor.badgeClass}`}
-                title={`Target: ${targetSeconds}s`}
-              >
-                <Clock className="w-3.5 h-3.5" />
-                <span>{questionElapsed}s (target: {targetSeconds}s)</span>
-              </span>
-            </>
-          )}
+          <div className="text-xs text-zinc-400 dark:text-[#8E95A5] flex items-center gap-1.5 font-medium">
+            <span>🔒 Explanation unlocks after checking</span>
+          </div>
         </div>
+      ) : (
+        /* Post-Answer Action Bar (Replaces Recheck Answer) */
+        <div className="gsap-post-answer-bar mt-6 pt-4 border-t border-zinc-200 dark:border-[#222634] max-w-[65ch] flex flex-wrap items-center justify-between gap-3 select-none">
+          {/* Left: Status badge + Explanation toggle button */}
+          <div className="flex items-center gap-2.5 flex-wrap">
+            <span
+              className={`text-xs font-semibold px-3 py-1.5 rounded-xl flex items-center gap-1.5 ${
+                isSelectedCorrect
+                  ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-950/50 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800/80'
+                  : 'bg-rose-100 text-rose-800 dark:bg-rose-950/50 dark:text-rose-300 border border-rose-300 dark:border-rose-800/80'
+              }`}
+            >
+              {isSelectedCorrect ? (
+                <>
+                  <CheckCircle className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+                  <span>✓ Correct</span>
+                </>
+              ) : (
+                <>
+                  <XCircle className="w-4 h-4 text-rose-600 dark:text-rose-400" />
+                  <span>
+                    ✕ Incorrect • Answer: {isSpr ? String(question.correctAnswer) : question.correctAnswer}
+                  </span>
+                </>
+              )}
+            </span>
 
-        {/* Explanation Toggle Drawer Button */}
-        <button
-          disabled={!userState.isAnswerChecked}
-          onClick={onToggleExplanation}
-          className={`flex items-center gap-1.5 text-xs sm:text-sm font-semibold transition-all duration-150 px-4 py-2 rounded-xl active:scale-95 ${
-            !userState.isAnswerChecked
-              ? 'text-zinc-400 bg-zinc-100 dark:bg-[#181B24] border border-zinc-200 dark:border-[#222634] cursor-not-allowed select-none opacity-80'
-              : 'text-blue-700 dark:text-blue-300 bg-blue-50/80 hover:bg-blue-100 dark:bg-blue-950/40 dark:hover:bg-blue-900/60 border border-blue-200/80 dark:border-blue-900/50 cursor-pointer shadow-2xs'
-          }`}
-          title={
-            !userState.isAnswerChecked
-              ? 'Select an option and click Check Answer first to unlock the explanation'
-              : 'Toggle explanation'
-          }
-        >
-          {!userState.isAnswerChecked ? (
-            <span>🔒 Explanation — Answer first</span>
-          ) : (
-            <>
+            <button
+              type="button"
+              onClick={onToggleExplanation}
+              className="flex items-center gap-1.5 text-xs font-semibold px-3.5 py-1.5 rounded-xl text-blue-700 dark:text-blue-300 bg-blue-50/80 hover:bg-blue-100 dark:bg-blue-950/40 dark:hover:bg-blue-900/60 border border-blue-200/80 dark:border-blue-900/50 transition-colors cursor-pointer shadow-2xs"
+            >
               <span>Explanation</span>
               {userState.isExplanationOpen ? (
-                <ChevronUp className="w-4 h-4" />
+                <ChevronUp className="w-3.5 h-3.5" />
               ) : (
-                <ChevronDown className="w-4 h-4" />
+                <ChevronDown className="w-3.5 h-3.5" />
               )}
-            </>
-          )}
-        </button>
-      </div>
+            </button>
+          </div>
+
+          {/* Right: Compact "↺ Reset" + Primary "Next Question →" */}
+          <div className="flex items-center gap-2 ml-auto">
+            {onResetQuestion && (
+              <button
+                type="button"
+                onClick={onResetQuestion}
+                className="h-9 px-3 rounded-xl border border-zinc-200 dark:border-[#222634] hover:bg-zinc-100 dark:hover:bg-[#181B24] text-zinc-700 dark:text-[#8E95A5] text-xs font-semibold transition-colors duration-150 flex items-center gap-1 cursor-pointer shadow-2xs active:scale-95"
+                title="Retry this question from scratch"
+              >
+                <Undo2 className="w-3.5 h-3.5" />
+                <span>↺ Reset</span>
+              </button>
+            )}
+
+            {onNextQuestion && (
+              <button
+                type="button"
+                onClick={onNextQuestion}
+                className="h-9 px-4 rounded-xl bg-blue-700 hover:bg-blue-800 text-white dark:bg-blue-600 dark:hover:bg-blue-500 font-semibold text-xs transition-all duration-150 active:scale-95 shadow-xs flex items-center gap-1 cursor-pointer"
+              >
+                <span>{isLastQuestion ? 'Finish Practice' : 'Next Question →'}</span>
+              </button>
+            )}
+          </div>
+        </div>
+      )}
 
       {/* 6. Official College Board Rationale Drawer */}
       {userState.isAnswerChecked && userState.isExplanationOpen && (
