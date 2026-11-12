@@ -30,7 +30,7 @@ export const SavedMistakesView: React.FC<SavedMistakesViewProps> = ({
   questions,
   onStartCustomPractice,
 }) => {
-  const [tab, setTab] = useState<'answered' | 'mistakes' | 'saved'>('answered');
+  const [tab, setTab] = useState<'saved' | 'mistakes' | 'answered'>('saved');
   const [subjectFilter, setSubjectFilter] = useState<'all' | 'rw' | 'math'>('all');
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [selectedDifficulty, setSelectedDifficulty] = useState<string>('all');
@@ -143,18 +143,18 @@ export const SavedMistakesView: React.FC<SavedMistakesViewProps> = ({
       <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3 flex-wrap">
         {/* Left Side: Tabs + Subject Filter */}
         <div className="flex items-center gap-2.5 flex-wrap">
-          {/* Status Tabs (Answered / Mistakes / Saved) */}
+          {/* Status Tabs (Saved / Mistakes / Answered) */}
           <div className="inline-flex p-1 bg-white dark:bg-[#11131A] border border-zinc-200 dark:border-[#222634] rounded-xl shadow-2xs flex-wrap gap-1">
             <button
-              onClick={() => setTab('answered')}
+              onClick={() => setTab('saved')}
               className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono font-medium transition-all duration-150 active:scale-95 cursor-pointer ${
-                tab === 'answered'
+                tab === 'saved'
                   ? 'bg-blue-700 text-white dark:bg-blue-600 font-semibold shadow-xs'
                   : 'text-zinc-600 dark:text-[#8E95A5] hover:text-zinc-950 dark:hover:text-white'
               }`}
             >
-              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" strokeWidth={1.75} />
-              <span>Answered ({answeredQuestions.length})</span>
+              <Bookmark className="w-3.5 h-3.5" strokeWidth={1.75} />
+              <span>Saved ({savedQuestions.length})</span>
             </button>
 
             <button
@@ -170,15 +170,15 @@ export const SavedMistakesView: React.FC<SavedMistakesViewProps> = ({
             </button>
 
             <button
-              onClick={() => setTab('saved')}
+              onClick={() => setTab('answered')}
               className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono font-medium transition-all duration-150 active:scale-95 cursor-pointer ${
-                tab === 'saved'
+                tab === 'answered'
                   ? 'bg-blue-700 text-white dark:bg-blue-600 font-semibold shadow-xs'
                   : 'text-zinc-600 dark:text-[#8E95A5] hover:text-zinc-950 dark:hover:text-white'
               }`}
             >
-              <Bookmark className="w-3.5 h-3.5" strokeWidth={1.75} />
-              <span>Saved ({savedQuestions.length})</span>
+              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" strokeWidth={1.75} />
+              <span>All Solved ({answeredQuestions.length})</span>
             </button>
           </div>
 

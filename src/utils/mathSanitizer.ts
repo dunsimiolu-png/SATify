@@ -10,6 +10,10 @@ export function sanitizeMathText(input: string): string {
   // 0. Decode numerical/HTML entities for dollar sign and ampersand
   s = s.replace(/&#36;|&amp;#36;/g, '$');
 
+  // 0.5. Protect standalone currency amounts outside math mode: e.g. $14, $406, $112, $12.50
+  // Ensures currency amounts with trailing space or punctuation aren't treated as math delimiters
+  s = s.replace(/(?<![\$\\])\$(?!\$)(?=\d+(?:,\d+)*(?:\.\d+)?(?:\s|[.,;!?)](?!\$)))/g, '\\$');
+
   // 1. Normalize LaTeX display delimiters: \[...\] -> $$...$$
   s = s.replace(/\\\[([\s\S]*?)\\\]/g, '$$$$$1$$$$');
 

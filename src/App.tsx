@@ -294,12 +294,15 @@ export const App: React.FC = () => {
   // Official Bluebook Digital SAT Math Layout:
   // Math MCQ questions render strictly in a centered single-column layout (never split screen).
   // Math SPR (grid-in) questions strictly render in a 50/50 split-screen layout with the Directions panel on the left.
+  const isMathSection = useMemo(() => {
+    return currentQuestion?.section === 'Math' || ['Algebra', 'Advanced Math', 'Problem-Solving and Data Analysis', 'Geometry and Trigonometry'].includes(currentQuestion?.domain || '');
+  }, [currentQuestion]);
+
   const isMathSingleColumn = useMemo(() => {
-    const isMath = currentQuestion?.section === 'Math' || ['Algebra', 'Advanced Math', 'Problem-Solving and Data Analysis', 'Geometry and Trigonometry'].includes(currentQuestion?.domain || '');
-    if (!isMath) return false;
+    if (!isMathSection) return false;
     const isSpr = currentQuestion?.questionType === 'spr' || !currentQuestion?.options || currentQuestion.options.length === 0;
     return !isSpr;
-  }, [currentQuestion]);
+  }, [currentQuestion, isMathSection]);
 
   const effectiveLeftCollapsed = isLeftCollapsed || isMathSingleColumn;
 
@@ -1006,6 +1009,7 @@ export const App: React.FC = () => {
             <AnalyticsView
               questions={allQuestions}
               onStartSkillPractice={handleStartSkillPractice}
+              initialSubject={isMathSection ? 'math' : 'all'}
             />
           )}
 

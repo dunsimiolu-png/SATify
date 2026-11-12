@@ -21,8 +21,8 @@ export const MathText: React.FC<MathTextProps> = ({
   const renderedHtml = useMemo(() => {
     if (!text) return '';
 
-    // Check if there are any math delimiters ($), brackets, currency escapes (\$), or HTML tags (<)
-    const hasMath = text.includes('$') || text.includes('\\(') || text.includes('\\[');
+    // Check if there are any math delimiters ($), brackets, currency escapes (\$), entities, or HTML tags (<)
+    const hasMath = text.includes('$') || text.includes('\\(') || text.includes('\\[') || text.includes('&#') || text.includes('\\');
     const hasHtml = text.includes('<') && text.includes('>');
 
     if (!hasMath && !hasHtml) {

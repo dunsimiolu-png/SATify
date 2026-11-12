@@ -98,10 +98,31 @@ export const Home: React.FC<HomeProps> = ({
 
   const [satDate, setSatDate] = useState<string>(() => {
     if (typeof window === 'undefined') return '';
-    return localStorage.getItem('satify_target_sat_date') || '';
+    const stored = localStorage.getItem('satify_target_sat_date') || '';
+    if (!stored) return '';
+    const parts = stored.split('-');
+    if (parts.length === 3) {
+      const year = parseInt(parts[0], 10);
+      const month = parseInt(parts[1], 10) - 1;
+      const day = parseInt(parts[2], 10);
+      const target = new Date(year, month, day);
+      const now = new Date();
+      now.setHours(0, 0, 0, 0);
+      if (target.getTime() < now.getTime()) {
+        localStorage.removeItem('satify_target_sat_date');
+        return '';
+      }
+    }
+    return stored;
   });
   const [isEditingSatDate, setIsEditingSatDate] = useState<boolean>(false);
   const [tempDateInput, setTempDateInput] = useState<string>(satDate);
+
+  const upcomingSatDates = useMemo(() => {
+    const todayStr = new Date().toISOString().slice(0, 10);
+    const future = OFFICIAL_SAT_DATES.filter(d => d.value >= todayStr);
+    return future.length > 0 ? future : OFFICIAL_SAT_DATES.slice(-8);
+  }, [OFFICIAL_SAT_DATES]);
 
   const satDaysRemaining = useMemo(() => {
     if (!satDate) return null;
@@ -114,7 +135,8 @@ export const Home: React.FC<HomeProps> = ({
     const now = new Date();
     now.setHours(0, 0, 0, 0);
     const diffTime = target.getTime() - now.getTime();
-    return Math.round(diffTime / (1000 * 60 * 60 * 24));
+    const days = Math.round(diffTime / (1000 * 60 * 60 * 24));
+    return days >= 0 ? days : null;
   }, [satDate]);
 
   const formattedSatDate = useMemo(() => {
@@ -489,7 +511,7 @@ export const Home: React.FC<HomeProps> = ({
                 {isEditingSatDate ? (
                   <div className="space-y-2">
                     <select
-                      value={OFFICIAL_SAT_DATES.some(d => d.value === tempDateInput) ? tempDateInput : (tempDateInput ? 'custom' : '')}
+                      value={upcomingSatDates.some(d => d.value === tempDateInput) ? tempDateInput : (tempDateInput ? 'custom' : '')}
                       onChange={(e) => {
                         if (e.target.value === 'custom') {
                           setTempDateInput('');
@@ -500,7 +522,7 @@ export const Home: React.FC<HomeProps> = ({
                       className="w-full text-xs p-1.5 rounded-lg border border-zinc-300 dark:border-[#222634] bg-neutral-50 dark:bg-[#181B24] text-zinc-900 dark:text-[#F4F4F6] cursor-pointer"
                     >
                       <option value="">Select official SAT date...</option>
-                      {OFFICIAL_SAT_DATES.map(d => (
+                      {upcomingSatDates.map(d => (
                         <option key={d.value} value={d.value}>
                           {d.label}
                         </option>

@@ -123,16 +123,17 @@ export const DesmosCalculator: React.FC<DesmosCalculatorProps> = ({ isOpen, onCl
     setHasBeenOpened(true);
   }
 
-  // Floating Window Geometry for Desktop
-  const [size, setSize] = useState<{ width: number; height: number }>({
-    width: 440,
-    height: 570,
+  // Floating Window Geometry for Desktop - Bluebook Default (Left-side docked, Landscape split orientation)
+  const [size, setSize] = useState<{ width: number; height: number }>(() => {
+    if (typeof window === 'undefined') return { width: 580, height: 530 };
+    const idealWidth = Math.min(620, Math.max(500, Math.floor(window.innerWidth * 0.45)));
+    const idealHeight = Math.min(560, Math.max(480, Math.floor(window.innerHeight * 0.65)));
+    return { width: idealWidth, height: idealHeight };
   });
 
   const [position, setPosition] = useState<{ x: number; y: number }>(() => {
-    if (typeof window === 'undefined') return { x: 50, y: 70 };
-    const preferredX = Math.max(20, window.innerWidth - 470);
-    return { x: preferredX, y: 70 };
+    // Official Digital SAT Bluebook: Desmos calculator opens anchored on the LEFT side at first
+    return { x: 28, y: 68 };
   });
 
   const [isDragging, setIsDragging] = useState<boolean>(false);
@@ -141,14 +142,14 @@ export const DesmosCalculator: React.FC<DesmosCalculatorProps> = ({ isOpen, onCl
   const dragStartRef = useRef<{ mouseX: number; mouseY: number; initialX: number; initialY: number }>({
     mouseX: 0,
     mouseY: 0,
-    initialX: 0,
-    initialY: 0,
+    initialX: 28,
+    initialY: 68,
   });
   const resizeStartRef = useRef<{ mouseX: number; mouseY: number; initialWidth: number; initialHeight: number }>({
     mouseX: 0,
     mouseY: 0,
-    initialWidth: 440,
-    initialHeight: 570,
+    initialWidth: 580,
+    initialHeight: 530,
   });
 
   // Desmos DOM elements & Calculator Instances
@@ -319,7 +320,7 @@ export const DesmosCalculator: React.FC<DesmosCalculatorProps> = ({ isOpen, onCl
   const toggleWidth = () => {
     setIsExpandedWidth(prev => {
       const next = !prev;
-      const newWidth = next ? Math.min(740, window.innerWidth - 30) : 440;
+      const newWidth = next ? Math.min(780, window.innerWidth - 30) : 580;
       setSize(s => ({ ...s, width: newWidth }));
       return next;
     });

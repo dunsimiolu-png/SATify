@@ -13,17 +13,25 @@ import { LowestAccuracyList } from '../components/charts/LowestAccuracyList';
 interface AnalyticsViewProps {
   questions?: MockQuestion[];
   onStartSkillPractice: (skillName: string, domainName: string) => void;
+  initialSubject?: SubjectFilter;
 }
 
 type TimeframeFilter = 'all' | '30d' | '7d' | 'today';
-type SubjectFilter = 'all' | 'rw' | 'math';
+export type SubjectFilter = 'all' | 'rw' | 'math';
 
 export const AnalyticsView: React.FC<AnalyticsViewProps> = ({
   questions: _questions,
   onStartSkillPractice,
+  initialSubject,
 }) => {
   const [timeframe, setTimeframe] = useState<TimeframeFilter>('all');
-  const [subjectFilter, setSubjectFilter] = useState<SubjectFilter>('all');
+  const [subjectFilter, setSubjectFilter] = useState<SubjectFilter>(initialSubject || 'all');
+
+  useEffect(() => {
+    if (initialSubject) {
+      setSubjectFilter(initialSubject);
+    }
+  }, [initialSubject]);
   const [storageVersion, setStorageVersion] = useState<number>(0);
   const [isResetModalOpen, setIsResetModalOpen] = useState<boolean>(false);
 

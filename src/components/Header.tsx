@@ -3,17 +3,13 @@ import {
   Menu, 
   Home, 
   ChevronDown, 
-  SlidersHorizontal, 
   Highlighter, 
-  Rows, 
-  Columns, 
   Maximize2, 
   Minimize, 
   Sun, 
   Moon, 
   Calculator, 
   BookOpen, 
-  Split, 
   Check, 
   MoreHorizontal,
   X,
@@ -32,7 +28,7 @@ interface HeaderProps {
   onOpenDirections: () => void;
   onOpenReference: () => void;
   onOpenCalculator: () => void;
-  onOpenFilter: () => void;
+  onOpenFilter?: () => void;
   onOpenGrammarGuide?: () => void;
   isAnnotateActive: boolean;
   onToggleAnnotate: () => void;
@@ -55,8 +51,6 @@ export const Header: React.FC<HeaderProps> = ({
   onOpenDirections,
   onOpenReference,
   onOpenCalculator,
-  onOpenFilter,
-  onOpenGrammarGuide,
   isAnnotateActive,
   onToggleAnnotate,
   onExitToDashboard,
@@ -67,9 +61,6 @@ export const Header: React.FC<HeaderProps> = ({
   user,
   onOpenLogin,
   onOpenAccount,
-  onToggleLayout,
-  isTwoPane = true,
-  isMathSingleColumn = false,
 }) => {
   const { isDark, toggleTheme } = useTheme();
   const [stopwatchSeconds, setStopwatchSeconds] = useState<number>(0);
@@ -239,63 +230,11 @@ export const Header: React.FC<HeaderProps> = ({
           )}
         </div>
 
-        {/* Right Section: Tools - Responsive */}
+        {/* Right Section: Authentic Digital SAT Bluebook Testing Tools */}
         <div className="flex items-center gap-1 shrink-0">
           {/* Desktop tools */}
           <div className="hidden sm:flex items-center gap-1">
-            {/* Filter */}
-            <button
-              onClick={onOpenFilter}
-              className="h-9 px-2.5 rounded-lg border border-transparent hover:border-zinc-200 dark:border-[#222634] hover:bg-zinc-100 dark:hover:bg-[#181B24] text-zinc-700 dark:text-[#8E95A5] hover:text-zinc-950 dark:hover:text-[#F4F4F6] text-xs font-medium transition-colors duration-150 flex items-center gap-1.5 cursor-pointer"
-              title="Configure Topics and Difficulty"
-            >
-              <SlidersHorizontal className="w-4 h-4 text-blue-700 dark:text-blue-400" strokeWidth={1.75} />
-              <span className="hidden md:inline">Filter</span>
-            </button>
-
-            {/* Grammar Guide: Hidden in Math */}
-            {onOpenGrammarGuide && !isMath && (
-              <button
-                onClick={onOpenGrammarGuide}
-                className="hidden md:flex h-9 px-2.5 rounded-lg border border-transparent hover:border-zinc-200 dark:border-[#222634] hover:bg-zinc-100 dark:hover:bg-[#181B24] text-zinc-700 dark:text-[#8E95A5] hover:text-zinc-950 dark:hover:text-[#F4F4F6] text-xs font-medium transition-colors duration-150 items-center gap-1.5 cursor-pointer"
-                title="Open Grammar Comparison Cheat Sheet"
-              >
-                <Split className="w-4 h-4 text-blue-700 dark:text-blue-400" strokeWidth={1.75} />
-                <span className="hidden lg:inline">Grammar</span>
-              </button>
-            )}
-
-            {/* Annotate */}
-            <button
-              onClick={onToggleAnnotate}
-              className={`h-9 px-2.5 rounded-lg border text-xs font-medium transition-colors duration-150 flex items-center gap-1.5 cursor-pointer ${
-                isAnnotateActive
-                  ? 'border-amber-400 bg-amber-50 dark:bg-amber-950/40 text-amber-900 dark:text-amber-200'
-                  : 'border-transparent hover:border-zinc-200 dark:border-[#222634] hover:bg-zinc-100 dark:hover:bg-[#181B24] text-zinc-700 dark:text-[#8E95A5] hover:text-zinc-950 dark:hover:text-[#F4F4F6]'
-              }`}
-              title="Toggle highlighter mode"
-            >
-              <Highlighter className="w-4 h-4" strokeWidth={1.75} />
-              <span className="hidden md:inline">Annotate</span>
-            </button>
-
-            {/* View Layout Toggle (Split vs Stacked) - Tablet & Desktop only */}
-            {onToggleLayout && !isMathSingleColumn && (
-              <button
-                onClick={onToggleLayout}
-                className="hidden md:flex h-9 px-2.5 rounded-lg border border-transparent hover:border-zinc-200 dark:border-[#222634] hover:bg-zinc-100 dark:hover:bg-[#181B24] text-zinc-700 dark:text-[#8E95A5] hover:text-zinc-950 dark:hover:text-[#F4F4F6] text-xs font-medium transition-colors duration-150 items-center gap-1.5 cursor-pointer"
-                title={isTwoPane ? "Switch to Stacked View" : "Switch to Side-by-Side Split View"}
-              >
-                {isTwoPane ? (
-                  <Rows className="w-4 h-4 text-blue-700 dark:text-blue-400" strokeWidth={1.75} />
-                ) : (
-                  <Columns className="w-4 h-4 text-blue-700 dark:text-blue-400" strokeWidth={1.75} />
-                )}
-                <span>{isTwoPane ? "Stacked" : "Split"}</span>
-              </button>
-            )}
-
-            {/* Calculator & Math Reference: Rendered when practicing Math */}
+            {/* Calculator & Math Reference: Rendered when practicing Math (Bluebook primary) */}
             {isMath && (
               <>
                 <button
@@ -319,6 +258,20 @@ export const Header: React.FC<HeaderProps> = ({
                 </button>
               </>
             )}
+
+            {/* Annotate / Highlighter (Official Bluebook Tool) */}
+            <button
+              onClick={onToggleAnnotate}
+              className={`h-9 px-2.5 rounded-lg border text-xs font-medium transition-colors duration-150 flex items-center gap-1.5 cursor-pointer ${
+                isAnnotateActive
+                  ? 'border-amber-400 bg-amber-50 dark:bg-amber-950/40 text-amber-900 dark:text-amber-200'
+                  : 'border-transparent hover:border-zinc-200 dark:border-[#222634] hover:bg-zinc-100 dark:hover:bg-[#181B24] text-zinc-700 dark:text-[#8E95A5] hover:text-zinc-950 dark:hover:text-[#F4F4F6]'
+              }`}
+              title="Toggle highlighter mode"
+            >
+              <Highlighter className="w-4 h-4" strokeWidth={1.75} />
+              <span className="hidden md:inline">Annotate</span>
+            </button>
 
             {/* Fullscreen - desktop only */}
             <button
@@ -381,16 +334,6 @@ export const Header: React.FC<HeaderProps> = ({
                       <span>Reference Sheet</span>
                     </button>
                   </>
-                )}
-                <button onClick={() => { onOpenFilter(); setIsMobileToolsOpen(false); }} className="w-full p-2.5 text-left rounded-xl hover:bg-zinc-100 dark:hover:bg-[#181B24] flex items-center gap-2.5 cursor-pointer transition-colors duration-150 text-xs font-semibold text-zinc-800 dark:text-[#F4F4F6] active:scale-[0.98]">
-                  <SlidersHorizontal className="w-4 h-4 text-blue-700 dark:text-blue-400" />
-                  <span>Filter Topics</span>
-                </button>
-                {onOpenGrammarGuide && !isMath && (
-                  <button onClick={() => { onOpenGrammarGuide(); setIsMobileToolsOpen(false); }} className="w-full p-2.5 text-left rounded-xl hover:bg-zinc-100 dark:hover:bg-[#181B24] flex items-center gap-2.5 cursor-pointer transition-colors duration-150 text-xs font-semibold text-zinc-800 dark:text-[#F4F4F6] active:scale-[0.98]">
-                    <Split className="w-4 h-4 text-blue-700 dark:text-blue-400" />
-                    <span>Grammar Guide</span>
-                  </button>
                 )}
                 <button onClick={() => { onToggleAnnotate(); setIsMobileToolsOpen(false); }} className={`w-full p-2.5 text-left rounded-xl flex items-center gap-2.5 cursor-pointer transition-colors duration-150 text-xs font-semibold active:scale-[0.98] ${isAnnotateActive ? 'bg-amber-50 dark:bg-amber-950/40 text-amber-900 dark:text-amber-200 border border-amber-300 dark:border-amber-800' : 'hover:bg-zinc-100 dark:hover:bg-[#181B24] text-zinc-800 dark:text-[#F4F4F6]'}`}>
                   <Highlighter className="w-4 h-4" />
