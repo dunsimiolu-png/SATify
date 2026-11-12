@@ -13,6 +13,7 @@ import {
 } from 'lucide-react';
 import { MockQuestion, AnswerChoice } from '../types/quiz';
 import { RichText } from '../components/RichText';
+import { PairedPassage, isPairedPassage } from '../components/PairedPassage';
 import { ExplanationRenderer } from '../components/ExplanationRenderer';
 import { 
   getSavedQuestionIds, 
@@ -300,7 +301,7 @@ export const SavedMistakesView: React.FC<SavedMistakesViewProps> = ({
                         ) : (
                           <span className="px-2 py-0.5 rounded text-[11px] font-bold bg-rose-100 text-rose-700 dark:bg-rose-950/40 dark:text-rose-300 border border-rose-200 dark:border-rose-800 flex items-center gap-1">
                             <XCircle className="w-3 h-3 text-rose-600 dark:text-rose-400" />
-                            <span>Mistake ({attempt.selectedOption} vs {q.correctAnswer})</span>
+                            <span>Mistake (Chose {attempt.selectedOption} • Ans: {q.correctAnswer})</span>
                           </span>
                         )
                       ) : answeredIds.has(q.id) ? (
@@ -375,9 +376,13 @@ export const SavedMistakesView: React.FC<SavedMistakesViewProps> = ({
                         <span className="text-[11px] font-bold text-zinc-400 dark:text-[#8E95A5] uppercase tracking-wider">
                           Passage / Stimulus
                         </span>
-                        <div className="font-serif text-[15px] leading-relaxed text-zinc-950 dark:text-[#F4F4F6] whitespace-pre-line">
-                          <RichText text={q.passage} />
-                        </div>
+                        {isPairedPassage(q.passage, q.skill) ? (
+                          <PairedPassage text={q.passage} showTabsOnMobile={false} />
+                        ) : (
+                          <div className="font-serif text-[15px] leading-relaxed text-zinc-950 dark:text-[#F4F4F6] whitespace-pre-line">
+                            <RichText text={q.passage} />
+                          </div>
+                        )}
                       </div>
                     )}
 

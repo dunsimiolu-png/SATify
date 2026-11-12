@@ -5,7 +5,7 @@ import {
   X
 } from 'lucide-react';
 import { MockQuestion } from '../types/quiz';
-import { getAttempts, clearAllProgress } from '../utils/storage';
+import { getAttempts, clearAllProgress, getUniqueSolvedQuestions } from '../utils/storage';
 import { DomainAccuracyComparison } from '../components/charts/DomainAccuracyComparison';
 import { DifficultyChart } from '../components/charts/DifficultyChart';
 import { LowestAccuracyList } from '../components/charts/LowestAccuracyList';
@@ -206,15 +206,20 @@ export const AnalyticsView: React.FC<AnalyticsViewProps> = ({
       };
     });
 
-    const attemptedSkills = skillStatsItems.filter(s => s.attempted > 0).sort((a, b) => a.accuracy - b.accuracy);
+    // Require >= 3 attempts before ranking weak skills; fallback gracefully
+    const qualifiedSkills = skillStatsItems.filter(s => s.attempted >= 3).sort((a, b) => a.accuracy - b.accuracy || b.attempted - a.attempted);
+    const otherAttempted = skillStatsItems.filter(s => s.attempted > 0 && s.attempted < 3).sort((a, b) => a.accuracy - b.accuracy);
     const unattemptedSkills = skillStatsItems.filter(s => s.attempted === 0);
-    const lowest = [...attemptedSkills, ...unattemptedSkills].slice(0, 5);
+    const lowest = [...qualifiedSkills, ...otherAttempted, ...unattemptedSkills].slice(0, 5);
+
+    const uniqueSolvedCount = _questions ? getUniqueSolvedQuestions(_questions).length : len;
+    const finalAttempted = (timeframe === 'all' && subjectFilter === 'all') ? uniqueSolvedCount : len;
 
     return {
-      totalAttempted: len,
+      totalAttempted: finalAttempted,
       totalCorrect: correctCount,
-      totalWrong: len - correctCount,
-      overallAccuracy: len > 0 ? Math.round((correctCount / len) * 100) : 0,
+      totalWrong: Math.max(0, finalAttempted - correctCount),
+      overallAccuracy: finalAttempted > 0 ? Math.round((correctCount / finalAttempted) * 100) : 0,
       avgTimeSeconds: len > 0 ? Math.round(totalTime / len) : 0,
       domainBreakdown: domainItems,
       difficultyBreakdown: diffItems,

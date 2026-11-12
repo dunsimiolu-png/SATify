@@ -219,17 +219,28 @@ export const ScoreCalculatorView: React.FC = () => {
                 <span className="text-zinc-400 font-mono text-xs">/ 27</span>
               </div>
             </div>
-            <input
-              type="range"
-              min={0}
-              max={27}
-              value={rwM1}
-              onChange={(e) => setRwM1(Number(e.target.value))}
-              className="w-full h-2 bg-zinc-200 dark:bg-[#222634] rounded-lg appearance-none cursor-pointer accent-blue-700"
-            />
+            <div className="relative">
+              <input
+                type="range"
+                min={0}
+                max={27}
+                value={rwM1}
+                onChange={(e) => setRwM1(Number(e.target.value))}
+                style={{
+                  background: `linear-gradient(to right, #1d4ed8 0%, #1d4ed8 ${(rwM1 / 27) * 100}%, #e4e4e7 ${(rwM1 / 27) * 100}%, #e4e4e7 100%)`
+                }}
+                className="w-full h-2 rounded-lg appearance-none cursor-pointer accent-blue-700 dark:[background:#1f293d]"
+              />
+              {/* 18 cutoff vertical tick line */}
+              <div 
+                className="absolute top-0 bottom-0 w-[2px] bg-amber-500/80 pointer-events-none rounded"
+                style={{ left: `${(18 / 27) * 100}%` }}
+                title="18 cutoff for Hard Module 2"
+              />
+            </div>
             <div className="flex justify-between text-[10px] font-mono text-zinc-400">
               <span>0</span>
-              <span>18 cutoff (Hard Module)</span>
+              <span className="text-amber-600 dark:text-amber-400 font-semibold">18 cutoff (Hard Module)</span>
               <span>27</span>
             </div>
           </div>
@@ -274,7 +285,10 @@ export const ScoreCalculatorView: React.FC = () => {
               max={27}
               value={rwM2}
               onChange={(e) => setRwM2(Number(e.target.value))}
-              className="w-full h-2 bg-zinc-200 dark:bg-[#222634] rounded-lg appearance-none cursor-pointer accent-blue-700"
+              style={{
+                background: `linear-gradient(to right, #1d4ed8 0%, #1d4ed8 ${(rwM2 / 27) * 100}%, #e4e4e7 ${(rwM2 / 27) * 100}%, #e4e4e7 100%)`
+              }}
+              className="w-full h-2 rounded-lg appearance-none cursor-pointer accent-blue-700 dark:[background:#1f293d]"
             />
             <div className="flex justify-between text-[10px] font-mono text-zinc-400">
               <span>0</span>
@@ -287,12 +301,12 @@ export const ScoreCalculatorView: React.FC = () => {
         <div className="p-5 sm:p-6 rounded-2xl bg-white dark:bg-[#11131A] border border-zinc-200 dark:border-[#222634] shadow-xs space-y-5 transition-all duration-200 hover:border-zinc-300 dark:hover:border-zinc-700">
           <div className="flex items-center justify-between pb-3 border-b border-zinc-100 dark:border-[#181B24]">
             <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-zinc-600 dark:bg-zinc-400" />
+              <span className="w-2 h-2 rounded-full bg-sky-500" />
               <h3 className="font-semibold text-base text-zinc-950 dark:text-[#F4F4F6]">
                 Mathematics (44 Questions)
               </h3>
             </div>
-            <span className="text-xs font-mono font-semibold text-zinc-800 dark:text-[#F4F4F6] bg-zinc-100 dark:bg-[#181B24] px-2.5 py-0.5 rounded-lg border border-zinc-200 dark:border-[#222634] tabular-nums shadow-2xs">
+            <span className="text-xs font-mono font-semibold text-sky-700 dark:text-sky-300 bg-sky-50 dark:bg-sky-950/40 px-2.5 py-0.5 rounded-lg border border-sky-200 dark:border-sky-800 tabular-nums shadow-2xs">
               Score: {mathScore}
             </span>
           </div>
@@ -308,22 +322,33 @@ export const ScoreCalculatorView: React.FC = () => {
                   max={22}
                   value={mathM1}
                   onChange={(e) => setMathM1(Math.min(22, Math.max(0, Number(e.target.value) || 0)))}
-                  className="w-12 h-7 px-1 text-center font-mono font-semibold text-xs tabular-nums bg-zinc-50 dark:bg-[#181B24] border border-zinc-200 dark:border-[#222634] rounded-lg text-zinc-950 dark:text-[#F4F4F6] focus:outline-hidden focus:border-blue-600 shadow-2xs"
+                  className="w-12 h-7 px-1 text-center font-mono font-semibold text-xs tabular-nums bg-zinc-50 dark:bg-[#181B24] border border-zinc-200 dark:border-[#222634] rounded-lg text-sky-700 dark:text-sky-300 focus:outline-hidden focus:border-sky-600 shadow-2xs"
                 />
                 <span className="text-zinc-400 font-mono text-xs">/ 22</span>
               </div>
             </div>
-            <input
-              type="range"
-              min={0}
-              max={22}
-              value={mathM1}
-              onChange={(e) => setMathM1(Number(e.target.value))}
-              className="w-full h-2 bg-zinc-200 dark:bg-[#222634] rounded-lg appearance-none cursor-pointer accent-zinc-700"
-            />
+            <div className="relative">
+              <input
+                type="range"
+                min={0}
+                max={22}
+                value={mathM1}
+                onChange={(e) => setMathM1(Number(e.target.value))}
+                style={{
+                  background: `linear-gradient(to right, #0284c7 0%, #0284c7 ${(mathM1 / 22) * 100}%, #e4e4e7 ${(mathM1 / 22) * 100}%, #e4e4e7 100%)`
+                }}
+                className="w-full h-2 rounded-lg appearance-none cursor-pointer accent-sky-600 dark:[background:#1f293d]"
+              />
+              {/* 15 cutoff vertical tick line */}
+              <div 
+                className="absolute top-0 bottom-0 w-[2px] bg-amber-500/80 pointer-events-none rounded"
+                style={{ left: `${(15 / 22) * 100}%` }}
+                title="15 cutoff for Hard Module 2"
+              />
+            </div>
             <div className="flex justify-between text-[10px] font-mono text-zinc-400">
               <span>0</span>
-              <span>15 cutoff (Hard Module)</span>
+              <span className="text-amber-600 dark:text-amber-400 font-semibold">15 cutoff (Hard Module)</span>
               <span>22</span>
             </div>
           </div>
@@ -362,14 +387,19 @@ export const ScoreCalculatorView: React.FC = () => {
                 <span className="text-zinc-400 font-mono text-xs">/ 22</span>
               </div>
             </div>
-            <input
-              type="range"
-              min={0}
-              max={22}
-              value={mathM2}
-              onChange={(e) => setMathM2(Number(e.target.value))}
-              className="w-full h-2 bg-zinc-200 dark:bg-[#222634] rounded-lg appearance-none cursor-pointer accent-zinc-700"
-            />
+            <div className="relative">
+              <input
+                type="range"
+                min={0}
+                max={22}
+                value={mathM2}
+                onChange={(e) => setMathM2(Number(e.target.value))}
+                style={{
+                  background: `linear-gradient(to right, #0284c7 0%, #0284c7 ${(mathM2 / 22) * 100}%, #e4e4e7 ${(mathM2 / 22) * 100}%, #e4e4e7 100%)`
+                }}
+                className="w-full h-2 rounded-lg appearance-none cursor-pointer accent-sky-600 dark:[background:#1f293d]"
+              />
+            </div>
             <div className="flex justify-between text-[10px] font-mono text-zinc-400">
               <span>0</span>
               <span>22</span>

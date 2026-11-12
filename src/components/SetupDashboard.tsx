@@ -17,7 +17,7 @@ import { MockQuestion, EnglishFilterConfig, DifficultyLevel } from '../types/qui
 import { allQuestions } from '../data/mockQuestions';
 import { Logo } from './Logo';
 import { useTheme } from '../utils/theme';
-import { getAnsweredQuestionIds } from '../utils/storage';
+import { getAnsweredQuestionIds, getLatestAttemptsMap } from '../utils/storage';
 
 interface SetupDashboardProps {
   isOpen: boolean;
@@ -118,6 +118,7 @@ export const SetupDashboard: React.FC<SetupDashboardProps> = ({
   const [hideAnswered, setHideAnswered] = useState<boolean>(
     currentConfig?.hideAnswered ?? currentConfig?.excludeActive ?? false
   );
+  const [statusFilter, setStatusFilter] = useState<'all' | 'unanswered' | 'incorrect' | 'solved'>('all');
 
   // Accordion state for all 8 domain dropdowns
   const [expandedDomains, setExpandedDomains] = useState<Record<string, boolean>>({
@@ -182,14 +183,15 @@ export const SetupDashboard: React.FC<SetupDashboardProps> = ({
 
   // Toggle domain
   const handleToggleDomain = (domain: string) => {
-    const isSelected = selectedDomains.includes(domain);
     const domainSkills = SKILLS_BY_DOMAIN[domain] || [];
+    const selectedSkillsInDomain = domainSkills.filter(s => selectedSkills.includes(s));
+    const isFullySelected = selectedSkillsInDomain.length === domainSkills.length;
 
-    if (isSelected) {
+    if (isFullySelected) {
       setSelectedDomains(prev => prev.filter(d => d !== domain));
       setSelectedSkills(prev => prev.filter(s => !domainSkills.includes(s)));
     } else {
-      setSelectedDomains(prev => [...prev, domain]);
+      setSelectedDomains(prev => Array.from(new Set([...prev, domain])));
       setSelectedSkills(prev => Array.from(new Set([...prev, ...domainSkills])));
     }
   };
@@ -246,9 +248,12 @@ export const SetupDashboard: React.FC<SetupDashboardProps> = ({
   }, []);
 
   // Compute matched questions from satify_attempts
+  const attemptsMap = useMemo(() => getLatestAttemptsMap(), [isOpen]);
+  const allAnsweredIds = useMemo(() => getAnsweredQuestionIds(), [isOpen]);
+
   const answeredIds = useMemo(() => {
-    return hideAnswered ? getAnsweredQuestionIds() : new Set<string>();
-  }, [hideAnswered]);
+    return hideAnswered ? allAnsweredIds : new Set<string>();
+  }, [hideAnswered, allAnsweredIds]);
 
   const matchedQuestions = useMemo(() => {
     return allQuestions.filter(q => {
@@ -260,15 +265,20 @@ export const SetupDashboard: React.FC<SetupDashboardProps> = ({
       if (!selectedDifficulties.includes(q.difficulty)) return false;
       // Hide already answered if option enabled (reading from satify_attempts)
       if (hideAnswered && answeredIds.has(q.id)) return false;
+      // Status pill filter
+      if (statusFilter === 'unanswered' && (allAnsweredIds.has(q.id) || !!attemptsMap[q.id])) return false;
+      if (statusFilter === 'incorrect' && (!attemptsMap[q.id] || attemptsMap[q.id].isCorrect)) return false;
+      if (statusFilter === 'solved' && (!attemptsMap[q.id]?.isCorrect && !allAnsweredIds.has(q.id))) return false;
       return true;
     });
-  }, [selectedSkills, selectedDomains, selectedDifficulties, hideAnswered, answeredIds]);
+  }, [selectedSkills, selectedDomains, selectedDifficulties, hideAnswered, answeredIds, statusFilter, allAnsweredIds, attemptsMap]);
 
   const handleResetFilters = () => {
     setSelectedDomains([...ALL_DOMAINS]);
     setSelectedSkills([...ALL_SKILLS]);
     setSelectedDifficulties(['Easy', 'Medium', 'Hard']);
     setHideAnswered(false);
+    setStatusFilter('all');
   };
 
   const handleLaunch = () => {
@@ -411,9 +421,11 @@ export const SetupDashboard: React.FC<SetupDashboardProps> = ({
               {/* R&W 4 Domains List */}
               <div className="divide-y divide-slate-200 dark:divide-slate-800">
                 {RW_DOMAINS.map(domain => {
-                  const isDomainSelected = selectedDomains.includes(domain);
-                  const isExpanded = expandedDomains[domain] ?? false;
                   const skills = SKILLS_BY_DOMAIN[domain] || [];
+                  const selectedSkillsInDomain = skills.filter(s => selectedSkills.includes(s));
+                  const isFullySelected = selectedSkillsInDomain.length === skills.length;
+                  const isPartiallySelected = selectedSkillsInDomain.length > 0 && selectedSkillsInDomain.length < skills.length;
+                  const isExpanded = expandedDomains[domain] ?? false;
                   const domainCount = counts.domainMap[domain] || 0;
 
                   return (
@@ -423,12 +435,16 @@ export const SetupDashboard: React.FC<SetupDashboardProps> = ({
                         <label className="flex items-center gap-3 cursor-pointer">
                           <input
                             type="checkbox"
-                            checked={isDomainSelected}
+                            checked={isFullySelected}
+                            ref={el => { if (el) el.indeterminate = isPartiallySelected; }}
                             onChange={() => handleToggleDomain(domain)}
                             className="w-4 h-4 rounded accent-blue-600 cursor-pointer"
                           />
-                          <span className={`font-semibold text-sm ${isDomainSelected ? 'text-slate-900 dark:text-white' : 'text-slate-500 dark:text-[#a1a1aa]'}`}>
+                          <span className={`font-semibold text-sm ${isFullySelected || isPartiallySelected ? 'text-slate-900 dark:text-white' : 'text-slate-500 dark:text-[#a1a1aa]'}`}>
                             {domain}
+                          </span>
+                          <span className="text-[11px] text-slate-500 dark:text-slate-400 font-mono">
+                            ({selectedSkillsInDomain.length} / {skills.length} selected)
                           </span>
                           <span className="text-xs text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded-md font-mono">
                             {domainCount}
@@ -516,9 +532,11 @@ export const SetupDashboard: React.FC<SetupDashboardProps> = ({
               {/* Math 4 Domains List */}
               <div className="divide-y divide-slate-200 dark:divide-slate-800">
                 {MATH_DOMAINS.map(domain => {
-                  const isDomainSelected = selectedDomains.includes(domain);
-                  const isExpanded = expandedDomains[domain] ?? false;
                   const skills = SKILLS_BY_DOMAIN[domain] || [];
+                  const selectedSkillsInDomain = skills.filter(s => selectedSkills.includes(s));
+                  const isFullySelected = selectedSkillsInDomain.length === skills.length;
+                  const isPartiallySelected = selectedSkillsInDomain.length > 0 && selectedSkillsInDomain.length < skills.length;
+                  const isExpanded = expandedDomains[domain] ?? false;
                   const domainCount = counts.domainMap[domain] || 0;
 
                   return (
@@ -528,12 +546,16 @@ export const SetupDashboard: React.FC<SetupDashboardProps> = ({
                         <label className="flex items-center gap-3 cursor-pointer">
                           <input
                             type="checkbox"
-                            checked={isDomainSelected}
+                            checked={isFullySelected}
+                            ref={el => { if (el) el.indeterminate = isPartiallySelected; }}
                             onChange={() => handleToggleDomain(domain)}
                             className="w-4 h-4 rounded accent-blue-600 cursor-pointer"
                           />
-                          <span className={`font-semibold text-sm ${isDomainSelected ? 'text-slate-900 dark:text-white' : 'text-slate-500 dark:text-[#a1a1aa]'}`}>
+                          <span className={`font-semibold text-sm ${isFullySelected || isPartiallySelected ? 'text-slate-900 dark:text-white' : 'text-slate-500 dark:text-[#a1a1aa]'}`}>
                             {domain}
+                          </span>
+                          <span className="text-[11px] text-slate-500 dark:text-slate-400 font-mono">
+                            ({selectedSkillsInDomain.length} / {skills.length} selected)
                           </span>
                           <span className="text-xs text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded-md font-mono">
                             {domainCount}
@@ -598,9 +620,38 @@ export const SetupDashboard: React.FC<SetupDashboardProps> = ({
 
           {/* SECTION 3: Difficulty */}
           <div className="space-y-2.5">
-            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-[#a1a1aa]">
-              3. Difficulty
-            </h3>
+            <div className="flex items-center justify-between">
+              <h3 className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-[#a1a1aa]">
+                3. Difficulty
+              </h3>
+              <div className="flex items-center gap-1.5">
+                <button
+                  type="button"
+                  onClick={() => setSelectedDifficulties(['Easy', 'Medium', 'Hard'])}
+                  className={`px-2 py-0.5 rounded-md text-xs font-semibold border transition cursor-pointer ${
+                    selectedDifficulties.length === 3
+                      ? 'bg-blue-600 text-white border-blue-600'
+                      : 'bg-white dark:bg-[#111726] border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-50'
+                  }`}
+                >
+                  All
+                </button>
+                {(['Easy', 'Medium', 'Hard'] as DifficultyLevel[]).map(diff => (
+                  <button
+                    key={diff}
+                    type="button"
+                    onClick={() => setSelectedDifficulties([diff])}
+                    className={`px-2 py-0.5 rounded-md text-xs font-semibold border transition cursor-pointer ${
+                      selectedDifficulties.length === 1 && selectedDifficulties[0] === diff
+                        ? 'bg-blue-600 text-white border-blue-600'
+                        : 'bg-white dark:bg-[#111726] border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-50'
+                    }`}
+                  >
+                    {diff}
+                  </button>
+                ))}
+              </div>
+            </div>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3">
               {(['Easy', 'Medium', 'Hard'] as DifficultyLevel[]).map(diff => {
                 const isSelected = selectedDifficulties.includes(diff);
@@ -641,11 +692,29 @@ export const SetupDashboard: React.FC<SetupDashboardProps> = ({
             </div>
           </div>
 
-          {/* SECTION 4: More Options */}
+          {/* SECTION 4: Status & More Options */}
           <div className="space-y-3">
-            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-[#a1a1aa]">
-              4. More options
-            </h3>
+            <div className="flex items-center justify-between">
+              <h3 className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-[#a1a1aa]">
+                4. Question Status &amp; Options
+              </h3>
+              <div className="flex items-center gap-1.5">
+                {(['all', 'unanswered', 'incorrect', 'solved'] as const).map(st => (
+                  <button
+                    key={st}
+                    type="button"
+                    onClick={() => setStatusFilter(st)}
+                    className={`px-2.5 py-1 rounded-lg text-xs font-semibold capitalize border transition cursor-pointer ${
+                      statusFilter === st
+                        ? 'bg-blue-600 text-white border-blue-600'
+                        : 'bg-white dark:bg-[#111726] border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-50'
+                    }`}
+                  >
+                    {st === 'all' ? 'All Status' : st}
+                  </button>
+                ))}
+              </div>
+            </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {/* Shuffle Questions */}

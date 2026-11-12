@@ -252,14 +252,6 @@ export const RightPane: React.FC<RightPaneProps> = ({
             {question.questionNumber}
           </div>
 
-          {/* Answered Indicator Badge */}
-          {isAnswered && (
-            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-mono font-semibold bg-emerald-600 text-white">
-              <Check className="w-3 h-3 stroke-[2.5]" />
-              <span>Answered</span>
-            </span>
-          )}
-
           {/* Mark for Review Toggle */}
           <button
             onClick={onToggleMarkForReview}
@@ -418,22 +410,26 @@ export const RightPane: React.FC<RightPaneProps> = ({
                   <div className="absolute inset-x-4 top-1/2 -translate-y-1/2 h-[1px] bg-zinc-500 dark:bg-zinc-400 pointer-events-none z-10" />
                 )}
 
-                {/* Bordered Letter Badge (A, B, C, D) */}
+                {/* Bordered Letter Badge (A, B, C, D) - Always displays choice letter */}
                 <div
                   className={`w-6 h-6 rounded-lg flex-shrink-0 flex items-center justify-center font-mono text-xs font-semibold tabular-nums transition-all duration-150 group-hover:scale-105 ${badgeStyleClass}`}
                 >
-                  {isChecked && isCorrect ? (
-                    <Check className="w-3.5 h-3.5 stroke-[2.5]" />
-                  ) : isChecked && isSelected && !isCorrect ? (
-                    <X className="w-3.5 h-3.5 stroke-[2.5]" />
-                  ) : (
-                    choiceId
-                  )}
+                  {choiceId}
                 </div>
 
-                {/* Choice Text */}
+                {/* Choice Text & Optional Status Icon */}
                 <div className="flex-1 pt-0.5 font-serif text-[15px] sm:text-[16px] leading-relaxed text-zinc-950 dark:text-[#F4F4F6]">
                   <RichText text={choice.text} />
+                  {isChecked && isCorrect && (
+                    <span className="inline-flex items-center gap-1 mt-1 text-xs font-sans font-bold text-emerald-700 dark:text-emerald-400">
+                      <Check className="w-3.5 h-3.5 stroke-[2.5]" /> Correct Choice
+                    </span>
+                  )}
+                  {isChecked && isSelected && !isCorrect && (
+                    <span className="inline-flex items-center gap-1 mt-1 text-xs font-sans font-bold text-rose-700 dark:text-rose-400">
+                      <X className="w-3.5 h-3.5 stroke-[2.5]" /> Selected Choice (Incorrect)
+                    </span>
+                  )}
                   {choice.imageUrl && (
                     <div className="mt-3 p-2.5 bg-white dark:bg-black border border-zinc-200 dark:border-[#222634] rounded-xl inline-flex items-center justify-center overflow-hidden shadow-xs">
                       <img

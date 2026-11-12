@@ -374,9 +374,78 @@ export function isQuestionAnswered(questionId: string): boolean {
 // -----------------------------------------------------------------------------
 // Daily Study Streak (Scoped to active user account)
 // -----------------------------------------------------------------------------
+/**
+ * Calculates continuous consecutive study streak from attempts history
+ */
+export function calculateStreakFromAttempts(attempts: AttemptRecord[]): number {
+  if (!attempts || attempts.length === 0) return 0;
+  const uniqueDates = Array.from(
+    new Set(attempts.map(a => new Date(a.timestamp).toISOString().slice(0, 10)))
+  ).sort().reverse();
+
+  if (uniqueDates.length === 0) return 0;
+
+  const today = new Date().toISOString().slice(0, 10);
+  const yesterday = new Date(Date.now() - 86400000).toISOString().slice(0, 10);
+
+  // If latest attempt is neither today nor yesterday, streak has expired
+  if (uniqueDates[0] !== today && uniqueDates[0] !== yesterday) {
+    return 0;
+  }
+
+  let streak = 1;
+  let currentDate = new Date(uniqueDates[0]);
+
+  for (let i = 1; i < uniqueDates.length; i++) {
+    const prevDate = new Date(uniqueDates[i]);
+    const diffDays = Math.round((currentDate.getTime() - prevDate.getTime()) / (1000 * 60 * 60 * 24));
+    if (diffDays === 1) {
+      streak++;
+      currentDate = prevDate;
+    } else if (diffDays === 0) {
+      continue;
+    } else {
+      break;
+    }
+  }
+
+  return streak;
+}
+
+/**
+ * Returns formatted streak string with proper pluralization (e.g. '1 Day' vs '2 Days')
+ */
+export function formatStreak(streak: number, capitalized = false): string {
+  const unit = streak === 1 ? (capitalized ? 'Day' : 'day') : (capitalized ? 'Days' : 'days');
+  return `${streak} ${unit}`;
+}
+
+/**
+ * Returns valid saved questions present in the master question bank
+ */
+export function getValidSavedQuestions<T extends { id: string }>(allQuestions: T[]): T[] {
+  const savedIds = new Set(getSavedQuestionIds());
+  return allQuestions.filter(q => savedIds.has(q.id));
+}
+
+/**
+ * Returns unique solved questions present in the master question bank
+ */
+export function getUniqueSolvedQuestions<T extends { id: string }>(allQuestions: T[]): T[] {
+  const attempts = getLatestAttemptsMap();
+  const answered = getAnsweredQuestionIds();
+  return allQuestions.filter(q => answered.has(q.id) || !!attempts[q.id]);
+}
+
 export function getStudyStreak(): number {
   if (typeof window === 'undefined') return 0;
   try {
+    const attempts = getAttempts();
+    if (attempts.length > 0) {
+      const computed = calculateStreakFromAttempts(attempts);
+      if (computed > 0) return computed;
+    }
+
     const key = getScopedKey(STORAGE_KEYS.STREAK);
     let raw = localStorage.getItem(key);
     if (!raw && getUserScope() === 'guest') {
@@ -387,13 +456,10 @@ export function getStudyStreak(): number {
     const today = new Date().toISOString().slice(0, 10);
     const yesterday = new Date(Date.now() - 86400000).toISOString().slice(0, 10);
 
-    if (data.lastDate === today) {
-      return data.streak || 1;
-    } else if (data.lastDate === yesterday) {
+    if (data.lastDate === today || data.lastDate === yesterday) {
       return data.streak || 1;
     } else {
-      // Missed more than 1 day
-      return 1;
+      return 0;
     }
   } catch (e) {
     return 0;
@@ -403,25 +469,12 @@ export function getStudyStreak(): number {
 export function updateStudyStreak(): number {
   if (typeof window === 'undefined') return 1;
   try {
+    const attempts = getAttempts();
+    const computed = calculateStreakFromAttempts(attempts);
+
     const key = getScopedKey(STORAGE_KEYS.STREAK);
     const today = new Date().toISOString().slice(0, 10);
-    const yesterday = new Date(Date.now() - 86400000).toISOString().slice(0, 10);
-    let raw = localStorage.getItem(key);
-    if (!raw && getUserScope() === 'guest') {
-      raw = localStorage.getItem(STORAGE_KEYS.STREAK);
-    }
-
-    let streak = 1;
-    if (raw) {
-      const data = JSON.parse(raw);
-      if (data.lastDate === today) {
-        return data.streak || 1;
-      } else if (data.lastDate === yesterday) {
-        streak = (data.streak || 1) + 1;
-      } else {
-        streak = 1;
-      }
-    }
+    const streak = Math.max(1, computed);
 
     localStorage.setItem(key, JSON.stringify({ streak, lastDate: today }));
     return streak;
@@ -474,14 +527,18 @@ export function get10DayActivityTrend(): DayActivity[] {
 // -----------------------------------------------------------------------------
 // Aggregated Question Analytics
 // -----------------------------------------------------------------------------
-export function getQuestionAnalytics() {
+export function getQuestionAnalytics(bankQuestions?: { id: string }[]) {
   const map = getLatestAttemptsMap();
-  const records = Object.values(map);
+  const records = bankQuestions
+    ? bankQuestions.filter(q => !!map[q.id]).map(q => map[q.id])
+    : Object.values(map);
   const attempted = records.length;
   const correct = records.filter(a => a.isCorrect).length;
   const wrong = attempted - correct;
   const accuracy = attempted > 0 ? Math.round((correct / attempted) * 100) : 0;
-  const savedCount = getSavedQuestionIds().length;
+  const savedCount = bankQuestions 
+    ? getValidSavedQuestions(bankQuestions).length 
+    : getSavedQuestionIds().length;
   const streak = attempted > 0 ? getStudyStreak() : 0;
 
   return {
@@ -496,11 +553,11 @@ export function getQuestionAnalytics() {
 
 export function getSkillStatsMap() {
   const map = getLatestAttemptsMap();
-  const stats: Record<string, { attempted: number; correct: number; wrong: number; timeSeconds: number }> = {};
+  const stats: Record<string, { domain: string; attempted: number; correct: number; wrong: number; timeSeconds: number }> = {};
 
   for (const a of Object.values(map)) {
     if (!stats[a.skill]) {
-      stats[a.skill] = { attempted: 0, correct: 0, wrong: 0, timeSeconds: 0 };
+      stats[a.skill] = { domain: a.domain || '', attempted: 0, correct: 0, wrong: 0, timeSeconds: 0 };
     }
     stats[a.skill].attempted++;
     if (a.isCorrect) stats[a.skill].correct++;

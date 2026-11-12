@@ -43,6 +43,16 @@ export interface CustomDeck {
 
 export type WordRating = 'needs_review' | 'almost' | 'know_it';
 
+export const formatPartOfSpeech = (pos?: string): string => {
+  if (!pos) return '';
+  const p = pos.toLowerCase().trim();
+  if (p === 'verb' || p === 'v') return 'VERB';
+  if (p === 'noun' || p === 'n') return 'NOUN';
+  if (p === 'adjective' || p === 'adj') return 'ADJ';
+  if (p === 'adverb' || p === 'adv') return 'ADV';
+  return p.toUpperCase();
+};
+
 const LOCAL_STORAGE_DECKS_KEY = 'satify_vocab_decks';
 const LOCAL_STORAGE_CUSTOM_DECKS_KEY = 'satify_custom_vocab_decks';
 const LOCAL_STORAGE_RATINGS_KEY = 'satify_vocab_word_ratings';
@@ -314,7 +324,7 @@ export const VocabPractice: React.FC = () => {
   }, [selectedDeckId, customDecks]);
 
   const activeDeckName = useMemo(() => {
-    if (selectedDeckId === 'official') return 'Official SAT Top 150';
+    if (selectedDeckId === 'official') return `Official SAT Top ${PRELOADED_SAT_VOCAB.length}`;
     if (selectedDeckId === 'all') return 'All SAT Words (Preloaded + Custom)';
     const deck = customDecks.find(d => d.id === selectedDeckId);
     return deck ? deck.name : 'Selected Deck';
@@ -408,16 +418,16 @@ export const VocabPractice: React.FC = () => {
       if (e.code === 'Space' || e.key === 'Enter') {
         e.preventDefault();
         setIsDefinitionRevealed(prev => !prev);
-      } else if (e.key === '1') {
+      } else if (isDefinitionRevealed && e.key === '1') {
         e.preventDefault();
         handleRateWord('needs_review');
-      } else if (e.key === '2') {
+      } else if (isDefinitionRevealed && e.key === '2') {
         e.preventDefault();
         handleRateWord('needs_review');
-      } else if (e.key === '3') {
+      } else if (isDefinitionRevealed && e.key === '3') {
         e.preventDefault();
         handleRateWord('almost');
-      } else if (e.key === '4') {
+      } else if (isDefinitionRevealed && e.key === '4') {
         e.preventDefault();
         handleRateWord('know_it');
       } else if (e.key === 'ArrowRight') {
@@ -430,7 +440,7 @@ export const VocabPractice: React.FC = () => {
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [activeTab, activeWords.length, currentFlashcard]);
+  }, [activeTab, activeWords.length, currentFlashcard, isDefinitionRevealed]);
 
   // ---------------------------------------------------------------------------
   // 2. Learn Mode (Interactive Quiz) State
@@ -1056,7 +1066,7 @@ export const VocabPractice: React.FC = () => {
                 onChange={(e) => setSelectedDeckId(e.target.value)}
                 className="bg-gray-50 dark:bg-[#0e131d] border border-gray-300 dark:border-slate-700 text-gray-900 dark:text-white text-xs font-bold rounded-lg px-3 py-1.5 focus:outline-none focus:border-[#0050d8] cursor-pointer"
               >
-                <option value="official">Official SAT Top 150 ({PRELOADED_SAT_VOCAB.length} words)</option>
+                <option value="official">Official SAT Top {PRELOADED_SAT_VOCAB.length} ({PRELOADED_SAT_VOCAB.length} words)</option>
                 <option value="all">All Words ({PRELOADED_SAT_VOCAB.length + customDecks.flatMap(d => d.words).length} words)</option>
                 {customDecks.length > 0 && (
                   <optgroup label="Custom Decks">
@@ -1103,7 +1113,7 @@ export const VocabPractice: React.FC = () => {
             </div>
 
             {/* Review Mode Tabs */}
-            <div className="w-full overflow-x-auto pb-1.5 scrollbar-none -mx-1 px-1">
+            <div className="w-full overflow-x-auto pb-1.5 scrollbar-none [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden -mx-1 px-1">
               <div className="inline-flex p-1 bg-gray-100 dark:bg-slate-800/80 rounded-xl border border-gray-200 dark:border-slate-700 min-w-max">
                 {[
                   { id: 'flashcards', label: 'Split-Pane Practice', icon: <Layers className="w-3.5 h-3.5" /> },
@@ -1260,7 +1270,7 @@ export const VocabPractice: React.FC = () => {
                                     {word.word}
                                   </span>
                                   <span className="text-[10px] uppercase font-bold text-gray-400 dark:text-slate-500">
-                                    {word.partOfSpeech.slice(0, 3)}
+                                    {formatPartOfSpeech(word.partOfSpeech)}
                                   </span>
                                 </div>
 
@@ -1306,7 +1316,7 @@ export const VocabPractice: React.FC = () => {
                         <div className="w-full flex items-center justify-between border-b border-zinc-100 dark:border-[#181B24] pb-3">
                           <div className="flex items-center gap-2">
                             <span className="px-2 py-0.5 rounded border border-zinc-200 dark:border-[#222634] bg-zinc-50 dark:bg-[#181B24] text-zinc-600 dark:text-[#8E95A5] font-mono text-[10px] uppercase font-semibold">
-                              {currentFlashcard.partOfSpeech}
+                              {formatPartOfSpeech(currentFlashcard.partOfSpeech)}
                             </span>
                             <span className="text-[10px] font-mono uppercase tracking-wider text-zinc-400 dark:text-[#8E95A5]">
                               {!isDefinitionRevealed ? 'Front • Stimulus' : 'Back • Definition'}
@@ -1376,45 +1386,56 @@ export const VocabPractice: React.FC = () => {
                           )}
                         </div>
 
-                        {/* Flashcard Bottom: 4 Keyboard-Accessible Rating Buttons */}
+                        {/* Flashcard Bottom: Reveal Definition or 4 Rating Buttons */}
                         <div className="w-full pt-3 border-t border-zinc-100 dark:border-[#181B24]">
-                          <div className="grid grid-cols-4 gap-2">
+                          {!isDefinitionRevealed ? (
                             <button
                               type="button"
-                              onClick={() => handleRateWord('needs_review')}
-                              className="py-2 px-1.5 rounded-lg border border-zinc-200 dark:border-[#222634] hover:border-rose-400 dark:hover:border-rose-800 bg-white dark:bg-[#11131A] text-rose-700 dark:text-rose-400 text-xs font-semibold transition-colors duration-150 cursor-pointer flex flex-col items-center justify-center gap-0.5"
+                              onClick={() => setIsDefinitionRevealed(true)}
+                              className="w-full py-2.5 px-4 rounded-lg border border-blue-200 dark:border-blue-900 bg-blue-50/70 hover:bg-blue-100 dark:bg-blue-950/40 dark:hover:bg-blue-900/50 text-blue-700 dark:text-blue-300 text-xs font-semibold transition-colors duration-150 cursor-pointer flex items-center justify-center gap-2 shadow-2xs"
                             >
-                              <span className="text-[10px] font-mono text-zinc-400 dark:text-[#8E95A5]">1</span>
-                              <span className="truncate">Again</span>
+                              <span>Reveal Definition</span>
+                              <kbd className="px-1.5 py-0.5 rounded border border-blue-200 dark:border-blue-800 bg-white dark:bg-[#11131A] text-[10px] font-mono">Space</kbd>
                             </button>
+                          ) : (
+                            <div className="grid grid-cols-4 gap-2 animate-in fade-in duration-150">
+                              <button
+                                type="button"
+                                onClick={() => handleRateWord('needs_review')}
+                                className="py-2 px-1.5 rounded-lg border border-zinc-200 dark:border-[#222634] hover:border-rose-400 dark:hover:border-rose-800 bg-white dark:bg-[#11131A] text-rose-700 dark:text-rose-400 text-xs font-semibold transition-colors duration-150 cursor-pointer flex flex-col items-center justify-center gap-0.5"
+                              >
+                                <span className="text-[10px] font-mono text-zinc-400 dark:text-[#8E95A5]">1</span>
+                                <span className="truncate">Again</span>
+                              </button>
 
-                            <button
-                              type="button"
-                              onClick={() => handleRateWord('needs_review')}
-                              className="py-2 px-1.5 rounded-lg border border-zinc-200 dark:border-[#222634] hover:border-amber-400 dark:hover:border-amber-800 bg-white dark:bg-[#11131A] text-amber-700 dark:text-amber-400 text-xs font-semibold transition-colors duration-150 cursor-pointer flex flex-col items-center justify-center gap-0.5"
-                            >
-                              <span className="text-[10px] font-mono text-zinc-400 dark:text-[#8E95A5]">2</span>
-                              <span className="truncate">Hard</span>
-                            </button>
+                              <button
+                                type="button"
+                                onClick={() => handleRateWord('needs_review')}
+                                className="py-2 px-1.5 rounded-lg border border-zinc-200 dark:border-[#222634] hover:border-amber-400 dark:hover:border-amber-800 bg-white dark:bg-[#11131A] text-amber-700 dark:text-amber-400 text-xs font-semibold transition-colors duration-150 cursor-pointer flex flex-col items-center justify-center gap-0.5"
+                              >
+                                <span className="text-[10px] font-mono text-zinc-400 dark:text-[#8E95A5]">2</span>
+                                <span className="truncate">Hard</span>
+                              </button>
 
-                            <button
-                              type="button"
-                              onClick={() => handleRateWord('almost')}
-                              className="py-2 px-1.5 rounded-lg border border-zinc-200 dark:border-[#222634] hover:border-blue-400 dark:hover:border-blue-800 bg-white dark:bg-[#11131A] text-blue-700 dark:text-blue-400 text-xs font-semibold transition-colors duration-150 cursor-pointer flex flex-col items-center justify-center gap-0.5"
-                            >
-                              <span className="text-[10px] font-mono text-zinc-400 dark:text-[#8E95A5]">3</span>
-                              <span className="truncate">Good</span>
-                            </button>
+                              <button
+                                type="button"
+                                onClick={() => handleRateWord('almost')}
+                                className="py-2 px-1.5 rounded-lg border border-zinc-200 dark:border-[#222634] hover:border-blue-400 dark:hover:border-blue-800 bg-white dark:bg-[#11131A] text-blue-700 dark:text-blue-400 text-xs font-semibold transition-colors duration-150 cursor-pointer flex flex-col items-center justify-center gap-0.5"
+                              >
+                                <span className="text-[10px] font-mono text-zinc-400 dark:text-[#8E95A5]">3</span>
+                                <span className="truncate">Good</span>
+                              </button>
 
-                            <button
-                              type="button"
-                              onClick={() => handleRateWord('know_it')}
-                              className="py-2 px-1.5 rounded-lg border border-zinc-200 dark:border-[#222634] hover:border-emerald-400 dark:hover:border-emerald-800 bg-white dark:bg-[#11131A] text-emerald-700 dark:text-emerald-400 text-xs font-semibold transition-colors duration-150 cursor-pointer flex flex-col items-center justify-center gap-0.5"
-                            >
-                              <span className="text-[10px] font-mono text-zinc-400 dark:text-[#8E95A5]">4</span>
-                              <span className="truncate">Easy</span>
-                            </button>
-                          </div>
+                              <button
+                                type="button"
+                                onClick={() => handleRateWord('know_it')}
+                                className="py-2 px-1.5 rounded-lg border border-zinc-200 dark:border-[#222634] hover:border-emerald-400 dark:hover:border-emerald-800 bg-white dark:bg-[#11131A] text-emerald-700 dark:text-emerald-400 text-xs font-semibold transition-colors duration-150 cursor-pointer flex flex-col items-center justify-center gap-0.5"
+                              >
+                                <span className="text-[10px] font-mono text-zinc-400 dark:text-[#8E95A5]">4</span>
+                                <span className="truncate">Easy</span>
+                              </button>
+                            </div>
+                          )}
 
                           {/* Prev / Next controls */}
                           <div className="flex items-center justify-between mt-3 text-xs font-mono text-zinc-500 dark:text-[#8E95A5]">
@@ -1476,7 +1497,7 @@ export const VocabPractice: React.FC = () => {
                 </h3>
                 <div className="flex items-center gap-2 mt-1">
                   <span className="text-sm italic text-gray-400 dark:text-slate-500 font-serif">
-                    ({currentQuizItem.partOfSpeech}) • {getWordPhonetics(currentQuizItem.word)}
+                    ({formatPartOfSpeech(currentQuizItem.partOfSpeech)}) • {getWordPhonetics(currentQuizItem.word)}
                   </span>
                   <button
                     type="button"
@@ -1688,7 +1709,7 @@ export const VocabPractice: React.FC = () => {
                           </button>
                         </div>
                         <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-blue-50 dark:bg-blue-950/60 text-[#0050d8] dark:text-blue-400 border border-blue-100 dark:border-blue-900">
-                          {item.partOfSpeech}
+                          {formatPartOfSpeech(item.partOfSpeech)}
                         </span>
                       </div>
 
@@ -1841,7 +1862,7 @@ export const VocabPractice: React.FC = () => {
             {/* Badges */}
             <div className="flex items-center gap-2">
               <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-blue-50 dark:bg-blue-950/60 text-[#0050d8] dark:text-blue-400 border border-blue-100 dark:border-blue-900">
-                {inspectedWord.partOfSpeech}
+                {formatPartOfSpeech(inspectedWord.partOfSpeech)}
               </span>
               <span className={`px-2.5 py-0.5 rounded-full text-xs font-bold ${
                 inspectedWord.difficulty === 'Hard' ? 'bg-rose-100 text-rose-700 dark:bg-rose-950/60 dark:text-rose-400' :
@@ -1859,7 +1880,7 @@ export const VocabPractice: React.FC = () => {
                   {inspectedWord.word}
                 </h2>
                 <p className="text-base text-gray-500 dark:text-slate-400 italic mt-1 font-serif">
-                  {inspectedWord.partOfSpeech} • {getWordPhonetics(inspectedWord.word)}
+                  {formatPartOfSpeech(inspectedWord.partOfSpeech)} • {getWordPhonetics(inspectedWord.word)}
                 </p>
               </div>
 

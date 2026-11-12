@@ -182,7 +182,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
       {/* Footer Utility Cluster */}
       <div className="p-3 border-t border-zinc-200 dark:border-[#222634] bg-white dark:bg-[#11131A] flex items-center justify-between text-zinc-500 dark:text-[#8E95A5]">
         <div className="text-[10px] font-mono tracking-tight">
-          © SATify 2026
+          © SATIFY {new Date().getFullYear()}
         </div>
 
         <div className="flex items-center gap-1">

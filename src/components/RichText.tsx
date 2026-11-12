@@ -129,9 +129,29 @@ export const renderFormattedContent = (
       seg.text.includes('\\frac') ||
       (seg.text.includes('<') && seg.text.includes('>'));
 
-    let node: React.ReactNode = hasMathOrEntities
-      ? <MathText text={seg.text} />
-      : seg.text;
+    // Check for passage blanks: 3 or more underscores ______
+    const hasBlank = /_{3,}/.test(seg.text);
+
+    let node: React.ReactNode;
+    if (hasMathOrEntities) {
+      node = <MathText text={seg.text} />;
+    } else if (hasBlank) {
+      const parts = seg.text.split(/_{3,}/g);
+      node = (
+        <>
+          {parts.map((part, pIdx) => (
+            <React.Fragment key={`blank-part-${pIdx}`}>
+              {part.replace(/\\+\$/g, '$').replace(/\\+%/g, '%')}
+              {pIdx < parts.length - 1 && (
+                <span className="inline-block border-b-2 border-zinc-900 dark:border-zinc-100 min-w-[3.5rem] h-[1.1em] mx-1 align-baseline bg-zinc-200/50 dark:bg-zinc-800/50 rounded-xs select-none">&nbsp;</span>
+              )}
+            </React.Fragment>
+          ))}
+        </>
+      );
+    } else {
+      node = seg.text.replace(/\\+\$/g, '$').replace(/\\+%/g, '%');
+    }
 
     if (seg.isSub) {
       node = <sub key={`sub-${idx}`}>{node}</sub>;

@@ -887,7 +887,7 @@ export const QuestionRush: React.FC<QuestionRushProps> = ({
             <div className="space-y-4">
               <div className="flex items-center justify-between">
                 <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-semibold uppercase tracking-wider bg-emerald-50 text-emerald-700 border border-emerald-200 dark:bg-emerald-950/40 dark:text-emerald-400 dark:border-emerald-800 shadow-2xs">
-                  Section 1 • Verbal
+                  Section 1 • Reading &amp; Writing
                 </span>
                 <span className="text-xs font-mono text-zinc-500 dark:text-[#8E95A5] tabular-nums">
                   {englishQuestions.length} questions
@@ -895,9 +895,14 @@ export const QuestionRush: React.FC<QuestionRushProps> = ({
               </div>
 
               <div>
-                <h3 className="text-lg font-bold text-zinc-950 dark:text-[#F4F4F6] tracking-tight">
-                  Reading &amp; Writing Rush
-                </h3>
+                <div className="flex items-center gap-2">
+                  <div className="w-6 h-6 rounded-lg bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
+                    <BookOpen className="w-3.5 h-3.5" />
+                  </div>
+                  <h3 className="text-lg font-bold text-zinc-950 dark:text-[#F4F4F6] tracking-tight">
+                    Reading &amp; Writing Rush
+                  </h3>
+                </div>
                 <p className="text-xs text-zinc-600 dark:text-[#8E95A5] mt-1 leading-relaxed">
                   Fast-paced drills across Craft &amp; Structure, Information &amp; Ideas, Expression of Ideas, and Standard English Conventions.
                 </p>
@@ -959,7 +964,7 @@ export const QuestionRush: React.FC<QuestionRushProps> = ({
               onClick={() => handleStartRush('Reading and Writing')}
               className="w-full py-2.5 px-4 rounded-xl bg-blue-700 hover:bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-500 text-white font-semibold text-xs transition-all duration-150 active:scale-95 shadow-xs hover:shadow flex items-center justify-between cursor-pointer"
             >
-              <span>Start Timed Rush</span>
+              <span>Start R&amp;W Rush</span>
               <ChevronRight className="w-4 h-4" strokeWidth={1.75} />
             </button>
           </div>
@@ -973,7 +978,7 @@ export const QuestionRush: React.FC<QuestionRushProps> = ({
             <div className="relative z-10 space-y-4">
               <div className="flex items-center justify-between">
                 <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-semibold uppercase tracking-wider bg-sky-50 text-sky-700 border border-sky-200 dark:bg-sky-950/40 dark:text-sky-300 dark:border-sky-800 shadow-2xs">
-                  Section 2 • Quantitative
+                  Section 2 • Math
                 </span>
                 <span className="text-xs font-mono text-zinc-500 dark:text-[#8E95A5] tabular-nums">
                   {mathQuestions.length} questions

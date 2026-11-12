@@ -22,10 +22,11 @@ import { allEnglishQuestions, allMathQuestions } from '../data/mockQuestions';
 import { 
   getAttempts, 
   getStudyStreak, 
-  getSavedQuestionIds, 
   get10DayActivityTrend, 
   getQuestionAnalytics,
-  getLatestAttemptsMap 
+  getLatestAttemptsMap,
+  getValidSavedQuestions,
+  getUniqueSolvedQuestions
 } from '../utils/storage';
 
 interface QuestionBankHubProps {
@@ -194,7 +195,7 @@ const DualToneDonutGauge: React.FC<{
       </svg>
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
         <span className="text-[11px] font-bold font-mono text-slate-800 dark:text-slate-100">
-          {attempted > 0 ? `${accuracy}%` : '0%'}
+          {attempted > 0 ? `${accuracy}%` : '—'}
         </span>
       </div>
     </div>
@@ -214,8 +215,9 @@ export const QuestionBankHub: React.FC<QuestionBankHubProps> = ({
   const attempts = useMemo(() => getAttempts(), []);
   const latestAttemptsMap = useMemo(() => getLatestAttemptsMap(), []);
   const streak = useMemo(() => getStudyStreak(), []);
-  const savedCount = useMemo(() => getSavedQuestionIds().length, []);
-  const analytics = useMemo(() => getQuestionAnalytics(), []);
+  const allQuestions = useMemo(() => [...allEnglishQuestions, ...allMathQuestions], []);
+  const savedCount = useMemo(() => getValidSavedQuestions(allQuestions).length, [allQuestions]);
+  const analytics = useMemo(() => getQuestionAnalytics(allQuestions), [allQuestions]);
   const activityTrend = useMemo(() => get10DayActivityTrend(), []);
 
   // Section Calculations
@@ -223,14 +225,10 @@ export const QuestionBankHub: React.FC<QuestionBankHubProps> = ({
   const totalMath = allMathQuestions.length; // 993
   const totalAll = totalRW + totalMath; // 1,746
 
-  const mathDomains = ['Algebra', 'Advanced Math', 'Problem-Solving and Data Analysis', 'Geometry and Trigonometry'];
-  const rwAttempts = useMemo(() => attempts.filter(a => !mathDomains.includes(a.domain)), [attempts]);
-  const mathAttempts = useMemo(() => attempts.filter(a => mathDomains.includes(a.domain)), [attempts]);
-
-  const rwSolved = rwAttempts.length;
+  const rwSolved = useMemo(() => getUniqueSolvedQuestions(allEnglishQuestions).length, []);
   const rwPercent = totalRW > 0 ? Math.min(100, Math.round((rwSolved / totalRW) * 100)) : 0;
 
-  const mathSolved = mathAttempts.length;
+  const mathSolved = useMemo(() => getUniqueSolvedQuestions(allMathQuestions).length, []);
   const mathPercent = totalMath > 0 ? Math.min(100, Math.round((mathSolved / totalMath) * 100)) : 0;
 
   // 10-day activity trend calculations
@@ -393,7 +391,9 @@ export const QuestionBankHub: React.FC<QuestionBankHubProps> = ({
                               <div className="flex items-start gap-2.5">
                                 {/* Small Square Skill Score Badge */}
                                 {attempted > 0 ? (
-                                  <div className="w-7 h-7 rounded-lg font-bold bg-lime-500 text-slate-950 flex items-center justify-center text-xs shadow-2xs font-mono shrink-0">
+                                  <div className={`w-7 h-7 rounded-lg font-bold flex items-center justify-center text-xs shadow-2xs font-mono shrink-0 text-white ${
+                                    accuracy >= 80 ? 'bg-emerald-600' : accuracy >= 60 ? 'bg-amber-500' : 'bg-rose-500'
+                                  }`}>
                                     {accuracy}
                                   </div>
                                 ) : (
@@ -404,7 +404,7 @@ export const QuestionBankHub: React.FC<QuestionBankHubProps> = ({
 
                                 <div className="min-w-0 flex-1">
                                   <h4 
-                                    className="font-bold text-xs sm:text-sm text-slate-900 dark:text-[#F4F4F6] leading-snug line-clamp-2"
+                                    className="font-bold text-xs sm:text-sm text-slate-900 dark:text-[#F4F4F6] leading-snug line-clamp-3"
                                     title={skill}
                                   >
                                     {skill}
@@ -524,7 +524,7 @@ export const QuestionBankHub: React.FC<QuestionBankHubProps> = ({
                 <div className="flex items-center justify-between">
                   <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider bg-white/15 text-blue-100 border border-white/20 backdrop-blur-xs">
                     <PenTool className="w-3 h-3" />
-                    Section 1 • Verbal
+                    SECTION 1 • READING &amp; WRITING
                   </span>
                   <span className="text-xs font-mono text-blue-200">
                     {totalRW} Questions
@@ -548,13 +548,11 @@ export const QuestionBankHub: React.FC<QuestionBankHubProps> = ({
                   </div>
 
                   {/* Progress Bar with White Circular Indicator Dot */}
-                  <div className="relative w-full h-2.5 bg-black/25 rounded-full overflow-visible">
+                  <div className="relative w-full h-2.5 bg-black/25 rounded-full overflow-hidden">
                     <div 
                       className="relative h-full bg-gradient-to-r from-blue-300 to-white rounded-full transition-all duration-500 ease-out"
-                      style={{ width: `${Math.max(4, rwPercent)}%` }}
-                    >
-                      <div className="absolute right-[-4px] top-1/2 -translate-y-1/2 w-3.5 h-3.5 rounded-full bg-white shadow-md border-2 border-blue-800" />
-                    </div>
+                      style={{ width: `${rwPercent}%` }}
+                    />
                   </div>
                 </div>
               </div>
@@ -594,7 +592,7 @@ export const QuestionBankHub: React.FC<QuestionBankHubProps> = ({
                 <div className="flex items-center justify-between">
                   <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider bg-white/15 text-sky-100 border border-white/20 backdrop-blur-xs">
                     <Calculator className="w-3 h-3" />
-                    Section 2 • Quantitative
+                    SECTION 2 • MATH
                   </span>
                   <span className="text-xs font-mono text-sky-200">
                     {totalMath} Questions
@@ -617,14 +615,12 @@ export const QuestionBankHub: React.FC<QuestionBankHubProps> = ({
                     <span className="font-bold text-white">{mathPercent}%</span>
                   </div>
 
-                  {/* Progress Bar with White Circular Indicator Dot */}
-                  <div className="relative w-full h-2.5 bg-black/25 rounded-full overflow-visible">
+                  {/* Progress Bar with Smooth Track */}
+                  <div className="relative w-full h-2.5 bg-black/25 rounded-full overflow-hidden">
                     <div 
                       className="relative h-full bg-gradient-to-r from-sky-200 to-white rounded-full transition-all duration-500 ease-out"
-                      style={{ width: `${Math.max(4, mathPercent)}%` }}
-                    >
-                      <div className="absolute right-[-4px] top-1/2 -translate-y-1/2 w-3.5 h-3.5 rounded-full bg-white shadow-md border-2 border-sky-800" />
-                    </div>
+                      style={{ width: `${mathPercent}%` }}
+                    />
                   </div>
                 </div>
               </div>
@@ -740,7 +736,7 @@ export const QuestionBankHub: React.FC<QuestionBankHubProps> = ({
               </span>
               <div className="mt-2">
                 <div className="text-2xl sm:text-3xl font-extrabold tracking-tight tabular-nums text-amber-600 dark:text-amber-400">
-                  {streak} <span className="text-xs font-semibold text-zinc-500 dark:text-[#8E95A5]">Days</span>
+                  {streak} <span className="text-xs font-semibold text-zinc-500 dark:text-[#8E95A5]">{streak === 1 ? 'Day' : 'Days'}</span>
                 </div>
                 <span className="text-[11px] font-mono text-zinc-500 dark:text-[#8E95A5] mt-1 block">
                   Consecutive practice

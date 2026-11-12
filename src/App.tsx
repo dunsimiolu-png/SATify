@@ -38,8 +38,8 @@ import {
 import { 
   recordAnswer, 
   toggleSaveQuestion, 
-  saveQuestion,
   getSavedQuestionIds,
+  getValidSavedQuestions,
   getSavedUserStates,
   saveUserState,
   getLatestAttemptsMap,
@@ -274,11 +274,24 @@ export const App: React.FC = () => {
   // Automatically persist last practice session whenever user views or answers a question in practice mode
   useEffect(() => {
     if (currentRoute === 'practice' && currentQuestion) {
-      const snippet = (currentQuestion.prompt || currentQuestion.passage || '')
-        .replace(/<[^>]+>/g, '')
-        .replace(/\s+/g, ' ')
-        .trim()
-        .slice(0, 110);
+      const raw = (currentQuestion.prompt || currentQuestion.passage || '').replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
+      let snippet = raw;
+      if (raw.length > 110) {
+        let cutoff = raw.lastIndexOf(' ', 110);
+        if (cutoff <= 60) cutoff = 110;
+        snippet = raw.slice(0, cutoff);
+        // Ensure not cutting inside a math block
+        const dollarCount = (snippet.match(/(?<!\\)\$/g) || []).length;
+        if (dollarCount % 2 !== 0) {
+          const nextDollar = raw.indexOf('$', cutoff);
+          if (nextDollar !== -1 && nextDollar < 140) {
+            snippet = raw.slice(0, nextDollar + 1);
+          } else {
+            snippet += '$';
+          }
+        }
+        snippet += '...';
+      }
       saveLastSession({
         section: currentQuestion.section,
         domain: currentQuestion.domain,
@@ -351,23 +364,8 @@ export const App: React.FC = () => {
         eliminatedChoices: prev.eliminatedChoices.filter(c => c !== choice),
       };
 
-      // Persist to storage
+      // Persist active choice to state
       saveUserState(currentQuestion.id, nextState);
-
-      // Auto-save question and record answer when answered
-      if (nextChoice !== null) {
-        saveQuestion(currentQuestion.id);
-        recordAnswer(
-          currentQuestion.id,
-          nextChoice,
-          nextChoice === currentQuestion.correctAnswer,
-          currentQuestion.domain,
-          currentQuestion.skill,
-          currentQuestion.difficulty,
-          30
-        );
-      }
-
       return nextState;
     });
   }, [updateCurrentState, currentQuestion]);
@@ -444,9 +442,6 @@ export const App: React.FC = () => {
       currentQuestion.difficulty,
       timeSpentSeconds || 30
     );
-
-    // Save answered question to bookmarks
-    saveQuestion(currentQuestion.id);
 
     const nextState: UserQuestionState = {
       ...currentState,
@@ -882,7 +877,7 @@ export const App: React.FC = () => {
     }
   }, [currentRoute]);
 
-  const savedCount = useMemo(() => getSavedQuestionIds().length, [currentState, storageVersion]);
+  const savedCount = useMemo(() => getValidSavedQuestions(allQuestions).length, [allQuestions, currentState, storageVersion]);
 
   return (
     <div className="w-full max-w-full overflow-x-hidden h-[100dvh] max-h-[100dvh] flex flex-col md:flex-row overflow-hidden font-sans bg-neutral-50 dark:bg-[#090A0F] text-zinc-950 dark:text-[#F4F4F6]">

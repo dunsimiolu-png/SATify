@@ -47,7 +47,7 @@ interface HeaderProps {
 
 export const Header: React.FC<HeaderProps> = ({
   section,
-  moduleNumber,
+  moduleNumber: _moduleNumber,
   onOpenDirections,
   onOpenReference,
   onOpenCalculator,
@@ -172,11 +172,15 @@ export const Header: React.FC<HeaderProps> = ({
           {/* Title & Directions */}
           <div className="flex flex-col justify-center min-w-0 hidden sm:flex">
             <div className="flex items-center gap-2">
-              <span className="text-zinc-950 dark:text-[#F4F4F6] font-semibold text-xs sm:text-sm tracking-tight truncate">
-                <span className="hidden lg:inline text-zinc-500 dark:text-[#8E95A5]">
-                  {isMath ? 'Section 2, Module 1: ' : `Section 1, Module ${moduleNumber}: `}
+              <span className="text-zinc-950 dark:text-[#F4F4F6] font-semibold text-xs sm:text-sm tracking-tight truncate max-w-[280px] lg:max-w-[420px]">
+                <span className="text-zinc-500 dark:text-[#8E95A5] mr-1.5 font-medium">
+                  {isMath ? 'Section 2 • Math' : `Section 1 • Reading & Writing`}
                 </span>
-                {isMath ? 'Math' : 'Reading & Writing'}
+                {currentQuestion?.skill && (
+                  <span className="text-zinc-800 dark:text-[#E2E8F0]">
+                    • {currentQuestion.skill}
+                  </span>
+                )}
               </span>
               {isAnswered && (
                 <span className="hidden md:inline-flex items-center gap-1 px-2 py-0.5 rounded border border-emerald-300 dark:border-emerald-800 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 text-[10px] font-mono font-semibold">
@@ -222,7 +226,7 @@ export const Header: React.FC<HeaderProps> = ({
                     title={`Pacing target for ${currentQuestion.skill} (${currentQuestion.difficulty}): ${targetSeconds}s`}
                   >
                     <span className={`w-1.5 h-1.5 rounded-full ${paceColor.dotClass}`} />
-                    <span>{formatSecondsToPace(stopwatchSeconds)} / {formatSecondsToPace(targetSeconds)}</span>
+                    <span>target {formatSecondsToPace(targetSeconds)}</span>
                   </div>
                 )}
               </div>

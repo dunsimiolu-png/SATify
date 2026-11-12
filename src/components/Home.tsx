@@ -220,30 +220,36 @@ export const Home: React.FC<HomeProps> = ({
     return attempts[attempts.length - 1];
   }, [attempts]);
 
-  // Strongest and Weakest skills calculation
+  // Strongest and Weakest skills calculation (Dynamic from user performance data, threshold >= 3 attempts)
   const { strongestSkills, weakestSkills } = useMemo(() => {
-    const defaultRWSkills = [
-      { name: 'Words in Context', domain: 'Craft and Structure' },
-      { name: 'Transitions', domain: 'Expression of Ideas' },
-      { name: 'Command of Evidence', domain: 'Information and Ideas' },
-      { name: 'Boundaries', domain: 'Standard English Conventions' },
-      { name: 'Central Ideas and Details', domain: 'Information and Ideas' },
-      { name: 'Inferences', domain: 'Information and Ideas' },
-    ];
+    const entries = Object.entries(skillStatsMap);
+    const qualified = entries
+      .filter(([_, stat]) => stat.attempted >= 3)
+      .map(([name, stat]) => ({
+        name,
+        domain: stat.domain || '',
+        accuracy: Math.round((stat.correct / stat.attempted) * 100),
+        attempted: stat.attempted,
+      }));
 
-    const mapped = defaultRWSkills.map(sk => {
-      const stat = skillStatsMap[sk.name];
-      if (stat && stat.attempted > 0) {
-        const acc = Math.round((stat.correct / stat.attempted) * 100);
-        return { name: sk.name, domain: sk.domain, accuracy: acc, attempted: stat.attempted };
-      }
-      return { name: sk.name, domain: sk.domain, accuracy: 75, attempted: 0 };
-    });
+    if (qualified.length >= 3) {
+      const strongest = [...qualified].sort((a, b) => b.accuracy - a.accuracy || b.attempted - a.attempted).slice(0, 3);
+      const weakest = [...qualified].sort((a, b) => a.accuracy - b.accuracy || b.attempted - a.attempted).slice(0, 3);
+      return { strongestSkills: strongest, weakestSkills: weakest };
+    }
 
-    // Sort descending for strongest, ascending for weakest
-    const sorted = [...mapped].sort((a, b) => b.accuracy - a.accuracy);
-    const strongest = sorted.slice(0, 3);
-    const weakest = [...mapped].sort((a, b) => a.accuracy - b.accuracy).slice(0, 3);
+    // Fallback: If fewer than 3 skills have >= 3 attempts, include skills with attempted > 0
+    const anyAttempted = entries
+      .filter(([_, stat]) => stat.attempted > 0)
+      .map(([name, stat]) => ({
+        name,
+        domain: stat.domain || '',
+        accuracy: Math.round((stat.correct / stat.attempted) * 100),
+        attempted: stat.attempted,
+      }));
+
+    const strongest = [...anyAttempted].sort((a, b) => b.accuracy - a.accuracy || b.attempted - a.attempted).slice(0, 3);
+    const weakest = [...anyAttempted].sort((a, b) => a.accuracy - b.accuracy || b.attempted - a.attempted).slice(0, 3);
 
     return { strongestSkills: strongest, weakestSkills: weakest };
   }, [skillStatsMap]);
@@ -283,7 +289,7 @@ export const Home: React.FC<HomeProps> = ({
                 <span className="text-blue-300">•</span>
                 <span className="text-amber-300 font-semibold flex items-center gap-1">
                   <Clock className="w-3 h-3" />
-                  Reveals in {countdown || '24h'}
+                  Resets in {countdown || '24h'}
                 </span>
               </div>
             </div>
@@ -322,7 +328,7 @@ export const Home: React.FC<HomeProps> = ({
 
                   <div>
                     <h3 className="font-bold text-sm text-zinc-950 dark:text-[#F4F4F6] group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                      Daily Quantitative Challenge
+                      Daily Math Challenge
                     </h3>
                     <p className="text-xs text-zinc-600 dark:text-[#8E95A5] mt-0.5 line-clamp-1">
                       Calibrated problem solving &amp; algebra reasoning drill.
@@ -364,7 +370,7 @@ export const Home: React.FC<HomeProps> = ({
 
                   <div>
                     <h3 className="font-bold text-sm text-zinc-950 dark:text-[#F4F4F6] group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
-                      Daily Verbal Reasoning
+                      Daily Reading &amp; Writing Challenge
                     </h3>
                     <p className="text-xs text-zinc-600 dark:text-[#8E95A5] mt-0.5 line-clamp-1">
                       Context clues, rhetorical synthesis, &amp; conventions pacing.
@@ -386,7 +392,10 @@ export const Home: React.FC<HomeProps> = ({
             
             {/* Royal-Blue Header Bar */}
             <div className="bg-gradient-to-r from-blue-700 to-indigo-800 dark:from-blue-600 dark:to-indigo-700 px-4 sm:px-5 py-3.5 text-white flex items-center justify-between">
-              <span className="font-bold text-sm tracking-wider uppercase">START PRACTICING</span>
+              <span className="font-bold text-sm tracking-wide flex items-center">
+                <Play className="w-4 h-4 fill-current mr-2 shrink-0" />
+                Start Practicing
+              </span>
               <span className="text-xs font-mono bg-black/25 text-white/95 px-2.5 py-0.5 rounded-full font-medium">
                 {questions.length} Items in Bank
               </span>
@@ -483,7 +492,7 @@ export const Home: React.FC<HomeProps> = ({
               </div>
               <div>
                 <div className="text-2xl font-bold tracking-tight text-zinc-950 dark:text-[#F4F4F6] tabular-nums">
-                  {streak} <span className="text-xs font-medium text-zinc-500 dark:text-[#8E95A5]">days</span>
+                  {streak} <span className="text-xs font-medium text-zinc-500 dark:text-[#8E95A5]">{streak === 1 ? 'day' : 'days'}</span>
                 </div>
                 <p className="text-[11px] text-zinc-500 dark:text-[#8E95A5] mt-0.5">
                   {streak > 0 ? 'Study streak on fire!' : 'Solve 1 Q to begin streak'}
@@ -677,7 +686,7 @@ export const Home: React.FC<HomeProps> = ({
               <div className="md:col-span-6 flex flex-col justify-between border-b md:border-b-0 md:border-r border-zinc-100 dark:border-[#181B24] pb-4 md:pb-0 md:pr-4">
                 <div className="flex items-center justify-between mb-2">
                   <span className="text-xs font-bold text-zinc-700 dark:text-zinc-300 uppercase font-mono tracking-wider">
-                    7-Day Accuracy
+                    7-Day Activity
                   </span>
                   <span className="text-[11px] font-mono text-zinc-400">
                     {recentDays.reduce((acc, d) => acc + d.total, 0)} Total Solved
@@ -689,14 +698,17 @@ export const Home: React.FC<HomeProps> = ({
                     const heightPercent = day.total > 0 ? Math.max(16, (day.total / maxRecentDay) * 100) : 6;
                     const correctPercent = day.total > 0 ? (day.correct / day.total) * 100 : 0;
                     const wrongPercent = 100 - correctPercent;
+                    const tooltip = day.total > 0 
+                      ? `${day.label}: ${day.correct}/${day.total} correct (${Math.round(correctPercent)}%)` 
+                      : `${day.label}: No practice`;
 
                     return (
-                      <div key={idx} className="flex-1 flex flex-col items-center gap-1.5 h-full justify-end group">
+                      <div key={idx} className="flex-1 flex flex-col items-center gap-1.5 h-full justify-end group relative" title={tooltip}>
                         <div className="w-full max-w-[24px] rounded-t-md overflow-hidden flex flex-col justify-end transition-all duration-200" style={{ height: `${heightPercent}%` }}>
                           {day.total > 0 ? (
                             <>
-                              <div style={{ height: `${wrongPercent}%` }} className="w-full bg-rose-500" title={`${day.wrong} incorrect`} />
-                              <div style={{ height: `${correctPercent}%` }} className="w-full bg-emerald-500" title={`${day.correct} correct`} />
+                              <div style={{ height: `${wrongPercent}%` }} className="w-full bg-rose-500" />
+                              <div style={{ height: `${correctPercent}%` }} className="w-full bg-emerald-500" />
                             </>
                           ) : (
                             <div className="w-full h-full bg-zinc-200 dark:bg-[#181B24] rounded-t-md" />
@@ -721,21 +733,27 @@ export const Home: React.FC<HomeProps> = ({
                     Strongest Skills
                   </span>
                   <div className="space-y-1.5">
-                    {strongestSkills.map(sk => (
-                      <div key={sk.name} className="flex items-center justify-between text-xs">
-                        <span className="truncate max-w-[170px] text-zinc-700 dark:text-[#C5CAD6]" title={sk.name}>
-                          {sk.name}
-                        </span>
-                        <div className="flex items-center gap-2 shrink-0">
-                          <div className="w-16 h-1.5 bg-zinc-100 dark:bg-[#181B24] rounded-full overflow-hidden">
-                            <div className="h-full bg-emerald-500 rounded-full" style={{ width: `${sk.accuracy}%` }} />
-                          </div>
-                          <span className="font-mono font-bold text-[11px] text-emerald-700 dark:text-emerald-400 tabular-nums">
-                            {sk.accuracy}%
+                    {strongestSkills.length > 0 ? (
+                      strongestSkills.map(sk => (
+                        <div key={sk.name} className="flex items-center justify-between text-xs">
+                          <span className="truncate max-w-[170px] text-zinc-700 dark:text-[#C5CAD6]" title={sk.name}>
+                            {sk.name}
                           </span>
+                          <div className="flex items-center gap-2 shrink-0">
+                            <div className="w-16 h-1.5 bg-zinc-100 dark:bg-[#181B24] rounded-full overflow-hidden">
+                              <div className="h-full bg-emerald-500 rounded-full" style={{ width: `${sk.accuracy}%` }} />
+                            </div>
+                            <span className="font-mono font-bold text-[11px] text-emerald-700 dark:text-emerald-400 tabular-nums">
+                              {sk.accuracy}%
+                            </span>
+                          </div>
                         </div>
-                      </div>
-                    ))}
+                      ))
+                    ) : (
+                      <p className="text-xs text-zinc-400 dark:text-[#8E95A5] italic">
+                        Solve 3+ questions per skill to reveal insights.
+                      </p>
+                    )}
                   </div>
                 </div>
 
@@ -746,21 +764,27 @@ export const Home: React.FC<HomeProps> = ({
                     Weakest Skills
                   </span>
                   <div className="space-y-1.5">
-                    {weakestSkills.map(sk => (
-                      <div key={sk.name} className="flex items-center justify-between text-xs">
-                        <span className="truncate max-w-[170px] text-zinc-700 dark:text-[#C5CAD6]" title={sk.name}>
-                          {sk.name}
-                        </span>
-                        <div className="flex items-center gap-2 shrink-0">
-                          <div className="w-16 h-1.5 bg-zinc-100 dark:bg-[#181B24] rounded-full overflow-hidden">
-                            <div className="h-full bg-amber-500 rounded-full" style={{ width: `${sk.accuracy}%` }} />
-                          </div>
-                          <span className="font-mono font-bold text-[11px] text-amber-700 dark:text-amber-400 tabular-nums">
-                            {sk.accuracy}%
+                    {weakestSkills.length > 0 ? (
+                      weakestSkills.map(sk => (
+                        <div key={sk.name} className="flex items-center justify-between text-xs">
+                          <span className="truncate max-w-[170px] text-zinc-700 dark:text-[#C5CAD6]" title={sk.name}>
+                            {sk.name}
                           </span>
+                          <div className="flex items-center gap-2 shrink-0">
+                            <div className="w-16 h-1.5 bg-zinc-100 dark:bg-[#181B24] rounded-full overflow-hidden">
+                              <div className="h-full bg-amber-500 rounded-full" style={{ width: `${sk.accuracy}%` }} />
+                            </div>
+                            <span className="font-mono font-bold text-[11px] text-amber-700 dark:text-amber-400 tabular-nums">
+                              {sk.accuracy}%
+                            </span>
+                          </div>
                         </div>
-                      </div>
-                    ))}
+                      ))
+                    ) : (
+                      <p className="text-xs text-zinc-400 dark:text-[#8E95A5] italic">
+                        Focus areas will appear as you practice.
+                      </p>
+                    )}
                   </div>
                 </div>
 

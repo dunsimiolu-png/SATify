@@ -83,7 +83,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Leo goes to a packing store to buy containers and tape. Leo has \\$15. Each container costs \\$1.87 and each roll of tape costs \\$2.40. Which inequality represents the relationship between the number of containers, $c$, and the number of rolls of tape, $t$, Leo can buy?",
+    "prompt": "Leo goes to a packing store to buy containers and tape. Leo has $15. Each container costs $1.87 and each roll of tape costs $2.40. Which inequality represents the relationship between the number of containers, $c$, and the number of rolls of tape, $t$, Leo can buy?",
     "options": [
       {
         "id": "A",
@@ -219,27 +219,27 @@
     "difficulty": "Hard",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "A business owner plans to purchase the same model of chair for each of the $81$ employees. The total budget to spend on these chairs is \\$14,000, which includes a $7\\%$ sales tax. Which of the following is closest to the maximum possible price per chair, before sales tax, the business owner could pay based on this budget?",
+    "prompt": "A business owner plans to purchase the same model of chair for each of the $81$ employees. The total budget to spend on these chairs is $14,000, which includes a $7\\%$ sales tax. Which of the following is closest to the maximum possible price per chair, before sales tax, the business owner could pay based on this budget?",
     "options": [
       {
         "id": "A",
         "label": "A",
-        "text": "\\$148.15"
+        "text": "$148.15"
       },
       {
         "id": "B",
         "label": "B",
-        "text": "\\$161.53"
+        "text": "$161.53"
       },
       {
         "id": "C",
         "label": "C",
-        "text": "\\$172.84"
+        "text": "$172.84"
       },
       {
         "id": "D",
         "label": "D",
-        "text": "\\$184.94"
+        "text": "$184.94"
       }
     ],
     "correctAnswer": "B",
@@ -951,7 +951,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Gabriella deposits \\$35 in a savings account at the end of each week. At the beginning of the $1\\text{st}$ week of a year there was \\$600 in that savings account. How much money, in dollars, will be in the account at the end of the $4\\text{th}$ week of that year?",
+    "prompt": "Gabriella deposits $35 in a savings account at the end of each week. At the beginning of the $1\\text{st}$ week of a year there was $600 in that savings account. How much money, in dollars, will be in the account at the end of the $4\\text{th}$ week of that year?",
     "options": [
       {
         "id": "A",
@@ -1019,7 +1019,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Students and chaperones from a middle school are going on a field trip to a museum. Admission to the museum will cost \\$8.50 for each student and \\$12 for each chaperone. It will cost a total of \\$730 for admission to the museum for all $83$ people on the field trip. How many students are going on the field trip?",
+    "prompt": "Students and chaperones from a middle school are going on a field trip to a museum. Admission to the museum will cost $8.50 for each student and $12 for each chaperone. It will cost a total of $730 for admission to the museum for all $83$ people on the field trip. How many students are going on the field trip?",
     "options": [
       {
         "id": "A",
@@ -1207,7 +1207,7 @@
     "difficulty": "Medium",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "$$24.5x+24.75y=641$$\n\nIsabel ordered topsoil and crushed stone, which cost a total of \\$641, for her garden. The given equation represents the relationship between the number of cubic yards of topsoil, $x$, and the number of tons of crushed stone, $y$, Isabel ordered. How much more, in dollars, did a ton of crushed stone cost Isabel than a cubic yard of topsoil?",
+    "prompt": "$$24.5x+24.75y=641$$\n\nIsabel ordered topsoil and crushed stone, which cost a total of $641, for her garden. The given equation represents the relationship between the number of cubic yards of topsoil, $x$, and the number of tons of crushed stone, $y$, Isabel ordered. How much more, in dollars, did a ton of crushed stone cost Isabel than a cubic yard of topsoil?",
     "options": [],
     "correctAnswer": "1/4",
     "rationale": "The correct answer is $.25$. It’s given that the topsoil and crushed stone Isabel ordered for her garden cost a total of \\$641. It’s also given that the equation $24.5x+24.75y=641$ represents the relationship between the number of cubic yards of topsoil, $x$, and the number of tons of crushed stone, $y$, that Isabel ordered. Since $x$ represents the number of cubic yards of topsoil ordered, $24.5x$ represents the total cost, in dollars, of the topsoil, and the cost per cubic yard of topsoil is \\$24.50. Similarly, since $y$ represents the number of tons of crushed stone ordered, $24.75y$ represents the total cost, in dollars, of crushed stone ordered, and the cost per ton of crushed stone is \\$24.75. Therefore, a ton of crushed stone cost Isabel $24.75-24.50$, or $0.25$, more dollars than a cubic yard of topsoil. Note that .25 and 1/4 are examples of ways to enter a correct answer.",
@@ -1295,7 +1295,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "A gym charges its members a onetime \\$36 enrollment fee and a membership fee of \\$19 per month. If there are no charges other than the enrollment fee and the membership fee, after how many months will a member have been charged a total of \\$188 at the gym?",
+    "prompt": "A gym charges its members a onetime $36 enrollment fee and a membership fee of $19 per month. If there are no charges other than the enrollment fee and the membership fee, after how many months will a member have been charged a total of $188 at the gym?",
     "options": [
       {
         "id": "A",
@@ -1787,7 +1787,7 @@
     "difficulty": "Hard",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "A yoga studio is offering a deal where the first session is free, the second session is half off the regular price, and the remaining sessions are at the regular price. If the regular price of a session is \\$25.40, which function $f$ gives the total cost, in dollars, of purchasing $x$ sessions using this deal, where $x \\ge 2$?",
+    "prompt": "A yoga studio is offering a deal where the first session is free, the second session is half off the regular price, and the remaining sessions are at the regular price. If the regular price of a session is $25.40, which function $f$ gives the total cost, in dollars, of purchasing $x$ sessions using this deal, where $x \\ge 2$?",
     "options": [
       {
         "id": "A",
@@ -1973,7 +1973,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "A contract for a certain service requires a onetime activation cost of \\$35 and a monthly cost of \\$23. Which equation represents this situation, where $c$ is the total cost, in dollars, of this service contract for $t$ months?",
+    "prompt": "A contract for a certain service requires a onetime activation cost of $35 and a monthly cost of $23. Which equation represents this situation, where $c$ is the total cost, in dollars, of this service contract for $t$ months?",
     "options": [
       {
         "id": "A",
@@ -2041,7 +2041,7 @@
     "difficulty": "Hard",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Store A sells raspberries for \\$5.50 per pint and blackberries for \\$3.00 per pint. Store B sells raspberries for \\$6.50 per pint and blackberries for \\$8.00 per pint. A certain purchase of raspberries and blackberries would cost \\$37.00 at Store A or \\$66.00 at Store B. How many pints of blackberries are in this purchase?",
+    "prompt": "Store A sells raspberries for $5.50 per pint and blackberries for $3.00 per pint. Store B sells raspberries for $6.50 per pint and blackberries for $8.00 per pint. A certain purchase of raspberries and blackberries would cost $37.00 at Store A or $66.00 at Store B. How many pints of blackberries are in this purchase?",
     "options": [
       {
         "id": "A",
@@ -3067,7 +3067,7 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Ellen bought two types of snack bags for a school event. Each box of chips Ellen bought contained $24$ bags and cost \\$11. Each box of crackers Ellen bought contained $16$ bags and cost \\$9. It cost Ellen \\$497 before tax to buy $968$ bags. If $x$ is the number of boxes of chips and $y$ is the number of boxes of crackers that Ellen bought, which of the following systems of equations represents this situation?",
+    "prompt": "Ellen bought two types of snack bags for a school event. Each box of chips Ellen bought contained $24$ bags and cost $11. Each box of crackers Ellen bought contained $16$ bags and cost $9. It cost Ellen $497 before tax to buy $968$ bags. If $x$ is the number of boxes of chips and $y$ is the number of boxes of crackers that Ellen bought, which of the following systems of equations represents this situation?",
     "options": [
       {
         "id": "A",
@@ -3357,7 +3357,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Naomi bought both rabbit snails and nerite snails for a total of \\$52. Each rabbit snail costs \\$8 and each nerite snail costs \\$6. If Naomi bought $2$ nerite snails, how many rabbit snails did she buy?",
+    "prompt": "Naomi bought both rabbit snails and nerite snails for a total of $52. Each rabbit snail costs $8 and each nerite snail costs $6. If Naomi bought $2$ nerite snails, how many rabbit snails did she buy?",
     "options": [
       {
         "id": "A",
@@ -3609,27 +3609,27 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Josie purchased a pass that cost \\$19.50 to tour a nature preserve. She also purchased $10$ identical stickers to give to her nieces and nephews. The pass and the stickers cost \\$62.00 total. What was the cost of one sticker?",
+    "prompt": "Josie purchased a pass that cost $19.50 to tour a nature preserve. She also purchased $10$ identical stickers to give to her nieces and nephews. The pass and the stickers cost $62.00 total. What was the cost of one sticker?",
     "options": [
       {
         "id": "A",
         "label": "A",
-        "text": "\\$1.95"
+        "text": "$1.95"
       },
       {
         "id": "B",
         "label": "B",
-        "text": "\\$4.25"
+        "text": "$4.25"
       },
       {
         "id": "C",
         "label": "C",
-        "text": "\\$6.20"
+        "text": "$6.20"
       },
       {
         "id": "D",
         "label": "D",
-        "text": "\\$8.15"
+        "text": "$8.15"
       }
     ],
     "correctAnswer": "B",
@@ -4532,7 +4532,7 @@
     "difficulty": "Easy",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "$$8x+11y=170$$\n\nThe equation gives the possible combinations of the number of $2009$ premium grade Log Cabin Pennies, $x$, and the number of $1996$ select grade Lincoln Pennies, $y$, in a collection that is worth a total of \\$170. If there are $6$ $1996$ select grade Lincoln Pennies in the collection, how many $2009$ premium grade Log Cabin Pennies are in the collection?",
+    "prompt": "$$8x+11y=170$$\n\nThe equation gives the possible combinations of the number of $2009$ premium grade Log Cabin Pennies, $x$, and the number of $1996$ select grade Lincoln Pennies, $y$, in a collection that is worth a total of $170. If there are $6$ $1996$ select grade Lincoln Pennies in the collection, how many $2009$ premium grade Log Cabin Pennies are in the collection?",
     "options": [],
     "correctAnswer": "13",
     "rationale": "The correct answer is $13$. It’s given that the equation $8x+11y=170$ gives the possible combinations of the number of $2009$ premium grade Log Cabin Pennies, $x$, and the number of $1996$ select grade Lincoln Pennies, $y$, in a collection that is worth a total of \\$170. It’s also given that there are $6$ $1996$ select grade Lincoln Pennies in the collection, and thus $y=6$. Substituting $6$ for $y$ in the given equation yields $8x+11(6)=170$, or $8x+66=170$. Subtracting $66$ from both sides of this equation yields $8x=104$. Dividing both sides of this equation by $8$ yields $x=13$. Therefore, there are $13$ $2009$ premium grade Log Cabin Pennies in the collection.",
@@ -4564,7 +4564,7 @@
     "difficulty": "Easy",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "A student council group is selling school posters for a fundraiser. They use the function $p\\left(x\\right)=5x-220$ to determine their profit $p\\left(x\\right)$, in dollars, for selling $x$ school posters. In order to earn a profit of \\$900, how many school posters must they sell?",
+    "prompt": "A student council group is selling school posters for a fundraiser. They use the function $p\\left(x\\right)=5x-220$ to determine their profit $p\\left(x\\right)$, in dollars, for selling $x$ school posters. In order to earn a profit of $900, how many school posters must they sell?",
     "options": [],
     "correctAnswer": "224",
     "rationale": "The correct answer is $224$. It’s given that a student council group uses the function $p\\left(x\\right)=5x-220$ to determine their profit $p\\left(x\\right)$, in dollars, for selling $x$ school posters. Substituting $900$ for $p\\left(x\\right)$ in the given function yields $900=5x-220$. Adding $220$ to each side of this equation yields $1,120=5x$. Dividing each side of this equation by $5$ yields $224=x$. Therefore, in order to earn a profit of \\$900, they must sell $224$ school posters.",
@@ -4784,7 +4784,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The equation $40x+20y=160$ represents the number of sweaters, $x$, and number of shirts, $y$, that Yesenia purchased for \\$160. If Yesenia purchased $2$ sweaters, how many shirts did she purchase?",
+    "prompt": "The equation $40x+20y=160$ represents the number of sweaters, $x$, and number of shirts, $y$, that Yesenia purchased for $160. If Yesenia purchased $2$ sweaters, how many shirts did she purchase?",
     "options": [
       {
         "id": "A",
@@ -4852,7 +4852,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Davio bought some potatoes and celery. The potatoes cost \\$0.69 per pound, and the celery cost \\$0.99 per pound. If Davio spent \\$5.34 in total and bought twice as many pounds of celery as pounds of potatoes, how many pounds of celery did Davio buy?",
+    "prompt": "Davio bought some potatoes and celery. The potatoes cost $0.69 per pound, and the celery cost $0.99 per pound. If Davio spent $5.34 in total and bought twice as many pounds of celery as pounds of potatoes, how many pounds of celery did Davio buy?",
     "options": [
       {
         "id": "A",
@@ -5038,7 +5038,7 @@
     "difficulty": "Hard",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "A team hosting an event to raise money for new uniforms plans to sell at least $140$ tickets before this event and at least $220$ tickets during this event to raise a total of at least \\$5,820 from all tickets sold. The price of a ticket during this event is \\$3 less than the price of a ticket before this event. Which inequality represents this situation, where $x$ is the price, in dollars, of a ticket sold during this event?",
+    "prompt": "A team hosting an event to raise money for new uniforms plans to sell at least $140$ tickets before this event and at least $220$ tickets during this event to raise a total of at least $5,820 from all tickets sold. The price of a ticket during this event is $3 less than the price of a ticket before this event. Which inequality represents this situation, where $x$ is the price, in dollars, of a ticket sold during this event?",
     "options": [
       {
         "id": "A",
@@ -5522,7 +5522,7 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The cost to rent a bus from Company X is \\$950 for the first $3$ hours and an additional \\$50 per hour for each hour after the first $3$ hours. If the total cost to rent the bus from Company X for $t$ hours, where $t>3$, is \\$1,150, which equation represents this situation?",
+    "prompt": "The cost to rent a bus from Company X is $950 for the first $3$ hours and an additional $50 per hour for each hour after the first $3$ hours. If the total cost to rent the bus from Company X for $t$ hours, where $t>3$, is $1,150, which equation represents this situation?",
     "options": [
       {
         "id": "A",
@@ -5661,7 +5661,7 @@
       {
         "id": "D",
         "label": "D",
-        "text": "$x<6$ or $x>18$"
+        "text": "$$x<6\\text{ or }x>18$$"
       }
     ],
     "correctAnswer": "C",
@@ -5696,22 +5696,22 @@
       {
         "id": "A",
         "label": "A",
-        "text": "Each game costs \\$25."
+        "text": "Each game costs $25."
       },
       {
         "id": "B",
         "label": "B",
-        "text": "The video game system costs \\$100."
+        "text": "The video game system costs $100."
       },
       {
         "id": "C",
         "label": "C",
-        "text": "The video game system costs \\$25."
+        "text": "The video game system costs $25."
       },
       {
         "id": "D",
         "label": "D",
-        "text": "Each game costs \\$100."
+        "text": "Each game costs $100."
       }
     ],
     "correctAnswer": "A",
@@ -5965,7 +5965,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "John paid a total of \\$165 for a microscope by making a down payment of \\$37 plus $p$ monthly payments of \\$16 each. Which of the following equations represents this situation?",
+    "prompt": "John paid a total of $165 for a microscope by making a down payment of $37 plus $p$ monthly payments of $16 each. Which of the following equations represents this situation?",
     "options": [
       {
         "id": "A",
@@ -6185,7 +6185,7 @@
     "difficulty": "Hard",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The cost of renting a carpet cleaner is \\$52 for the first day and \\$26 for each additional day. Which of the following functions gives the cost $C\\left(d\\right)$, in dollars, of renting the carpet cleaner for $d$ days, where $d$ is a positive integer?",
+    "prompt": "The cost of renting a carpet cleaner is $52 for the first day and $26 for each additional day. Which of the following functions gives the cost $C\\left(d\\right)$, in dollars, of renting the carpet cleaner for $d$ days, where $d$ is a positive integer?",
     "options": [
       {
         "id": "A",
@@ -6303,7 +6303,7 @@
     "difficulty": "Hard",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "$$11x+14y \\le 115$$\n\nAnthony will spend at most \\$115 to purchase $x$ small cheese pizzas and $y$ large cheese pizzas for a team dinner. The given inequality represents this situation. Which of the following is the best interpretation of $14y$ in this context?",
+    "prompt": "$$11x+14y \\le 115$$\n\nAnthony will spend at most $115 to purchase $x$ small cheese pizzas and $y$ large cheese pizzas for a team dinner. The given inequality represents this situation. Which of the following is the best interpretation of $14y$ in this context?",
     "options": [
       {
         "id": "A",
@@ -6865,7 +6865,7 @@
     "difficulty": "Easy",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "Vivian bought party hats and cupcakes for \\$71. Each package of party hats cost \\$3, and each cupcake cost \\$1. If Vivian bought $10$ packages of party hats, how many cupcakes did she buy?",
+    "prompt": "Vivian bought party hats and cupcakes for $71. Each package of party hats cost $3, and each cupcake cost $1. If Vivian bought $10$ packages of party hats, how many cupcakes did she buy?",
     "options": [],
     "correctAnswer": "41",
     "rationale": "The correct answer is $41$. The number of cupcakes Vivian bought can be found by first finding the amount Vivian spent on cupcakes. The amount Vivian spent on cupcakes can be found by subtracting the amount Vivian spent on party hats from the total amount Vivian spent. The amount Vivian spent on party hats can be found by multiplying the cost per package of party hats by the number of packages of party hats, which yields $\\text{\\$}3 \\cdot 10$, or \\$30. Subtracting the amount Vivian spent on party hats, \\$30, from the total amount Vivian spent, \\$71, yields $\\text{\\$}71-\\text{\\$}30$, or \\$41. Since the amount Vivian spent on cupcakes was \\$41 and each cupcake cost \\$1, it follows that Vivian bought $41$ cupcakes.",
@@ -7119,7 +7119,7 @@
     "difficulty": "Medium",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "An event planner is planning a party. It costs the event planner a onetime fee of \\$35 to rent the venue and \\$10.25 per attendee. The event planner has a budget of \\$200. What is the greatest number of attendees possible without exceeding the budget?",
+    "prompt": "An event planner is planning a party. It costs the event planner a onetime fee of $35 to rent the venue and $10.25 per attendee. The event planner has a budget of $200. What is the greatest number of attendees possible without exceeding the budget?",
     "options": [],
     "correctAnswer": "16",
     "rationale": "The correct answer is $16$. The total cost of the party is found by adding the onetime fee of the venue to the cost per attendee times the number of attendees. Let $x$ be the number of attendees. The expression $35+10.25x$ thus represents the total cost of the party. It's given that the budget is \\$200, so this situation can be represented by the inequality $35+10.25x \\le 200$. The greatest number of attendees can be found by solving this inequality for $x$. Subtracting $35$ from both sides of this inequality gives $10.25x \\le 165$. Dividing both sides of this inequality by $10.25$ results in approximately $x \\le 16.098$. Since the question is stated in terms of attendees, rounding $x$ down to the nearest whole number, $16$, gives the greatest number of attendees possible.",
@@ -7219,12 +7219,12 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Last week, an interior designer earned a total of \\$1,258 from consulting for $x$ hours and drawing up plans for $y$ hours. The equation $68x+85y=1,258$ represents this situation. Which of the following is the best interpretation of $68$ in this context?",
+    "prompt": "Last week, an interior designer earned a total of $1,258 from consulting for $x$ hours and drawing up plans for $y$ hours. The equation $68x+85y=1,258$ represents this situation. Which of the following is the best interpretation of $68$ in this context?",
     "options": [
       {
         "id": "A",
         "label": "A",
-        "text": "The interior designer earned \\$68 per hour consulting last week."
+        "text": "The interior designer earned $68 per hour consulting last week."
       },
       {
         "id": "B",
@@ -7234,7 +7234,7 @@
       {
         "id": "C",
         "label": "C",
-        "text": "The interior designer earned \\$68 per hour drawing up plans last week."
+        "text": "The interior designer earned $68 per hour drawing up plans last week."
       },
       {
         "id": "D",
@@ -7287,7 +7287,7 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The cost to rent a commercial fishing boat from a certain company is \\$950 for the first $2$ hours and an additional \\$50 per hour for each hour after the first $2$ hours. If the total cost to rent the commercial fishing boat from the company for $t$ hours, where $t>2$, is \\$1,100, which equation represents this situation?",
+    "prompt": "The cost to rent a commercial fishing boat from a certain company is $950 for the first $2$ hours and an additional $50 per hour for each hour after the first $2$ hours. If the total cost to rent the commercial fishing boat from the company for $t$ hours, where $t>2$, is $1,100, which equation represents this situation?",
     "options": [
       {
         "id": "A",
@@ -7342,17 +7342,17 @@
       {
         "id": "A",
         "label": "A",
-        "text": "With each monthly deposit, the amount in Hana's bank account increased by \\$25."
+        "text": "With each monthly deposit, the amount in Hana's bank account increased by $25."
       },
       {
         "id": "B",
         "label": "B",
-        "text": "Before Hana made any monthly deposits, the amount in her bank account was \\$25."
+        "text": "Before Hana made any monthly deposits, the amount in her bank account was $25."
       },
       {
         "id": "C",
         "label": "C",
-        "text": "After $1$ monthly deposit, the amount in Hana's bank account was \\$25."
+        "text": "After $1$ monthly deposit, the amount in Hana's bank account was $25."
       },
       {
         "id": "D",
@@ -7795,7 +7795,7 @@
     "difficulty": "Easy",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "Nasir bought $9$ storage bins that were each the same price. He used a coupon for \\$63 off the entire purchase. The cost for the entire purchase after using the coupon was \\$27. What was the original price, in dollars, for $1$ storage bin?",
+    "prompt": "Nasir bought $9$ storage bins that were each the same price. He used a coupon for $63 off the entire purchase. The cost for the entire purchase after using the coupon was $27. What was the original price, in dollars, for $1$ storage bin?",
     "options": [],
     "correctAnswer": "10",
     "rationale": "The correct answer is $10$. It’s given that the cost for the entire purchase was \\$27 after a coupon was used for \\$63 off the entire purchase. Adding the amount of the coupon to the purchase price yields $27+63=90$. Thus, the cost for the entire purchase before using the coupon was \\$90. It’s given that Nasir bought $9$ storage bins. The original price for $1$ storage bin can be found by dividing the total cost by $9$. Therefore, the original price, in dollars, for $1$ storage bin is $\\frac{90}{9}$, or $10$.",
@@ -7811,7 +7811,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The graph shows the possible combinations of the number of pounds of tangerines and lemons that could be purchased for \\$18 at a certain store. If Melvin purchased lemons and $4$ pounds of tangerines for a total of \\$18, how many pounds of lemons did he purchase?",
+    "prompt": "The graph shows the possible combinations of the number of pounds of tangerines and lemons that could be purchased for $18 at a certain store. If Melvin purchased lemons and $4$ pounds of tangerines for a total of $18, how many pounds of lemons did he purchase?",
     "options": [
       {
         "id": "A",
@@ -8014,27 +8014,27 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The total cost $f(x)$, in dollars, to lease a car for $36$ months from a particular car dealership is given by $f(x)=36x+1,000$, where $x$ is the monthly payment, in dollars. What is the total cost to lease a car when the monthly payment is \\$400?",
+    "prompt": "The total cost $f(x)$, in dollars, to lease a car for $36$ months from a particular car dealership is given by $f(x)=36x+1,000$, where $x$ is the monthly payment, in dollars. What is the total cost to lease a car when the monthly payment is $400?",
     "options": [
       {
         "id": "A",
         "label": "A",
-        "text": "\\$13,400"
+        "text": "$13,400"
       },
       {
         "id": "B",
         "label": "B",
-        "text": "\\$13,000"
+        "text": "$13,000"
       },
       {
         "id": "C",
         "label": "C",
-        "text": "\\$15,400"
+        "text": "$15,400"
       },
       {
         "id": "D",
         "label": "D",
-        "text": "\\$37,400"
+        "text": "$37,400"
       }
     ],
     "correctAnswer": "C",
@@ -8082,7 +8082,7 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "A linear function $f$ gives a company's profit, in dollars, for selling $x$ items. The company's profit is \\$220 when it sells $8$ items, and its profit is \\$320 when it sells $10$ items. Which equation defines $f$?",
+    "prompt": "A linear function $f$ gives a company's profit, in dollars, for selling $x$ items. The company's profit is $220 when it sells $8$ items, and its profit is $320 when it sells $10$ items. Which equation defines $f$?",
     "options": [
       {
         "id": "A",
@@ -8200,7 +8200,7 @@
     "difficulty": "Hard",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "A window repair specialist charges \\$220 for the first two hours of repair plus an hourly fee for each additional hour. The total cost for $5$ hours of repair is \\$400. Which function $f$ gives the total cost, in dollars, for $x$ hours of repair, where $x \\ge 2$?",
+    "prompt": "A window repair specialist charges $220 for the first two hours of repair plus an hourly fee for each additional hour. The total cost for $5$ hours of repair is $400. Which function $f$ gives the total cost, in dollars, for $x$ hours of repair, where $x \\ge 2$?",
     "options": [
       {
         "id": "A",
@@ -8728,7 +8728,7 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The combined original price for a mirror and a vase is \\$60. After a $25\\%$ discount to the mirror and a $45\\%$ discount to the vase are applied, the combined sale price for the two items is \\$39. Which system of equations gives the original price $m$, in dollars, of the mirror and the original price $v$, in dollars, of the vase?",
+    "prompt": "The combined original price for a mirror and a vase is $60. After a $25\\%$ discount to the mirror and a $45\\%$ discount to the vase are applied, the combined sale price for the two items is $39. Which system of equations gives the original price $m$, in dollars, of the mirror and the original price $v$, in dollars, of the vase?",
     "options": [
       {
         "id": "A",
@@ -9668,7 +9668,7 @@
     "difficulty": "Hard",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The cost of renting a large canopy tent for up to $10$ days is \\$430 for the first day and \\$215 for each additional day. Which of the following equations gives the cost $y$, in dollars, of renting the tent for $x$ days, where $x$ is a positive integer and $x \\le 10$?",
+    "prompt": "The cost of renting a large canopy tent for up to $10$ days is $430 for the first day and $215 for each additional day. Which of the following equations gives the cost $y$, in dollars, of renting the tent for $x$ days, where $x$ is a positive integer and $x \\le 10$?",
     "options": [
       {
         "id": "A",
@@ -9902,7 +9902,7 @@
     "difficulty": "Easy",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "$$f(x)=14+4x$$\n\nThe function $f$ represents the total cost, in dollars, of attending an arcade when $x$ games are played. How many games can be played for a total cost of \\$58?",
+    "prompt": "$$f(x)=14+4x$$\n\nThe function $f$ represents the total cost, in dollars, of attending an arcade when $x$ games are played. How many games can be played for a total cost of $58?",
     "options": [],
     "correctAnswer": "11",
     "rationale": "The correct answer is $11$. It’s given that the function $f\\left(x\\right)=14+4x$ represents the total cost, in dollars, of attending an arcade when $x$ games are played. Substituting $58$ for $f\\left(x\\right)$ in the given equation yields $58=14+4x$. Subtracting $14$ from each side of this equation yields $44=4x$. Dividing each side of this equation by $4$ yields $11=x$. Therefore, $11$ games can be played for a total cost of \\$58.",
@@ -10359,7 +10359,7 @@
     "difficulty": "Medium",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "An event planner is planning a party. It costs the event planner a onetime fee of \\$35 to rent the venue and \\$10.25 per attendee. The event planner has a budget of \\$300. What is the greatest number of attendees possible without exceeding the budget?",
+    "prompt": "An event planner is planning a party. It costs the event planner a onetime fee of $35 to rent the venue and $10.25 per attendee. The event planner has a budget of $300. What is the greatest number of attendees possible without exceeding the budget?",
     "options": [],
     "correctAnswer": "25",
     "rationale": "The correct answer is $25$. The total cost of the party is found by adding the onetime fee of the venue to the cost per attendee times the number of attendees. Let $x$ be the number of attendees. The expression $35+10.25x$ thus represents the total cost of the party. It's given that the budget is \\$300, so this situation can be represented by the inequality $35+10.25x \\le 300$. Subtracting $35$ from both sides of this inequality gives $10.25x \\le 265$. Dividing both sides of this inequality by $10.25$ results in approximately $x \\le 25.854$. Since the question is stated in terms of attendees, rounding $25.854$ down to the greatest whole number gives the greatest number of attendees possible, which is $25$.",
@@ -10409,7 +10409,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Sean rents a tent at a cost of \\$11 per day plus a onetime insurance fee of \\$10. Which equation represents the total cost $c$, in dollars, to rent the tent with insurance for $d$ days?",
+    "prompt": "Sean rents a tent at a cost of $11 per day plus a onetime insurance fee of $10. Which equation represents the total cost $c$, in dollars, to rent the tent with insurance for $d$ days?",
     "options": [
       {
         "id": "A",
@@ -10594,7 +10594,7 @@
     "difficulty": "Hard",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "For groups of $25$ or more people, a museum charges \\$21 per person for the first $25$ people and \\$14 for each additional person. Which function $f$ gives the total charge, in dollars, for a tour group with $n$ people, where $n \\ge 25$?",
+    "prompt": "For groups of $25$ or more people, a museum charges $21 per person for the first $25$ people and $14 for each additional person. Which function $f$ gives the total charge, in dollars, for a tour group with $n$ people, where $n \\ge 25$?",
     "options": [
       {
         "id": "A",
@@ -10730,7 +10730,7 @@
     "difficulty": "Hard",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The cost of renting a backhoe for up to $10$ days is \\$270 for the first day and \\$135 for each additional day. Which of the following equations gives the cost $y$, in dollars, of renting the backhoe for $x$ days, where $x$ is a positive integer and $x \\le 10$?",
+    "prompt": "The cost of renting a backhoe for up to $10$ days is $270 for the first day and $135 for each additional day. Which of the following equations gives the cost $y$, in dollars, of renting the backhoe for $x$ days, where $x$ is a positive integer and $x \\le 10$?",
     "options": [
       {
         "id": "A",
@@ -10898,7 +10898,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "A computer company pays customers for trading in old computers. The payment $p$, in dollars, is the original retail price of a computer minus \\$150 for each year since the computer was released. Which equation represents this situation for a computer with an original retail price of \\$690 when it was released $t$ years ago, where $t$ is a whole number and $1 \\le t \\le 4$?",
+    "prompt": "A computer company pays customers for trading in old computers. The payment $p$, in dollars, is the original retail price of a computer minus $150 for each year since the computer was released. Which equation represents this situation for a computer with an original retail price of $690 when it was released $t$ years ago, where $t$ is a whole number and $1 \\le t \\le 4$?",
     "options": [
       {
         "id": "A",
@@ -11050,7 +11050,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Henry receives a \\$60.00 gift card to pay for movies online. He uses his gift card to buy $3$ movies for \\$7.50 each. If he spends the rest of his gift card balance on renting movies for \\$1.50 each, how many movies can Henry rent?",
+    "prompt": "Henry receives a $60.00 gift card to pay for movies online. He uses his gift card to buy $3$ movies for $7.50 each. If he spends the rest of his gift card balance on renting movies for $1.50 each, how many movies can Henry rent?",
     "options": [
       {
         "id": "A",
@@ -11187,7 +11187,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The total cost, in dollars, to rent a surfboard consists of a \\$25 service fee and a \\$10 per hour rental fee. A person rents a surfboard for $t$ hours and intends to spend a maximum of \\$75 to rent the surfboard. Which inequality represents this situation?",
+    "prompt": "The total cost, in dollars, to rent a surfboard consists of a $25 service fee and a $10 per hour rental fee. A person rents a surfboard for $t$ hours and intends to spend a maximum of $75 to rent the surfboard. Which inequality represents this situation?",
     "options": [
       {
         "id": "A",
@@ -11887,7 +11887,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "A food truck buys forks for \\$0.04 each and plates for \\$0.48 each. The total cost of $x$ forks and $y$ plates is \\$661.76. Which equation represents this situation?",
+    "prompt": "A food truck buys forks for $0.04 each and plates for $0.48 each. The total cost of $x$ forks and $y$ plates is $661.76. Which equation represents this situation?",
     "options": [
       {
         "id": "A",
@@ -12194,7 +12194,7 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "To complete a landscaping project, Adam charges a fee of \\$20.00 for his equipment and \\$9.50 per hour spent working on the project. To complete this same landscaping project, Caroline charges a fee of \\$17.00 for her equipment and \\$10.00 per hour spent working on the project. If $x$ represents the number of hours spent working on the landscaping project, what are all the values of $x$ for which Caroline's total charge is greater than Adam's total charge?",
+    "prompt": "To complete a landscaping project, Adam charges a fee of $20.00 for his equipment and $9.50 per hour spent working on the project. To complete this same landscaping project, Caroline charges a fee of $17.00 for her equipment and $10.00 per hour spent working on the project. If $x$ represents the number of hours spent working on the landscaping project, what are all the values of $x$ for which Caroline's total charge is greater than Adam's total charge?",
     "options": [
       {
         "id": "A",
@@ -13207,7 +13207,7 @@
     "difficulty": "Medium",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "Brian saves $\\frac{2}{5}$ of the \\$215 he earns each week from his job. If Brian continues to save at this rate, how much money, in dollars, will Brian save in $9$ weeks?",
+    "prompt": "Brian saves $\\frac{2}{5}$ of the $215 he earns each week from his job. If Brian continues to save at this rate, how much money, in dollars, will Brian save in $9$ weeks?",
     "options": [],
     "correctAnswer": "774",
     "rationale": "The correct answer is $774$. It's given that Brian saves $\\frac{2}{5}$ of the \\$215 he earns each week from his job. Therefore, Brian saves $\\left(\\frac{2}{5}\\right)\\left(\\text{\\$}215\\right)$, or \\$86, per week. If Brian continues to save at this rate of \\$86 per week for $9$ weeks, then he will save a total of $\\left(9\\right)\\left(86\\right)$, or $774$, dollars.",
@@ -13291,7 +13291,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Connor has $c$ dollars and Maria has $m$ dollars. Connor has $4$ times as many dollars as Maria, and together they have a total of \\$25.00. Which system of equations represents this situation?",
+    "prompt": "Connor has $c$ dollars and Maria has $m$ dollars. Connor has $4$ times as many dollars as Maria, and together they have a total of $25.00. Which system of equations represents this situation?",
     "options": [
       {
         "id": "A",
@@ -13443,7 +13443,7 @@
     "difficulty": "Hard",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "A small business owner budgets \\$2,200 to purchase candles. The owner must purchase a minimum of $200$ candles to maintain the discounted pricing. If the owner pays \\$4.90 per candle to purchase small candles and \\$11.60 per candle to purchase large candles, what is the maximum number of large candles the owner can purchase to stay within the budget and maintain the discounted pricing?",
+    "prompt": "A small business owner budgets $2,200 to purchase candles. The owner must purchase a minimum of $200$ candles to maintain the discounted pricing. If the owner pays $4.90 per candle to purchase small candles and $11.60 per candle to purchase large candles, what is the maximum number of large candles the owner can purchase to stay within the budget and maintain the discounted pricing?",
     "options": [],
     "correctAnswer": "182",
     "rationale": "The correct answer is $182$. Let $s$ represent the number of small candles the owner can purchase, and let $l$ represent the number of large candles the owner can purchase. It’s given that the owner pays \\$4.90 per candle to purchase small candles and \\$11.60 per candle to purchase large candles. Therefore, the owner pays $4.90s$ dollars for $s$ small candles and $11.60l$ dollars for $l$ large candles, which means the owner pays a total of $4.90s+11.60l$ dollars to purchase candles. It’s given that the owner budgets \\$2,200 to purchase candles. Therefore, $4.90s+11.60l \\le 2,200$. It’s also given that the owner must purchase a minimum of $200$ candles. Therefore, $s+l \\ge 200$. The inequalities $4.90s+11.60l \\le 2,200$ and $s+l \\ge 200$ can be combined into one compound inequality by rewriting the second inequality so that its left-hand side is equivalent to the left-hand side of the first inequality. Subtracting $l$ from both sides of the inequality $s+l \\ge 200$ yields $s \\ge 200-l$. Multiplying both sides of this inequality by $4.90$ yields $4.90s \\ge 4.90\\left(200-l\\right)$, or $4.90s \\ge 980-4.90l$. Adding $11.60l$ to both sides of this inequality yields $4.90s+11.60l \\ge 980-4.90l+11.60l$, or $4.90s+11.60l \\ge 980+6.70l$. This inequality can be combined with the inequality $4.90s+11.60l \\le 2,200$, which yields the compound inequality $980+6.70l \\le 4.90s+11.60l \\le 2,200$. It follows that $980+6.70l \\le 2,200$. Subtracting $980$ from both sides of this inequality yields $6.70l \\le 2,200$. Dividing both sides of this inequality by $6.70$ yields approximately $l \\le 182.09$. Since the number of large candles the owner purchases must be a whole number, the maximum number of large candles the owner can purchase is the largest whole number less than $182.09$, which is $182$.",
@@ -13749,7 +13749,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Lorenzo purchased a box of cereal and some strawberries at the grocery store. Lorenzo paid \\$2 for the box of cereal and \\$1.90 per pound for the strawberries. If Lorenzo paid a total of \\$9.60 for the box of cereal and the strawberries, which of the following equations can be used to find $p$, the number of pounds of strawberries Lorenzo purchased? (Assume there is no sales tax.)",
+    "prompt": "Lorenzo purchased a box of cereal and some strawberries at the grocery store. Lorenzo paid $2 for the box of cereal and $1.90 per pound for the strawberries. If Lorenzo paid a total of $9.60 for the box of cereal and the strawberries, which of the following equations can be used to find $p$, the number of pounds of strawberries Lorenzo purchased? (Assume there is no sales tax.)",
     "options": [
       {
         "id": "A",
@@ -14347,7 +14347,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "To repair a refrigerator, a technician charges \\$60 per hour for labor plus \\$120 for parts. Which function f represents the total amount, in dollars, the technician will charge for this job if it takes $x$ hours?",
+    "prompt": "To repair a refrigerator, a technician charges $60 per hour for labor plus $120 for parts. Which function f represents the total amount, in dollars, the technician will charge for this job if it takes $x$ hours?",
     "options": [
       {
         "id": "A",
@@ -14649,7 +14649,7 @@
     "id": "0380bbdc",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
@@ -14683,7 +14683,7 @@
     "id": "03ff48d2",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Hard",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
@@ -14699,7 +14699,7 @@
     "id": "041eda89",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Hard",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
@@ -14867,7 +14867,7 @@
     "id": "062f86db",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
@@ -15039,7 +15039,7 @@
     "id": "09e5e4d3",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
@@ -15207,7 +15207,7 @@
     "id": "0bebc08c",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
@@ -15325,7 +15325,7 @@
     "id": "104bff62",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Hard",
     "questionType": "mcq",
     "passage": "",
@@ -15409,7 +15409,7 @@
     "id": "11ccf3e1",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
@@ -15493,7 +15493,7 @@
     "id": "133f3e41",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Hard",
     "questionType": "mcq",
     "passage": "",
@@ -15548,7 +15548,7 @@
     "id": "13e57f0a",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
@@ -15582,7 +15582,7 @@
     "id": "13e5a5d5",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Easy",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
@@ -15598,7 +15598,7 @@
     "id": "158591f0",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Hard",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
@@ -15719,7 +15719,7 @@
     "id": "17d0e87d",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Hard",
     "questionType": "mcq",
     "passage": "",
@@ -15940,7 +15940,7 @@
     "id": "1ce9ffcd",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Hard",
     "questionType": "mcq",
     "passage": "",
@@ -16024,7 +16024,7 @@
     "id": "1e003284",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
@@ -16229,7 +16229,7 @@
     "id": "1fe32f7d",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Hard",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
@@ -16671,7 +16671,7 @@
     "id": "2926cc6d",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
@@ -16739,7 +16739,7 @@
     "id": "29ed5d39",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
@@ -16806,7 +16806,7 @@
     "id": "2c05d312",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Hard",
     "questionType": "mcq",
     "passage": "",
@@ -16840,7 +16840,7 @@
     "id": "2c288148",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Hard",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
@@ -16890,7 +16890,7 @@
     "id": "2cb17792",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Hard",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
@@ -16909,7 +16909,7 @@
     "id": "2cd6b22d",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Hard",
     "questionType": "mcq",
     "passage": "",
@@ -17015,7 +17015,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "(0 comma 20,000)\napproximately (5 comma 26,263)\napproximately (10 comma 34,488)\n\nThe graph shown models the number of residents of a certain city $x$ years after $2010$. How many residents does this model estimate the city had in $2010$?",
+    "prompt": "The graph shown models the number of residents of a certain city $ years after $. How many residents does this model estimate the city had in True",
     "options": [
       {
         "id": "A",
@@ -17181,7 +17181,7 @@
     "id": "30596346",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Hard",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
@@ -17197,7 +17197,7 @@
     "id": "30a07668",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Medium",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
@@ -17213,7 +17213,7 @@
     "id": "3148fe3e",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
@@ -17281,7 +17281,7 @@
     "id": "332cd67b",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
@@ -17518,7 +17518,7 @@
     "id": "3934dd0a",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
@@ -17620,7 +17620,7 @@
     "id": "3a01a5ee",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Hard",
     "questionType": "mcq",
     "passage": "",
@@ -17654,7 +17654,7 @@
     "id": "3a9d60b2",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Hard",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
@@ -17670,7 +17670,7 @@
     "id": "3b4b8831",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Medium",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
@@ -17720,7 +17720,7 @@
     "id": "3cce51ea",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
@@ -17788,7 +17788,7 @@
     "id": "3d12b1e0",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Hard",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
@@ -17804,7 +17804,7 @@
     "id": "3d7d7534",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Medium",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
@@ -17889,11 +17889,11 @@
     "id": "3f8d5876",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The curve passes through the following points:\n\nThe graph of a system of a linear equation and a nonlinear equation is shown. What is the solution $\\left(x,y\\right)$ to this system?",
+    "prompt": "The graph of a system of a linear equation and a nonlinear equation is shown. What is the solution $\\left(x,y\\right)$ to this system?",
     "options": [
       {
         "id": "A",
@@ -17974,7 +17974,7 @@
     "id": "40f2e601",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
@@ -18228,7 +18228,7 @@
     "id": "46308566",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Hard",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
@@ -18346,11 +18346,11 @@
     "id": "494d247d",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The function passes through the following points:\n\nFor the linear function in the system:\n\nThe graph of a system of an absolute value function and a linear function is shown. What is the solution $\\left(x,y\\right)$ to this system of two equations?",
+    "prompt": "The graph of a system of an absolute value function and a linear function is shown. What is the solution $\\left(x,y\\right)$ to this system of two equations?",
     "options": [
       {
         "id": "A",
@@ -18533,7 +18533,7 @@
     "id": "4b6f0a3f",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Medium",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
@@ -18549,11 +18549,11 @@
     "id": "4ca30186",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The curve passes through the following points:\n\nThe graph of a system of a linear equation and a nonlinear equation is shown. What is the solution $\\left(x,y\\right)$ to this system?",
+    "prompt": "The graph of a system of a linear equation and a nonlinear equation is shown. What is the solution $\\left(x,y\\right)$ to this system?",
     "options": [
       {
         "id": "A",
@@ -18687,7 +18687,7 @@
     "id": "4dc5c6f9",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Hard",
     "questionType": "mcq",
     "passage": "",
@@ -18755,7 +18755,7 @@
     "id": "4e18fc5d",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
@@ -18823,7 +18823,7 @@
     "id": "4fb8a648",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Hard",
     "questionType": "mcq",
     "passage": "",
@@ -18861,7 +18861,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "(0.0 comma 3.8)\n(0.6 comma 5.5)\n(1.0 comma 4.8)\n(1.7 comma 0.0)\n\nThe graph shows the height above ground, in meters, of a ball $x$ seconds after the ball was launched upward from a platform. Which statement is the best interpretation of the marked point $\\left(1.0,4.8\\right)$ in this context?",
+    "prompt": "The graph shows the height above ground, in meters, of a ball $ seconds after the ball was launched upward from a platform. Which statement is the best interpretation of the marked point $\\\\left(1.0,4.8\\\\right)$ in this context?",
     "options": [
       {
         "id": "A",
@@ -19136,7 +19136,7 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The value of a certain fishing boat was \\$24,000 when it was purchased. Each year, the value of the fishing boat decreased by $20\\%$ of the previous year’s value. Which equation represents this situation, where $v$ is the value of the fishing boat, in dollars, and $y$ is the number of years since the fishing boat was purchased?",
+    "prompt": "The value of a certain fishing boat was $24,000 when it was purchased. Each year, the value of the fishing boat decreased by $20\\%$ of the previous year’s value. Which equation represents this situation, where $v$ is the value of the fishing boat, in dollars, and $y$ is the number of years since the fishing boat was purchased?",
     "options": [
       {
         "id": "A",
@@ -19182,7 +19182,7 @@
     "id": "5639dd1a",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Medium",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
@@ -19253,7 +19253,7 @@
     "id": "58443765",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
@@ -19287,7 +19287,7 @@
     "id": "58b109d4",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Hard",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
@@ -19341,7 +19341,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "An investment account was opened with an initial value of \\$890. The value of the account doubled every $10$ years. Which equation represents the value of the account $M\\left(t\\right)$, in dollars, $t$ years after the account was opened?",
+    "prompt": "An investment account was opened with an initial value of $890. The value of the account doubled every $10$ years. Which equation represents the value of the account $M\\left(t\\right)$, in dollars, $t$ years after the account was opened?",
     "options": [
       {
         "id": "A",
@@ -19405,7 +19405,7 @@
     "id": "5ae186b4",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Medium",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
@@ -19421,7 +19421,7 @@
     "id": "5ae4803e",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
@@ -19523,7 +19523,7 @@
     "id": "5c7d5744",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
@@ -19592,7 +19592,7 @@
     "id": "5da5c665",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Hard",
     "questionType": "mcq",
     "passage": "",
@@ -19695,7 +19695,7 @@
     "id": "5edc8c98",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Hard",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
@@ -19731,11 +19731,11 @@
     "id": "5f10c095",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "(0 comma 7.2)\n(4 comma 7.2)\n(6 comma 7.2)\n\nFor the parabola in the system:\n\nThe graph of a system of a linear equation and a quadratic equation is shown. A solution to the system is $\\left(x,y\\right)$. What is a possible value of $x$?",
+    "prompt": "The graph of a system of a linear equation and a quadratic equation is shown. A solution to the system is $\\\\left(x,y\\\\right)$. What is a possible value of True",
     "options": [
       {
         "id": "A",
@@ -19766,7 +19766,7 @@
     "id": "6011a3f8",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Hard",
     "questionType": "mcq",
     "passage": "",
@@ -19800,7 +19800,7 @@
     "id": "63c00e2b",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
@@ -19987,7 +19987,7 @@
     "id": "6acdcece",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
@@ -20021,7 +20021,7 @@
     "id": "6aefc52b",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Hard",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
@@ -20037,7 +20037,7 @@
     "id": "6bd40794",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Medium",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
@@ -20054,7 +20054,7 @@
     "id": "6bdcac03",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
@@ -20191,7 +20191,7 @@
     "id": "7028c74f",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Hard",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
@@ -20244,7 +20244,7 @@
     "id": "70f98ab4",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
@@ -20312,7 +20312,7 @@
     "id": "71014fb1",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Hard",
     "questionType": "mcq",
     "passage": "",
@@ -20381,7 +20381,7 @@
     "id": "717a1964",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Medium",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
@@ -20432,7 +20432,7 @@
     "id": "722de804",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Hard",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
@@ -20559,22 +20559,22 @@
       {
         "id": "A",
         "label": "A",
-        "text": "The company's estimated stock price increased \\$83 every day after the new product launched."
+        "text": "The company's estimated stock price increased $83 every day after the new product launched."
       },
       {
         "id": "B",
         "label": "B",
-        "text": "The company's estimated stock price increased \\$1 every $83$ days after the new product launched."
+        "text": "The company's estimated stock price increased $1 every $83$ days after the new product launched."
       },
       {
         "id": "C",
         "label": "C",
-        "text": "$1$ day after the new product launched, the company's estimated stock price is \\$83."
+        "text": "$1$ day after the new product launched, the company's estimated stock price is $83."
       },
       {
         "id": "D",
         "label": "D",
-        "text": "$83$ days after the new product launched, the company's estimated stock price is \\$1."
+        "text": "$83$ days after the new product launched, the company's estimated stock price is $1."
       }
     ],
     "correctAnswer": "C",
@@ -20584,7 +20584,7 @@
     "id": "7399c3b0",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
@@ -20618,7 +20618,7 @@
     "id": "74473be4",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Hard",
     "questionType": "mcq",
     "passage": "",
@@ -20686,7 +20686,7 @@
     "id": "75a32330",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
@@ -20826,7 +20826,7 @@
     "id": "77c0cced",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Hard",
     "questionType": "mcq",
     "passage": "",
@@ -21035,7 +21035,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The curve passes through the following points:\n\napproximately (0 comma 2.5)\napproximately (4 comma 0.8)\n\nWhat is the x-intercept of the graph shown?",
+    "prompt": "What is the x-intercept of the graph shown?",
     "options": [
       {
         "id": "A",
@@ -21116,7 +21116,7 @@
     "id": "7a8cb72a",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
@@ -21252,7 +21252,7 @@
     "id": "7cb3a8ee",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Easy",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
@@ -21304,7 +21304,7 @@
     "id": "7dbd46d9",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Hard",
     "questionType": "mcq",
     "passage": "",
@@ -21415,17 +21415,17 @@
       {
         "id": "A",
         "label": "A",
-        "text": "The estimated value of the tablet was \\$225 when it was purchased."
+        "text": "The estimated value of the tablet was $225 when it was purchased."
       },
       {
         "id": "B",
         "label": "B",
-        "text": "The estimated value of the tablet $24$ months after it was purchased was \\$225."
+        "text": "The estimated value of the tablet $24$ months after it was purchased was $225."
       },
       {
         "id": "C",
         "label": "C",
-        "text": "The estimated value of the tablet had decreased by \\$225 in the $24$ months after it was purchased."
+        "text": "The estimated value of the tablet had decreased by $225 in the $24$ months after it was purchased."
       },
       {
         "id": "D",
@@ -21703,7 +21703,7 @@
     "id": "84e5e36c",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
@@ -21771,7 +21771,7 @@
     "id": "88867d37",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
@@ -21805,7 +21805,7 @@
     "id": "88a0c425",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Hard",
     "questionType": "mcq",
     "passage": "",
@@ -21843,7 +21843,7 @@
     "difficulty": "Easy",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "The curve passes through the following points:\n\nThe graph of the exponential function $f$ is shown, where $y=f\\left(x\\right)$. The y-intercept of the graph is $\\left(0,y\\right)$. What is the value of $y$?",
+    "prompt": "The graph of the exponential function $f$ is shown, where $y=f\\left(x\\right)$. The y-intercept of the graph is $\\left(0,y\\right)$. What is the value of $y$?",
     "options": [],
     "correctAnswer": "3",
     "rationale": "The correct answer is $3$. For the graph of the exponential function $f$ shown, where $y=f\\left(x\\right)$, it's given that the y-intercept of the graph is $\\left(0,y\\right)$. The graph intersects the y-axis at the point $\\left(0,3\\right)$. Therefore, the value of $y$ is $3$.",
@@ -21856,7 +21856,7 @@
     "id": "895628b5",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
@@ -21924,7 +21924,7 @@
     "id": "8f65cddc",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
@@ -22131,7 +22131,7 @@
     "id": "95ed0b69",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
@@ -22403,7 +22403,7 @@
     "id": "9a1f1941",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Hard",
     "questionType": "mcq",
     "passage": "",
@@ -22437,7 +22437,7 @@
     "id": "9cb9beec",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Hard",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
@@ -22525,7 +22525,7 @@
     "id": "a1262cdb",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
@@ -22593,7 +22593,7 @@
     "id": "a267bd29",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
@@ -22677,7 +22677,7 @@
     "id": "a54753ca",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Hard",
     "questionType": "mcq",
     "passage": "",
@@ -22745,7 +22745,7 @@
     "id": "a67a439d",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
@@ -22920,7 +22920,7 @@
     "id": "ad03127d",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
@@ -23107,7 +23107,7 @@
     "id": "b4acba95",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
@@ -23145,7 +23145,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The curve passes through the following points:\n\nWhat is the y-intercept of the graph shown?",
+    "prompt": "What is the y-intercept of the graph shown?",
     "options": [
       {
         "id": "A",
@@ -23176,7 +23176,7 @@
     "id": "b5ebd31c",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
@@ -23298,7 +23298,7 @@
     "id": "b8c4a1cd",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
@@ -23348,7 +23348,7 @@
     "id": "ba0edc30",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Hard",
     "questionType": "mcq",
     "passage": "",
@@ -23518,7 +23518,7 @@
     "id": "be1b8c74",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
@@ -23620,7 +23620,7 @@
     "id": "bef4b1c6",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Medium",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
@@ -23652,7 +23652,7 @@
     "id": "bf704c34",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
@@ -23736,7 +23736,7 @@
     "id": "c1964c11",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
@@ -23820,7 +23820,7 @@
     "id": "c303ad23",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Hard",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
@@ -23904,7 +23904,7 @@
     "id": "c5d83a99",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
@@ -23938,7 +23938,7 @@
     "id": "c6a26e14",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
@@ -23993,7 +23993,7 @@
     "id": "c7789423",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Easy",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
@@ -24078,7 +24078,7 @@
     "id": "c8bf5313",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
@@ -24112,7 +24112,7 @@
     "id": "c8db0e19",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Hard",
     "questionType": "mcq",
     "passage": "",
@@ -24146,7 +24146,7 @@
     "id": "c8e9a011",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Hard",
     "questionType": "mcq",
     "passage": "",
@@ -24180,7 +24180,7 @@
     "id": "c9417793",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Hard",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
@@ -24271,27 +24271,27 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The graph shows the predicted value $y$, in dollars, of a certain sport utility vehicle $x$ years after it is first purchased.\n\n(0 comma 23,000)\n(1 comma 19,320)\n(3 comma 13,632)\n(5 comma 9,619)\n\nWhich of the following is closest to the predicted value of the sport utility vehicle $3$ years after it is first purchased?",
+    "prompt": "The graph shows the predicted value $, in dollars, of a certain sport utility vehicle $ years after it is first purchased. Which of the following is closest to the predicted value of the sport utility vehicle $ years after it is first purchased?",
     "options": [
       {
         "id": "A",
         "label": "A",
-        "text": "\\$9,619"
+        "text": "$9,619"
       },
       {
         "id": "B",
         "label": "B",
-        "text": "\\$13,632"
+        "text": "$13,632"
       },
       {
         "id": "C",
         "label": "C",
-        "text": "\\$19,320"
+        "text": "$19,320"
       },
       {
         "id": "D",
         "label": "D",
-        "text": "\\$23,000"
+        "text": "$23,000"
       }
     ],
     "correctAnswer": "B",
@@ -24494,7 +24494,7 @@
     "id": "ce940f80",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
@@ -24528,7 +24528,7 @@
     "id": "cec36caf",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
@@ -24631,7 +24631,7 @@
     "id": "d0a53ef5",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Hard",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
@@ -24647,7 +24647,7 @@
     "id": "d0e8e8f5",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
@@ -24732,11 +24732,11 @@
     "id": "d3f7c429",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The function passes through the following points:\n\nFor the linear function:\n\nThe graph of a system of an absolute value function and a linear function is shown. What is the solution $\\left(x,y\\right)$ to this system of two equations?",
+    "prompt": "The graph of a system of an absolute value function and a linear function is shown. What is the solution $\\left(x,y\\right)$ to this system of two equations?",
     "options": [
       {
         "id": "A",
@@ -24924,7 +24924,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "A company opens an account with an initial balance of \\$36,100.00. The account earns interest, and no additional deposits or withdrawals are made. The account balance is given by an exponential function $A$, where $A(t)$ is the account balance, in dollars, $t$ years after the account is opened. The account balance after $13$ years is \\$68,071.93. Which equation could define $A$?",
+    "prompt": "A company opens an account with an initial balance of $36,100.00. The account earns interest, and no additional deposits or withdrawals are made. The account balance is given by an exponential function $A$, where $A(t)$ is the account balance, in dollars, $t$ years after the account is opened. The account balance after $13$ years is $68,071.93. Which equation could define $A$?",
     "options": [
       {
         "id": "A",
@@ -25022,7 +25022,7 @@
     "id": "d964bc26",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
@@ -25056,7 +25056,7 @@
     "id": "da602115",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Medium",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
@@ -25225,11 +25225,11 @@
     "id": "dd3a910a",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The function passes through the following points:\n\nFor the linear function:\n\nThe graph of a system of an absolute value function and a linear function is shown. What is the solution $\\left(x,y\\right)$ to this system of two equations?",
+    "prompt": "The graph of a system of an absolute value function and a linear function is shown. What is the solution $\\left(x,y\\right)$ to this system of two equations?",
     "options": [
       {
         "id": "A",
@@ -25382,7 +25382,7 @@
     "difficulty": "Hard",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "A certain bowl was sold online for prices varying between \\$7 and \\$13. The number of bowls sold can be modeled by a quadratic function based on the price, where $5$ bowls were sold for \\$12 each and the maximum of $9$ bowls were sold for \\$10 each. According to the model, what is the number of bowls that were sold for \\$8 each?",
+    "prompt": "A certain bowl was sold online for prices varying between $7 and $13. The number of bowls sold can be modeled by a quadratic function based on the price, where $5$ bowls were sold for $12 each and the maximum of $9$ bowls were sold for $10 each. According to the model, what is the number of bowls that were sold for $8 each?",
     "options": [],
     "correctAnswer": "5",
     "rationale": "The correct answer is $5$. It’s given that the number of bowls sold can be modeled by a quadratic function based on the price, where a maximum of $9$ bowls were sold for \\$10 each and $5$ bowls were sold for \\$12 each. This quadratic function can be defined by an equation of the form $N\\left(p\\right)=a{(p-h)}^{2}+k$, where $N(p)$ is the number of bowls sold when the price is $\\$p$ each, and $a$, $h$, and $k$ are constants such that the function reaches its maximum value, $k$, when $p=h$. Since the model indicates the maximum number of bowls sold is $9$ when the price is \\$10 each, $N(p)$ reaches its maximum value, $9$, when $p=10$. Therefore, $k=9$ and $h=10$. Substituting $10$ for $h$ and $9$ for $k$ in the function $N\\left(p\\right)=a{(p-h)}^{2}+k$ yields $N\\left(p\\right)=a{(p-10)}^{2}+9$. Since the model indicates the number of bowls sold is $5$ when the price is \\$12 each, the value of $N(p)$ is $5$ when $p=12$. Substituting $12$ for $p$ and $5$ for $N(p)$ in the equation $N\\left(p\\right)=a{(p-10)}^{2}+9$ yields $5=a{(12-10)}^{2}+9$, or $5=4a+9$. Subtracting $9$ from both sides of this equation yields $-4=4a$. Dividing both sides of this equation by $4$ yields $-1=a$. Therefore, the model can be represented by the equation $N\\left(p\\right)=-{(p-10)}^{2}+9$. Substituting $8$ for $p$ in this equation yields $N\\left(8\\right)=-{(8-10)}^{2}+9$, or $N(8)=-4+9$, or $N(8)=5$. Therefore, according to the model, the number of bowls sold for \\$8 each was $5$.",
@@ -25463,7 +25463,7 @@
     "id": "e11294f9",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Hard",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
@@ -25616,7 +25616,7 @@
     "id": "e833de9a",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Hard",
     "questionType": "mcq",
     "passage": "",
@@ -25650,7 +25650,7 @@
     "id": "e8779461",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Easy",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
@@ -25721,7 +25721,7 @@
     "id": "ebb717ab",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Hard",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
@@ -25741,7 +25741,7 @@
     "difficulty": "Hard",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "An auditorium has seats for $1,800$ people. Tickets to attend a show at the auditorium currently cost \\$4.00. For each \\$1.00 increase to the ticket price, $100$ fewer tickets will be sold. This situation can be modeled by the equation $y=-100x^{2}+1,400x+7,200$, where $x$ represents the increase in ticket price, in dollars, and $y$ represents the revenue, in dollars, from ticket sales. If this equation is graphed in the xy-plane, at what value of $x$ is the maximum of the graph?",
+    "prompt": "An auditorium has seats for $1,800$ people. Tickets to attend a show at the auditorium currently cost $4.00. For each $1.00 increase to the ticket price, $100$ fewer tickets will be sold. This situation can be modeled by the equation $y=-100x^{2}+1,400x+7,200$, where $x$ represents the increase in ticket price, in dollars, and $y$ represents the revenue, in dollars, from ticket sales. If this equation is graphed in the xy-plane, at what value of $x$ is the maximum of the graph?",
     "options": [
       {
         "id": "A",
@@ -25889,7 +25889,7 @@
     "id": "f123e039",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
@@ -25944,7 +25944,7 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The curve passes through quadrant 1.\nThe curve trends up sharply.\n\nThe curve passes through the following points:\n\nThe graph gives the estimated population $y$, in thousands, of a town $x$ years since $2003$, where $0 \\le x \\le 5$. Which of the following best describes the increase in the estimated population from $x=0$ to $x=1$?",
+    "prompt": "The graph gives the estimated population $y$, in thousands, of a town $x$ years since $2003$, where $0 \\le x \\le 5$. Which of the following best describes the increase in the estimated population from $x=0$ to $x=1$?",
     "options": [
       {
         "id": "A",
@@ -26131,7 +26131,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The curve passes through the following points:\n\nWhat is the y-intercept of the graph shown?",
+    "prompt": "What is the y-intercept of the graph shown?",
     "options": [
       {
         "id": "A",
@@ -26162,7 +26162,7 @@
     "id": "f5aa5040",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Hard",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
@@ -26231,7 +26231,7 @@
     "id": "f76c1858",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Medium",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
@@ -26315,7 +26315,7 @@
     "id": "fad2f98c",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
@@ -26349,7 +26349,7 @@
     "id": "fada6b03",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Hard",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
@@ -26365,7 +26365,7 @@
     "id": "faeae876",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
@@ -26399,7 +26399,7 @@
     "id": "fbb96bb1",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Hard",
     "questionType": "mcq",
     "passage": "",
@@ -26433,7 +26433,7 @@
     "id": "fc2ec559",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
@@ -26467,7 +26467,7 @@
     "id": "fc3d783a",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Hard",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
@@ -26483,7 +26483,7 @@
     "id": "fcb78856",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
@@ -26653,7 +26653,7 @@
     "id": "ff2c1431",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
@@ -26687,7 +26687,7 @@
     "id": "ff2e5c76",
     "section": "Math",
     "domain": "Advanced Math",
-    "skill": "Nonlinear equations in one variable and systems of equations in two variables ",
+    "skill": "Nonlinear equations in one variable and systems of equations in two variables",
     "difficulty": "Hard",
     "questionType": "mcq",
     "passage": "",
@@ -26898,7 +26898,7 @@
     "difficulty": "Hard",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "The regular price of a shirt at a store is \\$11.70. The sale price of the shirt is $80\\%$ less than the regular price, and the sale price is $30\\%$ greater than the store's cost for the shirt. What was the store’s cost, in dollars, for the shirt? (Disregard the \\$ sign when entering your answer. For example, if your answer is \\$4.97, enter $4.97$)",
+    "prompt": "The regular price of a shirt at a store is $11.70. The sale price of the shirt is $80\\%$ less than the regular price, and the sale price is $30\\%$ greater than the store's cost for the shirt. What was the store’s cost, in dollars, for the shirt? (Disregard the \\$ sign when entering your answer. For example, if your answer is $4.97, enter $4.97$)",
     "options": [],
     "correctAnswer": "9/5",
     "rationale": "The correct answer is $1.8$. It’s given that the regular price of a shirt at a store is \\$11.70, and the sale price of the shirt is $80\\%$ less than the regular price. It follows that the sale price of the shirt is $\\$11.70\\left(1-\\frac{80}{100}\\right)$, or $\\$11.70\\left(1-0.8\\right)$, which is equivalent to \\$2.34. It’s also given that the sale price of the shirt is $30\\%$ greater than the store’s cost for the shirt. Let $x$ represent the store’s cost for the shirt. It follows that $2.34=\\left(1+\\frac{30}{100}\\right)x$, or $2.34=1.3x$. Dividing both sides of this equation by $1.3$ yields $x=1.80$. Therefore, the store’s cost, in dollars, for the shirt is $1.80$. Note that 1.8 and 9/5 are examples of ways to enter a correct answer.",
@@ -27259,7 +27259,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The scatterplot shows the relationship between two variables, $x$ and $y$.\n\n(0.3 comma 75)\n(1.9 comma 200)\n(2.6 comma 183)\n(3.5 comma 898)\n(4.2 comma 802)\n(5.1 comma 2,173)\n(5.7 comma 2,658)\n(6.4 comma 4,766)\n\nWhich of the following graphs shows the most appropriate model for the data?",
+    "prompt": "The scatterplot shows the relationship between two variables, $ and $. Which of the following graphs shows the most appropriate model for the data?",
     "options": [
       {
         "id": "A",
@@ -27333,7 +27333,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The scatterplot shows the relationship between two variables, $x$ and $y$.\n\n(1 comma 3.0)\n(3 comma 5.0)\n(5 comma 6.0)\n(7 comma 8.0)\n(9 comma 10.0)\n\nWhich equation is the most appropriate linear model for this relationship?",
+    "prompt": "The scatterplot shows the relationship between two variables, $ and $. Which equation is the most appropriate linear model for this relationship?",
     "options": [
       {
         "id": "A",
@@ -27584,7 +27584,7 @@
     "id": "1e562f24",
     "section": "Math",
     "domain": "Problem-Solving and Data Analysis",
-    "skill": "Inference from sample statistics and margin of error ",
+    "skill": "Inference from sample statistics and margin of error",
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
@@ -27812,7 +27812,7 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The scatterplot shows the relationship between two variables, $x$ and $y$. A line of best fit is also shown.\n\n(0 comma 14.1)\n(12.7 comma 0)\n\nWhich of the following is closest to the slope of this line of best fit?",
+    "prompt": "The scatterplot shows the relationship between two variables, $ and $. A line of best fit is also shown. Which of the following is closest to the slope of this line of best fit?",
     "options": [
       {
         "id": "A",
@@ -28153,7 +28153,7 @@
     "id": "2bab1399",
     "section": "Math",
     "domain": "Problem-Solving and Data Analysis",
-    "skill": "Inference from sample statistics and margin of error ",
+    "skill": "Inference from sample statistics and margin of error",
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
@@ -28187,7 +28187,7 @@
     "id": "2c76bcce",
     "section": "Math",
     "domain": "Problem-Solving and Data Analysis",
-    "skill": "Inference from sample statistics and margin of error ",
+    "skill": "Inference from sample statistics and margin of error",
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
@@ -28329,7 +28329,7 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "In the given scatterplot, a line of best fit for the data is shown.\n\n5 points are touching the line of best fit.\n2 points are above the line of best fit.\n3 points are below the line of best fit.\nThe line of best fit passes through the following approximate coordinates:\n\nWhich of the following is closest to the slope of this line of best fit?",
+    "prompt": "In the given scatterplot, a line of best fit for the data is shown. Which of the following is closest to the slope of this line of best fit?",
     "options": [
       {
         "id": "A",
@@ -28364,7 +28364,7 @@
     "difficulty": "Hard",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "(0 comma 11.9)\n(12 comma 30.3)\n(20 comma 42.6)\n\nThe scatterplot shows the relationship between two variables, $x$ and $y$, for data set E. A line of best fit is shown. Data set F is created by multiplying the y-coordinate of each data point from data set E by $3.9$. Which of the following could be an equation of a line of best fit for data set F?",
+    "prompt": "The scatterplot shows the relationship between two variables, $ and $, for data set E. A line of best fit is shown. Data set F is created by multiplying the y-coordinate of each data point from data set E by .9$. Which of the following could be an equation of a line of best fit for data set F?",
     "options": [
       {
         "id": "A",
@@ -28785,7 +28785,7 @@
     "id": "3e1bd4e2",
     "section": "Math",
     "domain": "Problem-Solving and Data Analysis",
-    "skill": "Inference from sample statistics and margin of error ",
+    "skill": "Inference from sample statistics and margin of error",
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
@@ -28819,7 +28819,7 @@
     "id": "4096a482",
     "section": "Math",
     "domain": "Problem-Solving and Data Analysis",
-    "skill": "Inference from sample statistics and margin of error ",
+    "skill": "Inference from sample statistics and margin of error",
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
@@ -29181,7 +29181,7 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "In the given scatterplot, a line of best fit for the data is shown.\n\n(0 comma 0.2)\n(5 comma 9.3)\n\nWhich of the following is closest to the slope of the line of best fit shown?",
+    "prompt": "In the given scatterplot, a line of best fit for the data is shown. Which of the following is closest to the slope of the line of best fit shown?",
     "options": [
       {
         "id": "A",
@@ -29882,7 +29882,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "(0.8 comma 8.9)\n(2.8 comma 5.1)\n(4.1 comma 2.9)\n\nWhich of the following equations is the most appropriate linear model for the data shown in the scatterplot?",
+    "prompt": "Which of the following equations is the most appropriate linear model for the data shown in the scatterplot?",
     "options": [
       {
         "id": "A",
@@ -30281,7 +30281,7 @@
     "id": "6fca0144",
     "section": "Math",
     "domain": "Problem-Solving and Data Analysis",
-    "skill": "Evaluating statistical claims: Observational studies and experiments ",
+    "skill": "Evaluating statistical claims: Observational studies and experiments",
     "difficulty": "Hard",
     "questionType": "mcq",
     "passage": "",
@@ -30808,7 +30808,7 @@
     "id": "7d68096f",
     "section": "Math",
     "domain": "Problem-Solving and Data Analysis",
-    "skill": "Evaluating statistical claims: Observational studies and experiments ",
+    "skill": "Evaluating statistical claims: Observational studies and experiments",
     "difficulty": "Hard",
     "questionType": "mcq",
     "passage": "<table border=\"1\">\n<thead>\n<tr style=\"height: 22.3906px;\">\n<th rowspan=\"2\" scope=\"colgroup\" style=\"text-align: center; height: 22.3906px; width: 25.0771%;\">Hours practiced</th>\n<th colspan=\"3\" scope=\"colgroup\" style=\"width: 75.2312%; text-align: center; height: 22.3906px;\">Number of points per round</th>\n</tr>\n<tr style=\"height: 44.7812px;\">\n<th scope=\"col\" style=\"width: 25.0771%; text-align: center; height: 44.7812px;\">6 to 13 points</th>\n<th scope=\"col\" style=\"width: 25.0771%; text-align: center; height: 44.7812px;\">14 or more points</th>\n<th scope=\"col\" style=\"width: 25.0771%; text-align: center; height: 44.7812px;\">Total</th>\n</tr>\n</thead>\n<tbody>\n<tr style=\"height: 22.3906px;\">\n<th scope=\"row\" style=\"width: 25.0771%; text-align: left; height: 22.3906px;\">3 to 5 hours</th>\n<td style=\"width: 25.0771%; text-align: center; height: 22.3906px;\">$6$</td>\n<td style=\"width: 25.0771%; text-align: center; height: 22.3906px;\">$4$</td>\n<td style=\"width: 25.0771%; text-align: center; height: 22.3906px;\">$10$</td>\n</tr>\n<tr style=\"height: 44.7812px;\">\n<th scope=\"row\" style=\"width: 25.0771%; text-align: left; height: 44.7812px;\">More than 5 hours</th>\n<td style=\"width: 25.0771%; text-align: center; height: 44.7812px;\">$4$</td>\n<td style=\"width: 25.0771%; text-align: center; height: 44.7812px;\">$26$</td>\n<td style=\"width: 25.0771%; text-align: center; height: 44.7812px;\">$30$</td>\n</tr>\n<tr style=\"height: 22.3906px;\">\n<th scope=\"row\" style=\"width: 25.0771%; text-align: center; height: 22.3906px;\">Total</th>\n<td style=\"width: 25.0771%; text-align: center; height: 22.3906px;\">$10$</td>\n<td style=\"width: 25.0771%; text-align: center; height: 22.3906px;\">$30$</td>\n<td style=\"width: 25.0771%; text-align: center; height: 22.3906px;\">$40$</td>\n</tr>\n</tbody>\n</table>",
@@ -30927,31 +30927,31 @@
     "id": "8173f32b",
     "section": "Math",
     "domain": "Problem-Solving and Data Analysis",
-    "skill": "Inference from sample statistics and margin of error ",
+    "skill": "Inference from sample statistics and margin of error",
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "An analyst collected data on the price of a carton of grape tomatoes at $30$ locations selected at random in Utah. The mean price of a carton of grape tomatoes in Utah was estimated to be \\$4.23, with an associated margin of error of \\$0.08. Which of the following is a plausible statement about the mean price of a carton of grape tomatoes for all locations that sell this product in Utah?",
+    "prompt": "An analyst collected data on the price of a carton of grape tomatoes at $30$ locations selected at random in Utah. The mean price of a carton of grape tomatoes in Utah was estimated to be $4.23, with an associated margin of error of $0.08. Which of the following is a plausible statement about the mean price of a carton of grape tomatoes for all locations that sell this product in Utah?",
     "options": [
       {
         "id": "A",
         "label": "A",
-        "text": "It is between \\$4.15 and \\$4.31."
+        "text": "It is between $4.15 and $4.31."
       },
       {
         "id": "B",
         "label": "B",
-        "text": "It is either less than \\$4.15 or greater than \\$4.31."
+        "text": "It is either less than $4.15 or greater than $4.31."
       },
       {
         "id": "C",
         "label": "C",
-        "text": "It is less than \\$4.15."
+        "text": "It is less than $4.15."
       },
       {
         "id": "D",
         "label": "D",
-        "text": "It is greater than \\$4.31."
+        "text": "It is greater than $4.31."
       }
     ],
     "correctAnswer": "A",
@@ -31084,7 +31084,7 @@
     "difficulty": "Easy",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "A customer spent \\$27 to purchase oranges at \\$3 per pound. How many pounds of oranges did the customer purchase?",
+    "prompt": "A customer spent $27 to purchase oranges at $3 per pound. How many pounds of oranges did the customer purchase?",
     "options": [],
     "correctAnswer": "9",
     "rationale": "The correct answer is $9$. It’s given that the customer spent \\$27 to purchase oranges at \\$3 per pound. Therefore, the number of pounds of oranges the customer purchased is $\\$27\\left(\\frac{1\\text{ pound}}{\\$3}\\right)$, or $9$ pounds.",
@@ -31475,7 +31475,7 @@
     "id": "916ffe9b",
     "section": "Math",
     "domain": "Problem-Solving and Data Analysis",
-    "skill": "Inference from sample statistics and margin of error ",
+    "skill": "Inference from sample statistics and margin of error",
     "difficulty": "Hard",
     "questionType": "mcq",
     "passage": "<table border=\"1\" style=\"border-collapse: collapse; width: 39.3547%; height: 71px; border-color: #000000; border-style: solid; margin-left: auto; margin-right: auto;\">\n<caption><p style=\"text-align: center;\">Poll Results</p></caption>\n<tbody>\n<tr>\n<th scope=\"row\" style=\"width: 60.589%; text-align: center;\">Angel Cruz</th>\n<td style=\"width: 35.3472%; text-align: center;\">$483$</td>\n</tr>\n<tr>\n<th scope=\"row\" style=\"width: 60.589%; text-align: center;\">Terry Smith</th>\n<td style=\"width: 35.3472%; text-align: center;\">$320$</td>\n</tr>\n</tbody>\n</table>",
@@ -31660,7 +31660,7 @@
     "id": "97631565",
     "section": "Math",
     "domain": "Problem-Solving and Data Analysis",
-    "skill": "Inference from sample statistics and margin of error ",
+    "skill": "Inference from sample statistics and margin of error",
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
@@ -31850,7 +31850,7 @@
     "id": "9bedc4a0",
     "section": "Math",
     "domain": "Problem-Solving and Data Analysis",
-    "skill": "Inference from sample statistics and margin of error ",
+    "skill": "Inference from sample statistics and margin of error",
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
@@ -32071,7 +32071,7 @@
     "id": "a2162ea1",
     "section": "Math",
     "domain": "Problem-Solving and Data Analysis",
-    "skill": "Inference from sample statistics and margin of error ",
+    "skill": "Inference from sample statistics and margin of error",
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
@@ -32259,7 +32259,7 @@
     "difficulty": "Medium",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "(2 comma 2.9)\n(8 comma 7.7)\n\nThe scatterplot shows the relationship between two variables, $x$ and $y$. A line of best fit is also shown. For how many of the $11$ data points does the line of best fit predict a greater $y$-value than the actual $y$-value?",
+    "prompt": "The scatterplot shows the relationship between two variables, $ and $. A line of best fit is also shown. For how many of the $ data points does the line of best fit predict a greater $-value than the actual $-value?",
     "options": [],
     "correctAnswer": "6",
     "rationale": "The correct answer is $6$. The line of best fit predicts a greater y-value than the actual y-value for any data point that's located below the line of best fit. For the scatterplot shown, $6$ of the data points are below the line of best fit. Therefore, the line of best fit predicts a greater y-value than the actual y-value for $6$ of the data points.",
@@ -32310,7 +32310,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "(600 comma 5.6)\n(1,200 comma 11.0)\n(1,500 comma 13.8)\n(1,800 comma 16.5)\n\nTwelve data points are shown in the scatterplot. A line of best fit for the data is also shown. At $x=1,200$, which of the following is closest to the y-value predicted by the line of best fit?",
+    "prompt": "Twelve data points are shown in the scatterplot. A line of best fit for the data is also shown. At =1,200$, which of the following is closest to the y-value predicted by the line of best fit?",
     "options": [
       {
         "id": "A",
@@ -32375,7 +32375,7 @@
     "id": "affb2315",
     "section": "Math",
     "domain": "Problem-Solving and Data Analysis",
-    "skill": "Inference from sample statistics and margin of error ",
+    "skill": "Inference from sample statistics and margin of error",
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
@@ -32495,7 +32495,7 @@
     "id": "b695711c",
     "section": "Math",
     "domain": "Problem-Solving and Data Analysis",
-    "skill": "Evaluating statistical claims: Observational studies and experiments ",
+    "skill": "Evaluating statistical claims: Observational studies and experiments",
     "difficulty": "Hard",
     "questionType": "mcq",
     "passage": "<table border=\"1\">\n<tbody>\n<tr style=\"height: 44.7917px;\">\n<td style=\"width: 19.9241%; height: 44.7917px;\"> </td>\n<th colspan=\"4\" scope=\"colgroup\" style=\"height: 44.7917px; width: 79.8598%; text-align: center;\">Percentage of correct notes the students played during a recital</th>\n</tr>\n<tr style=\"height: 89.5833px;\">\n<th scope=\"col\" style=\"width: 19.9241%; height: 89.5833px;\">Average number of minutes practiced each week</th>\n<th scope=\"col\" style=\"width: 14%; height: 89.5833px; text-align: center; vertical-align: middle;\">Less than $50\\%$</th>\n<th scope=\"col\" style=\"width: 14%; height: 89.5833px; text-align: center; vertical-align: middle;\">$50\\%$ to $80\\%$</th>\n<th scope=\"col\" style=\"width: 14%; height: 89.5833px; text-align: center; vertical-align: middle;\">Greater than $80\\%$</th>\n<th scope=\"col\" style=\"width: 14%; height: 89.5833px; text-align: center; vertical-align: middle;\">Total</th>\n</tr>\n<tr style=\"height: 22.3958px;\">\n<th scope=\"row\" style=\"width: 19.9241%; height: 22.3958px; text-align: left;\">$50$ to $150$</th>\n<td style=\"width: 14%; height: 22.3958px; text-align: center; vertical-align: middle;\">$7$</td>\n<td style=\"width: 14%; height: 22.3958px; text-align: center; vertical-align: middle;\">$28$</td>\n<td style=\"width: 14%; height: 22.3958px; text-align: center; vertical-align: middle;\">$5$</td>\n<td style=\"width: 14%; height: 22.3958px; text-align: center; vertical-align: middle;\">$40$</td>\n</tr>\n<tr style=\"height: 22.3958px;\">\n<th scope=\"row\" style=\"width: 19.9241%; height: 22.3958px; text-align: left;\">$151$ or more</th>\n<td style=\"width: 14%; height: 22.3958px; text-align: center; vertical-align: middle;\">$3$</td>\n<td style=\"width: 14%; height: 22.3958px; text-align: center; vertical-align: middle;\">$11$</td>\n<td style=\"width: 14%; height: 22.3958px; text-align: center; vertical-align: middle;\">$21$</td>\n<td style=\"width: 14%; height: 22.3958px; text-align: center; vertical-align: middle;\">$35$</td>\n</tr>\n<tr style=\"height: 22.3958px;\">\n<th scope=\"row\" style=\"width: 19.9241%; height: 22.3958px; text-align: center;\">Total</th>\n<td style=\"width: 14%; height: 22.3958px; text-align: center; vertical-align: middle;\">$10$</td>\n<td style=\"width: 14%; height: 22.3958px; text-align: center; vertical-align: middle;\">$39$</td>\n<td style=\"width: 14%; height: 22.3958px; text-align: center; vertical-align: middle;\">$26$</td>\n<td style=\"width: 14%; height: 22.3958px; text-align: center; vertical-align: middle;\">$75$</td>\n</tr>\n</tbody>\n</table>",
@@ -32943,7 +32943,7 @@
     "difficulty": "Medium",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "The amount of Hanna's bill for a food order was \\$50. Hanna gave a tip of $20\\%$ of the amount of the bill. What is the amount, in dollars, of the tip Hanna gave?",
+    "prompt": "The amount of Hanna's bill for a food order was $50. Hanna gave a tip of $20\\%$ of the amount of the bill. What is the amount, in dollars, of the tip Hanna gave?",
     "options": [],
     "correctAnswer": "10",
     "rationale": "The correct answer is $10$. It’s given that the amount of Hanna's food order was \\$50 and that Hanna gave a tip of $20\\%$ of the amount of the bill. $20\\%$ of $50$ can be calculated as $\\left(\\frac{20}{100}\\right)\\left(50\\right)$, which yields $\\frac{1000}{100}$, or $10$. Therefore, the amount, in dollars, of the tip Hanna gave is $10$.",
@@ -33539,7 +33539,7 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "In March, the price of a collectible card was \\$15.50. In April, the price of the collectible card was \\$17.36. The price of the collectible card in April was $p\\%$ of the price of the collectible card in March. What is the value of $p$?",
+    "prompt": "In March, the price of a collectible card was $15.50. In April, the price of the collectible card was $17.36. The price of the collectible card in April was $p\\%$ of the price of the collectible card in March. What is the value of $p$?",
     "options": [
       {
         "id": "A",
@@ -33654,7 +33654,7 @@
     "id": "da978ee6",
     "section": "Math",
     "domain": "Problem-Solving and Data Analysis",
-    "skill": "Inference from sample statistics and margin of error ",
+    "skill": "Inference from sample statistics and margin of error",
     "difficulty": "Hard",
     "questionType": "mcq",
     "passage": "",
@@ -33875,7 +33875,7 @@
     "id": "e03f3477",
     "section": "Math",
     "domain": "Problem-Solving and Data Analysis",
-    "skill": "Inference from sample statistics and margin of error ",
+    "skill": "Inference from sample statistics and margin of error",
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
@@ -33913,7 +33913,7 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The scatterplot shows the relationship between two variables, $x$ and $y$. A line of best fit for the data is also shown.\n\n(0 comma 0.1)\n(5 comma 5.1)\n\nFor how many of the $10$ data points is the actual y-value greater than the y-value predicted by the line of best fit?",
+    "prompt": "The scatterplot shows the relationship between two variables, $ and $. A line of best fit for the data is also shown. For how many of the $ data points is the actual y-value greater than the y-value predicted by the line of best fit?",
     "options": [
       {
         "id": "A",
@@ -34152,7 +34152,7 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "In the given scatterplot, a line of best fit for the data is shown.\n\n(0 comma 2.5)\n(5 comma 3.6)\n(10 comma 4.7)\n\nWhich of the following is closest to the slope of the line of best fit?",
+    "prompt": "In the given scatterplot, a line of best fit for the data is shown. Which of the following is closest to the slope of the line of best fit?",
     "options": [
       {
         "id": "A",
@@ -34192,22 +34192,22 @@
       {
         "id": "A",
         "label": "A",
-        "text": "Cutting boards that have a width greater than $48$ centimeters have an average sale price of \\$59.00."
+        "text": "Cutting boards that have a width greater than $48$ centimeters have an average sale price of $59.00."
       },
       {
         "id": "B",
         "label": "B",
-        "text": "Cutting boards that have a width greater than $48$ centimeters have an average sale price of \\$40.00."
+        "text": "Cutting boards that have a width greater than $48$ centimeters have an average sale price of $40.00."
       },
       {
         "id": "C",
         "label": "C",
-        "text": "Cutting boards that have a width between $18$ and $48$ centimeters have an average sale price of \\$31.20."
+        "text": "Cutting boards that have a width between $18$ and $48$ centimeters have an average sale price of $31.20."
       },
       {
         "id": "D",
         "label": "D",
-        "text": "Cutting boards that have a width between $18$ and $48$ centimeters have an average sale price of \\$23.00."
+        "text": "Cutting boards that have a width between $18$ and $48$ centimeters have an average sale price of $23.00."
       }
     ],
     "correctAnswer": "D",
@@ -34495,7 +34495,7 @@
     "id": "f04d40b2",
     "section": "Math",
     "domain": "Problem-Solving and Data Analysis",
-    "skill": "Inference from sample statistics and margin of error ",
+    "skill": "Inference from sample statistics and margin of error",
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
@@ -34648,7 +34648,7 @@
     "id": "f85bbf7a",
     "section": "Math",
     "domain": "Problem-Solving and Data Analysis",
-    "skill": "Inference from sample statistics and margin of error ",
+    "skill": "Inference from sample statistics and margin of error",
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
@@ -35877,7 +35877,7 @@
     "difficulty": "Hard",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "The circle passes through the following approximate points:\n\n(0 comma 8.6)\n(2.6 comma 6)\n(0 comma 3.4)\n(negative 2.6 comma 6)\n\nCircle A shown is defined by the equation $x^{2}+{\\left(y-6\\right)}^{2}=7$. Circle B (not shown) has the same radius but is translated $96$ units to the right. If the equation of circle B is ${\\left(x-h\\right)}^{2}+{\\left(y-k\\right)}^{2}=a$, where $h$, $k$, and $a$ are constants, what is the value of $4a$?",
+    "prompt": "Circle A shown is defined by the equation ^{2}+{\\\\left(y-6\\\\right)}^{2}=7$. Circle B (not shown) has the same radius but is translated $ units to the right. If the equation of circle B is ^{2}+{\\\\left(y-k\\\\right)}^{2}=a$, where $, $, and $ are constants, what is the value of True",
     "options": [],
     "correctAnswer": "28",
     "rationale": "The correct answer is $28$. The equation of a circle in the xy-plane can be written as ${(x-t)}^{2}+{(y-s)}^{2}=r^{2}$, where the center of the circle is $(t,s)$ and the radius of the circle is $r$. It’s given that circle A is defined by the equation $x^{2}+{(y-6)}^{2}=7$, which can be written as ${(x-0)}^{2}+{(y-6)}^{2}={\\left(\\sqrt{7}\\right)}^{2}$. It follows that $r=\\sqrt{7}$ and the radius of circle A is $\\sqrt{7}$. It’s also given that circle B has the same radius as circle A. If the equation of circle B is ${(x-h)}^{2}+{(y-k)}^{2}=a$, then $a=r^{2}$. Substituting $\\sqrt{7}$ for $r$ in this equation yields $a={\\left(\\sqrt{7}\\right)}^{2}$, or $a=7$. It follows that the value of $4a$ is $4(7)$, or $28$.",
