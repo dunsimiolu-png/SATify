@@ -22,8 +22,12 @@ export const QuestionNavModal: React.FC<QuestionNavModalProps> = ({
   currentIndex,
   userStates,
   onSelectQuestion,
-  sectionTitle = 'Section 1: Reading and Writing',
+  sectionTitle,
 }) => {
+  const currentQ = questions[currentIndex] || questions[0];
+  const isMathQuestion = currentQ?.section === 'Math' ||
+    ['Algebra', 'Advanced Math', 'Problem-Solving and Data Analysis', 'Geometry and Trigonometry'].includes(currentQ?.domain || '');
+  const resolvedSectionTitle = sectionTitle || (isMathQuestion ? 'Section 2: Math' : 'Section 1: Reading and Writing');
   const [activeFilter, setActiveFilter] = useState<FilterTab>('all');
   const [jumpValue, setJumpValue] = useState<string>('');
   const activeQuestionRef = useRef<HTMLButtonElement | null>(null);
@@ -119,7 +123,7 @@ export const QuestionNavModal: React.FC<QuestionNavModalProps> = ({
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <span className="font-semibold text-zinc-950 dark:text-[#F4F4F6] text-xs sm:text-sm tracking-tight">
-                {sectionTitle}
+                {resolvedSectionTitle}
               </span>
               <span className="text-[10px] font-mono font-semibold px-2 py-0.5 rounded-full border border-zinc-200 dark:border-[#222634] bg-white dark:bg-[#11131A] text-zinc-600 dark:text-[#8E95A5]">
                 {questions.length} Questions

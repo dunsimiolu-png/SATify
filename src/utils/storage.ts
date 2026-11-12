@@ -172,9 +172,6 @@ export function recordAttempt(attempt: AttemptRecord): void {
 
     updateStudyStreak();
 
-    // Auto-save question so answered questions are saved in bookmarks
-    saveQuestion(attempt.questionId);
-
     // Trigger reactive update across open components
     window.dispatchEvent(new CustomEvent('satify_storage_update'));
     queueCloudSync();

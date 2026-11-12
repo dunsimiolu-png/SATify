@@ -1197,7 +1197,11 @@ export const App: React.FC = () => {
       <DirectionsModal
         isOpen={isDirectionsOpen}
         onClose={() => setIsDirectionsOpen(false)}
-        section={currentQuestion.section}
+        section={
+          (currentQuestion?.section === 'Math' || ['Algebra', 'Advanced Math', 'Problem-Solving and Data Analysis', 'Geometry and Trigonometry'].includes(currentQuestion?.domain || ''))
+            ? 'Math'
+            : 'Reading and Writing'
+        }
       />
 
       <ReferenceModal
@@ -1216,6 +1220,11 @@ export const App: React.FC = () => {
         questions={activeQuestions}
         currentIndex={safeIndex}
         userStates={userStates}
+        sectionTitle={
+          (currentQuestion?.section === 'Math' || ['Algebra', 'Advanced Math', 'Problem-Solving and Data Analysis', 'Geometry and Trigonometry'].includes(currentQuestion?.domain || ''))
+            ? 'Section 2: Math'
+            : 'Section 1: Reading and Writing'
+        }
         onSelectQuestion={(idx) => {
           setUserStates(prev => {
             if (!prev[idx]?.isExplanationOpen) return prev;

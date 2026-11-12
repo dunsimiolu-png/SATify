@@ -15,6 +15,7 @@ import {
   Edit2 
 } from 'lucide-react';
 import { MockQuestion } from '../types/quiz';
+import { RichText } from './RichText';
 import { 
   getAttempts, 
   getStudyStreak, 
@@ -73,8 +74,28 @@ export const Home: React.FC<HomeProps> = ({
   }, []);
 
   // ---------------------------------------------------------------------------
-  // 2. Next SAT Date (localStorage)
+  // 2. Next SAT Date (localStorage & Official Dates)
   // ---------------------------------------------------------------------------
+  const OFFICIAL_SAT_DATES = useMemo(() => [
+    { label: 'March 8, 2025 (Spring SAT)', value: '2025-03-08' },
+    { label: 'May 3, 2025 (Spring SAT)', value: '2025-05-03' },
+    { label: 'June 7, 2025 (Summer SAT)', value: '2025-06-07' },
+    { label: 'August 23, 2025 (Fall SAT)', value: '2025-08-23' },
+    { label: 'October 4, 2025 (Fall SAT)', value: '2025-10-04' },
+    { label: 'November 8, 2025 (Fall SAT)', value: '2025-11-08' },
+    { label: 'December 6, 2025 (Winter SAT)', value: '2025-12-06' },
+    { label: 'March 14, 2026 (Spring SAT)', value: '2026-03-14' },
+    { label: 'May 2, 2026 (Spring SAT)', value: '2026-05-02' },
+    { label: 'June 6, 2026 (Summer SAT)', value: '2026-06-06' },
+    { label: 'August 22, 2026 (Fall SAT)', value: '2026-08-22' },
+    { label: 'October 3, 2026 (Fall SAT)', value: '2026-10-03' },
+    { label: 'November 7, 2026 (Fall SAT)', value: '2026-11-07' },
+    { label: 'December 5, 2026 (Winter SAT)', value: '2026-12-05' },
+    { label: 'March 13, 2027 (Spring SAT)', value: '2027-03-13' },
+    { label: 'May 8, 2027 (Spring SAT)', value: '2027-05-08' },
+    { label: 'June 5, 2027 (Summer SAT)', value: '2027-06-05' },
+  ], []);
+
   const [satDate, setSatDate] = useState<string>(() => {
     if (typeof window === 'undefined') return '';
     return localStorage.getItem('satify_target_sat_date') || '';
@@ -84,11 +105,24 @@ export const Home: React.FC<HomeProps> = ({
 
   const satDaysRemaining = useMemo(() => {
     if (!satDate) return null;
-    const target = new Date(satDate);
+    const parts = satDate.split('-');
+    if (parts.length !== 3) return null;
+    const year = parseInt(parts[0], 10);
+    const month = parseInt(parts[1], 10) - 1;
+    const day = parseInt(parts[2], 10);
+    const target = new Date(year, month, day);
     const now = new Date();
     now.setHours(0, 0, 0, 0);
     const diffTime = target.getTime() - now.getTime();
-    return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    return Math.round(diffTime / (1000 * 60 * 60 * 24));
+  }, [satDate]);
+
+  const formattedSatDate = useMemo(() => {
+    if (!satDate) return '';
+    const parts = satDate.split('-');
+    if (parts.length !== 3) return '';
+    const dt = new Date(parseInt(parts[0], 10), parseInt(parts[1], 10) - 1, parseInt(parts[2], 10));
+    return dt.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
   }, [satDate]);
 
   const handleSaveSatDate = (newDate: string) => {
@@ -140,11 +174,20 @@ export const Home: React.FC<HomeProps> = ({
   const activeSnippet = useMemo(() => {
     if (lastSession?.questionSnippet) return lastSession.questionSnippet;
     if (lastSessionQuestion) {
-      return (lastSessionQuestion.prompt || lastSessionQuestion.passage || '')
-        .replace(/<[^>]+>/g, '')
-        .replace(/\s+/g, ' ')
-        .trim()
-        .slice(0, 110);
+      const raw = lastSessionQuestion.prompt || lastSessionQuestion.passage || '';
+      const clean = raw.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
+      if (clean.length <= 110) return clean;
+      let cut = clean.slice(0, 110);
+      const dollarCount = (cut.match(/(?<!\\)\$/g) || []).length;
+      if (dollarCount % 2 !== 0) {
+        const nextDollar = clean.indexOf('$', 110);
+        if (nextDollar !== -1 && nextDollar < 140) {
+          cut = clean.slice(0, nextDollar + 1);
+        } else {
+          cut += '$';
+        }
+      }
+      return cut + '...';
     }
     return '';
   }, [lastSession, lastSessionQuestion]);
@@ -334,17 +377,32 @@ export const Home: React.FC<HomeProps> = ({
                 </span>
                 
                 {lastSession || lastAttempt ? (
-                  <div className="mt-1 space-y-1">
-                    <h4 className="font-semibold text-sm text-zinc-950 dark:text-[#F4F4F6]">
-                      {lastSession?.skill || lastAttempt?.skill || 'Standard English Conventions'}
-                    </h4>
-                    <p className="text-xs text-zinc-500 dark:text-[#8E95A5]">
-                      Domain: {lastSession?.domain || lastAttempt?.domain || 'Reading & Writing'} • Difficulty: {lastSession?.difficulty || lastAttempt?.difficulty || 'Medium'}
-                    </p>
+                  <div className="mt-2 space-y-2.5">
+                    <div className="flex items-center justify-between gap-2">
+                      <h4 className="font-semibold text-sm text-zinc-950 dark:text-[#F4F4F6] truncate">
+                        {lastSession?.skill || lastAttempt?.skill || 'Standard English Conventions'}
+                      </h4>
+                      <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full shrink-0 border ${
+                        (lastSession?.difficulty || lastAttempt?.difficulty) === 'Easy'
+                          ? 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400 border-emerald-200 dark:border-emerald-800'
+                          : (lastSession?.difficulty || lastAttempt?.difficulty) === 'Hard'
+                          ? 'bg-rose-50 dark:bg-rose-950/40 text-rose-700 dark:text-rose-400 border-rose-200 dark:border-rose-800'
+                          : 'bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-400 border-amber-200 dark:border-amber-800'
+                      }`}>
+                        {lastSession?.difficulty || lastAttempt?.difficulty || 'Medium'}
+                      </span>
+                    </div>
+
+                    <div className="flex items-center gap-2">
+                      <span className="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-400 border border-blue-200 dark:border-blue-900/40">
+                        {lastSession?.domain || lastAttempt?.domain || 'Reading & Writing'}
+                      </span>
+                    </div>
+
                     {activeSnippet && (
-                      <p className="text-xs text-zinc-600 dark:text-[#8E95A5] italic line-clamp-1 border-l-2 border-blue-500/60 pl-2 mt-1">
-                        &ldquo;{activeSnippet}&rdquo;
-                      </p>
+                      <div className="p-2.5 rounded-xl bg-neutral-50 dark:bg-[#181B24] border border-zinc-200/80 dark:border-[#222634] text-xs font-serif leading-relaxed text-zinc-800 dark:text-zinc-200 shadow-2xs">
+                        <RichText text={activeSnippet} />
+                      </div>
                     )}
                   </div>
                 ) : (
@@ -429,47 +487,79 @@ export const Home: React.FC<HomeProps> = ({
 
               <div>
                 {isEditingSatDate ? (
-                  <div className="space-y-1.5">
+                  <div className="space-y-2">
+                    <select
+                      value={OFFICIAL_SAT_DATES.some(d => d.value === tempDateInput) ? tempDateInput : (tempDateInput ? 'custom' : '')}
+                      onChange={(e) => {
+                        if (e.target.value === 'custom') {
+                          setTempDateInput('');
+                        } else {
+                          setTempDateInput(e.target.value);
+                        }
+                      }}
+                      className="w-full text-xs p-1.5 rounded-lg border border-zinc-300 dark:border-[#222634] bg-neutral-50 dark:bg-[#181B24] text-zinc-900 dark:text-[#F4F4F6] cursor-pointer"
+                    >
+                      <option value="">Select official SAT date...</option>
+                      {OFFICIAL_SAT_DATES.map(d => (
+                        <option key={d.value} value={d.value}>
+                          {d.label}
+                        </option>
+                      ))}
+                      <option value="custom">Custom date...</option>
+                    </select>
+
                     <input
                       type="date"
                       value={tempDateInput}
                       onChange={e => setTempDateInput(e.target.value)}
-                      className="w-full text-xs p-1 rounded border border-zinc-300 dark:border-[#222634] bg-neutral-50 dark:bg-[#181B24] text-zinc-900 dark:text-[#F4F4F6]"
+                      className="w-full text-xs p-1.5 rounded-lg border border-zinc-300 dark:border-[#222634] bg-neutral-50 dark:bg-[#181B24] text-zinc-900 dark:text-[#F4F4F6]"
+                      placeholder="YYYY-MM-DD"
                     />
-                    <div className="flex items-center gap-1.5">
+
+                    <div className="flex items-center gap-1.5 pt-0.5">
                       <button
                         type="button"
                         onClick={() => handleSaveSatDate(tempDateInput)}
-                        className="text-[10px] bg-blue-600 text-white px-2 py-0.5 rounded font-semibold cursor-pointer"
+                        disabled={!tempDateInput}
+                        className="text-[10px] bg-blue-600 hover:bg-blue-700 disabled:opacity-40 text-white px-2.5 py-1 rounded font-semibold transition-colors cursor-pointer"
                       >
                         Save
                       </button>
                       <button
                         type="button"
                         onClick={() => setIsEditingSatDate(false)}
-                        className="text-[10px] text-zinc-500 dark:text-[#8E95A5] px-1 py-0.5 cursor-pointer"
+                        className="text-[10px] text-zinc-500 hover:text-zinc-800 dark:text-[#8E95A5] dark:hover:text-zinc-200 px-1.5 py-1 transition-colors cursor-pointer"
                       >
                         Cancel
                       </button>
                     </div>
                   </div>
-                ) : satDaysRemaining !== null ? (
+                ) : (satDaysRemaining !== null && satDaysRemaining >= 0) ? (
                   <div>
-                    <div className="text-2xl font-bold tracking-tight text-blue-700 dark:text-blue-400 tabular-nums">
-                      {satDaysRemaining} <span className="text-xs font-medium text-zinc-500 dark:text-[#8E95A5]">days</span>
-                    </div>
+                    {satDaysRemaining === 0 ? (
+                      <div className="text-2xl font-bold tracking-tight text-emerald-600 dark:text-emerald-400">
+                        Today!
+                      </div>
+                    ) : (
+                      <div className="text-2xl font-bold tracking-tight text-blue-700 dark:text-blue-400 tabular-nums">
+                        {satDaysRemaining} <span className="text-xs font-medium text-zinc-500 dark:text-[#8E95A5]">days</span>
+                      </div>
+                    )}
                     <p className="text-[11px] text-zinc-500 dark:text-[#8E95A5] mt-0.5 truncate">
-                      {new Date(satDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} Test Date
+                      {formattedSatDate ? `${formattedSatDate} Test Date` : 'Target Test Date'}
                     </p>
                   </div>
                 ) : (
                   <div>
                     <div className="text-sm font-semibold text-zinc-700 dark:text-zinc-300">
-                      No SAT set
+                      Test date not set
                     </div>
                     <button
                       type="button"
-                      onClick={() => setIsEditingSatDate(true)}
+                      onClick={() => {
+                        setIsEditingSatDate(true);
+                        setTempDateInput('');
+                      }}
                       className="text-[11px] text-blue-600 dark:text-blue-400 font-semibold hover:underline mt-0.5 block cursor-pointer"
                     >
                       + Pick test date

@@ -46,8 +46,9 @@ export const MathText: React.FC<MathTextProps> = ({
     });
 
     // 2. Process inline math $...$
-    // The lookbehind (?<!\\) ensures that escaped currency (\$14, \$406) is NOT matched as math!
-    processed = processed.replace(/(?<!\\)\$([^\$\n]+?)\$/g, (_, math) => {
+    // The lookbehind (?<!\\) ensures that escaped currency (\$14, \$406) outside math is NOT matched!
+    // And allow escaped \$ inside math without prematurely ending the math token!
+    processed = processed.replace(/(?<!\\)\$((?:\\\$|[^\$\n])+?)(?<!\\)\$/g, (_, math) => {
       try {
         return katex.renderToString(math.trim(), {
           displayMode: false,
