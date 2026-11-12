@@ -10,6 +10,11 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta name="theme-color" content="#1e1e1e" />
+    <meta name="description" content="Master the Digital SAT with authentic Bluebook-style practice questions, Desmos graphing calculator, live timers, and real skill analytics." />
+    <meta property="og:title" content="SATify — Digital SAT Bluebook Practice" />
+    <meta property="og:description" content="Master the Digital SAT with authentic Bluebook-style practice questions, Desmos graphing calculator, live timers, and real skill analytics." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/satify-icon.svg" />
     <link rel="manifest" href="/manifest.json" />
     <title>SATify — Digital SAT Bluebook Practice</title>
     
@@ -39,6 +44,14 @@
     <script src="https://accounts.google.com/gsi/client" async defer></script>
   </head>
   <body class="bg-white text-gray-900 antialiased">
+    <noscript>
+      <div style="padding: 24px; text-align: center; font-family: system-ui, sans-serif; background-color: #11131A; color: #F4F4F6;">
+        <strong>JavaScript Required</strong>
+        <p style="margin-top: 8px; font-size: 14px; color: #8E95A5;">
+          SATify requires JavaScript to run the interactive Digital SAT Bluebook practice experience. Please enable JavaScript in your browser settings.
+        </p>
+      </div>
+    </noscript>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

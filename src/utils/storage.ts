@@ -377,16 +377,26 @@ export function isQuestionAnswered(questionId: string): boolean {
 /**
  * Calculates continuous consecutive study streak from attempts history
  */
+/**
+ * Formats a Date into a local YYYY-MM-DD string (preventing UTC timezone shift bugs)
+ */
+export function getLocalDateString(d: Date = new Date()): string {
+  const year = d.getFullYear();
+  const month = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+
 export function calculateStreakFromAttempts(attempts: AttemptRecord[]): number {
   if (!attempts || attempts.length === 0) return 0;
   const uniqueDates = Array.from(
-    new Set(attempts.map(a => new Date(a.timestamp).toISOString().slice(0, 10)))
+    new Set(attempts.map(a => getLocalDateString(new Date(a.timestamp))))
   ).sort().reverse();
 
   if (uniqueDates.length === 0) return 0;
 
-  const today = new Date().toISOString().slice(0, 10);
-  const yesterday = new Date(Date.now() - 86400000).toISOString().slice(0, 10);
+  const today = getLocalDateString(new Date());
+  const yesterday = getLocalDateString(new Date(Date.now() - 86400000));
 
   // If latest attempt is neither today nor yesterday, streak has expired
   if (uniqueDates[0] !== today && uniqueDates[0] !== yesterday) {
@@ -453,8 +463,8 @@ export function getStudyStreak(): number {
     }
     if (!raw) return 0;
     const data = JSON.parse(raw);
-    const today = new Date().toISOString().slice(0, 10);
-    const yesterday = new Date(Date.now() - 86400000).toISOString().slice(0, 10);
+    const today = getLocalDateString(new Date());
+    const yesterday = getLocalDateString(new Date(Date.now() - 86400000));
 
     if (data.lastDate === today || data.lastDate === yesterday) {
       return data.streak || 1;
@@ -473,7 +483,7 @@ export function updateStudyStreak(): number {
     const computed = calculateStreakFromAttempts(attempts);
 
     const key = getScopedKey(STORAGE_KEYS.STREAK);
-    const today = new Date().toISOString().slice(0, 10);
+    const today = getLocalDateString(new Date());
     const streak = Math.max(1, computed);
 
     localStorage.setItem(key, JSON.stringify({ streak, lastDate: today }));
@@ -489,11 +499,11 @@ export function updateStudyStreak(): number {
 export function get10DayActivityTrend(): DayActivity[] {
   const attempts = getAttempts();
   
-  // High-performance single O(N) reduction pass
+  // High-performance single O(N) reduction pass using local dates
   const countsByDate = new Map<string, { correct: number; wrong: number; total: number }>();
   for (let i = 0; i < attempts.length; i++) {
     const a = attempts[i];
-    const dateStr = new Date(a.timestamp).toISOString().slice(0, 10);
+    const dateStr = getLocalDateString(new Date(a.timestamp));
     let entry = countsByDate.get(dateStr);
     if (!entry) {
       entry = { correct: 0, wrong: 0, total: 0 };
@@ -505,10 +515,10 @@ export function get10DayActivityTrend(): DayActivity[] {
   }
 
   const days: DayActivity[] = [];
-  const now = Date.now();
+  const now = new Date();
   for (let i = 9; i >= 0; i--) {
-    const d = new Date(now - i * 86400000);
-    const dateStr = d.toISOString().slice(0, 10);
+    const d = new Date(now.getFullYear(), now.getMonth(), now.getDate() - i);
+    const dateStr = getLocalDateString(d);
     const label = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
     const stats = countsByDate.get(dateStr) || { correct: 0, wrong: 0, total: 0 };
 
