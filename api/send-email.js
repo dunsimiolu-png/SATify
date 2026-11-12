@@ -103,20 +103,21 @@ export default async function handler(req, res) {
     const smtpUser = process.env.SMTP_USER || 'satifysatceo@gmail.com';
     const smtpPass = process.env.SMTP_PASS || process.env.GMAIL_APP_PASSWORD;
     const smtpHost = process.env.SMTP_HOST;
+    const isGmail = smtpUser.includes('@gmail.com');
 
     if (smtpPass) {
-      const transporter = smtpHost
+      const transporter = isGmail
         ? nodemailer.createTransport({
-            host: smtpHost,
-            port: parseInt(process.env.SMTP_PORT || '465'),
-            secure: process.env.SMTP_SECURE === 'true' || process.env.SMTP_PORT === '465',
+            service: 'gmail',
             auth: {
               user: smtpUser,
               pass: smtpPass,
             },
           })
         : nodemailer.createTransport({
-            service: 'gmail',
+            host: smtpHost || 'smtp.gmail.com',
+            port: parseInt(process.env.SMTP_PORT || '587'),
+            secure: process.env.SMTP_SECURE === 'true',
             auth: {
               user: smtpUser,
               pass: smtpPass,

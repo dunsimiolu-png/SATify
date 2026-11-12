@@ -177,12 +177,20 @@ export const Home: React.FC<HomeProps> = ({
   };
 
   // ---------------------------------------------------------------------------
-  // 3. User Statistics, Attempts & XP (Local Date Keys)
+  // 3. User Statistics, Attempts & XP (Local Date Keys & Live Storage Sync)
   // ---------------------------------------------------------------------------
-  const attempts = useMemo(() => getAttempts(), []);
-  const streak = useMemo(() => getStudyStreak(), []);
-  const activityTrend = useMemo(() => get10DayActivityTrend(), []);
-  const skillStatsMap = useMemo(() => getSkillStatsMap(), []);
+  const [storageVersion, setStorageVersion] = useState<number>(0);
+
+  useEffect(() => {
+    const handleUpdate = () => setStorageVersion(v => v + 1);
+    window.addEventListener('satify_storage_update', handleUpdate);
+    return () => window.removeEventListener('satify_storage_update', handleUpdate);
+  }, []);
+
+  const attempts = useMemo(() => getAttempts(), [storageVersion]);
+  const streak = useMemo(() => getStudyStreak(), [storageVersion]);
+  const activityTrend = useMemo(() => get10DayActivityTrend(), [storageVersion]);
+  const skillStatsMap = useMemo(() => getSkillStatsMap(), [storageVersion]);
 
   // Today's attempts and XP calculation using local timezone key
   const { todayAttemptsCount, todayCorrectCount, todayXp } = useMemo(() => {

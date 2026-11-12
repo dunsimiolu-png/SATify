@@ -166,20 +166,41 @@ export const dispatchEmail = async (payload: UserPayload) => {
 
   try {
     const nodemailer = await import('nodemailer').catch(() => null);
-    const smtpUser = process.env.SMTP_USER || founderEmail;
-    const smtpPass = process.env.SMTP_PASS || process.env.GMAIL_APP_PASSWORD;
-    const smtpHost = process.env.SMTP_HOST;
+    let smtpUser = process.env.SMTP_USER || founderEmail;
+    let smtpPass = process.env.SMTP_PASS || process.env.GMAIL_APP_PASSWORD;
+    let smtpHost = process.env.SMTP_HOST;
+
+    if (!smtpPass) {
+      try {
+        const fs = await import('fs');
+        if (fs.existsSync('.env')) {
+          const raw = fs.readFileSync('.env', 'utf8');
+          raw.split('\n').forEach(line => {
+            const trimmed = line.trim();
+            if (trimmed && !trimmed.startsWith('#') && trimmed.includes('=')) {
+              const [k, ...v] = trimmed.split('=');
+              const key = k.trim();
+              const val = v.join('=').trim();
+              if (key === 'SMTP_PASS' || key === 'GMAIL_APP_PASSWORD') smtpPass = val;
+              if (key === 'SMTP_USER') smtpUser = val;
+              if (key === 'SMTP_HOST') smtpHost = val;
+            }
+          });
+        }
+      } catch {}
+    }
 
     if (nodemailer && smtpPass) {
-      const transporter = smtpHost
+      const isGmail = smtpUser.includes('@gmail.com');
+      const transporter = isGmail
         ? nodemailer.createTransport({
-            host: smtpHost,
-            port: parseInt(process.env.SMTP_PORT || '465'),
-            secure: process.env.SMTP_SECURE === 'true' || process.env.SMTP_PORT === '465',
+            service: 'gmail',
             auth: { user: smtpUser, pass: smtpPass },
           })
         : nodemailer.createTransport({
-            service: 'gmail',
+            host: smtpHost || 'smtp.gmail.com',
+            port: parseInt(process.env.SMTP_PORT || '587'),
+            secure: process.env.SMTP_SECURE === 'true',
             auth: { user: smtpUser, pass: smtpPass },
           });
 

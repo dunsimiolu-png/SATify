@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useRef } from 'react';
+import React, { useState, useMemo, useEffect, useRef } from 'react';
 import { 
   BookOpen, 
   Calculator, 
@@ -277,23 +277,32 @@ export const QuestionBankHub: React.FC<QuestionBankHubProps> = ({
     });
   }, { dependencies: [selectedSection], scope: containerRef });
 
-  const attempts = useMemo(() => getAttempts(), []);
-  const latestAttemptsMap = useMemo(() => getLatestAttemptsMap(), []);
-  const streak = useMemo(() => getStudyStreak(), []);
+  const [storageVersion, setStorageVersion] = useState<number>(0);
+
+  // Live storage update listener for real-time streak and activity sync
+  useEffect(() => {
+    const handleUpdate = () => setStorageVersion(v => v + 1);
+    window.addEventListener('satify_storage_update', handleUpdate);
+    return () => window.removeEventListener('satify_storage_update', handleUpdate);
+  }, []);
+
+  const attempts = useMemo(() => getAttempts(), [storageVersion]);
+  const latestAttemptsMap = useMemo(() => getLatestAttemptsMap(), [storageVersion]);
+  const streak = useMemo(() => getStudyStreak(), [storageVersion]);
   const allQuestions = useMemo(() => [...allEnglishQuestions, ...allMathQuestions], []);
-  const savedCount = useMemo(() => getValidSavedQuestions(allQuestions).length, [allQuestions]);
-  const analytics = useMemo(() => getQuestionAnalytics(allQuestions), [allQuestions]);
-  const activityTrend = useMemo(() => get10DayActivityTrend(), []);
+  const savedCount = useMemo(() => getValidSavedQuestions(allQuestions).length, [allQuestions, storageVersion]);
+  const analytics = useMemo(() => getQuestionAnalytics(allQuestions), [allQuestions, storageVersion]);
+  const activityTrend = useMemo(() => get10DayActivityTrend(), [storageVersion]);
 
   // Section Calculations
   const totalRW = allEnglishQuestions.length; // 753
   const totalMath = allMathQuestions.length; // 993
   const totalAll = totalRW + totalMath; // 1,746
 
-  const rwSolved = useMemo(() => getUniqueSolvedQuestions(allEnglishQuestions).length, []);
+  const rwSolved = useMemo(() => getUniqueSolvedQuestions(allEnglishQuestions).length, [storageVersion]);
   const rwPercent = totalRW > 0 ? Math.min(100, Math.round((rwSolved / totalRW) * 100)) : 0;
 
-  const mathSolved = useMemo(() => getUniqueSolvedQuestions(allMathQuestions).length, []);
+  const mathSolved = useMemo(() => getUniqueSolvedQuestions(allMathQuestions).length, [storageVersion]);
   const mathPercent = totalMath > 0 ? Math.min(100, Math.round((mathSolved / totalMath) * 100)) : 0;
 
   // 10-day activity trend calculations
