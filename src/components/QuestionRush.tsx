@@ -582,7 +582,7 @@ export const QuestionRush: React.FC<QuestionRushProps> = ({
                         }`}>
                           {opt.id}
                         </span>
-                        <div className="text-xs sm:text-sm font-medium leading-relaxed pt-0.5 flex-1">
+                        <div className="option-choice-text text-xs sm:text-sm font-medium leading-relaxed pt-0.5 flex-1">
                           <RichText text={opt.text} />
                           {opt.imageUrl && (
                             <div className="mt-2.5 p-2 bg-white dark:bg-black border border-zinc-200 dark:border-[#222634] rounded-xl inline-flex items-center justify-center overflow-hidden shadow-xs">

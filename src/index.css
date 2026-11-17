@@ -63,16 +63,45 @@ body.dark .inline-math-img {
   margin: 0.5em 0 !important;
 }
 
-/* Option choices KaTeX inline display override */
+/* Ensure KaTeX display wrappers never show vertical scrollbar marks across the app */
+.katex-display-wrapper {
+  overflow-y: hidden !important;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.katex-display-wrapper::-webkit-scrollbar {
+  width: 0 !important;
+  height: 4px;
+}
+
+/* Option choices KaTeX inline display override & scrollbar elimination */
+.option-choice-text,
+.option-choice-text * {
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+
+.option-choice-text ::-webkit-scrollbar,
+.option-choice-text *::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
 .option-choice-text .katex-display {
   display: inline-block;
   margin: 0 !important;
+  overflow: visible !important;
 }
 
 .option-choice-text .katex-display-wrapper {
-  display: inline-block;
+  display: inline-block !important;
   margin: 0 !important;
   padding: 0 !important;
+  overflow: visible !important;
+  overflow-x: visible !important;
+  overflow-y: visible !important;
 }
 
 /* When an option choice contains multiple equations (e.g. systems of equations), stack them vertically */
@@ -80,12 +109,18 @@ body.dark .inline-math-img {
   display: block !important;
   margin: 0.25rem 0 !important;
   text-align: left !important;
+  overflow: visible !important;
+  overflow-x: visible !important;
+  overflow-y: visible !important;
 }
 
 .option-choice-text .katex-display-wrapper:not(:only-child) .katex-display {
   display: block !important;
   margin: 0.15rem 0 !important;
   text-align: left !important;
+  overflow: visible !important;
+  overflow-x: visible !important;
+  overflow-y: visible !important;
 }
 
 /* ========================================================================= */
@@ -541,4 +576,16 @@ html.dark ::-webkit-scrollbar-thumb {
 
 html.dark ::-webkit-scrollbar-thumb:hover {
   background: #384259;
+}
+
+/* Universal scrollbar-none utility */
+.scrollbar-none {
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
 }

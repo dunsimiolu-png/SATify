@@ -36,7 +36,7 @@ export const MathText: React.FC<MathTextProps> = ({
     // 1. Process display math $$...$$
     processed = processed.replace(/\$\$([\s\S]+?)\$\$/g, (_, math) => {
       try {
-        return `<div class="katex-display-wrapper my-2.5 overflow-x-auto py-1 text-center select-text">${katex.renderToString(
+        return `<div class="katex-display-wrapper my-2.5 overflow-x-auto overflow-y-hidden py-1 text-center select-text scrollbar-none">${katex.renderToString(
           math.trim(),
           { displayMode: true, throwOnError: false }
         )}</div>`;

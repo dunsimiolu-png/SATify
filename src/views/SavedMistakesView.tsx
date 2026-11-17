@@ -479,7 +479,7 @@ export const SavedMistakesView: React.FC<SavedMistakesViewProps> = ({
                                   }`}>
                                     {optLabel}
                                   </span>
-                                  <div className="font-serif text-sm pt-0.5">
+                                  <div className="option-choice-text font-serif text-sm pt-0.5">
                                     <RichText text={opt.text} />
                                     {opt.imageUrl && (
                                       <div className="mt-2.5 p-2 bg-white dark:bg-black border border-zinc-200 dark:border-[#222634] rounded-xl inline-flex items-center justify-center overflow-hidden shadow-xs">
