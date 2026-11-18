@@ -93,16 +93,16 @@ export const CoordinatePlane: React.FC<CoordinatePlaneProps> = ({
   }
 
   return (
-    <div className={`my-4 flex flex-col items-center select-none ${className}`}>
+    <div className={`my-4 flex flex-col items-center select-none w-full max-w-full overflow-x-auto ${className}`}>
       {title && (
         <span className="text-xs font-serif font-bold text-slate-800 dark:text-slate-200 mb-2">
           {title}
         </span>
       )}
-      <div className="p-3 bg-white dark:bg-[#18181b] border border-slate-200 dark:border-[#334155] rounded-2xl shadow-xs transition-colors">
+      <div className="p-3 bg-white dark:bg-[#18181b] border border-slate-200 dark:border-[#334155] rounded-2xl shadow-xs transition-colors max-w-full overflow-x-auto">
         <svg
           viewBox={`0 0 ${width} ${height}`}
-          className="w-[280px] sm:w-[320px] h-[280px] sm:h-[320px] overflow-visible"
+          className="w-[280px] sm:w-[320px] max-w-full h-auto aspect-square overflow-visible"
         >
           <defs>
             {/* Dark Mode Axis Arrowhead */}

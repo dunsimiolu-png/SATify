@@ -222,10 +222,10 @@ export const LeftPane: React.FC<LeftPaneProps> = ({
       ref={containerRef}
       onMouseUp={handleSelectionEnd}
       onTouchEnd={handleSelectionEnd}
-      className={`px-4 sm:px-6 lg:px-8 py-5 sm:py-6 pb-24 overflow-x-hidden bg-white dark:bg-[#090A0F] text-zinc-950 dark:text-[#F4F4F6] select-text passage-text ${
+      className={`px-4 sm:px-6 lg:px-8 py-5 sm:py-6 overflow-x-hidden bg-white dark:bg-[#090A0F] text-zinc-950 dark:text-[#F4F4F6] select-text passage-text ${
         isSplitView 
-          ? 'h-full overflow-y-auto' 
-          : 'h-auto overflow-visible'
+          ? 'h-full overflow-y-auto pb-24' 
+          : 'h-auto overflow-visible pb-6 sm:pb-8'
       }`}
     >
       {/* Annotate active mode indicator & Sticky Mobile Highlighter Bar */}
@@ -287,7 +287,7 @@ export const LeftPane: React.FC<LeftPaneProps> = ({
 
       {/* Visual Graph / Table / Chart Figure Card */}
       {question.imageUrl && question.section !== 'Math' && (
-        <div className="mb-6 p-4 bg-white dark:bg-black border border-zinc-200 dark:border-[#222634] rounded-2xl shadow-xs overflow-hidden flex flex-col items-center max-w-[65ch]">
+        <div className="mb-6 p-4 bg-white dark:bg-black border border-zinc-200 dark:border-[#222634] rounded-2xl shadow-xs overflow-x-auto max-w-full flex flex-col items-center">
           <img
             src={question.imageUrl}
             alt="Question Graph or Table"

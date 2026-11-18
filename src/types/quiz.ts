@@ -51,6 +51,8 @@ export interface MockQuestion {
   passageText?: string;
   passageTitle?: string;
   imageUrl?: string;
+  figureSvg?: string;
+  svg?: string;
   
   // Right pane: Prompt and 4 options A-D or SPR input
   prompt: string;

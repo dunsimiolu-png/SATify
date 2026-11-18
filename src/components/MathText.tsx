@@ -36,7 +36,7 @@ export const MathText: React.FC<MathTextProps> = ({
     // 1. Process display math $$...$$
     processed = processed.replace(/\$\$([\s\S]+?)\$\$/g, (_, math) => {
       try {
-        return `<div class="katex-display-wrapper my-2.5 overflow-x-auto overflow-y-hidden py-1 text-center select-text scrollbar-none">${katex.renderToString(
+        return `<div class="katex-display-wrapper my-2.5 max-w-full overflow-x-auto overflow-y-hidden py-1 text-center select-text scrollbar-none">${katex.renderToString(
           math.trim(),
           { displayMode: true, throwOnError: false }
         )}</div>`;
@@ -59,7 +59,12 @@ export const MathText: React.FC<MathTextProps> = ({
       }
     });
 
-    // 3. AFTER KaTeX has parsed all math, unescape currency: \$ -> $
+    // 3. Constrain any HTML tables with max-w-full overflow-x-auto wrapper
+    if (processed.includes('<table')) {
+      processed = processed.replace(/(?<!<div class="sat-table-container[^>]*>\s*)<table\b([\s\S]*?)<\/table>/gi, '<div class="sat-table-container max-w-full overflow-x-auto my-3 select-text"><table$1</table></div>');
+    }
+
+    // 4. AFTER KaTeX has parsed all math, unescape currency: \$ -> $
     processed = processed.replace(/\\+\$/g, '$');
     // Also unescape \% in plain text: \% -> %
     processed = processed.replace(/\\+%/g, '%');

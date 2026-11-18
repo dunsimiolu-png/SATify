@@ -73,3 +73,103 @@ export function sanitizePlainStem(input: string): string {
     .replace(/\\+\$/g, '$')
     .replace(/\\+%/g, '%');
 }
+
+/**
+ * Cleans up College Board TTS (text-to-speech) screen-reader artifacts from question text.
+ * - Replaces repeated "upper [A-Z]" sequences (e.g. "Triangle upper W upper X upper Q" -> "Triangle WXQ")
+ * - Replaces single "upper [A-Z]" -> "[A-Z]" (e.g. "angle upper W" -> "angle W", "point upper Q" -> "point Q")
+ * - Replaces single "lower [a-z]" -> "[a-z]"
+ * - Replaces "script l" -> "$\ell$"
+ */
+export function cleanScreenReaderText(input: string): string {
+  if (!input) return '';
+  let s = input;
+
+  // 1. Replace repeated "upper [A-Z]" sequences (2 or more) with joined letters (e.g. "upper W upper X upper Q" -> "WXQ")
+  s = s.replace(/\bupper\s+([A-Za-z])(?:\s+upper\s+([A-Za-z]))+/gi, (match) => {
+    return match.replace(/upper\s+/gi, '').replace(/\s+/g, '');
+  });
+
+  // 2. Replace single "upper [A-Z]" with just the letter
+  s = s.replace(/\bupper\s+([A-Za-z])\b/gi, '$1');
+
+  // 3. Replace single "lower [a-z]" with just the letter
+  s = s.replace(/\blower\s+([a-z])\b/gi, '$1');
+
+  // 4. Replace "script l" with LaTeX $\ell$
+  s = s.replace(/\bscript\s+l\b/gi, '$\\ell$');
+
+  // 5. Clean any awkward spacing before punctuation created by stripping TTS tokens
+  s = s.replace(/\s+([.,;:?!])/g, '$1');
+
+  return s.trim();
+}
+
+/**
+ * Standard regex to locate the College Board figure-description divider note
+ */
+export const FIGURE_NOT_DRAWN_DIVIDER_REGEX =
+  /(?:A\s+note\s+indicates\s+the\s+figures?\s+(?:is|are)\s+not\s+drawn\s+to\s+scale\.?|Note:\s*Figures?\s+not\s+drawn\s+to\s+scale\.?)/i;
+
+export interface ExtractedFigureResult {
+  figureDescription: string | null;
+  cleanPrompt: string;
+}
+
+/**
+ * Preprocesses a question prompt to separate baked-in College Board screen-reader figure descriptions
+ * from the actual question text.
+ *
+ * - If a visual diagram (SVG or image) is present:
+ *   The screen-reader description is redundant and is stripped out completely, leaving only
+ *   the clean, natural question prompt.
+ *
+ * - If NO visual diagram is present:
+ *   The screen-reader description is cleaned of TTS artifacts and extracted into `figureDescription`,
+ *   so the UI can render it inside a distinct, subtly styled "Figure Description" callout box
+ *   instead of a garbled run-on sentence.
+ */
+export function extractFigureDescription(prompt: string, hasVisual: boolean): ExtractedFigureResult {
+  if (!prompt) {
+    return { figureDescription: null, cleanPrompt: '' };
+  }
+
+  const match = prompt.match(FIGURE_NOT_DRAWN_DIVIDER_REGEX);
+
+  if (match && typeof match.index === 'number') {
+    const rawDesc = prompt.slice(0, match.index + match[0].length).trim();
+    const rawQuestion = prompt.slice(match.index + match[0].length).trim();
+
+    if (hasVisual) {
+      // With visual diagram present: discard the redundant screen-reader description
+      return {
+        figureDescription: null,
+        cleanPrompt: cleanScreenReaderText(rawQuestion || prompt),
+      };
+    }
+
+    // Fallback: visual diagram missing -> separate into callout box + clean question prompt
+    return {
+      figureDescription: cleanScreenReaderText(rawDesc),
+      cleanPrompt: cleanScreenReaderText(rawQuestion || prompt),
+    };
+  }
+
+  // Handle leading stray screen-reader labels (e.g. "upper M\nupper N\nupper P\n\nPoints M, N, and P...")
+  if (/^\s*(?:upper\s+[A-Za-z]\s*)+(?:\n+|$)/i.test(prompt)) {
+    const labelMatch = prompt.match(/^(\s*(?:upper\s+[A-Za-z]\s*)+(?:\n+|$))([\s\S]*)$/i);
+    if (labelMatch) {
+      const rest = labelMatch[2].trim();
+      return {
+        figureDescription: null,
+        cleanPrompt: cleanScreenReaderText(rest),
+      };
+    }
+  }
+
+  // Pure question prompt without figure description prefix
+  return {
+    figureDescription: null,
+    cleanPrompt: cleanScreenReaderText(prompt),
+  };
+}

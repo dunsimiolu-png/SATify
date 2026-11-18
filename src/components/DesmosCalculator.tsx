@@ -158,14 +158,22 @@ export const DesmosCalculator: React.FC<DesmosCalculatorProps> = ({ isOpen, onCl
   const graphCalcRef = useRef<any>(null);
   const sciCalcRef = useRef<any>(null);
 
-  // Detect mobile viewport (< 640px)
+  // Detect mobile viewport (< 768px per mobile specification)
   const [isMobileScreen, setIsMobileScreen] = useState<boolean>(() => 
-    typeof window !== 'undefined' ? window.innerWidth < 640 : false
+    typeof window !== 'undefined' ? window.innerWidth < 768 : false
   );
+  // Mobile panel toggle state: false = 50dvh docked split, true = 80dvh expanded
+  const [isMobileExpanded, setIsMobileExpanded] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (!isOpen) {
+      setIsMobileExpanded(false);
+    }
+  }, [isOpen]);
 
   useEffect(() => {
     const handleWinResize = () => {
-      const isMobile = window.innerWidth < 640;
+      const isMobile = window.innerWidth < 768;
       setIsMobileScreen(isMobile);
       if (!isMobile) {
         // Clamp floating window inside visible viewport
@@ -405,7 +413,10 @@ export const DesmosCalculator: React.FC<DesmosCalculatorProps> = ({ isOpen, onCl
         isMobileScreen
           ? {
               display: isOpen ? 'flex' : 'none',
-              zIndex: 99999,
+              height: isMobileExpanded ? '80dvh' : '50dvh',
+              maxHeight: '85dvh',
+              minHeight: '220px',
+              zIndex: 35,
             }
           : {
               display: isOpen ? 'flex' : 'none',
@@ -419,7 +430,7 @@ export const DesmosCalculator: React.FC<DesmosCalculatorProps> = ({ isOpen, onCl
       }
       className={
         isMobileScreen
-          ? "fixed inset-x-0 bottom-0 h-[82vh] w-full flex flex-col bg-white rounded-t-2xl shadow-2xl border-t border-zinc-700 overflow-hidden select-none animate-in slide-in-from-bottom-6 duration-200"
+          ? "shrink-0 w-full flex flex-col bg-white rounded-t-2xl shadow-2xl border-t-2 border-zinc-300 dark:border-[#222634] overflow-hidden select-none transition-[height] duration-200 ease-out"
           : "fixed flex flex-col bg-white rounded-xl shadow-2xl border border-gray-700 overflow-hidden select-none animate-in fade-in-50 duration-150"
       }
     >
@@ -459,16 +470,59 @@ export const DesmosCalculator: React.FC<DesmosCalculatorProps> = ({ isOpen, onCl
           </button>
         </div>
 
-        {/* Center: Drag Grip Indicator */}
-        {!isMobileScreen && (
+        {/* Center: Drag Grip Indicator (Desktop) or Mobile Grab indicator */}
+        {!isMobileScreen ? (
           <div className="flex items-center gap-1 text-zinc-400 hover:text-white px-2 py-1 rounded transition">
             <GripHorizontal className="w-4 h-4" />
           </div>
+        ) : (
+          <div className="flex items-center justify-center">
+            <div className="w-8 h-1 rounded-full bg-zinc-500/60" />
+          </div>
         )}
 
-        {/* Right: Width Expand Toggle & Close Button */}
-        <div onMouseDown={e => e.stopPropagation()} className="flex items-center gap-1.5">
-          {!isMobileScreen && (
+        {/* Right: Expand/Collapse Toggle & Close Button */}
+        {isMobileScreen ? (
+          <div onMouseDown={e => e.stopPropagation()} className="flex items-center gap-1.5">
+            <button
+              type="button"
+              onClick={() => {
+                setIsMobileExpanded(prev => !prev);
+                setTimeout(() => {
+                  if (activeTab === 'graphing' && graphCalcRef.current?.resize) {
+                    graphCalcRef.current.resize();
+                  } else if (activeTab === 'scientific' && sciCalcRef.current?.resize) {
+                    sciCalcRef.current.resize();
+                  }
+                }, 60);
+              }}
+              className="flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-semibold bg-white/10 hover:bg-white/20 text-white transition cursor-pointer active:scale-95"
+              title={isMobileExpanded ? "Collapse to 50% split (50dvh)" : "Expand calculator (80dvh)"}
+            >
+              {isMobileExpanded ? (
+                <>
+                  <Minimize2 className="w-3.5 h-3.5" />
+                  <span className="hidden xs:inline text-[11px]">Collapse</span>
+                </>
+              ) : (
+                <>
+                  <Maximize2 className="w-3.5 h-3.5" />
+                  <span className="hidden xs:inline text-[11px]">Expand</span>
+                </>
+              )}
+            </button>
+
+            <button
+              type="button"
+              onClick={onClose}
+              className="p-1.5 rounded text-zinc-300 hover:text-white hover:bg-white/10 transition cursor-pointer active:scale-95"
+              title="Close calculator"
+            >
+              <X className="w-4 h-4" />
+            </button>
+          </div>
+        ) : (
+          <div onMouseDown={e => e.stopPropagation()} className="flex items-center gap-1.5">
             <button
               type="button"
               onClick={toggleWidth}
@@ -477,28 +531,28 @@ export const DesmosCalculator: React.FC<DesmosCalculatorProps> = ({ isOpen, onCl
             >
               {isExpandedWidth ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
             </button>
-          )}
 
-          <button
-            type="button"
-            onClick={onClose}
-            className="p-1 rounded text-zinc-300 hover:text-white hover:bg-white/10 transition cursor-pointer"
-            title="Close calculator"
-          >
-            <X className="w-4 h-4" />
-          </button>
-        </div>
+            <button
+              type="button"
+              onClick={onClose}
+              className="p-1 rounded text-zinc-300 hover:text-white hover:bg-white/10 transition cursor-pointer"
+              title="Close calculator"
+            >
+              <X className="w-4 h-4" />
+            </button>
+          </div>
+        )}
       </div>
 
       {/* 2. Isolated Explicitly-Sized Wrapper for Desmos */}
       <div 
-        className="w-full flex-1 relative overflow-hidden bg-white"
+        className="w-full flex-1 relative overflow-hidden bg-white min-h-0"
         style={{
           color: '#000',
           backgroundColor: '#ffffff',
           isolation: 'isolate',
           width: '100%',
-          minHeight: '380px',
+          minHeight: isMobileScreen ? '0px' : '380px',
         }}
       >
         {/* Graphing Calculator Container */}

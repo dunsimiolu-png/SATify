@@ -11,10 +11,13 @@
 
   html, body, #root {
     height: 100vh;
+    height: 100dvh;
     width: 100vw;
+    max-width: 100vw;
     margin: 0;
     padding: 0;
     overflow: hidden;
+    overflow-x: hidden;
     user-select: none;
     -webkit-user-select: none;
     font-family: 'Inter', 'Geist Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -54,20 +57,70 @@ body.dark .inline-math-img {
   mix-blend-mode: screen;
 }
 
+/* Screen-reader-only styling & SVG description concealment */
+.sr-only,
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border-width: 0 !important;
+}
+
+svg desc {
+  display: none !important;
+}
+
+/* Ensure inline SVGs and figures in math questions are responsive and theme-adaptive */
+.figure-svg-wrapper svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+html.dark .figure-svg-wrapper svg polygon,
+html.dark .figure-svg-wrapper svg line,
+html.dark .figure-svg-wrapper svg polyline,
+html.dark .figure-svg-wrapper svg path[stroke="#000"],
+html.dark .figure-svg-wrapper svg path[stroke="#000000"],
+html.dark .figure-svg-wrapper svg path[stroke="black"] {
+  stroke: #f4f4f6;
+}
+
+html.dark .figure-svg-wrapper svg text,
+html.dark .figure-svg-wrapper svg path[fill="#000"],
+html.dark .figure-svg-wrapper svg path[fill="#000000"],
+html.dark .figure-svg-wrapper svg path[fill="black"] {
+  fill: #f4f4f6;
+}
+
 .katex {
   font-size: 1.05em;
   color: inherit !important;
+  max-width: 100% !important;
 }
 
 .katex-display {
   margin: 0.5em 0 !important;
+  max-width: 100% !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* Ensure KaTeX display wrappers never show vertical scrollbar marks across the app */
 .katex-display-wrapper {
+  max-width: 100% !important;
+  overflow-x: auto !important;
   overflow-y: hidden !important;
   scrollbar-width: none;
   -ms-overflow-style: none;
+  -webkit-overflow-scrolling: touch;
 }
 
 .katex-display-wrapper::-webkit-scrollbar {
@@ -82,6 +135,13 @@ body.dark .inline-math-img {
   -ms-overflow-style: none !important;
 }
 
+.option-choice-text {
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
 .option-choice-text ::-webkit-scrollbar,
 .option-choice-text *::-webkit-scrollbar {
   display: none !important;
@@ -92,16 +152,18 @@ body.dark .inline-math-img {
 .option-choice-text .katex-display {
   display: inline-block;
   margin: 0 !important;
-  overflow: visible !important;
+  max-width: 100% !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
 }
 
 .option-choice-text .katex-display-wrapper {
   display: inline-block !important;
   margin: 0 !important;
   padding: 0 !important;
-  overflow: visible !important;
-  overflow-x: visible !important;
-  overflow-y: visible !important;
+  max-width: 100% !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
 }
 
 /* When an option choice contains multiple equations (e.g. systems of equations), stack them vertically */
@@ -109,18 +171,18 @@ body.dark .inline-math-img {
   display: block !important;
   margin: 0.25rem 0 !important;
   text-align: left !important;
-  overflow: visible !important;
-  overflow-x: visible !important;
-  overflow-y: visible !important;
+  max-width: 100% !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
 }
 
 .option-choice-text .katex-display-wrapper:not(:only-child) .katex-display {
   display: block !important;
   margin: 0.15rem 0 !important;
   text-align: left !important;
-  overflow: visible !important;
-  overflow-x: visible !important;
-  overflow-y: visible !important;
+  max-width: 100% !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
 }
 
 /* ========================================================================= */
@@ -473,17 +535,21 @@ html.dark .bluebook-dashed-border {
 
 /* Official Bluebook Digital SAT Math Structured Table Styling */
 .sat-table-container {
-  display: flex;
-  justify-content: center;
+  display: block;
   margin: 1rem 0;
   width: 100%;
-  overflow-x: auto;
+  max-width: 100% !important;
+  overflow-x: auto !important;
+  -webkit-overflow-scrolling: touch;
 }
 
 .sat-table,
 .math-rendered-content table,
 div[data-annotate-target] table,
 .sat-table-container table,
+.passage-text table,
+.question-stem table,
+.rich-text table,
 button table {
   border-collapse: collapse !important;
   margin: 0.5rem auto !important;
@@ -492,6 +558,18 @@ button table {
   border: 1.5px solid #cbd5e1 !important;
   border-radius: 6px !important;
   max-width: 100% !important;
+}
+
+/* Constrain all SVG diagrams so long equations and figures never push mobile layout wider than 100vw */
+svg {
+  max-width: 100%;
+}
+
+.math-visual-container,
+.coordinate-plane-container {
+  max-width: 100% !important;
+  overflow-x: auto !important;
+  -webkit-overflow-scrolling: touch;
 }
 
 .sat-table th,

@@ -167,7 +167,7 @@ export const Header: React.FC<HeaderProps> = ({
           </button>
 
           {/* Title & Directions */}
-          <div className="flex flex-col justify-center min-w-0 hidden sm:flex">
+          <div className="flex flex-col justify-center min-w-0 hidden md:flex">
             <div className="flex items-center gap-2">
               <span className="text-zinc-950 dark:text-[#F4F4F6] font-semibold text-xs sm:text-sm tracking-tight truncate max-w-[280px] lg:max-w-[420px]">
                 <span className="text-zinc-500 dark:text-[#8E95A5] mr-1.5 font-medium">
@@ -221,8 +221,8 @@ export const Header: React.FC<HeaderProps> = ({
 
         {/* Right Section: Authentic Digital SAT Bluebook Testing Tools */}
         <div className="flex items-center gap-1 shrink-0">
-          {/* Desktop tools */}
-          <div className="hidden sm:flex items-center gap-1">
+          {/* Desktop tools (>= 768px) */}
+          <div className="hidden md:flex items-center gap-1">
             {/* Calculator & Math Reference: Rendered when practicing Math (Bluebook primary) */}
             {isMath && (
               <>
@@ -286,11 +286,11 @@ export const Header: React.FC<HeaderProps> = ({
             </button>
           </div>
 
-          {/* Mobile quick calculator button */}
+          {/* Mobile quick calculator button (< 768px) */}
           {isMath && (
             <button
               onClick={onOpenCalculator}
-              className="sm:hidden p-2 rounded-xl bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-900/60 text-blue-700 dark:text-blue-400 min-h-[36px] min-w-[36px] flex items-center justify-center cursor-pointer active:scale-95 shadow-2xs"
+              className="md:hidden p-2 rounded-xl bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-900/60 text-blue-700 dark:text-blue-400 min-h-[40px] min-w-[40px] flex items-center justify-center cursor-pointer active:scale-95 shadow-2xs"
               title="Open Calculator (C)"
               aria-label="Open Calculator"
             >
@@ -298,11 +298,11 @@ export const Header: React.FC<HeaderProps> = ({
             </button>
           )}
 
-          {/* Mobile-only: compact overflow menu for tools (< sm / 640px) */}
-          <div className="sm:hidden relative">
+          {/* Mobile-only: compact overflow menu for tools (< 768px) */}
+          <div className="md:hidden relative">
             <button
               onClick={(e) => { e.stopPropagation(); setIsMobileToolsOpen(!isMobileToolsOpen); }}
-              className="p-2 rounded-xl bg-zinc-100 dark:bg-[#181B24] hover:bg-zinc-200 dark:hover:bg-[#202534] text-zinc-700 dark:text-[#8E95A5] transition-all duration-150 min-h-[36px] min-w-[36px] flex items-center justify-center cursor-pointer active:scale-95 border border-zinc-200 dark:border-[#222634]"
+              className="p-2 rounded-xl bg-zinc-100 dark:bg-[#181B24] hover:bg-zinc-200 dark:hover:bg-[#202534] text-zinc-700 dark:text-[#8E95A5] transition-all duration-150 min-h-[40px] min-w-[40px] flex items-center justify-center cursor-pointer active:scale-95 border border-zinc-200 dark:border-[#222634]"
               title="More Tools"
               aria-label="More Tools"
             >

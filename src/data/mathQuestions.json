@@ -28364,7 +28364,7 @@
     "difficulty": "Hard",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The scatterplot shows the relationship between two variables, $ and $, for data set E. A line of best fit is shown. Data set F is created by multiplying the y-coordinate of each data point from data set E by .9$. Which of the following could be an equation of a line of best fit for data set F?",
+    "prompt": "The scatterplot shows the relationship between two variables, $ and $, for data set E. A line of best fit is shown. Data set F is created by multiplying the y-coordinate of each data point from data set E by.9$. Which of the following could be an equation of a line of best fit for data set F?",
     "options": [
       {
         "id": "A",
@@ -34945,7 +34945,7 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Line segment upper Q upper R is extended to point upper S.\nA note indicates the figure is not drawn to scale.\n\nIn triangle $PQR$, $QR$ is extended to point $S$. The measure of $\\angle PQR$ is $132^\\circ$, and the measure of $\\angle PRS$ is $163^\\circ$. What is the measure of $\\angle QPR$?",
+    "prompt": "In triangle $PQR$, $QR$ is extended to point $S$. The measure of $\\angle PQR$ is $132^\\circ$, and the measure of $\\angle PRS$ is $163^\\circ$. What is the measure of $\\angle QPR$?",
     "options": [
       {
         "id": "A",
@@ -34970,7 +34970,8 @@
     ],
     "correctAnswer": "B",
     "rationale": "Choice B is correct. In the figure shown, since $\\overline{QS}$ is a line segment, the sum of the measures of $\\angle PRS$ and $\\angle PRQ$ is $180^\\circ$. It's given that the measure of $\\angle PRS$ is $163^\\circ$. Thus, the measure of $\\angle PRQ$ is $(180-163)^\\circ$, or $17^\\circ$. The sum of the measures of the interior angles of a triangle is $180^\\circ$. It's given that the measure of $\\angle PQR$ is $132^\\circ$. Therefore, the measure of $\\angle QPR$ is $(180-17-132)^\\circ$, or $31^\\circ$. \n\nChoice A is incorrect. This is the measure of the supplement of $\\angle PQR$, not the measure of $\\angle QPR$.\n\nChoice C is incorrect and may result from conceptual or calculation errors.\n\nChoice D is incorrect. This is the measure of $\\angle PRQ$, not the measure of $\\angle QPR$.",
-    "imageUrl": "/question-images/math/014edcb7.svg"
+    "imageUrl": "/question-images/math/014edcb7.svg",
+    "figureSvg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 460 210\" width=\"100%\" height=\"auto\" class=\"w-full max-w-[460px] select-none\" style=\"overflow: visible;\">\n  <!-- Triangle PQR with side QR extended to S -->\n  <g stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"none\" class=\"text-zinc-900 dark:text-zinc-100\">\n    <line x1=\"80\" y1=\"140\" x2=\"400\" y2=\"140\" />\n    <line x1=\"160\" y1=\"40\" x2=\"80\" y2=\"140\" />\n    <line x1=\"160\" y1=\"40\" x2=\"280\" y2=\"140\" />\n    <path d=\"M 102,140 A 24,24 0 0,0 95,122\" stroke-width=\"1.5\" />\n    <path d=\"M 298,140 A 24,24 0 0,0 270,126\" stroke-width=\"1.5\" />\n  </g>\n  <g font-family=\"system-ui, -apple-system, sans-serif\" font-weight=\"600\" font-size=\"15\" fill=\"currentColor\" class=\"text-zinc-900 dark:text-zinc-100 select-none\">\n    <text x=\"160\" y=\"28\" text-anchor=\"middle\">P</text>\n    <text x=\"75\" y=\"162\" text-anchor=\"middle\">Q</text>\n    <text x=\"280\" y=\"162\" text-anchor=\"middle\">R</text>\n    <text x=\"405\" y=\"162\" text-anchor=\"middle\">S</text>\n    <text x=\"116\" y=\"132\" font-size=\"12\" font-weight=\"500\">132°</text>\n    <text x=\"312\" y=\"132\" font-size=\"12\" font-weight=\"500\">163°</text>\n  </g>\n  <text x=\"230\" y=\"196\" text-anchor=\"middle\" font-family=\"system-ui, -apple-system, sans-serif\" font-size=\"11\" fill=\"currentColor\" class=\"text-zinc-500 dark:text-zinc-400 select-none\" letter-spacing=\"0.02em\">\n    Note: Figure not drawn to scale.\n  </text>\n</svg>"
   },
   {
     "id": "02b02213",
@@ -35048,7 +35049,7 @@
     "difficulty": "Hard",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Angle upper R is a right angle.\nThe length of side upper R upper S is 25.\nA note indicates the figure is not drawn to scale.\n\nIn triangle $QRS$ shown, $QR<RS$. Which expression represents the length of $\\overline{QS}$?",
+    "prompt": "In triangle $QRS$ shown, $QR<RS$. Which expression represents the length of $\\overline{QS}$?",
     "options": [
       {
         "id": "A",
@@ -35073,7 +35074,8 @@
     ],
     "correctAnswer": "D",
     "rationale": "Choice D is correct. The figure shows that triangle $QRS$ is a right triangle. Each of the given choices is an expression containing $sinQ$ or $cosQ$. For an acute angle in a right triangle, the sine of the angle is the length of the opposite leg divided by the length of the hypotenuse, and the cosine of the angle is the length of the adjacent leg divided by the length of the hypotenuse. It follows that $sinQ=\\frac{RS}{QS}$ and $cosQ=\\frac{QR}{QS}$, where $QR<RS$. It's given in the figure that the length of side $RS$ is $25$. Since only the equation $sinQ=\\frac{RS}{QS}$ contains $RS$, an expression representing $QS$ can be found by substituting $25$ for $RS$ in this equation, which yields $sinQ=\\frac{25}{QS}$. Multiplying both sides of this equation by $QS$ yields $QS \\cdot sinQ=25$. Dividing both sides of this equation by $sinQ$ yields $QS=\\frac{25}{sinQ}$. Therefore, the expression $\\frac{25}{sinQ}$ represents the length of $\\overline{QS}$.\n\nChoice A is incorrect and may result from conceptual or calculation errors.\n\nChoice B is incorrect and may result from conceptual or calculation errors.\n\nChoice C is incorrect and may result from conceptual or calculation errors.",
-    "imageUrl": "/question-images/math/053e5e9f.svg"
+    "imageUrl": "/question-images/math/053e5e9f.svg",
+    "figureSvg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 460 210\" width=\"100%\" height=\"auto\" class=\"w-full max-w-[460px] select-none\" style=\"overflow: visible;\">\n  <!-- Right triangle QRS with right angle at R -->\n  <g stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"none\" class=\"text-zinc-900 dark:text-zinc-100\">\n    <polygon points=\"100,40 100,160 360,160\" />\n    <polyline points=\"100,145 115,145 115,160\" stroke-width=\"1.5\" />\n  </g>\n  <g font-family=\"system-ui, -apple-system, sans-serif\" font-weight=\"600\" font-size=\"15\" fill=\"currentColor\" class=\"text-zinc-900 dark:text-zinc-100 select-none\">\n    <text x=\"100\" y=\"26\" text-anchor=\"middle\">Q</text>\n    <text x=\"82\" y=\"172\" text-anchor=\"middle\">R</text>\n    <text x=\"375\" y=\"166\" text-anchor=\"middle\">S</text>\n    <text x=\"230\" y=\"180\" font-size=\"14\" font-weight=\"500\" text-anchor=\"middle\">25</text>\n  </g>\n  <text x=\"230\" y=\"200\" text-anchor=\"middle\" font-family=\"system-ui, -apple-system, sans-serif\" font-size=\"11\" fill=\"currentColor\" class=\"text-zinc-500 dark:text-zinc-400 select-none\" letter-spacing=\"0.02em\">\n    Note: Figure not drawn to scale.\n  </text>\n</svg>"
   },
   {
     "id": "055aafe7",
@@ -35306,7 +35308,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Bottom left: x°\n\nBottom right: 33°\n\nA note indicates the figure is not drawn to scale.\n\nIn the figure, line $m$ is parallel to line $n$, and line $t$ intersects both lines. What is the value of $x$?",
+    "prompt": "In the figure, line $m$ is parallel to line $n$, and line $t$ intersects both lines. What is the value of $x$?",
     "options": [
       {
         "id": "A",
@@ -35546,7 +35548,7 @@
     "difficulty": "Hard",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Triangle upper W upper X upper Q has a common vertex with triangle upper Y upper Z upper Q.\nThe common vertex is upper Q.\nFor triangle upper W upper X upper Q:\n\nThe measure of angle upper W is a°.\n\nFor triangle upper Y upper Z upper Q:\n\nThe measure of angle upper Y is a°.\n\nA note indicates the figure is not drawn to scale.\n\nIn the figure shown, $\\overline{WZ}$ and $\\overline{XY}$ intersect at point $Q$, $YQ=21$, $WQ=70$, $WX=60$, and $XQ=120$. What is the length of $\\overline{YZ}$?",
+    "prompt": "In the figure shown, $\\overline{WZ}$ and $\\overline{XY}$ intersect at point $Q$, $YQ=21$, $WQ=70$, $WX=60$, and $XQ=120$. What is the length of $\\overline{YZ}$?",
     "options": [
       {
         "id": "A",
@@ -35571,7 +35573,8 @@
     ],
     "correctAnswer": "A",
     "rationale": "Choice A is correct. It's given that $WZ$ and $XY$ intersect at point $Q$. It follows that $\\angle WQX$ and $\\angle YQZ$ are vertical angles, which means they are congruent to each other. The figure shows that $\\angle W$ and $\\angle Y$ both have a measure of $a^\\circ$, so they are congruent to each other. Therefore, $\\triangle{}QWX$ and $\\triangle{}QYZ$ are similar triangles, where $WQ$ corresponds to $YQ$ and $WX$ corresponds to $YZ$. Since the lengths of corresponding sides in similar triangles are proportional, it follows that $\\frac{YZ}{YQ}=\\frac{WX}{WQ}$. It's given that $YQ=21$, $WQ=70$, and $WX=60$. Substituting $21$ for $YQ$, $70$ for $WQ$, and $60$ for $WX$ in the equation $\\frac{YZ}{YQ}=\\frac{WX}{WQ}$ yields $\\frac{YZ}{21}=\\frac{60}{70}$, or $\\frac{YZ}{21}=\\frac{6}{7}$. Multiplying each side of this equation by $21$ yields $YZ=18$. Therefore, the length of $YZ$ is $18$.\n\nChoice B is incorrect. This is the length of $QZ$, not $YZ$.\n\nChoice C is incorrect. This is the length of $XQ$, not $YZ$.\n\nChoice D is incorrect and may result from conceptual or calculation errors.",
-    "imageUrl": "/question-images/math/1318dfea.svg"
+    "imageUrl": "/question-images/math/1318dfea.svg",
+    "figureSvg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 460 210\" width=\"100%\" height=\"auto\" class=\"w-full max-w-[460px] select-none\" style=\"overflow: visible;\">\n  <!-- Intersecting segments WZ and XY at Q forming triangles WXQ and YZQ -->\n  <g stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"none\" class=\"text-zinc-900 dark:text-zinc-100\">\n    <line x1=\"76\" y1=\"28\" x2=\"400\" y2=\"120\" />\n    <line x1=\"22\" y1=\"140\" x2=\"345\" y2=\"24\" />\n    <line x1=\"76\" y1=\"28\" x2=\"22\" y2=\"140\" />\n    <line x1=\"345\" y1=\"24\" x2=\"400\" y2=\"120\" />\n    <path d=\"M 64,48 A 24,24 0 0,0 89,32\" stroke-width=\"1.5\" />\n    <path d=\"M 333,33 A 24,24 0 0,0 352,40\" stroke-width=\"1.5\" />\n  </g>\n  <g font-family=\"system-ui, -apple-system, sans-serif\" font-weight=\"600\" font-size=\"15\" fill=\"currentColor\" class=\"text-zinc-900 dark:text-zinc-100 select-none\">\n    <text x=\"68\" y=\"16\" text-anchor=\"middle\">W</text>\n    <text x=\"8\" y=\"152\" text-anchor=\"middle\">X</text>\n    <text x=\"216\" y=\"60\" text-anchor=\"middle\">Q</text>\n    <text x=\"352\" y=\"14\" text-anchor=\"middle\">Y</text>\n    <text x=\"416\" y=\"128\" text-anchor=\"middle\">Z</text>\n    <text x=\"82\" y=\"58\" font-size=\"13\" font-style=\"italic\" font-weight=\"500\">a°</text>\n    <text x=\"338\" y=\"54\" font-size=\"13\" font-style=\"italic\" font-weight=\"500\">a°</text>\n  </g>\n  <text x=\"230\" y=\"196\" text-anchor=\"middle\" font-family=\"system-ui, -apple-system, sans-serif\" font-size=\"11\" fill=\"currentColor\" class=\"text-zinc-500 dark:text-zinc-400 select-none\" letter-spacing=\"0.02em\">\n    Note: Figure not drawn to scale.\n  </text>\n</svg>"
   },
   {
     "id": "1429dcdf",
@@ -35581,7 +35584,7 @@
     "difficulty": "Hard",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "One angle is a right angle.The measure of a second angle is x°.The length of the hypotenuse is 23.The length of the leg opposite the angle with measure x° is 16.Note: Figure not drawn to scale.\n\nIn the triangle shown, what is the value of $sinx^\\circ$?",
+    "prompt": "In the triangle shown, what is the value of $sinx^\\circ$?",
     "options": [],
     "correctAnswer": "16/23",
     "rationale": "The correct answer is $\\frac{16}{23}$. In a right triangle, the sine of an acute angle is defined as the ratio of the length of the side opposite the angle to the length of the hypotenuse. In the triangle shown, the length of the side opposite the angle with measure $x^\\circ$ is $16$ units and the length of the hypotenuse is $23$ units. Therefore, the value of $sinx^\\circ$ is $\\frac{16}{23}$. Note that 16/23, .6956, .6957, 0.695, and 0.696 are examples of ways to enter a correct answer.",
@@ -35603,7 +35606,7 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "One angle is a right angle.The measure of the other 2 angles are as follows:45°45°The lengths of the 2 sides adjacent to the right angle are as follows:x24Note: Figure not drawn to scale.\n\nIn the triangle shown, what is the value of $x$?",
+    "prompt": "In the triangle shown, what is the value of $x$?",
     "options": [
       {
         "id": "A",
@@ -35788,7 +35791,7 @@
     "difficulty": "Hard",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "Top: a°\n\nTop left: b°\n\nAt the intersection of line r and line t:\n\nThe line segment divides the bottom-left angle into two equal angles, each labeled w°.\n\nA note indicates the figure is not drawn to scale.\n\nIn the figure, parallel lines $q$ and $t$ are intersected by lines $r$ and $s$. If $a=43$ and $b=122$, what is the value of $w$?",
+    "prompt": "In the figure, parallel lines $q$ and $t$ are intersected by lines $r$ and $s$. If $a=43$ and $b=122$, what is the value of $w$?",
     "options": [],
     "correctAnswer": "101/2",
     "rationale": "The correct answer is $\\frac{101}{2}$. In the figure, lines $q$, $r$, and $s$ form a triangle. One interior angle of this triangle is vertical to the angle marked $a^\\circ$; therefore, the interior angle also has measure $a^\\circ$. It's given that $a=43$. Therefore, the interior angle of the triangle has measure $43^\\circ$. A second interior angle of the triangle forms a straight line, $q$, with the angle marked $b^\\circ$. Therefore, the sum of the measures of these two angles is $180^\\circ$. It's given that $b=122$. Therefore, the angle marked $b^\\circ$ has measure $122^\\circ$ and the second interior angle of the triangle has measure $\\left(180-122\\right)^\\circ$, or $58^\\circ$. The sum of the interior angles of a triangle is $180^\\circ$. Therefore, the measure of the third interior angle of the triangle is $\\left(180-43-58\\right)^\\circ$, or $79^\\circ$. It's given that parallel lines $q$ and $t$ are intersected by line $r$. It follows that the triangle's interior angle with measure $79^\\circ$ is congruent to the same side interior angle between lines $q$ and $t$ formed by lines $t$ and $r$. Since this angle is supplementary to the two angles marked $w^\\circ$, the sum of $79^\\circ$, $w^\\circ$, and $w^\\circ$ is $180^\\circ$. It follows that $79+w+w=180$, or $79+2w=180$. Subtracting $79$ from both sides of this equation yields $2w=101$. Dividing both sides of this equation by $2$ yields $w=\\frac{101}{2}$. Note that 101/2 and 50.5 are examples of ways to enter a correct answer.",
@@ -35944,7 +35947,7 @@
     "difficulty": "Hard",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "One angle is a right angle.\nThe measure of a second angle is x°.\nThe length of the hypotenuse is 28.\nThe length of the leg adjacent to the angle with measure x° is 11.\nA note indicates the figure is not drawn to scale.\n\nIn the triangle shown, what is the value of $cosx^\\circ$?",
+    "prompt": "In the triangle shown, what is the value of $cosx^\\circ$?",
     "options": [],
     "correctAnswer": "11/28",
     "rationale": "The correct answer is $\\frac{11}{28}$. The cosine of an acute angle in a right triangle is defined as the ratio of the length of the leg adjacent to the angle to the length of the hypotenuse. In the triangle shown, the length of the leg adjacent to the angle with measure $x^\\circ$ is $11$ units and the length of the hypotenuse is $28$ units. Therefore, the value of $cosx^\\circ$ is $\\frac{11}{28}$. Note that 11/28, .3928, .3929, 0.392, and 0.393 are examples of ways to enter a correct answer.",
@@ -35966,7 +35969,7 @@
     "difficulty": "Hard",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "Line segment upper D upper E is drawn from side upper A upper B to side upper B upper C.\nLine segment upper B upper F is drawn from point upper B to side upper A upper C.\nLine segment upper D upper E and line segment upper B upper F intersect at point upper O.\nLine segment upper A upper O is drawn from point upper A to point upper O.\nThe measure of angle upper O upper A upper C is 30°.\nA note indicates the figure is not drawn to scale.\n\nIn triangle $ABC$, $AB=BC$. Points $D$ and $E$ lie on line segments $AB$ and $BC$, respectively, such that line segments $DE$ and $AC$ are parallel. Point $O$ is the midpoint of line segment $DE$, and the measure of $\\angle OAC$ is $30^\\circ$. Point $F$ lies on line segment $AC$, and line segment $BF$ passes through point $O$. If $AB=81$ and $AO=BO$, what is the length of line segment $BE$?",
+    "prompt": "In triangle $ABC$, $AB=BC$. Points $D$ and $E$ lie on line segments $AB$ and $BC$, respectively, such that line segments $DE$ and $AC$ are parallel. Point $O$ is the midpoint of line segment $DE$, and the measure of $\\angle OAC$ is $30^\\circ$. Point $F$ lies on line segment $AC$, and line segment $BF$ passes through point $O$. If $AB=81$ and $AO=BO$, what is the length of line segment $BE$?",
     "options": [],
     "correctAnswer": "54",
     "rationale": "The correct answer is $54$. It's given that $AB=BC$, so triangle $ABC$ is isosceles. It's also given that line segments $DE$ and $AC$ are parallel. Since line segments $DE$ and $AC$ are parallel, triangle $BDE$ is similar to triangle $BAC$, which means triangle $BDE$ is also isosceles. It’s given that point $O$ is the midpoint of line segment $DE$. Since triangle $BDE$ is isosceles, line segment $BO$ splits triangle $BDE$ into two congruent triangles, where $\\angle BOD$ is a right angle. Therefore, $\\angle BFA$ is also a right angle. The figure shows that the measure of $\\angle OAF$ is $30^\\circ$. It follows that triangle $AOF$ is a 30-60-90 triangle, where the measure of $\\angle AOF$ is $60^\\circ$. In a 30-60-90 triangle, the side opposite the $30^\\circ$ angle is half the length of the side opposite the $90^\\circ$ angle. Let $x$ represent the length of line segment $OF$ and let $2x$ represent the length of line segment $AO$. It's given that $AO=BO$. Since $AO=BO$, the length of line segment $BO$ is also $2x$. It follows that the length of line segment $BF$ is $BO+OF$, which is $2x+x$, or $3x$. Since triangle $BDE$ is similar to triangle $BAC$, the ratio of corresponding side lengths is equal to the ratio of the heights of the triangles. This means that $\\frac{BE}{BC}=\\frac{BO}{BF}$. Substituting $2x$ for $BO$ and $3x$ for $BF$ in this equation yields $\\frac{BE}{BC}=\\frac{2x}{3x}$, or $\\frac{BE}{BC}=\\frac{2}{3}$. It’s given that $AB=81$ and $AB=BC$, so $BC=81$. Substituting $81$ for $BC$ in the equation $\\frac{BE}{BC}=\\frac{2}{3}$ yields $\\frac{BE}{81}=\\frac{2}{3}$. Multiplying both sides of this equation by $81$ yields $BE=\\frac{2}{3}(81)$, or $BE=54$.",
@@ -36269,7 +36272,7 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Angle upper A upper D upper E is a right angle.\nLine segment upper B upper C is drawn from side upper A upper D to side upper A upper E.\nThe measure of angle upper B upper C upper A is x°.\nNote: Figure not drawn to scale.\n\nIn the figure, $\\overline{BC}$ is parallel to $\\overline{DE}$. If the length of $\\overline{DE}$ is $147$ and the length of $\\overline{AE}$ is $245$, what is the value of $tanx^\\circ$?",
+    "prompt": "In the figure, $\\overline{BC}$ is parallel to $\\overline{DE}$. If the length of $\\overline{DE}$ is $147$ and the length of $\\overline{AE}$ is $245$, what is the value of $tanx^\\circ$?",
     "options": [
       {
         "id": "A",
@@ -36294,7 +36297,8 @@
     ],
     "correctAnswer": "C",
     "rationale": "Choice C is correct. It’s given that the length of $\\overline{DE}$ is $147$, and the length of $\\overline{AE}$ is $245$. Since angle $D$ is a right angle, triangle $ADE$ is a right triangle with hypotenuse $\\overline{AE}$ and legs $\\overline{AD}$ and $\\overline{DE}$. By the Pythagorean theorem, if a right triangle has a hypotenuse with length $c$ and legs with lengths $a$ and $b$, then $a^{2}+b^{2}=c^{2}$. Substituting $AD$ for $a$, $147$ for $b$, and $245$ for $c$ in the equation $a^{2}+b^{2}=c^{2}$ yields ${AD}^{2}+{147}^{2}={245}^{2}$. Subtracting ${147}^{2}$ from both sides of this equation yields ${AD}^{2}={245}^{2}-{147}^{2}$. Evaluating this difference yields $AD^{2}=60,025-21,609$, or $AD^{2}=38,416$. Taking the positive square root of both sides of this equation yields $AD=196$. It's given that $\\overline{BC}$ is parallel to $\\overline{DE}$, and $\\overline{AE}$ intersects $\\overline{BC}$ and $\\overline{DE}$. It follows that angle $ACB$ is congruent to angle $AED$. Since angle $A$ is common to triangles $ABC$ and $ADE$, it follows that triangle $ABC$ is similar to triangle $ADE$. In triangle $ABC$, $tanx^\\circ$ is the ratio of the leg opposite angle $ACB$ to the leg adjacent to angle $ACB$, so $tanx^\\circ=\\frac{AB}{BC}$. Since triangle $ABC$ is similar to triangle $ADE$ and similar triangles have proportional side lengths, it follows that $\\frac{AB}{BC}=\\frac{AD}{DE}$. Therefore, $tanx^\\circ=\\frac{AD}{DE}$. Substituting $196$ for $AD$ and $147$ for $DE$ in this equation yields $tanx^\\circ=\\frac{196}{147}$. Therefore, the value of $tanx^\\circ$ is $\\frac{196}{147}$.\n\nChoice A is incorrect and may result from conceptual or calculation errors.\n\nChoice B is incorrect. This is the value of $cosx^\\circ$, not $tanx^\\circ$.\n\nChoice D is incorrect and may result from conceptual or calculation errors.",
-    "imageUrl": "/question-images/math/2757549e.svg"
+    "imageUrl": "/question-images/math/2757549e.svg",
+    "figureSvg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 460 210\" width=\"100%\" height=\"auto\" class=\"w-full max-w-[460px] select-none\" style=\"overflow: visible;\">\n  <!-- Right triangle ADE with parallel segment BC -->\n  <g stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"none\" class=\"text-zinc-900 dark:text-zinc-100\">\n    <line x1=\"60\" y1=\"150\" x2=\"400\" y2=\"150\" />\n    <line x1=\"400\" y1=\"150\" x2=\"400\" y2=\"30\" />\n    <line x1=\"60\" y1=\"150\" x2=\"400\" y2=\"30\" />\n    <line x1=\"260\" y1=\"150\" x2=\"260\" y2=\"80\" />\n    <polyline points=\"385,150 385,135 400,135\" stroke-width=\"1.5\" />\n    <path d=\"M 260,98 A 18,18 0 0,0 248,84\" stroke-width=\"1.5\" />\n  </g>\n  <g font-family=\"system-ui, -apple-system, sans-serif\" font-weight=\"600\" font-size=\"15\" fill=\"currentColor\" class=\"text-zinc-900 dark:text-zinc-100 select-none\">\n    <text x=\"45\" y=\"156\" text-anchor=\"middle\">A</text>\n    <text x=\"260\" y=\"172\" text-anchor=\"middle\">B</text>\n    <text x=\"254\" y=\"68\" text-anchor=\"middle\">C</text>\n    <text x=\"415\" y=\"156\" text-anchor=\"middle\">D</text>\n    <text x=\"415\" y=\"24\" text-anchor=\"middle\">E</text>\n    <text x=\"242\" y=\"104\" font-size=\"13\" font-style=\"italic\" font-weight=\"500\">x°</text>\n  </g>\n  <text x=\"230\" y=\"196\" text-anchor=\"middle\" font-family=\"system-ui, -apple-system, sans-serif\" font-size=\"11\" fill=\"currentColor\" class=\"text-zinc-500 dark:text-zinc-400 select-none\" letter-spacing=\"0.02em\">\n    Note: Figure not drawn to scale.\n  </text>\n</svg>"
   },
   {
     "id": "27d075d8",
@@ -36388,7 +36392,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The lengths of the sides are x, y, and z.\nA note indicates the figure is not drawn to scale.\n\nThe triangle shown has a perimeter of $22$ units. If $x=9$ units and $y=7$ units, what is the value of $z$, in units?",
+    "prompt": "The triangle shown has a perimeter of $22$ units. If $x=9$ units and $y=7$ units, what is the value of $z$, in units?",
     "options": [
       {
         "id": "A",
@@ -36457,7 +36461,7 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Top right: x°\nBottom left: y°\n\nTop left: z°\n\nA note indicates the figure is not drawn to scale.\n\nIn the figure, lines $m$ and $n$ are parallel. If $x=6k+13$ and $y=8k-29$, what is the value of $z$?",
+    "prompt": "In the figure, lines $m$ and $n$ are parallel. If $x=6k+13$ and $y=8k-29$, what is the value of $z$?",
     "options": [
       {
         "id": "A",
@@ -36508,7 +36512,7 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Angle upper A upper C upper B is a right angle.\nThe length of side upper A upper B is 42.\nThe length of side upper A upper C is 41.\nA note indicates the figure is not drawn to scale.\n\nWhat is the value of $cosA$ in the triangle shown?",
+    "prompt": "What is the value of $cosA$ in the triangle shown?",
     "options": [
       {
         "id": "A",
@@ -36580,7 +36584,7 @@
     "difficulty": "Hard",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "Triangle upper R upper T upper U is labeled as follows:\n\nThe measure of angle upper R upper T upper U is x°.\n\nThe 2 triangles partially overlap:\n\nSide upper R upper T of triangle upper R upper T upper U intersects side upper S upper V of triangle upper S upper V upper U.\nVertex upper V of triangle upper S upper V upper U lies on side upper R upper U of triangle upper R upper T upper U.\nVertex upper T of triangle upper R upper T upper U lies on side upper S upper U of triangle upper S upper V upper U.\n\nA note indicates the figure is not drawn to scale.\n\nIn the figure, $RT=TU$, the measure of angle $VST$ is $29^\\circ$, and the measure of angle $RVS$ is $41^\\circ$. What is the value of $x$?",
+    "prompt": "In the figure, $RT=TU$, the measure of angle $VST$ is $29^\\circ$, and the measure of angle $RVS$ is $41^\\circ$. What is the value of $x$?",
     "options": [],
     "correctAnswer": "156",
     "rationale": "The correct answer is $156$. In the figure shown, the sum of the measures of angle $UVS$ and angle $RVS$ is $180^\\circ$. It’s given that the measure of angle $RVS$ is $41^\\circ$. Therefore, the measure of angle $UVS$ is $\\left(180-41\\right)^\\circ$, or $139^\\circ$. The sum of the measures of the interior angles of a triangle is $180^\\circ$. In triangle $UVS$, the measure of angle $UVS$ is $139^\\circ$ and it's given that the measure of angle $VST$ is $29^\\circ$. Thus, the measure of angle $VUS$ is $\\left(180-139-29\\right)^\\circ$, or $12^\\circ$. It’s given that $RT=TU$. Therefore, triangle $TUR$ is an isosceles triangle and the measure of $VUS$ is equal to the measure of angle $TRU$. In triangle $TUR$, the measure of angle $VUS$ is $12^\\circ$ and the measure of angle $TRU$ is $12^\\circ$. Thus, the measure of angle $UTR$ is $\\left(180-12-12\\right)^\\circ$, or $156^\\circ$. The figure shows that the measure of angle $UTR$ is $x^\\circ$, so the value of $x$ is $156$.",
@@ -36631,7 +36635,7 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Line segment upper B upper D is drawn from side upper C upper A to side upper C upper E to form triangle upper C upper B upper D.\nAngle upper C upper D upper B is a right angle.\nAngle upper C upper E upper A is a right angle.\nA note indicates the figure is not drawn to scale.\n\nIn the figure shown, triangle $CAE$ is similar to triangle $CBD$. The measure of angle $CBD$ is $57^\\circ$, and $AE=26\\left(BD\\right)$. What is the measure of angle $CAE$?",
+    "prompt": "In the figure shown, triangle $CAE$ is similar to triangle $CBD$. The measure of angle $CBD$ is $57^\\circ$, and $AE=26\\left(BD\\right)$. What is the measure of angle $CAE$?",
     "options": [
       {
         "id": "A",
@@ -36853,14 +36857,15 @@
     "difficulty": "Hard",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "The 2 triangles intersect at vertex upper Q.\nThe measure of angle upper X upper W upper Q is a°.\nThe measure of angle upper Z upper Y upper Q is a°.\nA note indicates the figure is not drawn to scale.\n\nIn the figure shown, $\\overline{WZ}$ and $\\overline{XY}$ intersect at point $Q$. $YQ=63$, $WQ=70$, $WX=60$, and $XQ=120$. What is the length of $\\overline{YZ}$?",
+    "prompt": "In the figure shown, $\\overline{WZ}$ and $\\overline{XY}$ intersect at point $Q$. $YQ=63$, $WQ=70$, $WX=60$, and $XQ=120$. What is the length of $\\overline{YZ}$?",
     "options": [],
     "correctAnswer": "54",
     "rationale": "The correct answer is $54$. The figure shown includes two triangles, triangle $WQX$ and triangle $YQZ$, such that angle $WQX$ and angle $YQZ$ are vertical angles. It follows that angle $WQX$ is congruent to angle $YQZ$. It’s also given in the figure that the measures of angle $W$ and angle $Y$ are $a^\\circ$. Therefore angle $W$ is congruent to angle $Y$. Since triangle $WQX$ and triangle $YQZ$ have two pairs of congruent angles, triangle $WQX$ is similar to triangle $YQZ$ by the angle-angle similarity postulate, where $\\overline{YZ}$ corresponds to $\\overline{WX}$, and $\\overline{YQ}$ corresponds to $\\overline{WQ}$. Since the lengths of corresponding sides in similar triangles are proportional, it follows that $\\frac{YZ}{WX}=\\frac{YQ}{WQ}$. It’s given that $YQ=63$, $WQ=70$, and $WX=60$. Substituting $63$ for $YQ$, $70$ for $WQ$, and $60$ for $WX$ in the equation $\\frac{YZ}{WX}=\\frac{YQ}{WQ}$ yields $\\frac{YZ}{60}=\\frac{63}{70}$. Multiplying each side of this equation by $60$ yields $YZ=\\left(\\frac{63}{70}\\right)\\left(60\\right)$, or $YZ=54$. Therefore, the length of $\\overline{YZ}$ is $54$.",
     "acceptedAnswers": [
       "54"
     ],
-    "imageUrl": "/question-images/math/345cc36a.svg"
+    "imageUrl": "/question-images/math/345cc36a.svg",
+    "figureSvg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 460 210\" width=\"100%\" height=\"auto\" class=\"w-full max-w-[460px] select-none\" style=\"overflow: visible;\">\n  <!-- Intersecting segments WZ and XY at Q forming triangles WXQ and YZQ -->\n  <g stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"none\" class=\"text-zinc-900 dark:text-zinc-100\">\n    <line x1=\"76\" y1=\"28\" x2=\"400\" y2=\"120\" />\n    <line x1=\"22\" y1=\"140\" x2=\"345\" y2=\"24\" />\n    <line x1=\"76\" y1=\"28\" x2=\"22\" y2=\"140\" />\n    <line x1=\"345\" y1=\"24\" x2=\"400\" y2=\"120\" />\n    <path d=\"M 64,48 A 24,24 0 0,0 89,32\" stroke-width=\"1.5\" />\n    <path d=\"M 333,33 A 24,24 0 0,0 352,40\" stroke-width=\"1.5\" />\n  </g>\n  <g font-family=\"system-ui, -apple-system, sans-serif\" font-weight=\"600\" font-size=\"15\" fill=\"currentColor\" class=\"text-zinc-900 dark:text-zinc-100 select-none\">\n    <text x=\"68\" y=\"16\" text-anchor=\"middle\">W</text>\n    <text x=\"8\" y=\"152\" text-anchor=\"middle\">X</text>\n    <text x=\"216\" y=\"60\" text-anchor=\"middle\">Q</text>\n    <text x=\"352\" y=\"14\" text-anchor=\"middle\">Y</text>\n    <text x=\"416\" y=\"128\" text-anchor=\"middle\">Z</text>\n    <text x=\"82\" y=\"58\" font-size=\"13\" font-style=\"italic\" font-weight=\"500\">a°</text>\n    <text x=\"338\" y=\"54\" font-size=\"13\" font-style=\"italic\" font-weight=\"500\">a°</text>\n  </g>\n  <text x=\"230\" y=\"196\" text-anchor=\"middle\" font-family=\"system-ui, -apple-system, sans-serif\" font-size=\"11\" fill=\"currentColor\" class=\"text-zinc-500 dark:text-zinc-400 select-none\" letter-spacing=\"0.02em\">\n    Note: Figure not drawn to scale.\n  </text>\n</svg>"
   },
   {
     "id": "35d37640",
@@ -36904,7 +36909,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "One angle is a right angle.\nThe length of the side opposite the right angle is c.\nThe lengths of the other 2 sides are as follows:\n\n9\n6\n\nA note indicates the figure is not drawn to scale.\n\nIn the right triangle shown, which of the following is closest to the value of $c$?",
+    "prompt": "In the right triangle shown, which of the following is closest to the value of $c$?",
     "options": [
       {
         "id": "A",
@@ -37058,7 +37063,7 @@
     "difficulty": "Easy",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "Bottom right: 133°\nBottom left: x°\n\nA note indicates the figure is not drawn to scale.\n\nIn the figure, line $j$ is parallel to line $k$. What is the value of $x$?",
+    "prompt": "In the figure, line $j$ is parallel to line $k$. What is the value of $x$?",
     "options": [],
     "correctAnswer": "47",
     "rationale": "The correct answer is $47$. Based on the figure, the angle with measure $x^\\circ$ and the angle with measure $133^\\circ$ together form a straight line. Therefore, these two angles are supplementary, so the sum of their measures is $180^\\circ$. It follows that $x+133=180$. Subtracting $133$ from both sides of this equation yields $x=47$.",
@@ -37091,7 +37096,7 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Triangle upper A upper B upper C has a common vertex with triangle upper C upper D upper E.\nThe common vertex is upper C.\nTriangle upper A upper B upper C is labeled as follows:\n\nThe measure of angle upper B upper A upper C is y°.\n\nTriangle upper C upper D upper E is labeled as follows:\n\nThe measure of angle upper D upper C upper E is x°.\nThe measure of angle upper C upper D upper E is z°.\n\nA note indicates the figure is not drawn to scale.\n\nIn the figure, $\\overline{AE}$ intersects $\\overline{DB}$ at point $C$ and $\\overline{AB}$ is parallel to $\\overline{DE}$, creating triangles $ABC$ and $CDE$. If $x=63$ and $y=2x-47$, what is the value of $z$?",
+    "prompt": "In the figure, $\\overline{AE}$ intersects $\\overline{DB}$ at point $C$ and $\\overline{AB}$ is parallel to $\\overline{DE}$, creating triangles $ABC$ and $CDE$. If $x=63$ and $y=2x-47$, what is the value of $z$?",
     "options": [
       {
         "id": "A",
@@ -37116,7 +37121,8 @@
     ],
     "correctAnswer": "A",
     "rationale": "Choice A is correct. It’s given that $AE$ intersects $DB$ at point $C$ and that $AB$ is parallel to $DE$, creating triangles $ABC$ and $CDE$. Since $AB$ is parallel to $DE$, angles $BAC$ and $DEC$ are opposite interior angles and are congruent. It follows that the measure of angle $DEC$ is $y^\\circ$. This means the three interior angles of triangle $CDE$ have measures of $x^\\circ$, $z^\\circ$, and $y^\\circ$, respectively. It’s given that $x=63$ and $y=2x-47$. Substituting $63$ for $x$ in the equation $y=2x-47$ yields $y=2(63)-47$, or $y=79$. Therefore, the three interior angles of triangle $CDE$ have measures $63^\\circ$, $z^\\circ$, and $79^\\circ$, respectively. The sum of the interior angles of a triangle is $180^\\circ$. Therefore, $63+z+79=180$, or $z+142=180$. Subtracting $142$ from both sides of this equation yields $z=38$. Therefore, the value of $z$ is $38$.\n\nChoice B is incorrect and may result from conceptual or calculation errors.\n\nChoice C is incorrect. This is the value of $x$, not $z$.\n\nChoice D is incorrect. This is the value of $y$, not $z$.",
-    "imageUrl": "/question-images/math/3e4e2ab0.svg"
+    "imageUrl": "/question-images/math/3e4e2ab0.svg",
+    "figureSvg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 460 210\" width=\"100%\" height=\"auto\" class=\"w-full max-w-[460px] select-none\" style=\"overflow: visible;\">\n  <!-- Triangles ABC and CDE sharing vertex C with AB || DE -->\n  <g stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"none\" class=\"text-zinc-900 dark:text-zinc-100\">\n    <line x1=\"60\" y1=\"30\" x2=\"60\" y2=\"160\" />\n    <line x1=\"400\" y1=\"40\" x2=\"400\" y2=\"150\" />\n    <line x1=\"60\" y1=\"30\" x2=\"400\" y2=\"150\" />\n    <line x1=\"60\" y1=\"160\" x2=\"400\" y2=\"40\" />\n    <path d=\"M 78,40 A 20,20 0 0,1 68,54\" stroke-width=\"1.5\" />\n    <path d=\"M 246,95 A 18,18 0 0,0 238,107\" stroke-width=\"1.5\" />\n    <path d=\"M 382,50 A 20,20 0 0,1 392,60\" stroke-width=\"1.5\" />\n  </g>\n  <g font-family=\"system-ui, -apple-system, sans-serif\" font-weight=\"600\" font-size=\"15\" fill=\"currentColor\" class=\"text-zinc-900 dark:text-zinc-100 select-none\">\n    <text x=\"44\" y=\"28\" text-anchor=\"middle\">A</text>\n    <text x=\"44\" y=\"172\" text-anchor=\"middle\">B</text>\n    <text x=\"230\" y=\"80\" text-anchor=\"middle\">C</text>\n    <text x=\"416\" y=\"38\" text-anchor=\"middle\">D</text>\n    <text x=\"416\" y=\"162\" text-anchor=\"middle\">E</text>\n    <text x=\"82\" y=\"55\" font-size=\"13\" font-style=\"italic\" font-weight=\"500\">y°</text>\n    <text x=\"254\" y=\"115\" font-size=\"13\" font-style=\"italic\" font-weight=\"500\">x°</text>\n    <text x=\"375\" y=\"66\" font-size=\"13\" font-style=\"italic\" font-weight=\"500\">z°</text>\n  </g>\n  <text x=\"230\" y=\"196\" text-anchor=\"middle\" font-family=\"system-ui, -apple-system, sans-serif\" font-size=\"11\" fill=\"currentColor\" class=\"text-zinc-500 dark:text-zinc-400 select-none\" letter-spacing=\"0.02em\">\n    Note: Figure not drawn to scale.\n  </text>\n</svg>"
   },
   {
     "id": "3e577e4a",
@@ -37262,7 +37268,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Top left: x°\nBottom right: 145°\n\nA note indicates the figure is not drawn to scale.\n\nIn the figure, line $m$ is parallel to line $n$, and line $k$ intersects both lines. Which of the following statements is true?",
+    "prompt": "In the figure, line $m$ is parallel to line $n$, and line $k$ intersects both lines. Which of the following statements is true?",
     "options": [
       {
         "id": "A",
@@ -37718,7 +37724,7 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The 2 triangles share common vertex upper R.\n\nCommon vertex upper R lies on line segment upper P upper T.\n\nTriangle upper Q upper P upper R is labeled as follows:\n\nAngle upper Q upper P upper R is a right angle.\nThe measure of angle upper Q upper R upper P is x°.\n\nTriangle upper S upper T upper R is labeled as follows:\n\nAngle upper S upper T upper R is a right angle.\nThe measure of angle upper S upper R upper T is x°.\n\nA note indicates the figure is not drawn to scale.\n\n$\\triangle{}QPR$ is similar to $\\triangle{}STR$. The lengths represented by $\\overline{ST}$, $\\overline{QP}$, $\\overline{PR}$, and $\\overline{QR}$ in the figure are $14$, $15$, $20$, and $25$, respectively. What is the length of $\\overline{SR}$?",
+    "prompt": "$\\triangle{}QPR$ is similar to $\\triangle{}STR$. The lengths represented by $\\overline{ST}$, $\\overline{QP}$, $\\overline{PR}$, and $\\overline{QR}$ in the figure are $14$, $15$, $20$, and $25$, respectively. What is the length of $\\overline{SR}$?",
     "options": [
       {
         "id": "A",
@@ -37753,7 +37759,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Bottom left: 170°\n\nBottom left: w°\n\nA note indicates the figure is not drawn to scale.\n\nIn the figure, line $m$ is parallel to line $n$. What is the value of $w$?",
+    "prompt": "In the figure, line $m$ is parallel to line $n$. What is the value of $w$?",
     "options": [
       {
         "id": "A",
@@ -37822,7 +37828,7 @@
     "difficulty": "Hard",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The length of side upper A upper B is 54.\nThe measure of angle upper B is 30°.\nAngle upper C is a right angle.\nA note indicates the figure is not drawn to scale.\n\nRight triangle $ABC$ is shown. What is the value of $tanA$?",
+    "prompt": "Right triangle $ABC$ is shown. What is the value of $tanA$?",
     "options": [
       {
         "id": "A",
@@ -38101,7 +38107,7 @@
     "difficulty": "Easy",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "Top left: 162°\n\nTop left: x°\n\nA note indicates the figure is not drawn to scale.\n\nIn the figure, line $n$ intersects lines $r$ and $s$. Line $r$ is parallel to line $s$. What is the value of $x$?",
+    "prompt": "In the figure, line $n$ intersects lines $r$ and $s$. Line $r$ is parallel to line $s$. What is the value of $x$?",
     "options": [],
     "correctAnswer": "162",
     "rationale": "The correct answer is $162$. It's given that line $r$ is parallel to line $s$. Since line $n$ intersects both lines $r$ and $s$, it's a transversal. The angles in the figure marked as $162^\\circ$ and $x^\\circ$ are on the same side of the transversal, where one is an interior angle with line $s$ as a side, and the other is an exterior angle with line $r$ as a side. Thus, the marked angles are corresponding angles. When two parallel lines are intersected by a transversal, corresponding angles are congruent and, therefore, have equal measure. It follows that the value of $x$ is $162$.",
@@ -38202,7 +38208,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "One angle is a right angle.\nThe measure of a second angle is x°.\nThe length of the leg opposite the angle with measure x° is 26.\nThe length of the leg adjacent to the angle with measure x° is 7.\nA note indicates the figure is not drawn to scale.\n\nIn the triangle shown, what is the value of $tanx^\\circ$?",
+    "prompt": "In the triangle shown, what is the value of $tanx^\\circ$?",
     "options": [
       {
         "id": "A",
@@ -38237,7 +38243,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Top: w°\nRight: unlabeled\nBottom: z°\nLeft: unlabeled\n\nA note indicates the figure is not drawn to scale.\n\nIn the figure, two lines intersect at a point. If $w=136$, what is the value of $z$?",
+    "prompt": "In the figure, two lines intersect at a point. If $w=136$, what is the value of $z$?",
     "options": [
       {
         "id": "A",
@@ -38306,7 +38312,7 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Angle upper Z is a right angle.\nThe length of side upper X upper Z is 27.\nThe length of side upper Y upper Z is 35.\nA note indicates the figure is not drawn to scale.\n\nTriangle $XYZ$ shown is a right triangle. Which of the following has the same value as $sinX$?",
+    "prompt": "Triangle $XYZ$ shown is a right triangle. Which of the following has the same value as $sinX$?",
     "options": [
       {
         "id": "A",
@@ -38375,7 +38381,7 @@
     "difficulty": "Medium",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "Top right: 58°\n\nTop left: y°\n\nA note indicates the figure is not drawn to scale.\n\nIn the figure, line $q$ is parallel to line $r$, and both lines are intersected by line $s$. If $y=2x+8$, what is the value of $x$?",
+    "prompt": "In the figure, line $q$ is parallel to line $r$, and both lines are intersected by line $s$. If $y=2x+8$, what is the value of $x$?",
     "options": [],
     "correctAnswer": "57",
     "rationale": "The correct answer is $57$. Based on the figure, the angle with measure $y^\\circ$ and the angle vertical to the angle with measure $58^\\circ$ are same side interior angles. Since vertical angles are congruent, the angle vertical to the angle with measure $58^\\circ$ also has measure $58^\\circ$. It’s given that lines $q$ and $r$ are parallel. Therefore, same side interior angles between lines $q$ and $r$ are supplementary. It follows that $y+58=180$. If $y=2x+8$, then the value of $x$ can be found by substituting $2x+8$ for $y$ in the equation $y+58=180$, which yields $\\left(2x+8\\right)+58=180$, or $2x+66=180$. Subtracting $66$ from both sides of this equation yields $2x=114$. Dividing both sides of this equation by $2$ yields $x=57$. Thus, if $y=2x+8$, the value of $x$ is $57$.",
@@ -38426,7 +38432,7 @@
     "difficulty": "Hard",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "Angle upper D upper E upper A is a right angle.\nPoint upper B lies on side upper A upper D.\nPoint upper C lies on side upper A upper E.\nLine segment upper B upper C is drawn from side upper A upper D to side upper A upper E to form right triangle upper A upper B upper C.\nAngle upper B upper C upper A is a right angle.\nA note indicates the figure is not drawn to scale.\n\nIn the figure shown, $AB=\\sqrt{34}$ units, $AC=3$ units, and $CE=21$ units. What is the area, in square units, of triangle $ADE$?",
+    "prompt": "In the figure shown, $AB=\\sqrt{34}$ units, $AC=3$ units, and $CE=21$ units. What is the area, in square units, of triangle $ADE$?",
     "options": [],
     "correctAnswer": "480",
     "rationale": "The correct answer is $480$. It's given in the figure that angle $ACB$ and angle $AED$ are right angles. It follows that angle $ACB$ is congruent to angle $AED$. It's also given that angle $BAC$ and angle $DAE$ are the same angle. It follows that angle $BAC$ is congruent to angle $DAE$. Since triangles $ABC$ and $ADE$ have two pairs of congruent angles, the triangles are similar. Sides $AB$ and $AC$ in triangle $ABC$ correspond to sides $AD$ and $AE$, respectively, in triangle $ADE$. Corresponding sides in similar triangles are proportional. Therefore, $\\frac{AD}{AB}=\\frac{AE}{AC}$. It's given that $AC=3$ units and $CE=21$ units. Therefore, $AE=24$ units. It’s also given that $AB=\\sqrt{34}$ units. Substituting $3$ for $AC$, $24$ for $AE$, and $\\sqrt{34}$ for $AB$ in the equation $\\frac{AD}{AB}=\\frac{AE}{AC}$ yields $\\frac{AD}{\\sqrt{34}}=\\frac{24}{3}$, or $\\frac{AD}{\\sqrt{34}}=8$. Multiplying each side of this equation by $\\sqrt{34}$ yields $AD=8\\sqrt{34}$. By the Pythagorean theorem, if a right triangle has a hypotenuse with length $c$ and legs with lengths $a$ and $b$, then $a^{2}+b^{2}=c^{2}$. Since triangle $ADE$ is a right triangle, it follows that $AD$ represents the length of the hypotenuse, $c$, and $DE$ and $AE$ represent the lengths of the legs, $a$ and $b$. Substituting $24$ for $b$ and $8\\sqrt{34}$ for $c$ in the equation $a^{2}+b^{2}=c^{2}$ yields $a^{2}+{\\left(24\\right)}^{2}={\\left(8\\sqrt{34}\\right)}^{2}$, which is equivalent to $a^{2}+576=64\\left(34\\right)$, or $a^{2}+576=2,176$. Subtracting $576$ from both sides of this equation yields $a^{2}=1,600$. Taking the square root of both sides of this equation yields $a= \\pm 40$. Since $a$ represents a length, which must be positive, the value of $a$ is $40$. Therefore, $DE=40$. Since $DE$ and $AE$ represent the lengths of the legs of triangle $ADE$, it follows that $DE$ and $AE$ can be used to calculate the area, in square units, of the triangle as $\\frac{1}{2}\\left(40\\right)\\left(24\\right)$, or $480$. Therefore, the area, in square units, of triangle $ADE$ is $480$.",
@@ -38443,7 +38449,7 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Triangle upper A upper B upper C is labeled as follows:\n\nAngle upper A upper B upper C is a right angle.\nThe length of side upper A upper B is r.\n\nTriangle upper B upper D upper E is labeled as follows:\n\nAngle upper B upper D upper E is a right angle.\nThe length of side upper D upper E is s.\n\nThe 2 triangles partially overlap:\n\nSide upper A upper C of triangle upper A upper B upper C intersects side upper B upper E of triangle upper B upper D upper E.\nVertex upper C of triangle upper A upper B upper C lies on side upper B upper D of triangle upper B upper D upper E.\n\nA note indicates the figure is not drawn to scale.\n\nIn the figure shown, $\\triangle{}ABC$ is congruent to $\\triangle{}BDE$. If $r=54$ and $s=26$, what is the length of $CD$?",
+    "prompt": "In the figure shown, $\\triangle{}ABC$ is congruent to $\\triangle{}BDE$. If $r=54$ and $s=26$, what is the length of $CD$?",
     "options": [
       {
         "id": "A",
@@ -38478,7 +38484,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "One angle is a right angle.\nThe measures of the other 2 angles are as follows:\n\na°\n13°\n\nA note indicates the figure is not drawn to scale.\n\nIn the right triangle shown, what is the value of $a$?",
+    "prompt": "In the right triangle shown, what is the value of $a$?",
     "options": [
       {
         "id": "A",
@@ -38582,7 +38588,7 @@
     "difficulty": "Hard",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "A line segment is drawn from vertex upper Z to side upper X upper Y.\nThe angle at the intersection of the line segment and side upper X upper Y is a right angle.\nA note indicates the figure is not drawn to scale.\n\nIn the figure shown, the measure of angle $X$ is $54^\\circ$. The length of $XY$ is $26$ units and the length of $XZ$ is $19$ units. What is the area, in square units, of triangle $XYZ$?",
+    "prompt": "In the figure shown, the measure of angle $X$ is $54^\\circ$. The length of $XY$ is $26$ units and the length of $XZ$ is $19$ units. What is the area, in square units, of triangle $XYZ$?",
     "options": [
       {
         "id": "A",
@@ -38617,7 +38623,7 @@
     "difficulty": "Hard",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "Triangle upper A upper C upper D partially overlaps triangle upper E upper B upper D.\nPoint upper C is on line segment upper B upper D.\nPoint upper E is on line segment upper A upper D.\nThe measure of angle upper A upper E upper B is x°.\nA note indicates the figure is not drawn to scale.\n\nIn the figure, $AC=CD$. The measure of angle $EBC$ is $45^\\circ$, and the measure of angle $ACD$ is $104^\\circ$. What is the value of $x$?",
+    "prompt": "In the figure, $AC=CD$. The measure of angle $EBC$ is $45^\\circ$, and the measure of angle $ACD$ is $104^\\circ$. What is the value of $x$?",
     "options": [],
     "correctAnswer": "83",
     "rationale": "The correct answer is $83$. It's given that in the figure, $AC=CD$. Thus, triangle $ACD$ is an isosceles triangle and the measure of angle $CDA$ is equal to the measure of angle $CAD$. The sum of the measures of the interior angles of a triangle is $180^\\circ$. Thus, the sum of the measures of the interior angles of triangle $ACD$ is $180^\\circ$. It's given that the measure of angle $ACD$ is $104^\\circ$. It follows that the sum of the measures of angles $CDA$ and $CAD$ is $\\left(180-104\\right)^\\circ$, or $76^\\circ$. Since the measure of angle $CDA$ is equal to the measure of angle $CAD$, the measure of angle $CDA$ is half of $76^\\circ$, or $38^\\circ$. The sum of the measures of the interior angles of triangle $BDE$ is $180^\\circ$. It's given that the measure of angle $EBC$ is $45^\\circ$. Since the measure of angle $BDE$, which is the same angle as angle $CDA$, is $38^\\circ$, it follows that the measure of angle $DEB$ is $\\left(180-45-38\\right)^\\circ$, or $97^\\circ$. Since angle $DEB$ and angle $AEB$ form a straight line, the sum of the measures of these angles is $180^\\circ$. It's given in the figure that the measure of angle $AEB$ is $x^\\circ$. It follows that $97+x=180$. Subtracting $97$ from both sides of this equation yields $x=83$.",
@@ -38634,7 +38640,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The measure of angle upper P is 24°.The measure of angle upper Q is 132°.The measure of angle upper R is x°.A note indicates the figure is not drawn to scale.\n\nIn the triangle shown, $PQ=QR$. What is the value of $x$?",
+    "prompt": "In the triangle shown, $PQ=QR$. What is the value of $x$?",
     "options": [
       {
         "id": "A",
@@ -38801,7 +38807,7 @@
     "difficulty": "Hard",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Segment upper B upper E\nSegment upper A upper D\n\nSegment upper A upper D intersects segment upper B upper E at point upper C.\nThe intersections of the lines and line segments form triangle upper A upper B upper C and triangle upper D upper E upper C.\n\nTriangle upper A upper B upper C has a common vertex with triangle upper D upper E upper C. \nThe common vertex is upper C.\n\nNote: Figure not drawn to scale.\n\nIn the figure, segment $AD$ and segment $BE$ intersect at point $C$. Segment $AD$ is perpendicular to line $l$ at point $A$. Which of the following additional pieces of information is(are) sufficient to determine that triangle $ABC$ is congruent to triangle $DEC$?\n\nSegment $AD$ is perpendicular to line $m$ at point $D$.\n$AC=13$ and $DC=13$",
+    "prompt": "In the figure, segment $AD$ and segment $BE$ intersect at point $C$. Segment $AD$ is perpendicular to line $l$ at point $A$. Which of the following additional pieces of information is(are) sufficient to determine that triangle $ABC$ is congruent to triangle $DEC$?\n\nSegment $AD$ is perpendicular to line $m$ at point $D$.\n$AC=13$ and $DC=13$",
     "options": [
       {
         "id": "A",
@@ -38902,7 +38908,7 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "upper M\nupper N\nupper P\n\nPoints $M$, $N$, and $P$ lie on the circle shown. On this circle, minor arc $MN$ has a length of $39$ centimeters and major arc $MPN$ has a length of $195$ centimeters. What is the circumference, in centimeters, of the circle shown?",
+    "prompt": "Points $M$, $N$, and $P$ lie on the circle shown. On this circle, minor arc $MN$ has a length of $39$ centimeters and major arc $MPN$ has a length of $195$ centimeters. What is the circumference, in centimeters, of the circle shown?",
     "options": [
       {
         "id": "A",
@@ -38992,7 +38998,7 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Angle upper U is a right angle.The measure of angle upper V is 25°.The length of side upper U upper V is 76.Note: Figure not drawn to scale.\n\nTriangle $TUV$ is dilated by a scale factor of $\\frac{1}{2}$ to obtain triangle $T^{'}U^{'}V^{'}$ (not shown), where $T$ corresponds to $T^{'}$ and $U$ corresponds to $U^{'}$. What is the measure, in degrees, of angle $V^{'}$?",
+    "prompt": "Triangle $TUV$ is dilated by a scale factor of $\\frac{1}{2}$ to obtain triangle $T^{'}U^{'}V^{'}$ (not shown), where $T$ corresponds to $T^{'}$ and $U$ corresponds to $U^{'}$. What is the measure, in degrees, of angle $V^{'}$?",
     "options": [
       {
         "id": "A",
@@ -39061,7 +39067,7 @@
     "difficulty": "Hard",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The 2 lines are labeled script l and j.\n\nPoint upper A and point upper B are on line script l.\nPoint upper C and point upper D are on line j.\n\nLine segments upper A upper C, upper A upper D, and upper B upper D are drawn between line script l and line j.\n\nPoint upper E is on line segment upper A upper C.\nPoint upper G is on line segment upper B upper D.\n\nLine segment upper E upper G is drawn from line segment upper A upper C to line segment upper B upper D.\n\nLine segment upper E upper G and line segment upper A upper D intersect at point upper F.\n\nThe following 4 triangles are formed by the intersection of the 2 lines and 4 line segments:\n\nTriangle upper A upper C upper D\nTriangle upper A upper E upper F\nTriangle upper D upper B upper A\nTriangle upper D upper F upper G\n\n3 angles are labeled as follows:\n\nThe measure of angle upper A upper D upper C is x°.\nThe measure of angle upper A upper E upper F is x°.\nThe measure of 1 angle formed by the intersection of line script l and line segment upper A upper C and exterior to triangle upper A upper C upper D is x°.\n\nA note indicates the figure is not drawn to scale.\n\nIn the figure, $\\overline{EG}$ and $\\overline{AD}$ intersect at point $F$, and line $l$ is parallel to line $j$. If $EF=0.5CD$ and $FG=2.25CD$, which of the following must be true?\n\n$AB=2.25EF$\n$FG=0.5AB$\n$\\frac{EF}{FG}=\\frac{AF}{FD}$",
+    "prompt": "In the figure, $\\overline{EG}$ and $\\overline{AD}$ intersect at point $F$, and line $l$ is parallel to line $j$. If $EF=0.5CD$ and $FG=2.25CD$, which of the following must be true?\n\n$AB=2.25EF$\n$FG=0.5AB$\n$\\frac{EF}{FG}=\\frac{AF}{FD}$",
     "options": [
       {
         "id": "A",
@@ -39146,7 +39152,7 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Angle upper C is a right angle.The length of side upper A upper B is 171.The length of side upper B upper C is 35.A note indicates the figure is not drawn to scale.\n\nIn the right triangle shown, what is the value of $sinA$?",
+    "prompt": "In the right triangle shown, what is the value of $sinA$?",
     "options": [
       {
         "id": "A",
@@ -39281,7 +39287,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Line t passes through points upper A and upper C.\nThe measure of angle upper A upper C upper B is x°.\nThe measure of angle upper C upper A upper D is y°.\nA note indicates the figure is not drawn to scale.\n\nIn the figure shown, $\\overline{BC}$ is parallel to $\\overline{AD}$ and $x=22$. Line $t$ passes through points $A$ and $C$. What is the value of $y$?",
+    "prompt": "In the figure shown, $\\overline{BC}$ is parallel to $\\overline{AD}$ and $x=22$. Line $t$ passes through points $A$ and $C$. What is the value of $y$?",
     "options": [
       {
         "id": "A",
@@ -39384,7 +39390,7 @@
     "difficulty": "Hard",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Angle upper R is a right angle.\nThe length of side upper R upper S is 18.\nA note indicates the figure is not drawn to scale.\n\nIn triangle $QRS$ shown, $QR<RS$. Which expression represents the length of $\\overline{QS}$?",
+    "prompt": "In triangle $QRS$ shown, $QR<RS$. Which expression represents the length of $\\overline{QS}$?",
     "options": [
       {
         "id": "A",
@@ -39487,7 +39493,7 @@
     "difficulty": "Medium",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "One angle is a right angle. The measure of a second angle is x°. The lengths of the 2 sides adjacent to the right angle are as follows: 1515Note: Figure not drawn to scale. \n\nIn the triangle shown, what is the value of $x$?",
+    "prompt": "In the triangle shown, what is the value of $x$?",
     "options": [],
     "correctAnswer": "45",
     "rationale": "The correct answer is $45$. An isosceles right triangle has a right angle and two legs of equal length. In the triangle shown, one angle is a right angle and the two legs each have a length of $15$. Thus, the given triangle is an isosceles right triangle. In an isosceles right triangle, the measures of the two non-right angles are $45^\\circ$. It follows that the value of $x$ is $45$.",
@@ -39743,7 +39749,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Top right: w°\nBottom left: x°\n\nTop right: 40°\nBottom right: z°\nBottom left: y°\n\nA note indicates the figure is not drawn to scale.\n\nIn the figure shown, line $l$ intersects lines $j$ and $k$. Which additional piece of information is sufficient to prove that lines $j$ and $k$ are parallel?",
+    "prompt": "In the figure shown, line $l$ intersects lines $j$ and $k$. Which additional piece of information is sufficient to prove that lines $j$ and $k$ are parallel?",
     "options": [
       {
         "id": "A",
@@ -40134,7 +40140,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "At the intersection of the 2 lines, the angles are labeled clockwise from left as follows:\n\nLeft: 1\nTop: unlabeled\nRight: 2\nBottom: unlabeled\n\nA note indicates the figure is not drawn to scale.\n\nIn the figure, two lines intersect at a point. Angle $1$ and angle $2$ are vertical angles. The measure of angle $1$ is $72^\\circ$. What is the measure of angle $2$?",
+    "prompt": "In the figure, two lines intersect at a point. Angle $1$ and angle $2$ are vertical angles. The measure of angle $1$ is $72^\\circ$. What is the measure of angle $2$?",
     "options": [
       {
         "id": "A",
@@ -40253,7 +40259,7 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Top right: x°\n\nBottom right: y°\n\nA note indicates the figure is not drawn to scale.\n\nIn the figure shown, lines $r$ and $s$ are parallel, and line $m$ intersects both lines. If $y<65$, which of the following must be true?",
+    "prompt": "In the figure shown, lines $r$ and $s$ are parallel, and line $m$ intersects both lines. If $y<65$, which of the following must be true?",
     "options": [
       {
         "id": "A",
@@ -40288,7 +40294,7 @@
     "difficulty": "Medium",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "One angle is a right angle.\nThe lengths of the 2 sides adjacent to the right angle are as follows:\n\n3\n5\n\nA note indicates the figure is not drawn to scale.\n\nThe figure shows the lengths, in inches, of two sides of a right triangle. What is the area of the triangle, in square inches?",
+    "prompt": "The figure shows the lengths, in inches, of two sides of a right triangle. What is the area of the triangle, in square inches?",
     "options": [],
     "correctAnswer": "15/2",
     "rationale": "The correct answer is $\\frac{15}{2}$. The area, $A$, of a triangle is given by the formula $A=\\frac{1}{2}bh$, where $b$ is the length of the base of the triangle and $h$ is the height of the triangle. In the right triangle shown, the length of the base of the triangle is $5$ inches, and the height is $3$ inches. It follows that $b=5$ and $h=3$. Substituting $5$ for $b$ and $3$ for $h$ in the formula $A=\\frac{1}{2}bh$ yields $A=\\frac{1}{2}\\left(5\\right)\\left(3\\right)$, which is equivalent to $A=\\frac{1}{2}\\left(15\\right)$, or $A=\\frac{15}{2}$. Therefore, the area of the triangle, in square inches, is $\\frac{15}{2}$. Note that 15/2 and 7.5 are examples of ways to enter a correct answer.",
@@ -40376,7 +40382,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "One angle is a right angle.\nThe measure of a second angle is x°.\nThe length of the side opposite the right angle is 73.\nThe length of the side opposite the angle with measure x° is 63.\nA note indicates the figure is not drawn to scale.\n\nIn the right triangle shown, what is the value of $sinx^\\circ$?",
+    "prompt": "In the right triangle shown, what is the value of $sinx^\\circ$?",
     "options": [
       {
         "id": "A",
@@ -40411,7 +40417,7 @@
     "difficulty": "Hard",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "Angle upper S is a right angle.\nThe length of side upper R upper T is 53.\nA note indicates the figure is not drawn to scale.\n\nIn the triangle shown, $RS=\\sqrt{105}$. What is the value of $sinR$?",
+    "prompt": "In the triangle shown, $RS=\\sqrt{105}$. What is the value of $sinR$?",
     "options": [],
     "correctAnswer": "52/53",
     "rationale": "The correct answer is $\\frac{52}{53}$. In a right triangle, the square of the length of the hypotenuse is equal to the sum of the squares of the lengths of the two legs. The length of the hypotenuse of the right triangle shown is $53$. It’s given that $RS=\\sqrt{105}$. Therefore, the length of one of the legs of the triangle shown is $\\sqrt{105}$. Let $x$ represent $TS$, the length of the other leg of the triangle shown. Therefore, ${53}^{2}={(\\sqrt{105})}^{2}+x^{2}$, or $2,809=105+x^{2}$. Subtracting $105$ from both sides of this equation yields $2,704=x^{2}$. Taking the positive square root of both sides of this equation yields $52=x$. Therefore, $TS$, the length of the other leg of the triangle shown, is $52$. The sine of an acute angle in a right triangle is defined as the ratio of the length of the leg opposite the angle to the length of the hypotenuse. The length of the leg opposite angle $R$ is $52$, and the length of the hypotenuse is $53$. Therefore, the value of $sinR$ is $\\frac{52}{53}$. Note that 52/53 or .9811 are examples of ways to enter a correct answer.",
@@ -40431,7 +40437,7 @@
     "difficulty": "Medium",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "One angle is a right angle. The measure of a second angle is x°. The lengths of the 2 sides adjacent to the right angle are as follows: 3232Note: Figure not drawn to scale. \n\nIn the triangle shown, what is the value of $x$?",
+    "prompt": "In the triangle shown, what is the value of $x$?",
     "options": [],
     "correctAnswer": "45",
     "rationale": "The correct answer is $45$. An isosceles right triangle has a right angle and two legs of equal length. In the triangle shown, one angle is a right angle and the two legs each have a length of $32$. Thus, the given triangle is an isosceles right triangle. In an isosceles right triangle, the measures of the two non-right angles are $45^\\circ$. It follows that the value of $x$ is $45$.",
@@ -40482,7 +40488,7 @@
     "difficulty": "Hard",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Triangle upper L upper M upper R has a common vertex with triangle upper P upper Q upper R.\nThe common vertex is upper R.\nA note indicates the figure is not drawn to scale.\n\nIn the figure, $\\overline{LQ}$ intersects $\\overline{MP}$ at point $R$, and $\\overline{LM}$ is parallel to $\\overline{PQ}$. The lengths of $\\overline{MR}$, $\\overline{LR}$, and $\\overline{RP}$ are $6$, $7$, and $11$, respectively. What is the length of $\\overline{LQ}$?",
+    "prompt": "In the figure, $\\overline{LQ}$ intersects $\\overline{MP}$ at point $R$, and $\\overline{LM}$ is parallel to $\\overline{PQ}$. The lengths of $\\overline{MR}$, $\\overline{LR}$, and $\\overline{RP}$ are $6$, $7$, and $11$, respectively. What is the length of $\\overline{LQ}$?",
     "options": [
       {
         "id": "A",
@@ -40507,7 +40513,8 @@
     ],
     "correctAnswer": "D",
     "rationale": "Choice D is correct. The figure shows that angle $MRL$ and angle $PRQ$ are vertical angles. Since vertical angles are congruent, angle $MRL$ and angle $PRQ$ are congruent. It’s given that $\\overline{LM}$ is parallel to $\\overline{PQ}$. The figure also shows that $\\overline{LQ}$ intersects $\\overline{LM}$ and $\\overline{PQ}$. If two parallel segments are intersected by a third segment, alternate interior angles are congruent. Thus, alternate interior angles $MLR$ and $PQR$ are congruent. Since triangles $LMR$ and $PQR$ have two pairs of congruent angles, the triangles are similar. Sides $LR$ and $MR$ in triangle $LMR$ correspond to sides $RQ$ and $RP$, respectively, in triangle $PQR$. Since the lengths of corresponding sides in similar triangles are proportional, it follows that $\\frac{RQ}{LR}=\\frac{RP}{MR}$. It's given that the lengths of $\\overline{MR}$, $\\overline{LR}$, and $\\overline{RP}$ are $6$, $7$, and $11$, respectively. Substituting $6$ for $MR$, $7$ for $LR$, and $11$ for $RP$ in the equation $\\frac{RQ}{LR}=\\frac{RP}{MR}$ yields $\\frac{RQ}{7}=\\frac{11}{6}$. Multiplying each side of this equation by $7$ yields $RQ=\\left(\\frac{11}{6}\\right)\\left(7\\right)$, or $RQ=\\frac{77}{6}$. It's given that $\\overline{LQ}$ intersects $\\overline{MP}$ at point $R$, so $LQ=LR+RQ$. Substituting $7$ for $LR$ and $\\frac{77}{6}$ for $RQ$ in this equation yields $LQ=7+\\frac{77}{6}$, or $LQ=\\frac{119}{6}$. Therefore, the length of $\\overline{LQ}$ is $\\frac{119}{6}$.\n\nChoice A is incorrect and may result from conceptual or calculation errors.\n\nChoice B is incorrect. This is the length of $\\overline{RQ}$, not $\\overline{LQ}$.\n\nChoice C is incorrect and may result from conceptual or calculation errors.",
-    "imageUrl": "/question-images/math/adae6543.svg"
+    "imageUrl": "/question-images/math/adae6543.svg",
+    "figureSvg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 460 210\" width=\"100%\" height=\"auto\" class=\"w-full max-w-[460px] select-none\" style=\"overflow: visible;\">\n  <!-- Triangles LMR and PQR sharing vertex R with LM || PQ -->\n  <g stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"none\" class=\"text-zinc-900 dark:text-zinc-100\">\n    <line x1=\"70\" y1=\"35\" x2=\"70\" y2=\"155\" />\n    <line x1=\"390\" y1=\"20\" x2=\"390\" y2=\"170\" />\n    <line x1=\"70\" y1=\"35\" x2=\"390\" y2=\"170\" />\n    <line x1=\"70\" y1=\"155\" x2=\"390\" y2=\"20\" />\n  </g>\n  <g font-family=\"system-ui, -apple-system, sans-serif\" font-weight=\"600\" font-size=\"15\" fill=\"currentColor\" class=\"text-zinc-900 dark:text-zinc-100 select-none\">\n    <text x=\"52\" y=\"32\" text-anchor=\"middle\">L</text>\n    <text x=\"52\" y=\"168\" text-anchor=\"middle\">M</text>\n    <text x=\"200\" y=\"85\" text-anchor=\"middle\">R</text>\n    <text x=\"408\" y=\"18\" text-anchor=\"middle\">P</text>\n    <text x=\"408\" y=\"182\" text-anchor=\"middle\">Q</text>\n  </g>\n  <text x=\"230\" y=\"196\" text-anchor=\"middle\" font-family=\"system-ui, -apple-system, sans-serif\" font-size=\"11\" fill=\"currentColor\" class=\"text-zinc-500 dark:text-zinc-400 select-none\" letter-spacing=\"0.02em\">\n    Note: Figure not drawn to scale.\n  </text>\n</svg>"
   },
   {
     "id": "ae041e52",
@@ -40619,7 +40626,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Top right: x°\n\nTop left: 26°\n\nA note indicates the figure is not drawn to scale.\n\nIn the figure shown, line $m$ is parallel to line $n$. What is the value of $x$?",
+    "prompt": "In the figure shown, line $m$ is parallel to line $n$. What is the value of $x$?",
     "options": [
       {
         "id": "A",
@@ -40688,7 +40695,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "One angle is a right angle.\nThe length of the side opposite the right angle is 19.\nThe lengths of the other 2 sides are as follows:\n\nb\n4\n\nA note indicates the figure is not drawn to scale.\n\nWhich equation shows the relationship between the side lengths of the given triangle?",
+    "prompt": "Which equation shows the relationship between the side lengths of the given triangle?",
     "options": [
       {
         "id": "A",
@@ -40824,7 +40831,7 @@
     "difficulty": "Hard",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Triangle upper L upper M upper R has a common vertex with triangle upper P upper Q upper R.\nThe common vertex is upper R.\nA note indicates the figure is not drawn to scale.\n\nIn the figure, $\\overline{LQ}$ intersects $\\overline{MP}$ at point $R$, and $\\overline{LM}$ is parallel to $\\overline{PQ}$. The lengths of $\\overline{MR}$ and $\\overline{RP}$ are $8$ and $14$ units, respectively. The area of $\\triangle{}LMR$ is $36$ square units. What is the area of $\\triangle{}PQR$, in square units?",
+    "prompt": "In the figure, $\\overline{LQ}$ intersects $\\overline{MP}$ at point $R$, and $\\overline{LM}$ is parallel to $\\overline{PQ}$. The lengths of $\\overline{MR}$ and $\\overline{RP}$ are $8$ and $14$ units, respectively. The area of $\\triangle{}LMR$ is $36$ square units. What is the area of $\\triangle{}PQR$, in square units?",
     "options": [
       {
         "id": "A",
@@ -40849,7 +40856,8 @@
     ],
     "correctAnswer": "D",
     "rationale": "Choice D is correct. The figure shows that $\\angle MRL$ and $\\angle PRQ$ are vertical angles. Since vertical angles are congruent, $\\angle MRL$ and $\\angle PRQ$ are congruent. It’s given that $\\overline{LM}$ is parallel to $\\overline{PQ}$. The figure also shows that $\\overline{LQ}$ intersects $\\overline{LM}$ and $\\overline{PQ}$. If two parallel segments are intersected by a third segment, alternate interior angles are congruent. Thus, $\\angle MLR$ and $\\angle PQR$ are congruent. Since $\\triangle{}LMR$ and $\\triangle{}PQR$ have two pairs of congruent angles, the triangles are similar, where $\\overline{MR}$ in $\\triangle{}LMR$ corresponds to $\\overline{PR}$ in $\\triangle{}PQR$. Since the areas of similar triangles are proportional to the squares of the lengths of corresponding sides, it follows that $\\frac{\\text{area of}\\triangle{}PQR}{\\text{area of}\\triangle{}LMR}={(\\frac{RP}{MR})}^{2}$. It’s given that the lengths of $\\overline{MR}$ and $\\overline{RP}$ are $8$ and $14$ units, respectively, and the area of $\\triangle{}LMR$ is $36$ square units. Substituting $14$ for $RP$, $8$ for $MR$, and $36$ for $\\text{area of}\\triangle{}LMR$ in the equation $\\frac{\\text{area of}\\triangle{}PQR}{\\text{area of}\\triangle{}LMR}={(\\frac{RP}{MR})}^{2}$ yields $\\frac{\\text{area of}\\triangle{}PQR}{36}={(\\frac{14}{8})}^{2}$, which is equivalent to $\\frac{\\text{area of}\\triangle{}PQR}{36}={(\\frac{7}{4})}^{2}$, or $\\frac{\\text{area of}\\triangle{}PQR}{36}=\\frac{49}{16}$. Multiplying each side of this equation by $36$ yields $\\text{area of}\\triangle{}PQR=36(\\frac{49}{16})$, or $\\text{area of}\\triangle{}PQR=\\frac{441}{4}$. Therefore, the area of $\\triangle{}PQR$ is $\\frac{441}{4}$ square units.\n\nChoice A is incorrect. This is the result of multiplying $36$ by ${(\\frac{8}{14})}^{2}$ instead of by ${(\\frac{14}{8})}^{2}$.\n\nChoice B is incorrect. This is the result of multiplying $36$ by $\\frac{8}{14}$ instead of by ${(\\frac{14}{8})}^{2}$.\n\nChoice C is incorrect. This is the result of multiplying $36$ by $\\frac{14}{8}$ instead of by ${(\\frac{14}{8})}^{2}$.",
-    "imageUrl": "/question-images/math/b5d62bba.svg"
+    "imageUrl": "/question-images/math/b5d62bba.svg",
+    "figureSvg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 460 210\" width=\"100%\" height=\"auto\" class=\"w-full max-w-[460px] select-none\" style=\"overflow: visible;\">\n  <!-- Triangles LMR and PQR sharing vertex R with LM || PQ -->\n  <g stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"none\" class=\"text-zinc-900 dark:text-zinc-100\">\n    <line x1=\"70\" y1=\"35\" x2=\"70\" y2=\"155\" />\n    <line x1=\"390\" y1=\"20\" x2=\"390\" y2=\"170\" />\n    <line x1=\"70\" y1=\"35\" x2=\"390\" y2=\"170\" />\n    <line x1=\"70\" y1=\"155\" x2=\"390\" y2=\"20\" />\n  </g>\n  <g font-family=\"system-ui, -apple-system, sans-serif\" font-weight=\"600\" font-size=\"15\" fill=\"currentColor\" class=\"text-zinc-900 dark:text-zinc-100 select-none\">\n    <text x=\"52\" y=\"32\" text-anchor=\"middle\">L</text>\n    <text x=\"52\" y=\"168\" text-anchor=\"middle\">M</text>\n    <text x=\"200\" y=\"85\" text-anchor=\"middle\">R</text>\n    <text x=\"408\" y=\"18\" text-anchor=\"middle\">P</text>\n    <text x=\"408\" y=\"182\" text-anchor=\"middle\">Q</text>\n  </g>\n  <text x=\"230\" y=\"196\" text-anchor=\"middle\" font-family=\"system-ui, -apple-system, sans-serif\" font-size=\"11\" fill=\"currentColor\" class=\"text-zinc-500 dark:text-zinc-400 select-none\" letter-spacing=\"0.02em\">\n    Note: Figure not drawn to scale.\n  </text>\n</svg>"
   },
   {
     "id": "b8a225ff",
@@ -40907,7 +40915,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Right triangle upper J upper K upper L is labeled as follows:\n\nAngle upper L is a right angle.\n\nRight triangle upper R upper S upper T is labeled as follows:\n\nAngle upper T is a right angle.\n\nA note indicates the figures are not drawn to scale.\n\nIn the figure shown, triangle $JKL$ is similar to triangle $RST$, where $J$ corresponds to $R$ and $K$ corresponds to $S$. The length of $\\overline{JK}$ is $15$, and the perimeter of triangle $JKL$ is $36$. The length of $\\overline{RS}$ is $135$. What is the perimeter of triangle $RST$?",
+    "prompt": "In the figure shown, triangle $JKL$ is similar to triangle $RST$, where $J$ corresponds to $R$ and $K$ corresponds to $S$. The length of $\\overline{JK}$ is $15$, and the perimeter of triangle $JKL$ is $36$. The length of $\\overline{RS}$ is $135$. What is the perimeter of triangle $RST$?",
     "options": [
       {
         "id": "A",
@@ -41094,7 +41102,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Bottom left: 134°\n\nBottom left: w°\n\nA note indicates the figure is not drawn to scale.\n\nIn the figure, line $m$ is parallel to line $n$. What is the value of $w$?",
+    "prompt": "In the figure, line $m$ is parallel to line $n$. What is the value of $w$?",
     "options": [
       {
         "id": "A",
@@ -41197,7 +41205,7 @@
     "difficulty": "Hard",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "Angle upper B upper A upper C is a right angle.\nPoint upper D is on side upper B upper C.\nLine segment upper A upper D is drawn from vertex upper A to side upper B upper C.\nAngle upper A upper D upper C is a right angle.\nA note indicates the figure is not drawn to scale.\n\nIn the figure, $\\overline{AD}$ and $\\overline{BC}$ intersect at point $D$. If the length of $\\overline{BD}$ is $5$ and the tangent of angle $CAD$ is $1.3$, what is the length of $\\overline{AD}$?",
+    "prompt": "In the figure, $\\overline{AD}$ and $\\overline{BC}$ intersect at point $D$. If the length of $\\overline{BD}$ is $5$ and the tangent of angle $CAD$ is $1.3$, what is the length of $\\overline{AD}$?",
     "options": [],
     "correctAnswer": "13/2",
     "rationale": "The correct answer is $6.5$. The figure shows that $\\triangle{}BAC$ is a right triangle. In the figure, $\\overline{AD}$ is perpendicular to $\\overline{BC}$, which forms two additional right triangles: $\\triangle{}BDA$ and $\\triangle{}ADC$. If two pairs of corresponding angles in two triangles are congruent, then the triangles are similar. $\\triangle{}BDA$ shares angle $B$ with $\\triangle{}BAC$ and $\\triangle{}ADC$ shares angle $C$ with $\\triangle{}BAC$. Therefore, the figure contains three similar right triangles: $\\triangle{}BAC$, $\\triangle{}BDA$, and $\\triangle{}ADC$. In similar triangles, the tangents of corresponding angles are equivalent. It's given that the tangent of angle $CAD$ is $1.3$. Since angle $CAD$ in $\\triangle{}ADC$ corresponds to angle $ABD$ in $\\triangle{}BDA$, it follows that the tangent of angle $ABD$ is also $1.3$. The tangent of an acute angle in a right triangle is equal to the length of the leg opposite the angle divided by the length of the leg adjacent to the angle. Therefore, $tanABD=\\frac{AD}{BD}$. It's given that the length of $\\overline{BD}$ is $5$. Substituting $5$ for $BD$ and $1.3$ for $tanABD$ in the equation $tanABD=\\frac{AD}{BD}$ yields $1.3=\\frac{AD}{5}$. Multiplying both sides of this equation by $5$ yields $6.5=AD$. Therefore, the length of $\\overline{AD}$ is $6.5$. Note that 6.5 and 13/2 are examples of ways to enter a correct answer.",
@@ -41440,7 +41448,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The side lengths are labeled as follows:\n\na\nb\nc\n\nThe angle opposite the side labeled c is a right angle.\nA note indicates the figure is not drawn to scale.\n\nFor the right triangle shown, $a=4$ and $b=5$. Which expression represents the value of $c$?",
+    "prompt": "For the right triangle shown, $a=4$ and $b=5$. Which expression represents the value of $c$?",
     "options": [
       {
         "id": "A",
@@ -41509,7 +41517,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "One angle is a right angle.\nThe lengths of the sides adjacent to the right angle are as follows:49\nA note indicates the figure is not drawn to scale.\n\nThe figure shows the lengths, in units, of two sides of a triangle. What is the area, in square units, of the triangle?",
+    "prompt": "The figure shows the lengths, in units, of two sides of a triangle. What is the area, in square units, of the triangle?",
     "options": [
       {
         "id": "A",
@@ -41612,7 +41620,7 @@
     "difficulty": "Easy",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "Top right: x°\n\nTop left: 110°\n\nA note indicates the figure is not drawn to scale.\n\nIn the figure shown, line $c$ intersects parallel lines $s$ and $t$. What is the value of $x$?",
+    "prompt": "In the figure shown, line $c$ intersects parallel lines $s$ and $t$. What is the value of $x$?",
     "options": [],
     "correctAnswer": "70",
     "rationale": "The correct answer is $70$. Based on the figure, the angle with measure $110^\\circ$ and the angle vertical to the angle with measure $x^\\circ$ are same side interior angles. Since vertical angles are congruent, the angle vertical to the angle with measure $x^\\circ$ also has measure $x^\\circ$. It’s given that lines $s$ and $t$ are parallel. Therefore, same side interior angles between lines $s$ and $t$ are supplementary. It follows that $x+110=180$. Subtracting $110$ from both sides of this equation yields $x=70$.",
@@ -41835,7 +41843,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Right triangle upper P upper Q upper R is labeled as follows:\n\nAngle upper R is a right angle.\n\nRight triangle upper S upper T upper U is labeled as follows:\n\nAngle upper U is a right angle.\n\nA note indicates the figures are not drawn to scale.\n\nRight triangles $PQR$ and $STU$ are similar, where $P$ corresponds to $S$. If the measure of angle $Q$ is $18^\\circ$, what is the measure of angle $S$?",
+    "prompt": "Right triangles $PQR$ and $STU$ are similar, where $P$ corresponds to $S$. If the measure of angle $Q$ is $18^\\circ$, what is the measure of angle $S$?",
     "options": [
       {
         "id": "A",
@@ -41904,7 +41912,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "At the intersection of the 2 lines, the angles are labeled clockwise from left as follows:\n\nLeft: r°\nTop: unlabeled\nRight: s°\nBottom: unlabeled\n\nA note indicates the figure is not drawn to scale.\n\nIn the figure, two lines intersect at a point. If $r=53$, what is the value of $s$?",
+    "prompt": "In the figure, two lines intersect at a point. If $r=53$, what is the value of $s$?",
     "options": [
       {
         "id": "A",
@@ -41973,7 +41981,7 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "One angle is a right angle.\nThe length of the side opposite the right angle is 21.\nThe length of one side adjacent to the right angle is 6.\nThe length of the other side adjacent to the right angle is a.\nA note indicates the figure is not drawn to scale.\n\nFor the triangle shown, which expression represents the value of $a$?",
+    "prompt": "For the triangle shown, which expression represents the value of $a$?",
     "options": [
       {
         "id": "A",
@@ -42008,7 +42016,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "One angle is a right angle. The length of the side opposite the right angle is c. The lengths of the other 2 sides are as follows:312Note: Figure not drawn to scale. \n\nWhich equation shows the relationship between the side lengths of the triangle shown?",
+    "prompt": "Which equation shows the relationship between the side lengths of the triangle shown?",
     "options": [
       {
         "id": "A",
@@ -42111,7 +42119,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "The 2 triangles are oriented such that upper A corresponds to upper X, upper B corresponds to upper Y, and upper C corresponds to upper Z.\nTriangle upper A upper B upper C is labeled as follows:\n\nThe measure of angle upper A is 60°.\nThe length of side upper A upper C is d.\n\nA note indicates the figures are not drawn to scale.\n\nFor the triangles shown, triangle $ABC$ is dilated by a scale factor of $3$ to obtain triangle $XYZ$, where $d=16$. What is the measure, in degrees, of angle $X$?",
+    "prompt": "For the triangles shown, triangle $ABC$ is dilated by a scale factor of $3$ to obtain triangle $XYZ$, where $d=16$. What is the measure, in degrees, of angle $X$?",
     "options": [
       {
         "id": "A",
@@ -42146,7 +42154,7 @@
     "difficulty": "Hard",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "Upper P\nUpper Q\nUpper R\nUpper S\nUpper T\nUpper V\n\nTriangle upper Q upper X upper S\nTriangle upper R upper U upper T\n\nLine segments upper R upper U and upper S upper X intersect at point upper W.\nA note indicates the figure is not drawn to scale.\n\nIn the figure shown, points $Q$, $R$, $S$, and $T$ lie on line segment $PV$, and line segment $RU$ intersects line segment $SX$ at point $W$. The measure of $\\angle SQX$ is $48^\\circ$, the measure of $\\angle SXQ$ is $86^\\circ$, the measure of $\\angle SWU$ is $85^\\circ$, and the measure of $\\angle VTU$ is $162^\\circ$. What is the measure, in degrees, of $\\angle TUR$?",
+    "prompt": "In the figure shown, points $Q$, $R$, $S$, and $T$ lie on line segment $PV$, and line segment $RU$ intersects line segment $SX$ at point $W$. The measure of $\\angle SQX$ is $48^\\circ$, the measure of $\\angle SXQ$ is $86^\\circ$, the measure of $\\angle SWU$ is $85^\\circ$, and the measure of $\\angle VTU$ is $162^\\circ$. What is the measure, in degrees, of $\\angle TUR$?",
     "options": [],
     "correctAnswer": "123",
     "rationale": "The correct answer is $123$. The triangle angle sum theorem states that the sum of the measures of the interior angles of a triangle is $180$ degrees. It's given that the measure of $\\angle SQX$ is $48^\\circ$ and the measure of $\\angle SXQ$ is $86^\\circ$. Since points $S$, $Q$, and $X$ form a triangle, it follows from the triangle angle sum theorem that the measure, in degrees, of $\\angle QSX$ is $180-48-86$, or $46$. It's also given that the measure of $\\angle SWU$ is $85^\\circ$. Since $\\angle SWU$ and $\\angle SWR$ are supplementary angles, the sum of their measures is $180$ degrees. It follows that the measure, in degrees, of $\\angle SWR$ is $180-85$, or $95$. Since points $R$, $S$, and $W$ form a triangle, and $\\angle RSW$ is the same angle as $\\angle QSX$, it follows from the triangle angle sum theorem that the measure, in degrees, of $\\angle WRS$ is $180-46-95$, or $39$. It's given that the measure of $\\angle VTU$ is $162^\\circ$. Since $\\angle VTU$ and $\\angle STU$ are supplementary angles, the sum of their measures is $180$ degrees. It follows that the measure, in degrees, of $\\angle STU$ is $180-162$, or $18$. Since points $R$, $T$, and $U$ form a triangle, and $\\angle URT$ is the same angle as $\\angle WRS$, it follows from the triangle angle sum theorem that the measure, in degrees, of $\\angle TUR$ is $180-39-18$, or $123$.",
@@ -42383,7 +42391,7 @@
     "difficulty": "Easy",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "One angle is a right angle.\nThe lengths of the sides adjacent to the right angle are as follows:\n\n3\n7\n\nA note indicates the figure is not drawn to scale.\n\nThe lengths of the legs of a right triangle are shown. Which of the following is closest to the length of the triangle's hypotenuse?",
+    "prompt": "The lengths of the legs of a right triangle are shown. Which of the following is closest to the length of the triangle's hypotenuse?",
     "options": [
       {
         "id": "A",
@@ -42520,7 +42528,7 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Rectangle upper A upper B upper C upper D is labeled as follows:\n\nThe length of side upper A upper B is 12 inches.\n\nRectangle upper Q upper R upper S upper T is labeled as follows:\n\nThe length of side upper Q upper R is 5 inches.\nThe length of side upper Q upper T is 10 inches.\n\nA note indicates the figure is not drawn to scale.\n\nRectangles $ABCD$ and $QRST$ shown are similar, where $A$, $B$, $C$, and $D$ correspond to $Q$, $R$, $S$, and $T$, respectively. What is the length, in inches $\\left(\\text{in}\\right)$, of $\\overline{AD}$?",
+    "prompt": "Rectangles $ABCD$ and $QRST$ shown are similar, where $A$, $B$, $C$, and $D$ correspond to $Q$, $R$, $S$, and $T$, respectively. What is the length, in inches $\\left(\\text{in}\\right)$, of $\\overline{AD}$?",
     "options": [
       {
         "id": "A",
@@ -42607,7 +42615,7 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "Top right: w°\nBottom right: x°\n\nTop right: y°\nBottom right: z°\n\nA note indicates the figure is not drawn to scale.\n\nIn the figure shown, line $k$ intersects lines $r$ and $s$. If $w=147$, which additional piece of information is sufficient to prove that lines $r$ and $s$ are parallel?",
+    "prompt": "In the figure shown, line $k$ intersects lines $r$ and $s$. If $w=147$, which additional piece of information is sufficient to prove that lines $r$ and $s$ are parallel?",
     "options": [
       {
         "id": "A",
@@ -42676,7 +42684,7 @@
     "difficulty": "Medium",
     "questionType": "spr",
     "passage": "Student-produced response directions\n• If you find more than one correct solution, enter only one.\n• You can enter up to 5 characters for a positive result and up to 6 characters (including the negative sign) for a negative result.\n• If your answer is a fraction that doesn't fit in the provided space, enter the decimal equivalent.\n• If your answer is a decimal that doesn't fit in the provided space, truncate or round it at the fourth digit.\n• If your answer is a mixed number (such as 3 1/2), enter it as an improper fraction (7/2) or its decimal equivalent (3.5).\n• Don't enter symbols such as a percent sign, comma, or dollar sign.",
-    "prompt": "Angle upper Y is a right angle.The length of side upper X upper Y is 75.The length of side upper Y upper Z is 560.The length of side upper Z upper X is 565. A note indicates the figure is not drawn to scale. \n\nIn triangle $XYZ$, $cosZ=\\frac{560}{c}$. What is the value of $c$?",
+    "prompt": "In triangle $XYZ$, $cosZ=\\frac{560}{c}$. What is the value of $c$?",
     "options": [],
     "correctAnswer": "565",
     "rationale": "The correct answer is $565$. In triangle $XYZ$, angle $Y$ is a right angle. Therefore, triangle $XYZ$ is a right triangle. The cosine of an acute angle in a right triangle is the ratio of the length of the side adjacent to that angle to the length of the hypotenuse. In right triangle $XYZ$, side $YZ$ is the side adjacent to angle $Z$ and side $XZ$ is the hypotenuse. It’s given that the length of side $YZ$ is $560$ and the length of side $XZ$ is $565$. Therefore, $cosZ=\\frac{560}{565}$. It's also given that $cosZ=\\frac{560}{c}$. It follows that $\\frac{560}{c}=\\frac{560}{565}$. Therefore, $c=565$.",
@@ -43266,7 +43274,7 @@
     "difficulty": "Medium",
     "questionType": "mcq",
     "passage": "",
-    "prompt": "A diagonal is drawn from vertex upper D to vertex upper F.\nThe measure of angle upper E upper D upper F is x°.\nThe measure of angle upper E upper F upper D is y°.\nA note indicates the figure is not drawn to scale.\n\nIn the figure shown, $CD=EF$ and $FC=DE$. If $x=65$ and $y=30$, what is the measure of $\\angle CDE$?",
+    "prompt": "In the figure shown, $CD=EF$ and $FC=DE$. If $x=65$ and $y=30$, what is the measure of $\\angle CDE$?",
     "options": [
       {
         "id": "A",
@@ -43291,7 +43299,8 @@
     ],
     "correctAnswer": "C",
     "rationale": "Choice C is correct. It’s given that $CD=EF$ and $FC=DE$, and the figure shows that $\\overline{DF}$ is a side of both $\\triangle{}CDF$ and $\\triangle{}EFD$. Since $\\triangle{}CDF$ and $\\triangle{}EFD$ have three pairs of congruent sides, the triangles are congruent, where $\\angle CFD$ corresponds to $\\angle EDF$ and $\\angle CDF$ corresponds to $\\angle EFD$. It’s given that the measure of $\\angle EDF$ is $65^\\circ$ and the measure of $\\angle EFD$ is $30^\\circ$. Since corresponding angles of congruent triangles are congruent, $\\angle CFD$ is congruent to $\\angle EDF$ and $\\angle CDF$ is congruent to $\\angle EFD$. Therefore, the measure of $\\angle CFD$ is $65^\\circ$ and the measure of $\\angle CDF$ is $30^\\circ$. Since $\\angle CDE$ is made up of $\\angle CDF$ and $\\angle EDF$, it follows that the measure of $\\angle CDE$ is equal to the sum of the measures of $\\angle CDF$ and $\\angle EDF$. Therefore, the measure of $\\angle CDE$ is equal to $(30+65)^\\circ$, or $95^\\circ$.\n\nChoice A is incorrect. This is the measure of $\\angle CDF$, not the measure of $\\angle CDE$.\n\nChoice B is incorrect. This is the measure of $\\angle CFD$, not the measure of $\\angle CDE$.\n\nChoice D is incorrect. This is the sum of the measures of $\\angle CFD$ and $\\angle EDF$, not $\\angle CDF$ and $\\angle EDF$.",
-    "imageUrl": "/question-images/math/ffc39dc5.svg"
+    "imageUrl": "/question-images/math/ffc39dc5.svg",
+    "figureSvg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 460 210\" width=\"100%\" height=\"auto\" class=\"w-full max-w-[460px] select-none\" style=\"overflow: visible;\">\n  <!-- Parallelogram CDEF with diagonal DF -->\n  <g stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"none\" class=\"text-zinc-900 dark:text-zinc-100\">\n    <polygon points=\"120,40 380,40 320,150 60,150\" />\n    <line x1=\"60\" y1=\"150\" x2=\"380\" y2=\"40\" />\n    <path d=\"M 82,143 A 24,24 0 0,0 80,126\" stroke-width=\"1.5\" />\n    <path d=\"M 358,47 A 24,24 0 0,0 360,64\" stroke-width=\"1.5\" />\n  </g>\n  <g font-family=\"system-ui, -apple-system, sans-serif\" font-weight=\"600\" font-size=\"15\" fill=\"currentColor\" class=\"text-zinc-900 dark:text-zinc-100 select-none\">\n    <text x=\"110\" y=\"28\" text-anchor=\"middle\">C</text>\n    <text x=\"390\" y=\"28\" text-anchor=\"middle\">F</text>\n    <text x=\"45\" y=\"162\" text-anchor=\"middle\">D</text>\n    <text x=\"330\" y=\"168\" text-anchor=\"middle\">E</text>\n    <text x=\"96\" y=\"132\" font-size=\"13\" font-style=\"italic\" font-weight=\"500\">x°</text>\n    <text x=\"345\" y=\"68\" font-size=\"13\" font-style=\"italic\" font-weight=\"500\">y°</text>\n  </g>\n  <text x=\"230\" y=\"196\" text-anchor=\"middle\" font-family=\"system-ui, -apple-system, sans-serif\" font-size=\"11\" fill=\"currentColor\" class=\"text-zinc-500 dark:text-zinc-400 select-none\" letter-spacing=\"0.02em\">\n    Note: Figure not drawn to scale.\n  </text>\n</svg>"
   },
   {
     "id": "ffe862a3",

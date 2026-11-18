@@ -1212,8 +1212,8 @@ export const App: React.FC = () => {
                 </>
               ) : (
                 /* Collapsed Full Width View */
-                <div className="relative w-full h-full bg-white dark:bg-[#090A0F] overflow-y-auto flex flex-col">
-                  {!isMathSingleColumn && (
+                <div className={`relative w-full ${isTwoPane ? 'h-full overflow-y-auto' : 'flex-1 overflow-visible'} bg-white dark:bg-[#090A0F] flex flex-col`}>
+                  {!isMathSingleColumn && isTwoPane && (
                     <button
                       onClick={() => setIsLeftCollapsed(false)}
                       className="absolute left-6 top-3 z-30 flex items-center gap-1.5 px-3 py-1.5 bg-white dark:bg-[#11131A] hover:bg-zinc-100 dark:hover:bg-[#181B24] border border-zinc-200 dark:border-[#222634] rounded-lg text-xs font-semibold text-zinc-900 dark:text-[#F4F4F6] shadow-xs transition-colors duration-150 cursor-pointer"
@@ -1224,7 +1224,7 @@ export const App: React.FC = () => {
                     </button>
                   )}
 
-                  <div className={`w-full ${isMathSingleColumn ? 'max-w-[800px]' : 'max-w-4xl'} mx-auto h-full flex flex-col`}>
+                  <div className={`w-full ${isMathSingleColumn ? 'max-w-[800px]' : 'max-w-4xl'} mx-auto ${isTwoPane ? 'h-full' : 'min-h-0'} flex flex-col`}>
                     <RightPane
                       question={currentQuestion}
                       userState={currentState}
@@ -1247,6 +1247,12 @@ export const App: React.FC = () => {
                 </div>
               )}
             </main>
+
+            {/* Integrated Desmos Calculator: on mobile (< 768px), docked bottom split-panel (h-[50dvh]); on desktop, floating draggable window */}
+            <CalculatorModal
+              isOpen={isCalculatorOpen}
+              onClose={() => setIsCalculatorOpen(false)}
+            />
 
             {/* Bottom Bluebook Footer with "© Oluwole Inuoluwadunsimi 2026" */}
             <Footer
@@ -1276,11 +1282,6 @@ export const App: React.FC = () => {
       <ReferenceModal
         isOpen={isReferenceOpen}
         onClose={() => setIsReferenceOpen(false)}
-      />
-
-      <CalculatorModal
-        isOpen={isCalculatorOpen}
-        onClose={() => setIsCalculatorOpen(false)}
       />
 
       <QuestionNavModal

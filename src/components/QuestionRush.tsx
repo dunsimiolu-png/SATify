@@ -569,9 +569,9 @@ export const QuestionRush: React.FC<QuestionRushProps> = ({
                         key={opt.id}
                         disabled={isAnswerRevealed}
                         onClick={() => handleSelectChoice(opt.id as 'A' | 'B' | 'C' | 'D')}
-                        className={`w-full min-h-[48px] text-left p-3.5 rounded-xl border transition-all duration-150 ease-spring active:scale-[0.99] shadow-2xs flex items-start gap-3 cursor-pointer disabled:cursor-default ${buttonStyles}`}
+                        className={`w-full min-h-[56px] sm:min-h-[48px] text-left p-4 sm:p-3.5 rounded-xl border transition-all duration-150 ease-spring active:scale-[0.99] shadow-2xs flex items-start gap-3.5 sm:gap-3 cursor-pointer disabled:cursor-default ${buttonStyles}`}
                       >
-                        <span className={`w-6 h-6 rounded-lg font-bold text-xs flex items-center justify-center shrink-0 border transition-transform duration-150 ${
+                        <span className={`w-7 h-7 sm:w-6 sm:h-6 rounded-lg font-bold text-xs flex items-center justify-center shrink-0 border transition-transform duration-150 ${
                           isAnswerRevealed && isCorrectAnswer
                             ? 'bg-emerald-500 text-white border-emerald-400'
                             : isAnswerRevealed && isSelected && !isCorrectAnswer
@@ -582,11 +582,11 @@ export const QuestionRush: React.FC<QuestionRushProps> = ({
                         }`}>
                           {opt.id}
                         </span>
-                        <div className="option-choice-text text-xs sm:text-sm font-medium leading-relaxed pt-0.5 flex-1">
+                        <div className="option-choice-text text-xs sm:text-sm font-medium leading-relaxed pt-0.5 flex-1 min-w-0 max-w-full overflow-x-auto">
                           <RichText text={opt.text} />
                           {opt.imageUrl && (
-                            <div className="mt-2.5 p-2 bg-white dark:bg-black border border-zinc-200 dark:border-[#222634] rounded-xl inline-flex items-center justify-center overflow-hidden shadow-xs">
-                              <img src={opt.imageUrl} alt={`Option ${opt.id}`} className="max-h-28 sm:max-h-36 w-auto object-contain rounded select-none transition-all dark:invert dark:contrast-[1.1] dark:brightness-[0.95]" />
+                            <div className="mt-2.5 p-2 bg-white dark:bg-black border border-zinc-200 dark:border-[#222634] rounded-xl inline-flex items-center justify-center overflow-hidden shadow-xs max-w-full overflow-x-auto">
+                              <img src={opt.imageUrl} alt={`Option ${opt.id}`} className="max-h-28 sm:max-h-36 max-w-full h-auto object-contain rounded select-none transition-all dark:invert dark:contrast-[1.1] dark:brightness-[0.95]" />
                             </div>
                           )}
                         </div>

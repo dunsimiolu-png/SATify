@@ -12,7 +12,8 @@ import {
   XCircle, 
   HelpCircle,
   Undo2,
-  Split
+  Split,
+  Info
 } from 'lucide-react';
 import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
@@ -22,6 +23,7 @@ import { MathText } from './MathText';
 import { MathVisual } from './MathVisual';
 import { ExplanationRenderer } from './ExplanationRenderer';
 import { evaluateNumericEquivalence, formatSprPreview } from '../utils/mathEvaluator';
+import { extractFigureDescription } from '../utils/mathSanitizer';
 
 gsap.registerPlugin(useGSAP);
 
@@ -98,7 +100,12 @@ export const RightPane: React.FC<RightPaneProps> = ({
     return () => mm.revert();
   }, { scope: containerRef, dependencies: [userState.isAnswerChecked] });
 
-  const promptText = question.prompt || question.stem || '';
+  const rawPromptText = question.prompt || question.stem || '';
+  const hasVisual = Boolean(question.imageUrl || question.figureSvg || question.svg);
+  const { figureDescription, cleanPrompt } = React.useMemo(() => {
+    return extractFigureDescription(rawPromptText, hasVisual);
+  }, [rawPromptText, hasVisual]);
+
   const optionsList: AnswerChoice[] = question.options || question.choices || [];
   const isSpr = question.questionType === 'spr' || !optionsList || optionsList.length === 0;
 
@@ -271,7 +278,7 @@ export const RightPane: React.FC<RightPaneProps> = ({
           {/* Mark for Review Toggle */}
           <button
             onClick={onToggleMarkForReview}
-            className={`flex items-center gap-1.5 text-xs transition-colors duration-150 cursor-pointer ${
+            className={`flex items-center gap-1.5 text-xs transition-colors duration-150 cursor-pointer min-h-[36px] py-1 px-2 rounded-lg ${
               userState.isMarkedForReview
                 ? 'text-rose-600 dark:text-rose-400 font-semibold'
                 : 'text-zinc-600 hover:text-zinc-950 dark:text-[#8E95A5] dark:hover:text-[#F4F4F6] font-medium'
@@ -291,7 +298,7 @@ export const RightPane: React.FC<RightPaneProps> = ({
         {!isSpr && !userState.isAnswerChecked && (
           <button
             onClick={() => setIsAbcModeActive(!isAbcModeActive)}
-            className={`text-xs px-2.5 py-1 rounded font-mono font-medium transition-colors duration-150 flex items-center gap-1 cursor-pointer ${
+            className={`text-xs px-3 py-1.5 min-h-[36px] rounded-lg font-mono font-medium transition-colors duration-150 flex items-center gap-1 cursor-pointer ${
               isAbcModeActive
                 ? 'bg-zinc-950 text-white dark:bg-blue-600 dark:text-white'
                 : 'bg-white border border-zinc-200 text-zinc-800 dark:bg-[#11131A] dark:border-[#222634] dark:text-[#F4F4F6] hover:bg-zinc-50 dark:hover:bg-[#181B24]'
@@ -304,15 +311,32 @@ export const RightPane: React.FC<RightPaneProps> = ({
       </div>
 
       {/* 2.5. Mathematical Visual (Coordinate Plane / Diagram / Table) */}
-      {question.imageUrl && (
-        <div className="w-full flex justify-center max-w-[65ch]">
-          <MathVisual imageUrl={question.imageUrl} alt="Question diagram or coordinate plane" />
+      {(question.imageUrl || question.figureSvg || question.svg) && (
+        <div className="w-full flex justify-center max-w-full overflow-x-auto">
+          <MathVisual
+            imageUrl={question.imageUrl}
+            figureSvg={question.figureSvg || question.svg}
+            alt="Question diagram or coordinate plane"
+          />
+        </div>
+      )}
+
+      {/* Fallback Figure Description Callout (when visual diagram is missing) */}
+      {figureDescription && !hasVisual && (
+        <div className="mt-4 mb-2 p-4 rounded-xl border border-zinc-200 dark:border-[#222634] bg-zinc-50/70 dark:bg-[#11131A] max-w-[65ch]">
+          <div className="flex items-center gap-1.5 mb-1.5 text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider font-mono">
+            <Info className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
+            <span>Figure Description</span>
+          </div>
+          <div className="text-sm font-serif leading-relaxed text-zinc-700 dark:text-zinc-300">
+            <RichText text={figureDescription} />
+          </div>
         </div>
       )}
 
       {/* 3. Question Prompt / Stem (Constrained measure, high-legibility serif) */}
       <div data-annotate-target="prompt" className="mt-5 mb-5 font-serif text-[17px] leading-relaxed max-w-[65ch] text-zinc-950 dark:text-[#F4F4F6]">
-        <RichText text={promptText} />
+        <RichText text={cleanPrompt} />
       </div>
 
       {/* 4. Multiple Choice Options (A, B, C, D) OR Student-Produced Response (SPR) */}
@@ -340,7 +364,7 @@ export const RightPane: React.FC<RightPaneProps> = ({
                 autoComplete="off"
                 autoCorrect="off"
                 spellCheck="false"
-                className={`w-full font-mono text-2xl font-bold tracking-wider px-4 py-3.5 rounded-xl border transition-all duration-150 outline-none ${
+                className={`w-full min-h-[52px] sm:min-h-[48px] font-mono text-xl sm:text-2xl font-bold tracking-wider px-4 py-3.5 rounded-xl border transition-all duration-150 outline-none ${
                   userState.isAnswerChecked
                     ? isSelectedCorrect
                       ? 'border-emerald-500 bg-emerald-50/50 dark:bg-emerald-950/20 text-emerald-900 dark:text-emerald-200'
@@ -386,7 +410,7 @@ export const RightPane: React.FC<RightPaneProps> = ({
           </div>
         </div>
       ) : (
-        <div className="space-y-2.5 max-w-[65ch]">
+        <div className="space-y-3 sm:space-y-2.5 max-w-[65ch]">
           {optionsList.map((choice: AnswerChoice) => {
             const choiceId = choice.id || choice.label || 'A';
             const isSelected = userState.selectedChoice === choiceId;
@@ -414,7 +438,7 @@ export const RightPane: React.FC<RightPaneProps> = ({
             }
 
             return (
-              <div key={choiceId} className="relative flex items-center gap-2 group">
+              <div key={choiceId} className="relative flex items-center gap-2.5 sm:gap-2 group">
                 <button
                   type="button"
                   disabled={isEliminated || isChecked}
@@ -427,7 +451,7 @@ export const RightPane: React.FC<RightPaneProps> = ({
                       { scale: 1, duration: 0.16, ease: 'back.out(2)', clearProps: 'transform' }
                     );
                   }}
-                  className={`w-full min-h-[48px] relative text-left rounded-xl px-4 py-3.5 flex items-center justify-between gap-4 transition-all duration-150 select-none ${cardClasses} ${
+                  className={`w-full min-h-[56px] sm:min-h-[48px] relative text-left rounded-xl px-4 sm:px-4.5 py-4 sm:py-3.5 flex items-center justify-between gap-3.5 sm:gap-4 transition-all duration-150 select-none ${cardClasses} ${
                     isEliminated ? 'opacity-40 pointer-events-none' : isChecked ? 'cursor-default' : 'cursor-pointer active:scale-[0.99]'
                   }`}
                 >
@@ -438,18 +462,18 @@ export const RightPane: React.FC<RightPaneProps> = ({
 
                   {/* Left: Option Letter Badge + Text/KaTeX strictly inline */}
                   <div className="flex items-center gap-3.5 flex-1 min-w-0">
-                    <div className={`w-6 h-6 rounded-lg shrink-0 flex items-center justify-center font-mono text-xs font-semibold tabular-nums transition-transform ${badgeClasses}`}>
+                    <div className={`w-7 h-7 sm:w-6.5 sm:h-6.5 rounded-lg shrink-0 flex items-center justify-center font-mono text-xs font-bold tabular-nums transition-transform ${badgeClasses}`}>
                       {choiceId}
                     </div>
 
-                    <div className="option-choice-text inline font-serif text-[15px] sm:text-[16px] leading-normal text-zinc-950 dark:text-[#F4F4F6] break-words">
+                    <div className="option-choice-text flex-1 min-w-0 max-w-full font-serif text-[15px] sm:text-[16px] leading-normal text-zinc-950 dark:text-[#F4F4F6] break-words">
                       <RichText text={choice.text} />
                       {choice.imageUrl && (
-                        <div className="mt-2.5 p-2 bg-white dark:bg-black border border-zinc-200 dark:border-[#222634] rounded-lg inline-flex items-center justify-center overflow-hidden">
+                        <div className="mt-2.5 p-2 bg-white dark:bg-black border border-zinc-200 dark:border-[#222634] rounded-lg inline-flex items-center justify-center max-w-full overflow-x-auto">
                           <img
                             src={choice.imageUrl}
                             alt={`Option ${choiceId}`}
-                            className="max-h-32 w-auto object-contain rounded select-none dark:invert dark:contrast-[1.1] dark:brightness-[0.95]"
+                            className="max-h-32 max-w-full h-auto object-contain rounded select-none dark:invert dark:contrast-[1.1] dark:brightness-[0.95]"
                             loading="lazy"
                           />
                         </div>
@@ -481,17 +505,18 @@ export const RightPane: React.FC<RightPaneProps> = ({
                   <button
                     type="button"
                     onClick={() => onToggleEliminate(choiceId as 'A' | 'B' | 'C' | 'D')}
-                    className={`shrink-0 h-9 w-9 flex items-center justify-center rounded-xl border transition-all duration-150 cursor-pointer active:scale-90 ${
+                    className={`shrink-0 h-11 w-11 sm:h-9 sm:w-9 flex items-center justify-center rounded-xl border transition-all duration-150 cursor-pointer active:scale-95 touch-manipulation shadow-2xs ${
                       isEliminated
-                        ? 'border-zinc-300 bg-zinc-100 dark:bg-[#181B24] text-zinc-700 dark:text-[#8E95A5] hover:bg-zinc-200'
-                        : 'border-zinc-200 dark:border-[#222634] bg-white dark:bg-[#11131A] text-zinc-400 hover:text-rose-600 hover:border-rose-300 shadow-2xs'
+                        ? 'border-zinc-300 dark:border-zinc-700 bg-zinc-100 dark:bg-[#181B24] text-zinc-700 dark:text-[#8E95A5] hover:bg-zinc-200'
+                        : 'border-zinc-200 dark:border-[#222634] bg-zinc-50 dark:bg-[#11131A] text-zinc-400 hover:text-rose-600 hover:border-rose-300 hover:bg-rose-50/50'
                     }`}
                     title={isEliminated ? `Restore Option ${choiceId}` : `Eliminate Option ${choiceId}`}
+                    aria-label={isEliminated ? `Restore Option ${choiceId}` : `Eliminate Option ${choiceId}`}
                   >
                     {isEliminated ? (
-                      <Undo2 className="w-3.5 h-3.5" strokeWidth={1.75} />
+                      <Undo2 className="w-4 h-4 sm:w-3.5 sm:h-3.5" strokeWidth={2} />
                     ) : (
-                      <X className="w-3.5 h-3.5" strokeWidth={1.75} />
+                      <X className="w-4 h-4 sm:w-3.5 sm:h-3.5" strokeWidth={2.25} />
                     )}
                   </button>
                 )}
@@ -508,7 +533,7 @@ export const RightPane: React.FC<RightPaneProps> = ({
             type="button"
             onClick={() => onCheckAnswer(timeSpentSeconds)}
             disabled={isSpr ? (!userState.sprAnswer || userState.sprAnswer.trim().length === 0) : !userState.selectedChoice}
-            className={`h-11 px-7 rounded-xl text-sm font-semibold transition-all duration-150 flex items-center gap-2 ${
+            className={`h-12 sm:h-11 px-8 sm:px-7 rounded-xl text-sm font-semibold transition-all duration-150 flex items-center gap-2 ${
               (isSpr ? (userState.sprAnswer && userState.sprAnswer.trim().length > 0) : userState.selectedChoice)
                 ? 'bg-blue-700 hover:bg-blue-800 text-white dark:bg-blue-600 dark:hover:bg-blue-500 shadow-xs hover:shadow active:scale-95 cursor-pointer'
                 : 'bg-zinc-200 dark:bg-[#181B24] text-zinc-400 dark:text-zinc-600 cursor-not-allowed border border-transparent'
